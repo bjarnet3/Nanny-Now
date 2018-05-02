@@ -1,0 +1,1019 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5C042AE4209248B10022C5DD /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C042AE3209248B10022C5DD /* Message.swift */; };
+		5C093A491FE0985100144A32 /* MessageStandardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C093A481FE0985100144A32 /* MessageStandardCell.swift */; };
+		5C093A4B1FE099E700144A32 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C093A4A1FE099E700144A32 /* Request.swift */; };
+		5C1104151DF56A4200C7FB46 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1104141DF56A4200C7FB46 /* Extensions.swift */; };
+		5C17A1DE20817D87004CCBC6 /* SubSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17A1DD20817D87004CCBC6 /* SubSettingsViewController.swift */; };
+		5C2895551FDB52A50009F6D5 /* FamilyDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2895541FDB52A50009F6D5 /* FamilyDetailVC.swift */; };
+		5C33CFC71DB422830075675E /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C33CFC61DB422830075675E /* Functions.swift */; };
+		5C389686208968FD008C7E12 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C389685208968FD008C7E12 /* Friends.swift */; };
+		5C3D9ACA202AE128007A9147 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3D9AC9202AE128007A9147 /* MapKit.framework */; };
+		5C3D9ACB202AE131007A9147 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3D9AC9202AE128007A9147 /* MapKit.framework */; };
+		5C41A4EA207C34B00025A4AE /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C41A4E9207C34B00025A4AE /* FriendsTableViewCell.swift */; };
+		5C4C30821FD9DF9500151AB6 /* FamilyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4C30811FD9DF9500151AB6 /* FamilyTableViewCell.swift */; };
+		5C4C30841FD9E7F800151AB6 /* FoldingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4C30831FD9E7F800151AB6 /* FoldingCell.swift */; };
+		5C4C9A8D1F71BBDF00D431F3 /* NannyDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4C9A8C1F71BBDF00D431F3 /* NannyDetailVC.swift */; };
+		5C558A061FA7711C0076A17D /* LoginPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C558A051FA7711C0076A17D /* LoginPageVC.swift */; };
+		5C558A081FA772BE0076A17D /* LoginZeroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C558A071FA772BE0076A17D /* LoginZeroVC.swift */; };
+		5C558A0A1FA772E80076A17D /* LoginOneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C558A091FA772E80076A17D /* LoginOneVC.swift */; };
+		5C558A0C1FA772FD0076A17D /* LoginTwoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C558A0B1FA772FD0076A17D /* LoginTwoVC.swift */; };
+		5C55C1011DAAFC5600581EF3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C55C1001DAAFC5600581EF3 /* Constants.swift */; };
+		5C592B741DAE9DF300238E7E /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C592B731DAE9DF300238E7E /* CustomImageView.swift */; };
+		5C6D422B1EDE0DFA001037CE /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C6D422A1EDE0DFA001037CE /* Notifications.swift */; };
+		5C70E62C208214F00076CC4A /* MessageHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70E62B208214F00076CC4A /* MessageHeaderCell.swift */; };
+		5C70E62E2082153E0076CC4A /* MessageUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70E62D2082153E0076CC4A /* MessageUserCell.swift */; };
+		5C76202B2088DCAA005D7647 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C76202A2088DCAA005D7647 /* Review.swift */; };
+		5C76202F20891DC0005D7647 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C76202E20891DC0005D7647 /* HeaderTableViewCell.swift */; };
+		5C85A7EE1DB84D83008C5FBB /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C85A7ED1DB84D83008C5FBB /* DataService.swift */; };
+		5C860FC41FCF36870063B0BB /* PrintDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C860FC31FCF36870063B0BB /* PrintDebug.swift */; };
+		5C8925A220810A060032CEAA /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8925A120810A060032CEAA /* ReviewTableViewCell.swift */; };
+		5C8925A420810C1F0032CEAA /* ReviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8925A320810C1F0032CEAA /* ReviewCollectionViewCell.swift */; };
+		5C89EE9E1FA48072005341ED /* DTTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89EE9D1FA48072005341ED /* DTTextField.swift */; };
+		5C9859AE2081D1F6006AA58A /* AnimatedRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9859AD2081D1F6006AA58A /* AnimatedRingView.swift */; };
+		5C9FC62C1FF6E95000906B05 /* FriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9FC62B1FF6E95000906B05 /* FriendsCollectionViewCell.swift */; };
+		5CA49F5B1FD78DA100B0A993 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA49F5A1FD78DA000B0A993 /* MessageViewController.swift */; };
+		5CB7FE561FE435B600D41E6F /* FrostyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7FE551FE435B600D41E6F /* FrostyView.swift */; };
+		5CB7FE581FE4362900D41E6F /* FrostyTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7FE571FE4362900D41E6F /* FrostyTabBar.swift */; };
+		5CB7FE5A1FE4368900D41E6F /* FrostyCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7FE591FE4368900D41E6F /* FrostyCornerView.swift */; };
+		5CB7FE601FE4CC8900D41E6F /* notification11.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CB7FE5F1FE4CC8900D41E6F /* notification11.wav */; };
+		5CBD1C2E1DA81E7900CAC8CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5CBD1C2D1DA81E7900CAC8CF /* GoogleService-Info.plist */; };
+		5CC0C6972095DFD1005317FA /* MessageDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC0C6962095DFD1005317FA /* MessageDetailVC.swift */; };
+		5CC849331FCA1198003AE163 /* FirstTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC849321FCA1198003AE163 /* FirstTableViewCell.swift */; };
+		5CC849351FCA11BE003AE163 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC849341FCA11BE003AE163 /* SettingsTableViewCell.swift */; };
+		5CC849371FCA18BE003AE163 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC849361FCA18BE003AE163 /* Settings.swift */; };
+		5CC8493B1FCA34C3003AE163 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC8493A1FCA34C3003AE163 /* Users.swift */; };
+		5CCAB5CF2075F0A20006CDF4 /* MenuImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCAB5CE2075F0A20006CDF4 /* MenuImageView.swift */; };
+		5CCF0C751D898BFB0089F39D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C741D898BFB0089F39D /* AppDelegate.swift */; };
+		5CCF0C771D898BFB0089F39D /* NannyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C761D898BFB0089F39D /* NannyViewController.swift */; };
+		5CCF0C791D898BFB0089F39D /* FamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C781D898BFB0089F39D /* FamilyViewController.swift */; };
+		5CCF0C7C1D898BFB0089F39D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CCF0C7A1D898BFB0089F39D /* Main.storyboard */; };
+		5CCF0C7E1D898BFB0089F39D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CCF0C7D1D898BFB0089F39D /* Assets.xcassets */; };
+		5CCF0C811D898BFB0089F39D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CCF0C7F1D898BFB0089F39D /* LaunchScreen.storyboard */; };
+		5CCF0C8D1D898D090089F39D /* Groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C8C1D898D090089F39D /* Groups.swift */; };
+		5CCF0C931D898D9F0089F39D /* NannyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C921D898D9F0089F39D /* NannyTableViewCell.swift */; };
+		5CCF0C971D898E940089F39D /* NannyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C961D898E940089F39D /* NannyImageView.swift */; };
+		5CCF0C991D898EC40089F39D /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C981D898EC40089F39D /* CustomButton.swift */; };
+		5CCF0C9D1D898F110089F39D /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C9C1D898F110089F39D /* StartViewController.swift */; };
+		5CCF0C9F1D898F300089F39D /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C9E1D898F300089F39D /* InfoViewController.swift */; };
+		5CDE08051FB27A5000E97D97 /* LocalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDE08041FB27A5000E97D97 /* LocalService.swift */; };
+		5CE12DF0202A9C82003495D3 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE4A9E71EBBBEF40018A831 /* UserNotifications.framework */; };
+		5CE12DF1202A9C82003495D3 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE4A9E91EBBBEF40018A831 /* UserNotificationsUI.framework */; };
+		5CE12DF4202A9C82003495D3 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE12DF3202A9C82003495D3 /* NotificationViewController.swift */; };
+		5CE12DF7202A9C82003495D3 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CE12DF5202A9C82003495D3 /* MainInterface.storyboard */; };
+		5CE12DFB202A9C82003495D3 /* NotificationContentExtensions.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5CE12DEF202A9C82003495D3 /* NotificationContentExtensions.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5CE4AA481EBBDF970018A831 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE4AA471EBBDF970018A831 /* NotificationService.swift */; };
+		5CE4AA4C1EBBDF970018A831 /* NotificationServiceExtensions.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5CE4AA451EBBDF970018A831 /* NotificationServiceExtensions.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5CE55E191FF7446F00E89D86 /* CustomTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE55E181FF7446F00E89D86 /* CustomTableView.swift */; };
+		D76AEE53A84CCAADE054300E /* Pods_Nanny_Now.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C06149E4985579864421B59A /* Pods_Nanny_Now.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5CE12DF9202A9C82003495D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5CCF0C691D898BFB0089F39D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5CE12DEE202A9C82003495D3;
+			remoteInfo = NotificationContentExtensions;
+		};
+		5CE4AA4A1EBBDF970018A831 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5CCF0C691D898BFB0089F39D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5CE4AA441EBBDF970018A831;
+			remoteInfo = NotificationServiceExtensions;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5CCB1C721EB563C700C131A7 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				5CE4AA4C1EBBDF970018A831 /* NotificationServiceExtensions.appex in Embed App Extensions */,
+				5CE12DFB202A9C82003495D3 /* NotificationContentExtensions.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0CA99DE7D370AAFC2FC961D1 /* Pods-Nanny Now.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nanny Now.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nanny Now/Pods-Nanny Now.debug.xcconfig"; sourceTree = "<group>"; };
+		5C042AE3209248B10022C5DD /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		5C093A481FE0985100144A32 /* MessageStandardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStandardCell.swift; sourceTree = "<group>"; };
+		5C093A4A1FE099E700144A32 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		5C1104141DF56A4200C7FB46 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		5C17A1DD20817D87004CCBC6 /* SubSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSettingsViewController.swift; sourceTree = "<group>"; };
+		5C2895541FDB52A50009F6D5 /* FamilyDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyDetailVC.swift; sourceTree = "<group>"; };
+		5C33CFC61DB422830075675E /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		5C389685208968FD008C7E12 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
+		5C3D9AC9202AE128007A9147 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		5C41A4E9207C34B00025A4AE /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
+		5C4C30811FD9DF9500151AB6 /* FamilyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyTableViewCell.swift; sourceTree = "<group>"; };
+		5C4C30831FD9E7F800151AB6 /* FoldingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldingCell.swift; sourceTree = "<group>"; };
+		5C4C9A8C1F71BBDF00D431F3 /* NannyDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NannyDetailVC.swift; sourceTree = "<group>"; };
+		5C558A051FA7711C0076A17D /* LoginPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageVC.swift; sourceTree = "<group>"; };
+		5C558A071FA772BE0076A17D /* LoginZeroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginZeroVC.swift; sourceTree = "<group>"; };
+		5C558A091FA772E80076A17D /* LoginOneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginOneVC.swift; sourceTree = "<group>"; };
+		5C558A0B1FA772FD0076A17D /* LoginTwoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTwoVC.swift; sourceTree = "<group>"; };
+		5C55C1001DAAFC5600581EF3 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		5C592B731DAE9DF300238E7E /* CustomImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
+		5C6D422A1EDE0DFA001037CE /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		5C70E62B208214F00076CC4A /* MessageHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageHeaderCell.swift; sourceTree = "<group>"; };
+		5C70E62D2082153E0076CC4A /* MessageUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageUserCell.swift; sourceTree = "<group>"; };
+		5C76202A2088DCAA005D7647 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		5C76202E20891DC0005D7647 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
+		5C85A7ED1DB84D83008C5FBB /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		5C860FC31FCF36870063B0BB /* PrintDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintDebug.swift; sourceTree = "<group>"; };
+		5C8925A120810A060032CEAA /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
+		5C8925A320810C1F0032CEAA /* ReviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCollectionViewCell.swift; sourceTree = "<group>"; };
+		5C89EE9D1FA48072005341ED /* DTTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTTextField.swift; sourceTree = "<group>"; };
+		5C9859AD2081D1F6006AA58A /* AnimatedRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedRingView.swift; sourceTree = "<group>"; };
+		5C9FC62B1FF6E95000906B05 /* FriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewCell.swift; sourceTree = "<group>"; };
+		5CA49F5A1FD78DA000B0A993 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		5CB7FE551FE435B600D41E6F /* FrostyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyView.swift; sourceTree = "<group>"; };
+		5CB7FE571FE4362900D41E6F /* FrostyTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyTabBar.swift; sourceTree = "<group>"; };
+		5CB7FE591FE4368900D41E6F /* FrostyCornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyCornerView.swift; sourceTree = "<group>"; };
+		5CB7FE5F1FE4CC8900D41E6F /* notification11.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = notification11.wav; sourceTree = "<group>"; };
+		5CBD1C2D1DA81E7900CAC8CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5CC0C6962095DFD1005317FA /* MessageDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailVC.swift; sourceTree = "<group>"; };
+		5CC849321FCA1198003AE163 /* FirstTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTableViewCell.swift; sourceTree = "<group>"; };
+		5CC849341FCA11BE003AE163 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		5CC849361FCA18BE003AE163 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		5CC8493A1FCA34C3003AE163 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		5CCAB5CE2075F0A20006CDF4 /* MenuImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuImageView.swift; sourceTree = "<group>"; };
+		5CCF0C711D898BFB0089F39D /* Nanny Now.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nanny Now.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CCF0C741D898BFB0089F39D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5CCF0C761D898BFB0089F39D /* NannyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NannyViewController.swift; sourceTree = "<group>"; };
+		5CCF0C781D898BFB0089F39D /* FamilyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyViewController.swift; sourceTree = "<group>"; };
+		5CCF0C7B1D898BFB0089F39D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5CCF0C7D1D898BFB0089F39D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5CCF0C801D898BFB0089F39D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5CCF0C821D898BFB0089F39D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CCF0C8C1D898D090089F39D /* Groups.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Groups.swift; sourceTree = "<group>"; };
+		5CCF0C921D898D9F0089F39D /* NannyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NannyTableViewCell.swift; sourceTree = "<group>"; };
+		5CCF0C961D898E940089F39D /* NannyImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NannyImageView.swift; sourceTree = "<group>"; };
+		5CCF0C981D898EC40089F39D /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		5CCF0C9C1D898F110089F39D /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		5CCF0C9E1D898F300089F39D /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		5CCF0CA61D89901C0089F39D /* Nanny Now.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Nanny Now.entitlements"; sourceTree = "<group>"; };
+		5CDE08041FB27A5000E97D97 /* LocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalService.swift; sourceTree = "<group>"; };
+		5CE12DEF202A9C82003495D3 /* NotificationContentExtensions.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationContentExtensions.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CE12DF3202A9C82003495D3 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		5CE12DF6202A9C82003495D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		5CE12DF8202A9C82003495D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CE4A9E71EBBBEF40018A831 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		5CE4A9E91EBBBEF40018A831 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		5CE4AA451EBBDF970018A831 /* NotificationServiceExtensions.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationServiceExtensions.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CE4AA471EBBDF970018A831 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		5CE4AA491EBBDF970018A831 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CE55E181FF7446F00E89D86 /* CustomTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableView.swift; sourceTree = "<group>"; };
+		77AACDD398985A24EF2F229E /* Pods-Nanny Now.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nanny Now.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nanny Now/Pods-Nanny Now.release.xcconfig"; sourceTree = "<group>"; };
+		C06149E4985579864421B59A /* Pods_Nanny_Now.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nanny_Now.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5CCF0C6E1D898BFB0089F39D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D76AEE53A84CCAADE054300E /* Pods_Nanny_Now.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5CE12DEC202A9C82003495D3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CE12DF1202A9C82003495D3 /* UserNotificationsUI.framework in Frameworks */,
+				5C3D9ACA202AE128007A9147 /* MapKit.framework in Frameworks */,
+				5CE12DF0202A9C82003495D3 /* UserNotifications.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5CE4AA421EBBDF970018A831 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C3D9ACB202AE131007A9147 /* MapKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5C55C0FF1DAAFC3700581EF3 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				5C33CFC61DB422830075675E /* Functions.swift */,
+				5C55C1001DAAFC5600581EF3 /* Constants.swift */,
+				5C1104141DF56A4200C7FB46 /* Extensions.swift */,
+				5C860FC31FCF36870063B0BB /* PrintDebug.swift */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
+		5CB7FE5C1FE4C92C00D41E6F /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				5CB7FE5E1FE4C94100D41E6F /* Sounds */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		5CB7FE5E1FE4C94100D41E6F /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				5CB7FE5F1FE4CC8900D41E6F /* notification11.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		5CCAB5CD2075D95D0006CDF4 /* LoginPageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5C558A051FA7711C0076A17D /* LoginPageVC.swift */,
+				5C558A071FA772BE0076A17D /* LoginZeroVC.swift */,
+				5C558A091FA772E80076A17D /* LoginOneVC.swift */,
+				5C558A0B1FA772FD0076A17D /* LoginTwoVC.swift */,
+			);
+			name = LoginPageViewController;
+			sourceTree = "<group>";
+		};
+		5CCF0C681D898BFB0089F39D = {
+			isa = PBXGroup;
+			children = (
+				5CCF0C731D898BFB0089F39D /* Nanny Now */,
+				5CE4AA461EBBDF970018A831 /* NotificationServiceExtensions */,
+				5CE12DF2202A9C82003495D3 /* NotificationContentExtensions */,
+				5CCF0C721D898BFB0089F39D /* Products */,
+				AE2585337B1E06613CC60B15 /* Pods */,
+				B9B2A5F96FB68004FDC86950 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		5CCF0C721D898BFB0089F39D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5CCF0C711D898BFB0089F39D /* Nanny Now.app */,
+				5CE4AA451EBBDF970018A831 /* NotificationServiceExtensions.appex */,
+				5CE12DEF202A9C82003495D3 /* NotificationContentExtensions.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5CCF0C731D898BFB0089F39D /* Nanny Now */ = {
+			isa = PBXGroup;
+			children = (
+				5CB7FE5C1FE4C92C00D41E6F /* Library */,
+				5C55C0FF1DAAFC3700581EF3 /* Util */,
+				5CCF0C8B1D898C290089F39D /* Services */,
+				5CCF0C8A1D898C240089F39D /* Models */,
+				5CCF0C891D898C1E0089F39D /* Views */,
+				5CCF0C881D898C170089F39D /* Controllers */,
+				5CCF0C741D898BFB0089F39D /* AppDelegate.swift */,
+				5CCF0C7D1D898BFB0089F39D /* Assets.xcassets */,
+				5CBD1C2D1DA81E7900CAC8CF /* GoogleService-Info.plist */,
+				5CCF0C821D898BFB0089F39D /* Info.plist */,
+				5CCF0CA61D89901C0089F39D /* Nanny Now.entitlements */,
+			);
+			path = "Nanny Now";
+			sourceTree = "<group>";
+		};
+		5CCF0C881D898C170089F39D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5CCAB5CD2075D95D0006CDF4 /* LoginPageViewController */,
+				5CCF0C9C1D898F110089F39D /* StartViewController.swift */,
+				5CCF0C761D898BFB0089F39D /* NannyViewController.swift */,
+				5C4C9A8C1F71BBDF00D431F3 /* NannyDetailVC.swift */,
+				5CCF0C781D898BFB0089F39D /* FamilyViewController.swift */,
+				5C2895541FDB52A50009F6D5 /* FamilyDetailVC.swift */,
+				5CA49F5A1FD78DA000B0A993 /* MessageViewController.swift */,
+				5CC0C6962095DFD1005317FA /* MessageDetailVC.swift */,
+				5CCF0C9E1D898F300089F39D /* InfoViewController.swift */,
+				5C17A1DD20817D87004CCBC6 /* SubSettingsViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		5CCF0C891D898C1E0089F39D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5CCF0C7A1D898BFB0089F39D /* Main.storyboard */,
+				5CCF0C7F1D898BFB0089F39D /* LaunchScreen.storyboard */,
+				5CC849321FCA1198003AE163 /* FirstTableViewCell.swift */,
+				5CC849341FCA11BE003AE163 /* SettingsTableViewCell.swift */,
+				5CCF0C921D898D9F0089F39D /* NannyTableViewCell.swift */,
+				5C4C30811FD9DF9500151AB6 /* FamilyTableViewCell.swift */,
+				5C76202E20891DC0005D7647 /* HeaderTableViewCell.swift */,
+				5C41A4E9207C34B00025A4AE /* FriendsTableViewCell.swift */,
+				5C9FC62B1FF6E95000906B05 /* FriendsCollectionViewCell.swift */,
+				5C8925A120810A060032CEAA /* ReviewTableViewCell.swift */,
+				5C8925A320810C1F0032CEAA /* ReviewCollectionViewCell.swift */,
+				5C70E62B208214F00076CC4A /* MessageHeaderCell.swift */,
+				5C70E62D2082153E0076CC4A /* MessageUserCell.swift */,
+				5C093A481FE0985100144A32 /* MessageStandardCell.swift */,
+				5C4C30831FD9E7F800151AB6 /* FoldingCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		5CCF0C8A1D898C240089F39D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5CC8493A1FCA34C3003AE163 /* Users.swift */,
+				5C389685208968FD008C7E12 /* Friends.swift */,
+				5CCF0C8C1D898D090089F39D /* Groups.swift */,
+				5CC849361FCA18BE003AE163 /* Settings.swift */,
+				5C76202A2088DCAA005D7647 /* Review.swift */,
+				5C093A4A1FE099E700144A32 /* Request.swift */,
+				5C042AE3209248B10022C5DD /* Message.swift */,
+				5C9859AD2081D1F6006AA58A /* AnimatedRingView.swift */,
+				5CCF0C961D898E940089F39D /* NannyImageView.swift */,
+				5CCAB5CE2075F0A20006CDF4 /* MenuImageView.swift */,
+				5C592B731DAE9DF300238E7E /* CustomImageView.swift */,
+				5CE55E181FF7446F00E89D86 /* CustomTableView.swift */,
+				5CCF0C981D898EC40089F39D /* CustomButton.swift */,
+				5C89EE9D1FA48072005341ED /* DTTextField.swift */,
+				5CB7FE571FE4362900D41E6F /* FrostyTabBar.swift */,
+				5CB7FE551FE435B600D41E6F /* FrostyView.swift */,
+				5CB7FE591FE4368900D41E6F /* FrostyCornerView.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		5CCF0C8B1D898C290089F39D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5C85A7ED1DB84D83008C5FBB /* DataService.swift */,
+				5CDE08041FB27A5000E97D97 /* LocalService.swift */,
+				5C6D422A1EDE0DFA001037CE /* Notifications.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		5CE12DF2202A9C82003495D3 /* NotificationContentExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				5CE12DF3202A9C82003495D3 /* NotificationViewController.swift */,
+				5CE12DF5202A9C82003495D3 /* MainInterface.storyboard */,
+				5CE12DF8202A9C82003495D3 /* Info.plist */,
+			);
+			path = NotificationContentExtensions;
+			sourceTree = "<group>";
+		};
+		5CE4AA461EBBDF970018A831 /* NotificationServiceExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				5CE4AA471EBBDF970018A831 /* NotificationService.swift */,
+				5CE4AA491EBBDF970018A831 /* Info.plist */,
+			);
+			path = NotificationServiceExtensions;
+			sourceTree = "<group>";
+		};
+		AE2585337B1E06613CC60B15 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0CA99DE7D370AAFC2FC961D1 /* Pods-Nanny Now.debug.xcconfig */,
+				77AACDD398985A24EF2F229E /* Pods-Nanny Now.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B9B2A5F96FB68004FDC86950 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5C3D9AC9202AE128007A9147 /* MapKit.framework */,
+				C06149E4985579864421B59A /* Pods_Nanny_Now.framework */,
+				5CE4A9E71EBBBEF40018A831 /* UserNotifications.framework */,
+				5CE4A9E91EBBBEF40018A831 /* UserNotificationsUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5CCF0C701D898BFB0089F39D /* Nanny Now */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5CCF0C851D898BFB0089F39D /* Build configuration list for PBXNativeTarget "Nanny Now" */;
+			buildPhases = (
+				CE3589B2711F3C40B7A3C741 /* [CP] Check Pods Manifest.lock */,
+				5CCF0C6D1D898BFB0089F39D /* Sources */,
+				5CCF0C6E1D898BFB0089F39D /* Frameworks */,
+				5CCF0C6F1D898BFB0089F39D /* Resources */,
+				6F4206A33A848B0375357A80 /* [CP] Embed Pods Frameworks */,
+				85EC99B819B5A7D797D7775E /* [CP] Copy Pods Resources */,
+				5CCB1C721EB563C700C131A7 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5CE4AA4B1EBBDF970018A831 /* PBXTargetDependency */,
+				5CE12DFA202A9C82003495D3 /* PBXTargetDependency */,
+			);
+			name = "Nanny Now";
+			productName = "Nanny Now";
+			productReference = 5CCF0C711D898BFB0089F39D /* Nanny Now.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5CE12DEE202A9C82003495D3 /* NotificationContentExtensions */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5CE12DFE202A9C82003495D3 /* Build configuration list for PBXNativeTarget "NotificationContentExtensions" */;
+			buildPhases = (
+				5CE12DEB202A9C82003495D3 /* Sources */,
+				5CE12DEC202A9C82003495D3 /* Frameworks */,
+				5CE12DED202A9C82003495D3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotificationContentExtensions;
+			productName = NotificationContentExtensions;
+			productReference = 5CE12DEF202A9C82003495D3 /* NotificationContentExtensions.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		5CE4AA441EBBDF970018A831 /* NotificationServiceExtensions */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5CE4AA4D1EBBDF970018A831 /* Build configuration list for PBXNativeTarget "NotificationServiceExtensions" */;
+			buildPhases = (
+				5CE4AA411EBBDF970018A831 /* Sources */,
+				5CE4AA421EBBDF970018A831 /* Frameworks */,
+				5CE4AA431EBBDF970018A831 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotificationServiceExtensions;
+			productName = NotificationServiceExtensions;
+			productReference = 5CE4AA451EBBDF970018A831 /* NotificationServiceExtensions.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5CCF0C691D898BFB0089F39D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = "Digital Mood";
+				TargetAttributes = {
+					5CCF0C701D898BFB0089F39D = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = GCRJ652248;
+						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+					5CE12DEE202A9C82003495D3 = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = GCRJ652248;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					5CE4AA441EBBDF970018A831 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = GCRJ652248;
+						LastSwiftMigration = 0900;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 5CCF0C6C1D898BFB0089F39D /* Build configuration list for PBXProject "Nanny Now" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5CCF0C681D898BFB0089F39D;
+			productRefGroup = 5CCF0C721D898BFB0089F39D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5CCF0C701D898BFB0089F39D /* Nanny Now */,
+				5CE4AA441EBBDF970018A831 /* NotificationServiceExtensions */,
+				5CE12DEE202A9C82003495D3 /* NotificationContentExtensions */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5CCF0C6F1D898BFB0089F39D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CCF0C811D898BFB0089F39D /* LaunchScreen.storyboard in Resources */,
+				5CB7FE601FE4CC8900D41E6F /* notification11.wav in Resources */,
+				5CBD1C2E1DA81E7900CAC8CF /* GoogleService-Info.plist in Resources */,
+				5CCF0C7E1D898BFB0089F39D /* Assets.xcassets in Resources */,
+				5CCF0C7C1D898BFB0089F39D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5CE12DED202A9C82003495D3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CE12DF7202A9C82003495D3 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5CE4AA431EBBDF970018A831 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6F4206A33A848B0375357A80 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Nanny Now/Pods-Nanny Now-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		85EC99B819B5A7D797D7775E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Nanny Now/Pods-Nanny Now-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE3589B2711F3C40B7A3C741 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5CCF0C6D1D898BFB0089F39D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C860FC41FCF36870063B0BB /* PrintDebug.swift in Sources */,
+				5C6D422B1EDE0DFA001037CE /* Notifications.swift in Sources */,
+				5CA49F5B1FD78DA100B0A993 /* MessageViewController.swift in Sources */,
+				5C70E62E2082153E0076CC4A /* MessageUserCell.swift in Sources */,
+				5C592B741DAE9DF300238E7E /* CustomImageView.swift in Sources */,
+				5C55C1011DAAFC5600581EF3 /* Constants.swift in Sources */,
+				5CCF0C791D898BFB0089F39D /* FamilyViewController.swift in Sources */,
+				5CC849351FCA11BE003AE163 /* SettingsTableViewCell.swift in Sources */,
+				5C9FC62C1FF6E95000906B05 /* FriendsCollectionViewCell.swift in Sources */,
+				5CB7FE561FE435B600D41E6F /* FrostyView.swift in Sources */,
+				5C558A0C1FA772FD0076A17D /* LoginTwoVC.swift in Sources */,
+				5CCF0C8D1D898D090089F39D /* Groups.swift in Sources */,
+				5CE55E191FF7446F00E89D86 /* CustomTableView.swift in Sources */,
+				5CCF0C991D898EC40089F39D /* CustomButton.swift in Sources */,
+				5CCF0C9D1D898F110089F39D /* StartViewController.swift in Sources */,
+				5C9859AE2081D1F6006AA58A /* AnimatedRingView.swift in Sources */,
+				5C4C30821FD9DF9500151AB6 /* FamilyTableViewCell.swift in Sources */,
+				5C4C30841FD9E7F800151AB6 /* FoldingCell.swift in Sources */,
+				5C042AE4209248B10022C5DD /* Message.swift in Sources */,
+				5C33CFC71DB422830075675E /* Functions.swift in Sources */,
+				5CC849371FCA18BE003AE163 /* Settings.swift in Sources */,
+				5CC849331FCA1198003AE163 /* FirstTableViewCell.swift in Sources */,
+				5C8925A220810A060032CEAA /* ReviewTableViewCell.swift in Sources */,
+				5C1104151DF56A4200C7FB46 /* Extensions.swift in Sources */,
+				5CB7FE5A1FE4368900D41E6F /* FrostyCornerView.swift in Sources */,
+				5C4C9A8D1F71BBDF00D431F3 /* NannyDetailVC.swift in Sources */,
+				5CCF0C751D898BFB0089F39D /* AppDelegate.swift in Sources */,
+				5C558A081FA772BE0076A17D /* LoginZeroVC.swift in Sources */,
+				5C093A4B1FE099E700144A32 /* Request.swift in Sources */,
+				5C093A491FE0985100144A32 /* MessageStandardCell.swift in Sources */,
+				5C70E62C208214F00076CC4A /* MessageHeaderCell.swift in Sources */,
+				5C76202F20891DC0005D7647 /* HeaderTableViewCell.swift in Sources */,
+				5CC8493B1FCA34C3003AE163 /* Users.swift in Sources */,
+				5C389686208968FD008C7E12 /* Friends.swift in Sources */,
+				5CB7FE581FE4362900D41E6F /* FrostyTabBar.swift in Sources */,
+				5CCF0C9F1D898F300089F39D /* InfoViewController.swift in Sources */,
+				5C558A0A1FA772E80076A17D /* LoginOneVC.swift in Sources */,
+				5C85A7EE1DB84D83008C5FBB /* DataService.swift in Sources */,
+				5CCF0C971D898E940089F39D /* NannyImageView.swift in Sources */,
+				5C8925A420810C1F0032CEAA /* ReviewCollectionViewCell.swift in Sources */,
+				5CC0C6972095DFD1005317FA /* MessageDetailVC.swift in Sources */,
+				5CCF0C771D898BFB0089F39D /* NannyViewController.swift in Sources */,
+				5C558A061FA7711C0076A17D /* LoginPageVC.swift in Sources */,
+				5C17A1DE20817D87004CCBC6 /* SubSettingsViewController.swift in Sources */,
+				5C89EE9E1FA48072005341ED /* DTTextField.swift in Sources */,
+				5C41A4EA207C34B00025A4AE /* FriendsTableViewCell.swift in Sources */,
+				5C76202B2088DCAA005D7647 /* Review.swift in Sources */,
+				5C2895551FDB52A50009F6D5 /* FamilyDetailVC.swift in Sources */,
+				5CCF0C931D898D9F0089F39D /* NannyTableViewCell.swift in Sources */,
+				5CCAB5CF2075F0A20006CDF4 /* MenuImageView.swift in Sources */,
+				5CDE08051FB27A5000E97D97 /* LocalService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5CE12DEB202A9C82003495D3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CE12DF4202A9C82003495D3 /* NotificationViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5CE4AA411EBBDF970018A831 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CE4AA481EBBDF970018A831 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5CE12DFA202A9C82003495D3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5CE12DEE202A9C82003495D3 /* NotificationContentExtensions */;
+			targetProxy = 5CE12DF9202A9C82003495D3 /* PBXContainerItemProxy */;
+		};
+		5CE4AA4B1EBBDF970018A831 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5CE4AA441EBBDF970018A831 /* NotificationServiceExtensions */;
+			targetProxy = 5CE4AA4A1EBBDF970018A831 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5CCF0C7A1D898BFB0089F39D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5CCF0C7B1D898BFB0089F39D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5CCF0C7F1D898BFB0089F39D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5CCF0C801D898BFB0089F39D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		5CE12DF5202A9C82003495D3 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5CE12DF6202A9C82003495D3 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5CCF0C831D898BFB0089F39D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = GCRJ652248;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALID_ARCHS = arm64;
+			};
+			name = Debug;
+		};
+		5CCF0C841D898BFB0089F39D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = GCRJ652248;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = arm64;
+			};
+			name = Release;
+		};
+		5CCF0C861D898BFB0089F39D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0CA99DE7D370AAFC2FC961D1 /* Pods-Nanny Now.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Nanny Now/Nanny Now.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = GCRJ652248;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "Nanny Now/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "no.digital.mood.developer.Nanny-Now";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		5CCF0C871D898BFB0089F39D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 77AACDD398985A24EF2F229E /* Pods-Nanny Now.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Nanny Now/Nanny Now.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = GCRJ652248;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "Nanny Now/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "no.digital.mood.developer.Nanny-Now";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		5CE12DFC202A9C82003495D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GCRJ652248;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = NotificationContentExtensions/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "no.digital.mood.developer.Nanny-Now.NotificationContentExtensions";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5CE12DFD202A9C82003495D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GCRJ652248;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = NotificationContentExtensions/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "no.digital.mood.developer.Nanny-Now.NotificationContentExtensions";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5CE4AA4E1EBBDF970018A831 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = GCRJ652248;
+				INFOPLIST_FILE = NotificationServiceExtensions/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "no.digital.mood.developer.Nanny-Now.NotificationServiceExtensions";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		5CE4AA4F1EBBDF970018A831 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = GCRJ652248;
+				INFOPLIST_FILE = NotificationServiceExtensions/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "no.digital.mood.developer.Nanny-Now.NotificationServiceExtensions";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5CCF0C6C1D898BFB0089F39D /* Build configuration list for PBXProject "Nanny Now" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5CCF0C831D898BFB0089F39D /* Debug */,
+				5CCF0C841D898BFB0089F39D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5CCF0C851D898BFB0089F39D /* Build configuration list for PBXNativeTarget "Nanny Now" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5CCF0C861D898BFB0089F39D /* Debug */,
+				5CCF0C871D898BFB0089F39D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5CE12DFE202A9C82003495D3 /* Build configuration list for PBXNativeTarget "NotificationContentExtensions" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5CE12DFC202A9C82003495D3 /* Debug */,
+				5CE12DFD202A9C82003495D3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5CE4AA4D1EBBDF970018A831 /* Build configuration list for PBXNativeTarget "NotificationServiceExtensions" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5CE4AA4E1EBBDF970018A831 /* Debug */,
+				5CE4AA4F1EBBDF970018A831 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5CCF0C691D898BFB0089F39D /* Project object */;
+}
