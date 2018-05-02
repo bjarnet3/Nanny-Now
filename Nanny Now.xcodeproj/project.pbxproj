@@ -37,6 +37,7 @@
 		5C8925A220810A060032CEAA /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8925A120810A060032CEAA /* ReviewTableViewCell.swift */; };
 		5C8925A420810C1F0032CEAA /* ReviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8925A320810C1F0032CEAA /* ReviewCollectionViewCell.swift */; };
 		5C89EE9E1FA48072005341ED /* DTTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89EE9D1FA48072005341ED /* DTTextField.swift */; };
+		5C8D344D209A73AC001671E5 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8D344C209A73AB001671E5 /* Test.swift */; };
 		5C9859AE2081D1F6006AA58A /* AnimatedRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9859AD2081D1F6006AA58A /* AnimatedRingView.swift */; };
 		5C9FC62C1FF6E95000906B05 /* FriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9FC62B1FF6E95000906B05 /* FriendsCollectionViewCell.swift */; };
 		5CA49F5B1FD78DA100B0A993 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA49F5A1FD78DA000B0A993 /* MessageViewController.swift */; };
@@ -138,6 +139,7 @@
 		5C8925A120810A060032CEAA /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		5C8925A320810C1F0032CEAA /* ReviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCollectionViewCell.swift; sourceTree = "<group>"; };
 		5C89EE9D1FA48072005341ED /* DTTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTTextField.swift; sourceTree = "<group>"; };
+		5C8D344C209A73AB001671E5 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		5C9859AD2081D1F6006AA58A /* AnimatedRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedRingView.swift; sourceTree = "<group>"; };
 		5C9FC62B1FF6E95000906B05 /* FriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewCell.swift; sourceTree = "<group>"; };
 		5CA49F5A1FD78DA000B0A993 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				5C55C1001DAAFC5600581EF3 /* Constants.swift */,
 				5C1104141DF56A4200C7FB46 /* Extensions.swift */,
 				5C860FC31FCF36870063B0BB /* PrintDebug.swift */,
+				5C8D344C209A73AB001671E5 /* Test.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -660,6 +663,7 @@
 				5C558A061FA7711C0076A17D /* LoginPageVC.swift in Sources */,
 				5C17A1DE20817D87004CCBC6 /* SubSettingsViewController.swift in Sources */,
 				5C89EE9E1FA48072005341ED /* DTTextField.swift in Sources */,
+				5C8D344D209A73AC001671E5 /* Test.swift in Sources */,
 				5C41A4EA207C34B00025A4AE /* FriendsTableViewCell.swift in Sources */,
 				5C76202B2088DCAA005D7647 /* Review.swift in Sources */,
 				5C2895551FDB52A50009F6D5 /* FamilyDetailVC.swift in Sources */,
