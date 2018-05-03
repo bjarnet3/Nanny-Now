@@ -1640,7 +1640,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                 <pageViewController storyboardIdentifier="LoginPageVC" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Sdh-ed-5vs" customClass="LoginPageVC" customModule="Nanny_Now" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TRd-AO-FsS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1711" y="-708"/>
+            <point key="canvasLocation" x="-3090" y="-18"/>
         </scene>
         <!--Login ZeroVC-->
         <scene sceneID="0Ab-kD-Frg">
@@ -1802,13 +1802,13 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="76d-db-aa1">
-                                        <rect key="frame" x="10" y="185" width="355" height="142"/>
+                                        <rect key="frame" x="10" y="160" width="355" height="198"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="wlW-KE-Mbg">
-                                                <rect key="frame" x="0.0" y="0.0" width="355" height="28"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="42"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Fornavn" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="mO7-7M-TUJ" customClass="DTTextField" customModule="Nanny_Now" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="172.5" height="28"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="172.5" height="42"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardAppearance="alert" returnKeyType="done" textContentType="given-name"/>
@@ -1817,7 +1817,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Etternavn" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="1Nx-6g-3Fm" customClass="DTTextField" customModule="Nanny_Now" customModuleProvider="target">
-                                                        <rect key="frame" x="182.5" y="0.0" width="172.5" height="28"/>
+                                                        <rect key="frame" x="182.5" y="0.0" width="172.5" height="42"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardAppearance="alert" returnKeyType="done" textContentType="family-name"/>
@@ -1826,9 +1826,12 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                         </connections>
                                                     </textField>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="42" id="FUJ-TA-mIz"/>
+                                                </constraints>
                                             </stackView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Epost" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="TUo-Mj-afA" customClass="DTTextField" customModule="Nanny_Now" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="38" width="355" height="28"/>
+                                                <rect key="frame" x="0.0" y="52" width="355" height="42"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="done" textContentType="email"/>
@@ -1837,7 +1840,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Yrke / Stilling" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="u1z-Mr-tu4" customClass="DTTextField" customModule="Nanny_Now" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="76" width="355" height="28"/>
+                                                <rect key="frame" x="0.0" y="104" width="355" height="42"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes" keyboardAppearance="alert" returnKeyType="done" textContentType="organization-title"/>
@@ -1846,7 +1849,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                 </connections>
                                             </textField>
                                             <segmentedControl opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" segmentControlStyle="bordered" translatesAutoresizingMaskIntoConstraints="NO" id="y9U-RR-xFB">
-                                                <rect key="frame" x="0.0" y="114" width="355" height="29"/>
+                                                <rect key="frame" x="0.0" y="156" width="355" height="43"/>
                                                 <color key="backgroundColor" red="0.98656708002090454" green="0.18414348363876343" blue="0.57283514738082886" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <segments>
                                                     <segment title="Kvinne  ♀"/>
@@ -1858,7 +1861,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         </subviews>
                                     </stackView>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DYN-YW-hbc">
-                                        <rect key="frame" x="10" y="338" width="355" height="127"/>
+                                        <rect key="frame" x="10" y="369" width="355" height="96"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <date key="date" timeIntervalSinceReferenceDate="-31609672.829605103">
                                             <!--2000-01-01 03:32:07 +0000-->
@@ -1881,7 +1884,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="76d-db-aa1" firstAttribute="top" secondItem="3a4-ZU-0ur" secondAttribute="bottom" constant="165" id="0hp-4n-Byy"/>
+                            <constraint firstItem="76d-db-aa1" firstAttribute="top" secondItem="3a4-ZU-0ur" secondAttribute="bottom" constant="140" id="0hp-4n-Byy"/>
                             <constraint firstItem="lN7-Jc-8S9" firstAttribute="trailing" secondItem="skj-FM-cTr" secondAttribute="trailing" id="8r3-3M-0iw"/>
                             <constraint firstItem="lN7-Jc-8S9" firstAttribute="top" secondItem="skj-FM-cTr" secondAttribute="top" id="9uI-r0-U91"/>
                             <constraint firstAttribute="trailing" secondItem="lN7-Jc-8S9" secondAttribute="trailing" id="Alh-sQ-A7I"/>

@@ -30,6 +30,7 @@ class LoginTwoVC: UIViewController {
         guard let startVC = storyboard?.instantiateViewController(withIdentifier: "StartVC") as? StartViewController else {
             return
         }
+        
         // loginPageVC.userInfo = userInfo
         present(startVC, animated: false)
     }
