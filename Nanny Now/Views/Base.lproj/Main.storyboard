@@ -1051,6 +1051,7 @@
                         <outlet property="requestName" destination="dXq-qk-w5z" id="EpM-fD-vUa"/>
                         <outlet property="requestRating" destination="hR8-nA-pFB" id="FYh-AT-a24"/>
                         <outlet property="requestTitle" destination="TfK-Wd-oqS" id="e9l-1O-V5U"/>
+                        <outlet property="requestType" destination="C23-hx-NGv" id="jjf-zm-TQ6"/>
                         <outlet property="tableView" destination="dgZ-cO-BAT" id="jrj-cB-lni"/>
                         <outlet property="toDateTime" destination="nKl-lH-nHB" id="TzT-Gv-VWI"/>
                     </connections>

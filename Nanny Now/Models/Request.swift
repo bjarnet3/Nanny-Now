@@ -196,4 +196,6 @@ struct Request {
         self._requestStatus = requestStatusString(requestStatus: requestStatus)!
         self._requestCategory = requestCategoryString(requestCategory: requestCategory)!
     }
+    
+    
 }

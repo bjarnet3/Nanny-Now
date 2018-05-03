@@ -39,6 +39,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     @IBOutlet weak var requestGender: UILabel!
     @IBOutlet weak var requestDistance: UILabel!
     @IBOutlet weak var requestMessage: UITextField!
+    @IBOutlet weak var requestType: UISegmentedControl!
     
     @IBOutlet weak var fromDateTime: UIDatePicker!
     @IBOutlet weak var toDateTime: UIDatePicker!
@@ -119,13 +120,22 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         if let lastRow = lastRowSelected?.row {
             let lastNanny = self.nannies[lastRow]
             
-            var message = "Melding til: \(lastNanny.firstName)"
-            if let text = self.requestMessage.text, text != "" { message = text }
+            var requestMessage = "Melding til: \(lastNanny.firstName)"
+            if let text = self.requestMessage.text, text != "" { requestMessage = text }
             
-            // Notifications.instance.sendNotification(to: lastNanny.userUID, text: "test", categoryRequest: .nannyRequest)
-            let request = Request(nanny: lastNanny, user: self.user!, timeFrom: self.fromDateTime.date, timeTo: self.toDateTime.date, message: message)
-            Notifications.instance.sendNotifications(with: request)
+            if self.requestType.selectedSegmentIndex == 0 {
+                // Send Request
+                let request = Request(nanny: lastNanny, user: self.user!, timeFrom: self.fromDateTime.date, timeTo: self.toDateTime.date, message: requestMessage)
+                Notifications.instance.sendNotifications(with: request)
+                
+            } else {
+                // Send Message
+                let message = Message(from: self.user!, to: lastNanny, message: requestMessage)
+                Notifications.instance.sendNotifications(with: message)
+                
+            }
         }
+        
         self.exitAllMenu()
         for selectedAnnotation in self.mapView.selectedAnnotations {
             self.mapView.deselectAnnotation(selectedAnnotation, animated: true) }

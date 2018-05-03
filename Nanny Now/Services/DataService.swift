@@ -183,14 +183,18 @@ class DataService {
     func postToMessage(recieveUserID: String, message: String) {
         if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             
+            let messageREF = DataService.instance.REF_MESSAGES
+            let messageID = messageREF.childByAutoId().key
+            
+            let baseFirebase = messageREF.child("private").child(recieveUserID)
+            let reciFirebase = messageREF.child("private").child(userID)
             let timeStamp = returnTimeStamp()
             
             let chat : [String : String] = [
-                timeStamp : message
+                timeStamp : message,
+                messageID : messageID
             ]
             
-            let baseFirebase = DataService.instance.REF_USERS_PRIVATE.child(userID).child("communication").child(recieveUserID)
-            let reciFirebase = DataService.instance.REF_USERS_PRIVATE.child(recieveUserID).child("communication").child(userID)
             baseFirebase.updateChildValues(chat)
             reciFirebase.updateChildValues(chat)
         }
