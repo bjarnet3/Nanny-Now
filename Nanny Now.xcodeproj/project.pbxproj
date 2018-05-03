@@ -313,8 +313,8 @@
 		5CB7FE5C1FE4C92C00D41E6F /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				5CCF0C7D1D898BFB0089F39D /* Assets.xcassets */,
 				5CB7FE5E1FE4C94100D41E6F /* Sounds */,
+				5CCF0C7D1D898BFB0089F39D /* Assets.xcassets */,
 			);
 			path = Library;
 			sourceTree = "<group>";
