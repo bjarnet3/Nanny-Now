@@ -12,5 +12,5 @@ Barnepass, Trygt, Raskt og Lett tilgjengelig
 
 
 ## LoginViewControllers and LoginPageViewControllers
-LoginManager + Facebook Login API + Firebase
+[LoginManager](https://github.com/bjarnet3/Nanny-Now/tree/master/Nanny%20Now/Controllers/LoginViewController) + [Facebook Login API](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Controllers/LoginViewController/LoginZeroVC.swift) + [Firebase](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Services/DataService.swift)
 ![LoginViewControllers in Nanny Now](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_LoginPageVC.imageset/LoginPageVC.png)
