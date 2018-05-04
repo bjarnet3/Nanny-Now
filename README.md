@@ -20,8 +20,7 @@ Firebase Database & Firebase Storage - [DataService.swift](https://github.com/bj
 [LoginManager](https://github.com/bjarnet3/Nanny-Now/tree/master/Nanny%20Now/Controllers/LoginViewController) + [Facebook Login API](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Controllers/LoginViewController/LoginZeroVC.swift) + [Firebase Authentication](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Services/DataService.swift)
 ![LoginViewControllers in Nanny Now](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_LoginPageVC.imageset/LoginPageVC.png)
 
-![Before Login in LoginZeroVC](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_LoginPageVC_SignedOut.imageset/LoginPageVC_SignedOut.png)
-![After Login in LoginZeroVC](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_LoginZeroVC.imageset/LoginZeroVC.png)
+![Login in LoginZeroVC](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_Login.imageset/Login.png)
 
 ## Notification
 Notifications Singleton - [Notifications.swift](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Services/Nofitications.swift)
