@@ -59,7 +59,7 @@ GPS & Geolocation Services
 **Pods and Animations**
 - TabBarAnimations - "Thanx to [Ramotion](https://github.com/bjarnet3/Nanny-Now/tree/master/Pods/RAMAnimatedTabBarController)"
 - SKSplashView - "Thanx to [sachinkesiraju](https://github.com/bjarnet3/Nanny-Now/tree/master/Pods/RevealingSplashView)"
-
+- SwiftKeychainWrapper - "Thanx to [Jason Rendel](https://github.com/jrendel/SwiftKeychainWrapperExample)"
 
 **Thanks to**
 
