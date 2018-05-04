@@ -34,6 +34,17 @@ GPS & Geolocation Services
 ## Animations & Effects
 [Blur](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Controllers/MessageViewController.swift) -- [TabBarAnimations](https://github.com/bjarnet3/Nanny-Now/tree/master/Pods/RAMAnimatedTabBarController) -- [Fade](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Utilities/Functions.swift) -- [ParallaxEffectOnView](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Utilities/Functions.swift) -- [CellAnimation](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Utilities/Functions.swift) -- [SplashView](https://github.com/bjarnet3/Nanny-Now/tree/master/Pods/RevealingSplashView)
 
+# Target / Progress / Goal
+
+## 2016
+### Week 23
+- [x] Nanny Now App - Start Nanny Now Development
+
+### Week 24
+- [x] Nanny Now App - Implement TableView
+- [x] Nanny Now App - Implement MapKit
+- [x] Nanny Now App - Custom ImageView (Rounded corners on Images)
+
 # Contributors:
 **App Icon Template (iOS)**
 - Michael Flarup (https://appicontemplate.com/) - PixelResort, Twitter @flarup
