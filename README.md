@@ -48,8 +48,11 @@ GPS & Geolocation Services
 - Alex Fuller (noun_10551_cc) 
 
 **Notification Sound**
-- notification11.wav
-- https://www.zedge.net/ringtone/1716388/
+- [notification11](https://www.zedge.net/ringtone/1716388/)
+- [notification48](https://www.zedge.net/ringtone/87154a39-442a-3cc0-b026-709657d4de6d)
+- [notification50](https://www.zedge.net/ringtone/9addaf43-4207-3e41-8de9-a933d558e224)
+- [success_notification](https://www.zedge.net/ringtone/2c79b8be-ce82-347f-8e80-fae1b7ed58ea)
+- [failure_notification](https://www.zedge.net/ringtone/d6cf9eaf-66b3-365f-95d4-1fe486549177)
 
 **Web Page / Internet**
 
