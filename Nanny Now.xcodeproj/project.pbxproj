@@ -45,7 +45,6 @@
 		5CB7FE5A1FE4368900D41E6F /* FrostyCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7FE591FE4368900D41E6F /* FrostyCornerView.swift */; };
 		5CB7FE601FE4CC8900D41E6F /* notification11.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CB7FE5F1FE4CC8900D41E6F /* notification11.wav */; };
 		5CBD1C2E1DA81E7900CAC8CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5CBD1C2D1DA81E7900CAC8CF /* GoogleService-Info.plist */; };
-		5CBE763A209B8E9400879AE5 /* Testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBE7639209B8E9400879AE5 /* Testing.swift */; };
 		5CC0C6972095DFD1005317FA /* MessageDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC0C6962095DFD1005317FA /* MessageDetailVC.swift */; };
 		5CC849331FCA1198003AE163 /* FirstTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC849321FCA1198003AE163 /* FirstTableViewCell.swift */; };
 		5CC849351FCA11BE003AE163 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC849341FCA11BE003AE163 /* SettingsTableViewCell.swift */; };
@@ -151,7 +150,6 @@
 		5CB7FE591FE4368900D41E6F /* FrostyCornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyCornerView.swift; sourceTree = "<group>"; };
 		5CB7FE5F1FE4CC8900D41E6F /* notification11.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = notification11.wav; sourceTree = "<group>"; };
 		5CBD1C2D1DA81E7900CAC8CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		5CBE7639209B8E9400879AE5 /* Testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testing.swift; sourceTree = "<group>"; };
 		5CC0C6962095DFD1005317FA /* MessageDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailVC.swift; sourceTree = "<group>"; };
 		5CC849321FCA1198003AE163 /* FirstTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTableViewCell.swift; sourceTree = "<group>"; };
 		5CC849341FCA11BE003AE163 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
@@ -313,7 +311,6 @@
 				5C55C1001DAAFC5600581EF3 /* Constants.swift */,
 				5C1104141DF56A4200C7FB46 /* Extensions.swift */,
 				5C860FC31FCF36870063B0BB /* PrintDebug.swift */,
-				5CBE7639209B8E9400879AE5 /* Testing.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -656,7 +653,6 @@
 				5C33CFC71DB422830075675E /* Functions.swift in Sources */,
 				5CC849371FCA18BE003AE163 /* Settings.swift in Sources */,
 				5CC849331FCA1198003AE163 /* FirstTableViewCell.swift in Sources */,
-				5CBE763A209B8E9400879AE5 /* Testing.swift in Sources */,
 				5C8925A220810A060032CEAA /* ReviewTableViewCell.swift in Sources */,
 				5C1104151DF56A4200C7FB46 /* Extensions.swift in Sources */,
 				5CB7FE5A1FE4368900D41E6F /* FrostyCornerView.swift in Sources */,
