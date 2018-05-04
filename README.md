@@ -209,22 +209,18 @@ Summary:
 ## 2017
 
 ### Week 1: (Protocol Oriented Programming)
-- Nanny Protocol - Part 1 (Playground)
-### Week 1: (Protocol Oriented Programming)
-- Nanny Protocol - Part 1 (Playground)
+- [x] Nanny Protocol - Part 1 (Playground)
 - [x] Nanny Now - Merge Nanny and CostumPointAnnotation array together
 Summary:
 - Classes, Structs and Enums that conforms to the same Protocol can be put together in an Array[Protocol]
 
 ### Week 2: (Protocol Extensions & Type Extensions)
 - [x] Nanny Now - Update Tabbar
-- Nanny Protocol - Part 2 (Playground)
+- [x] Nanny Protocol - Part 2 (Playground)
 Summary:
 - Protocol Extensions : implementation of functions to objects conformed to that «base» protocol
 
 ### Week 3: (Design Patters, Protocol and Advanced Type Inferences)
-- Design Patterns — Creational Patterns — Factory Pattern in Swift
-- Advanced Type Inferences (Stanford)
 - [x] Nanny Now - Conform Nanny Class to User Protocol (Part 1)
 - [x] Nanny Now - Add Observer to NannyViewController and TableView
 - [x] Nanny Now - Get from Firebase Database (Successful)
@@ -258,7 +254,6 @@ Summary:
 - [x] Nanny Now - Add TextFields and Buttons - NOT DONE
 - [x] Nanny Now - Reintroduce TableView for FamilyVC - Part 1 - NOT DONE
 Summary:
-- Instance Method ( var class = Class() )
 - @IBDesignable (update «on the fly» in Interface Builder)
 - @IBInspectable (add specific property in Identity Inspector in Interface Builder) (Only explicitly declared)
 
@@ -287,7 +282,6 @@ Summary:
 - DataService.ds.REF_NANNIES.queryOrdered(byChild: "breddeGrad" + "lendeGrad").observe
 
 ### Week 16: (Nanny Now and Remote Notifications)
-- Firebase Push Notification
 - [x] Nanny Now - 1. Create Certificates, IDs and Profiles - ONLY DEVELOPMENT Certificates
 - [x] Nanny Now - 2. Setup Firebase for Cloud Messaging
 - [x] Nanny Now - 3. Setup Remote Notification in Xcode
@@ -301,9 +295,7 @@ Summary:
 - [x] Nanny Now - Send Remote Notification from Application or To Dedicated Server
 - [x] Nanny Now - Send Notification From Application to Application
 Summary:
-- curl -X POST --header "Authorization: key=<API_ACCESS_KEY>"     --Header "Content-Type: application/json"     https://fcm.googleapis.com/fcm/send     -d "{\"to\":\"<YOUR_DEVICE_ID_TOKEN>\",\"notification\":{\"title\":\"Title Text\",\"body\":\"Message from Terminal\",\"sound\":\"default\",\"badge\"},\"priority\":10}"
-- [ "data": [ "score": "5x1", "time": "15:10" ], "to" : "bk3RNwTe3H0:CI2k_HHwgIpoDKCIZvvDMExUdFQ3P1..." ]
-- https://github.com/realtime-framework/MessagingSwift3Chat/blob/master/CustomPushService/NotificationService.swift
+- curl -X POST --header "Authorization: key=<API_ACCESS_KEY>"     --Header "Content-Type: application/json"     https://fcm.googleapis.com/fcm/send
 - https://framework.realtime.co/blog/ios10-push-notifications-support.html
 
 ### Week 18: (Cleanup and Wrap It Up)
@@ -486,7 +478,6 @@ Summary:
 Uke 4: (APIs and the week goes By) <— This Week
 - [x] Nanny Now - Haptic Light, medium, heavy... touches move
 Summary:
-- https://www.youtube.com/watch?v=HzrWQ0Y82RA
 - «/Users/bjarnet3/Library/Mobile Documents/com~apple~CloudDocs/Xcode/Projects/_macOS/Hey DJ/firebase-express»
 - nvm start - To start the server
 - https://github.com/firebase/firebase-ios-sdk/tree/master/Example
@@ -551,16 +542,12 @@ Uke 12 - 13: (…Hemsedal…Easter Bunny…)
 Uke 14: (Criminal Aliens & Cognitive Dissonance)
 - [x] Nanny Now - Send Request «DatePicker» - Part 1
 Summary:
-- self.requests.count == self.totalRequests - 1 <—This was the solution for tableView and reloadData
+- self.requests.count == self.totalRequests - 1 <— This was the solution for tableView and reloadData
 - Assert() =  Crash if not true (Debugging)
 - switch (can be used on most types,, even string)
 - enum MemosMenu { case kebab(size: Int) case pizza(String)  }
 - switch menuItem { case .kebab(let size: print() case .pizza(let pizzaName): print() }
 «Multiple inheritance» with protocols
-- CountableRange implements many protocols …
-- Sequence - makeIterator (and thus supports for in)
-- Collection - subscripting (i.e. []) index(offsetBy:), index(of:), etc.
-- Array already implements these protocols
 - Dictionary is also a Collection, as is Set and String
 - Equatable protocol, to match objects together 
 
@@ -580,7 +567,6 @@ Uke 16: (Versace & Garage)
 - [ ] Nanny Now - Nedtelling / Takstameter / Pris
 - [x] Nanny Now - Launch New Version v1.24
 - [ ] Add Nanny Now to Github
-- [ ] Add Other projects to Github
 
 Uke 17: (Github & Version Control)
 - [x] Nanny Now - Fixed Token and Location Manager in Nanny
