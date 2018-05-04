@@ -38,7 +38,7 @@ GPS & Geolocation Services
 
 ## 2016
 ### Week 23
-- [x] Nanny Now App - Start Nanny Now Development
+- [x] Nanny Now - Start Nanny Now Development
 
 ### Week 24
 - [x] Nanny Now - Implement TableView
@@ -65,6 +65,150 @@ GPS & Geolocation Services
 - [x] Nanny Now - Update «Generic Function» Custom UIColor from RGB: Hex #Swift 3.0
 - [x] Nanny Now - Create Calculate To Center Position From Array
 
+### Week 31:
+- [x] Nanny Now - Add button Image to Presentation Sheet
+- [x] Nanny Now - EmployeeViewController { func notificationSetup(_ all: Bool) { } }
+
+### Week 33:
+- Advanced Navigation Bars
+- Advanced Table Views
+- Advanced Times Tables
+
+### Week 34:
+- Webpage to Nanny Now - Alpha 1.0
+- Add more buttons (Navigation Buttons)
+- Downloading Web Content
+- Multiple View Controllers
+- Controlling The Keyboard
+Summary:
+- override func touchesBegan( _  _ ) { self.view.endEditing(true) }
+- textFieldShouldReturn( ) { textField.resignFirstResponder() } // add, UITextFieldDelegate
+
+### Week 35:
+- JSONParsing
+- Optional Chaining
+- GeoCoding / Reversed GeoCoding
+- Advanced iOS Features II: Animations, Games, Maps & Geolocation, Audio
+Summary:
+- if let _ = textField { if let _ = label.text { if let _ = text.hashValue }  }  } - NON OPTIONAL CHANING
+- if let _ = textField?.text?.hashValue { /* … */ } - OPTIONAL CHANING
+
+### Week 36:
+- Start recreation of Nanny Now with Xcode 8 RC
+- [x] Nanny Now - StoryBoard - tableViewCell setup
+- [x] Nanny Now - Adding User Annotation To Maps
+
+### Week 37:
+- Object Oriented Programming VS Protocol Oriented Programming
+- Create UIView Playground (Frame, Bounds, Rect) - Maybe use PS instead of Playground
+Summary:
+- CodeSnippet <#Code>
+
+### Week 38:
+- [x] Nanny Now (3D Touch : Quick Actions)
+- Firebase «Overview»
+- Create Generic UIView (Tinder like buttons) (Look more into Stanford 4 for help) - NOT DONE
+Summary:
+- didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?
+- performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping 
+- func handleShortcut(shortcutItem: UIApplicationShortcutItem ) -> Bool
+
+### Week 39:
+- [x] Nanny Now - Complete Login (Start Screen) - ALMOST DONE (Static)
+- [x] Nanny Now - Go from TableViewCell to VC (prepare for seque) - NOT DONE
+- Firebase Auth
+Summary:
+- Documenting /// **Bold** /** */ #H1# ##H2## 
+
+### Week 40:
+- [x] Nanny Now - Facebook Authentication with Firebase
+- [x] Nanny Now - Email Authentication with Firebase
+- Refactoring at Scale - Instagram Presentation (IGListKit Reference)
+Summary:
+- https://speakerdeck.com/realm/ryan-nystrom-refactoring-at-scale-lessons-learned-rewriting-instagrams-feed
+
+### Week 41:
+- [x] Nanny Now - Firebase DB Basic Structure
+- UIPictureView post to Firebase / Part 1
+- Creating database users for Firebase
+- Test Sync til Server (Firebase) (Part 1)
+Summary:
+- ...
+
+### Week 42:
+- [x] Nanny Now - Implement Splash Screen
+- [x] Nanny Now - Add Haptic Engine
+- Firebase data modeling & architecture
+Summary:
+- enum HepticEngineTypes { case error, success, warning, light, medium, heavy, selection } 
+- Singleton - An instance of a class, that is publicly available that has only one reference.
+
+### Week 43:
+- UIPickerView post to Firebase
+- Parsing Firebase Database
+- Intro to Firebase Storage
+- [x] Nanny Now - Authentication with Personal Information from FB
+- [x] Nanny Now - Auto Sign in with Keychain (Part 1)
+- [x] Nanny Now - Save login to Firebase Database
+- [x] Nanny Now - UICollectionView in FamilyViewController (Part 1)
+- [x] Nanny Now - UIDatePickerView in UIActionAlert - NOT DONE
+- Documenting - Functions, Enums, Structs and Protocols (Part 1) - NOT DONE
+Summary:
+- FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name"]).start(completionHandler: { (c, r, error) }
+
+### Week 44: (Firebase Datasource)
+- Sync and Connect Database (Firebase) (Part 1)
+- [x] Nanny Now- UICollectionView in FamilyViewController (Part 1)
+- [x] Nanny Now - Test Sync to Server (Firebase) (Part 2)
+- [x] Nanny Now - Get «birthday property» from Facebook Login
+- Documenting - Functions, Enums, Structs and Protocols (Part 1)
+Summary:
+- withReadPermissions: ["public_profile", "user_birthday", "email"] - FBSDKLoginManager
+- birthday property declared in FBSDKLoginManager...
+
+### Week 45: (Split & Merge)
+- Custom Protocol and Delegate Methods
+- [x] Nanny Now - Try «Diffing» with Instagram SDK (IGListKit)
+- [x] Nanny Now - UIDatePickerView in UIActionAlert
+- Conform Protocol and Merge Classes (Nanny & Family) together.
+
+### Week 46:
+- FUIAuth.defaultAuthUI() instead of FIRAuthUI.default()
+
+### Week 47: (Firebase)
+- [x] Nanny Now - UIPickerViewDelegate and DataSource to extension
+- [x] Nanny Now - UITableViewDelegate and DataSource to extension
+- [x] Nanny Now - IBDesignable (Removed Again Because of Performance)
+- [x] Nanny Now - «Upload Facebook Login Image» to Firebase Storage and set in DB
+- [x] Nanny Now - RevealingSplashView in Functions.swift - Standalone function
+- [x] Nanny Now - UICollectionView Delegate in FamilyViewController as extension
+Summary:
+- @IBDesignable // Will update preview in Storyboard / Xib file
+- extension NannyViewController : UIPickerViewDelegate, UIPickerViewDataSource - Friendly
+- extension NannyViewController : UITableViewDelegate, UITableViewDataSource
+
+### Week 48: (More Firebase)
+- [x] Nanny Now - Implement Struct «Firebase Constants»
+- [x] Nanny Now - UICollectionView «Easy Display of Fields»
+- [x] Nanny Now- Post on Firebase - Part 1
+- [x] Nanny Now - Create new Reference (Nannies)
+Summary:
+- func postToFirebase(_ postNumber: Int) { post to Firebase } 
+
+### Week 49: (Even More Firebase)
+- [x] Nanny Now - Post on Firebase - Part 2
+- [x] Nanny Now - Upload FB picture to Firebase
+- [x] Nanny Now - Create Reference from FB picture to DB
+- [x] Nanny Now - Complete Old tutorials
+Summary:
+- Nanny.swift - // Changed from Foundation to UIKit
+- Nanny.swift - // Inherit from MKPointAnnotation
+
+### Week 50: (NEW OFFICE SPACE)
+
+## 2017
+
+## 2018
 
 # Contributors:
 **App Icon Template (iOS)**
