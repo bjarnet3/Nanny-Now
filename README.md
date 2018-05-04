@@ -11,13 +11,11 @@ Barnepass, Trygt, Raskt og Lett tilgjengelig
 ![Tabbar in Main.storyboard](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_Tabbar.imageset/Tabbar.png)
 
 
-# Services
+# Services [Singleton](https://github.com/bjarnet3/Nanny-Now/tree/master/Nanny%20Now/Services)
 
 ## Login / Register (4 ViewControllers)
-### Firebase Autentication + Facebook API
 [LoginManager](https://github.com/bjarnet3/Nanny-Now/tree/master/Nanny%20Now/Controllers/LoginViewController) + [Facebook Login API](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Controllers/LoginViewController/LoginZeroVC.swift) + [Firebase Authentication](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Services/DataService.swift)
 ![LoginViewControllers in Nanny Now](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_LoginPageVC.imageset/LoginPageVC.png)
 
 ## Notification
-### Firebase Cloud Messaging
 
