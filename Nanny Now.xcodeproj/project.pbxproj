@@ -45,7 +45,7 @@
 		5CB7FE5A1FE4368900D41E6F /* FrostyCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7FE591FE4368900D41E6F /* FrostyCornerView.swift */; };
 		5CB7FE601FE4CC8900D41E6F /* notification11.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CB7FE5F1FE4CC8900D41E6F /* notification11.wav */; };
 		5CBD1C2E1DA81E7900CAC8CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5CBD1C2D1DA81E7900CAC8CF /* GoogleService-Info.plist */; };
-		5CC0C6972095DFD1005317FA /* MessageDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC0C6962095DFD1005317FA /* MessageDetailVC.swift */; };
+		5CC0C6972095DFD1005317FA /* RequestDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC0C6962095DFD1005317FA /* RequestDetailVC.swift */; };
 		5CC849331FCA1198003AE163 /* FirstTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC849321FCA1198003AE163 /* FirstTableViewCell.swift */; };
 		5CC849351FCA11BE003AE163 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC849341FCA11BE003AE163 /* SettingsTableViewCell.swift */; };
 		5CC849371FCA18BE003AE163 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC849361FCA18BE003AE163 /* Settings.swift */; };
@@ -77,6 +77,7 @@
 		5CF50D80209C1E5F00136167 /* notification50.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CF50D7D209C1E5E00136167 /* notification50.wav */; };
 		5CF50D81209C1E5F00136167 /* success_notification.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CF50D7E209C1E5E00136167 /* success_notification.wav */; };
 		5CF50D83209C49D300136167 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF50D82209C49D300136167 /* MessageTableViewCell.swift */; };
+		5CF50D85209CD5F800136167 /* MessageDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF50D84209CD5F800136167 /* MessageDetailVC.swift */; };
 		D76AEE53A84CCAADE054300E /* Pods_Nanny_Now.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C06149E4985579864421B59A /* Pods_Nanny_Now.framework */; };
 /* End PBXBuildFile section */
 
@@ -151,7 +152,7 @@
 		5CB7FE591FE4368900D41E6F /* FrostyCornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyCornerView.swift; sourceTree = "<group>"; };
 		5CB7FE5F1FE4CC8900D41E6F /* notification11.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = notification11.wav; sourceTree = "<group>"; };
 		5CBD1C2D1DA81E7900CAC8CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		5CC0C6962095DFD1005317FA /* MessageDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailVC.swift; sourceTree = "<group>"; };
+		5CC0C6962095DFD1005317FA /* RequestDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailVC.swift; sourceTree = "<group>"; };
 		5CC849321FCA1198003AE163 /* FirstTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTableViewCell.swift; sourceTree = "<group>"; };
 		5CC849341FCA11BE003AE163 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		5CC849361FCA18BE003AE163 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -188,6 +189,7 @@
 		5CF50D7D209C1E5E00136167 /* notification50.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = notification50.wav; sourceTree = "<group>"; };
 		5CF50D7E209C1E5E00136167 /* success_notification.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success_notification.wav; sourceTree = "<group>"; };
 		5CF50D82209C49D300136167 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		5CF50D84209CD5F800136167 /* MessageDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailVC.swift; sourceTree = "<group>"; };
 		77AACDD398985A24EF2F229E /* Pods-Nanny Now.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nanny Now.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nanny Now/Pods-Nanny Now.release.xcconfig"; sourceTree = "<group>"; };
 		C06149E4985579864421B59A /* Pods_Nanny_Now.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nanny_Now.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -255,7 +257,8 @@
 				5CCF0C781D898BFB0089F39D /* FamilyViewController.swift */,
 				5C2895541FDB52A50009F6D5 /* FamilyDetailVC.swift */,
 				5CA49F5A1FD78DA000B0A993 /* MessageViewController.swift */,
-				5CC0C6962095DFD1005317FA /* MessageDetailVC.swift */,
+				5CF50D84209CD5F800136167 /* MessageDetailVC.swift */,
+				5CC0C6962095DFD1005317FA /* RequestDetailVC.swift */,
 				5CCF0C9E1D898F300089F39D /* InfoViewController.swift */,
 				5C17A1DD20817D87004CCBC6 /* SubSettingsViewController.swift */,
 			);
@@ -657,6 +660,7 @@
 				5CC849371FCA18BE003AE163 /* Settings.swift in Sources */,
 				5CC849331FCA1198003AE163 /* FirstTableViewCell.swift in Sources */,
 				5C8925A220810A060032CEAA /* ReviewTableViewCell.swift in Sources */,
+				5CF50D85209CD5F800136167 /* MessageDetailVC.swift in Sources */,
 				5C1104151DF56A4200C7FB46 /* Extensions.swift in Sources */,
 				5CB7FE5A1FE4368900D41E6F /* FrostyCornerView.swift in Sources */,
 				5C4C9A8D1F71BBDF00D431F3 /* NannyDetailVC.swift in Sources */,
@@ -675,7 +679,7 @@
 				5C85A7EE1DB84D83008C5FBB /* DataService.swift in Sources */,
 				5CCF0C971D898E940089F39D /* NannyImageView.swift in Sources */,
 				5C8925A420810C1F0032CEAA /* ReviewCollectionViewCell.swift in Sources */,
-				5CC0C6972095DFD1005317FA /* MessageDetailVC.swift in Sources */,
+				5CC0C6972095DFD1005317FA /* RequestDetailVC.swift in Sources */,
 				5CCF0C771D898BFB0089F39D /* NannyViewController.swift in Sources */,
 				5C558A061FA7711C0076A17D /* LoginPageVC.swift in Sources */,
 				5C17A1DE20817D87004CCBC6 /* SubSettingsViewController.swift in Sources */,

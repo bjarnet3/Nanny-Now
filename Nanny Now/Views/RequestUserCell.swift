@@ -260,14 +260,14 @@ class RequestUserCell: UITableViewCell {
     }
 
     // MARK: - Update View
-    func updateView(request: Request) {
+    func updateView(message: Message) {
         self.setNeedsLayout()
-        self.imageName.loadImageUsingCacheWith(urlString: request.imageName)
-        self.nameLabel.text = request.firstName
-        self.messageLabel.text = request.message
-        self.timeFromLabel.text = request.timeFrom.description
-        self.timeToLabel.text = request.timeTo.description
-        self.amount.text = "\(request.amount.description) kr / time"
+        self.imageName.loadImageUsingCacheWith(urlString: message._imageURL)
+        self.nameLabel.text = "First Name"
+        self.messageLabel.text = message._message
+        self.timeFromLabel.text = message._messageTime
+        self.timeToLabel.text = "_"
+        self.amount.text = "\("1000") kr / time"
         // self.setHighlighted(request.highlighted, animated: true)
     }
 }

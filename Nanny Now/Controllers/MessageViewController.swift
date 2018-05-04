@@ -416,42 +416,30 @@ class MessageViewController: UIViewController {
             userRef.observeSingleEvent(of: .value, with: { snapshot in
                 
                 if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
+                    
+                    var imageName: String?
+                    var firstName: String?
+                    
                     for (key, val) in snapValue {
                         
                         if key == "imageUrl" {
-                            if let imageValue = val as? String {
-                                var message = message
-                                
-                                message.setImageUrl(imageURL: imageValue)
-                                self.messages.append(message)
-                                
-                            }
+                            imageName = val as? String
+                        }
+                        if key == "first_name" {
+                            firstName = val as? String
                         }
                         
                     }
-                }
-                /*
-                
-                // self.requests.sort(by: { $0.timeRequested > $1.timeRequested })
-                if let index = self.requests.index(where: { $0.timeRequested >= requestVal.timeRequested }) {
-                    self.requests.insert(requestVal, at: index)
                     
-                    let indexPath = IndexPath(row: index.advanced(by: 2), section: 0)
-                    let updateIndexPath = IndexPath(row: index.advanced(by: 3), section: 0)
+                    var message = message
                     
-                    self.mainTable.insertRows(at: [indexPath], with: .automatic)
-                    self.mainTable.reloadRows(at: [updateIndexPath], with: .automatic)
-                } else {
-                    self.requests.append(requestVal)
-                    self.mainTable.reloadData()
+                    let user = User(userUID: message._fromUID, imageName: imageName, firstName: firstName)
+                    message.setFrom(user: user)
+                    
+                    // message.setImageUrl(imageURL: imageValue)
+                    self.messages.append(message)
+                    
                 }
-                self.messageBadge += 1
-                if self.requests.count == self.totalRequests - 1 {
-                    print("observeUser last request")
-                    self.mainTable.reloadData()
-                }
-                
-                */
             })
 
         } else {
@@ -578,11 +566,14 @@ extension MessageViewController {
         self.scrollAnimator?.stopAnimation(true)
         self.blurAnimator?.stopAnimation(true)
         
+        
+        /*
         if !self.mainTableMinimized {
             self.backTable.alpha = 0.4
             self.backTable.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
             self.backTable.layer.cornerRadius = 0
         }
+        */
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -672,46 +663,46 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var returnCell: UITableViewCell?
+        let returnCell = UITableViewCell()
         
         if tableView == mainTable {
             
             if indexPath.row == 0 {
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestHeaderCell", for: indexPath) as? RequestHeaderCell {
                     
-                    returnCell = cell
+                    return cell
                 }
             } else if indexPath.row == 1 {
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestBodyCell", for: indexPath) as? RequestBodyCell {
                     cell.updateView(user: self.user!)
                     cell.layoutIfNeeded()
                     
-                    returnCell = cell
+                    return cell
                 }
             } else {
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestUserCell", for: indexPath) as? RequestUserCell {
                     cell.updateView(request: requests[indexPath.row - 2], animated: true)
                     
                     // https://stackoverflow.com/questions/30066625/uiimageview-in-table-view-not-showing-until-clicked-on-or-device-is-roatated
-                    
-                    returnCell = cell
+                    return cell
                 }
             }
         }
         
         if tableView == backTable {
-            
             if let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell", for: indexPath) as? MessageTableViewCell {
-                cell.loadData(for: messages[indexPath.row])
-                returnCell = cell
+                cell.updateView(with: messages[indexPath.row])
+                return cell
             }
         }
-        return returnCell!
+        
+        return returnCell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let height = (indexPath.row < self.heightForRow.count) ? self.heightForRow[indexPath.row] : 80
-        return height // self.heights?[indexPath.row] ?? 80
+        let backHeight: CGFloat = 80
+        let mainHeight = (indexPath.row < self.heightForRow.count) ? self.heightForRow[indexPath.row] : 80
+        return tableView == mainTable ? mainHeight : backHeight // self.heights?[indexPath.row] ?? 80
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -721,7 +712,7 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if tableView == self.mainTable {
-            guard let messageDetailVC = storyboard?.instantiateViewController(withIdentifier: "MessageDetailVC") as? MessageDetailVC else { return
+            guard let messageDetailVC = storyboard?.instantiateViewController(withIdentifier: "MessageDetailVC") as? RequestDetailVC else { return
             }
             
             if let cell = tableView.cellForRow(at: indexPath) {
@@ -749,14 +740,11 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         if tableView == self.backTable {
-            guard let messageAll = storyboard?.instantiateViewController(withIdentifier: "MessageTableViewCell") as? MessageTableViewCell else {
+            tableView.deselectRow(at: indexPath, animated: true)
+            guard let messageDetailVC = storyboard?.instantiateViewController(withIdentifier: "MessageDetailVC") as? MessageDetailVC else {
                 return
             }
-            if let cell = tableView.cellForRow(at: indexPath) {
-                print("Shit hun var fitt")
-            }
-            
-            tableView.deselectRow(at: indexPath, animated: true)
+            present(messageDetailVC, animated: true)
         }
     }
     

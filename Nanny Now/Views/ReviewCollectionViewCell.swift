@@ -22,6 +22,10 @@ class ReviewCollectionViewCell: UICollectionViewCell {
         case exit
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
     func animateView( direction: Direction) {
         if direction == .enter {
             self.contentView.alpha = 0

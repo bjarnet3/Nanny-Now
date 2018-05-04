@@ -2016,39 +2016,83 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" alpha="0.59999999999999998" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1S9-DO-AYS" customClass="CustomTableView" customModule="Nanny_Now" customModuleProvider="target">
+                            <tableView clipsSubviews="YES" alpha="0.59999999999999998" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1S9-DO-AYS" customClass="CustomTableView" customModule="Nanny_Now" customModuleProvider="target">
                                 <rect key="frame" x="10" y="25" width="355" height="642"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageTableViewCell" rowHeight="80" id="j4A-f1-hfm" customClass="MessageTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="355" height="80"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageTableViewCell" id="Wk0-3T-LmW" customClass="MessageTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="355" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="j4A-f1-hfm" id="kOs-kZ-yYD">
-                                            <rect key="frame" x="0.0" y="0.0" width="355" height="79.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wk0-3T-LmW" id="YwM-zF-5GM">
+                                            <rect key="frame" x="0.0" y="0.0" width="355" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GT6-eH-KVm" customClass="CustomImageView" customModule="Nanny_Now" customModuleProvider="target">
-                                                    <rect key="frame" x="15" y="8" width="44" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Iy-Xb-SVl" customClass="CustomImageView" customModule="Nanny_Now" customModuleProvider="target">
+                                                    <rect key="frame" x="15" y="-24" width="56" height="56"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="56" id="uBT-Wx-FG7"/>
+                                                        <constraint firstAttribute="height" constant="56" id="vsK-od-sTb"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4c-2k-8je">
-                                                    <rect key="frame" x="67" y="11" width="268" height="40"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="IJx-Vb-tAd">
+                                                    <rect key="frame" x="81" y="10" width="264" height="24"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="A6U-zG-Xhi">
+                                                            <rect key="frame" x="0.0" y="0.0" width="259" height="18"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXB-nW-4Od">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="118.5" height="18"/>
+                                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20:50" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiH-Fq-QwT">
+                                                                    <rect key="frame" x="123.5" y="0.0" width="135.5" height="18"/>
+                                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vm-gs-kuY">
+                                                            <rect key="frame" x="0.0" y="18" width="264" height="6"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                            <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="A6U-zG-Xhi" firstAttribute="leading" secondItem="IJx-Vb-tAd" secondAttribute="leading" id="8a2-81-T2A"/>
+                                                        <constraint firstItem="8vm-gs-kuY" firstAttribute="top" secondItem="IJx-Vb-tAd" secondAttribute="top" constant="18" id="EtX-NR-Pf8"/>
+                                                        <constraint firstItem="A6U-zG-Xhi" firstAttribute="top" secondItem="IJx-Vb-tAd" secondAttribute="top" id="GIs-rM-Hhq"/>
+                                                        <constraint firstAttribute="trailing" secondItem="A6U-zG-Xhi" secondAttribute="trailing" constant="5" id="nl2-UU-xST"/>
+                                                    </constraints>
+                                                </stackView>
                                             </subviews>
+                                            <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="IJx-Vb-tAd" firstAttribute="leading" secondItem="3Iy-Xb-SVl" secondAttribute="trailing" constant="10" id="Pu2-SQ-fq9"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="3Iy-Xb-SVl" secondAttribute="bottom" constant="12" id="1vl-mH-at5"/>
+                                            <constraint firstAttribute="trailing" secondItem="8vm-gs-kuY" secondAttribute="trailing" constant="10" id="38b-Dk-O0S"/>
+                                            <constraint firstAttribute="bottom" secondItem="IJx-Vb-tAd" secondAttribute="bottom" constant="10" id="58S-jT-oZ4"/>
+                                            <constraint firstItem="3Iy-Xb-SVl" firstAttribute="leading" secondItem="Wk0-3T-LmW" secondAttribute="leading" constant="15" id="9c2-Vc-arY"/>
+                                            <constraint firstAttribute="bottom" secondItem="8vm-gs-kuY" secondAttribute="bottom" constant="10" id="JAQ-tr-7SW"/>
+                                            <constraint firstItem="IJx-Vb-tAd" firstAttribute="top" secondItem="Wk0-3T-LmW" secondAttribute="top" constant="10" id="UQa-Kj-jLO"/>
+                                        </constraints>
                                         <connections>
-                                            <outlet property="messageLabel" destination="t4c-2k-8je" id="vQX-ZY-lDt"/>
-                                            <outlet property="profileImage" destination="GT6-eH-KVm" id="SeU-EC-RnA"/>
+                                            <outlet property="messageLabel" destination="8vm-gs-kuY" id="6uG-fa-TZd"/>
+                                            <outlet property="nameLabel" destination="WXB-nW-4Od" id="GvI-Bb-XgF"/>
+                                            <outlet property="profileImage" destination="3Iy-Xb-SVl" id="YRd-xu-FYz"/>
+                                            <outlet property="timeLabel" destination="aiH-Fq-QwT" id="RQn-5E-Fne"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" directionalLockEnabled="YES" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="scrollableAxes" indicatorStyle="black" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6BB-7Z-reE" userLabel="Main Table" customClass="CustomTableView" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="188" width="375" height="479"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="scrollableAxes" indicatorStyle="black" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6BB-7Z-reE" userLabel="Main Table" customClass="CustomTableView" customModule="Nanny_Now" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="55" width="375" height="612"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="50" maxX="0.0" maxY="100"/>
                                 <prototypes>
@@ -2172,12 +2216,8 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="6BB-7Z-reE" secondAttribute="bottom" id="F1a-8b-f7v"/>
-                            <constraint firstAttribute="bottom" secondItem="1S9-DO-AYS" secondAttribute="bottom" id="FYQ-X4-qVg"/>
-                            <constraint firstItem="1S9-DO-AYS" firstAttribute="leading" secondItem="x4L-4W-Qr8" secondAttribute="leading" constant="10" id="SAg-oz-eyM"/>
                             <constraint firstItem="6BB-7Z-reE" firstAttribute="leading" secondItem="x4L-4W-Qr8" secondAttribute="leading" id="SaQ-aU-0gV"/>
                             <constraint firstItem="6BB-7Z-reE" firstAttribute="top" secondItem="x4L-4W-Qr8" secondAttribute="top" constant="55" id="TCj-tt-Piy"/>
-                            <constraint firstItem="1S9-DO-AYS" firstAttribute="top" secondItem="x4L-4W-Qr8" secondAttribute="top" constant="25" id="pQQ-jy-PU0"/>
-                            <constraint firstAttribute="trailing" secondItem="1S9-DO-AYS" secondAttribute="trailing" constant="10" id="pcs-vx-ICx"/>
                             <constraint firstAttribute="trailing" secondItem="6BB-7Z-reE" secondAttribute="trailing" id="uYn-es-HND"/>
                         </constraints>
                     </view>
@@ -2219,9 +2259,37 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
             <point key="canvasLocation" x="996" y="832.53373313343332"/>
         </scene>
         <!--Message DetailVC-->
+        <scene sceneID="bJ5-Ru-bY1">
+            <objects>
+                <viewController storyboardIdentifier="MessageDetailVC" id="WpP-rT-5Nh" customClass="MessageDetailVC" customModule="Nanny_Now" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xrv-PD-bic"/>
+                        <viewControllerLayoutGuide type="bottom" id="NnS-Ij-5k3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aty-UC-zmS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PyN-V2-g5P">
+                                <rect key="frame" x="16" y="28" width="128" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Back To Messages"/>
+                                <connections>
+                                    <action selector="dismissButton:" destination="WpP-rT-5Nh" eventType="touchUpInside" id="hqV-We-RFo"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N6n-cB-huM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1668" y="833"/>
+        </scene>
+        <!--Request DetailVC-->
         <scene sceneID="LtI-5c-p6a">
             <objects>
-                <viewController storyboardIdentifier="MessageDetailVC" id="t8V-4x-faD" customClass="MessageDetailVC" customModule="Nanny_Now" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RequestDetailVC" id="t8V-4x-faD" customClass="RequestDetailVC" customModule="Nanny_Now" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kxF-rz-H9F"/>
                         <viewControllerLayoutGuide type="bottom" id="ywO-tF-qyo"/>

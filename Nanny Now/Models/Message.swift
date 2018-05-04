@@ -28,6 +28,14 @@ struct Message {
     
     private(set) public var _highlighted: Bool = false
     
+    mutating func setTo(user: User) {
+        self._toUser = user
+    }
+    
+    mutating func setFrom(user: User) {
+        self._fromUser = user
+    }
+    
     mutating func setImageUrl(imageURL: String) {
         self._imageURL = imageURL
     }
