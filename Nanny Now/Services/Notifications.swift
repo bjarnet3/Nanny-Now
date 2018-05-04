@@ -19,7 +19,7 @@ class Notifications {
     static let instance = Notifications()
     
     func sendNotifications(with message: Message) {
-        let remoteID = message._toUser.userUID
+        let remoteID = message._toUser?.userUID
         let text = message._message
         let categoryRequest: NotificationRequestCategory = .message
         let requestID = message._messageID
@@ -53,7 +53,7 @@ class Notifications {
                         let id = snapshot.value as! String
                         
                         var tokens = [String]()
-                        let tokenREF = DataService.instance.REF_USERS_PRIVATE.child(remoteID).child("tokens")
+                        let tokenREF = DataService.instance.REF_USERS_PRIVATE.child(remoteID!).child("tokens")
                         
                         tokenREF.observeSingleEvent(of: .value, with: { (snapshot) in
                             if !snapshot.exists() { return }
@@ -70,7 +70,7 @@ class Notifications {
                                 }
                                 
                                 var badge = 0
-                                let badgeRef = DataService.instance.REF_USERS_PRIVATE.child(remoteID).child("badge")
+                                let badgeRef = DataService.instance.REF_USERS_PRIVATE.child(remoteID!).child("badge")
                                 badgeRef.observeSingleEvent(of: .value, with: { (snapshot) in
                                     
                                     if !snapshot.exists() { return }
@@ -91,7 +91,7 @@ class Notifications {
                                     let category = categoryRequest.rawValue // "messageRequest"
                                     
                                     // title = "Melding fra \(firstName):"
-                                    DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(message)")
+                                    DataService.instance.postToMessage(recieveUserID: remoteID!, message: "\(message)")
                                     
                                     // For Advanced Rich Notificaiton Setup
                                     let mediaUrl = getFacebookProfilePictureUrl(id, .large)

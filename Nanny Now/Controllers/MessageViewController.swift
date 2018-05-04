@@ -28,6 +28,8 @@ class MessageViewController: UIViewController {
     var messages = [Message]()
 
     var totalRequests: Int = 0
+    var totalMessages: Int = 0
+    
     var lastRowSelected: IndexPath?
     var heightForRow:[CGFloat] = [40,180,80]
     
@@ -193,8 +195,8 @@ class MessageViewController: UIViewController {
     // Check if image is loaded for MessageStandardCell
     func lastCellLayout() {
         for cell in mainTable.visibleCells {
-            if cell is MessageStandardCell {
-                if let customCell = cell as? MessageStandardCell {
+            if cell is RequestUserCell {
+                if let customCell = cell as? RequestUserCell {
                     if customCell.cellImageLoaded != true {
                         print("standardCellImage is not loaded - reloadData")
                         self.mainTable.reloadData()
@@ -252,6 +254,33 @@ class MessageViewController: UIViewController {
             }
         }
     }
+    
+    // MARK: - Observer, Firebase Database Functions
+    // ----------------------------------------
+    func observeMessages(_ exemptIDs: [String] = []) {
+        if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            DataService.instance.REF_MESSAGES.child("private").child(UID).child("last").observe(.value, with: { (snapshot) in
+                let remoteID = snapshot.key
+                
+                if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
+                    self.totalMessages = snapValue.keys.count
+                    
+                    print(snapValue.keys.count)
+                    
+                    if !exemptIDs.contains(remoteID) {
+                        self.messages.removeAll()
+                        
+                        for (key,value) in snapValue {
+                            if let snapMessage = value as? [String:AnyObject] {
+                                self.fetchMessageObserver(snapMessage, remoteUID: key, userUID: UID)
+                            }
+                        }
+                    }
+                }
+                
+            })
+        }
+    }
 
     // MARK: - Observer, Firebase Database Functions
     // ----------------------------------------
@@ -270,7 +299,7 @@ class MessageViewController: UIViewController {
                         
                         for (key,value) in snapValue {
                             if let snapRequest = value as? [String:AnyObject] {
-                                self.fetchRequestObserver(snapRequest, remoteID: key)
+                                self.fetchRequestObserver(snapRequest, remoteUID: key)
                             }
                         }
                     }
@@ -290,7 +319,7 @@ class MessageViewController: UIViewController {
                     if !exemptIDs.contains(remoteID) {
                         for (index,_) in snapValue.enumerated() {
                             
-                            self.fetchRequestObserver(snapValue, remoteID: remoteID)
+                            self.fetchRequestObserver(snapValue, remoteUID: remoteID)
                             // Print first object
                             if index == 0 { print("first") }
                         }
@@ -301,8 +330,21 @@ class MessageViewController: UIViewController {
         }
     }
     
-    func fetchRequestObserver(_ requestSnap: Dictionary<String, AnyObject>, remoteID: String) {
-        let userREF = DataService.instance.REF_USERS_PRIVATE.child(remoteID)
+    func fetchMessageObserver(_ messageSnap: Dictionary<String, AnyObject>, remoteUID: String, userUID: String) {
+        let userREF = DataService.instance.REF_USERS_PRIVATE.child(remoteUID)
+        let message = Message(
+            from:  messageSnap["fromUID"] as! String,
+            to:  messageSnap["toUID"] as! String,
+            messageID: messageSnap["messageID"] as! String,
+            message:  messageSnap["message"] as! String,
+            messageTime:  messageSnap["messageTime"] as! String,
+            highlighted:  messageSnap["highlighted"] as! Bool)
+        self.observeUser(with: message, userRef: userREF)
+    }
+    
+    
+    func fetchRequestObserver(_ requestSnap: Dictionary<String, AnyObject>, remoteUID: String) {
+        let userREF = DataService.instance.REF_USERS_PRIVATE.child(remoteUID)
         let request = Request(
             requestID: requestSnap["requestID"] as! String,
             nannyID: requestSnap["nannyID"] as! String,
@@ -368,6 +410,59 @@ class MessageViewController: UIViewController {
         }
     }
     
+    func observeUser(with message: Message, userRef: DatabaseReference) {
+        if self.messages.count < self.totalMessages {
+            
+            userRef.observeSingleEvent(of: .value, with: { snapshot in
+                
+                if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
+                    for (key, val) in snapValue {
+                        
+                        if key == "imageUrl" {
+                            if let imageValue = val as? String {
+                                var message = message
+                                
+                                message.setImageUrl(imageURL: imageValue)
+                                self.messages.append(message)
+                                
+                            }
+                        }
+                        
+                    }
+                }
+                /*
+                
+                // self.requests.sort(by: { $0.timeRequested > $1.timeRequested })
+                if let index = self.requests.index(where: { $0.timeRequested >= requestVal.timeRequested }) {
+                    self.requests.insert(requestVal, at: index)
+                    
+                    let indexPath = IndexPath(row: index.advanced(by: 2), section: 0)
+                    let updateIndexPath = IndexPath(row: index.advanced(by: 3), section: 0)
+                    
+                    self.mainTable.insertRows(at: [indexPath], with: .automatic)
+                    self.mainTable.reloadRows(at: [updateIndexPath], with: .automatic)
+                } else {
+                    self.requests.append(requestVal)
+                    self.mainTable.reloadData()
+                }
+                self.messageBadge += 1
+                if self.requests.count == self.totalRequests - 1 {
+                    print("observeUser last request")
+                    self.mainTable.reloadData()
+                }
+                
+                */
+            })
+
+        } else {
+            print("requests.count and totalRequests unsyncronized")
+            self.mainTable.reloadData()
+            
+            print("requests.count : \(self.requests.count)")
+            print("totalRequests count: \(self.totalRequests)")
+        }
+    }
+    
     // MARK: - Go to : LoginPageVC, InfoVC
     // ----------------------------------------
     func goToRegister(pageToLoadFirst: Int = 0) {
@@ -405,7 +500,9 @@ extension MessageViewController {
         self.backTable.dataSource = self
         
         getUserSettings()
+        
         observeRequests()
+        observeMessages()
         
         revealingSplashAnimation(self.view, type: SplashAnimationType.swingAndZoomOut, completion: {
             
@@ -580,20 +677,21 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
         if tableView == mainTable {
             
             if indexPath.row == 0 {
-                if let cell = tableView.dequeueReusableCell(withIdentifier: "MessageHeaderCell", for: indexPath) as? MessageHeaderCell {
+                if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestHeaderCell", for: indexPath) as? RequestHeaderCell {
                     
                     returnCell = cell
                 }
             } else if indexPath.row == 1 {
-                if let cell = tableView.dequeueReusableCell(withIdentifier: "MessageUserCell", for: indexPath) as? MessageUserCell {
+                if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestBodyCell", for: indexPath) as? RequestBodyCell {
                     cell.updateView(user: self.user!)
                     cell.layoutIfNeeded()
                     
                     returnCell = cell
                 }
             } else {
-                if let cell = tableView.dequeueReusableCell(withIdentifier: "MessageStandardCell", for: indexPath) as? MessageStandardCell {
+                if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestUserCell", for: indexPath) as? RequestUserCell {
                     cell.updateView(request: requests[indexPath.row - 2], animated: true)
+                    
                     // https://stackoverflow.com/questions/30066625/uiimageview-in-table-view-not-showing-until-clicked-on-or-device-is-roatated
                     
                     returnCell = cell
@@ -603,7 +701,8 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
         
         if tableView == backTable {
             
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "BackHeaderCell", for: indexPath) as? MessageAllCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell", for: indexPath) as? MessageTableViewCell {
+                cell.loadData(for: messages[indexPath.row])
                 returnCell = cell
             }
         }
@@ -626,8 +725,8 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
             if let cell = tableView.cellForRow(at: indexPath) {
-                if cell is MessageStandardCell {
-                    if let messageCell = cell as? MessageStandardCell {
+                if cell is RequestUserCell {
+                    if let messageCell = cell as? RequestUserCell {
                         
                         let request = requests[indexPath.row - 2]
                         let adminUser = self.user!
@@ -650,7 +749,7 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         if tableView == self.backTable {
-            guard let messageAll = storyboard?.instantiateViewController(withIdentifier: "MessageAll") as? MessageAllCell else {
+            guard let messageAll = storyboard?.instantiateViewController(withIdentifier: "MessageTableViewCell") as? MessageTableViewCell else {
                 return
             }
             if let cell = tableView.cellForRow(at: indexPath) {

@@ -186,20 +186,32 @@ class DataService {
             let messageREF = DataService.instance.REF_MESSAGES
             let messageID = messageREF.childByAutoId().key
             
-            let baseFirebase = messageREF.child("private").child(recieveUserID).child(userID)
-            let reciFirebase = messageREF.child("private").child(userID).child(recieveUserID)
+            // let baseFirebase = messageREF.child("private").child(recieveUserID).child("last").child(userID)
+            // let reciFirebase = messageREF.child("private").child(userID).child("last").child(recieveUserID)
+            
+            let baseFirebase = messageREF.child("private").child(recieveUserID)
+            let reciFirebase = messageREF.child("private").child(userID)
+            
             let timeStamp = returnTimeStamp()
             
-            let chat : [String : String] = [
-                userID : message
+            let base : [String : Any] = [
+                "message"   : message,
+                "messageID" : messageID,
+                "messageTime": timeStamp,
+                "toUID"     : recieveUserID,
+                "fromUID"   : userID,
+                "highlighted" : true
             ]
             
-            let messageObject : [String : Any] = [
-                timeStamp : chat
+            baseFirebase.child("last").child(userID).updateChildValues(base)
+            reciFirebase.child("last").child(recieveUserID).updateChildValues(base)
+            
+            let all : [String : Any] = [
+                messageID : base
             ]
             
-            baseFirebase.updateChildValues(messageObject)
-            reciFirebase.updateChildValues(messageObject)
+            baseFirebase.child("all").updateChildValues(all)
+            reciFirebase.child("all").updateChildValues(all)
         }
     }
     

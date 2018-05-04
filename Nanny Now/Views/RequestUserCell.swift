@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MessageStandardCell: UITableViewCell {
+class RequestUserCell: UITableViewCell {
     
     @IBOutlet weak var imageName: NannyImageView!
     @IBOutlet weak var nameLabel: UILabel!

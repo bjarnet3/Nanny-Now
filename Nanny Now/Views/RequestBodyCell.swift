@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MessageUserCell: UITableViewCell {
+class RequestBodyCell: UITableViewCell {
     
     @IBOutlet weak var profileImage: UIImageView!
     
