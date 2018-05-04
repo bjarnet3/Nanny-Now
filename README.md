@@ -32,7 +32,7 @@ GPS & Geolocation Services
 ![LocationManager in NannyViewController](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_Location.imageset/Location.png)
 
 ## Animations & Effects
-**[Blur](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Controllers/MessageViewController.swift)** - **[TabBarAnimations]()** : Thanx to [Ramotion](https://www.ramotion.com/) - [Fade](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Utilities/Functions.swift) - [ParallaxEffectOnView](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Utilities/Functions.swift) - SKSplashView : Thanx to [sachinkesiraju](https://github.com/sachinkesiraju/SKSplashView) - [CellAnimation](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Utilities/Functions.swift)
+**[Blur](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Controllers/MessageViewController.swift)** - **[TabBarAnimations]()** "Thanx to [Ramotion](https://www.ramotion.com/) - [Fade](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Utilities/Functions.swift)" - [ParallaxEffectOnView](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Utilities/Functions.swift) - SKSplashView "Thanx to [sachinkesiraju](https://github.com/sachinkesiraju/SKSplashView)" - [CellAnimation](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Utilities/Functions.swift)
 
 # Contributors:
 **App Icon Template (iOS)**
