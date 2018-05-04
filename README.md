@@ -29,7 +29,36 @@ Notifications Singleton - [Notifications.swift](https://github.com/bjarnet3/Nann
 ## LocationManager / Maps
 GPS & Geolocation Services
 
-![LocationManager in NannyViewController](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_Notification.imageset/Notification.png)
+![LocationManager in NannyViewController](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_Location.imageset/Location.png)
 
-# Animations
-- animations -
+## Animations & Effects
+Blur - Fade - ParallaxEffectOnView - SKSplashView[Thanx to sachinkesiraju](https://github.com/sachinkesiraju/SKSplashView) - CellAnimation - TabBarAnimations[Thanx to Ramotion](https://www.ramotion.com/)
+
+# Contributors:
+App Icon Template (iOS)
+- Michael Flarup (https://appicontemplate.com/) - PixelResort, Twitter @flarup
+
+**The Noun Project (Icons)**
+- Boudewijn Mijnlieff (noun_206322_cc) - Part of the Logo
+- Guillaume Bahri (noun_67650_cc) - Part of the Logo
+- Vishal Marotkar (noun_221523_cc) - Part of the Logo
+- Mister Pixel (noun_35686_cc) - Part of the Map Annotation
+- Sasha Willins (noun_322104_cc) - Part of the Map Annotation and unknown profil female picture
+- Gayatri (noun_362109_cc) - Part of the Map Annotation and unknown profil male picture
+- Alex Fuller (noun_10551_cc) 
+
+**Notification Sound**
+- notification11.wav
+- https://www.zedge.net/ringtone/1716388/
+
+**Web Page / Internet**
+
+**Web template (for presentation)**
+- Blackrock Digital LLC (startbootstrap-creative) MIT License
+
+
+**Thanks to**
+
+- Anne Rydgren (Barnehage Eier)
+- Joachim Rydgren (Naprapat)
+- Espen Dyrnes (DNB Autolease)
