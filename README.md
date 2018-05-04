@@ -453,7 +453,7 @@ Summary:
 
 ## 2018
 
-Uke 1: (Startup & Request)
+### Week 1: (Startup & Request)
 - [x] Nanny Now - RequestVC
 - [x] Nanny Now - RequestPageVC
 - [ ] Nanny Now - RequestCurrentVC - prepare for seque «to all requests from that user»
@@ -464,25 +464,25 @@ Uke 1: (Startup & Request)
 - [x] Nanny Now - Login Page / Register update Public username
 - [ ] Nanny Now - Fix : getLocations() crash, probably current is not available
 
-Uke 2: (Time is running out…)
+### Week 2: (Time is running out…)
 - [x] Nanny Now - Login / Register «Txt Field» Resign / Hide Keyboard on Done Button
 - [ ] Nanny Now - RequestCurrentVC locations on NannyAd
 - [ ] Nanny Now - NannyDetail «Map Request» in RequestCurrentVC
 - [ ] Nanny Now - FamilyTableViewController (Part 1) - VERY IMPORTANT - Remake / Redesign
 
-Uke 3: (Light in the end of the tunnel)
+### Week 3: (Light in the end of the tunnel)
 - [x] Nanny Now - Create Tinder like Flipp… 
 Summary:
 - Touches Begun, Touches Ended & Touches Cancelled - Instead of setHighligted…
 
-Uke 4: (APIs and the week goes By) <— This Week
+### Week 4: (APIs and the week goes By) <— This Week
 - [x] Nanny Now - Haptic Light, medium, heavy... touches move
 Summary:
 - «/Users/bjarnet3/Library/Mobile Documents/com~apple~CloudDocs/Xcode/Projects/_macOS/Hey DJ/firebase-express»
 - nvm start - To start the server
 - https://github.com/firebase/firebase-ios-sdk/tree/master/Example
 
-Uke 6: (Frameworks, Codecs, Web & Logo)
+### Week 6: (Frameworks, Codecs, Web & Logo)
 - [x] Nanny Now - Notification Content «Custom» Request with MapKit - WORKING GOOD
 - [ ] Nanny Now - Notification Remake
 Summary:
@@ -491,7 +491,7 @@ Summary:
 - [ if case let ], [ where case let ], [ for case let ] - http://alisoftware.github.io/swift/pattern-matching/2016/05/16/pattern-matching-4/
 - [ if let ] vs [ guard let ] - Expression accesible inside vs outside scope
 
-Uke 7: (Step by Step)
+### Week 7: (Step by Step)
 - [ ] Nanny Now - Why, What, How Presentasjon til Frank Mjøs med Video
 - [x] Nanny Now - Add block and unBlock DataService function()
 - [x] Nanny Now - Fixing UIImageView overlapping pictures - WORKING «reloadData() only if last cell loaded»
@@ -501,7 +501,7 @@ Uke 7: (Step by Step)
 Summary:
 - @available(iOS, deprecated, message: "Use unfold(_:animated:completion) method instead.")
 
-Uke 8: (Final Countdown)
+### Week 8: (Final Countdown)
 - [ ] Nanny Now - Why, What, How Presentasjon til Frank Mjøs med Video
 - [ ] Nanny Now - Create Instillinger «seque» - Part 1
 - [ ] Nanny Now - Send Request «DatePicker» - Part 1
@@ -509,7 +509,7 @@ Uke 8: (Final Countdown)
 - [ ] Nanny Now - Cleanup - Part 3
 - [x] Nanny Now - «Custom Point Annotation» instead of Artwork Annotation - MORE CLEAN
 
-Uke 9: (Resett, Refill & Regain)
+### Week 9: (Resett, Refill & Regain)
 - [x] Nanny Now - Cleanup - Part 3 (Nanny / User object)
 - [x] Nanny Now - Fix Nanny / Family / Users New Objects - Part 1
 - [x] Nanny Now - Fix Nanny / Family / Users New Objects - Part 2
@@ -520,13 +520,13 @@ Uke 9: (Resett, Refill & Regain)
 - [ ] Nanny Now - Create Instillinger «seque» - Part 1
 - [ ] Nanny Now - Send Request «DatePicker» - Part 1
 
-Uke 10: (Identity Politics & Feminism)
+### Week 10: (Identity Politics & Feminism)
 - [x] Nanny Now - Update 3D / Force Touch icons.
 - [x] Nanny Now - Remove Artwork (Annotation) - Part 1
 - [ ] Nanny Now - Send Request «DatePicker» - Part 1
 - [ ] Nanny Now - Mutual Friends dissaperad (Nanny Detali VC)
 
-Uke 11: (Gledespikene og Landssvikerne)
+### Week 11: (Gledespikene og Landssvikerne)
 - [ ] Nanny Now - Fix Constraints for iPhone 8 Plus and iPhone X
 - [ ] Nanny Now - Send Request «DatePicker» - Part 1
 - [x] Nanny Now - Mutual Friends dissaperad (Nanny Detali VC) - OK
@@ -535,11 +535,11 @@ Uke 11: (Gledespikene og Landssvikerne)
 Summary:
 - Property Observer = var flipCount = 0 { didSet { print(self.flipCount) }  }  — print if flipCount didSet
 
-Uke 12 - 13: (…Hemsedal…Easter Bunny…)
+### Week 12 - 13: (…Hemsedal…Easter Bunny…)
 - [x] Nanny Now - Fix Constraints for iPhone 8 Plus and iPhone X
 - [x] Nanny Now - Release v.1.23
 
-Uke 14: (Criminal Aliens & Cognitive Dissonance)
+### Week 14: (Criminal Aliens & Cognitive Dissonance)
 - [x] Nanny Now - Send Request «DatePicker» - Part 1
 Summary:
 - self.requests.count == self.totalRequests - 1 <— This was the solution for tableView and reloadData
@@ -551,14 +551,14 @@ Summary:
 - Dictionary is also a Collection, as is Set and String
 - Equatable protocol, to match objects together 
 
-Uke 15: ()
+### Week 15: ()
 - [ ] Nanny Now - Send Request «DatePicker» - Part 2
 - [x] Nanny Now - Mutual Friends (Nanny Detali VC) (FID) - OK
 - [x] Nanny Now - Review Feedback (FID) - OK
 - [x] Nanny Now - Extend SettingsViewController / SubSettingsViewController - Part 1
 - [ ] Nanny Now - Cleanup
 
-Uke 16: (Versace & Garage)
+### Week 16: (Versace & Garage)
 - [x] Nanny Now - MessageViewController()
 - [x] Nanny Now - Removed RequestPageViewController
 - [x] Nanny Now - Add Blur Effect with PropertyAnimatorView
@@ -568,10 +568,10 @@ Uke 16: (Versace & Garage)
 - [x] Nanny Now - Launch New Version v1.24
 - [ ] Add Nanny Now to Github
 
-Uke 17: (Github & Version Control)
+### Week 17: (Github & Version Control)
 - [x] Nanny Now - Fixed Token and Location Manager in Nanny
 
-Uke 18: (Github & Version Control)
+### Week 18: (Github & Version Control)
 - [ ] Nanny Now - Login PVC / Firstname, job Title and imageName not Loading
 - [ ] Nanny Now - Why, What, How Presentasjon til Frank Mjøs med Video - Side 1
 - [ ] Nanny Now - Create SubSettings «Seque» - Part 1
@@ -579,7 +579,7 @@ Uke 18: (Github & Version Control)
 - [x] Add Nanny Now to Github
 - [x] Add Other projects to Github (musicVOID, TV-Remote, Poker Mood, FolkVote)
 
-Uke 19: (Deprecated & Obsolete)
+### Week 19: (Deprecated & Obsolete)
 
 
 # Contributors:
