@@ -41,9 +41,30 @@ GPS & Geolocation Services
 - [x] Nanny Now App - Start Nanny Now Development
 
 ### Week 24
-- [x] Nanny Now App - Implement TableView
-- [x] Nanny Now App - Implement MapKit
-- [x] Nanny Now App - Custom ImageView (Rounded corners on Images)
+- [x] Nanny Now - Implement TableView
+- [x] Nanny Now - Implement MapKit
+- [x] Nanny Now - Custom ImageView (Rounded corners on Images)
+
+### Week 25
+- [ ] Nanny Now - Polymorphism (add from VC to Model) - NOT DONE
+- [ ] Nanny Now - MVC - NOT DONE
+- [x] Nanny Now - Application Icons
+- [x] Nanny Now - Clean up
+
+### Week 26
+- [x] Nanny Now «First presentation slide»
+
+### Week 27
+- [ ] Nanny Now - Launch Image - NOT DONE
+- [ ] Nanny Now - Add to InfoVC - NOT DONE
+- [x] Nanny Now - Change StartVC
+- [x] Nanny Now - Fix Annotation array (from static implementation)
+- [x] Nanny Now - Polymorphism (add from VC to Model) - ALMOST DONE
+- [x] Nanny Now - MVC
+- [x] Nanny Now - Convert to #Swift 3.0
+- [x] Nanny Now - Update «Generic Function» Custom UIColor from RGB: Hex #Swift 3.0
+- [x] Nanny Now - Create Calculate To Center Position From Array
+
 
 # Contributors:
 **App Icon Template (iOS)**
