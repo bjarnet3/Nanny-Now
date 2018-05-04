@@ -2020,18 +2020,31 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                 <rect key="frame" x="10" y="25" width="355" height="642"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BackHeaderCell" id="j4A-f1-hfm">
-                                        <rect key="frame" x="0.0" y="28" width="355" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BackHeaderCell" rowHeight="62" id="j4A-f1-hfm" customClass="MessageAllCell" customModule="Nanny_Now" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="355" height="62"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="j4A-f1-hfm" id="kOs-kZ-yYD">
-                                            <rect key="frame" x="0.0" y="0.0" width="355" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="355" height="61.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GT6-eH-KVm">
+                                                    <rect key="frame" x="15" y="8" width="44" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4c-2k-8je">
+                                                    <rect key="frame" x="67" y="11" width="268" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="scrollableAxes" indicatorStyle="black" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6BB-7Z-reE" userLabel="Main Table" customClass="CustomTableView" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55" width="375" height="612"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" directionalLockEnabled="YES" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="scrollableAxes" indicatorStyle="black" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6BB-7Z-reE" userLabel="Main Table" customClass="CustomTableView" customModule="Nanny_Now" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="286" width="375" height="381"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="50" maxX="0.0" maxY="100"/>
                                 <prototypes>
@@ -2199,7 +2212,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="996" y="833"/>
+            <point key="canvasLocation" x="996" y="832.53373313343332"/>
         </scene>
         <!--Message DetailVC-->
         <scene sceneID="LtI-5c-p6a">

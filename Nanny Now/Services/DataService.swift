@@ -186,17 +186,20 @@ class DataService {
             let messageREF = DataService.instance.REF_MESSAGES
             let messageID = messageREF.childByAutoId().key
             
-            let baseFirebase = messageREF.child("private").child(recieveUserID)
-            let reciFirebase = messageREF.child("private").child(userID)
+            let baseFirebase = messageREF.child("private").child(recieveUserID).child(userID)
+            let reciFirebase = messageREF.child("private").child(userID).child(recieveUserID)
             let timeStamp = returnTimeStamp()
             
             let chat : [String : String] = [
-                timeStamp : message,
-                messageID : messageID
+                userID : message
             ]
             
-            baseFirebase.updateChildValues(chat)
-            reciFirebase.updateChildValues(chat)
+            let messageObject : [String : Any] = [
+                timeStamp : chat
+            ]
+            
+            baseFirebase.updateChildValues(messageObject)
+            reciFirebase.updateChildValues(messageObject)
         }
     }
     

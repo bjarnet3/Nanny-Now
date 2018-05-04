@@ -23,7 +23,9 @@ class MessageViewController: UIViewController {
     // MARK: - Properties: Array & Varables
     // -------------------------------------
     var user: User?
+    
     var requests = [Request]()
+    var messages = [Message]()
 
     var totalRequests: Int = 0
     var lastRowSelected: IndexPath?
@@ -399,6 +401,9 @@ extension MessageViewController {
         self.mainTable.delegate = self
         self.mainTable.dataSource = self
         
+        self.backTable.delegate = self
+        self.backTable.dataSource = self
+        
         getUserSettings()
         observeRequests()
         
@@ -569,24 +574,40 @@ extension MessageViewController: UIScrollViewDelegate {
 extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "MessageHeaderCell", for: indexPath) as? MessageHeaderCell {
-                return cell
-            }
-        } else if indexPath.row == 1 {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "MessageUserCell", for: indexPath) as? MessageUserCell {
-                cell.updateView(user: self.user!)
-                cell.layoutIfNeeded()
-                return cell
-            }
-        } else {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "MessageStandardCell", for: indexPath) as? MessageStandardCell {
-                cell.updateView(request: requests[indexPath.row - 2], animated: true)
-                // https://stackoverflow.com/questions/30066625/uiimageview-in-table-view-not-showing-until-clicked-on-or-device-is-roatated
-                return cell
+        
+        var returnCell: UITableViewCell?
+        
+        if tableView == mainTable {
+            
+            if indexPath.row == 0 {
+                if let cell = tableView.dequeueReusableCell(withIdentifier: "MessageHeaderCell", for: indexPath) as? MessageHeaderCell {
+                    
+                    returnCell = cell
+                }
+            } else if indexPath.row == 1 {
+                if let cell = tableView.dequeueReusableCell(withIdentifier: "MessageUserCell", for: indexPath) as? MessageUserCell {
+                    cell.updateView(user: self.user!)
+                    cell.layoutIfNeeded()
+                    
+                    returnCell = cell
+                }
+            } else {
+                if let cell = tableView.dequeueReusableCell(withIdentifier: "MessageStandardCell", for: indexPath) as? MessageStandardCell {
+                    cell.updateView(request: requests[indexPath.row - 2], animated: true)
+                    // https://stackoverflow.com/questions/30066625/uiimageview-in-table-view-not-showing-until-clicked-on-or-device-is-roatated
+                    
+                    returnCell = cell
+                }
             }
         }
-        return MessageHeaderCell()
+        
+        if tableView == backTable {
+            
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "BackHeaderCell", for: indexPath) as? MessageAllCell {
+                returnCell = cell
+            }
+        }
+        return returnCell!
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -595,34 +616,49 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return requests.count + 2
+        return tableView == mainTable ? requests.count + 2 : messages.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let messageDetailVC = storyboard?.instantiateViewController(withIdentifier: "MessageDetailVC") as? MessageDetailVC else { return }
         
-        if let cell = tableView.cellForRow(at: indexPath) {
-            if cell is MessageStandardCell {
-                if let messageCell = cell as? MessageStandardCell {
-                    
-                    let request = requests[indexPath.row - 2]
-                    let adminUser = self.user!
-                    let guestUser = User(userUID: request.userID, imageName: request.imageName, firstName: request.firstName)
-                    
-                    messageDetailVC.initWith(adminUser: adminUser, guestUser: guestUser)
-                    present(messageDetailVC, animated: false)
-                    
-                    if !messageCell.hasSelected {
-                        print("hasSelected is false")
-                        self.messageBadge = (messageBadge > 0) ? (messageBadge - 1) : 0
-                        messageCell.hasSelected = true
-                    } else {
-                        print("hasSelected is true")
+        if tableView == self.mainTable {
+            guard let messageDetailVC = storyboard?.instantiateViewController(withIdentifier: "MessageDetailVC") as? MessageDetailVC else { return
+            }
+            
+            if let cell = tableView.cellForRow(at: indexPath) {
+                if cell is MessageStandardCell {
+                    if let messageCell = cell as? MessageStandardCell {
+                        
+                        let request = requests[indexPath.row - 2]
+                        let adminUser = self.user!
+                        let guestUser = User(userUID: request.userID, imageName: request.imageName, firstName: request.firstName)
+                        
+                        messageDetailVC.initWith(adminUser: adminUser, guestUser: guestUser)
+                        present(messageDetailVC, animated: false)
+                        
+                        if !messageCell.hasSelected {
+                            print("hasSelected is false")
+                            self.messageBadge = (messageBadge > 0) ? (messageBadge - 1) : 0
+                            messageCell.hasSelected = true
+                        } else {
+                            print("hasSelected is true")
+                        }
                     }
                 }
             }
+            tableView.deselectRow(at: indexPath, animated: true)
         }
-        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if tableView == self.backTable {
+            guard let messageAll = storyboard?.instantiateViewController(withIdentifier: "MessageAll") as? MessageAllCell else {
+                return
+            }
+            if let cell = tableView.cellForRow(at: indexPath) {
+                print("Shit hun var fitt")
+            }
+            
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
     
 }
