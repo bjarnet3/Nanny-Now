@@ -35,7 +35,7 @@ GPS & Geolocation Services
 Blur - Fade - ParallaxEffectOnView - SKSplashView [Thanx to sachinkesiraju](https://github.com/sachinkesiraju/SKSplashView) - CellAnimation - TabBarAnimations [Thanx to Ramotion](https://www.ramotion.com/)
 
 # Contributors:
-App Icon Template (iOS)
+**App Icon Template (iOS)**
 - Michael Flarup (https://appicontemplate.com/) - PixelResort, Twitter @flarup
 
 **The Noun Project (Icons)**
@@ -59,6 +59,7 @@ App Icon Template (iOS)
 
 **Thanks to**
 
+- Espen Dyrnes (DNB Autolease)
 - Anne Rydgren (Barnehage Eier)
 - Joachim Rydgren (Naprapat)
-- Espen Dyrnes (DNB Autolease)
+
