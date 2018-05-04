@@ -32,7 +32,7 @@ GPS & Geolocation Services
 ![LocationManager in NannyViewController](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_Location.imageset/Location.png)
 
 ## Animations & Effects
-Blur - Fade - ParallaxEffectOnView - SKSplashView[Thanx to sachinkesiraju](https://github.com/sachinkesiraju/SKSplashView) - CellAnimation - TabBarAnimations[Thanx to Ramotion](https://www.ramotion.com/)
+Blur - Fade - ParallaxEffectOnView - SKSplashView [Thanx to sachinkesiraju](https://github.com/sachinkesiraju/SKSplashView) - CellAnimation - TabBarAnimations [Thanx to Ramotion](https://www.ramotion.com/)
 
 # Contributors:
 App Icon Template (iOS)
