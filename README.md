@@ -13,7 +13,7 @@ Barnepass, Trygt, Raskt og Lett tilgjengelig
 
 # Services
 
-## Database / Storgage
+## Database / Storage
 Firebase Database & Firebase Storage - [DataService.swift](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Services/DataService.swift)
 
 ## Login / Register
