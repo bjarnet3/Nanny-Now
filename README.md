@@ -22,7 +22,7 @@ Firebase Database & Firebase Storage - [DataService.swift](https://github.com/bj
 ![Login in LoginZeroVC](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_Login.imageset/Login.png)
 
 ## Notifications
-Notifications Singleton - [Notifications.swift](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Services/Nofitications.swift)
+Notifications Singleton - [Notifications.swift](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Services/Notifications.swift)
 
 ![Notifications in LoginZeroVC](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_Notification.imageset/Notification.png)
 
