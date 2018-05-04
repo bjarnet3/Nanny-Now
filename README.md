@@ -14,9 +14,8 @@ Barnepass, Trygt, Raskt og Lett tilgjengelig
 # Services 
 [services singleton classes](https://github.com/bjarnet3/Nanny-Now/tree/master/Nanny%20Now/Services)
 
-## Database + Storgage
-Firebase Database & Storage
-[DataService Singelton Class](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Services/DataService.swift)
+## Database / Storgage
+Firebase Database & Storage - [DataService](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Services/DataService.swift)
 
 ## Login / Register (4 ViewControllers)
 [LoginManager](https://github.com/bjarnet3/Nanny-Now/tree/master/Nanny%20Now/Controllers/LoginViewController) + [Facebook Login API](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Controllers/LoginViewController/LoginZeroVC.swift) + [Firebase Authentication](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Services/DataService.swift)
