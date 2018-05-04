@@ -24,6 +24,8 @@ Firebase Database & Firebase Storage - [DataService.swift](https://github.com/bj
 ## Notification
 Notifications Singleton - [Notifications.swift](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Services/Nofitications.swift)
 
+![Notifications in LoginZeroVC](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_Notification.imageset/Notification.png)
+
 ## LocationManager / Maps
 GPS & Geolocation Services
 
