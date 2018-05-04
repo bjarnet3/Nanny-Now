@@ -31,6 +31,11 @@ GPS & Geolocation Services
 
 ![LocationManager in NannyViewController](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_Location.imageset/Location.png)
 
+## Regular View / Base
+--
+
+![Base Views in NannyViewController](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_BaseViews.imageset/BaseViews.png)
+
 ## Animations & Effects
 [Blur](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Controllers/MessageViewController.swift) -- [TabBarAnimations](https://github.com/bjarnet3/Nanny-Now/tree/master/Pods/RAMAnimatedTabBarController) -- [Fade](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Utilities/Functions.swift) -- [ParallaxEffectOnView](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Utilities/Functions.swift) -- [CellAnimation](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Utilities/Functions.swift) -- [SplashView](https://github.com/bjarnet3/Nanny-Now/tree/master/Pods/RevealingSplashView)
 
