@@ -21,5 +21,7 @@ Firebase Database & Firebase Storage - [DataService.swift](https://github.com/bj
 ![LoginViewControllers in Nanny Now](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_LoginPageVC.imageset/LoginPageVC.png)
 
 ## Notification
-Notifications Singleton Class - [Notifications.swift](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Services/Nofitications.swift)
+Notifications Singleton - [Notifications.swift](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Services/Nofitications.swift)
 
+# Animations
+- animations -
