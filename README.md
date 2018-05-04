@@ -29,7 +29,7 @@ Notifications Singleton - [Notifications.swift](https://github.com/bjarnet3/Nann
 ## LocationManager / Maps
 GPS & Geolocation Services
 
-![LocationManager in NannyViewController](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_Notification.imageset/Notification.png)
+![LocationManager in NannyViewController](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_Location.imageset/Location.png)
 
 # Animations
 - animations -
