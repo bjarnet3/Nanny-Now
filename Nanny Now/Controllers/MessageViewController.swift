@@ -90,54 +90,28 @@ class MessageViewController: UIViewController {
     
     // MARK: - Functions, Database & Animation
     // ----------------------------------------
-    func setMainTable() {
-        self.mainTable.frame = CGRect(x: 0, y: self.mainTableMaxY, width: self.mainScreenWidth, height: self.mainScreenHeight - self.mainTableMaxY)
-        self.mainTable.frame = self.mainTable.frame.offsetBy(dx: 0, dy: inactiveOffset)
-        self.mainTable.layer.cornerRadius = cornerRadius
-        // Specify which corners to round = [ upper left , upper right ]
-        self.mainTable.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-    }
-    
-    func setBackTable() {
-        self.backTable.frame = CGRect(x: self.backTableOffset/2, y: self.backTableOffset, width: self.mainScreenWidth - self.backTableOffset, height: self.mainScreenHeight - self.backTableOffset)
-        self.backTable.alpha = 0.95
-        self.backTable.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-        self.backTable.layer.cornerRadius = 0
-        // Specify which corners to round = [ upper left , upper right ]
-        self.backTable.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-    }
-    
-    func showMainTable() {
+    func maxiMizeTableView() {
+        self.blurAnimator?.stopAnimation(true)
+        self.scrollAnimator?.stopAnimation(true)
         
-        // backTableView
-        self.backTable.frame = CGRect(x: self.backTableOffset/2, y: self.backTableOffset, width: self.mainScreenWidth - self.backTableOffset, height: self.mainScreenHeight - self.backTableOffset)
-        self.backTable.layer.cornerRadius = self.cornerRadius
-        self.backTable.alpha = 0.40
-        self.backTable.isScrollEnabled = false
+        // setBlurEffectWithAnimator(on: self.mainTable, startBlur: true, curve: .easeIn)
+        setBlurEffectWithAnimator(on: self.mainTable, duration: 0.42, startBlur: true, curve: .easeIn)
         
-        // tableView
-        self.mainTable.frame = CGRect(x: 0, y: self.mainTableMaxY, width: self.mainScreenWidth, height: self.mainScreenHeight - self.mainTableMaxY)
-        self.mainTable.layer.cornerRadius = self.cornerRadius
-        self.mainTable.isScrollEnabled = true
+        self.blurAnimator?.startAnimation()
         
-    }
-    
-    func showBackTable() {
-        
-        // backTableView
-        self.backTable.frame = UIScreen.main.bounds
-        self.backTable.layer.cornerRadius = 0
-        self.backTable.alpha = 1.00
-        self.backTable.isScrollEnabled = true
-        self.backTable.layoutIfNeeded()
-        
-        // tableView
-        self.mainTable.frame = CGRect(x: 0, y: self.mainScreenHeight - self.mainTableMinimizedHeight, width: self.mainScreenWidth, height: self.mainTableMinimizedHeight)
-        self.mainTable.layer.cornerRadius = 0
-        self.mainTable.isScrollEnabled = false
-        self.mainTable.scrollToRow(at: IndexPath(row: 0, section: 0), at:.top, animated: true)
-        self.mainTable.layoutIfNeeded()
-        
+        UIView.animate(withDuration: 0.45, delay: 0.045, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
+            
+            self.enterMainTable()
+            
+        }, completion: { (true) in
+            self.mainTableMinimized = false
+            self.animatorIsBusy = false
+            
+            self.view.setNeedsDisplay()
+            
+            self.setBlurEffectWithAnimator(on: self.mainTable, startBlur: false)
+            self.setScrollEffectWithAnimator(on: self.mainTable, reversed: false)
+        })
     }
     
     func miniMizeTableView() {
@@ -150,7 +124,7 @@ class MessageViewController: UIViewController {
         // self.scrollAnimator?.finishAnimation(at: .end)
         UIView.animate(withDuration: 0.45, delay: 0.010, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
             
-            self.showBackTable()
+            self.enterBackTable()
             
         }, completion: { (true) in
             
@@ -161,28 +135,70 @@ class MessageViewController: UIViewController {
         })
     }
     
-    func maxiMizeTableView() {
-        self.blurAnimator?.stopAnimation(true)
-        self.scrollAnimator?.stopAnimation(true)
+    func setMainTable() {
+        self.mainTable.frame = CGRect(x: 0, y: self.mainTableMaxY, width: self.mainScreenWidth, height: self.mainScreenHeight - self.mainTableMaxY)
+        self.mainTable.frame = self.mainTable.frame.offsetBy(dx: 0, dy: inactiveOffset)
+        self.mainTable.layer.cornerRadius = cornerRadius
+        // Specify which corners to round = [ upper left , upper right ]
+        self.mainTable.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+    }
+    
+    func setBackTable() {
+        self.backTable.frame = UIScreen.main.bounds
+        self.backTable.alpha = 0.95
+        self.backTable.layer.cornerRadius = 0
+        // Specify which corners to round = [ upper left , upper right ]
+        self.backTable.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+    }
+    
+    func hideBackTable() {
+        self.backTable.layer.cornerRadius = self.cornerRadius
+        self.backTable.alpha = 0.40
+        self.backTable.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        self.backTable.isScrollEnabled = false
+        self.backTable.layoutIfNeeded()
+    }
+    
+    func showBackTable() {
+        self.backTable.layer.cornerRadius = 0
+        self.backTable.alpha = 1.0
+        self.backTable.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.backTable.isScrollEnabled = true
+        self.backTable.layoutIfNeeded()
+    }
+    
+    func showBackTableLittleBit() {
         
-        // setBlurEffectWithAnimator(on: self.mainTable, startBlur: true, curve: .easeIn)
-        setBlurEffectWithAnimator(on: self.mainTable, duration: 0.42, startBlur: true, curve: .easeIn)
+        self.backTable.layer.cornerRadius = 11
+        self.backTable.alpha = 0.8
+        self.backTable.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        self.backTable.layoutIfNeeded()
         
-        self.blurAnimator?.startAnimation()
-        
-        UIView.animate(withDuration: 0.45, delay: 0.045, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
-            
-            self.showMainTable()
-            
-        }, completion: { (true) in
-            self.mainTableMinimized = false
-            self.animatorIsBusy = false
-            
-            self.view.setNeedsDisplay()
-            
-            self.setBlurEffectWithAnimator(on: self.mainTable, startBlur: false)
-            self.setScrollEffectWithAnimator(on: self.mainTable, reversed: false)
-        })
+    }
+    
+    func hideMainTable() {
+        self.mainTable.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.mainTable.frame = CGRect(x: 0, y: self.mainScreenHeight - self.mainTableMinimizedHeight, width: self.mainScreenWidth, height: self.mainTableMinimizedHeight)
+        self.mainTable.layer.cornerRadius = 0
+        self.mainTable.isScrollEnabled = false
+        self.mainTable.scrollToRow(at: IndexPath(row: 0, section: 0), at:.top, animated: true)
+        self.mainTable.layoutIfNeeded()
+    }
+    
+    func showMainTable() {
+        self.mainTable.frame = CGRect(x: 0, y: self.mainTableMaxY, width: self.mainScreenWidth, height: self.mainScreenHeight - self.mainTableMaxY)
+        self.mainTable.layer.cornerRadius = self.cornerRadius
+        self.mainTable.isScrollEnabled = true
+    }
+    
+    func enterMainTable() {
+        self.hideBackTable()
+        self.showMainTable()
+    }
+    
+    func enterBackTable() {
+        self.hideMainTable()
+        self.showBackTable()
     }
     
     // Set User Object
@@ -207,11 +223,12 @@ class MessageViewController: UIViewController {
     }
     
     func setScrollEffectWithAnimator(on view: UIView, reversed: Bool = false, curve: UIViewAnimationCurve = .easeOut) {
-        scrollAnimator = UIViewPropertyAnimator(duration: 0.5, curve: curve) {
+        scrollAnimator = UIViewPropertyAnimator(duration: 0.8, curve: curve) {
             if reversed {
-                self.showBackTable()
+                self.hideBackTable()
             } else {
-                self.showMainTable()
+                self.showBackTableLittleBit()
+                self.mainTable.transform = CGAffineTransform(translationX: 0, y: 35)
             }
         }
     }
@@ -385,12 +402,12 @@ class MessageViewController: UIViewController {
                 // self.requests.sort(by: { $0.timeRequested > $1.timeRequested })
                 if let index = self.requests.index(where: { $0.timeRequested >= requestVal.timeRequested }) {
                     self.requests.insert(requestVal, at: index)
-                    
                     let indexPath = IndexPath(row: index.advanced(by: 2), section: 0)
-                    let updateIndexPath = IndexPath(row: index.advanced(by: 3), section: 0)
+                    // let updateIndexPath = IndexPath(row: index.advanced(by: 3), section: 0)
                     
                     self.mainTable.insertRows(at: [indexPath], with: .automatic)
-                    self.mainTable.reloadRows(at: [updateIndexPath], with: .automatic)
+                    // self.mainTable.reloadRows(at: [updateIndexPath], with: .automatic)
+                    self.mainTable.reloadData()
                 } else {
                     self.requests.append(requestVal)
                     self.mainTable.reloadData()
@@ -438,13 +455,13 @@ class MessageViewController: UIViewController {
                     
                     // message.setImageUrl(imageURL: imageValue)
                     self.messages.append(message)
-                    
+                    self.backTable.reloadData()
                 }
             })
 
         } else {
             print("requests.count and totalRequests unsyncronized")
-            self.mainTable.reloadData()
+            self.backTable.reloadData()
             
             print("requests.count : \(self.requests.count)")
             print("totalRequests count: \(self.totalRequests)")
@@ -495,19 +512,17 @@ extension MessageViewController {
         revealingSplashAnimation(self.view, type: SplashAnimationType.swingAndZoomOut, completion: {
             
             self.setBlurEffectWithAnimator(on: self.mainTable, duration: 0.45, startBlur: true, curve: .easeIn)
+            self.mainTable.reloadData()
             
             UIView.animate(withDuration: 0.51, delay: 0.151, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: {
                 print("- revealingSplashAnimation (completion:)")
                 self.blurAnimator?.startAnimation()
                 
+                // backTableView
+                self.hideBackTable()
+                
                 self.mainTable.frame = self.mainTable.frame.offsetBy(dx: 0, dy: -self.inactiveOffset)
                 self.mainTable.layoutIfNeeded()
-                // self.tableView.transform = CGAffineTransform(scaleX: 1.00, y: 1.00)
-                
-                self.backTable.alpha = 0.4
-                self.backTable.transform = CGAffineTransform(scaleX: 1.00, y: 1.00)
-                self.backTable.layer.cornerRadius = self.cornerRadius
-                self.backTable.layoutIfNeeded()
                 
             }, completion: { (true) in
                 self.introAnimationLoaded = true
@@ -533,6 +548,8 @@ extension MessageViewController {
         if self.introAnimationLoaded {
             
             if !self.mainTableMinimized {
+                
+                self.showBackTable()
                 
                 self.mainTable.frame = self.mainTable.frame.offsetBy(dx: 0, dy: inactiveOffset)
                 self.setBlurEffect(on: self.mainTable)
@@ -565,15 +582,6 @@ extension MessageViewController {
         self.mainTable.isUserInteractionEnabled = false
         self.scrollAnimator?.stopAnimation(true)
         self.blurAnimator?.stopAnimation(true)
-        
-        
-        /*
-        if !self.mainTableMinimized {
-            self.backTable.alpha = 0.4
-            self.backTable.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
-            self.backTable.layer.cornerRadius = 0
-        }
-        */
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -604,20 +612,23 @@ extension MessageViewController: UIScrollViewDelegate {
     
     // Search for: scrollViewDidScroll UIVisualEffect
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        
         if mainTable == scrollView {
-            if scrollView.contentOffset.y < -15 {
-                if blurAnimator != nil && scrollAnimator != nil {
-                    
-                    if !mainTableMinimized || !animatorIsBusy {
-                        
+            if blurAnimator != nil && scrollAnimator != nil {
+                if !mainTableMinimized || !animatorIsBusy {
+                    if scrollView.contentOffset.y < -15 {
                         let blurResult = returnScrollValue(with: scrollView.contentOffset.y, valueOffset: 0.25)
                         blurAnimator?.fractionComplete = blurResult
                         
                         if scrollAnimator?.state != .stopped {
-                            let scrollResult = returnScrollValue(with: scrollView.contentOffset.y, valueOffset: 0)
-                            scrollAnimator?.fractionComplete = scrollResult / 5
+                            // print("scrollAnimator.state is not stopped")
+                            let scrollResult = returnScrollValue(with: scrollView.contentOffset.y, valueOffset: 0.15)
+                            scrollAnimator?.fractionComplete = scrollResult
+                            print(scrollResult)
                         }
                     }
+
                 }
             }
         }
@@ -643,17 +654,25 @@ extension MessageViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
         print("scrollViewWillBeginDecelerating")
         if mainTable == scrollView {
-            // self.scrollAnimator?.stopAnimation(true)
+            
+            
         }
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         print("scrollViewDidEndDecelerating")
         if mainTable == scrollView {
-            if scrollAnimator?.state != .stopped {
-                self.scrollAnimator?.startAnimation()
+            if scrollView.contentOffset.y >= -80  {
+                if scrollAnimator?.state != .stopped {
+                    self.mainTable.contentOffset = .zero
+                    self.backTable.contentOffset = .zero
+                }
             }
         }
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        print("scrollViewDidEndScrollingAnimation")
     }
 }
 
@@ -687,6 +706,7 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
                     return cell
                 }
             }
+            
         }
         
         if tableView == backTable {

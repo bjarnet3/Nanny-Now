@@ -24,11 +24,11 @@ class RequestBodyCell: UITableViewCell {
             self.contentView.alpha = 0
             self.setNeedsDisplay(profileImage.frame)
             self.contentView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
-            self.layer.transform = CATransform3DMakeRotation(CGFloat.pi / 16, 1, 0, 0)
+            // self.layer.transform = CATransform3DMakeRotation(CGFloat.pi / 16, 1, 0, 0)
         } else {
             self.contentView.alpha = 1
             self.contentView.transform = CGAffineTransform(scaleX: 1.00, y: 1.00)
-            self.layer.transform = CATransform3DMakeRotation(0, 1, 0, 0)
+            // self.layer.transform = CATransform3DMakeRotation(0, 1, 0, 0)
         }
     }
     

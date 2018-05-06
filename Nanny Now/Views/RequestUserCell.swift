@@ -24,169 +24,47 @@ class RequestUserCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        /*
-        self.backgroundColor = WHITE_SOLID
-        self.profileImage.layer.borderColor = PINK_NANNY_LOGO.cgColor
-        self.profileImage.layer.borderWidth = 0.9
-        
-        self.nameLbl.textColor = UIColor.darkText
-        self.textLbl.textColor = PINK_TABBAR_SELECTED
-        self.timeFromLbl.textColor = UIColor.darkText
-        self.timeToLbl.textColor = UIColor.darkGray
-        self.amountLbl.textColor = UIColor.darkGray
-        */
-        // self.layer.anchorPoint = CGPoint(x: 0, y: 0.5)
-        // self.layer.frame = self.layer.frame.offsetBy(dx: -(self.frame.width / 2), dy: 0)
     }
     
     // MARK: - CATransform3DRotate
     // Thanx to - http://www.programering.com/a/MDN3YzMwATE.html
     // Recommend isHighlithed() insted of touchesBegan()
-
-    /*
-    //Touches Began
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touchesBegan")
-        if let touch = touches.first {
-            let position = touch.location(in: nil)
-            
-            let scaleLenght = self.frame.width / 2
-            
-            let maxPosition = (CGFloat.pi/2.0)
-            let minPosition = maxPosition / scaleLenght
-            
-            let currentPosition = minPosition * (position.x - scaleLenght)
-            
-            // Nice ternary operator
-            // let transformRadius = position.x < self.frame.width / 2 ? -currentPosition : currentPosition
-            var transform3D = CATransform3DIdentity
-            
-            UIView.animate(withDuration: 0.20, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.10, options: .curveEaseIn, animations: { () in
-                
-                transform3D.m34 = -1.0 / 400.0
-                transform3D = CATransform3DRotate(transform3D, currentPosition, 0, 1, 0)
-                
-                self.layer.transform = transform3D
-                hapticButton(.heavy)
-            })
-        }
-    }
-    // Touches Ended
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("toucheEnded")
-        var rollBack3D = CATransform3DIdentity
-        
-        UIView.animate(withDuration: 0.35, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.175, options: .curveEaseOut, animations: { () in
-            
-            rollBack3D.m34 = -1.0 / 400.0
-            rollBack3D = CATransform3DRotate(rollBack3D, 0, 0, 1, 0)
-            
-            self.layer.transform = rollBack3D
-            hapticButton(.selection)
-        })
-    }
     
-    // Dont repeat yourself,, yea yea...
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touchCancelled")
-        
-        var rollBack3D = CATransform3DIdentity
-        
-        UIView.animate(withDuration: 0.35, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.175, options: .curveEaseOut, animations: { () in
-            
-            rollBack3D.m34 = -1.0 / 400.0
-            rollBack3D = CATransform3DRotate(rollBack3D, 0, 0, 1, 0)
-            
-            self.layer.transform = rollBack3D
-            hapticButton(.selection)
-        })
-        
-        /*
-        var rollBack3D = CATransform3DIdentity
-        
-        UIView.animate(withDuration: 0.30, delay: 0.05, usingSpringWithDamping: 0.1, initialSpringVelocity: 0.11, options: .curveEaseIn, animations: { () in
-            
-            rollBack3D.m34 = -1.0 / 400.0
-            rollBack3D = CATransform3DRotate(rollBack3D, 0, 0, 1, 0)
-            
-            self.layer.transform = rollBack3D
-            hapticButton(.warning)
-        })
-        */
-    }
-    
-    /*
-    // MARK: - Set Selected and Set Highlighted
-    /*
     override func setSelected(_ selected: Bool, animated: Bool) {
         if selected {
-            self.layer.backgroundColor = PINK_DARK_SOLID.cgColor
-            self.profileImage.layer.borderColor = WHITE_ALPHA.cgColor
-            self.nameLbl.textColor = WHITE_SOLID
-            self.textLbl.textColor = WHITE_SOLID
-            self.timeFromLbl.textColor = WHITE_SOLID
-            self.timeToLbl.textColor = WHITE_SOLID
-            self.amountLbl.textColor = WHITE_SOLID
-        } else {
-            self.backgroundColor = WHITE_SOLID
-            self.profileImage.layer.borderColor = WHITE_ALPHA.cgColor
-            self.nameLbl.textColor = UIColor.darkText
-            self.textLbl.textColor = PINK_TABBAR_SELECTED
-            self.timeFromLbl.textColor = UIColor.darkText
-            self.timeToLbl.textColor = UIColor.darkGray
-            self.amountLbl.textColor = UIColor.darkGray
-        }
-    }
-     
-    */
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        if highlighted {
-            // Nice ternary operator
-            let transformRadius = (CGFloat.pi/20.0)
-            var transform3D = CATransform3DIdentity
-            
-            UIView.animate(withDuration: 0.20, delay: 0, usingSpringWithDamping: 0.75, initialSpringVelocity: 0.10, options: .curveEaseIn, animations: { () in
+            UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in
+                self.hasSelected = true
                 
-                transform3D.m34 = -1.0 / 500.0
-                transform3D = CATransform3DRotate(transform3D, transformRadius, 0, 1, 0)
+                self.messageLabel.isHighlighted = true
+                self.nameLabel.isHighlighted = true
+                self.timeFromLabel.isHighlighted = true
+                self.amount.isHighlighted = true
+                self.timeToLabel.isHighlighted = true
+                self.imageName.isHighlighted = true
+                self.imageName.alpha = 1.0
                 
-                // self.layer.anchorPoint = CGPoint(x: 0, y: 0.5)
-                // self.layer.frame = self.layer.frame.offsetBy(dx: -(self.frame.width / 2), dy: 0)
-                self.layer.transform = transform3D
                 
-                hapticButton(.heavy)
             })
         }
         else {
-            var rollBack3D = CATransform3DIdentity
-            
-            UIView.animate(withDuration: 0.30, delay: 0.05, usingSpringWithDamping: 0.1, initialSpringVelocity: 0.11, options: .curveEaseIn, animations: { () in
+            UIView.animate(withDuration: 0.20, delay: 0.05, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in
                 
-                rollBack3D.m34 = -1.0 / 500.0
-                rollBack3D = CATransform3DRotate(rollBack3D, 0, 0, 1, 0)
                 
-                self.layer.transform = rollBack3D
-                hapticButton(.warning)
             })
         }
     }
-     */
-    */
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         if highlighted {
-            // Nice ternary operator
-            // let transformRadius = (CGFloat.pi/10.0)
-            // var transform3D = CATransform3DIdentity
-            
             UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in
                 
-                // transform3D.m34 = -1.0 / 500.0
-                // transform3D = CATransform3DRotate(transform3D, transformRadius, 1, 0, 0)
-                
-                // self.layer.anchorPoint = CGPoint(x: 0, y: 0.5)
-                // self.layer.frame = self.layer.frame.offsetBy(dx: -(self.frame.width / 2), dy: 0)
-                // self.layer.transform = transform3D
+                self.messageLabel.isHighlighted = false
+                self.nameLabel.isHighlighted = false
+                self.timeFromLabel.isHighlighted = false
+                self.amount.isHighlighted = false
+                self.timeToLabel.isHighlighted = false
+                self.imageName.isHighlighted = false
+                self.imageName.alpha = 0.9
                 
                 self.transform = CGAffineTransform(scaleX: 1.10, y: 1.10)
                 
@@ -194,14 +72,7 @@ class RequestUserCell: UITableViewCell {
             })
         }
         else {
-            // var rollBack3D = CATransform3DIdentity
-            
             UIView.animate(withDuration: 0.20, delay: 0.05, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in
-                
-                // rollBack3D.m34 = -1.0 / 500.0
-                // rollBack3D = CATransform3DRotate(rollBack3D, 0, 1, 0, 0)
-                
-                // self.layer.transform = rollBack3D
                 
                 self.transform = CGAffineTransform(scaleX: 1.00, y: 1.00)
             })
