@@ -19,10 +19,10 @@ class RequestDetailVC: UIViewController {
     private var adminUser: User?
     private var guestUser: User?
     
+    private var viewRect = UIScreen.main.bounds
+    
     @IBAction func backAction(_ sender: Any) {
-        self.dismiss(animated: true, completion: { ()
-            print("dismissed MessageDetailVC")
-        })
+        exitDetailView()
     }
     
     override func viewDidLoad() {
@@ -33,15 +33,38 @@ class RequestDetailVC: UIViewController {
         
         self.adminImageView.loadImageUsingCacheWith(urlString: (adminUser?.imageName)!)
         self.guestImageView.loadImageUsingCacheWith(urlString: (guestUser?.imageName)!)
+        
+        self.backgroundView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        self.backgroundView.layer.cornerRadius = 22.0
+        self.backgroundView.frame = viewRect
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         print("viewDidAppear")
+        
+        UIView.animate(withDuration: 0.45, delay: 0.150, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
+            self.backgroundView.frame = UIScreen.main.bounds
+            self.backgroundView.layer.cornerRadius = 0.0
+            self.backgroundView.layoutIfNeeded()
+        })
+        
     }
     
-    func initWith(adminUser: User, guestUser: User) {
+    func exitDetailView() {
+        UIView.animate(withDuration: 0.45, delay: 0.010, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
+            self.backgroundView.frame = self.viewRect
+            self.backgroundView.layer.cornerRadius = 22.0
+        }, completion: { (true) in
+            self.dismiss(animated: false, completion: nil)
+        })
+    }
+    
+    func initWith(adminUser: User, guestUser: User, viewRect: CGRect) {
         self.adminUser = adminUser
         self.guestUser = guestUser
+        
+        self.viewRect = viewRect
     }
     
 }

@@ -42,8 +42,6 @@ class RequestUserCell: UITableViewCell {
                 self.timeToLabel.isHighlighted = true
                 self.imageName.isHighlighted = true
                 self.imageName.alpha = 1.0
-                
-                
             })
         }
         else {
@@ -67,13 +65,11 @@ class RequestUserCell: UITableViewCell {
                 self.imageName.alpha = 0.9
                 
                 self.transform = CGAffineTransform(scaleX: 1.10, y: 1.10)
-                
                 hapticButton(.selection)
             })
         }
         else {
             UIView.animate(withDuration: 0.20, delay: 0.05, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in
-                
                 self.transform = CGAffineTransform(scaleX: 1.00, y: 1.00)
             })
         }
@@ -98,14 +94,11 @@ class RequestUserCell: UITableViewCell {
     }
     
     func updateView(request: Request, animated: Bool = true) {
-        animateView(direction: .enter)
-        
-        self.imageName.loadImageUsingCacheWith(urlString: request.imageName, completion: {
-            if animated {
-                
+        if animated {
+            animateView(direction: .enter)
+            self.imageName.loadImageUsingCacheWith(urlString: request.imageName, completion: {
                 let random = Double(arc4random_uniform(UInt32(1000))) / 3000
                 UIView.animate(withDuration: 0.6, delay: random, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
-                    
                     self.animateView(direction: .exit)
                     
                     self.nameLabel.text = request.firstName
@@ -113,32 +106,15 @@ class RequestUserCell: UITableViewCell {
                     self.timeFromLabel.text = request.timeFrom.description
                     self.timeToLabel.text = request.timeTo.description
                     self.amount.text = "\(request.amount.description) kr / time"
-                    
-                    // self.setNeedsDisplay()
-                    // self.layoutIfNeeded()
                 })
-            } else {
-                self.animateView(direction: .exit)
-                
-                self.nameLabel.text = request.firstName
-                self.messageLabel.text = request.message
-                self.timeFromLabel.text = request.timeRequested.description
-                self.timeToLabel.text = request.timeTo.description
-                self.amount.text = "\(request.amount.description) kr / time"
-            }
-            self.cellImageLoaded = true
-        })
-    }
-
-    // MARK: - Update View
-    func updateView(message: Message) {
-        self.setNeedsLayout()
-        self.imageName.loadImageUsingCacheWith(urlString: message._imageURL)
-        self.nameLabel.text = "First Name"
-        self.messageLabel.text = message._message
-        self.timeFromLabel.text = message._messageTime
-        self.timeToLabel.text = "_"
-        self.amount.text = "\("1000") kr / time"
-        // self.setHighlighted(request.highlighted, animated: true)
+                self.cellImageLoaded = true
+            })
+        } else {
+            self.nameLabel.text = request.firstName
+            self.messageLabel.text = request.message
+            self.timeFromLabel.text = request.timeRequested.description
+            self.timeToLabel.text = request.timeTo.description
+            self.amount.text = "\(request.amount.description) kr / time"
+        }
     }
 }
