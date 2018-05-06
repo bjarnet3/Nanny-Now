@@ -542,6 +542,10 @@ extension MessageViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         print("- viewWillAppear")
+        
+        if self.mainTableMinimized {
+            // hideBackTable()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -551,9 +555,7 @@ extension MessageViewController {
         self.mainTable.isUserInteractionEnabled = true
         
         if !self.returnWithDismiss {
-            
             if self.introAnimationLoaded {
-                
                 if !self.mainTableMinimized {
                     
                     self.showBackTable()
@@ -563,6 +565,7 @@ extension MessageViewController {
                     self.maxiMizeTableView()
                     self.mainTable.layoutIfNeeded()
                 } else {
+                    animateCells3d(in: self.backTable, true)
                     
                     // tableView
                     self.mainTable.layer.cornerRadius = 0
