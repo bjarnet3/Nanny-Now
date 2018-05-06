@@ -484,7 +484,7 @@ public enum TableViewCellAnimation {
     case fade(() -> Void)
     case scale(() -> Void)
     case tilt3D(() -> Void)
-    // case blur
+    case blur(() -> Void)
 }
 
 public func animateCells(in tableView: UITableView,_ animated: Bool = true) {

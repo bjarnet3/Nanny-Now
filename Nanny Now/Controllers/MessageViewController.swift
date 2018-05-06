@@ -82,10 +82,12 @@ class MessageViewController: UIViewController {
             self.animatorIsBusy = true
             self.mainTableMinimized = false
             miniMizeTableView()
+            
         } else {
             self.animatorIsBusy = true
             self.mainTableMinimized = true
             maxiMizeTableView()
+            
         }
     }
     
@@ -221,7 +223,7 @@ class MessageViewController: UIViewController {
         scrollAnimator = UIViewPropertyAnimator(duration: 0.8, curve: curve) {
             if reversed {
                 self.backTable.layer.cornerRadius = 22.0
-                self.backTable.alpha = 0.7
+                self.backTable.alpha = 0.4
                 self.backTable.transform = CGAffineTransform(translationX: 0, y: 35)
                 self.backTable.layoutIfNeeded()
             } else {
@@ -434,9 +436,7 @@ class MessageViewController: UIViewController {
     
     func observeUser(with message: Message, userRef: DatabaseReference) {
         if self.messages.count < self.totalMessages {
-            
             userRef.observeSingleEvent(of: .value, with: { snapshot in
-                
                 if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
                     
                     var imageName: String?
@@ -450,7 +450,6 @@ class MessageViewController: UIViewController {
                         if key == "first_name" {
                             firstName = val as? String
                         }
-                        
                     }
                     
                     var message = message
@@ -463,7 +462,6 @@ class MessageViewController: UIViewController {
                     self.backTable.reloadData()
                 }
             })
-
         } else {
             print("requests.count and totalRequests unsyncronized")
             self.backTable.reloadData()
@@ -536,7 +534,6 @@ extension MessageViewController {
                 self.setBlurEffectWithAnimator(on: self.mainTable, startBlur: false)
                 self.setScrollEffectWithAnimator(on: self.mainTable, reversed: false)
             })
-            
         })
     }
     
@@ -565,12 +562,12 @@ extension MessageViewController {
                     self.maxiMizeTableView()
                     self.mainTable.layoutIfNeeded()
                 } else {
-                    animateCells3d(in: self.backTable, true)
+                    animateCells(in: self.backTable, true)
+                    // animateCells3d(in: self.backTable, true)
                     
                     // tableView
                     self.mainTable.layer.cornerRadius = 0
                     self.mainTable.frame = CGRect(x: 0, y: self.mainScreenHeight - self.mainTableMinimizedHeight, width: self.mainScreenWidth, height: self.mainTableMinimizedHeight)
-                    
                 }
             } else {
                 let tab = self.tabBarController?.tabBar as! FrostyTabBar
@@ -734,7 +731,6 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
                 return cell
             }
         }
-        
         return returnCell
     }
     
