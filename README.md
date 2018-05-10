@@ -1,4 +1,4 @@
-# ![Nanny Now](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/Nanny%20Now%20-%20App%20Icon%20Small.imageset/Nanny%20Now%20-%20App%20Icon%20Small.png "Nanny Now")
+# ![Nanny Now](/blob/master/Nanny%20Now/Library/Assets.xcassets/Nanny%20Now%20-%20App%20Icon%20Small.imageset/Nanny%20Now%20-%20App%20Icon%20Small.png "Nanny Now")
 Barnepass, Trygt, Raskt og Lett tilgjengelig.
 
 
