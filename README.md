@@ -1,5 +1,5 @@
 
-# Nanny Now  -   <img src="https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/App%20Icon%20Template%20Glyph.imageset/App%20Icon%20Template%20Glyph.png" width="30" height="30">
+# <img src="https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/App%20Icon%20Template%20Glyph.imageset/App%20Icon%20Template%20Glyph.png" width="30" height="30"> Nanny Now
 Barnepass, Trygt, Raskt og Lett tilgjengelig
 
 ![Presentasjon av Nanny Now](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_presentation.imageset/presentation.png)  
