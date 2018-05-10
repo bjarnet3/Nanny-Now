@@ -1,6 +1,7 @@
 
-# Nanny Now   ![](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/App%20Icon%20Template%20Glyph.imageset/App%20Icon%20Template%20Glyph.png){:height="50%" width="50%"}
-![](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/App%20Icon%20Template%20Glyph.imageset/App%20Icon%20Template%20Glyph.png?v=4&s=20)
+# Nanny Now   ![](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/App%20Icon%20Template%20Glyph.imageset/App%20Icon%20Template%20Glyph.png | width=32)
+
+![](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/App%20Icon%20Template%20Glyph.imageset/App%20Icon%20Template%20Glyph.png)
 
 
 <img src="https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/App%20Icon%20Template%20Glyph.imageset/App%20Icon%20Template%20Glyph.png" width="32" height="32">
