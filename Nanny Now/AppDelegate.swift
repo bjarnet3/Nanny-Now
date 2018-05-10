@@ -343,8 +343,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             publicRequest.updateChildValues(updateUserID)
             DataService.instance.moveValuesFromRefToRef(fromReference: publicRequest, toReference: publicAccept)
             
-            DataService.instance.REF_REQUESTS.child("public").child(familyID).child(requestID).child("userID").removeValue()
-            
             // Go to Message / Request location
             let sb = UIStoryboard(name: "Main", bundle: nil)
             let vc = sb.instantiateInitialViewController()

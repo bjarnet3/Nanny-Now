@@ -456,6 +456,7 @@ class DataService {
         let from = fromReference
         from.observeSingleEvent(of: .value, with: { snapshot in
             let snapshotChildValues = snapshot.value as? [AnyHashable : Any] ?? [:]
+            // toReference.setValue(snapshotChildValues)
             toReference.updateChildValues(snapshotChildValues)
             // DataService.instance.REF_REQUESTS.updateChildValues(snapshotChildValues)
             // DataService.instance.REF_NANNIESACTIVE.child(userID).updateChildValues(snapshotChildValues)

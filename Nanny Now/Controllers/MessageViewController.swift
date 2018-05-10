@@ -485,6 +485,43 @@ class MessageViewController: UIViewController {
         }
         present(infoVC, animated: true)
     }
+    
+    
+    func removeDatabaseSubValue() {
+        if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(UID).child("requests")
+            let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(UID)
+            publicRequest.observeSingleEvent(of: .value, with: { snapshot in
+                if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                    
+                    for snap in snapshot {
+                        if let snapValue = snap.value as? [String: AnyObject] {
+                            for (key,val) in snapValue {
+                                if key == "familyID" || key == "nannyID" {
+                                    print("family and nannyID")
+                                    if let remoteUID = val as? String, remoteUID != UID {
+                                        publicRequest.child(snap.key).child("userID").setValue(remoteUID)
+                                    }
+                                }
+                                if key == "requestStatus", val as? String != "pending" {
+                                    DataService.instance.moveValuesFromRefToRef(fromReference: publicRequest, toReference: privateRequest)
+                                }
+                                if key == "userID" {
+                                    // Remove subValue "userID"
+                                    // publicRequest.child(snap.key).child(key).removeValue()
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+                
+            })
+        }
+        
+    }
+    
+    
 }
 
 // MARK: - ViewDidLoad, ViewWillLoad etc...
@@ -496,12 +533,6 @@ extension MessageViewController {
 
         setMainTable()
         setBackTable()
-        
-        if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
-            let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(UID)
-            let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(UID).child("requests")
-            DataService.instance.moveValuesFromRefToRef(fromReference: publicRequest, toReference: privateRequest)
-        }
         
         self.setBlurEffectWithAnimator(on: self.mainTable, startBlur: true)
         
@@ -554,6 +585,8 @@ extension MessageViewController {
         
         self.animatorIsBusy = false
         self.mainTable.isUserInteractionEnabled = true
+        
+        self.removeDatabaseSubValue()
         
         if !self.returnWithDismiss {
             if self.introAnimationLoaded {
