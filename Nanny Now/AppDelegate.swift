@@ -329,7 +329,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             let updateStatus = ["requestStatus":"accepted"]
             let updateUserID = ["userID":familyID]
             
-            let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(nannyID).child("accepts").child(requestID)
+            let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(nannyID).child("requests").child(requestID)
             privateRequest.updateChildValues(updateUserID)
             privateRequest.updateChildValues(updateStatus)
             

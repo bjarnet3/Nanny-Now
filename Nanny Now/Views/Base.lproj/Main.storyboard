@@ -1601,7 +1601,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="GW4-jM-tkh" firstAttribute="top" secondItem="Zea-ul-MgI" secondAttribute="bottom" constant="20" id="AS0-jZ-geJ"/>
-                            <constraint firstItem="I3b-ec-HgB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rJz-V0-0FY" secondAttribute="leading" symbolic="YES" id="GmK-UK-Sf0"/>
+                            <constraint firstItem="I3b-ec-HgB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rJz-V0-0FY" secondAttribute="leading" constant="20" symbolic="YES" id="GmK-UK-Sf0"/>
                             <constraint firstItem="KPv-tH-Vmw" firstAttribute="top" secondItem="rJz-V0-0FY" secondAttribute="top" id="IxP-wh-1rh"/>
                             <constraint firstItem="KPv-tH-Vmw" firstAttribute="top" secondItem="xrC-bD-lTG" secondAttribute="bottom" constant="-158" id="MxV-gc-vQw"/>
                             <constraint firstAttribute="bottom" secondItem="x2W-Wj-T8H" secondAttribute="bottom" id="OcG-Nl-der"/>
@@ -2132,13 +2132,18 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                             <outlet property="profileImage" destination="p07-i7-HlN" id="yK1-2d-yye"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RequestUserCell" rowHeight="80" id="Hem-Ml-rcr" customClass="RequestUserCell" customModule="Nanny_Now" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RequestUserCell" rowHeight="80" id="Hem-Ml-rcr" customClass="RequestUserCell" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="248" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hem-Ml-rcr" id="nxJ-6K-edE">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="1Jd-0d-Yqy">
+                                                    <rect key="frame" x="0.0" y="79" width="375" height="3"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="tintColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </progressView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nanny-profil" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tJ0-v9-xoF" customClass="NannyImageView" customModule="Nanny_Now" customModuleProvider="target">
                                                     <rect key="frame" x="10" y="15" width="50" height="50"/>
                                                     <constraints>
@@ -2205,6 +2210,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                             <outlet property="imageName" destination="tJ0-v9-xoF" id="2vh-TY-yq1"/>
                                             <outlet property="messageLabel" destination="sAB-YJ-ret" id="cIh-ah-fjq"/>
                                             <outlet property="nameLabel" destination="S5P-hP-Spt" id="9sZ-OR-rTG"/>
+                                            <outlet property="progressIndicatior" destination="1Jd-0d-Yqy" id="Um7-zP-0tE"/>
                                             <outlet property="timeFromLabel" destination="C4e-UF-RWQ" id="2Q7-we-ahi"/>
                                             <outlet property="timeToLabel" destination="Hay-ub-5Wy" id="eB6-u8-Hm6"/>
                                         </connections>

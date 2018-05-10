@@ -10,6 +10,8 @@ import UIKit
 
 class RequestUserCell: UITableViewCell {
     
+    @IBOutlet weak var progressIndicatior: UIProgressView!
+    
     @IBOutlet weak var imageName: NannyImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!

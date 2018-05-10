@@ -36,6 +36,14 @@ let ORANGE_NANNY_LOGO = hexStringToUIColor("#ff6633")
 let PINK_TABBAR_SELECTED = hexStringToUIColor("#FC2F92")
 let PINK_TABBAR_UNSELECTED = hexStringToUIColor("#FF85FF")
 
+let LIGHT_GREY = hexStringToUIColor("#EBEBEB")
+let LIGHT_PINK = hexStringToUIColor("#FF72C8")
+let LIGHT_BLUE = hexStringToUIColor("#0096FF")
+
+let STRAWBERRY = hexStringToUIColor("#FF2F92")
+let SILVER     = hexStringToUIColor("#D6D6D6")
+
+
 // Struct Altitude Constants
 struct AltitudeDistance {
     static let tiny: Double = 600

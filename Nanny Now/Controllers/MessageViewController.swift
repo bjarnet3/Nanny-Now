@@ -308,23 +308,26 @@ class MessageViewController: UIViewController {
     // ----------------------------------------
     func observeRequests(_ exemptIDs: [String] = []) {
         if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
-            DataService.instance.REF_REQUESTS.child("private").child(UID).child("users").observe(.value, with: { (snapshot) in
-                let remoteID = snapshot.key
+            DataService.instance.REF_REQUESTS.child("private").child(UID).child("requests").observe(.value, with: { (snapshot) in
+                // let remoteID = snapshot.key
                 
                 if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
                     self.totalRequests = snapValue.keys.count
+                    
                     print("snapshot count: \(snapValue.keys.count)")
                     print("------------------")
-                    
-                    if !exemptIDs.contains(remoteID) {
+                        
                         self.requests.removeAll()
                         
-                        for (key,value) in snapValue {
+                        for (_,value) in snapValue {
                             if let snapRequest = value as? [String:AnyObject] {
-                                self.fetchRequestObserver(snapRequest, remoteUID: key)
+                                
+                                if let snapKey = snapRequest["userID"] as? String {
+                                    self.fetchRequestObserver(snapRequest, remoteUID: snapKey)
+                                }
                             }
                         }
-                    }
+                    
                 }
                 
             })
@@ -777,6 +780,10 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
         return tableView == mainTable ? mainHeight : backHeight
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return tableView == mainTable && indexPath.row >= 2 || tableView == backTable
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableView == mainTable ? requests.count + 2 : messages.count
     }
@@ -820,6 +827,36 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
             self.returnWithDismiss = true
             present(messageDetailVC, animated: true)
         }
+    }
+    
+    // Swipe to delete implemented :-P,, other tableView cell button implemented :-D howdy!
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        // Haptic Light
+        hapticButton(.light, lowPowerModeDisabled)
+        
+        let delete = UITableViewRowAction(style: .destructive, title: " ⊗ ") { (action , indexPath ) -> Void in
+            // if true, crash (because didEndEditingRow is called)
+            tableView.isEditing = false
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            // Update badgeValue
+            // self.nannyTabBar.badgeValue = "\(self.nannies.count)"
+        }
+        
+        let request = UITableViewRowAction(style: .destructive, title: " ☑︎ ") { (action , indexPath) -> Void in
+            // self.enterRequestMenu()
+            // self.sendRequestAlert(row: indexPath.row)
+        }
+        
+        let more = UITableViewRowAction(style: .default, title: " ⋮ ") { (action, indexPath) -> Void in
+            // Show on map
+            // self.standardAlert(row: indexPath.row)
+        }
+        
+        delete.backgroundColor = SILVER
+        request.backgroundColor = LIGHT_GREY
+        more.backgroundColor = PINK_NANNY_LOGO
+        
+        return [delete, request, more]
     }
     
 }
