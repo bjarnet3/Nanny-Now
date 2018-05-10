@@ -44,9 +44,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// Tells the delegate that the launch process is almost done and the app is almost ready to run.
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
         // Clear badge when app did finish launching
         application.applicationIconBadgeNumber = 0
+        
+        // [END register_for_notifications]
+        FirebaseApp.configure()
         
         // Facebook Part 2
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -56,9 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // set user notifications.
         setNotifications()
-        
-        // [END register_for_notifications]
-        FirebaseApp.configure()
         
         // [START add_token_refresh_observer]
         // Add observer for InstanceID token refresh callback.
@@ -71,6 +70,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                object: nil)
          */
         // [END add_token_refresh_observer]
+        
+        // User Status
+        DataService.instance.updateStatusOnUser(with: .active)
         
         var performShortcutDelegate = true
         if let launchOptions = launchOptions {
@@ -145,6 +147,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// Tells the delegate that the app is about to become inactive.
     func applicationWillResignActive(_ application: UIApplication) {
+        // User Status
+        DataService.instance.updateStatusOnUser(with: .inactive)
+        
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
@@ -152,6 +157,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Tells the delegate that the app is about to enter the foreground.
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        
+        // User Status
+        DataService.instance.updateStatusOnUser(with: .foreground)
         
         // Clear badge when app is or resumed
         application.applicationIconBadgeNumber = 0
@@ -173,6 +181,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // [START disconnect_from_fcm]
     /// Tells the delegate that the app is now in the background.
     func applicationDidEnterBackground(_ application: UIApplication) {
+        // User Status
+        DataService.instance.updateStatusOnUser(with: .background)
+        
         // Messaging.messaging().disconnect()
         Messaging.messaging().shouldEstablishDirectChannel = false
         print("Disconnected from FCM.")
@@ -183,6 +194,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Tells the delegate when the app is about to terminate.
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        
+        // User Status
+        DataService.instance.updateStatusOnUser(with: .terminate)
     }
     
     // [START refresh_token]
@@ -341,7 +355,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             tabBarController.tabBarItem.badgeValue = nil
             
             // DataService.instance.REF_NANNIES.child("public").child(remoteID).child("badge").setValue(badge - 1)
-            sendNotification(familyID, "Jeg kommer til avtalt tid", .nannyConfirmed, requestID)
+            // sendNotification(familyID, "Jeg kommer til avtalt tid", .nannyConfirmed, requestID)
             
         } else if response.actionIdentifier == "actionLater" {
             print("action later")

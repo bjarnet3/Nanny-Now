@@ -25,6 +25,14 @@ enum Service {
     case All
 }
 
+enum State: String {
+    case active = "active"
+    case inactive = "inactive"
+    case foreground = "foreground"
+    case background = "background"
+    case terminate = "terminate"
+}
+
 /// DataService Singleton / Database and Datastorage References to Firebase
 class DataService {
     static let instance = DataService()
@@ -133,6 +141,17 @@ class DataService {
             updateUserChildValues(uid: userID, userData: badge)
         } else {
             printDebug(object: "clearBadge couldn't get userID from KeychainWrapper")
+        }
+    }
+    
+    func updateStatusOnUser(with state: State) {
+        if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            let status: [String: String] = [
+                "state": state.rawValue,
+                "time" : returnTimeStamp()
+            ]
+            let publicREF = DataService.instance.REF_USERS_PUBLIC.child(userID).child("status")
+            publicREF.updateChildValues(status)
         }
     }
     

@@ -29,7 +29,6 @@ class RequestUserCell: UITableViewCell {
     // MARK: - CATransform3DRotate
     // Thanx to - http://www.programering.com/a/MDN3YzMwATE.html
     // Recommend isHighlithed() insted of touchesBegan()
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         if selected {
             UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in

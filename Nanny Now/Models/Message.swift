@@ -67,7 +67,6 @@ struct Message {
         self._messageTime = messageTime
         
         self._highlighted = highlighted
-        
     }
     
 }

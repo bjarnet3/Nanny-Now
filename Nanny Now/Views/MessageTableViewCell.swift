@@ -21,9 +21,7 @@ class MessageTableViewCell: UITableViewCell {
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         if highlighted {
-            
             UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in
-                
                 self.transform = CGAffineTransform(scaleX: 1.10, y: 1.10)
                 hapticButton(.selection)
             })
@@ -31,7 +29,6 @@ class MessageTableViewCell: UITableViewCell {
         else {
             // var rollBack3D = CATransform3DIdentity
             UIView.animate(withDuration: 0.20, delay: 0.05, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in
-                
                 self.transform = CGAffineTransform(scaleX: 1.00, y: 1.00)
             })
         }
@@ -60,7 +57,6 @@ class MessageTableViewCell: UITableViewCell {
                 self.messageLabel.text = message._message
                 self.timeLabel.text = message._messageTime
             }
-            
             if animated {
                 animateView(direction: .enter)
                 self.profileImage.loadImageUsingCacheWith(urlString: user.imageName, completion: {

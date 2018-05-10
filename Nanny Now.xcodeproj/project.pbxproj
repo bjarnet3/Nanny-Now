@@ -333,11 +333,11 @@
 		5CB7FE5E1FE4C94100D41E6F /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				5CF50D7C209C1E5E00136167 /* failure_notification.wav */,
-				5CF50D7D209C1E5E00136167 /* notification50.wav */,
 				5CF50D7E209C1E5E00136167 /* success_notification.wav */,
-				5CF50D7A209C19FE00136167 /* notification48.wav */,
+				5CF50D7C209C1E5E00136167 /* failure_notification.wav */,
 				5CB7FE5F1FE4CC8900D41E6F /* notification11.wav */,
+				5CF50D7A209C19FE00136167 /* notification48.wav */,
+				5CF50D7D209C1E5E00136167 /* notification50.wav */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
