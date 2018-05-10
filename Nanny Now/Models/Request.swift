@@ -13,8 +13,9 @@ import SwiftKeychainWrapper
 // This should be used in Notifications.swift
 public enum RequestStatus : String {
     case pending = "pending"
-    case rejected = "rejected"
     case accepted = "accepted"
+    case rejected = "rejected"
+    case running = "running"
     case complete = "complete"
 }
 

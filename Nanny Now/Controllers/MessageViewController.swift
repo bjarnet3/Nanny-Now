@@ -82,12 +82,10 @@ class MessageViewController: UIViewController {
             self.animatorIsBusy = true
             self.mainTableMinimized = false
             miniMizeTableView()
-            
         } else {
             self.animatorIsBusy = true
             self.mainTableMinimized = true
             maxiMizeTableView()
-            
         }
     }
     
@@ -498,6 +496,12 @@ extension MessageViewController {
 
         setMainTable()
         setBackTable()
+        
+        if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(UID)
+            let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(UID).child("requests")
+            DataService.instance.moveValuesFromRefToRef(fromReference: publicRequest, toReference: privateRequest)
+        }
         
         self.setBlurEffectWithAnimator(on: self.mainTable, startBlur: true)
         

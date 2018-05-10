@@ -37,6 +37,7 @@ class User : MKPointAnnotation {
     // -----------------------------
     public var _locations: [String:CLLocation]?
     public var _distance: Double?
+    public var _status: State?
     
     // Computed Properties
     // -------------------

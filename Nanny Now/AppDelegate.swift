@@ -158,9 +158,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         
-        // User Status
-        DataService.instance.updateStatusOnUser(with: .foreground)
-        
         // Clear badge when app is or resumed
         application.applicationIconBadgeNumber = 0
     }
@@ -168,6 +165,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Tells the delegate that the app has become active.
     func applicationDidBecomeActive(_ application: UIApplication) {
         connectToFcm()
+        
+        // User Status
+        DataService.instance.updateStatusOnUser(with: .active)
         
         application.applicationIconBadgeNumber = 0
         guard let shortcut = shortcutItem else { return }
@@ -182,7 +182,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Tells the delegate that the app is now in the background.
     func applicationDidEnterBackground(_ application: UIApplication) {
         // User Status
-        DataService.instance.updateStatusOnUser(with: .background)
+        DataService.instance.updateStatusOnUser(with: .inactive)
         
         // Messaging.messaging().disconnect()
         Messaging.messaging().shouldEstablishDirectChannel = false
@@ -315,10 +315,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         let userInfo = response.notification.request.content.userInfo
         // testing - Put action here
         if response.actionIdentifier == "nannyAccept" {
-            // Maybe not the best solution
-            
-            // let aps = userInfo["aps"] as? [String: Any]
-            // if let badge = aps?["badge"] as? Int { }
             
             // Switch
             let nannyID = userInfo["remoteID"] as? String ?? "noRemoteID"
@@ -330,20 +326,24 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             
             DataService.instance.moveValuesFromRefToRef(fromReference: nannyActive, toReference: nannyStored)
             
-            let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(nannyID).child("requests").child(requestID)
-            let privateUsers = DataService.instance.REF_REQUESTS.child("private").child(nannyID).child("users").child(familyID)
-            
-            let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(requestID)
-            
-            DataService.instance.copyValuesFromRefToRef(fromReference: publicRequest, toReference: privateRequest)
-            DataService.instance.copyValuesFromRefToRef(fromReference: publicRequest, toReference: privateUsers)
-            
             let updateStatus = ["requestStatus":"accepted"]
+            let updateUserID = ["userID":familyID]
+            
+            let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(nannyID).child("accepts").child(requestID)
+            privateRequest.updateChildValues(updateUserID)
+            privateRequest.updateChildValues(updateStatus)
+            
+            let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(nannyID).child(requestID)
+            publicRequest.child("userID").removeValue()
             publicRequest.updateChildValues(updateStatus)
             
-            let updateUserID = ["userID": familyID]
-            privateRequest.updateChildValues(updateUserID)
-            privateUsers.updateChildValues(updateUserID)
+            let publicAccept = DataService.instance.REF_REQUESTS.child("public").child(familyID).child(requestID)
+            DataService.instance.copyValuesFromRefToRef(fromReference: publicRequest, toReference: privateRequest)
+            
+            publicRequest.updateChildValues(updateUserID)
+            DataService.instance.moveValuesFromRefToRef(fromReference: publicRequest, toReference: publicAccept)
+            
+            DataService.instance.REF_REQUESTS.child("public").child(familyID).child(requestID).child("userID").removeValue()
             
             // Go to Message / Request location
             let sb = UIStoryboard(name: "Main", bundle: nil)
@@ -353,10 +353,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             
             tabBarController.setSelectIndex(from: 0, to: 3)
             tabBarController.tabBarItem.badgeValue = nil
-            
-            // DataService.instance.REF_NANNIES.child("public").child(remoteID).child("badge").setValue(badge - 1)
-            // sendNotification(familyID, "Jeg kommer til avtalt tid", .nannyConfirmed, requestID)
-            
         } else if response.actionIdentifier == "actionLater" {
             print("action later")
         } else if response.actionIdentifier == "messageRespond" {

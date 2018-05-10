@@ -138,10 +138,6 @@ class Notifications {
                 })
             }
         })
-        
-
-        
-        
     }
     
     func sendNotifications(with request: Request) {
@@ -236,22 +232,24 @@ class Notifications {
                                         let requestREFID = DataService.instance.REF_REQUESTS.childByAutoId()
                                         requestID = requestREFID.key
                                         
-                                        let nannyRequest = DataService.instance.REF_REQUESTS.child("public").child(requestID)
-                                        DataService.instance.postToRequest(with: request, reference: nannyRequest)
+                                        let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(remoteID).child(requestID)
+                                        
+                                        DataService.instance.postToRequest(with: request, reference: publicRequest)
+                                        
+                                        let setUserID = ["userID" : userID]
+                                        publicRequest.updateChildValues(setUserID)
+                                        
+                                        let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(userID).child("requests").child(requestID)
+                                        
+                                        DataService.instance.postToRequest(with: request, reference: privateRequest)
+                                        
+                                        let setRemoteID = ["userID" : remoteID]
+                                        privateRequest.updateChildValues(setRemoteID)
                                         
                                         let familyPrivate = DataService.instance.REF_FAMILIES.child("private").child(userID)
                                         let familyStored = DataService.instance.REF_FAMILIES.child("stored").child(remoteID).child(userID)
                                         DataService.instance.copyValuesFromRefToRef(fromReference: familyPrivate, toReference: familyStored)
                                         
-                                        let privateUsers = DataService.instance.REF_REQUESTS.child("private").child(userID).child("users").child(remoteID)
-                                        let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(userID).child("requests").child(requestID)
-                                        
-                                        DataService.instance.copyValuesFromRefToRef(fromReference: nannyRequest, toReference: privateUsers)
-                                        DataService.instance.copyValuesFromRefToRef(fromReference: nannyRequest, toReference: privateRequest)
-                                        
-                                        let nannyID = ["userID" : remoteID]
-                                        privateRequest.updateChildValues(nannyID)
-                                        privateUsers.updateChildValues(nannyID)
                                     case .nannyConfirmed:
                                         title = "Barnevakten \(firstName):"
                                         
