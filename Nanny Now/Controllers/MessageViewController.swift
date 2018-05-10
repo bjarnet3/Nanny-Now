@@ -24,14 +24,40 @@ class MessageViewController: UIViewController {
     // -------------------------------------
     var user: User?
     
-    var requests = [Request]()
+    var requests = [Request]() {
+        didSet {
+            if requests.count > 0 {
+                if requests[requests.index(before: requests.endIndex)].userID == requests.last?.userID {
+                    heightForRow.append(40)
+                    print(requests.count)
+                    print("append 40")
+                } else {
+                    heightForRow.append(80)
+                    print("append 80")
+                }
+            }
+        }
+    }
+    
+    func appendHeight() {
+        for (i, req) in requests.enumerated() {
+            if i > 0 {
+                if req.userID == requests[i-1].userID {
+                    heightForRow.append(40)
+                } else {
+                    heightForRow.append(80)
+                }
+            }
+        }
+    }
+    
     var messages = [Message]()
 
     var totalRequests: Int = 0
     var totalMessages: Int = 0
     
     var lastRowSelected: IndexPath?
-    var heightForRow:[CGFloat] = [40,180,80]
+    var heightForRow:[CGFloat] = [40,180,80,80]
     
     var animatorIsBusy = false
     var introAnimationLoaded = false
@@ -152,6 +178,14 @@ class MessageViewController: UIViewController {
         self.backTable.layer.cornerRadius = self.cornerRadius
         self.backTable.alpha = 0.35
         self.backTable.transform = CGAffineTransform(scaleX: 0.89, y: 0.89)
+        // self.backTable.isScrollEnabled = false
+        self.backTable.layoutIfNeeded()
+    }
+    
+    func midBackTable() {
+        self.backTable.layer.cornerRadius = self.cornerRadius * 0.8
+        self.backTable.alpha = 0.45
+        self.backTable.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
         // self.backTable.isScrollEnabled = false
         self.backTable.layoutIfNeeded()
     }
@@ -327,6 +361,39 @@ class MessageViewController: UIViewController {
                                 }
                             }
                         }
+                    
+                }
+                
+            })
+        }
+    }
+    
+    // MARK: - Observer, Firebase Database Functions
+    // ----------------------------------------
+    func observeRequestsOnce(_ exemptIDs: [String] = []) {
+        if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            DataService.instance.REF_REQUESTS.child("private").child(UID).child("requests").observeSingleEvent(of: .value, with: { snapshot in
+                // let remoteID = snapshot.key
+                
+                if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
+                    self.totalRequests = snapValue.keys.count
+                    
+                    print("snapshot count: \(snapValue.keys.count)")
+                    print("------------------")
+                    
+                    self.requests.removeAll()
+                    
+                    for (_,value) in snapValue {
+                        if let snapRequest = value as? [String:AnyObject] {
+                            
+                            printDebug(object: snapRequest)
+                            
+                            if let snapKey = snapRequest["userID"] as? String {
+                                printDebug(object: snapKey)
+                                self.fetchRequestObserver(snapRequest, remoteUID: snapKey)
+                            }
+                        }
+                    }
                     
                 }
                 
@@ -536,7 +603,7 @@ extension MessageViewController {
 
         setMainTable()
         setBackTable()
-        
+
         self.setBlurEffectWithAnimator(on: self.mainTable, startBlur: true)
         
         self.mainTable.delegate = self
@@ -547,10 +614,12 @@ extension MessageViewController {
         
         getUserSettings()
         
-        observeRequests()
+        observeRequestsOnce()
         observeMessages()
         
         revealingSplashAnimation(self.view, type: SplashAnimationType.swingAndZoomOut, completion: {
+            
+            self.midBackTable()
             
             self.setBlurEffectWithAnimator(on: self.mainTable, duration: 0.45, startBlur: true, curve: .easeIn)
             self.mainTable.reloadData()
@@ -595,7 +664,8 @@ extension MessageViewController {
             if self.introAnimationLoaded {
                 if !self.mainTableMinimized {
                     
-                    self.showBackTable()
+                    // self.showBackTable()
+                    self.midBackTable()
                     self.mainTable.frame = self.mainTable.frame.offsetBy(dx: 0, dy: inactiveOffset)
                     self.setBlurEffect(on: self.mainTable)
                     
@@ -756,12 +826,23 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.layoutIfNeeded()
                     return cell
                 }
-            } else {
+            } else if indexPath.row >= 2 {
+                if indexPath.row >= 3 {
+                    if requests[indexPath.row - 2].userID == requests[indexPath.row - 3].userID {
+                        if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestExtendedCell", for: indexPath) as? RequestExtendedCell {
+                            cell.updateView(request: requests[indexPath.row - 2], animated: true)
+                            // https://stackoverflow.com/questions/30066625/uiimageview-in-table-view-not-showing-until-clicked-on-or-device-is-roatated
+                            return cell
+                        }
+                    }
+                }
+                
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestUserCell", for: indexPath) as? RequestUserCell {
                     cell.updateView(request: requests[indexPath.row - 2], animated: true)
                     // https://stackoverflow.com/questions/30066625/uiimageview-in-table-view-not-showing-until-clicked-on-or-device-is-roatated
                     return cell
                 }
+                
             }
         }
         
@@ -777,7 +858,7 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let backHeight: CGFloat = 80
         let mainHeight = (indexPath.row < self.heightForRow.count) ? self.heightForRow[indexPath.row] : 80
-        return tableView == mainTable ? mainHeight : backHeight
+        return tableView == mainTable ? self.heightForRow[indexPath.row] : backHeight
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

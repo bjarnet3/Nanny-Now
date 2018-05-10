@@ -778,9 +778,9 @@ extension NannyViewController : UITableViewDelegate, UITableViewDataSource {
             self.standardAlert(row: indexPath.row)
         }
         
-        delete.backgroundColor = hexStringToUIColor("#FF4981")
-        request.backgroundColor = hexStringToUIColor("#4CD964")
-        more.backgroundColor = hexStringToUIColor("#1D77EF")
+        delete.backgroundColor = SILVER
+        request.backgroundColor = LIGHT_GREY
+        more.backgroundColor = PINK_NANNY_LOGO
         
         return [delete, request, more]
     }

@@ -78,6 +78,7 @@
 		5CF50D81209C1E5F00136167 /* success_notification.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CF50D7E209C1E5E00136167 /* success_notification.wav */; };
 		5CF50D83209C49D300136167 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF50D82209C49D300136167 /* MessageTableViewCell.swift */; };
 		5CF50D85209CD5F800136167 /* MessageDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF50D84209CD5F800136167 /* MessageDetailVC.swift */; };
+		5CFE968820A4E1F1003C08A4 /* RequestExtendedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE968720A4E1F1003C08A4 /* RequestExtendedCell.swift */; };
 		D76AEE53A84CCAADE054300E /* Pods_Nanny_Now.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C06149E4985579864421B59A /* Pods_Nanny_Now.framework */; };
 /* End PBXBuildFile section */
 
@@ -190,6 +191,7 @@
 		5CF50D7E209C1E5E00136167 /* success_notification.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success_notification.wav; sourceTree = "<group>"; };
 		5CF50D82209C49D300136167 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		5CF50D84209CD5F800136167 /* MessageDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailVC.swift; sourceTree = "<group>"; };
+		5CFE968720A4E1F1003C08A4 /* RequestExtendedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestExtendedCell.swift; sourceTree = "<group>"; };
 		77AACDD398985A24EF2F229E /* Pods-Nanny Now.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nanny Now.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nanny Now/Pods-Nanny Now.release.xcconfig"; sourceTree = "<group>"; };
 		C06149E4985579864421B59A /* Pods_Nanny_Now.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nanny_Now.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -242,6 +244,7 @@
 				5C70E62B208214F00076CC4A /* RequestHeaderCell.swift */,
 				5C70E62D2082153E0076CC4A /* RequestBodyCell.swift */,
 				5C093A481FE0985100144A32 /* RequestUserCell.swift */,
+				5CFE968720A4E1F1003C08A4 /* RequestExtendedCell.swift */,
 				5C4C30831FD9E7F800151AB6 /* FoldingCell.swift */,
 			);
 			path = Views;
@@ -685,6 +688,7 @@
 				5C17A1DE20817D87004CCBC6 /* SubSettingsViewController.swift in Sources */,
 				5C89EE9E1FA48072005341ED /* DTTextField.swift in Sources */,
 				5C41A4EA207C34B00025A4AE /* FriendsTableViewCell.swift in Sources */,
+				5CFE968820A4E1F1003C08A4 /* RequestExtendedCell.swift in Sources */,
 				5C76202B2088DCAA005D7647 /* Review.swift in Sources */,
 				5C2895551FDB52A50009F6D5 /* FamilyDetailVC.swift in Sources */,
 				5CCF0C931D898D9F0089F39D /* NannyTableViewCell.swift in Sources */,
