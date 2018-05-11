@@ -27,11 +27,9 @@ class MessageDetailVC: UIViewController {
     @IBAction func dismissButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    
 }
 
 extension MessageDetailVC {
-    
     fileprivate func transition(to mapType: MKMapType) {
         switch mapType {
         case .standard:

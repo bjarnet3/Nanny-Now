@@ -2116,11 +2116,11 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6LM-aO-ro8">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
+                                                    <rect key="frame" x="117.5" y="20" width="140" height="140"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nanny-profil" translatesAutoresizingMaskIntoConstraints="NO" id="p07-i7-HlN" customClass="ShaddowImageView" customModule="Nanny_Now" customModuleProvider="target">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nanny-profil" translatesAutoresizingMaskIntoConstraints="NO" id="p07-i7-HlN" customClass="NannyImageView" customModule="Nanny_Now" customModuleProvider="target">
                                                     <rect key="frame" x="117.5" y="20" width="140" height="140"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="p07-i7-HlN" secondAttribute="height" multiplier="1:1" id="bp0-hb-pE1"/>
