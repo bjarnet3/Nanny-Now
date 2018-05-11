@@ -7,16 +7,22 @@
 //
 
 import UIKit
+import QuartzCore
 
 class RequestBodyCell: UITableViewCell {
     
     @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var view: UIView!
     
     var user: User?
     
     public enum Direction {
         case enter
         case exit
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
     }
     
     func animateView( direction: Direction) {

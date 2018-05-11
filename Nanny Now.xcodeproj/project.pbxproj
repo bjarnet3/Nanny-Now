@@ -39,6 +39,7 @@
 		5C89EE9E1FA48072005341ED /* DTTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89EE9D1FA48072005341ED /* DTTextField.swift */; };
 		5C9859AE2081D1F6006AA58A /* AnimatedRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9859AD2081D1F6006AA58A /* AnimatedRingView.swift */; };
 		5C9FC62C1FF6E95000906B05 /* FriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9FC62B1FF6E95000906B05 /* FriendsCollectionViewCell.swift */; };
+		5C9FD3CC20A52B6400B1D5A1 /* ShaddowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9FD3CB20A52B6400B1D5A1 /* ShaddowImageView.swift */; };
 		5CA49F5B1FD78DA100B0A993 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA49F5A1FD78DA000B0A993 /* MessageViewController.swift */; };
 		5CB7FE561FE435B600D41E6F /* FrostyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7FE551FE435B600D41E6F /* FrostyView.swift */; };
 		5CB7FE581FE4362900D41E6F /* FrostyTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7FE571FE4362900D41E6F /* FrostyTabBar.swift */; };
@@ -78,6 +79,9 @@
 		5CF50D81209C1E5F00136167 /* success_notification.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CF50D7E209C1E5E00136167 /* success_notification.wav */; };
 		5CF50D83209C49D300136167 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF50D82209C49D300136167 /* MessageTableViewCell.swift */; };
 		5CF50D85209CD5F800136167 /* MessageDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF50D84209CD5F800136167 /* MessageDetailVC.swift */; };
+		5CFDC33120A5355100ACB61C /* UIImage+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFDC33020A5355100ACB61C /* UIImage+Shadow.swift */; };
+		5CFDC33320A535CC00ACB61C /* PassThroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFDC33220A535CC00ACB61C /* PassThroughView.swift */; };
+		5CFDC33520A535F400ACB61C /* GripBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFDC33420A535F300ACB61C /* GripBarView.swift */; };
 		5CFE968820A4E1F1003C08A4 /* RequestExtendedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE968720A4E1F1003C08A4 /* RequestExtendedCell.swift */; };
 		D76AEE53A84CCAADE054300E /* Pods_Nanny_Now.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C06149E4985579864421B59A /* Pods_Nanny_Now.framework */; };
 /* End PBXBuildFile section */
@@ -147,6 +151,7 @@
 		5C89EE9D1FA48072005341ED /* DTTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTTextField.swift; sourceTree = "<group>"; };
 		5C9859AD2081D1F6006AA58A /* AnimatedRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedRingView.swift; sourceTree = "<group>"; };
 		5C9FC62B1FF6E95000906B05 /* FriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewCell.swift; sourceTree = "<group>"; };
+		5C9FD3CB20A52B6400B1D5A1 /* ShaddowImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaddowImageView.swift; sourceTree = "<group>"; };
 		5CA49F5A1FD78DA000B0A993 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		5CB7FE551FE435B600D41E6F /* FrostyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyView.swift; sourceTree = "<group>"; };
 		5CB7FE571FE4362900D41E6F /* FrostyTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyTabBar.swift; sourceTree = "<group>"; };
@@ -191,6 +196,9 @@
 		5CF50D7E209C1E5E00136167 /* success_notification.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success_notification.wav; sourceTree = "<group>"; };
 		5CF50D82209C49D300136167 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		5CF50D84209CD5F800136167 /* MessageDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailVC.swift; sourceTree = "<group>"; };
+		5CFDC33020A5355100ACB61C /* UIImage+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImage+Shadow.swift"; path = "Nanny Now/Models/UIImage+Shadow.swift"; sourceTree = SOURCE_ROOT; };
+		5CFDC33220A535CC00ACB61C /* PassThroughView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassThroughView.swift; sourceTree = "<group>"; };
+		5CFDC33420A535F300ACB61C /* GripBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GripBarView.swift; sourceTree = "<group>"; };
 		5CFE968720A4E1F1003C08A4 /* RequestExtendedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestExtendedCell.swift; sourceTree = "<group>"; };
 		77AACDD398985A24EF2F229E /* Pods-Nanny Now.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nanny Now.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nanny Now/Pods-Nanny Now.release.xcconfig"; sourceTree = "<group>"; };
 		C06149E4985579864421B59A /* Pods_Nanny_Now.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nanny_Now.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -309,6 +317,10 @@
 				5CB7FE571FE4362900D41E6F /* FrostyTabBar.swift */,
 				5CB7FE551FE435B600D41E6F /* FrostyView.swift */,
 				5CB7FE591FE4368900D41E6F /* FrostyCornerView.swift */,
+				5C9FD3CB20A52B6400B1D5A1 /* ShaddowImageView.swift */,
+				5CFDC33420A535F300ACB61C /* GripBarView.swift */,
+				5CFDC33220A535CC00ACB61C /* PassThroughView.swift */,
+				5CFDC33020A5355100ACB61C /* UIImage+Shadow.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -641,10 +653,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C860FC41FCF36870063B0BB /* PrintDebug.swift in Sources */,
+				5CFDC33120A5355100ACB61C /* UIImage+Shadow.swift in Sources */,
 				5C6D422B1EDE0DFA001037CE /* Notifications.swift in Sources */,
 				5CA49F5B1FD78DA100B0A993 /* MessageViewController.swift in Sources */,
+				5C9FD3CC20A52B6400B1D5A1 /* ShaddowImageView.swift in Sources */,
 				5C70E62E2082153E0076CC4A /* RequestBodyCell.swift in Sources */,
+				5CFDC33320A535CC00ACB61C /* PassThroughView.swift in Sources */,
 				5C592B741DAE9DF300238E7E /* CustomImageView.swift in Sources */,
+				5CFDC33520A535F400ACB61C /* GripBarView.swift in Sources */,
 				5C55C1011DAAFC5600581EF3 /* Constants.swift in Sources */,
 				5CCF0C791D898BFB0089F39D /* FamilyViewController.swift in Sources */,
 				5CC849351FCA11BE003AE163 /* SettingsTableViewCell.swift in Sources */,

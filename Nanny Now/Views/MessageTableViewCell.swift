@@ -22,7 +22,7 @@ class MessageTableViewCell: UITableViewCell {
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         if highlighted {
             UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in
-                self.transform = CGAffineTransform(scaleX: 1.10, y: 1.10)
+                self.transform = CGAffineTransform(scaleX: 1.08, y: 1.08)
                 hapticButton(.selection)
             })
         }

@@ -24,45 +24,19 @@ class MessageViewController: UIViewController {
     // -------------------------------------
     var user: User?
     
-    var requests = [Request]() {
-        didSet {
-            if requests.count > 0 {
-                if requests[requests.index(before: requests.endIndex)].userID == requests.last?.userID {
-                    heightForRow.append(40)
-                    print(requests.count)
-                    print("append 40")
-                } else {
-                    heightForRow.append(80)
-                    print("append 80")
-                }
-            }
-        }
-    }
-    
-    func appendHeight() {
-        for (i, req) in requests.enumerated() {
-            if i > 0 {
-                if req.userID == requests[i-1].userID {
-                    heightForRow.append(40)
-                } else {
-                    heightForRow.append(80)
-                }
-            }
-        }
-    }
-    
+    var requests = [Request]()
     var messages = [Message]()
-
+    
     var totalRequests: Int = 0
     var totalMessages: Int = 0
     
     var lastRowSelected: IndexPath?
-    var heightForRow:[CGFloat] = [40,180,80,80]
+    var heightForRow:[CGFloat] = [40,180,80]
     
     var animatorIsBusy = false
     var introAnimationLoaded = false
     var returnWithDismiss = false
-  
+    
     let cornerRadius: CGFloat = 22.0
     let inactiveOffset: CGFloat = 80
     
@@ -337,7 +311,7 @@ class MessageViewController: UIViewController {
             })
         }
     }
-
+    
     // MARK: - Observer, Firebase Database Functions
     // ----------------------------------------
     func observeRequests(_ exemptIDs: [String] = []) {
@@ -350,17 +324,17 @@ class MessageViewController: UIViewController {
                     
                     print("snapshot count: \(snapValue.keys.count)")
                     print("------------------")
-                        
-                        self.requests.removeAll()
-                        
-                        for (_,value) in snapValue {
-                            if let snapRequest = value as? [String:AnyObject] {
-                                
-                                if let snapKey = snapRequest["userID"] as? String {
-                                    self.fetchRequestObserver(snapRequest, remoteUID: snapKey)
-                                }
+                    
+                    self.requests.removeAll()
+                    
+                    for (_,value) in snapValue {
+                        if let snapRequest = value as? [String:AnyObject] {
+                            
+                            if let snapKey = snapRequest["userID"] as? String {
+                                self.fetchRequestObserver(snapRequest, remoteUID: snapKey)
                             }
                         }
+                    }
                     
                 }
                 
@@ -600,10 +574,10 @@ extension MessageViewController {
     override func viewDidLoad() {
         print("-- viewDidLoad")
         super.viewDidLoad()
-
+        
         setMainTable()
         setBackTable()
-
+        
         self.setBlurEffectWithAnimator(on: self.mainTable, startBlur: true)
         
         self.mainTable.delegate = self
@@ -763,7 +737,7 @@ extension MessageViewController: UIScrollViewDelegate {
                             print(scrollResult)
                         }
                     }
-
+                    
                 }
             }
         }
@@ -794,10 +768,14 @@ extension MessageViewController: UIScrollViewDelegate {
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         print("scrollViewDidEndDecelerating")
-        if scrollView.contentOffset.y >= -80  {
+        if scrollView.contentOffset.y >= -80 {
+            print(scrollView.contentOffset.y)
             if scrollAnimator?.state != .stopped {
-                self.mainTable.contentOffset = .zero
-                self.backTable.contentOffset = .zero
+                
+                if scrollView.contentOffset.y <= 0 {
+                    self.mainTable.contentOffset = .zero
+                    self.backTable.contentOffset = .zero
+                }
             }
         }
     }
@@ -826,23 +804,12 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.layoutIfNeeded()
                     return cell
                 }
-            } else if indexPath.row >= 2 {
-                if indexPath.row >= 3 {
-                    if requests[indexPath.row - 2].userID == requests[indexPath.row - 3].userID {
-                        if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestExtendedCell", for: indexPath) as? RequestExtendedCell {
-                            cell.updateView(request: requests[indexPath.row - 2], animated: true)
-                            // https://stackoverflow.com/questions/30066625/uiimageview-in-table-view-not-showing-until-clicked-on-or-device-is-roatated
-                            return cell
-                        }
-                    }
-                }
-                
+            } else {
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestUserCell", for: indexPath) as? RequestUserCell {
                     cell.updateView(request: requests[indexPath.row - 2], animated: true)
                     // https://stackoverflow.com/questions/30066625/uiimageview-in-table-view-not-showing-until-clicked-on-or-device-is-roatated
                     return cell
                 }
-                
             }
         }
         
@@ -858,7 +825,7 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let backHeight: CGFloat = 80
         let mainHeight = (indexPath.row < self.heightForRow.count) ? self.heightForRow[indexPath.row] : 80
-        return tableView == mainTable ? self.heightForRow[indexPath.row] : backHeight
+        return tableView == mainTable ? mainHeight : backHeight
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

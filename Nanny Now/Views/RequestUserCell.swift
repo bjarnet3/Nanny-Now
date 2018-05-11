@@ -65,7 +65,7 @@ class RequestUserCell: UITableViewCell {
                 self.imageName.isHighlighted = false
                 self.imageName.alpha = 0.9
                 
-                self.transform = CGAffineTransform(scaleX: 1.10, y: 1.10)
+                self.transform = CGAffineTransform(scaleX: 1.08, y: 1.08)
                 hapticButton(.selection)
             })
         }
