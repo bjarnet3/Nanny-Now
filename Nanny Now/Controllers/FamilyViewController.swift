@@ -286,7 +286,7 @@ extension FamilyViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FamilyCell", for: indexPath) as? FamilyTableViewCell {
-            cell.updateView(family: familiez[indexPath.row], user: self.user!)
+            cell.setupView(family: familiez[indexPath.row], user: self.user!)
             return cell
         } else {
             return FamilyTableViewCell()

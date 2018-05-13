@@ -81,7 +81,7 @@ class RequestExtendedCell: UITableViewCell {
         }
     }
     
-    func updateView(request: Request, animated: Bool = true) {
+    func setupView(request: Request, animated: Bool = true) {
         if animated {
             animateView(direction: .enter)
             self.imageName.loadImageUsingCacheWith(urlString: request.imageName, completion: {

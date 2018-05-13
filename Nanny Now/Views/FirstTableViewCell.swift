@@ -18,7 +18,7 @@ class FirstTableViewCell: UITableViewCell {
     @IBOutlet weak var yrkeLbl: UILabel!
     @IBOutlet weak var descriptionLbl: UILabel!
 
-    func updateViews(user: User) {
+    func setupView(user: User) {
         profileImageView.loadImageUsingCacheWith(urlString: user.imageName)
         let age = calcAge(birthday: user.birthday)
         nameLbl.text = "\(user.firstName) (\(age) år)"

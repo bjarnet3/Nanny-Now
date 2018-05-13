@@ -39,7 +39,7 @@ class ReviewCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func updateView(review: Review, animated: Bool = true) {
+    func setupView(review: Review, animated: Bool = true) {
         animateView(direction: .enter)
         
         let reviews = review

@@ -92,7 +92,7 @@ class NannyTableViewCell: UITableViewCell {
         }
     }
     
-    func updateView(nanny: Nanny) {
+    func setupView(nanny: Nanny) {
         self.nameLabel.text = nanny.firstName
         self.ageLabel.text = "\(nanny.age) år"
         self.genderLabel.text = nanny.gender

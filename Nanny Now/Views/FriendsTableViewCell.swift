@@ -61,7 +61,7 @@ extension FriendsTableViewCell: UICollectionViewDataSource, UICollectionViewDele
             // let name = Array(self.mutualFriends.values)[indexPath.row]
             cell.contentView.frame = cell.bounds
             // cell.updateView(imageURL: imageURL, name: name, animated: true)
-            cell.updateView(friend: self.friends[indexPath.row])
+            cell.setupView(friend: self.friends[indexPath.row])
             // cell.updateView(for: indexPath.row, imageURL: imageURL, name: name)
             return cell
         } else {

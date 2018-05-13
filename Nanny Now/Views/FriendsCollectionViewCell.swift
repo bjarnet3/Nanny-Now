@@ -31,7 +31,7 @@ class FriendsCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func updateView(friend: Friends, animated: Bool = true) {
+    func setupView(friend: Friends, animated: Bool = true) {
         animateView(direction: .enter)
         
         let userName = friend.name

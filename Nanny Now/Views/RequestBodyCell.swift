@@ -41,7 +41,7 @@ class RequestBodyCell: UITableViewCell {
     }
     
     // MARK: - Update View
-    func updateView(user: User, animated: Bool = false) {
+    func setupView(user: User, animated: Bool = false) {
         animateView(direction: .enter)
         
         self.profileImage.loadImageUsingCacheWith(urlString: user.imageName, completion: {

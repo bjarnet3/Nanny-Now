@@ -44,7 +44,7 @@ extension ReviewTableViewCell: UICollectionViewDataSource, UICollectionViewDeleg
             ReviewCollectionViewCell {
             
             cell.contentView.frame = cell.bounds
-            cell.updateView(review: self.reviews[indexPath.row], animated: true)
+            cell.setupView(review: self.reviews[indexPath.row], animated: true)
             
             return cell
         } else {

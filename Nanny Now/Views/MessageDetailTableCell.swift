@@ -1,14 +1,14 @@
 //
-//  MessageAllCell.swift
+//  MessageDetailTableCell.swift
 //  Nanny Now
 //
-//  Created by Bjarne Tvedten on 04.05.2018.
+//  Created by Bjarne Tvedten on 13.05.2018.
 //  Copyright © 2018 Digital Mood. All rights reserved.
 //
 
 import UIKit
 
-class MessageTableViewCell: UITableViewCell {
+class MessageDetailTableCell: UITableViewCell {
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var messageLabel: UILabel!

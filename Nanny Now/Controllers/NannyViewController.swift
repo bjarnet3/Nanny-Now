@@ -719,7 +719,7 @@ extension NannyViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "NannyCell", for: indexPath) as? NannyTableViewCell {
-            cell.updateView(nanny: nannies[indexPath.row])
+            cell.setupView(nanny: nannies[indexPath.row])
             return cell
         } else {
             return NannyTableViewCell()

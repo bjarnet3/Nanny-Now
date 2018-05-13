@@ -284,7 +284,7 @@ extension StartViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 0 {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "FirstCell") as? FirstTableViewCell {
                 if let user = self.user {
-                    cell.updateViews(user: user)
+                    cell.setupView(user: user)
                     return cell
                 }
             }
@@ -293,7 +293,7 @@ extension StartViewController: UITableViewDelegate, UITableViewDataSource {
                 let settings = LocalService.instance.getSettings()
                 let settingsRow = indexPath.row - 1
                 
-                cell.updateViews(settings: settings[settingsRow])
+                cell.setupView(settings: settings[settingsRow])
                 return cell
             }
         }

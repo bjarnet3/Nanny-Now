@@ -800,13 +800,13 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             } else if indexPath.row == 1 {
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestBodyCell", for: indexPath) as? RequestBodyCell {
-                    cell.updateView(user: self.user!)
+                    cell.setupView(user: self.user!)
                     cell.layoutIfNeeded()
                     return cell
                 }
             } else {
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestUserCell", for: indexPath) as? RequestUserCell {
-                    cell.updateView(request: requests[indexPath.row - 2], animated: true)
+                    cell.setupView(request: requests[indexPath.row - 2], animated: true)
                     // https://stackoverflow.com/questions/30066625/uiimageview-in-table-view-not-showing-until-clicked-on-or-device-is-roatated
                     return cell
                 }
@@ -815,7 +815,7 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
         
         if tableView == backTable {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell", for: indexPath) as? MessageTableViewCell {
-                cell.updateView(with: messages[indexPath.row])
+                cell.setupView(with: messages[indexPath.row])
                 return cell
             }
         }

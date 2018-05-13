@@ -51,7 +51,7 @@ class FamilyTableViewCell: FoldingCell {
         self._image = image
     }
     
-    func updateView(family: Families, user: User) {
+    func setupView(family: Families, user: User) {
         self.familyName.text = family.lastName
         self.firstNames.text = family.firstName
         self.timeLbl.text = family.requestStart

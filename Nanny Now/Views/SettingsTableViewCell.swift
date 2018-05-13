@@ -14,7 +14,7 @@ class SettingsTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var descriptionLbl: UILabel!
     
-    func updateViews(settings: Settings) {
+    func setupView(settings: Settings) {
         self.settingsImage.image = UIImage(named: settings.imageName)
         self.titleLbl.text = settings.title
         self.descriptionLbl.text = settings.info
