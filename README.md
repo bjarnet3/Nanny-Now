@@ -1,4 +1,11 @@
 # ![Nanny Now](/Nanny%20Now/Library/Assets.xcassets/Nanny%20Now%20-%20App%20Icon%20Small.imageset/Nanny%20Now%20-%20App%20Icon%20Small.png) Nanny Now
+[![iOS 11](https://img.shields.io/badge/Platform-iOS%2011-lightgrey.svg)](https://developer.apple.com/ios/)
+[![Swift 4.1](https://img.shields.io/badge/Swift-4.1-orange.svg?style=flat)](https://swift.org)
+[![Firebase Database](https://img.shields.io/badge/Database-Firebase-yellow.svg)](https://firebase.google.com/)
+[![Facebook Login API](https://img.shields.io/badge/Login%20API-Facebook-blue.svg)](https://developers.facebook.com/)
+[![Project Progress](https://img.shields.io/badge/Progress-73%25-red.svg)]()
+[![MIT licensed](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
+
 Barnepass, Trygt, Raskt og Lett tilgjengelig.
 
 ![Presentasjon av Nanny Now](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Library/Assets.xcassets/_presentation.imageset/presentation.png)  
@@ -587,10 +594,11 @@ Summary:
 
 
 # Contributors:
-**App Icon Template (iOS)**
+This list is not complete... Be patient :-D
+#### App Icon Template (iOS)
 - Michael Flarup (https://appicontemplate.com/) - PixelResort, Twitter @flarup
 
-**The Noun Project (Icons)**
+#### The Noun Project (Icons)
 - Boudewijn Mijnlieff (noun_206322_cc) - Part of the Logo
 - Guillaume Bahri (noun_67650_cc) - Part of the Logo
 - Vishal Marotkar (noun_221523_cc) - Part of the Logo
@@ -599,24 +607,24 @@ Summary:
 - Gayatri (noun_362109_cc) - Part of the Map Annotation and unknown profil male picture
 - Alex Fuller (noun_10551_cc) 
 
-**Notification Sounds**
+#### Notification Sounds
 - [notification11](https://www.zedge.net/ringtone/1716388/)
 - [notification48](https://www.zedge.net/ringtone/87154a39-442a-3cc0-b026-709657d4de6d)
 - [notification50](https://www.zedge.net/ringtone/9addaf43-4207-3e41-8de9-a933d558e224)
 - [success_notification](https://www.zedge.net/ringtone/2c79b8be-ce82-347f-8e80-fae1b7ed58ea)
 - [failure_notification](https://www.zedge.net/ringtone/d6cf9eaf-66b3-365f-95d4-1fe486549177)
 
-**Web Page / Internet**
+### Web Page / Internet
 
-**Web template (for presentation)**
+#### Web template (for presentation)
 - Blackrock Digital LLC (startbootstrap-creative) MIT License
 
-**Pods and Animations**
+#### Pods and Animations
 - TabBarAnimations - "Thanx to [Ramotion](https://github.com/bjarnet3/Nanny-Now/tree/master/Pods/RAMAnimatedTabBarController)"
 - SKSplashView - "Thanx to [sachinkesiraju](https://github.com/bjarnet3/Nanny-Now/tree/master/Pods/RevealingSplashView)"
 - SwiftKeychainWrapper - "Thanx to [Jason Rendel](https://github.com/jrendel/SwiftKeychainWrapperExample)"
 
-**Thanks to**
+#### Thanks to
 
 - Espen Dyrnes (DNB Autolease)
 - Anne Rydgren (Barnehage Eier)
