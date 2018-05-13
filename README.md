@@ -3,7 +3,7 @@
 [![Swift 4.1](https://img.shields.io/badge/Swift-4.1-orange.svg?style=flat)](https://swift.org)
 [![Firebase Database](https://img.shields.io/badge/Database-Firebase-yellow.svg)](https://firebase.google.com/)
 [![Facebook Login API](https://img.shields.io/badge/Login%20API-Facebook-blue.svg)](https://developers.facebook.com/)
-[![Project Progress](https://img.shields.io/badge/Progress-73%25-red.svg)]()
+[![Project Progress](https://img.shields.io/badge/Progress-73%25-red.svg)](PROGRESS.md)
 [![MIT licensed](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
 
 Barnepass, Trygt, Raskt og Lett tilgjengelig.
@@ -45,27 +45,28 @@ GPS & Geolocation Services
 ## Animations & Effects
 [Blur](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Controllers/MessageViewController.swift) -- [TabBarAnimations](https://github.com/bjarnet3/Nanny-Now/tree/master/Pods/RAMAnimatedTabBarController) -- [Fade](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Utilities/Functions.swift) -- [ParallaxEffectOnView](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Utilities/Functions.swift) -- [CellAnimation](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Utilities/Functions.swift) -- [SplashView](https://github.com/bjarnet3/Nanny-Now/tree/master/Pods/RevealingSplashView)
 
+[Label](73)
 # Target / Progress / Goal
 
 ## 2016
-### Week 23
+#### Week 23
 - [x] Nanny Now - Start Nanny Now Development
 
-### Week 24
+#### Week 24
 - [x] Nanny Now - Implement TableView
 - [x] Nanny Now - Implement MapKit
 - [x] Nanny Now - Custom ImageView (Rounded corners on Images)
 
-### Week 25
+#### Week 25
 - [ ] Nanny Now - Polymorphism (add from VC to Model) - NOT DONE
 - [ ] Nanny Now - MVC - NOT DONE
 - [x] Nanny Now - Application Icons
 - [x] Nanny Now - Clean up
 
-### Week 26
+#### Week 26
 - [x] Nanny Now «First presentation slide»
 
-### Week 27
+#### Week 27
 - [ ] Nanny Now - Launch Image - NOT DONE
 - [ ] Nanny Now - Add to InfoVC - NOT DONE
 - [x] Nanny Now - Change StartVC
@@ -76,16 +77,16 @@ GPS & Geolocation Services
 - [x] Nanny Now - Update «Generic Function» Custom UIColor from RGB: Hex #Swift 3.0
 - [x] Nanny Now - Create Calculate To Center Position From Array
 
-### Week 31:
+#### Week 31:
 - [x] Nanny Now - Add button Image to Presentation Sheet
 - [x] Nanny Now - EmployeeViewController { func notificationSetup(_ all: Bool) { } }
 
-### Week 33:
+#### Week 33:
 - Advanced Navigation Bars
 - Advanced Table Views
 - Advanced Times Tables
 
-### Week 34:
+#### Week 34:
 - Webpage to Nanny Now - Alpha 1.0
 - Add more buttons (Navigation Buttons)
 - Downloading Web Content
@@ -95,7 +96,7 @@ Summary:
 - override func touchesBegan( _  _ ) { self.view.endEditing(true) }
 - textFieldShouldReturn( ) { textField.resignFirstResponder() } // add, UITextFieldDelegate
 
-### Week 35:
+#### Week 35:
 - JSONParsing
 - Optional Chaining
 - GeoCoding / Reversed GeoCoding
@@ -104,18 +105,18 @@ Summary:
 - if let _ = textField { if let _ = label.text { if let _ = text.hashValue }  }  } - NON OPTIONAL CHANING
 - if let _ = textField?.text?.hashValue { /* … */ } - OPTIONAL CHANING
 
-### Week 36:
+#### Week 36:
 - Start recreation of Nanny Now with Xcode 8 RC
 - [x] Nanny Now - StoryBoard - tableViewCell setup
 - [x] Nanny Now - Adding User Annotation To Maps
 
-### Week 37:
+#### Week 37:
 - Object Oriented Programming VS Protocol Oriented Programming
 - Create UIView Playground (Frame, Bounds, Rect) - Maybe use PS instead of Playground
 Summary:
 - CodeSnippet <#Code>
 
-### Week 38:
+#### Week 38:
 - [x] Nanny Now (3D Touch : Quick Actions)
 - Firebase «Overview»
 - Create Generic UIView (Tinder like buttons) (Look more into Stanford 4 for help) - NOT DONE
@@ -124,21 +125,21 @@ Summary:
 - performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping 
 - func handleShortcut(shortcutItem: UIApplicationShortcutItem ) -> Bool
 
-### Week 39:
+#### Week 39:
 - [x] Nanny Now - Complete Login (Start Screen) - ALMOST DONE (Static)
 - [x] Nanny Now - Go from TableViewCell to VC (prepare for seque) - NOT DONE
 - Firebase Auth
 Summary:
 - Documenting /// **Bold** /** */ #H1# ##H2## 
 
-### Week 40:
+#### Week 40:
 - [x] Nanny Now - Facebook Authentication with Firebase
 - [x] Nanny Now - Email Authentication with Firebase
 - Refactoring at Scale - Instagram Presentation (IGListKit Reference)
 Summary:
 - https://speakerdeck.com/realm/ryan-nystrom-refactoring-at-scale-lessons-learned-rewriting-instagrams-feed
 
-### Week 41:
+#### Week 41:
 - [x] Nanny Now - Firebase DB Basic Structure
 - UIPictureView post to Firebase / Part 1
 - Creating database users for Firebase
@@ -146,7 +147,7 @@ Summary:
 Summary:
 - ...
 
-### Week 42:
+#### Week 42:
 - [x] Nanny Now - Implement Splash Screen
 - [x] Nanny Now - Add Haptic Engine
 - Firebase data modeling & architecture
@@ -154,7 +155,7 @@ Summary:
 - enum HepticEngineTypes { case error, success, warning, light, medium, heavy, selection } 
 - Singleton - An instance of a class, that is publicly available that has only one reference.
 
-### Week 43:
+#### Week 43:
 - UIPickerView post to Firebase
 - Parsing Firebase Database
 - Intro to Firebase Storage
@@ -167,7 +168,7 @@ Summary:
 Summary:
 - FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name"]).start(completionHandler: { (c, r, error) }
 
-### Week 44: (Firebase Datasource)
+#### Week 44: (Firebase Datasource)
 - Sync and Connect Database (Firebase) (Part 1)
 - [x] Nanny Now- UICollectionView in FamilyViewController (Part 1)
 - [x] Nanny Now - Test Sync to Server (Firebase) (Part 2)
@@ -177,16 +178,16 @@ Summary:
 - withReadPermissions: ["public_profile", "user_birthday", "email"] - FBSDKLoginManager
 - birthday property declared in FBSDKLoginManager...
 
-### Week 45: (Split & Merge)
+#### Week 45: (Split & Merge)
 - Custom Protocol and Delegate Methods
 - [x] Nanny Now - Try «Diffing» with Instagram SDK (IGListKit)
 - [x] Nanny Now - UIDatePickerView in UIActionAlert
 - Conform Protocol and Merge Classes (Nanny & Family) together.
 
-### Week 46:
+#### Week 46:
 - FUIAuth.defaultAuthUI() instead of FIRAuthUI.default()
 
-### Week 47: (Firebase)
+#### Week 47: (Firebase)
 - [x] Nanny Now - UIPickerViewDelegate and DataSource to extension
 - [x] Nanny Now - UITableViewDelegate and DataSource to extension
 - [x] Nanny Now - IBDesignable (Removed Again Because of Performance)
@@ -198,7 +199,7 @@ Summary:
 - extension NannyViewController : UIPickerViewDelegate, UIPickerViewDataSource - Friendly
 - extension NannyViewController : UITableViewDelegate, UITableViewDataSource
 
-### Week 48: (More Firebase)
+#### Week 48: (More Firebase)
 - [x] Nanny Now - Implement Struct «Firebase Constants»
 - [x] Nanny Now - UICollectionView «Easy Display of Fields»
 - [x] Nanny Now- Post on Firebase - Part 1
@@ -206,7 +207,7 @@ Summary:
 Summary:
 - func postToFirebase(_ postNumber: Int) { post to Firebase } 
 
-### Week 49: (Even More Firebase)
+#### Week 49: (Even More Firebase)
 - [x] Nanny Now - Post on Firebase - Part 2
 - [x] Nanny Now - Upload FB picture to Firebase
 - [x] Nanny Now - Create Reference from FB picture to DB
@@ -215,44 +216,44 @@ Summary:
 - Nanny.swift - // Changed from Foundation to UIKit
 - Nanny.swift - // Inherit from MKPointAnnotation
 
-### Week 50: (NEW OFFICE SPACE)
+#### Week 50: (NEW OFFICE SPACE)
 
 ## 2017
 
-### Week 1: (Protocol Oriented Programming)
+#### Week 1: (Protocol Oriented Programming)
 - [x] Nanny Protocol - Part 1 (Playground)
 - [x] Nanny Now - Merge Nanny and CostumPointAnnotation array together
 Summary:
 - Classes, Structs and Enums that conforms to the same Protocol can be put together in an Array[Protocol]
 
-### Week 2: (Protocol Extensions & Type Extensions)
+#### Week 2: (Protocol Extensions & Type Extensions)
 - [x] Nanny Now - Update Tabbar
 - [x] Nanny Protocol - Part 2 (Playground)
 Summary:
 - Protocol Extensions : implementation of functions to objects conformed to that «base» protocol
 
-### Week 3: (Design Patters, Protocol and Advanced Type Inferences)
+#### Week 3: (Design Patters, Protocol and Advanced Type Inferences)
 - [x] Nanny Now - Conform Nanny Class to User Protocol (Part 1)
 - [x] Nanny Now - Add Observer to NannyViewController and TableView
 - [x] Nanny Now - Get from Firebase Database (Successful)
 Summary:
 - DataService.ds.REF_NANNIES.observeSingleEvent(of: .value, with: { (snapshot) in Void } )
 
-### Week 4: (Content uploading & Error resolving)
+#### Week 4: (Content uploading & Error resolving)
 - [x] Nanny Now - Image Upload to Datastorage
 - [x] Nanny Now - Image File Location stored in DB
 - [x] Nanny Now - Categorize & Fix
 Summary: 
 - Dictionary<String, Any>
 
-### Week 5: (Trim, Documentation & Global Function)
+#### Week 5: (Trim, Documentation & Global Function)
 - [x] Nanny Now - Post To Firebase / Create Global Function
 Summary:
 - Optionally Default - display.text = s ?? "  "
 - Conditionally Downcast == self.nameLabel.text = self.userInfo["name"] as? String ?? "Unknown name" 
 - Timer vs GCD «Grand Central Dispatch» (high level vs low level,, timer easier to stop, dispatch need more code)
 
-### Week 6 - 10: (Flytting og Praktiske ting)
+#### Week 6 - 10: (Flytting og Praktiske ting)
 - Flytte, pakke og gjøre praktiske ting
 - [x] Nanny Now - Fix Login Screen - NOT DONE
 - «Type Inferred Enum» - Kalkuler.playground
@@ -260,7 +261,7 @@ Summary:
 - var f: (Double) -> Double
 - let bigNumbers = [2, 47, 118, 5, 9].filter({ $0 > 20 })  // bigNumber = [ 47, 118 ]
 
-### Week 11: (Views and UIBezierPath)
+#### Week 11: (Views and UIBezierPath)
 - [x] Nanny Now - Fix Login Screen - NOT DONE
 - [x] Nanny Now - Add TextFields and Buttons - NOT DONE
 - [x] Nanny Now - Reintroduce TableView for FamilyVC - Part 1 - NOT DONE
@@ -268,15 +269,15 @@ Summary:
 - @IBDesignable (update «on the fly» in Interface Builder)
 - @IBInspectable (add specific property in Identity Inspector in Interface Builder) (Only explicitly declared)
 
-### Week 12: (Chill and Spill)
+#### Week 12: (Chill and Spill)
 
-### Week 13: (Generics)
+#### Week 13: (Generics)
 - https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Generics.html
 - func swapTwoInts(_ a: inout Int, _ b: inout Int)
 - func swapTwoStrings(_ a: inout String, _ b: inout String)
 - func swapTwoValues<T>(_ a: inout T, _ b: inout T)
 
-### Week 14: (Closures for iOS Developers)
+#### Week 14: (Closures for iOS Developers)
 - [x] Nanny Now - Fix Login Screen
 - [x] Nanny Now - Add TextFields and Buttons
 - [x] Nanny Now - Reintroduce TableView for FamilyVC - Part 1
@@ -286,13 +287,13 @@ Summary:
 - Abstract Class «never» initialized,, just used for subclassing «to be subclassed»
 - @IBOutlet weak var faceView: FaceView! { didSet { } }
 
-### Week 15: (Firebase Database Order)
+#### Week 15: (Firebase Database Order)
 - Nanny Protocol - Part 3 (Playground) - NOT DONE
 - [x] Nanny Now - Database Order
 Summary:
 - DataService.ds.REF_NANNIES.queryOrdered(byChild: "breddeGrad" + "lendeGrad").observe
 
-### Week 16: (Nanny Now and Remote Notifications)
+#### Week 16: (Nanny Now and Remote Notifications)
 - [x] Nanny Now - 1. Create Certificates, IDs and Profiles - ONLY DEVELOPMENT Certificates
 - [x] Nanny Now - 2. Setup Firebase for Cloud Messaging
 - [x] Nanny Now - 3. Setup Remote Notification in Xcode
@@ -301,7 +302,7 @@ Summary:
 Summary:
 - Send Multiple Notifications
 
-### Week 17: (Nanny Now and Advanced Notifications)
+#### Week 17: (Nanny Now and Advanced Notifications)
 - [x] Nanny Now - Send Remote Notification from Dedicated server or Terminal - NOT SECURED
 - [x] Nanny Now - Send Remote Notification from Application or To Dedicated Server
 - [x] Nanny Now - Send Notification From Application to Application
@@ -309,21 +310,21 @@ Summary:
 - curl -X POST --header "Authorization: key=<API_ACCESS_KEY>"     --Header "Content-Type: application/json"     https://fcm.googleapis.com/fcm/send
 - https://framework.realtime.co/blog/ios10-push-notifications-support.html
 
-### Week 18: (Cleanup and Wrap It Up)
+#### Week 18: (Cleanup and Wrap It Up)
 - [x] Nanny Now - Cleanup
 - [x] Nanny Now - Rich Notification Service :-D
 - [x] Nanny Now - Add Database Notification Code
 - Nanny Protocol - Part 3 (Playground)
 
-### Week 19: (Rodos Ferie)
+#### Week 19: (Rodos Ferie)
 
-### Week 20: (Back 2 Basic + Fix Login)
+#### Week 20: (Back 2 Basic + Fix Login)
 - [x] Nanny Now - Add Actions On Notification Server
 - UIApplication.badge = Unread messages in self.messages (User Database) - Den som sender må sjekke «uleste på mottaker»++
 - [x] Nanny Now - Fix Annotation Overlapping
 - [x] Nanny Now - Add TextFields and Buttons
 
-### Week 21: (Transformation tuesday OR in between)
+#### Week 21: (Transformation tuesday OR in between)
 - [x] Nanny Now - Cleanup
 - [x] Nanny Now - Fix Point Annotation Overlapping - Very Important (Memory Leak)
 - [x] Nanny Now - Extend Notification Categories - Not Important
@@ -333,7 +334,7 @@ Summary:
 Summary:
 - guard can be used outside scope - guard let name else { return } return name 
 
-### Week 22: (New Classes, Global functions, Singletons & Recursion)
+#### Week 22: (New Classes, Global functions, Singletons & Recursion)
 - [x] Nanny Now - Sort TableView «closest Nannies»
 - [x] Nanny Now - Put Create Notifications() Class and add Global func «sendNotification()»
 - [x] Nanny Now - Extend Tabbar Controller / Login
@@ -342,11 +343,11 @@ Summary:
 - Notifications() is a singleton
 - func getMapViewPoints() // northEast and southWest longitude and latitude
 
-### Week 23: (Notification Triks & MiniMix)
+#### Week 23: (Notification Triks & MiniMix)
 - [x] Nanny Now - Notification Class and Appdelegate cleanup - Part 1
 - [x] Nanny Now - Change from postDict[location] to post.location.coordinate - Overloading
 
-### Week 24 - 27 : (Swift 4 Update & Vacation)
+#### Week 24 - 27 : (Swift 4 Update & Vacation)
 
 Uke 28: (New Login screen - «Prepare for seque»)
 - [x] Nanny Now - Implement Seque on NannyTableView
@@ -355,12 +356,12 @@ Summary:
 - if !excemptIDs.contains(userID) { }
 - UIView.animate { from view.frame(x,y,height,length) to view.frame(x,y,height,length) }
 
-### Week 29: (Seque, UIView & UICollectionView)
+#### Week 29: (Seque, UIView & UICollectionView)
 - [x] Nanny Now - Add CollectionView to FamilyVC - Part 1
 - [x] Nanny Now - Fix Login Screen - Should be easy
 - [x] Nanny Now - Extend Tabbar Controller / Login
 
-### Week 31 - 36: (Keep it Neet, DRY and Repeat)
+#### Week 31 - 36: (Keep it Neet, DRY and Repeat)
 - Nanny Protocol - Part 3 (Playground)
 - [x] Nanny Now - Implement Segue on NannyTableView - Did select row at IndexPath
 Summary:
@@ -368,7 +369,7 @@ Summary:
 - dismiss(animated: true, completion: { } ) — Dismisses the view controller that was presented modally by the view controller.
 - self.performSegue(withIdentifier: "riderSeque", sender: nil)
 
-### Week 37 - 43: (Poker Mood & Hey-DJ)
+#### Week 37 - 43: (Poker Mood & Hey-DJ)
 - [x] Nanny Now - Extend Tabbar Controller / Login
 - [x] Nanny Now - New Version On TestFlight (Nanny Now v1.2)
 - [x] Nanny Now - Add TextFields and Buttons (Part 1) - Should be very easy
@@ -377,7 +378,7 @@ Summary:
 - [x] Nanny Now - Add «Peak and Pop» to Nanny VC with «UIViewControllerPreviewingDelegate»
 - [x] Nanny Now - Add «Peak and Pop» to CollectionView with «UIViewControllerPreviewingDelegate»
 
-### Week 44: (Pre-Beta on Nanny Now)
+#### Week 44: (Pre-Beta on Nanny Now)
 - Page View Controller - THORN TECH (Onboarding-With-UIPageViewController-Starter-master)
 - [x] Nanny Now - Fix Login Screen (Part 2)
 - [x] Nanny Now - Login Screen With PageViewController Part 1
@@ -388,7 +389,7 @@ Summary:
 - Clicking Facebook login when already logged in will get new facebook image,, if logged out, only regular login «with FB» will occur.
 - private(set) public var title: String // private for setting , public for getting
 
-### Week 45: (New Login on Nanny Now with PageVC)
+#### Week 45: (New Login on Nanny Now with PageVC)
 - [x] Nanny Now - Fix Dyrets Phone problem
 - [x] Nanny Now - Add TextFields and Buttons (Part 2)
 - [x] Nanny Now - Fix Login Screen (Part 2)
@@ -399,14 +400,14 @@ Summary:
 Summary:
 - postImageToFirebase: Unable to upload image to Firebase storage (not authenticated)
 
-### Week 46: (Complete the Login on Nanny Now)
+#### Week 46: (Complete the Login on Nanny Now)
 - [x] Nanny Now - First fase of «Mutual Facebook Friends»
 - [x] Nanny Now - Cleaning Code (Part 1)
 - [x] Nanny Now - Database Restructuring (Part 1)
 Summary:
 - DispatchQue == Do things In the background
 
-### Week 47: (Code Cleaning, Get Ratings, New StartViewController) 
+#### Week 47: (Code Cleaning, Get Ratings, New StartViewController) 
 - [x] Nanny Now - Remake of StartViewController
 - [x] Nanny Now - Cleaning Code (Part 2)
 - [x] Nanny Now - Add TextFields and Buttons (Part 3)
@@ -418,7 +419,7 @@ Summary:
 - FYI: Two users cannot use same image «imageCache» at least from server (NannyVC)
 - Thanks to this: https://www.youtube.com/watch?v=GX4mcOOUrWQ «Lets Build That App»
 
-### Week 48: (Passing Objects + Server Architecture)
+#### Week 48: (Passing Objects + Server Architecture)
 - [x] Nanny Now - Fix DatabaseObserver — IMPORTANT - Not Complete yet,, half done as always
 - [x] Nanny Now - Server Architecture - Look in the Firebase documentation
 - [x] Nanny Now - StartViewController add more (Part 2) - IMPORTANT
@@ -432,7 +433,7 @@ Summary:
 - https://developer.apple.com/library/content/documentation/Xcode/Reference/xcode_markup_formatting_ref/index.html
 - MKDirectionsRequest() - MapKit Route / Distance etc - Almost complete
 
-### Week 49: (Completion - Preparation)
+#### Week 49: (Completion - Preparation)
 - [x] Nanny Now - StartViewController add more (Part 3) - IMPORTANT
 - [x] Nanny Now - Mutual Friends (Part 2)
 - [x] Nanny Now - Clean Up Code on Notifications
@@ -444,16 +445,16 @@ Summary:
 - Token is added to Nannies (function) to get Token from User and add Token to Nannies «when Nanny-Ad is active»
 - Token now has Device UUID and name And Sorted by UUID
 
-### Week 50: (The End is near, request & repair) 
+#### Week 50: (The End is near, request & repair) 
 - [x] Nanny Now - RequestVC
 - [x] Nanny Now - RequestPageVC
 - [x] Nanny Now - New Datastructur (Part 1)
 - [x] Nanny Now - Small Fixes
 - [x] Nanny Now - FamilyTableViewController (Part 1) - VERY IMPORTANT - Remake
 
-### Week 51: (Christmas Holiday)
+#### Week 51: (Christmas Holiday)
 
-### Week 52: (New Year)
+#### Week 52: (New Year)
 - [x] Nanny Now - Mutual Friends (Part 3) (Picture and Name) - NOT COMPLETE
 - [x] Nanny Now - AnimateCells «Family TableView Cells»
 - [x] Nanny Now - Request Observer (Part 1)
@@ -464,7 +465,7 @@ Summary:
 
 ## 2018
 
-### Week 1: (Startup & Request)
+#### Week 1: (Startup & Request)
 - [x] Nanny Now - RequestVC
 - [x] Nanny Now - RequestPageVC
 - [ ] Nanny Now - RequestCurrentVC - prepare for seque «to all requests from that user»
@@ -475,25 +476,25 @@ Summary:
 - [x] Nanny Now - Login Page / Register update Public username
 - [ ] Nanny Now - Fix : getLocations() crash, probably current is not available
 
-### Week 2: (Time is running out…)
+#### Week 2: (Time is running out…)
 - [x] Nanny Now - Login / Register «Txt Field» Resign / Hide Keyboard on Done Button
 - [ ] Nanny Now - RequestCurrentVC locations on NannyAd
 - [ ] Nanny Now - NannyDetail «Map Request» in RequestCurrentVC
 - [ ] Nanny Now - FamilyTableViewController (Part 1) - VERY IMPORTANT - Remake / Redesign
 
-### Week 3: (Light in the end of the tunnel)
+#### Week 3: (Light in the end of the tunnel)
 - [x] Nanny Now - Create Tinder like Flipp… 
 Summary:
 - Touches Begun, Touches Ended & Touches Cancelled - Instead of setHighligted…
 
-### Week 4: (APIs and the week goes By) <— This Week
+#### Week 4: (APIs and the week goes By) <— This Week
 - [x] Nanny Now - Haptic Light, medium, heavy... touches move
 Summary:
 - «/Users/bjarnet3/Library/Mobile Documents/com~apple~CloudDocs/Xcode/Projects/_macOS/Hey DJ/firebase-express»
 - nvm start - To start the server
 - https://github.com/firebase/firebase-ios-sdk/tree/master/Example
 
-### Week 6: (Frameworks, Codecs, Web & Logo)
+#### Week 6: (Frameworks, Codecs, Web & Logo)
 - [x] Nanny Now - Notification Content «Custom» Request with MapKit - WORKING GOOD
 - [ ] Nanny Now - Notification Remake
 Summary:
@@ -502,7 +503,7 @@ Summary:
 - [ if case let ], [ where case let ], [ for case let ] - http://alisoftware.github.io/swift/pattern-matching/2016/05/16/pattern-matching-4/
 - [ if let ] vs [ guard let ] - Expression accesible inside vs outside scope
 
-### Week 7: (Step by Step)
+#### Week 7: (Step by Step)
 - [ ] Nanny Now - Why, What, How Presentasjon til Frank Mjøs med Video
 - [x] Nanny Now - Add block and unBlock DataService function()
 - [x] Nanny Now - Fixing UIImageView overlapping pictures - WORKING «reloadData() only if last cell loaded»
@@ -512,7 +513,7 @@ Summary:
 Summary:
 - @available(iOS, deprecated, message: "Use unfold(_:animated:completion) method instead.")
 
-### Week 8: (Final Countdown)
+#### Week 8: (Final Countdown)
 - [ ] Nanny Now - Why, What, How Presentasjon til Frank Mjøs med Video
 - [ ] Nanny Now - Create Instillinger «seque» - Part 1
 - [ ] Nanny Now - Send Request «DatePicker» - Part 1
@@ -520,7 +521,7 @@ Summary:
 - [ ] Nanny Now - Cleanup - Part 3
 - [x] Nanny Now - «Custom Point Annotation» instead of Artwork Annotation - MORE CLEAN
 
-### Week 9: (Resett, Refill & Regain)
+#### Week 9: (Resett, Refill & Regain)
 - [x] Nanny Now - Cleanup - Part 3 (Nanny / User object)
 - [x] Nanny Now - Fix Nanny / Family / Users New Objects - Part 1
 - [x] Nanny Now - Fix Nanny / Family / Users New Objects - Part 2
@@ -531,13 +532,13 @@ Summary:
 - [ ] Nanny Now - Create Instillinger «seque» - Part 1
 - [ ] Nanny Now - Send Request «DatePicker» - Part 1
 
-### Week 10: (Identity Politics & Feminism)
+#### Week 10: (Identity Politics & Feminism)
 - [x] Nanny Now - Update 3D / Force Touch icons.
 - [x] Nanny Now - Remove Artwork (Annotation) - Part 1
 - [ ] Nanny Now - Send Request «DatePicker» - Part 1
 - [ ] Nanny Now - Mutual Friends dissaperad (Nanny Detali VC)
 
-### Week 11: (Gledespikene og Landssvikerne)
+#### Week 11: (Gledespikene og Landssvikerne)
 - [ ] Nanny Now - Fix Constraints for iPhone 8 Plus and iPhone X
 - [ ] Nanny Now - Send Request «DatePicker» - Part 1
 - [x] Nanny Now - Mutual Friends dissaperad (Nanny Detali VC) - OK
@@ -546,11 +547,11 @@ Summary:
 Summary:
 - Property Observer = var flipCount = 0 { didSet { print(self.flipCount) }  }  — print if flipCount didSet
 
-### Week 12 - 13: (…Hemsedal…Easter Bunny…)
+#### Week 12 - 13: (…Hemsedal…Easter Bunny…)
 - [x] Nanny Now - Fix Constraints for iPhone 8 Plus and iPhone X
 - [x] Nanny Now - Release v.1.23
 
-### Week 14: (Criminal Aliens & Cognitive Dissonance)
+#### Week 14: (Criminal Aliens & Cognitive Dissonance)
 - [x] Nanny Now - Send Request «DatePicker» - Part 1
 Summary:
 - self.requests.count == self.totalRequests - 1 <— This was the solution for tableView and reloadData
@@ -562,14 +563,14 @@ Summary:
 - Dictionary is also a Collection, as is Set and String
 - Equatable protocol, to match objects together 
 
-### Week 15: ()
+#### Week 15: ()
 - [ ] Nanny Now - Send Request «DatePicker» - Part 2
 - [x] Nanny Now - Mutual Friends (Nanny Detali VC) (FID) - OK
 - [x] Nanny Now - Review Feedback (FID) - OK
 - [x] Nanny Now - Extend SettingsViewController / SubSettingsViewController - Part 1
 - [ ] Nanny Now - Cleanup
 
-### Week 16: (Versace & Garage)
+#### Week 16: (Versace & Garage)
 - [x] Nanny Now - MessageViewController()
 - [x] Nanny Now - Removed RequestPageViewController
 - [x] Nanny Now - Add Blur Effect with PropertyAnimatorView
@@ -579,10 +580,10 @@ Summary:
 - [x] Nanny Now - Launch New Version v1.24
 - [ ] Add Nanny Now to Github
 
-### Week 17: (Github & Version Control)
+#### Week 17: (Github & Version Control)
 - [x] Nanny Now - Fixed Token and Location Manager in Nanny
 
-### Week 18: (Github & Version Control)
+#### Week 18: (Github & Version Control)
 - [ ] Nanny Now - Login PVC / Firstname, job Title and imageName not Loading
 - [ ] Nanny Now - Why, What, How Presentasjon til Frank Mjøs med Video - Side 1
 - [ ] Nanny Now - Create SubSettings «Seque» - Part 1
@@ -590,7 +591,8 @@ Summary:
 - [x] Add Nanny Now to Github
 - [x] Add Other projects to Github (musicVOID, TV-Remote, Poker Mood, FolkVote)
 
-### Week 19: (Deprecated & Obsolete)
+#### Week 19: (Deprecated & Obsolete)
+
 
 
 # Contributors:
