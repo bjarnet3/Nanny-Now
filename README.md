@@ -593,7 +593,15 @@ Summary:
 - [x] Add Other projects to Github (musicVOID, TV-Remote, Poker Mood, FolkVote)
 
 #### Week 19: (Deprecated & Obsolete)
-
+- [x] Nanny Now - MessageDetailView - Part 1
+- [x] Nanny Now - RequestDetailView - Part 1
+- [ ] Nanny Now - Login PVC / Firstname, job Title and imageName not Loading
+- [ ] Nanny Now - Create SubSettings «Seque» - Part 1
+- [ ] Nanny Now - Nedtelling / Takstameter / Pris
+- [ ] Update Github 2.
+Summary:
+- Unowned vs Weak : https://medium.com/@fahad_29644/unowned-vs-weak-614ac71ac516
+- Driving Records Blockchain in iOS : https://hackernoon.com/implementing-driving-records-blockchain-in-ios-using-swift-23fb258819b1
 
 
 # Contributors:
