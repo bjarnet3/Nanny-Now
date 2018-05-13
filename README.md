@@ -3,7 +3,7 @@
 [![Swift 4.1](https://img.shields.io/badge/Swift-4.1-orange.svg?style=flat)](https://swift.org)
 [![Firebase Database](https://img.shields.io/badge/Database-Firebase-yellow.svg)](https://firebase.google.com/)
 [![Facebook Login API](https://img.shields.io/badge/Login%20API-Facebook-blue.svg)](https://developers.facebook.com/)
-[![Project Progress](https://img.shields.io/badge/Progress-73%25-red.svg)]()
+[![Project Progress](https://img.shields.io/badge/Progress-[Label]73%25-red.svg)]()
 [![MIT licensed](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
 
 Barnepass, Trygt, Raskt og Lett tilgjengelig.
@@ -45,6 +45,7 @@ GPS & Geolocation Services
 ## Animations & Effects
 [Blur](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Controllers/MessageViewController.swift) -- [TabBarAnimations](https://github.com/bjarnet3/Nanny-Now/tree/master/Pods/RAMAnimatedTabBarController) -- [Fade](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Utilities/Functions.swift) -- [ParallaxEffectOnView](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Utilities/Functions.swift) -- [CellAnimation](https://github.com/bjarnet3/Nanny-Now/blob/master/Nanny%20Now/Utilities/Functions.swift) -- [SplashView](https://github.com/bjarnet3/Nanny-Now/tree/master/Pods/RevealingSplashView)
 
+[Label](73)
 # Target / Progress / Goal
 
 ## 2016
