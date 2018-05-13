@@ -587,10 +587,10 @@ Summary:
 
 
 # Contributors:
-**App Icon Template (iOS)**
+#### App Icon Template (iOS)
 - Michael Flarup (https://appicontemplate.com/) - PixelResort, Twitter @flarup
 
-**The Noun Project (Icons)**
+#### The Noun Project (Icons)
 - Boudewijn Mijnlieff (noun_206322_cc) - Part of the Logo
 - Guillaume Bahri (noun_67650_cc) - Part of the Logo
 - Vishal Marotkar (noun_221523_cc) - Part of the Logo
@@ -599,7 +599,7 @@ Summary:
 - Gayatri (noun_362109_cc) - Part of the Map Annotation and unknown profil male picture
 - Alex Fuller (noun_10551_cc) 
 
-**Notification Sounds**
+#### Notification Sounds
 - [notification11](https://www.zedge.net/ringtone/1716388/)
 - [notification48](https://www.zedge.net/ringtone/87154a39-442a-3cc0-b026-709657d4de6d)
 - [notification50](https://www.zedge.net/ringtone/9addaf43-4207-3e41-8de9-a933d558e224)
@@ -608,15 +608,15 @@ Summary:
 
 ### Web Page / Internet
 
-**Web template (for presentation)**
+#### Web template (for presentation)
 - Blackrock Digital LLC (startbootstrap-creative) MIT License
 
-**Pods and Animations**
+#### Pods and Animations
 - TabBarAnimations - "Thanx to [Ramotion](https://github.com/bjarnet3/Nanny-Now/tree/master/Pods/RAMAnimatedTabBarController)"
 - SKSplashView - "Thanx to [sachinkesiraju](https://github.com/bjarnet3/Nanny-Now/tree/master/Pods/RevealingSplashView)"
 - SwiftKeychainWrapper - "Thanx to [Jason Rendel](https://github.com/jrendel/SwiftKeychainWrapperExample)"
 
-**Thanks to**
+#### Thanks to
 
 - Espen Dyrnes (DNB Autolease)
 - Anne Rydgren (Barnehage Eier)
