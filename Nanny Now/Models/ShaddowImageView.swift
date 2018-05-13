@@ -21,11 +21,9 @@ extension UIImageView {
         self.layer.shouldRasterize = true
         self.layer.rasterizationScale = UIScreen.main.scale
     }
-
 }
 
 class ShaddowImageView : UIImageView {
-    
     var backLayer = CALayer()
     
     override func layoutSubviews() {
@@ -42,11 +40,9 @@ class ShaddowImageView : UIImageView {
         backLayer.shadowRadius = 8
         backLayer.shadowOffset = CGSize(width: self.frame.width, height: self.frame.height)
         backLayer.shadowOpacity = 0.8
-        
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
     }
 }

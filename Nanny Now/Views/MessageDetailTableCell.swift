@@ -12,8 +12,6 @@ class MessageDetailTableCell: UITableViewCell {
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var messageLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -50,12 +48,10 @@ class MessageDetailTableCell: UITableViewCell {
         }
     }
     
-    func setupView(with message: Message, animated: Bool = false) {
-        if let user = message._fromUser {
+    func setupView(with message: Message, to user: User?, animated: Bool = false) {
+        if let user = user {
             func setLabels() {
-                self.nameLabel.text = user.firstName
                 self.messageLabel.text = message._message
-                self.timeLabel.text = message._messageTime
             }
             if animated {
                 animateView(direction: .enter)

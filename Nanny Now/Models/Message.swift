@@ -10,13 +10,21 @@ import Foundation
 import Firebase
 
 struct Message {
+    enum RemoteUser {
+        case toUser
+        case fromUser
+    }
     // Personal information (Private)
     // ------------------------------
     private(set) public var _toUser: User?
     private(set) public var _fromUser: User?
     
+    private(set) public var _remoteUser: User?
+    
     private(set) public var _toUID: String
     private(set) public var _fromUID: String
+    
+    private(set) public var _remoteUID: String?
     
     private(set) public var _imageURL: String
     
@@ -36,11 +44,15 @@ struct Message {
         self._fromUser = user
     }
     
+    mutating func setRemote(remoteUser: User) {
+        self._remoteUser = remoteUser
+    }
+    
     mutating func setImageUrl(imageURL: String) {
         self._imageURL = imageURL
     }
     
-    init(from fromUser: User, to toUser: User, message: String) {
+    init(from fromUser: User, to toUser: User, message: String, remoteUser: User? = nil) {
         self._toUser = toUser
         self._fromUser = fromUser
         
@@ -55,10 +67,12 @@ struct Message {
         self._highlighted = false
     }
     
-    init(from fromUID: String, to toUID: String, messageID: String, message: String, messageTime: String, highlighted: Bool) {
+    init(from fromUID: String, to toUID: String, messageID: String, message: String, messageTime: String, highlighted: Bool, remoteUID: String?) {
         
         self._toUID = toUID
         self._fromUID = fromUID
+        
+        self._remoteUID = remoteUID
         
         self._imageURL = ""
         

@@ -51,7 +51,7 @@ class MessageTableViewCell: UITableViewCell {
     }
     
     func setupView(with message: Message, animated: Bool = false) {
-        if let user = message._fromUser {
+        if let user = message._remoteUser {
             func setLabels() {
                 self.nameLabel.text = user.firstName
                 self.messageLabel.text = message._message
@@ -71,6 +71,7 @@ class MessageTableViewCell: UITableViewCell {
                 setLabels()
             }
         }
+        
     }
     
 }
