@@ -491,9 +491,7 @@ public func animateCells(in tableView: UITableView,_ animated: Bool = true) {
     if animated && lowPowerModeDisabled {
         let cells = tableView.visibleCells
         
-        for cell in cells {
-            cell.alpha = 0
-        }
+        for cell in cells { cell.alpha = 0 }
         
         tableView.alpha = 1
         
@@ -510,7 +508,6 @@ public func animateCells(in tableView: UITableView,_ animated: Bool = true) {
                 // print("animateTable completion")
             })
             index += 1
-            
         }
     } else {
         tableView.alpha = 1

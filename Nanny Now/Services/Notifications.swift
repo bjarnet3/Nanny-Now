@@ -107,7 +107,7 @@ class Notifications {
                                          "notification":
                                             ["title" : title,
                                              "body"  : message,
-                                             "sound" : "notification11.wav",
+                                             "sound" : "notification48.wav",
                                              "badge" : badge],
                                          "priority":10,
                                          // "content_available": true,

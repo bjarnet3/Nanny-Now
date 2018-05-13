@@ -2456,7 +2456,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XnZ-cb-od5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1044" y="1602"/>
+            <point key="canvasLocation" x="996" y="1496"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="Kgl-tx-E5M">
