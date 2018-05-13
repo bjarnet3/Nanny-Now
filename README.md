@@ -1,4 +1,5 @@
 # ![Nanny Now](/Nanny%20Now/Library/Assets.xcassets/Nanny%20Now%20-%20App%20Icon%20Small.imageset/Nanny%20Now%20-%20App%20Icon%20Small.png) Nanny Now
+[![Nanny Now Version](https://img.shields.io/badge/Version-1.25%20Beta-ff69b4.svg)](https://github.com/bjarnet3/Nanny-Now/releases)
 [![iOS 11](https://img.shields.io/badge/Platform-iOS%2011-lightgrey.svg)](https://developer.apple.com/ios/)
 [![Swift 4.1](https://img.shields.io/badge/Swift-4.1-orange.svg?style=flat)](https://swift.org)
 [![Firebase Database](https://img.shields.io/badge/Database-Firebase-yellow.svg)](https://firebase.google.com/)
@@ -592,7 +593,15 @@ Summary:
 - [x] Add Other projects to Github (musicVOID, TV-Remote, Poker Mood, FolkVote)
 
 #### Week 19: (Deprecated & Obsolete)
-
+- [x] Nanny Now - MessageDetailView - Part 1
+- [x] Nanny Now - RequestDetailView - Part 1
+- [ ] Nanny Now - Login PVC / Firstname, job Title and imageName not Loading
+- [ ] Nanny Now - Create SubSettings «Seque» - Part 1
+- [ ] Nanny Now - Nedtelling / Takstameter / Pris
+- [ ] Update Github 2.
+Summary:
+- Unowned vs Weak : https://medium.com/@fahad_29644/unowned-vs-weak-614ac71ac516
+- Driving Records Blockchain in iOS : https://hackernoon.com/implementing-driving-records-blockchain-in-ios-using-swift-23fb258819b1
 
 
 # Contributors:
