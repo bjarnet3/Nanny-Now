@@ -3,7 +3,7 @@
 [![Swift 4.1](https://img.shields.io/badge/Swift-4.1-orange.svg?style=flat)](https://swift.org)
 [![Firebase Database](https://img.shields.io/badge/Database-Firebase-yellow.svg)](https://firebase.google.com/)
 [![Facebook Login API](https://img.shields.io/badge/Login%20API-Facebook-blue.svg)](https://developers.facebook.com/)
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
+[![MIT licensed](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
 
 Barnepass, Trygt, Raskt og Lett tilgjengelig.
 
