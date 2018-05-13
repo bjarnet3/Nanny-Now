@@ -360,6 +360,8 @@ class MessageViewController: UIViewController {
                     for (_,value) in snapValue {
                         if let snapRequest = value as? [String:AnyObject] {
                             
+                            printDebug(object: snapRequest)
+                            
                             if let snapKey = snapRequest["userID"] as? String {
                                 printDebug(object: snapKey)
                                 self.fetchRequestObserver(snapRequest, remoteUID: snapKey)
@@ -402,9 +404,7 @@ class MessageViewController: UIViewController {
             messageID: messageSnap["messageID"] as! String,
             message:  messageSnap["message"] as! String,
             messageTime:  messageSnap["messageTime"] as! String,
-            highlighted:  messageSnap["highlighted"] as! Bool,
-            remoteUID: remoteUID != self.user?.userUID ? remoteUID : nil
-            )
+            highlighted:  messageSnap["highlighted"] as! Bool)
         self.observeUser(with: message, userRef: userREF)
     }
     
@@ -495,29 +495,13 @@ class MessageViewController: UIViewController {
                     }
                     
                     var message = message
-
-                    if let userID = self.user?.userUID {
-                        
-                        
-                        if message._fromUID != userID {
-                            let remoteUID = message._fromUID
-                            let remoteUser = User(userUID: remoteUID, imageName: imageName, firstName: firstName)
-                            message.setFrom(user: remoteUser)
-                            
-                            self.messages.append(message)
-                            self.backTable.reloadData()
-                            
-                        } else {
-                            let remoteUser = User(userUID: message._toUID, imageName: imageName, firstName: firstName)
-                            message.setTo(user: remoteUser)
-                            message.setRemote(remoteUser: remoteUser)
-                            
-                            self.messages.append(message)
-                            self.backTable.reloadData()
-                        }
-                    }
+                    
+                    let user = User(userUID: message._fromUID, imageName: imageName, firstName: firstName)
+                    message.setFrom(user: user)
+                    
                     // message.setImageUrl(imageURL: imageValue)
-                    // self.backTable.reloadData()
+                    self.messages.append(message)
+                    self.backTable.reloadData()
                 }
             })
         } else {
@@ -888,9 +872,8 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
             guard let messageDetailVC = storyboard?.instantiateViewController(withIdentifier: "MessageDetailVC") as? MessageDetailVC else {
                 return
             }
-            
-            if let remoteUser = messages[indexPath.row]._toUser {
-                printDebug(object: remoteUser)
+
+            if let remoteUser = messages[indexPath.row]._fromUser {
                 if let user = self.user {
                     messageDetailVC.setupView(user: user, remoteUser: remoteUser)
                     self.returnWithDismiss = true

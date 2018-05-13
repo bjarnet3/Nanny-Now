@@ -50,6 +50,7 @@ class MessageDetailTableCell: UITableViewCell {
     
     func setupView(with message: Message, to user: User?, animated: Bool = false) {
         if let user = user {
+            print(user.imageName)
             func setLabels() {
                 self.messageLabel.text = message._message
             }

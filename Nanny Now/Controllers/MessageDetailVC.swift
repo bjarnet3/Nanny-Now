@@ -57,6 +57,10 @@ class MessageDetailVC: UIViewController {
                             guard let userID = self.user?.userUID else { return }
                             guard let remoteID = self.remoteUser?.userUID else { return }
                             
+                            print(snapMessage)
+                            print(userID)
+                            print(remoteID)
+                            
                             if userID != remoteID {
                                 if let firstUID = snapMessage["fromUID"] as? String, firstUID == userID || firstUID == remoteID {
                                     if let secondUID = snapMessage["toUID"] as? String, secondUID == userID || secondUID == remoteID {
@@ -92,9 +96,7 @@ class MessageDetailVC: UIViewController {
             messageID: messageSnap["messageID"] as! String,
             message:  messageSnap["message"] as! String,
             messageTime:  messageSnap["messageTime"] as! String,
-            highlighted:  messageSnap["highlighted"] as! Bool,
-            remoteUID: self.remoteUser?.userUID
-            )
+            highlighted:  messageSnap["highlighted"] as! Bool)    
         // self.messages.sort(by: { $0._messageTime < $1._messageTime })
         self.messages.append(message)
         self.tableView.reloadData()
@@ -111,23 +113,15 @@ extension MessageDetailVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let user = self.user, messages[indexPath.row]._fromUID == user.userUID {
             if let leftCell = tableView.dequeueReusableCell(withIdentifier: "MessageDetailLeftCell", for: indexPath) as? MessageDetailTableCell {
-                print(user.imageName)
-                
                 leftCell.setupView(with: self.messages[indexPath.row], to: user)
                 return leftCell
             }
-        } else if let remoteUser = self.remoteUser, messages[indexPath.row]._toUID == remoteUser.userUID {
-            print(self.remoteUser?.userUID)
-            print(self.remoteUser?.imageName)
+        } else if let remoteUser = self.remoteUser {
             if let rightCell = tableView.dequeueReusableCell(withIdentifier: "MessageDetailRightCell", for: indexPath) as? MessageDetailTableCell {
-                
-                print(remoteUser.imageName)
                 rightCell.setupView(with: self.messages[indexPath.row], to: remoteUser)
                 return rightCell
             }
         }
         return MessageDetailTableCell()
     }
-    
-    
 }
