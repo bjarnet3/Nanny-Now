@@ -298,7 +298,7 @@ class MessageViewController: UIViewController {
                     print(snapValue.keys.count)
                     
                     if !exemptIDs.contains(remoteID) {
-                        self.messages.removeAll()
+                        // self.messages.removeAll()
                         
                         for (key,value) in snapValue {
                             if let snapMessage = value as? [String:AnyObject] {
@@ -368,7 +368,6 @@ class MessageViewController: UIViewController {
                             }
                         }
                     }
-                    
                 }
                 
             })
@@ -498,6 +497,9 @@ class MessageViewController: UIViewController {
                     
                     let user = User(userUID: message._fromUID, imageName: imageName, firstName: firstName)
                     message.setFrom(user: user)
+                    
+                    let remote = User(userUID: message._toUID, imageName: imageName, firstName: firstName)
+                    message.setTo(user: remote)
                     
                     // message.setImageUrl(imageURL: imageValue)
                     self.messages.append(message)
@@ -839,7 +841,7 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if tableView == self.mainTable {
-            guard let requestDetail = storyboard?.instantiateViewController(withIdentifier: "RequestDetailVC") as? RequestDetailVC else { return
+            guard let requestDetail = storyboard?.instantiateViewController(withIdentifier: "RequestDetail") as? RequestDetailVC else { return
             }
             
             if let cell = tableView.cellForRow(at: indexPath) {
@@ -869,15 +871,22 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
         
         if tableView == self.backTable {
             tableView.deselectRow(at: indexPath, animated: true)
-            guard let messageDetailVC = storyboard?.instantiateViewController(withIdentifier: "MessageDetailVC") as? MessageDetailVC else {
+            guard let messageDetailVC = storyboard?.instantiateViewController(withIdentifier: "MessageDetail") as? MessageDetailVC else {
                 return
             }
 
-            if let remoteUser = messages[indexPath.row]._fromUser {
+            if let remoteFrom = messages[indexPath.row]._fromUser {
                 if let user = self.user {
-                    messageDetailVC.setupView(user: user, remoteUser: remoteUser)
-                    self.returnWithDismiss = true
-                    present(messageDetailVC, animated: true)
+                    if let remoteUser = remoteFrom.userUID != user.userUID ? remoteFrom : messages[indexPath.row]._toUser {
+                        
+                        print(remoteFrom)
+                        print(remoteUser)
+                        
+                        messageDetailVC.setupView(user: user, remoteUser: remoteUser)
+                        
+                        self.returnWithDismiss = true
+                        present(messageDetailVC, animated: true)
+                    }
                 }
             }
             

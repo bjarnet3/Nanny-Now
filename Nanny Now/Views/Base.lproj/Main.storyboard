@@ -2328,7 +2328,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
         <!--Message DetailVC-->
         <scene sceneID="bJ5-Ru-bY1">
             <objects>
-                <viewController storyboardIdentifier="MessageDetailVC" id="WpP-rT-5Nh" customClass="MessageDetailVC" customModule="Nanny_Now" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MessageDetail" id="WpP-rT-5Nh" customClass="MessageDetailVC" customModule="Nanny_Now" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xrv-PD-bic"/>
                         <viewControllerLayoutGuide type="bottom" id="NnS-Ij-5k3"/>
@@ -2437,7 +2437,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
         <!--Request DetailVC-->
         <scene sceneID="LtI-5c-p6a">
             <objects>
-                <viewController storyboardIdentifier="RequestDetailVC" id="t8V-4x-faD" customClass="RequestDetailVC" customModule="Nanny_Now" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RequestDetail" id="t8V-4x-faD" customClass="RequestDetailVC" customModule="Nanny_Now" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kxF-rz-H9F"/>
                         <viewControllerLayoutGuide type="bottom" id="ywO-tF-qyo"/>

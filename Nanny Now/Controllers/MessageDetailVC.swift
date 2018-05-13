@@ -26,6 +26,10 @@ class MessageDetailVC: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         observeMessages()
     }
@@ -51,24 +55,36 @@ class MessageDetailVC: UIViewController {
                     print("snapshot count: \(snapValue.keys.count)")
                     print("------------------")
                     
-                    for (_,value) in snapValue {
+                    for (_,value) in snapValue.reversed() {
                         if let snapMessage = value as? [String:AnyObject] {
                             
                             guard let userID = self.user?.userUID else { return }
                             guard let remoteID = self.remoteUser?.userUID else { return }
                             
+                            if let remoteU = self.remoteUser?.familyID {
+                                print(remoteU)
+                            }
+                            
                             print(snapMessage)
-                            print(userID)
-                            print(remoteID)
+                            print("userID \(userID)")
+                            print("remoteID \(remoteID)")
                             
                             if userID != remoteID {
-                                if let firstUID = snapMessage["fromUID"] as? String, firstUID == userID || firstUID == remoteID {
-                                    if let secondUID = snapMessage["toUID"] as? String, secondUID == userID || secondUID == remoteID {
-                                        if firstUID != secondUID {
-                                            if firstUID == userID {
-                                                self.fetchMessageObserver(snapMessage, remoteUID: userID, userUID: remoteID)
-                                            } else if firstUID == remoteID {
+                                
+                                if let fromUID = snapMessage["fromUID"] as? String, fromUID == userID || fromUID == remoteID {
+                                    
+                                    if let toUID = snapMessage["toUID"] as? String, toUID == userID || toUID == remoteID {
+                                        
+                                        if fromUID != toUID {
+                                            
+                                            if fromUID == userID {
+                                                
+                                                self.fetchMessageObserver(snapMessage, remoteUID: fromUID, userUID: toUID)
+                                                
+                                            } else if fromUID == remoteID {
+                                                
                                                 self.fetchMessageObserver(snapMessage, remoteUID: remoteID, userUID: userID)
+                                                
                                             }
                                         }
                                     }
@@ -94,11 +110,11 @@ class MessageDetailVC: UIViewController {
             from: remoteUID,
             to:  userUID,
             messageID: messageSnap["messageID"] as! String,
-            message:  messageSnap["message"] as! String,
+            message:  messageSnap["message"] as? String ?? "",
             messageTime:  messageSnap["messageTime"] as! String,
-            highlighted:  messageSnap["highlighted"] as! Bool)    
-        // self.messages.sort(by: { $0._messageTime < $1._messageTime })
+            highlighted:  messageSnap["highlighted"] as? Bool ?? true)
         self.messages.append(message)
+        self.messages.sort(by: { $0._messageTime < $1._messageTime })
         self.tableView.reloadData()
     }
     
