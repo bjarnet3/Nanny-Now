@@ -1,8 +1,6 @@
 # ![Nanny Now](/Nanny%20Now/Library/Assets.xcassets/Nanny%20Now%20-%20App%20Icon%20Small.imageset/Nanny%20Now%20-%20App%20Icon%20Small.png) Nanny Now
-[![Build Status](https://travis-ci.org/iwasrobbed/Down.svg?branch=master)](https://travis-ci.org/iwasrobbed/Down)
 [![Swift 4](https://img.shields.io/badge/language-Swift-blue.svg)](https://swift.org)
 [![iOS](https://img.shields.io/badge/OS-iOS-orange.svg)](https://developer.apple.com/ios/)
-[![CocoaPods](https://img.shields.io/cocoapods/v/Down.svg?maxAge=10800)]()
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 
 Barnepass, Trygt, Raskt og Lett tilgjengelig.
