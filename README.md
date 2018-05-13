@@ -49,24 +49,24 @@ GPS & Geolocation Services
 **2016 - Present**
 
 ### 2016
-### Week 23
+#### Week 23
 - [x] Nanny Now - Start Nanny Now Development
 
-### Week 24
+#### Week 24
 - [x] Nanny Now - Implement TableView
 - [x] Nanny Now - Implement MapKit
 - [x] Nanny Now - Custom ImageView (Rounded corners on Images)
 
-### Week 25
+#### Week 25
 - [ ] Nanny Now - Polymorphism (add from VC to Model) - NOT DONE
 - [ ] Nanny Now - MVC - NOT DONE
 - [x] Nanny Now - Application Icons
 - [x] Nanny Now - Clean up
 
-### Week 26
+#### Week 26
 - [x] Nanny Now «First presentation slide»
 
-### Week 27
+#### Week 27
 - [ ] Nanny Now - Launch Image - NOT DONE
 - [ ] Nanny Now - Add to InfoVC - NOT DONE
 - [x] Nanny Now - Change StartVC
@@ -77,16 +77,16 @@ GPS & Geolocation Services
 - [x] Nanny Now - Update «Generic Function» Custom UIColor from RGB: Hex #Swift 3.0
 - [x] Nanny Now - Create Calculate To Center Position From Array
 
-### Week 31:
+#### Week 31:
 - [x] Nanny Now - Add button Image to Presentation Sheet
 - [x] Nanny Now - EmployeeViewController { func notificationSetup(_ all: Bool) { } }
 
-### Week 33:
+#### Week 33:
 - Advanced Navigation Bars
 - Advanced Table Views
 - Advanced Times Tables
 
-### Week 34:
+#### Week 34:
 - Webpage to Nanny Now - Alpha 1.0
 - Add more buttons (Navigation Buttons)
 - Downloading Web Content
@@ -96,7 +96,7 @@ Summary:
 - override func touchesBegan( _  _ ) { self.view.endEditing(true) }
 - textFieldShouldReturn( ) { textField.resignFirstResponder() } // add, UITextFieldDelegate
 
-### Week 35:
+#### Week 35:
 - JSONParsing
 - Optional Chaining
 - GeoCoding / Reversed GeoCoding
@@ -105,18 +105,18 @@ Summary:
 - if let _ = textField { if let _ = label.text { if let _ = text.hashValue }  }  } - NON OPTIONAL CHANING
 - if let _ = textField?.text?.hashValue { /* … */ } - OPTIONAL CHANING
 
-### Week 36:
+#### Week 36:
 - Start recreation of Nanny Now with Xcode 8 RC
 - [x] Nanny Now - StoryBoard - tableViewCell setup
 - [x] Nanny Now - Adding User Annotation To Maps
 
-### Week 37:
+#### Week 37:
 - Object Oriented Programming VS Protocol Oriented Programming
 - Create UIView Playground (Frame, Bounds, Rect) - Maybe use PS instead of Playground
 Summary:
 - CodeSnippet <#Code>
 
-### Week 38:
+#### Week 38:
 - [x] Nanny Now (3D Touch : Quick Actions)
 - Firebase «Overview»
 - Create Generic UIView (Tinder like buttons) (Look more into Stanford 4 for help) - NOT DONE
