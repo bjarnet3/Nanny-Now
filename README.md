@@ -1,6 +1,6 @@
 # ![Nanny Now](/Nanny%20Now/Library/Assets.xcassets/Nanny%20Now%20-%20App%20Icon%20Small.imageset/Nanny%20Now%20-%20App%20Icon%20Small.png) Nanny Now
 [![iOS](https://img.shields.io/badge/OS-iOS-lightgrey.svg)](https://developer.apple.com/ios/)
-[![Swift 4.1](https://img.shields.io/badge/Swift-2.2-orange.svg?style=flat)](https://swift.org)
+[![Swift 4.1](https://img.shields.io/badge/Swift-4.1-orange.svg?style=flat)](https://swift.org)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 
 Barnepass, Trygt, Raskt og Lett tilgjengelig.
