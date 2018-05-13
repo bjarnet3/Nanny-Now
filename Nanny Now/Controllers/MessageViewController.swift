@@ -211,13 +211,13 @@ class MessageViewController: UIViewController {
         }
     }
     
-    // Check if image is loaded for MessageStandardCell
+    // Check if image is loaded for RequestUserCell
     func lastCellLayout() {
         for cell in mainTable.visibleCells {
             if cell is RequestUserCell {
                 if let customCell = cell as? RequestUserCell {
                     if customCell.cellImageLoaded != true {
-                        print("standardCellImage is not loaded - reloadData")
+                        print("RequestUserCell is not loaded - reloadData")
                         self.mainTable.reloadData()
                     }
                 }
@@ -883,9 +883,19 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
         hapticButton(.light, lowPowerModeDisabled)
         
         let delete = UITableViewRowAction(style: .destructive, title: " ⊗ ") { (action , indexPath ) -> Void in
-            // if true, crash (because didEndEditingRow is called)
-            tableView.isEditing = false
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            
+            if tableView == self.mainTable {
+                self.requests.remove(at: indexPath.row - 2)
+                
+                self.mainTable.isEditing = false
+                self.mainTable.deleteRows(at: [indexPath], with: .fade)
+            } else {
+                self.messages.remove(at: indexPath.row)
+                
+                self.backTable.isEditing = false
+                self.backTable.deleteRows(at: [indexPath], with: .fade)
+            }
             // Update badgeValue
             // self.nannyTabBar.badgeValue = "\(self.nannies.count)"
         }
