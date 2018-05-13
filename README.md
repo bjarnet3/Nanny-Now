@@ -587,6 +587,7 @@ Summary:
 
 
 # Contributors:
+This list is not complete... Be patient :-D
 #### App Icon Template (iOS)
 - Michael Flarup (https://appicontemplate.com/) - PixelResort, Twitter @flarup
 
