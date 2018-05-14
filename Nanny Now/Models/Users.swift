@@ -58,6 +58,8 @@ class User : MKPointAnnotation {
         }
         return _userFID!
     }
+    
+    // -------------------
     var familyID: String? { return _familyID }
     
     var imageName: String { get { return _imageName! } set { _imageName = newValue } }

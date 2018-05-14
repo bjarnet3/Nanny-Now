@@ -18,7 +18,7 @@ struct Message {
     private(set) public var _toUID: String
     private(set) public var _fromUID: String
     
-    private(set) public var _imageURL: String
+    private(set) public var _imageURL: String?
     
     // Service information (Request)
     // -----------------------------
@@ -26,7 +26,13 @@ struct Message {
     private(set) public var _messageTime: String
     private(set) public var _message: String
     
+    private(set) public var _requestCategory: NotificationCategory = .messageRequest
+    
     private(set) public var _highlighted: Bool = false
+    
+    mutating func setMessageID() {
+        self._messageID = DataService.instance.REF_MESSAGES.childByAutoId().key
+    }
     
     mutating func setTo(user: User) {
         self._toUser = user
@@ -55,18 +61,17 @@ struct Message {
         self._highlighted = false
     }
     
-    init(from fromUID: String, to toUID: String, messageID: String, message: String, messageTime: String, highlighted: Bool) {
+    init(from fromUID: String, to toUID: String, messageID: String? = nil, message: String, messageTime: String, highlighted: Bool = true, requestCategory: NotificationCategory? = nil) {
         
         self._toUID = toUID
         self._fromUID = fromUID
         
-        self._imageURL = ""
-        
         self._message = message
-        self._messageID = messageID
+        self._messageID = messageID ?? DataService.instance.REF_MESSAGES.childByAutoId().key
         self._messageTime = messageTime
         
         self._highlighted = highlighted
+        self._requestCategory = requestCategory ?? .messageRequest
     }
     
 }

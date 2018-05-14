@@ -130,13 +130,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // let actionLater = UNNotificationAction(identifier: "actionLater", title: "Påminnelse om 10 sekunder", options: [])
         let actionShowDetails = UNNotificationAction(identifier: "actionShowDetails", title: "Vis detaljer", options: [.foreground])
         let actionReject = UNNotificationAction(identifier: "actionReject", title: "Avvis", options: [.destructive, .authenticationRequired])
-        let messageRespond = UNNotificationAction(identifier: "messageRespond", title: "Svar", options: [.foreground, .authenticationRequired])
+        let messageResponse = UNNotificationAction(identifier: "messageResponse", title: "Svar", options: [.foreground, .authenticationRequired])
         // identifier is "myCategory" == message in NSURL Request
         let mapCategory = UNNotificationCategory(identifier: "mapRequest", actions: [nannyAccept, actionShowDetails, actionReject], intentIdentifiers: [], options: [])
         let nannyCategory = UNNotificationCategory(identifier: "nannyRequest", actions: [nannyAccept, actionShowDetails, actionReject], intentIdentifiers: [], options: [])
         let nannyConfirmed = UNNotificationCategory(identifier: "nannyConfirmed", actions: [nannyConfirm], intentIdentifiers: [], options: [])
         let familyCategory = UNNotificationCategory(identifier: "familyRequest", actions: [familyAccept, actionShowDetails, actionReject], intentIdentifiers: [], options: [])
-        let messageCategory = UNNotificationCategory(identifier: "message", actions: [messageRespond, actionReject], intentIdentifiers: [], options: [])
+        let messageCategory = UNNotificationCategory(identifier: "messageRequest", actions: [messageResponse, actionReject], intentIdentifiers: [], options: [])
         UNUserNotificationCenter.current().setNotificationCategories([mapCategory, nannyCategory, nannyConfirmed, familyCategory, messageCategory])
     }
     
@@ -353,7 +353,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             tabBarController.tabBarItem.badgeValue = nil
         } else if response.actionIdentifier == "actionLater" {
             print("action later")
-        } else if response.actionIdentifier == "messageRespond" {
+        } else if response.actionIdentifier == "messageResponse" {
             
             // Go to Message / Request location
             let sb = UIStoryboard(name: "Main", bundle: nil)

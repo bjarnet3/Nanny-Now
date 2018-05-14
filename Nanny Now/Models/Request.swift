@@ -19,24 +19,27 @@ public enum RequestStatus : String {
     case complete = "complete"
 }
 
-public func requestStatusString(requestStatus: String) -> RequestStatus? {
-    return RequestStatus(rawValue: requestStatus)
+public func requestStatusString(request: String) -> RequestStatus? {
+    return RequestStatus(rawValue: request)
 }
 
 /// Defination of category types will come here !!
-public enum NotificationRequestCategory : String {
+public enum NotificationCategory : String {
     case nannyRequest = "nannyRequest"
     case nannyConfirmed = "nannyConfirmed"
     case nannyAccept = "nannyAccept"
     case familyRequest = "familyRequest"
     case familyAccept = "familyAccept"
     case mapRequest = "mapRequest"
-    case message = "message"
+    
+    case messageRequest = "messageRequest"
+    case messageResponse = "messageResponse"
+    
     case defaultValue = "default"
 }
 
-public func requestCategoryString(requestCategory: String) -> NotificationRequestCategory? {
-    return NotificationRequestCategory(rawValue: requestCategory)
+public func notificationRequest(category: String) -> NotificationCategory? {
+    return NotificationCategory(rawValue: category)
 }
 
 struct Request {
@@ -61,7 +64,7 @@ struct Request {
     private(set) public var _requestID: String
     private(set) public var _requestREF: DatabaseReference
     private(set) public var _requestStatus: RequestStatus = .pending
-    private(set) public var _requestCategory: NotificationRequestCategory = .nannyRequest
+    private(set) public var _requestCategory: NotificationCategory = .nannyRequest
     
     private(set) public var _timeRequested: Date
     private(set) public var _timeFrom: Date
@@ -80,12 +83,12 @@ struct Request {
     
     var requestStatus: String {
         get { return _requestStatus.rawValue }
-            set { if let request = requestStatusString(requestStatus: newValue) {
+            set { if let request = requestStatusString(request: newValue) {
                 self._requestStatus = request } } }
     
     var requestCategory: String {
         get { return _requestCategory.rawValue }
-            set { if let request = requestCategoryString(requestCategory: newValue) {
+            set { if let request = notificationRequest(category: newValue) {
                 self._requestCategory = request } } }
     
     var highlighted: Bool {
@@ -194,8 +197,8 @@ struct Request {
 
         self._message = message == nil ? "Kan du stille som barnevakt mellom" : message!
         self._amount = requestAmount
-        self._requestStatus = requestStatusString(requestStatus: requestStatus)!
-        self._requestCategory = requestCategoryString(requestCategory: requestCategory)!
+        self._requestStatus = requestStatusString(request: requestStatus)!
+        self._requestCategory = notificationRequest(category: requestCategory)!
     }
     
     

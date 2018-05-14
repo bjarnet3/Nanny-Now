@@ -400,10 +400,10 @@ class MessageViewController: UIViewController {
         let message = Message(
             from:  messageSnap["fromUID"] as! String,
             to:  messageSnap["toUID"] as! String,
-            messageID: messageSnap["messageID"] as! String,
+            messageID: messageSnap["messageID"] as? String,
             message:  messageSnap["message"] as! String,
             messageTime:  messageSnap["messageTime"] as! String,
-            highlighted:  messageSnap["highlighted"] as! Bool)
+            highlighted:  (messageSnap["highlighted"] as? Bool)!)
         self.observeUser(with: message, userRef: userREF)
     }
     

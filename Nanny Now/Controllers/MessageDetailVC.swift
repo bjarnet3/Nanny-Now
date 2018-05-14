@@ -14,6 +14,7 @@ import SwiftKeychainWrapper
 class MessageDetailVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var chatTextField: UITextField!
     
     var user: User?
     var remoteUser: User?
@@ -21,26 +22,56 @@ class MessageDetailVC: UIViewController {
     var messages = [Message]()
     var totalMessages: Int = 0
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        observeMessages()
-    }
-    
     func setupView(user:User, remoteUser: User) {
         self.user = user
         self.remoteUser = remoteUser
     }
     
+    @IBAction func sendButton(_ sender: Any) {
+        sendMessage()
+        dismissKeyboard()
+        addMessageToArray()
+    }
+    
+    @IBAction func resignKeyboard(_ sender: Any) {
+        dismissKeyboard()
+    }
+    
     @IBAction func dismissButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func sendMessage() {
+        if let text = chatTextField.text {
+            // Send Message to remoteUser
+            sendNotification(messageText: text)
+            // Remove text from Textfield
+            self.chatTextField.text = ""
+            // Dismiss Keyboard
+            // self.dismissKeyboard()
+            self.chatTextField.endEditing(true)
+            self.tableView.reloadData()
+        }
+    }
+    
+    func sendNotification(messageText: String) {
+        // Send Message
+        let message = Message(from: self.user!, to: remoteUser!, message: messageText)
+        Notifications.instance.sendNotifications(with: message)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if (textField.returnKeyType==UIReturnKeyType.go)
+        {
+            
+        }
+        return true
+    }
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     // MARK: - Observer, Firebase Database Functions
@@ -109,8 +140,8 @@ class MessageDetailVC: UIViewController {
         let message = Message(
             from: remoteUID,
             to:  userUID,
-            messageID: messageSnap["messageID"] as! String,
-            message:  messageSnap["message"] as? String ?? "",
+            messageID: messageSnap["messageID"] as? String,
+            message:  (messageSnap["message"] as? String)!,
             messageTime:  messageSnap["messageTime"] as! String,
             highlighted:  messageSnap["highlighted"] as? Bool ?? true)
         self.messages.append(message)
@@ -118,6 +149,44 @@ class MessageDetailVC: UIViewController {
         self.tableView.reloadData()
     }
     
+    func addMessageToArray() {
+        if let remote = self.remoteUser {
+            if let user = self.user {
+                var message = Message(
+                    from: user.userUID,
+                    to:  remote.userUID,
+                    message:  self.chatTextField.text!,
+                    messageTime:  returnTimeStamp(),
+                    highlighted: true)
+                message.setMessageID()
+                self.messages.append(message)
+                self.messages.sort(by: { $0._messageTime < $1._messageTime })
+                self.tableView.reloadData()
+                // self.tableView.reloadData()
+            }
+        }
+    }
+}
+
+extension MessageDetailVC {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.tableView.alpha = 0
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        observeMessages()
+        animateCells(in: self.tableView, true)
+    }
 }
 
 extension MessageDetailVC: UITableViewDelegate, UITableViewDataSource {

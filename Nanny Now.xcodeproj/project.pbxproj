@@ -42,6 +42,11 @@
 		5C9FC62C1FF6E95000906B05 /* FriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9FC62B1FF6E95000906B05 /* FriendsCollectionViewCell.swift */; };
 		5C9FD3CC20A52B6400B1D5A1 /* ShaddowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9FD3CB20A52B6400B1D5A1 /* ShaddowImageView.swift */; };
 		5CA49F5B1FD78DA100B0A993 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA49F5A1FD78DA000B0A993 /* MessageViewController.swift */; };
+		5CAD362C20A8EFBC00C56FCE /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE4A9E71EBBBEF40018A831 /* UserNotifications.framework */; };
+		5CAD362D20A8EFBC00C56FCE /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE4A9E91EBBBEF40018A831 /* UserNotificationsUI.framework */; };
+		5CAD363020A8EFBC00C56FCE /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD362F20A8EFBC00C56FCE /* NotificationViewController.swift */; };
+		5CAD363320A8EFBC00C56FCE /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CAD363120A8EFBC00C56FCE /* MainInterface.storyboard */; };
+		5CAD363720A8EFBC00C56FCE /* NotificationMessageResponse.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5CAD362B20A8EFBB00C56FCE /* NotificationMessageResponse.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5CB7FE561FE435B600D41E6F /* FrostyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7FE551FE435B600D41E6F /* FrostyView.swift */; };
 		5CB7FE581FE4362900D41E6F /* FrostyTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7FE571FE4362900D41E6F /* FrostyTabBar.swift */; };
 		5CB7FE5A1FE4368900D41E6F /* FrostyCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7FE591FE4368900D41E6F /* FrostyCornerView.swift */; };
@@ -88,6 +93,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5CAD363520A8EFBC00C56FCE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5CCF0C691D898BFB0089F39D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5CAD362A20A8EFBB00C56FCE;
+			remoteInfo = NotificationMessageResponse;
+		};
 		5CE12DF9202A9C82003495D3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5CCF0C691D898BFB0089F39D /* Project object */;
@@ -111,6 +123,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				5CAD363720A8EFBC00C56FCE /* NotificationMessageResponse.appex in Embed App Extensions */,
 				5CE4AA4C1EBBDF970018A831 /* NotificationServiceExtensions.appex in Embed App Extensions */,
 				5CE12DFB202A9C82003495D3 /* NotificationContentExtensions.appex in Embed App Extensions */,
 			);
@@ -155,6 +168,10 @@
 		5C9FC62B1FF6E95000906B05 /* FriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewCell.swift; sourceTree = "<group>"; };
 		5C9FD3CB20A52B6400B1D5A1 /* ShaddowImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaddowImageView.swift; sourceTree = "<group>"; };
 		5CA49F5A1FD78DA000B0A993 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		5CAD362B20A8EFBB00C56FCE /* NotificationMessageResponse.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationMessageResponse.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CAD362F20A8EFBC00C56FCE /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		5CAD363220A8EFBC00C56FCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		5CAD363420A8EFBC00C56FCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CB7FE551FE435B600D41E6F /* FrostyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyView.swift; sourceTree = "<group>"; };
 		5CB7FE571FE4362900D41E6F /* FrostyTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyTabBar.swift; sourceTree = "<group>"; };
 		5CB7FE591FE4368900D41E6F /* FrostyCornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyCornerView.swift; sourceTree = "<group>"; };
@@ -207,6 +224,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5CAD362820A8EFBB00C56FCE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CAD362D20A8EFBC00C56FCE /* UserNotificationsUI.framework in Frameworks */,
+				5CAD362C20A8EFBC00C56FCE /* UserNotifications.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5CCF0C6E1D898BFB0089F39D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -290,6 +316,16 @@
 			path = LoginViewController;
 			sourceTree = "<group>";
 		};
+		5CAD362E20A8EFBC00C56FCE /* NotificationMessageResponse */ = {
+			isa = PBXGroup;
+			children = (
+				5CAD362F20A8EFBC00C56FCE /* NotificationViewController.swift */,
+				5CAD363120A8EFBC00C56FCE /* MainInterface.storyboard */,
+				5CAD363420A8EFBC00C56FCE /* Info.plist */,
+			);
+			path = NotificationMessageResponse;
+			sourceTree = "<group>";
+		};
 		5CB03AD2209B6DF600C29FDE /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +402,7 @@
 				5CCF0C731D898BFB0089F39D /* Nanny Now */,
 				5CE4AA461EBBDF970018A831 /* NotificationServiceExtensions */,
 				5CE12DF2202A9C82003495D3 /* NotificationContentExtensions */,
+				5CAD362E20A8EFBC00C56FCE /* NotificationMessageResponse */,
 				5CCF0C721D898BFB0089F39D /* Products */,
 				AE2585337B1E06613CC60B15 /* Pods */,
 				B9B2A5F96FB68004FDC86950 /* Frameworks */,
@@ -378,6 +415,7 @@
 				5CCF0C711D898BFB0089F39D /* Nanny Now.app */,
 				5CE4AA451EBBDF970018A831 /* NotificationServiceExtensions.appex */,
 				5CE12DEF202A9C82003495D3 /* NotificationContentExtensions.appex */,
+				5CAD362B20A8EFBB00C56FCE /* NotificationMessageResponse.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -441,6 +479,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5CAD362A20A8EFBB00C56FCE /* NotificationMessageResponse */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5CAD363A20A8EFBC00C56FCE /* Build configuration list for PBXNativeTarget "NotificationMessageResponse" */;
+			buildPhases = (
+				5CAD362720A8EFBB00C56FCE /* Sources */,
+				5CAD362820A8EFBB00C56FCE /* Frameworks */,
+				5CAD362920A8EFBB00C56FCE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotificationMessageResponse;
+			productName = NotificationMessageResponse;
+			productReference = 5CAD362B20A8EFBB00C56FCE /* NotificationMessageResponse.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		5CCF0C701D898BFB0089F39D /* Nanny Now */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5CCF0C851D898BFB0089F39D /* Build configuration list for PBXNativeTarget "Nanny Now" */;
@@ -458,6 +513,7 @@
 			dependencies = (
 				5CE4AA4B1EBBDF970018A831 /* PBXTargetDependency */,
 				5CE12DFA202A9C82003495D3 /* PBXTargetDependency */,
+				5CAD363620A8EFBC00C56FCE /* PBXTargetDependency */,
 			);
 			name = "Nanny Now";
 			productName = "Nanny Now";
@@ -504,10 +560,15 @@
 		5CCF0C691D898BFB0089F39D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0920;
+				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Digital Mood";
 				TargetAttributes = {
+					5CAD362A20A8EFBB00C56FCE = {
+						CreatedOnToolsVersion = 9.3.1;
+						DevelopmentTeam = GCRJ652248;
+						ProvisioningStyle = Automatic;
+					};
 					5CCF0C701D898BFB0089F39D = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = GCRJ652248;
@@ -564,11 +625,20 @@
 				5CCF0C701D898BFB0089F39D /* Nanny Now */,
 				5CE4AA441EBBDF970018A831 /* NotificationServiceExtensions */,
 				5CE12DEE202A9C82003495D3 /* NotificationContentExtensions */,
+				5CAD362A20A8EFBB00C56FCE /* NotificationMessageResponse */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5CAD362920A8EFBB00C56FCE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CAD363320A8EFBC00C56FCE /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5CCF0C6F1D898BFB0089F39D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -651,6 +721,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5CAD362720A8EFBB00C56FCE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5CAD363020A8EFBC00C56FCE /* NotificationViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5CCF0C6D1D898BFB0089F39D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -736,6 +814,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5CAD363620A8EFBC00C56FCE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5CAD362A20A8EFBB00C56FCE /* NotificationMessageResponse */;
+			targetProxy = 5CAD363520A8EFBC00C56FCE /* PBXContainerItemProxy */;
+		};
 		5CE12DFA202A9C82003495D3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5CE12DEE202A9C82003495D3 /* NotificationContentExtensions */;
@@ -749,6 +832,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		5CAD363120A8EFBC00C56FCE /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5CAD363220A8EFBC00C56FCE /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		5CCF0C7A1D898BFB0089F39D /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -776,6 +867,52 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5CAD363820A8EFBC00C56FCE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GCRJ652248;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = NotificationMessageResponse/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "no.digital.mood.developer.Nanny-Now.NotificationMessageResponse";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5CAD363920A8EFBC00C56FCE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GCRJ652248;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = NotificationMessageResponse/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "no.digital.mood.developer.Nanny-Now.NotificationMessageResponse";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		5CCF0C831D898BFB0089F39D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1025,6 +1162,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5CAD363A20A8EFBC00C56FCE /* Build configuration list for PBXNativeTarget "NotificationMessageResponse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5CAD363820A8EFBC00C56FCE /* Debug */,
+				5CAD363920A8EFBC00C56FCE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5CCF0C6C1D898BFB0089F39D /* Build configuration list for PBXProject "Nanny Now" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

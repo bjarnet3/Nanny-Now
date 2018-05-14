@@ -19,9 +19,9 @@ class Notifications {
     static let instance = Notifications()
     
     func sendNotifications(with message: Message) {
-        let remoteID = message._toUser?.userUID
+        let remoteID = message._toUser?.userUID ?? message._toUID
         let text = message._message
-        let categoryRequest: NotificationRequestCategory = .message
+        let categoryRequest: NotificationCategory = message._requestCategory
         let requestID = message._messageID
         
         let url = NSURL(string: "https://fcm.googleapis.com/fcm/send")!
@@ -53,7 +53,7 @@ class Notifications {
                         let id = snapshot.value as! String
                         
                         var tokens = [String]()
-                        let tokenREF = DataService.instance.REF_USERS_PRIVATE.child(remoteID!).child("tokens")
+                        let tokenREF = DataService.instance.REF_USERS_PRIVATE.child(remoteID).child("tokens")
                         
                         tokenREF.observeSingleEvent(of: .value, with: { (snapshot) in
                             if !snapshot.exists() { return }
@@ -70,7 +70,7 @@ class Notifications {
                                 }
                                 
                                 var badge = 0
-                                let badgeRef = DataService.instance.REF_USERS_PRIVATE.child(remoteID!).child("badge")
+                                let badgeRef = DataService.instance.REF_USERS_PRIVATE.child(remoteID).child("badge")
                                 badgeRef.observeSingleEvent(of: .value, with: { (snapshot) in
                                     
                                     if !snapshot.exists() { return }
@@ -91,7 +91,7 @@ class Notifications {
                                     let category = categoryRequest.rawValue // "messageRequest"
                                     
                                     // title = "Melding fra \(firstName):"
-                                    DataService.instance.postToMessage(recieveUserID: remoteID!, message: "\(message)")
+                                    DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(message)")
                                     
                                     // For Advanced Rich Notificaiton Setup
                                     let mediaUrl = getFacebookProfilePictureUrl(id, .large)
@@ -143,7 +143,7 @@ class Notifications {
     func sendNotifications(with request: Request) {
         let remoteID = request.nannyID
         let text = request.message
-        let categoryRequest: NotificationRequestCategory = NotificationRequestCategory(rawValue: request.requestCategory)!
+        let categoryRequest: NotificationCategory = NotificationCategory(rawValue: request.requestCategory)!
         let requestID = request.requestID
         
         let url = NSURL(string: "https://fcm.googleapis.com/fcm/send")!
@@ -256,7 +256,10 @@ class Notifications {
                                         let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(requestID)
                                         publicRequest.child("nannyID").removeValue()
                                         
-                                    case .message:
+                                    case .messageRequest:
+                                        title = "Melding fra \(firstName):"
+                                        DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(title) \(message)")
+                                    case .messageResponse:
                                         title = "Melding fra \(firstName):"
                                         DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(title) \(message)")
                                     case .nannyAccept:
@@ -319,7 +322,7 @@ class Notifications {
 
     }
     
-    func sendNotification(to remoteID: String, text: String, categoryRequest: NotificationRequestCategory,_ requestID: String = "") {
+    func sendNotification(to remoteID: String, text: String, categoryRequest: NotificationCategory,_ requestID: String = "") {
         
         let url = NSURL(string: "https://fcm.googleapis.com/fcm/send")!
         let session = URLSession.shared
@@ -428,7 +431,7 @@ class Notifications {
                                         let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(requestID)
                                         publicRequest.child("nannyID").removeValue()
                                         
-                                    case .message:
+                                    case .messageRequest:
                                         title = "Melding fra \(firstName):"
                                         DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(title) \(message)")
                                     case .nannyAccept:
@@ -490,7 +493,7 @@ class Notifications {
     }
     
     // SHIT THIS IS MESSY,, but it works: YAHOO
-    func sendNotificationResponse(userID: String, remoteID: String, title: String, text: String, categoryRequest: NotificationRequestCategory) {
+    func sendNotificationResponse(userID: String, remoteID: String, title: String, text: String, categoryRequest: NotificationCategory) {
         
         let url = NSURL(string: "https://fcm.googleapis.com/fcm/send")!
         let session = URLSession.shared

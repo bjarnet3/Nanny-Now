@@ -116,6 +116,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         }
     }
     
+    // Send Simple Message
     @IBAction func sendRequest(_ sender: UIButton) {
         if let lastRow = lastRowSelected?.row {
             let lastNanny = self.nannies[lastRow]
@@ -129,10 +130,10 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                 Notifications.instance.sendNotifications(with: request)
                 
             } else {
+                // sendMessageResponse()
                 // Send Message
                 let message = Message(from: self.user!, to: lastNanny, message: requestMessage)
                 Notifications.instance.sendNotifications(with: message)
-                
             }
         }
         
@@ -141,6 +142,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
             self.mapView.deselectAnnotation(selectedAnnotation, animated: true) }
         self.mapView.showAnnotations(self.nannies, animated: lowPowerModeDisabled)
     }
+    
     
     @IBAction func cancelRequest(_ sender: Any) {
         self.exitAllMenu()
@@ -178,6 +180,24 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     
     // MARK: - Functions, Database & Animation
     // ----------------------------------------
+    
+    // Experimental
+    func sendMessageResponse(with requestCategory: NotificationCategory? = nil, message: String? = nil) {
+        if let lastRow = lastRowSelected?.row {
+            let lastNanny = self.nannies[lastRow]
+            
+            let requestMessage = "Melding til: \(lastNanny.firstName)"
+            // Send Message
+            let message = Message(from: (self.user?.userUID)!, to: lastNanny.userUID, messageID: nil, message: message ?? requestMessage, messageTime: returnTimeStamp() , highlighted: true, requestCategory: requestCategory ?? .messageResponse)
+            Notifications.instance.sendNotifications(with: message)
+        }
+        
+        self.exitAllMenu()
+        for selectedAnnotation in self.mapView.selectedAnnotations {
+            self.mapView.deselectAnnotation(selectedAnnotation, animated: true) }
+        self.mapView.showAnnotations(self.nannies, animated: lowPowerModeDisabled)
+    }
+
     func getUserSettings() {
         if let user = LocalService.instance.getUser() {
             self.user = user
@@ -945,15 +965,20 @@ extension NannyViewController {
             }
         }
         
-        /*
         let sendMapRequest = UIAlertAction(title: "Send Kart Forespørsel", style: .default) { (_) in
             if lowPowerModeDisabled {
-                Notifications.instance.sendNotification(to: userIDatRow, text: "mapRequest", categoryRequest: .mapRequest)
+                Notifications.instance.sendNotification(to: self.nannies[row].userUID, text: "mapRequest", categoryRequest: .mapRequest)
                     // sendNotification(userIDatRow, dt.description, .nannyRequest, "")
                 self.view.fadeIn()
             }
         }
-        */
+        
+        let sendMessageRequest = UIAlertAction(title: "Send MSG Response", style: .default) { (_) in
+            if lowPowerModeDisabled {
+                Notifications.instance.sendNotification(to: self.nannies[row].userUID, text: "This is a message response", categoryRequest: .messageResponse)
+                self.view.fadeIn()
+            }
+        }
         
         let sendRequest = UIAlertAction(title: "Send Forespørsel", style: .default) { (_) in
             self.enterRequestMenu()
@@ -969,7 +994,8 @@ extension NannyViewController {
         
         alertController.addAction(profileAction)
         alertController.addAction(sendRequest)
-        // alertController.addAction(sendMapRequest)
+        alertController.addAction(sendMapRequest)
+        alertController.addAction(sendMessageRequest)
         alertController.addAction(cancelAction)
         
         self.present(alertController, animated: lowPowerModeDisabled) {
