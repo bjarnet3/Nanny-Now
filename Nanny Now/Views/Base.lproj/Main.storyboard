@@ -2337,9 +2337,8 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bCr-ei-flI">
-                                <rect key="frame" x="0.0" y="68" width="375" height="599"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bCr-ei-flI">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageDetailLeftCell" focusStyle="custom" id="AzS-p7-tDQ" customClass="MessageDetailTableCell" customModule="Nanny_Now" customModuleProvider="target">
@@ -2394,6 +2393,21 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Ep-jY-Yre" customClass="FrostyView" customModule="Nanny_Now" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PyN-V2-g5P">
+                                        <rect key="frame" x="0.0" y="25" width="139" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Back To Messages"/>
+                                        <connections>
+                                            <action selector="backButton:" destination="WpP-rT-5Nh" eventType="touchUpInside" id="hqV-We-RFo"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i9K-I6-gHO" customClass="FrostyView" customModule="Nanny_Now" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="612" width="375" height="55"/>
                                 <subviews>
@@ -2401,16 +2415,17 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         <rect key="frame" x="8" y="8" width="293" height="39"/>
                                         <color key="textColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
-                                            <action selector="resignKeyboard:" destination="WpP-rT-5Nh" eventType="editingDidEnd" id="SH7-R5-Fqp"/>
+                                            <action selector="textFieldEnter:" destination="WpP-rT-5Nh" eventType="primaryActionTriggered" id="Of4-j9-BF2"/>
+                                            <action selector="textFieldValue:" destination="WpP-rT-5Nh" eventType="editingChanged" id="kK3-D7-JXX"/>
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nEX-VP-fz7">
                                         <rect key="frame" x="309" y="15" width="58" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                        <state key="normal" title="SEND">
+                                        <state key="normal" title="AVBRYT">
                                             <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -2427,42 +2442,33 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                     <constraint firstAttribute="height" constant="55" id="z62-fb-8Sy"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Ep-jY-Yre" customClass="FrostyView" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PyN-V2-g5P">
-                                        <rect key="frame" x="0.0" y="25" width="139" height="35"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Back To Messages"/>
-                                        <connections>
-                                            <action selector="dismissButton:" destination="WpP-rT-5Nh" eventType="touchUpInside" id="hqV-We-RFo"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="bCr-ei-flI" secondAttribute="trailing" id="AMd-LB-ZkR"/>
                             <constraint firstItem="NnS-Ij-5k3" firstAttribute="top" secondItem="i9K-I6-gHO" secondAttribute="bottom" id="B5W-7y-n2y"/>
                             <constraint firstItem="i9K-I6-gHO" firstAttribute="leading" secondItem="aty-UC-zmS" secondAttribute="leading" id="Enx-5z-Jzx"/>
+                            <constraint firstItem="bCr-ei-flI" firstAttribute="top" secondItem="xrv-PD-bic" secondAttribute="bottom" id="KBJ-Tf-rht"/>
                             <constraint firstAttribute="trailing" secondItem="i9K-I6-gHO" secondAttribute="trailing" id="X4H-Nh-YRD"/>
+                            <constraint firstItem="bCr-ei-flI" firstAttribute="leading" secondItem="aty-UC-zmS" secondAttribute="leading" id="lLV-HR-Jxy"/>
+                            <constraint firstItem="bCr-ei-flI" firstAttribute="bottom" secondItem="i9K-I6-gHO" secondAttribute="bottom" id="vPj-I5-eIj"/>
                         </constraints>
                         <connections>
-                            <outletCollection property="gestureRecognizers" destination="scs-D6-M6s" appends="YES" id="oLu-0D-Mk8"/>
+                            <outletCollection property="gestureRecognizers" destination="gBW-ML-beI" appends="YES" id="K8M-zW-NQ7"/>
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="bottomLayoutTextField" destination="B5W-7y-n2y" id="c7A-xT-LsK"/>
                         <outlet property="chatTextField" destination="epV-9u-eCf" id="SGw-JR-xLI"/>
+                        <outlet property="sendButtonTitle" destination="nEX-VP-fz7" id="g7o-eO-tIt"/>
                         <outlet property="tableView" destination="bCr-ei-flI" id="jPZ-N4-tcL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6n-cB-huM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="scs-D6-M6s">
+                <tapGestureRecognizer id="gBW-ML-beI">
                     <connections>
-                        <action selector="resignKeyboard:" destination="WpP-rT-5Nh" id="Pbl-0g-2Or"/>
+                        <action selector="touchedBackground:" destination="WpP-rT-5Nh" id="NIS-di-jpM"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

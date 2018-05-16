@@ -11,72 +11,115 @@ import MapKit
 import Firebase
 import SwiftKeychainWrapper
 
+private extension Selector {
+    static let keyboardWillShow = #selector(MessageDetailVC.keyboardWillShow(notification:))
+    static let keyboardWillDisappear = #selector(MessageDetailVC.keyboardWillDisappear(notification:))
+}
+
 class MessageDetailVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var chatTextField: UITextField!
+    @IBOutlet weak var bottomLayoutTextField: NSLayoutConstraint!
+    @IBOutlet weak var sendButtonTitle: UIButton!
     
-    var user: User?
-    var remoteUser: User?
+    private var user: User?
+    private var remoteUser: User?
     
-    var messages = [Message]()
-    var totalMessages: Int = 0
+    private var messages = [Message]()
+    private var totalMessages: Int = 0
     
     func setupView(user:User, remoteUser: User) {
         self.user = user
         self.remoteUser = remoteUser
     }
     
-    @IBAction func sendButton(_ sender: Any) {
-        sendMessage()
-        dismissKeyboard()
-        addMessageToArray()
-    }
-    
-    @IBAction func resignKeyboard(_ sender: Any) {
-        dismissKeyboard()
-    }
-    
-    @IBAction func dismissButton(_ sender: Any) {
+    @IBAction func backButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func sendMessage() {
+    @IBAction func sendButton(_ sender: UIButton) {
+        if sender.titleLabel?.text == "SEND" {
+            sendMessage()
+            addMessageToArray()
+        } else {
+            self.view.endEditing(true)
+        }
+    }
+    
+    @IBAction func touchedBackground(_ sender: Any) {
+        // Dissmiss
+        self.view.endEditing(true)
+    }
+    
+    @IBAction func textFieldEnter(_ sender: UITextField) {
+        if (sender.returnKeyType==UIReturnKeyType.send)
+        {
+            sendMessage()
+            addMessageToArray()
+        }
+    }
+    
+    @IBAction func textFieldValue(_ sender: UITextField) {
+        print("textField did change value")
+        if sender.text?.count == 0 {
+            print("textField did change value is nil")
+            self.sendButtonTitle.setTitle("AVBRYT", for: .normal)
+        } else {
+            print("textField did change value is not nil")
+            self.sendButtonTitle.setTitle("SEND", for: .normal)
+        }
+    }
+
+    private func setUpKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: .keyboardWillShow, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: .keyboardWillDisappear, name: .UIKeyboardWillHide, object: nil)
+    }
+    
+    private func removeKeyboard() {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow , object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide , object: nil)
+    }
+    
+    private func sendMessage() {
         if let text = chatTextField.text {
             // Send Message to remoteUser
             sendNotification(messageText: text)
             // Remove text from Textfield
             self.chatTextField.text = ""
             // Dismiss Keyboard
-            // self.dismissKeyboard()
             self.chatTextField.endEditing(true)
-            self.tableView.reloadData()
+            // Set Title To AVBRYT
+            self.sendButtonTitle.setTitle("AVBRYT", for: .normal)
         }
     }
     
-    func sendNotification(messageText: String) {
+    private func sendNotification(messageText: String) {
         // Send Message
         let message = Message(from: self.user!, to: remoteUser!, message: messageText)
         Notifications.instance.sendNotifications(with: message)
+        
+        self.tableView.layoutIfNeeded()
+        self.tableView.reloadData()
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if (textField.returnKeyType==UIReturnKeyType.go)
-        {
-            
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.45, delay: 0.045, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
+                self.bottomLayoutTextField.constant = keyboardSize.height
+            })
         }
-        return true
     }
     
-    //Calls this function when the tap is recognized.
-    func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
+    @objc func keyboardWillDisappear(notification: NSNotification) {
+        UIView.animate(withDuration: 0.45, delay: 0.045, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
+            self.bottomLayoutTextField.constant = 0.0
+        })
     }
     
     // MARK: - Observer, Firebase Database Functions
     // ----------------------------------------
-    func observeMessages() {
+    private func observeMessages() {
         if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             DataService.instance.REF_MESSAGES.child("private").child(UID).child("all").queryOrdered(byChild: "messageTime").observeSingleEvent(of: .value, with: { (snapshot) in
                 
@@ -136,7 +179,7 @@ class MessageDetailVC: UIViewController {
         }
     }
     
-    func fetchMessageObserver(_ messageSnap: Dictionary<String, AnyObject>, remoteUID: String, userUID: String) {
+    private func fetchMessageObserver(_ messageSnap: Dictionary<String, AnyObject>, remoteUID: String, userUID: String) {
         let message = Message(
             from: remoteUID,
             to:  userUID,
@@ -145,11 +188,11 @@ class MessageDetailVC: UIViewController {
             messageTime:  messageSnap["messageTime"] as! String,
             highlighted:  messageSnap["highlighted"] as? Bool ?? true)
         self.messages.append(message)
-        self.messages.sort(by: { $0._messageTime < $1._messageTime })
+        self.messages.sort(by: { $0._messageTime > $1._messageTime })
         self.tableView.reloadData()
     }
     
-    func addMessageToArray() {
+    private func addMessageToArray() {
         if let remote = self.remoteUser {
             if let user = self.user {
                 var message = Message(
@@ -160,7 +203,7 @@ class MessageDetailVC: UIViewController {
                     highlighted: true)
                 message.setMessageID()
                 self.messages.append(message)
-                self.messages.sort(by: { $0._messageTime < $1._messageTime })
+                self.messages.sort(by: { $0._messageTime > $1._messageTime })
                 self.tableView.reloadData()
                 // self.tableView.reloadData()
             }
@@ -174,6 +217,14 @@ extension MessageDetailVC {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.scrollsToTop = true
+        // tableView.contentOffset.y = 60
+        tableView.contentInset.top = 65
+        tableView.contentInset.bottom = 45
+        
+        tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
+        // tableView.transform = CGAffineTransform(rotationAngle: -CGFloat.pi)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -181,11 +232,18 @@ extension MessageDetailVC {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setUpKeyboard()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         observeMessages()
-        animateCells(in: self.tableView, true)
+        // animateCells(in: self.tableView, true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        removeKeyboard()
     }
 }
 
@@ -199,11 +257,16 @@ extension MessageDetailVC: UITableViewDelegate, UITableViewDataSource {
         if let user = self.user, messages[indexPath.row]._fromUID == user.userUID {
             if let leftCell = tableView.dequeueReusableCell(withIdentifier: "MessageDetailLeftCell", for: indexPath) as? MessageDetailTableCell {
                 leftCell.setupView(with: self.messages[indexPath.row], to: user)
+                leftCell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
+                // leftCell.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
                 return leftCell
             }
         } else if let remoteUser = self.remoteUser {
             if let rightCell = tableView.dequeueReusableCell(withIdentifier: "MessageDetailRightCell", for: indexPath) as? MessageDetailTableCell {
                 rightCell.setupView(with: self.messages[indexPath.row], to: remoteUser)
+                rightCell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
+                // tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                // rightCell.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
                 return rightCell
             }
         }

@@ -146,6 +146,8 @@ class MessageViewController: UIViewController {
         self.backTable.layer.cornerRadius = 0
         // Specify which corners to round = [ upper left , upper right ]
         self.backTable.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        self.backTable.contentInset.top = 35
+        self.backTable.contentOffset.y = 35
     }
     
     func hideBackTable() {
@@ -714,7 +716,7 @@ extension MessageViewController: UIScrollViewDelegate {
                     if scrollView.contentOffset.y < -25 {
                         if scrollAnimator?.state != .stopped {
                             // print("scrollAnimator.state is not stopped")
-                            let scrollResult = returnScrollValue(with: scrollView.contentOffset.y, valueOffset: 0.15)
+                            let scrollResult = returnScrollValue(with: scrollView.contentOffset.y, valueOffset: 0.50)
                             scrollAnimator?.fractionComplete = scrollResult
                             print(scrollResult)
                         }
@@ -776,7 +778,7 @@ extension MessageViewController: UIScrollViewDelegate {
                 
                 if scrollView.contentOffset.y <= 0 {
                     self.mainTable.contentOffset = .zero
-                    self.backTable.contentOffset = .zero
+                    // self.backTable.contentOffset = CGPoint(x: 0, y: 35)
                 }
             }
         }
