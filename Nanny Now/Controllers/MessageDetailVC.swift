@@ -205,7 +205,6 @@ class MessageDetailVC: UIViewController {
                 self.messages.append(message)
                 self.messages.sort(by: { $0._messageTime > $1._messageTime })
                 self.tableView.reloadData()
-                // self.tableView.reloadData()
             }
         }
     }

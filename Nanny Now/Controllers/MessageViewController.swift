@@ -132,6 +132,9 @@ class MessageViewController: UIViewController {
         })
     }
     
+    // THIS NEEDS TO BE FIXED
+    // ----------------------
+    
     func setMainTable() {
         self.mainTable.frame = CGRect(x: 0, y: self.mainTableMaxY, width: self.mainScreenWidth, height: self.mainScreenHeight - self.mainTableMaxY)
         self.mainTable.frame = self.mainTable.frame.offsetBy(dx: 0, dy: inactiveOffset)
@@ -174,13 +177,6 @@ class MessageViewController: UIViewController {
         self.backTable.layoutIfNeeded()
     }
     
-    func showBackTableLittleBit() {
-        self.backTable.layer.cornerRadius = 9
-        self.backTable.alpha = 0.7
-        self.backTable.transform = CGAffineTransform(scaleX: 0.96, y: 0.96)
-        self.backTable.layoutIfNeeded()
-    }
-    
     func hideMainTable() {
         self.mainTable.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         self.mainTable.frame = CGRect(x: 0, y: self.mainScreenHeight - self.mainTableMinimizedHeight, width: self.mainScreenWidth, height: self.mainTableMinimizedHeight)
@@ -205,6 +201,9 @@ class MessageViewController: UIViewController {
         self.hideMainTable()
         self.showBackTable()
     }
+    
+    // THIS NEEDS TO BE FIXED
+    // ----------------------
     
     // Set User Object
     func getUserSettings() {
@@ -624,10 +623,6 @@ extension MessageViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         print("- viewWillAppear")
-        
-        if self.mainTableMinimized {
-            // hideBackTable()
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

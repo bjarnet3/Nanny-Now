@@ -27,7 +27,6 @@ struct Message {
     private(set) public var _message: String
     
     private(set) public var _requestCategory: NotificationCategory = .messageRequest
-    
     private(set) public var _highlighted: Bool = false
     
     mutating func setMessageID() {
