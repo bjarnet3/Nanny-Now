@@ -29,11 +29,12 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     
     func didReceive(_ notification: UNNotification) {
         
+        /*
         let userInfo = notification.request.content.userInfo
         
         let title = notification.request.content.title
         let body = notification.request.content.body
-        
+        */
         
     }
 
