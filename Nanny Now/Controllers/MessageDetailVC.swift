@@ -197,7 +197,7 @@ class MessageDetailVC: UIViewController {
             if let user = self.user {
                 var message = Message(
                     from: user.userUID,
-                    to:  remote.userUID,
+                    to: remote.userUID,
                     message:  self.chatTextField.text!,
                     messageTime:  returnTimeStamp(),
                     highlighted: true)
@@ -218,7 +218,7 @@ extension MessageDetailVC {
         tableView.dataSource = self
         
         tableView.scrollsToTop = true
-        // tableView.contentOffset.y = 60
+        
         tableView.contentInset.top = 65
         tableView.contentInset.bottom = 45
         

@@ -897,7 +897,6 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
         
         let delete = UITableViewRowAction(style: .destructive, title: " ⊗ ") { (action , indexPath ) -> Void in
             
-            
             if tableView == self.mainTable {
                 self.requests.remove(at: indexPath.row - 2)
                 
