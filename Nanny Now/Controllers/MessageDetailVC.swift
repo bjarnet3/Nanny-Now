@@ -41,7 +41,6 @@ class MessageDetailVC: UIViewController {
     @IBAction func sendButton(_ sender: UIButton) {
         if sender.titleLabel?.text == "SEND" {
             sendMessage()
-            addMessageToArray()
         } else {
             self.view.endEditing(true)
         }
@@ -56,7 +55,6 @@ class MessageDetailVC: UIViewController {
         if (sender.returnKeyType==UIReturnKeyType.send)
         {
             sendMessage()
-            addMessageToArray()
         }
     }
     
@@ -82,9 +80,10 @@ class MessageDetailVC: UIViewController {
     }
     
     private func sendMessage() {
-        if let text = chatTextField.text {
+        if let messageText = chatTextField.text {
             // Send Message to remoteUser
-            sendNotification(messageText: text)
+            // sendNotification(messageText: text)
+            addMessage(messageText: messageText)
             // Remove text from Textfield
             self.chatTextField.text = ""
             // Dismiss Keyboard
@@ -94,9 +93,9 @@ class MessageDetailVC: UIViewController {
         }
     }
     
-    private func sendNotification(messageText: String) {
+    private func sendNotification(message: Message) {
         // Send Message
-        let message = Message(from: self.user!, to: remoteUser!, message: messageText)
+        // let message = Message(from: self.user!, to: remoteUser!, message: messageText)
         Notifications.instance.sendNotifications(with: message)
         
         self.tableView.layoutIfNeeded()
@@ -192,16 +191,18 @@ class MessageDetailVC: UIViewController {
         self.tableView.reloadData()
     }
     
-    private func addMessageToArray() {
+    private func addMessage(messageText: String) {
         if let remote = self.remoteUser {
             if let user = self.user {
                 var message = Message(
                     from: user.userUID,
                     to: remote.userUID,
-                    message:  self.chatTextField.text!,
+                    message: messageText,
                     messageTime:  returnTimeStamp(),
                     highlighted: true)
                 message.setMessageID()
+                sendNotification(message: message)
+                
                 self.messages.append(message)
                 self.messages.sort(by: { $0._messageTime > $1._messageTime })
                 self.tableView.reloadData()
