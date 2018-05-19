@@ -84,14 +84,14 @@ class Notifications {
                                     
                                     // Get tokens from Database
                                     let registration_ids = tokens
-                                    let message = text
                                     let title = "\(firstName)"
                                     
                                     // MARK: - Change this to display different Notificaiton Categories
                                     let category = categoryRequest.rawValue // "messageRequest"
                                     
                                     // title = "Melding fra \(firstName):"
-                                    DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(message)")
+                                    DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(text)")
+                                    // DataService.instance.postToMessage(with: message)
                                     
                                     // For Advanced Rich Notificaiton Setup
                                     let mediaUrl = getFacebookProfilePictureUrl(id, .large)
@@ -106,7 +106,7 @@ class Notifications {
                                          "registration_ids" : registration_ids,
                                          "notification":
                                             ["title" : title,
-                                             "body"  : message,
+                                             "body"  : text,
                                              "sound" : "notification48.wav",
                                              "badge" : badge],
                                          "priority":10,

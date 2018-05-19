@@ -189,6 +189,9 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
             let requestMessage = "Melding til: \(lastNanny.firstName)"
             // Send Message
             let message = Message(from: (self.user?.userUID)!, to: lastNanny.userUID, messageID: nil, message: message ?? requestMessage, messageTime: returnTimeStamp() , highlighted: true, requestCategory: requestCategory ?? .messageResponse)
+            
+            // let anotherMessage = Message(from: self.user!, to: lastNanny, message: requestMessage)
+            
             Notifications.instance.sendNotifications(with: message)
         }
         

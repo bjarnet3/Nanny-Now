@@ -198,15 +198,46 @@ class DataService {
         return "https://graph.facebook.com/" + fid + "/picture?type=\(size)"
     }
     
+    func postToMessage(with message: Message) {
+        if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            
+            let remoteID = message._toUser?.userUID ?? message._toUID
+            
+            let messageREF = DataService.instance.REF_MESSAGES
+            let messageID = message._messageID
+            
+            let baseFirebase = messageREF.child("private").child(remoteID)
+            let reciFirebase = messageREF.child("private").child(userID)
+            
+            let timeStamp = returnTimeStamp()
+            
+            let base : [String : Any] = [
+                "message"   : message,
+                "messageID" : messageID,
+                "messageTime": timeStamp,
+                "toUID"     : remoteID,
+                "fromUID"   : userID,
+                "highlighted" : false
+            ]
+            
+            baseFirebase.child("last").child(userID).updateChildValues(base)
+            reciFirebase.child("last").child(remoteID).updateChildValues(base)
+            
+            let all : [String : Any] = [
+                messageID : base
+            ]
+            
+            baseFirebase.child("all").updateChildValues(all)
+            reciFirebase.child("all").updateChildValues(all)
+        }
+    }
+    
     // MARK: - NEW - BUT NEED TO BE IMPROVED
     func postToMessage(recieveUserID: String, message: String) {
         if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             
             let messageREF = DataService.instance.REF_MESSAGES
             let messageID = messageREF.childByAutoId().key
-            
-            // let baseFirebase = messageREF.child("private").child(recieveUserID).child("last").child(userID)
-            // let reciFirebase = messageREF.child("private").child(userID).child("last").child(recieveUserID)
             
             let baseFirebase = messageREF.child("private").child(recieveUserID)
             let reciFirebase = messageREF.child("private").child(userID)
