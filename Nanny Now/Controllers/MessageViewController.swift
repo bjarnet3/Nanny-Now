@@ -134,7 +134,6 @@ class MessageViewController: UIViewController {
     
     // THIS NEEDS TO BE FIXED
     // ----------------------
-    
     func setMainTable() {
         self.mainTable.frame = CGRect(x: 0, y: self.mainTableMaxY, width: self.mainScreenWidth, height: self.mainScreenHeight - self.mainTableMaxY)
         self.mainTable.frame = self.mainTable.frame.offsetBy(dx: 0, dy: inactiveOffset)
@@ -201,7 +200,6 @@ class MessageViewController: UIViewController {
         self.hideMainTable()
         self.showBackTable()
     }
-    
     // THIS NEEDS TO BE FIXED
     // ----------------------
     
@@ -290,16 +288,15 @@ class MessageViewController: UIViewController {
     // ----------------------------------------
     func observeMessages(_ exemptIDs: [String] = []) {
         if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
-            DataService.instance.REF_MESSAGES.child("private").child(UID).child("last").observe(.value, with: { (snapshot) in
+            DataService.instance.REF_MESSAGES.child("private").child(UID).child("last").queryOrdered(byChild: "messageTime").observe(.value, with: { (snapshot) in
                 let remoteID = snapshot.key
+                
+                self.messages.removeAll()
                 
                 if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
                     self.totalMessages = snapValue.keys.count
                     
-                    print(snapValue.keys.count)
-                    
                     if !exemptIDs.contains(remoteID) {
-                        // self.messages.removeAll()
                         
                         for (key,value) in snapValue {
                             if let snapMessage = value as? [String:AnyObject] {
@@ -447,15 +444,11 @@ class MessageViewController: UIViewController {
                         }
                     }
                 }
-                
-                // self.requests.sort(by: { $0.timeRequested > $1.timeRequested })
                 if let index = self.requests.index(where: { $0.timeRequested >= requestVal.timeRequested }) {
                     self.requests.insert(requestVal, at: index)
                     let indexPath = IndexPath(row: index.advanced(by: 2), section: 0)
-                    // let updateIndexPath = IndexPath(row: index.advanced(by: 3), section: 0)
                     
                     self.mainTable.insertRows(at: [indexPath], with: .automatic)
-                    // self.mainTable.reloadRows(at: [updateIndexPath], with: .automatic)
                     self.mainTable.reloadData()
                 } else {
                     self.requests.append(requestVal)
@@ -502,8 +495,10 @@ class MessageViewController: UIViewController {
                     let remote = User(userUID: message._toUID, imageName: imageName, firstName: firstName)
                     message.setTo(user: remote)
                     
-                    // message.setImageUrl(imageURL: imageValue)
+                    self.messages.sort(by: { $0._messageTime > $1._messageTime })
                     self.messages.append(message)
+                    self.messages.sort(by: { $0._messageTime > $1._messageTime })
+                    
                     self.backTable.reloadData()
                 }
             })
@@ -565,7 +560,6 @@ class MessageViewController: UIViewController {
                 
             })
         }
-        
     }
     
     

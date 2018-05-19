@@ -137,6 +137,67 @@ class MessageDetailVC: UIViewController {
     
     // MARK: - Observer, Firebase Database Functions
     // ----------------------------------------
+    private func removeMessagesObserver() {
+        if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            DataService.instance.REF_MESSAGES.child("private").child(UID).child("all").removeAllObservers()
+        }
+    }
+    
+    private func observeMessages() {
+        if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            DataService.instance.REF_MESSAGES.child("private").child(UID).child("all").queryOrdered(byChild: "messageTime").observe(.value, with: { (snapshot) in
+                
+                self.messages.removeAll()
+                
+                if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
+                    self.totalMessages = snapValue.keys.count
+                    
+                    for (_,value) in snapValue.reversed() {
+                        if let snapMessage = value as? [String:AnyObject] {
+                            
+                            guard let userID = self.user?.userUID else { return }
+                            guard let remoteID = self.remoteUser?.userUID else { return }
+                            
+                            if let remoteU = self.remoteUser?.familyID {
+                                print(remoteU)
+                            }
+                            
+                            if userID != remoteID {
+                                
+                                if let fromUID = snapMessage["fromUID"] as? String, fromUID == userID || fromUID == remoteID {
+                                    
+                                    if let toUID = snapMessage["toUID"] as? String, toUID == userID || toUID == remoteID {
+                                        
+                                        if fromUID != toUID {
+                                            
+                                            if fromUID == userID {
+                                                
+                                                self.fetchMessageObserver(snapMessage, remoteUID: fromUID, userUID: toUID)
+                                                
+                                            } else if fromUID == remoteID {
+                                                
+                                                self.fetchMessageObserver(snapMessage, remoteUID: remoteID, userUID: userID)
+                                                
+                                            }
+                                        }
+                                    }
+                                }
+                            } else {
+                                if let firstUID = snapMessage["fromUID"] as? String, firstUID == userID {
+                                    if let secondUID = snapMessage["toUID"] as? String, secondUID == remoteID {
+                                        self.fetchMessageObserver(snapMessage, remoteUID: remoteID, userUID: userID)
+                                    }
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+                
+            })
+        }
+    }
+    
     private func observeMessagesOnce() {
         if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             DataService.instance.REF_MESSAGES.child("private").child(UID).child("all").queryOrdered(byChild: "messageTime").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -227,24 +288,26 @@ extension MessageDetailVC {
         // tableView.transform = CGAffineTransform(rotationAngle: -CGFloat.pi)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-    }
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setUpKeyboard()
-        observeMessagesOnce()
+        observeMessages()
+        // observeMessagesOnce()
         self.tableView.alpha = 0
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
         animateCells(in: self.tableView, true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         removeKeyboard()
+        removeMessagesObserver()
     }
+    
+    
 }
 
 extension MessageDetailVC: UITableViewDelegate, UITableViewDataSource {
