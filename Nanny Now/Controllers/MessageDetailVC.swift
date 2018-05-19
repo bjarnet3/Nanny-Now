@@ -29,11 +29,6 @@ class MessageDetailVC: UIViewController {
     private var messages = [Message]()
     private var totalMessages: Int = 0
     
-    func setupView(user:User, remoteUser: User) {
-        self.user = user
-        self.remoteUser = remoteUser
-    }
-    
     @IBAction func backButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -59,7 +54,6 @@ class MessageDetailVC: UIViewController {
     }
     
     @IBAction func textFieldValue(_ sender: UITextField) {
-        print("textField did change value")
         if sender.text?.count == 0 {
             print("textField did change value is nil")
             self.sendButtonTitle.setTitle("AVBRYT", for: .normal)
@@ -67,6 +61,11 @@ class MessageDetailVC: UIViewController {
             print("textField did change value is not nil")
             self.sendButtonTitle.setTitle("SEND", for: .normal)
         }
+    }
+    
+    func setupView(user: User, remoteUser: User) {
+        self.user = user
+        self.remoteUser = remoteUser
     }
 
     private func setUpKeyboard() {
@@ -94,12 +93,32 @@ class MessageDetailVC: UIViewController {
     }
     
     private func sendNotification(message: Message) {
-        // Send Message
-        // let message = Message(from: self.user!, to: remoteUser!, message: messageText)
+        // Send Notification Message
         Notifications.instance.sendNotifications(with: message)
         
         self.tableView.layoutIfNeeded()
         self.tableView.reloadData()
+    }
+    
+    private func addMessage(messageText: String) {
+        if let remote = self.remoteUser {
+            if let user = self.user {
+                var message = Message(
+                    from: user.userUID,
+                    to: remote.userUID,
+                    message: messageText,
+                    messageTime:  returnTimeStamp(),
+                    highlighted: true)
+                message.setMessageID()
+                sendNotification(message: message)
+                
+                self.messages.append(message)
+                self.messages.sort(by: { $0._messageTime > $1._messageTime })
+                
+                self.totalMessages += 1
+                self.tableView.reloadData()
+            }
+        }
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -118,7 +137,7 @@ class MessageDetailVC: UIViewController {
     
     // MARK: - Observer, Firebase Database Functions
     // ----------------------------------------
-    private func observeMessages() {
+    private func observeMessagesOnce() {
         if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             DataService.instance.REF_MESSAGES.child("private").child(UID).child("all").queryOrdered(byChild: "messageTime").observeSingleEvent(of: .value, with: { (snapshot) in
                 
@@ -190,25 +209,6 @@ class MessageDetailVC: UIViewController {
         self.messages.sort(by: { $0._messageTime > $1._messageTime })
         self.tableView.reloadData()
     }
-    
-    private func addMessage(messageText: String) {
-        if let remote = self.remoteUser {
-            if let user = self.user {
-                var message = Message(
-                    from: user.userUID,
-                    to: remote.userUID,
-                    message: messageText,
-                    messageTime:  returnTimeStamp(),
-                    highlighted: true)
-                message.setMessageID()
-                sendNotification(message: message)
-                
-                self.messages.append(message)
-                self.messages.sort(by: { $0._messageTime > $1._messageTime })
-                self.tableView.reloadData()
-            }
-        }
-    }
 }
 
 extension MessageDetailVC {
@@ -228,18 +228,18 @@ extension MessageDetailVC {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        self.tableView.alpha = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         setUpKeyboard()
+        observeMessagesOnce()
+        self.tableView.alpha = 0
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        observeMessages()
-        // animateCells(in: self.tableView, true)
+        
+        animateCells(in: self.tableView, true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -257,14 +257,12 @@ extension MessageDetailVC: UITableViewDelegate, UITableViewDataSource {
         if let user = self.user, messages[indexPath.row]._fromUID == user.userUID {
             if let leftCell = tableView.dequeueReusableCell(withIdentifier: "MessageDetailLeftCell", for: indexPath) as? MessageDetailTableCell {
                 leftCell.setupView(with: self.messages[indexPath.row], to: user)
-                leftCell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
                 // leftCell.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
                 return leftCell
             }
         } else if let remoteUser = self.remoteUser {
             if let rightCell = tableView.dequeueReusableCell(withIdentifier: "MessageDetailRightCell", for: indexPath) as? MessageDetailTableCell {
                 rightCell.setupView(with: self.messages[indexPath.row], to: remoteUser)
-                rightCell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
                 // tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
                 // rightCell.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
                 return rightCell

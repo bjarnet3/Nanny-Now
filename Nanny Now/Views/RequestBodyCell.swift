@@ -24,7 +24,7 @@ class RequestBodyCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         view.layer.cornerRadius = view.frame.height / 2
-        profileImage.layer .cornerRadius = profileImage.layer.frame.height / 2
+        profileImage.layer.cornerRadius = profileImage.layer.frame.height / 2
     }
     
     func animateView( direction: Direction) {
@@ -43,7 +43,6 @@ class RequestBodyCell: UITableViewCell {
     // MARK: - Update View
     func setupView(user: User, animated: Bool = false) {
         animateView(direction: .enter)
-        
         self.profileImage.loadImageUsingCacheWith(urlString: user.imageName, completion: {
             if animated {
                 let random = Double(arc4random_uniform(UInt32(1000))) / 2000 
