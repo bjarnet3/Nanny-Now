@@ -1442,7 +1442,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ARb-Y3-ywq">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="208.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="gXl-YY-7Ic">
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="12" minimumInteritemSpacing="12" id="gXl-YY-7Ic">
                                                         <size key="itemSize" width="178" height="25"/>
                                                         <size key="headerReferenceSize" width="10" height="10"/>
                                                         <size key="footerReferenceSize" width="10" height="25"/>
@@ -2415,15 +2415,14 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         <rect key="frame" x="8" y="8" width="293" height="39"/>
                                         <color key="textColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <action selector="textFieldEnter:" destination="WpP-rT-5Nh" eventType="primaryActionTriggered" id="Of4-j9-BF2"/>
                                             <action selector="textFieldValue:" destination="WpP-rT-5Nh" eventType="editingChanged" id="kK3-D7-JXX"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nEX-VP-fz7">
-                                        <rect key="frame" x="309" y="15" width="58" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nEX-VP-fz7">
+                                        <rect key="frame" x="311" y="15" width="54" height="24"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                         <state key="normal" title="AVBRYT">
                                             <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2436,6 +2435,10 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="epV-9u-eCf" secondAttribute="bottom" constant="8" id="9PD-pb-DFc"/>
+                                    <constraint firstAttribute="trailing" secondItem="nEX-VP-fz7" secondAttribute="trailing" constant="10" id="WSn-k4-5nR"/>
+                                    <constraint firstItem="nEX-VP-fz7" firstAttribute="top" secondItem="i9K-I6-gHO" secondAttribute="top" constant="15" id="ZDt-fL-8aV"/>
+                                    <constraint firstItem="nEX-VP-fz7" firstAttribute="leading" secondItem="epV-9u-eCf" secondAttribute="trailing" constant="10" id="d5w-E5-Nv3"/>
+                                    <constraint firstAttribute="bottom" secondItem="nEX-VP-fz7" secondAttribute="bottom" constant="16" id="j3w-zt-5kh"/>
                                     <constraint firstAttribute="trailing" secondItem="epV-9u-eCf" secondAttribute="trailing" constant="74" id="jae-lu-sxS"/>
                                     <constraint firstItem="epV-9u-eCf" firstAttribute="top" secondItem="i9K-I6-gHO" secondAttribute="top" constant="8" id="uSZ-qw-ORI"/>
                                     <constraint firstItem="epV-9u-eCf" firstAttribute="leading" secondItem="i9K-I6-gHO" secondAttribute="leading" constant="8" id="wTJ-kI-ilS"/>

@@ -160,7 +160,7 @@ class MessageDetailVC: UIViewController {
                 if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
                     self.totalMessages = snapValue.keys.count
                     
-                    for (_,value) in snapValue.reversed() {
+                    for (_,value) in snapValue {
                         if let snapMessage = value as? [String:AnyObject] {
                             
                             guard let userID = self.user?.userUID else { return }

@@ -15,23 +15,10 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
+    var cellImageLoaded = false
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-    }
-    
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        if highlighted {
-            UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in
-                self.transform = CGAffineTransform(scaleX: 1.08, y: 1.08)
-                hapticButton(.selection)
-            })
-        }
-        else {
-            // var rollBack3D = CATransform3DIdentity
-            UIView.animate(withDuration: 0.20, delay: 0.05, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in
-                self.transform = CGAffineTransform(scaleX: 1.00, y: 1.00)
-            })
-        }
     }
     
     public enum Direction {
@@ -50,26 +37,26 @@ class MessageTableViewCell: UITableViewCell {
         }
     }
     
-    func setupView(with message: Message, animated: Bool = false) {
+    func setupView(with message: Message, animated: Bool = true) {
         if let user = message._fromUser {
-            func setLabels() {
-                self.nameLabel.text = user.firstName
-                self.messageLabel.text = message._message
-                self.timeLabel.text = message._messageTime
-            }
-            if animated {
-                animateView(direction: .enter)
-                self.profileImage.loadImageUsingCacheWith(urlString: user.imageName, completion: {
-                    let random = Double(arc4random_uniform((UInt32(1000))) / 3000) + 250
+            self.profileImage.loadImageUsingCacheWith(urlString: user.imageName, completion: {
+                if animated {
+                    self.animateView(direction: .enter)
+                    let random = Double(arc4random_uniform(UInt32(1000))) / 3000
                     UIView.animate(withDuration: 0.6, delay: random, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
                         self.animateView(direction: .exit)
-                        setLabels()
+                        
+                        self.nameLabel.text = user.firstName
+                        self.messageLabel.text = message._message
+                        self.timeLabel.text = message._messageTime
                     })
-                })
-            } else {
-                self.profileImage.loadImageUsingCacheWith(urlString: user.imageName)
-                setLabels()
-            }
+                } else {
+                    self.nameLabel.text = user.firstName
+                    self.messageLabel.text = message._message
+                    self.timeLabel.text = message._messageTime
+                }
+                self.cellImageLoaded = true
+            })
         }
     }
     

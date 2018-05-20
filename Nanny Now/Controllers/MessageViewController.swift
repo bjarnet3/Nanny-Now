@@ -315,14 +315,9 @@ class MessageViewController: UIViewController {
     func observeRequests(_ exemptIDs: [String] = []) {
         if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             DataService.instance.REF_REQUESTS.child("private").child(UID).child("requests").observe(.value, with: { (snapshot) in
-                // let remoteID = snapshot.key
                 
                 if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
                     self.totalRequests = snapValue.keys.count
-                    
-                    print("snapshot count: \(snapValue.keys.count)")
-                    print("------------------")
-                    
                     self.requests.removeAll()
                     
                     for (_,value) in snapValue {
@@ -333,7 +328,6 @@ class MessageViewController: UIViewController {
                             }
                         }
                     }
-                    
                 }
                 
             })
@@ -345,46 +339,17 @@ class MessageViewController: UIViewController {
     func observeRequestsOnce(_ exemptIDs: [String] = []) {
         if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             DataService.instance.REF_REQUESTS.child("private").child(UID).child("requests").observeSingleEvent(of: .value, with: { snapshot in
-                // let remoteID = snapshot.key
                 
                 if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
                     self.totalRequests = snapValue.keys.count
-                    
-                    print("snapshot count: \(snapValue.keys.count)")
-                    print("------------------")
-                    
                     self.requests.removeAll()
                     
                     for (_,value) in snapValue {
                         if let snapRequest = value as? [String:AnyObject] {
                             
-                            printDebug(object: snapRequest)
-                            
                             if let snapKey = snapRequest["userID"] as? String {
-                                printDebug(object: snapKey)
                                 self.fetchRequestObserver(snapRequest, remoteUID: snapKey)
                             }
-                        }
-                    }
-                }
-                
-            })
-        }
-    }
-    
-    // TODO: observeChildAdded : observeChildRemoved
-    func observeChildAdded(_ exemptIDs: [String] = []) {
-        if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
-            DataService.instance.REF_REQUESTS.child("private").child(UID).child("users").observe(.childAdded, with: { (snapshot) in
-                let remoteID = snapshot.key
-                if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
-                    self.totalRequests = snapValue.keys.count
-                    if !exemptIDs.contains(remoteID) {
-                        for (index,_) in snapValue.enumerated() {
-                            
-                            self.fetchRequestObserver(snapValue, remoteUID: remoteID)
-                            // Print first object
-                            if index == 0 { print("first") }
                         }
                     }
                 }
@@ -461,11 +426,7 @@ class MessageViewController: UIViewController {
                 }
             })
         } else {
-            print("requests.count and totalRequests unsyncronized")
             self.mainTable.reloadData()
-            
-            print("requests.count : \(self.requests.count)")
-            print("totalRequests count: \(self.totalRequests)")
         }
     }
     
@@ -503,11 +464,7 @@ class MessageViewController: UIViewController {
                 }
             })
         } else {
-            print("requests.count and totalRequests unsyncronized")
             self.backTable.reloadData()
-            
-            print("requests.count : \(self.requests.count)")
-            print("totalRequests count: \(self.totalRequests)")
         }
     }
     
