@@ -18,17 +18,23 @@ private extension Selector {
 
 class MessageDetailVC: UIViewController {
     
+    // MARK: - IBOutlet: Connection to Storyboard
+    // ----------------------------------------
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var chatTextField: UITextField!
     @IBOutlet weak var bottomLayoutTextField: NSLayoutConstraint!
     @IBOutlet weak var sendButtonTitle: UIButton!
     
+    // MARK: - Properties: Array & Varables
+    // -------------------------------------
     private var user: User?
     private var remoteUser: User?
     
     private var messages = [Message]()
     private var totalMessages: Int = 0
     
+    // MARK: - IBAction: Methods connected to UI
+    // ----------------------------------------
     @IBAction func backButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -63,6 +69,8 @@ class MessageDetailVC: UIViewController {
         }
     }
     
+    // MARK: - Functions, Database & Animation
+    // ----------------------------------------
     func setupView(user: User, remoteUser: User) {
         self.user = user
         self.remoteUser = remoteUser
@@ -121,7 +129,7 @@ class MessageDetailVC: UIViewController {
         }
     }
     
-    @objc func keyboardWillShow(notification: NSNotification) {
+    @objc fileprivate func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.45, delay: 0.045, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
                 self.bottomLayoutTextField.constant = keyboardSize.height
@@ -129,7 +137,7 @@ class MessageDetailVC: UIViewController {
         }
     }
     
-    @objc func keyboardWillDisappear(notification: NSNotification) {
+    @objc fileprivate func keyboardWillDisappear(notification: NSNotification) {
         UIView.animate(withDuration: 0.45, delay: 0.045, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
             self.bottomLayoutTextField.constant = 0.0
         })
@@ -272,7 +280,10 @@ class MessageDetailVC: UIViewController {
     }
 }
 
+// MARK: - ViewDidLoad, ViewWillLoad etc...
+// ----------------------------------------
 extension MessageDetailVC {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -287,8 +298,6 @@ extension MessageDetailVC {
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
         // tableView.transform = CGAffineTransform(rotationAngle: -CGFloat.pi)
     }
-    
-
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -310,6 +319,8 @@ extension MessageDetailVC {
     
 }
 
+// MARK: - TableView, Delegate & Datasource
+// ----------------------------------------
 extension MessageDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -45,6 +45,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     @IBOutlet weak var toDateTime: UIDatePicker!
     
     @IBOutlet weak var effectView: UIVisualEffectView!
+    
     // MARK: - Properties: Array & Varables
     // -------------------------------------
     var user: User?
