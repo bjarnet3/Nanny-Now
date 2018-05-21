@@ -337,7 +337,6 @@ extension MessageDetailVC: UITableViewDelegate, UITableViewDataSource {
         } else if let remoteUser = self.remoteUser {
             if let rightCell = tableView.dequeueReusableCell(withIdentifier: "MessageDetailRightCell", for: indexPath) as? MessageDetailTableCell {
                 rightCell.setupView(with: self.messages[indexPath.row], to: remoteUser)
-                // tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
                 // rightCell.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
                 return rightCell
             }
