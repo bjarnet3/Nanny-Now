@@ -60,11 +60,9 @@ class MessageDetailVC: UIViewController {
     }
     
     @IBAction func textFieldValue(_ sender: UITextField) {
-        if sender.text?.count == 0 {
-            print("textField did change value is nil")
+        if (sender.text?.isEmpty)! {
             self.sendButtonTitle.setTitle("AVBRYT", for: .normal)
         } else {
-            print("textField did change value is not nil")
             self.sendButtonTitle.setTitle("SEND", for: .normal)
         }
     }
