@@ -7,22 +7,15 @@
 //
 
 import UIKit
-// UserNotification (Part 1)
 import UserNotifications
-// Firebase (Part 1)
 import Firebase
-// Facebook (Part 1)
 import FBSDKLoginKit
-// RAMAnimatedTabBarController (Part 1)
 import RAMAnimatedTabBarController
-// Messaging and Firebase Notifications
 import FirebaseMessaging
 import FirebaseInstanceID
 
 @UIApplicationMain
-// UserNotification (Part 2)
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
     
     // ********************************
     //
@@ -31,16 +24,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // ********************************
     var window: UIWindow?
     var shortcutItem: UIApplicationShortcutItem?
-    
     let gcmMessageIDKey = "gcm.message_id"
-    
     
     // ********************************
     //
     // MARK: - Delegates
     //
     // ********************************
-    
     
     /// Tells the delegate that the launch process is almost done and the app is almost ready to run.
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -59,17 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // set user notifications.
         setNotifications()
         
-        // [START add_token_refresh_observer]
         // Add observer for InstanceID token refresh callback.
         NotificationCenter.default.addObserver(forName: Notification.Name.MessagingRegistrationTokenRefreshed, object: nil, queue: nil, using: tokenRefreshNotification(_:))
-        
-        /*
-         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.tokenRefreshNotification),
-                                               name: Notification.Name.MessagingRegistrationTokenRefreshed,
-                                               object: nil)
-         */
-        // [END add_token_refresh_observer]
         
         // User Status
         DataService.instance.updateStatusOnUser(with: .active)
@@ -105,11 +86,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     if grand {
                         // DispatchQueue.main.async(execute: {} )
                         DispatchQueue.main.async {
-                            
                             UIApplication.shared.registerForRemoteNotifications()
                         }
                     }
             })
+            
             // For iOS 10 data message (sent via FCM)
             Messaging.messaging().delegate = self
         } else {
@@ -149,14 +130,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(_ application: UIApplication) {
         // User Status
         DataService.instance.updateStatusOnUser(with: .inactive)
-        
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
     
     /// Tells the delegate that the app is about to enter the foreground.
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        // User Status
+        DataService.instance.updateStatusOnUser(with: .active)
         
         // Clear badge when app is or resumed
         application.applicationIconBadgeNumber = 0
@@ -164,12 +143,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// Tells the delegate that the app has become active.
     func applicationDidBecomeActive(_ application: UIApplication) {
-        connectToFcm()
-        
         // User Status
         DataService.instance.updateStatusOnUser(with: .active)
         
+        // Clear badge when app is or resumed
         application.applicationIconBadgeNumber = 0
+        
+        connectToFcm()
+        
         guard let shortcut = shortcutItem else { return }
         
         // print("- Shortcut property has been set")
@@ -178,7 +159,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    // [START disconnect_from_fcm]
     /// Tells the delegate that the app is now in the background.
     func applicationDidEnterBackground(_ application: UIApplication) {
         // User Status
@@ -186,15 +166,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Messaging.messaging().disconnect()
         Messaging.messaging().shouldEstablishDirectChannel = false
-        print("Disconnected from FCM.")
     }
-    // [END disconnect_from_fcm]
-    
     
     /// Tells the delegate when the app is about to terminate.
     func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        
         // User Status
         DataService.instance.updateStatusOnUser(with: .terminate)
     }
@@ -208,10 +183,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Connect to FCM since connection may have failed when attempted before having a token.
         connectToFcm()
     }
-    // [END refresh_token]
     
-    
-    // [START connect_to_fcm]
     func connectToFcm() {
         // Won't connect since there is no token
         guard InstanceID.instanceID().token() != nil else {
@@ -221,12 +193,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Messaging.messaging().shouldEstablishDirectChannel = false
         // Messaging.messaging().shouldEstablishDirectChannel = true
     }
-    // [END connect_to_fcm]
     
     
     // This function is added here only for debugging purposes, and can be removed if swizzling is enabled.
     // If swizzling is disabled then this function must be implemented so that the APNs token can be paired to
     // the InstanceID token.
+    
     /// Tells the delegate that the app successfully registered with Apple Push Notification service (APNs).
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         print("APNs token retrieved: \(deviceToken)")
@@ -244,7 +216,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Unable to register for remote notifications: \(error.localizedDescription)")
     }
     
-    // [START receive_message]
     /// Tells the app that a remote notification arrived that indicates there is data to be fetched.
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         // If you are receiving a notification message while your app is in the background,
@@ -258,8 +229,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(mediaUrl)
         }
     }
-    // [END receive_message]
-    
     
     // Closure @escaping ...
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
@@ -300,12 +269,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate : UNUserNotificationCenterDelegate {
     
     // Receive displayed notifications for iOS 10 devices.
+    
     /// Called when a notification is delivered to a foreground app
     public func userNotificationCenter(_ center: UNUserNotificationCenter,
                                        willPresent notification: UNNotification,
                                        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         // Change this to your preferred presentation option
-        completionHandler([.alert, .sound])
+        completionHandler([.sound])
     }
     
     /// Called to let your app know which action was selected by the user for a given notification.
