@@ -331,16 +331,6 @@ public func setAltitude (_ altitude: locationAltitude) -> CLLocationDistance {
     return altitude.rawValue
 }
 
-/// The size of this picture. It can be one of the following values: small, normal, large, album, square.
-public enum PictureSize : String {
-    case small = "small", normal = "normal", large = "large", album = "album", square = "square"
-}
-
-// Return Facebook Profile Picture URL with size
-public func getFacebookProfilePictureUrl(_ fid: String, _ size: PictureSize) -> String {
-    return "https://graph.facebook.com/" + fid + "/picture?type=\(size)"
-}
-
 // First understandable and usefull enum - (enum here used for typo arguments)
 public enum HapticEngineTypes {
     case error, success, warning, light, medium, heavy, selection

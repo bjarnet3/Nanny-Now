@@ -104,21 +104,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setNotifications() {
-        // Notification Categories
-        let familyAccept = UNNotificationAction(identifier: "familyAccept", title: "Aksepter", options: [ .foreground, .authenticationRequired])
-        let nannyAccept = UNNotificationAction(identifier: "nannyAccept", title: "Aksepter", options: [ .foreground, .authenticationRequired])
-        let nannyConfirm = UNNotificationAction(identifier: "nannyConfirm", title: "OK", options: [ .foreground] )
+        
+        // Notification Actions
+        // --------------------
+        
+        
+        let nannyAccept = UNNotificationAction(identifier: NotificationCategory.nannyAccept.rawValue, title: "Aksepter", options: [ .foreground, .authenticationRequired])
+        let nannyConfirm = UNNotificationAction(identifier: NotificationCategory.nannyConfirmed.rawValue, title: "OK", options: [.destructive, .foreground])
+        let nannyReject = UNNotificationAction(identifier: NotificationCategory.nannyReject.rawValue, title: "Avvis", options: [.destructive, .authenticationRequired])
+        
+        let familyAccept = UNNotificationAction(identifier: NotificationCategory.familyAccept.rawValue, title: "Aksepter", options: [ .foreground, .authenticationRequired])
+        let familyConfirm = UNNotificationAction(identifier: NotificationCategory.familyConfirmed.rawValue, title: "OK", options: [.destructive, .foreground])
+        let familyReject = UNNotificationAction(identifier: NotificationCategory.familyReject.rawValue, title: "Avvis", options: [.destructive, .authenticationRequired])
+        
         // let actionLater = UNNotificationAction(identifier: "actionLater", title: "Påminnelse om 10 sekunder", options: [])
-        let actionShowDetails = UNNotificationAction(identifier: "actionShowDetails", title: "Vis detaljer", options: [.foreground])
-        let actionReject = UNNotificationAction(identifier: "actionReject", title: "Avvis", options: [.destructive, .authenticationRequired])
-        let messageResponse = UNNotificationAction(identifier: "messageResponse", title: "Svar", options: [.foreground, .authenticationRequired])
-        // identifier is "myCategory" == message in NSURL Request
-        let mapCategory = UNNotificationCategory(identifier: "mapRequest", actions: [nannyAccept, actionShowDetails, actionReject], intentIdentifiers: [], options: [])
-        let nannyCategory = UNNotificationCategory(identifier: "nannyRequest", actions: [nannyAccept, actionShowDetails, actionReject], intentIdentifiers: [], options: [])
-        let nannyConfirmed = UNNotificationCategory(identifier: "nannyConfirmed", actions: [nannyConfirm], intentIdentifiers: [], options: [])
-        let familyCategory = UNNotificationCategory(identifier: "familyRequest", actions: [familyAccept, actionShowDetails, actionReject], intentIdentifiers: [], options: [])
-        let messageCategory = UNNotificationCategory(identifier: "messageRequest", actions: [messageResponse, actionReject], intentIdentifiers: [], options: [])
-        UNUserNotificationCenter.current().setNotificationCategories([mapCategory, nannyCategory, nannyConfirmed, familyCategory, messageCategory])
+        // let actionShowDetails = UNNotificationAction(identifier: "actionShowDetails", title: "Vis detaljer", options: [.foreground])
+        // let actionReject = UNNotificationAction(identifier: "actionReject", title: "Avvis", options: [.destructive, .authenticationRequired])
+        
+        let messageRequest = UNNotificationAction(identifier: NotificationCategory.messageRequest.rawValue, title: "Svar", options: [.foreground, .authenticationRequired])
+        let messageAccept = UNNotificationAction(identifier: NotificationCategory.messageAccept.rawValue, title: "Ok", options: [.destructive, .authenticationRequired])
+        
+        // Notification Categories
+        // -----------------------
+        
+        let nannyCategory = UNNotificationCategory(identifier: NotificationCategory.nannyRequest.rawValue, actions: [nannyAccept, nannyConfirm, nannyReject], intentIdentifiers: [], options: [])
+        let nannyMapRequest = UNNotificationCategory(identifier: NotificationCategory.nannyMapRequest.rawValue, actions: [nannyAccept, nannyConfirm, nannyReject], intentIdentifiers: [], options: [])
+        
+        let familyCategory = UNNotificationCategory(identifier: NotificationCategory.familyRequest.rawValue, actions: [familyAccept, familyConfirm, familyReject], intentIdentifiers: [], options: [])
+        let familyMapAccept = UNNotificationCategory(identifier: NotificationCategory.nannyMapRequest.rawValue, actions: [familyAccept, familyReject], intentIdentifiers: [], options: [])
+        
+        let messageCategory = UNNotificationCategory(identifier: NotificationCategory.messageRequest.rawValue, actions: [messageRequest, messageAccept], intentIdentifiers: [], options: [])
+        UNUserNotificationCenter.current().setNotificationCategories([nannyCategory, nannyMapRequest, familyCategory, familyMapAccept, messageCategory])
     }
     
     // Facebook Part 3
@@ -275,7 +291,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                        willPresent notification: UNNotification,
                                        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         // Change this to your preferred presentation option
-        completionHandler([.sound])
+        completionHandler([.alert, .badge, .sound])
     }
     
     /// Called to let your app know which action was selected by the user for a given notification.
@@ -283,86 +299,119 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                        didReceive response: UNNotificationResponse,
                                        withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        // testing - Put action here
-        if response.actionIdentifier == "nannyAccept" {
-            
-            // Switch
-            let nannyID = userInfo["remoteID"] as? String ?? "noRemoteID"
-            let familyID = userInfo["userID"] as? String ?? "noUserID"
-            let requestID = userInfo["requestID"] as? String ?? "noRequestID"
-            
-            let nannyActive = DataService.instance.REF_NANNIES.child("active").child(nannyID)
-            let nannyStored = DataService.instance.REF_NANNIES.child("stored").child(familyID).child(nannyID)
-            
-            DataService.instance.moveValuesFromRefToRef(fromReference: nannyActive, toReference: nannyStored)
-            
-            let updateStatus = ["requestStatus":"accepted"]
-            let updateUserID = ["userID":familyID]
-            
-            let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(nannyID).child("requests").child(requestID)
-            privateRequest.updateChildValues(updateUserID)
-            privateRequest.updateChildValues(updateStatus)
-            
-            let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(nannyID).child(requestID)
-            publicRequest.child("userID").removeValue()
-            publicRequest.updateChildValues(updateStatus)
-            
-            let publicAccept = DataService.instance.REF_REQUESTS.child("public").child(familyID).child(requestID)
-            DataService.instance.copyValuesFromRefToRef(fromReference: publicRequest, toReference: privateRequest)
-            
-            publicRequest.updateChildValues(updateUserID)
-            DataService.instance.moveValuesFromRefToRef(fromReference: publicRequest, toReference: publicAccept)
-            
-            // Go to Message / Request location
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let vc = sb.instantiateInitialViewController()
-            window?.rootViewController = vc
-            guard let tabBarController = window?.rootViewController as? RAMAnimatedTabBarController else { return  }
-            
-            tabBarController.setSelectIndex(from: 0, to: 3)
-            tabBarController.tabBarItem.badgeValue = nil
-        } else if response.actionIdentifier == "actionLater" {
-            print("action later")
-        } else if response.actionIdentifier == "messageResponse" {
-            
-            // Go to Message / Request location
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let vc = sb.instantiateInitialViewController()
-            window?.rootViewController = vc
-            guard let tabBarController = window?.rootViewController as? RAMAnimatedTabBarController else { return  }
-            
-            tabBarController.setSelectIndex(from: 0, to: 1)
-            tabBarController.tabBarItem.badgeValue = nil
-            
-        } else if response.actionIdentifier == "actionReject" {
-            let remoteID = userInfo["remoteID"] as? String ?? "noRemoteID"
-            // let userID = userInfo["userID"] as? String ?? "noUserID"
-            let aps = userInfo["aps"] as? [String: Any]
-            let badge = aps?["badge"] as! Int
-            
-            DataService.instance.REF_USERS_PRIVATE.child(remoteID).child("badge").setValue(badge - 1)
-        } else if response.actionIdentifier == "nannyConfirm" {
-            
-            let familyID = userInfo["remoteID"] as? String ?? "noRemoteID"
-            let nannyID = userInfo["userID"] as? String ?? "noUserID"
-            let requestID = userInfo["requestID"] as? String ?? "noRequestID"
-            
-            let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(familyID).child("requests").child(requestID)
-            let updateUserID = ["userID": nannyID]
-            privateRequest.updateChildValues(updateUserID)
-            
-            let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(requestID)
-            publicRequest.child("familyID").removeValue()
-            
-            let updateStatus = ["requestStatus":"confirmed"]
-            publicRequest.updateChildValues(updateStatus)
+        let category = response.actionIdentifier
+        
+        func actionForNotificaion(notificationCategory: NotificationCategory) {
+            switch notificationCategory {
+            case .nannyRequest:
+                print("")
+            case .nannyMapRequest:
+                print("")
+            case .nannyAccept:
+                print("nannyAccept")
+                // Switch
+                let nannyID = userInfo["remoteID"] as? String ?? "noRemoteID"
+                let familyID = userInfo["userID"] as? String ?? "noUserID"
+                let requestID = userInfo["requestID"] as? String ?? "noRequestID"
+                
+                let nannyActive = DataService.instance.REF_NANNIES.child("active").child(nannyID)
+                let nannyStored = DataService.instance.REF_NANNIES.child("stored").child(familyID).child(nannyID)
+                
+                DataService.instance.moveValuesFromRefToRef(fromReference: nannyActive, toReference: nannyStored)
+                
+                let updateStatus = ["requestStatus":"accepted"]
+                let updateUserID = ["userID":familyID]
+                
+                let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(nannyID).child("requests").child(requestID)
+                privateRequest.updateChildValues(updateUserID)
+                privateRequest.updateChildValues(updateStatus)
+                
+                let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(nannyID).child(requestID)
+                publicRequest.child("userID").removeValue()
+                publicRequest.updateChildValues(updateStatus)
+                
+                let publicAccept = DataService.instance.REF_REQUESTS.child("public").child(familyID).child(requestID)
+                DataService.instance.copyValuesFromRefToRef(fromReference: publicRequest, toReference: privateRequest)
+                
+                publicRequest.updateChildValues(updateUserID)
+                DataService.instance.moveValuesFromRefToRef(fromReference: publicRequest, toReference: publicAccept)
+                
+                // Go to Message / Request location
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+                let vc = sb.instantiateInitialViewController()
+                window?.rootViewController = vc
+                guard let tabBarController = window?.rootViewController as? RAMAnimatedTabBarController else { return  }
+                
+                tabBarController.setSelectIndex(from: 0, to: 3)
+                tabBarController.tabBarItem.badgeValue = nil
+            case .nannyConfirmed:
+                print("")
+                let familyID = userInfo["remoteID"] as? String ?? "noRemoteID"
+                let nannyID = userInfo["userID"] as? String ?? "noUserID"
+                let requestID = userInfo["requestID"] as? String ?? "noRequestID"
+                
+                let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(familyID).child("requests").child(requestID)
+                let updateUserID = ["userID": nannyID]
+                privateRequest.updateChildValues(updateUserID)
+                
+                let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(requestID)
+                publicRequest.child("familyID").removeValue()
+                
+                let updateStatus = ["requestStatus":"confirmed"]
+                publicRequest.updateChildValues(updateStatus)
+            case .nannyReject:
+                print("")
+                let remoteID = userInfo["remoteID"] as? String ?? "noRemoteID"
+                // let userID = userInfo["userID"] as? String ?? "noUserID"
+                let aps = userInfo["aps"] as? [String: Any]
+                let badge = aps?["badge"] as! Int
+                
+                DataService.instance.REF_USERS_PRIVATE.child(remoteID).child("badge").setValue(badge - 1)
+            case .familyRequest:
+                print("")
+            case .familyAccept:
+                print("")
+            case .familyMapAccept:
+                print("")
+            case .familyReject:
+                print("")
+                let remoteID = userInfo["remoteID"] as? String ?? "noRemoteID"
+                // let userID = userInfo["userID"] as? String ?? "noUserID"
+                let aps = userInfo["aps"] as? [String: Any]
+                let badge = aps?["badge"] as! Int
+                
+                DataService.instance.REF_USERS_PRIVATE.child(remoteID).child("badge").setValue(badge - 1)
+            case .messageRequest:
+                // Go to Message / Request location
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+                let vc = sb.instantiateInitialViewController()
+                window?.rootViewController = vc
+                guard let tabBarController = window?.rootViewController as? RAMAnimatedTabBarController else { return  }
+                
+                tabBarController.setSelectIndex(from: 0, to: 1)
+                tabBarController.tabBarItem.badgeValue = nil
+            case .messageAccept:
+                print("")
+                
+            default:
+                print("")
+            }
         }
+        
+        actionForNotificaion(notificationCategory: notificationRequest(category: category))
+        
         // MARK: Action will happen on all Notification Events "including" all responses
         // Not launched if Notficitaion is ignored
         completionHandler: do {
             // DataService.instance.REF_NANNIES.child("-Kb0HQzRoxbSIrp0zfFu").removeValue()
         }
+        
+        
+        
+        
+        
     }
+    
 }
 
 

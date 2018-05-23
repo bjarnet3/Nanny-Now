@@ -11,11 +11,24 @@ import UIKit
 // Stored Images
 let imageCache = NSCache<NSString, UIImage>()
 
+// Completion Typealias
+public typealias Completion = () -> Void
+
 // Type Extension
 public extension String {
     var isEmptyStr:Bool{
         return self.trimmingCharacters(in: NSCharacterSet.whitespaces).isEmpty
     }
+}
+
+/// The size of this picture. It can be one of the following values: small, normal, large, album, square.
+public enum PictureSize : String {
+    case small = "small", normal = "normal", large = "large", album = "album", square = "square"
+}
+
+// Return Facebook Profile Picture URL with size
+public func getFacebookProfilePictureUrl(_ fid: String, _ size: PictureSize) -> String {
+    return "https://graph.facebook.com/" + fid + "/picture?type=\(size)"
 }
 
 extension UIImageView {

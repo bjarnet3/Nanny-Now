@@ -12,6 +12,31 @@ import SwiftKeychainWrapper
 
 var sendNotification = Notifications.instance.sendNotification
 
+/// Defination of category types will come here !!
+public enum NotificationCategory : String {
+    case nannyRequest = "nannyRequest"
+    case nannyMapRequest = "nannyMapRequest"
+    case nannyAccept = "nannyAccept"
+    case nannyConfirmed = "nannyConfirmed"
+    case nannyReject = "nannyReject"
+    
+    case familyRequest = "familyRequest"
+    case familyAccept = "familyAccept"
+    case familyMapAccept = "familyMapAccept"
+    case familyConfirmed = "familyConfirmed"
+    case familyReject = "familyReject"
+    
+    case messageRequest = "messageRequest"
+    case messageAccept = "messageAccept"
+    
+    case defaultValue = "default"
+}
+
+public func notificationRequest(category: String) -> NotificationCategory {
+    guard let notificaitonCategory = NotificationCategory(rawValue: category) else { return NotificationCategory.defaultValue }
+    return notificaitonCategory
+}
+
 /// Notification Singleton / with sendNotification() and sendNotificationResponse() function
 class Notifications {
     
@@ -89,17 +114,27 @@ class Notifications {
                                     // MARK: - Change this to display different Notificaiton Categories
                                     let category = categoryRequest.rawValue // "messageRequest"
                                     
-                                    // title = "Melding fra \(firstName):"
-                                    DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(text)")
+                                    switch categoryRequest {
+                                    case .messageRequest:
+                                        // title = "Melding fra \(firstName):"
+                                        DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(text)")
+                                    case .messageAccept:
+                                        // title = "Melding fra \(firstName):"
+                                        DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(text)")
+                                    default:
+                                        print("default")
+                                    }
                                     // DataService.instance.postToMessage(with: message)
                                     
                                     // For Advanced Rich Notificaiton Setup
-                                    let mediaUrl = getFacebookProfilePictureUrl(id, .large)
+                                    let mediaUrl = message._toUser?.imageName ?? getFacebookProfilePictureUrl(id, .large)
+                                    let userUrl = message._fromUser?.imageName ?? "userUrl"
                                     
                                     let dictionary =
                                         ["data":
                                             [ "category": category,
                                               "mediaUrl": mediaUrl,
+                                              "userUrl": userUrl,
                                               "requestID": requestID,
                                               "remoteID": remoteID,
                                               "userID"  : userID ],
@@ -224,8 +259,6 @@ class Notifications {
                                     let category = categoryRequest.rawValue // "messageRequest"
                                     
                                     switch categoryRequest {
-                                    case .mapRequest:
-                                        print("testing mapRequest")
                                     case .nannyRequest:
                                         title = "Forespørsel fra \(firstName):"
                                         
@@ -236,19 +269,31 @@ class Notifications {
                                         
                                         DataService.instance.postToRequest(with: request, reference: publicRequest)
                                         
-                                        let setUserID = ["userID" : userID]
+                                        let setUserID = ["userID" : userID,
+                                                         "requestID": requestID
+                                                         ]
                                         publicRequest.updateChildValues(setUserID)
                                         
                                         let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(userID).child("requests").child(requestID)
                                         
                                         DataService.instance.postToRequest(with: request, reference: privateRequest)
                                         
-                                        let setRemoteID = ["userID" : remoteID]
+                                        let setRemoteID = ["userID" : remoteID,
+                                                           "requestID": requestID
+                                                           ]
                                         privateRequest.updateChildValues(setRemoteID)
                                         
                                         let familyPrivate = DataService.instance.REF_FAMILIES.child("private").child(userID)
                                         let familyStored = DataService.instance.REF_FAMILIES.child("stored").child(remoteID).child(userID)
                                         DataService.instance.copyValuesFromRefToRef(fromReference: familyPrivate, toReference: familyStored)
+                                        
+                                    case .nannyMapRequest:
+                                        print("testing mapRequest")
+                                        
+                                    case .nannyAccept:
+                                        title = "\(firstName)"
+                                        // DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(message)")
+                                        // category = "default"
                                         
                                     case .nannyConfirmed:
                                         title = "Barnevakten \(firstName):"
@@ -256,16 +301,20 @@ class Notifications {
                                         let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(requestID)
                                         publicRequest.child("nannyID").removeValue()
                                         
-                                    case .messageRequest:
-                                        title = "Melding fra \(firstName):"
-                                        DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(title) \(message)")
-                                    case .messageResponse:
-                                        title = "Melding fra \(firstName):"
-                                        DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(title) \(message)")
-                                    case .nannyAccept:
+                                    case .nannyReject:
                                         title = "\(firstName)"
-                                        // DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(message)")
-                                    // category = "default"
+
+                                    case .familyRequest:
+                                        print("familyRequest")
+                                    case .familyAccept:
+                                        print("familyAccept")
+                                    case .familyMapAccept:
+                                        print("familyMapAccept")
+                                    case .familyConfirmed:
+                                        print("familyConfirmed")
+                                    case .familyReject:
+                                        print("familyReject")
+                                        
                                     default:
                                         title = "\(firstName)"
                                         // DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(title): \(message)")
@@ -401,8 +450,6 @@ class Notifications {
                                     let category = categoryRequest.rawValue // "messageRequest"
                                     
                                     switch categoryRequest {
-                                    case .mapRequest:
-                                        print("testing mapRequest")
                                     case .nannyRequest:
                                         title = "Forespørsel fra \(firstName):"
                                         
@@ -425,19 +472,32 @@ class Notifications {
                                         let nannyID = ["userID" : remoteID]
                                         privateRequest.updateChildValues(nannyID)
                                         privateUsers.updateChildValues(nannyID)
+                                        
+                                    case .nannyMapRequest:
+                                        print("nannyMapRequest")
+                                        
+                                    case .nannyAccept:
+                                        title = "\(firstName)"
+                                        // DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(message)")
+                                    // category = "default"
                                     case .nannyConfirmed:
                                         title = "Barnevakten \(firstName):"
                                         
                                         let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(requestID)
                                         publicRequest.child("nannyID").removeValue()
+                                    
+                                    case .nannyReject:
+                                        print("nannyReject")
+                                        
                                         
                                     case .messageRequest:
                                         title = "Melding fra \(firstName):"
                                         DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(title) \(message)")
-                                    case .nannyAccept:
-                                        title = "\(firstName)"
-                                        // DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(message)")
-                                    // category = "default"
+                                    
+                                    case .messageAccept:
+                                        title = "Melding fra \(firstName):"
+                                        DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(title) \(message)")
+
                                     default:
                                         title = "\(firstName)"
                                         // DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(title): \(message)")

@@ -22,53 +22,110 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="100" id="oYf-vt-OV3">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="100"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NotificationMessageLeftCell" id="Qrb-RW-BeR" customClass="NotificationMessageCell" customModule="NotificationMessageResponse" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oYf-vt-OV3" id="GHA-Hl-JJh">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qrb-RW-BeR" id="fpY-nS-zvh">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Halloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!!" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EbH-PB-hJb">
+                                                    <rect key="frame" x="58" y="3" width="247" height="39"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="12"/>
+                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="nanny-profil" translatesAutoresizingMaskIntoConstraints="NO" id="fb5-HL-V5o" customClass="NannyImageView" customModule="NotificationMessageResponse" customModuleProvider="target">
+                                                    <rect key="frame" x="15" y="5" width="35" height="35"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="messageLabel" destination="EbH-PB-hJb" id="Zgb-SD-ecd"/>
+                                            <outlet property="profileImage" destination="fb5-HL-V5o" id="wAG-CX-xyq"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NotificationMessageRightCell" id="aSo-DB-JcW" customClass="NotificationMessageCell" customModule="NotificationMessageResponse" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aSo-DB-JcW" id="o2I-a6-taN">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Halloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!!" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ee0-ul-4Wj">
+                                                    <rect key="frame" x="17" y="3" width="245" height="39"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="12"/>
+                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="nanny-profil" translatesAutoresizingMaskIntoConstraints="NO" id="hp5-fB-AdB" customClass="NannyImageView" customModule="NotificationMessageResponse" customModuleProvider="target">
+                                                    <rect key="frame" x="270" y="4" width="35" height="35"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="messageLabel" destination="Ee0-ul-4Wj" id="7vy-sa-3PG"/>
+                                            <outlet property="profileImage" destination="hp5-fB-AdB" id="cmS-Tw-xoN"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q9C-IG-mxh">
-                                <rect key="frame" x="0.0" y="244" width="320" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ld-Qr-Vic">
-                                <rect key="frame" x="164" y="276" width="156" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                <state key="normal" title="Send Response">
-                                    <color key="titleColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6fv-Ai-eyc">
-                                <rect key="frame" x="0.0" y="276" width="162" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IwX-Z1-nuj" customClass="FrostyView" customModule="NotificationMessageResponse" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="265" width="320" height="55"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GIB-Uo-DqO">
+                                        <rect key="frame" x="8" y="8" width="242" height="39"/>
+                                        <color key="textColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="textFieldEnter:" destination="M4Y-Lb-cyx" eventType="primaryActionTriggered" id="dFl-Ls-QAm"/>
+                                            <action selector="textFieldValue:" destination="M4Y-Lb-cyx" eventType="editingChanged" id="lnu-aR-mJf"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krR-ks-5vV">
+                                        <rect key="frame" x="258" y="15" width="52" height="24"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                        <state key="normal" title="AVBRYT">
+                                            <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="sendButton:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="eor-Eh-h7q"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="GIB-Uo-DqO" secondAttribute="trailing" constant="70" id="940-gI-H5y"/>
+                                    <constraint firstAttribute="trailing" secondItem="krR-ks-5vV" secondAttribute="trailing" constant="10" id="Byq-xB-8CG"/>
+                                    <constraint firstAttribute="bottom" secondItem="GIB-Uo-DqO" secondAttribute="bottom" constant="8" id="FMn-Gg-QqD"/>
+                                    <constraint firstItem="krR-ks-5vV" firstAttribute="leading" secondItem="GIB-Uo-DqO" secondAttribute="trailing" constant="8" id="O5i-Cx-vRK"/>
+                                    <constraint firstAttribute="height" constant="55" id="WkN-3x-nw8"/>
+                                    <constraint firstItem="GIB-Uo-DqO" firstAttribute="top" secondItem="IwX-Z1-nuj" secondAttribute="top" constant="8" id="eLt-vc-k3j"/>
+                                    <constraint firstAttribute="bottom" secondItem="krR-ks-5vV" secondAttribute="bottom" constant="16" id="i7T-EP-bv6"/>
+                                    <constraint firstItem="krR-ks-5vV" firstAttribute="top" secondItem="IwX-Z1-nuj" secondAttribute="top" constant="15" id="idE-kh-GA6"/>
+                                    <constraint firstItem="GIB-Uo-DqO" firstAttribute="leading" secondItem="IwX-Z1-nuj" secondAttribute="leading" constant="8" id="tKu-Pp-oHg"/>
+                                </constraints>
+                            </view>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="2BE-c3-nQJ" firstAttribute="trailing" secondItem="IwX-Z1-nuj" secondAttribute="trailing" id="1ce-Uh-dGL"/>
+                            <constraint firstItem="2BE-c3-nQJ" firstAttribute="bottom" secondItem="IwX-Z1-nuj" secondAttribute="bottom" id="HMH-ba-VYp"/>
+                            <constraint firstItem="IwX-Z1-nuj" firstAttribute="leading" secondItem="2BE-c3-nQJ" secondAttribute="leading" id="ZMH-fT-SYr"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="2BE-c3-nQJ"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="320"/>
                     <connections>
-                        <outlet property="cancelButton" destination="6fv-Ai-eyc" id="zKn-Nv-62m"/>
-                        <outlet property="sendButton" destination="4Ld-Qr-Vic" id="GI6-O5-Uh7"/>
+                        <outlet property="sendButton" destination="krR-ks-5vV" id="ccE-D2-dRJ"/>
                         <outlet property="tableView" destination="wyC-BQ-AtZ" id="qc4-Fk-RRb"/>
-                        <outlet property="textField" destination="q9C-IG-mxh" id="evI-YV-Bes"/>
+                        <outlet property="textField" destination="GIB-Uo-DqO" id="qx1-m1-gE3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -76,4 +133,7 @@
             <point key="canvasLocation" x="35.200000000000003" y="32.383808095952027"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="nanny-profil" width="550" height="550"/>
+    </resources>
 </document>

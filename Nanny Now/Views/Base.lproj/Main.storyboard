@@ -31,7 +31,7 @@
                                 <rect key="frame" x="0.0" y="45" width="375" height="622"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FirstCell" rowHeight="220" id="zzj-Ec-fdU" customClass="FirstTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FirstCell" rowHeight="220" id="zzj-Ec-fdU" customClass="FirstTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="220"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zzj-Ec-fdU" id="90q-cD-CLc">
@@ -97,7 +97,7 @@
                                             <outlet property="yrkeLbl" destination="mgo-pO-Nc7" id="ZEy-x3-Mga"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingsCell" rowHeight="65" id="1Dz-w1-UcJ" customClass="SettingsTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingsCell" rowHeight="65" id="1Dz-w1-UcJ" customClass="SettingsTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="248" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1Dz-w1-UcJ" id="Vgc-ek-BsD">
@@ -221,7 +221,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="28" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FamilyCell" rowHeight="312" id="dLQ-0m-lEL" customClass="FamilyTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FamilyCell" rowHeight="312" id="dLQ-0m-lEL" customClass="FamilyTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="312"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dLQ-0m-lEL" id="g9S-eO-zqP">
@@ -660,7 +660,7 @@
                                 <rect key="frame" x="0.0" y="323" width="375" height="344"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NannyCell" rowHeight="65" id="RIO-tA-f2n" customClass="NannyTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NannyCell" rowHeight="65" id="RIO-tA-f2n" customClass="NannyTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RIO-tA-f2n" id="n0q-TZ-FRH">
@@ -1106,7 +1106,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="639"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubSettingsHeaderCell" rowHeight="65" id="Mfa-HX-e5d" customClass="SettingsTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubSettingsHeaderCell" rowHeight="65" id="Mfa-HX-e5d" customClass="SettingsTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mfa-HX-e5d" id="XsF-N8-TCp">
@@ -1150,7 +1150,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubSettingsBodyCell" rowHeight="65" id="FT2-lR-cWs" customClass="SettingsTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubSettingsBodyCell" rowHeight="65" id="FT2-lR-cWs" customClass="SettingsTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="120.5" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FT2-lR-cWs" id="Cyc-zS-h5q">
@@ -1199,7 +1199,7 @@
                                             <outlet property="titleLbl" destination="ULJ-QJ-o1g" id="YZY-k2-w9E"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubSettingsFooterCell" rowHeight="65" id="hu1-ga-nhF" customClass="SettingsTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubSettingsFooterCell" rowHeight="65" id="hu1-ga-nhF" customClass="SettingsTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="185.5" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hu1-ga-nhF" id="X3D-LE-9yl">
@@ -1336,7 +1336,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                 <rect key="frame" x="0.0" y="225" width="375" height="442"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HeaderTableViewCell" rowHeight="40" id="J5t-ME-zdu" customClass="HeaderTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HeaderTableViewCell" rowHeight="40" id="J5t-ME-zdu" customClass="HeaderTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="20" width="375" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="J5t-ME-zdu" id="iPS-CC-1WE">
@@ -1361,7 +1361,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                             <outlet property="headerTitle" destination="2wq-01-8wh" id="V6x-kM-7uP"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FriendsTableViewCell" rowHeight="160" id="Gy3-t4-ssP" customClass="FriendsTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FriendsTableViewCell" rowHeight="160" id="Gy3-t4-ssP" customClass="FriendsTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="60" width="375" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gy3-t4-ssP" id="bD9-Fk-Kw8">
@@ -1432,7 +1432,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                             <outlet property="collectionView" destination="IYV-tL-D4Y" id="9cn-Wx-TIw"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReviewTableViewCell" rowHeight="200" id="u6U-qF-qPH" customClass="ReviewTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReviewTableViewCell" rowHeight="200" id="u6U-qF-qPH" customClass="ReviewTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="220" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="u6U-qF-qPH" id="CQU-HV-Leo">
@@ -2021,7 +2021,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageTableViewCell" id="Wk0-3T-LmW" customClass="MessageTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageTableViewCell" id="Wk0-3T-LmW" customClass="MessageTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="355" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wk0-3T-LmW" id="YwM-zF-5GM">
@@ -2036,19 +2036,19 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="IJx-Vb-tAd">
-                                                    <rect key="frame" x="81" y="10" width="264" height="24"/>
+                                                    <rect key="frame" x="81" y="10" width="74.5" height="24"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="A6U-zG-Xhi">
-                                                            <rect key="frame" x="0.0" y="0.0" width="259" height="18"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="69.5" height="18"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXB-nW-4Od">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="126.5" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="34" height="18"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20:50" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiH-Fq-QwT">
-                                                                    <rect key="frame" x="131.5" y="0.0" width="127.5" height="18"/>
+                                                                    <rect key="frame" x="39" y="0.0" width="30.5" height="18"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
@@ -2056,7 +2056,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vm-gs-kuY">
-                                                            <rect key="frame" x="0.0" y="18" width="264" height="6"/>
+                                                            <rect key="frame" x="0.0" y="18" width="39" height="6"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                                                             <color key="textColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -2096,7 +2096,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="50" maxX="0.0" maxY="100"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RequestHeaderCell" focusStyle="custom" rowHeight="40" id="qh9-q2-Ylx" customClass="RequestHeaderCell" customModule="Nanny_Now" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RequestHeaderCell" focusStyle="custom" rowHeight="40" id="qh9-q2-Ylx" customClass="RequestHeaderCell" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qh9-q2-Ylx" id="SLg-S1-lp1">
@@ -2108,7 +2108,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                             <outletCollection property="gestureRecognizers" destination="vJJ-EC-gA4" appends="YES" id="1aB-cL-3ZE"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RequestBodyCell" rowHeight="180" id="hDV-X7-JOj" customClass="RequestBodyCell" customModule="Nanny_Now" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RequestBodyCell" rowHeight="180" id="hDV-X7-JOj" customClass="RequestBodyCell" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="68" width="375" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hDV-X7-JOj" id="GD0-48-R5b">
@@ -2141,7 +2141,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                             <outlet property="view" destination="6LM-aO-ro8" id="Evr-2G-dem"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RequestUserCell" rowHeight="80" id="Hem-Ml-rcr" customClass="RequestUserCell" customModule="Nanny_Now" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RequestUserCell" rowHeight="80" id="Hem-Ml-rcr" customClass="RequestUserCell" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="248" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hem-Ml-rcr" id="nxJ-6K-edE">
@@ -2224,7 +2224,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                             <outlet property="timeToLabel" destination="Hay-ub-5Wy" id="eB6-u8-Hm6"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RequestExtendedCell" rowHeight="40" id="xGL-hd-QgU" customClass="RequestExtendedCell" customModule="Nanny_Now" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RequestExtendedCell" rowHeight="40" id="xGL-hd-QgU" customClass="RequestExtendedCell" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="328" width="375" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xGL-hd-QgU" id="TzO-8g-YTF">
@@ -2341,7 +2341,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageDetailLeftCell" id="AzS-p7-tDQ" customClass="MessageDetailTableCell" customModule="Nanny_Now" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageDetailLeftCell" id="AzS-p7-tDQ" customClass="MessageDetailTableCell" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AzS-p7-tDQ" id="CgU-XN-3z2">
@@ -2366,7 +2366,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                             <outlet property="profileImage" destination="3h7-UD-wh4" id="ENf-pX-apk"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageDetailRightCell" id="zvC-Jb-tXR" customClass="MessageDetailTableCell" customModule="Nanny_Now" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageDetailRightCell" id="zvC-Jb-tXR" customClass="MessageDetailTableCell" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zvC-Jb-tXR" id="EMY-c6-wuJ">
@@ -2463,9 +2463,9 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                     </view>
                     <connections>
                         <outlet property="bottomLayoutTextField" destination="B5W-7y-n2y" id="c7A-xT-LsK"/>
-                        <outlet property="chatTextField" destination="epV-9u-eCf" id="SGw-JR-xLI"/>
-                        <outlet property="sendButtonTitle" destination="nEX-VP-fz7" id="g7o-eO-tIt"/>
+                        <outlet property="sendButton" destination="nEX-VP-fz7" id="g7o-eO-tIt"/>
                         <outlet property="tableView" destination="bCr-ei-flI" id="jPZ-N4-tcL"/>
+                        <outlet property="textField" destination="epV-9u-eCf" id="SGw-JR-xLI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6n-cB-huM" userLabel="First Responder" sceneMemberID="firstResponder"/>

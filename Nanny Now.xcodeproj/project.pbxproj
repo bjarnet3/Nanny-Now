@@ -16,6 +16,8 @@
 		5C2F4BBB20A7FB1100BFB313 /* MessageDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F4BBA20A7FB1100BFB313 /* MessageDetailTableCell.swift */; };
 		5C33CFC71DB422830075675E /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C33CFC61DB422830075675E /* Functions.swift */; };
 		5C389686208968FD008C7E12 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C389685208968FD008C7E12 /* Friends.swift */; };
+		5C3D884A20B5F1C7008C84D4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1104141DF56A4200C7FB46 /* Extensions.swift */; };
+		5C3D884D20B5F276008C84D4 /* NotificationMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3D884C20B5F276008C84D4 /* NotificationMessageCell.swift */; };
 		5C3D9ACA202AE128007A9147 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3D9AC9202AE128007A9147 /* MapKit.framework */; };
 		5C3D9ACB202AE131007A9147 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3D9AC9202AE128007A9147 /* MapKit.framework */; };
 		5C41A4EA207C34B00025A4AE /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C41A4E9207C34B00025A4AE /* FriendsTableViewCell.swift */; };
@@ -143,6 +145,7 @@
 		5C2F4BBA20A7FB1100BFB313 /* MessageDetailTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailTableCell.swift; sourceTree = "<group>"; };
 		5C33CFC61DB422830075675E /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		5C389685208968FD008C7E12 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
+		5C3D884C20B5F276008C84D4 /* NotificationMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationMessageCell.swift; sourceTree = "<group>"; };
 		5C3D9AC9202AE128007A9147 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		5C41A4E9207C34B00025A4AE /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
 		5C4C30811FD9DF9500151AB6 /* FamilyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyTableViewCell.swift; sourceTree = "<group>"; };
@@ -320,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				5CAD362F20A8EFBC00C56FCE /* NotificationViewController.swift */,
+				5C3D884C20B5F276008C84D4 /* NotificationMessageCell.swift */,
 				5CAD363120A8EFBC00C56FCE /* MainInterface.storyboard */,
 				5CAD363420A8EFBC00C56FCE /* Info.plist */,
 			);
@@ -726,6 +730,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CAD363020A8EFBC00C56FCE /* NotificationViewController.swift in Sources */,
+				5C3D884D20B5F276008C84D4 /* NotificationMessageCell.swift in Sources */,
+				5C3D884A20B5F1C7008C84D4 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

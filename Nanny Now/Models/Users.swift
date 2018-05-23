@@ -7,7 +7,6 @@
 //
 
 import MapKit
-import Firebase
 import CoreLocation
 
 class User : MKPointAnnotation {
@@ -42,22 +41,7 @@ class User : MKPointAnnotation {
     // Computed Properties
     // -------------------
     var userUID: String { return _userUID! }
-    var userFID: String {
-        if let userFID = _userFID {
-            return userFID
-        } else {
-            if _userUID != nil {
-                let fidREF = DataService.instance.REF_USERS_PUBLIC.child(self.userUID).child("fid")
-                fidREF.observeSingleEvent(of: .value) { snapshot in
-                    if let userFID = snapshot.value as? String {
-                        self._userFID = userFID
-                    }
-                }
-                return _userFID!
-            }
-        }
-        return _userFID!
-    }
+    var userFID: String { return _userFID! }
     
     // -------------------
     var familyID: String? { return _familyID }
@@ -87,19 +71,6 @@ class User : MKPointAnnotation {
         self.title = self.firstName
         self.subtitle = self.jobTitle
         self.coordinate = (self.location?.coordinate)!
-    }
-    
-    // NOT TESTED YET
-    func setFID(from userUID: String) {
-        let userREF = DataService.instance.REF_USERS_PRIVATE.child(userUID)
-        userREF.observeSingleEvent(of: .value, with: { snapshot in
-            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
-                for snapFID in snapshot {
-                    self._userFID = snapFID.key
-                    print(snapFID.key)
-                }
-            }
-        })
     }
     
     // Options Configurations (get)

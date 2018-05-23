@@ -21,9 +21,9 @@ class MessageDetailVC: UIViewController {
     // MARK: - IBOutlet: Connection to Storyboard
     // ----------------------------------------
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var chatTextField: UITextField!
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var bottomLayoutTextField: NSLayoutConstraint!
-    @IBOutlet weak var sendButtonTitle: UIButton!
     
     // MARK: - Properties: Array & Varables
     // -------------------------------------
@@ -61,9 +61,9 @@ class MessageDetailVC: UIViewController {
     
     @IBAction func textFieldValue(_ sender: UITextField) {
         if (sender.text?.isEmpty)! {
-            self.sendButtonTitle.setTitle("AVBRYT", for: .normal)
+            self.sendButton.setTitle("AVBRYT", for: .normal)
         } else {
-            self.sendButtonTitle.setTitle("SEND", for: .normal)
+            self.sendButton.setTitle("SEND", for: .normal)
         }
     }
     
@@ -85,16 +85,16 @@ class MessageDetailVC: UIViewController {
     }
     
     private func sendMessage() {
-        if let messageText = chatTextField.text {
+        if let messageText = textField.text {
             // Send Message to remoteUser
             // sendNotification(messageText: text)
             addMessage(messageText: messageText)
             // Remove text from Textfield
-            self.chatTextField.text = ""
+            self.textField.text = ""
             // Dismiss Keyboard
-            self.chatTextField.endEditing(true)
+            self.textField.endEditing(true)
             // Set Title To AVBRYT
-            self.sendButtonTitle.setTitle("AVBRYT", for: .normal)
+            self.sendButton.setTitle("AVBRYT", for: .normal)
         }
     }
     

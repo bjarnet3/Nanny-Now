@@ -189,7 +189,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
             
             let requestMessage = "Melding til: \(lastNanny.firstName)"
             // Send Message
-            let message = Message(from: (self.user?.userUID)!, to: lastNanny.userUID, messageID: nil, message: message ?? requestMessage, messageTime: returnTimeStamp() , highlighted: true, requestCategory: requestCategory ?? .messageResponse)
+            let message = Message(from: (self.user?.userUID)!, to: lastNanny.userUID, messageID: nil, message: message ?? requestMessage, messageTime: returnTimeStamp() , highlighted: true, requestCategory: requestCategory ?? .messageRequest)
             
             // let anotherMessage = Message(from: self.user!, to: lastNanny, message: requestMessage)
             
@@ -971,7 +971,7 @@ extension NannyViewController {
         
         let sendMapRequest = UIAlertAction(title: "Send Kart Forespørsel", style: .default) { (_) in
             if lowPowerModeDisabled {
-                Notifications.instance.sendNotification(to: self.nannies[row].userUID, text: "mapRequest", categoryRequest: .mapRequest)
+                Notifications.instance.sendNotification(to: self.nannies[row].userUID, text: "mapRequest", categoryRequest: .nannyMapRequest)
                     // sendNotification(userIDatRow, dt.description, .nannyRequest, "")
                 self.view.fadeIn()
             }
@@ -979,7 +979,7 @@ extension NannyViewController {
         
         let sendMessageRequest = UIAlertAction(title: "Send MSG Response", style: .default) { (_) in
             if lowPowerModeDisabled {
-                Notifications.instance.sendNotification(to: self.nannies[row].userUID, text: "This is a message response", categoryRequest: .messageResponse)
+                Notifications.instance.sendNotification(to: self.nannies[row].userUID, text: "This is a message response", categoryRequest: .messageRequest)
                 self.view.fadeIn()
             }
         }

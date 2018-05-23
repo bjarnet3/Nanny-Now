@@ -23,25 +23,6 @@ public func requestStatusString(request: String) -> RequestStatus? {
     return RequestStatus(rawValue: request)
 }
 
-/// Defination of category types will come here !!
-public enum NotificationCategory : String {
-    case nannyRequest = "nannyRequest"
-    case nannyConfirmed = "nannyConfirmed"
-    case nannyAccept = "nannyAccept"
-    case familyRequest = "familyRequest"
-    case familyAccept = "familyAccept"
-    case mapRequest = "mapRequest"
-    
-    case messageRequest = "messageRequest"
-    case messageResponse = "messageResponse"
-    
-    case defaultValue = "default"
-}
-
-public func notificationRequest(category: String) -> NotificationCategory? {
-    return NotificationCategory(rawValue: category)
-}
-
 struct Request {
     
     // Personal information (Private)
@@ -88,8 +69,9 @@ struct Request {
     
     var requestCategory: String {
         get { return _requestCategory.rawValue }
-            set { if let request = notificationRequest(category: newValue) {
-                self._requestCategory = request } } }
+            set {
+                let request = notificationRequest(category: newValue)
+                self._requestCategory = request  } }
     
     var highlighted: Bool {
         get { return _highlighted }
@@ -198,7 +180,7 @@ struct Request {
         self._message = message == nil ? "Kan du stille som barnevakt mellom" : message!
         self._amount = requestAmount
         self._requestStatus = requestStatusString(request: requestStatus)!
-        self._requestCategory = notificationRequest(category: requestCategory)!
+        self._requestCategory = notificationRequest(category: requestCategory)
     }
     
     

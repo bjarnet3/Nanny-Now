@@ -8,8 +8,6 @@
 
 import UIKit
 
-public typealias Completion = () -> Void
-
 // Static User ID, Facebook ID, Post ID og Request ID
 let KEY_UID = "uid"
 let KEY_FID = "fid"
