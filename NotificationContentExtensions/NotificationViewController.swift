@@ -94,8 +94,6 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         super.viewDidLoad()
         // The solution to not drawing polyline
         mapView.delegate = self
-        
-        print("viewDidLoad")
     }
     
     func didReceive(_ notification: UNNotification) {

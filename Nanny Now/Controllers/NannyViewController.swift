@@ -120,8 +120,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     // Send Simple Message
     @IBAction func sendRequest(_ sender: UIButton) {
         if let lastRow = lastRowSelected?.row {
-            
-            guard let user = self.user else { return }
             let lastNanny = self.nannies[lastRow]
             
             var requestMessage = "Melding til: \(lastNanny.firstName)"
@@ -129,18 +127,18 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
             
             if self.requestType.selectedSegmentIndex <= 1 {
                 // Send Request
-                var request = Request(nanny: lastNanny, user: user, timeFrom: self.fromDateTime.date, timeTo: self.toDateTime.date, message: requestMessage)
+                var request = Request(nanny: lastNanny, user: self.user!, timeFrom: self.fromDateTime.date, timeTo: self.toDateTime.date, message: requestMessage)
                 if self.requestType.selectedSegmentIndex == 1 {
                     request.requestCategory = NotificationCategory.nannyMapRequest.rawValue
                 } else {
                     request.requestCategory = NotificationCategory.nannyRequest.rawValue
                 }
-                Notifications.instance.sendNotifications(with: request)
+                Notifications.instance.sendNotification(with: request)
                 
             } else {
                 // sendMessageResponse()
                 // Send Message
-                let message = Message(from: user, to: lastNanny, message: requestMessage)
+                let message = Message(from: self.user!, to: lastNanny, message: requestMessage)
                 Notifications.instance.sendNotifications(with: message)
             }
         }
@@ -980,6 +978,7 @@ extension NannyViewController {
         let sendMapRequest = UIAlertAction(title: "Send Kart Forespørsel", style: .default) { (_) in
             if lowPowerModeDisabled {
                 if let lastRow = self.lastRowSelected?.row {
+                    
                     let lastNanny = self.nannies[lastRow]
                     
                     var requestMessage = "Melding til: \(lastNanny.firstName)"
@@ -989,10 +988,11 @@ extension NannyViewController {
                     var request = Request(nanny: lastNanny, user: self.user!, timeFrom: self.fromDateTime.date, timeTo: self.toDateTime.date, message: requestMessage)
                     
                     request.requestCategory = NotificationCategory.nannyMapRequest.rawValue
-                    Notifications.instance.sendNotifications(with: request)
+                    Notifications.instance.sendNotification(with: request)
                 }
                 
                 self.exitAllMenu()
+                
                 for selectedAnnotation in self.mapView.selectedAnnotations {
                     self.mapView.deselectAnnotation(selectedAnnotation, animated: true) }
                 self.mapView.showAnnotations(self.nannies, animated: lowPowerModeDisabled)

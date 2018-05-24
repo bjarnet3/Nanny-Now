@@ -222,7 +222,6 @@ extension NotificationViewController {
         self.tableView.reloadData()
         print(messages.count)
     }
-    
 }
 
 extension NotificationViewController: UITableViewDelegate, UITableViewDataSource {

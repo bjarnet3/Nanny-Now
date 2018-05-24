@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 import SwiftKeychainWrapper
 
-var sendNotification = Notifications.instance.sendNotification
+var sendNotifications = Notifications.instance.sendNotifications
 
 /// Defination of category types will come here !!
 public enum NotificationCategory : String {
@@ -177,11 +177,15 @@ class Notifications {
         })
     }
     
-    func sendNotifications(with request: Request) {
-        let remoteID = request.nannyID
-        let text = request.message
-        let categoryRequest: NotificationCategory = NotificationCategory(rawValue: request.requestCategory)!
+    func sendNotification(with request: Request) {
         let requestID = request.requestID
+        let message = request.message
+        let categoryRequest: NotificationCategory = NotificationCategory(rawValue: request.requestCategory)!
+        
+        guard let user = request._user else { return }
+        guard let remote = request._nanny else { return }
+        
+        let remoteID = request.nannyID
         
         let url = NSURL(string: "https://fcm.googleapis.com/fcm/send")!
         let session = URLSession.shared
@@ -190,11 +194,11 @@ class Notifications {
         urlRequest.httpMethod = "POST"
         urlRequest.cachePolicy = URLRequest.CachePolicy.reloadIgnoringCacheData
         
-        guard let userID = KeychainWrapper.standard.string(forKey: KEY_UID) else {
+        guard let userUID = KeychainWrapper.standard.string(forKey: KEY_UID) else {
             return
         }
         
-        let nameRef = DataService.instance.REF_USERS_PRIVATE.child(userID).child("first_name")
+        let nameRef = DataService.instance.REF_USERS_PRIVATE.child(userUID).child("first_name")
         nameRef.observeSingleEvent(of: .value, with: { (snapshot) in
             
             if !snapshot.exists() { return }
@@ -203,7 +207,7 @@ class Notifications {
                 let firstName = snapshot.value as! String
                 // print(snapshot.value as! String)
                 
-                let idRef = DataService.instance.REF_USERS_PRIVATE.child(userID).child("fid")
+                let idRef = DataService.instance.REF_USERS_PRIVATE.child(userUID).child("fid")
                 idRef.observeSingleEvent(of: .value, with: { (snapshot) in
                     
                     if !snapshot.exists() { return }
@@ -248,15 +252,15 @@ class Notifications {
                                         badgeRef.setValue(badge)
                                     }
                                     
-                                    let remoteLat = 60.1890322
-                                    let remoteLong = 5.9254423
+                                    let userLat = user.location?.coordinate.latitude ?? 60.12424245
+                                    let userLong = user.location?.coordinate.longitude ?? 5.4343453
                                     
-                                    let userLat = 60.12424245
-                                    let userLong = 5.4343453
+                                    let remoteLat = remote.location?.coordinate.latitude ?? 60.1890322
+                                    let remoteLong = remote.location?.coordinate.longitude ?? 5.9254423
                                     
                                     // Get tokens from Database
                                     let registration_ids = tokens
-                                    let message = text
+                                    let message = message
                                     var title = "\(firstName)"
                                     var requestID = requestID
                                     
@@ -274,12 +278,12 @@ class Notifications {
                                         
                                         DataService.instance.postToRequest(with: request, reference: publicRequest)
                                         
-                                        let setUserID = ["userID" : userID,
+                                        let setUserID = ["userID" : userUID,
                                                          "requestID": requestID
                                                          ]
                                         publicRequest.updateChildValues(setUserID)
                                         
-                                        let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(userID).child("requests").child(requestID)
+                                        let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(userUID).child("requests").child(requestID)
                                         
                                         DataService.instance.postToRequest(with: request, reference: privateRequest)
                                         
@@ -288,8 +292,8 @@ class Notifications {
                                                            ]
                                         privateRequest.updateChildValues(setRemoteID)
                                         
-                                        let familyPrivate = DataService.instance.REF_FAMILIES.child("private").child(userID)
-                                        let familyStored = DataService.instance.REF_FAMILIES.child("stored").child(remoteID).child(userID)
+                                        let familyPrivate = DataService.instance.REF_FAMILIES.child("private").child(userUID)
+                                        let familyStored = DataService.instance.REF_FAMILIES.child("stored").child(remoteID).child(userUID)
                                         DataService.instance.copyValuesFromRefToRef(fromReference: familyPrivate, toReference: familyStored)
                                         
                                     case .nannyMapRequest:
@@ -324,10 +328,10 @@ class Notifications {
                                         title = "\(firstName)"
                                         // DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(title): \(message)")
                                     }
-                                    
+
                                     // For Advanced Rich Notificaiton Setup
-                                    let remoteURL = request._nanny?.imageName ?? getFacebookProfilePictureUrl(id, .large)
-                                    guard let userURL = request._user?.imageName else { return }
+                                    let remoteURL = request._nanny?.imageName ?? ""
+                                    let userURL = request._user?.imageName ?? getFacebookProfilePictureUrl(id, .large)
                                     
                                     let dictionary =
                                         ["data":
@@ -339,7 +343,7 @@ class Notifications {
                                               "remoteLat": remoteLat,
                                               "remoteLong": remoteLong,
                                               
-                                              "userID"  : userID,
+                                              "userID"  : userUID,
                                               "userURL": userURL,
                                               "userLat": userLat,
                                               "userLong": userLong ],
