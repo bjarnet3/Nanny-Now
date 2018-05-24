@@ -184,21 +184,20 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         
         let userInfo = notification.request.content.userInfo
         
-        // let userImageUrl = AnyHashable("userUrl")
-        let remoteImageUrl = AnyHashable("mediaUrl")
-        
-        print(remoteImageUrl)
-        
         let userID = userInfo["userID"] as? String
         let remoteID = userInfo["remoteID"] as? String
         
-        // let userURL = userInfo[userImageUrl]! as? String
-        let remoteURL = userInfo[remoteImageUrl]! as? String
+        // let userImageUrl = AnyHashable("userUrl")
+        let userURL = AnyHashable("remoteURL")
+        let remoteURL = AnyHashable("userURL")
         
-        let messageText = notification.request.content.title
+        let userImageName = userInfo[userURL]! as? String
+        let remoteImageName = userInfo[remoteURL]! as? String
         
-        let user = User(userUID: userID, imageName: remoteURL, firstName: "userName")
-        let remoteUser = User(userUID: remoteID, imageName: remoteURL, firstName: "remoteName")
+        let messageText = notification.request.content.body
+        
+        let user = User(userUID: userID, imageName: userImageName, firstName: "userName")
+        let remoteUser = User(userUID: remoteID, imageName: remoteImageName, firstName: "remoteName")
         
         setupView(user: user, remoteUser: remoteUser)
         

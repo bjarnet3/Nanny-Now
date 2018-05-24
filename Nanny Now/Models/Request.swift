@@ -77,7 +77,8 @@ struct Request {
         get { return _highlighted }
             set { self.highlighted = newValue } }
     
-    
+    // Personal Information
+    // --------------------
     var firstName: String {
         get { guard let name = _firstName else { return "Anonymous" }
             return name
@@ -96,6 +97,8 @@ struct Request {
         }
     }
     
+    // Identifications
+    // ---------------
     var nannyID: String {
         get { return _nannyID }
             set { self._nannyID = newValue } }
@@ -111,6 +114,25 @@ struct Request {
                 return userID } }
         set { self._familyID = newValue } }
     
+    // Users & Groups
+    // --------------
+    var user: User {
+        get { return _user! }
+        set { self._user = newValue }
+    }
+    
+    var nanny: Nanny {
+        get { return _nanny! }
+        set { self.nanny = newValue }
+    }
+    
+    var family: Family {
+        get { return _family! }
+        set { self._family = newValue }
+    }
+    
+    // Time & Date
+    // -----------
     var timeRequested: String {
         get { return dateTimeToString(_timeRequested) }
             set { self._timeRequested = stringToDateTime(newValue) } }
@@ -123,6 +145,8 @@ struct Request {
         get { return dateTimeToString(_timeTo)  }
             set { self._timeTo = stringToDateTime(newValue) } }
     
+    // Price & Money
+    // -------------
     var amount: Int {
         get { return _amount }
             set { self._amount = newValue } }
@@ -131,6 +155,8 @@ struct Request {
         get {return _message}
             set {self._message = newValue} }
     
+    // Initializers
+    // ------------
     init(nanny: Nanny, user: User, timeFrom: Date, timeTo: Date, message: String?) {
         self._requestREF = DataService.instance.REF_REQUESTS.childByAutoId()
         self._requestID = self._requestREF.key
@@ -141,7 +167,6 @@ struct Request {
         self._nannyID = nanny.userUID
         self._userID = user.userUID
         self._familyID = user.userUID
-        // if let id = user.familyID { self._familyID = id }
         
         self._timeRequested = Date()
         self._timeFrom = timeFrom

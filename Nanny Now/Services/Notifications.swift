@@ -344,7 +344,8 @@ class Notifications {
                                               "userID"  : userUID,
                                               "userURL": userURL,
                                               "userLat": String(userLat),
-                                              "userLong": String(userLong) ],
+                                              "userLong": String(userLong)
+                                            ],
                                          "registration_ids" : registration_ids,
                                          "notification":
                                             ["title" : title,

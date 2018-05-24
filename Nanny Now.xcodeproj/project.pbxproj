@@ -41,6 +41,10 @@
 		5C8925A420810C1F0032CEAA /* ReviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8925A320810C1F0032CEAA /* ReviewCollectionViewCell.swift */; };
 		5C89EE9E1FA48072005341ED /* DTTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89EE9D1FA48072005341ED /* DTTextField.swift */; };
 		5C9859AE2081D1F6006AA58A /* AnimatedRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9859AD2081D1F6006AA58A /* AnimatedRingView.swift */; };
+		5C9D522320B6CD7A0083CE13 /* NannyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C961D898E940089F39D /* NannyImageView.swift */; };
+		5C9D522520B6CD830083CE13 /* NannyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D522420B6CD830083CE13 /* NannyImageView.swift */; };
+		5C9D522720B6CE190083CE13 /* NannyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D522620B6CE180083CE13 /* NannyImageView.swift */; };
+		5C9D522920B6F1D60083CE13 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D522820B6F1D60083CE13 /* LoginManager.swift */; };
 		5C9FC62C1FF6E95000906B05 /* FriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9FC62B1FF6E95000906B05 /* FriendsCollectionViewCell.swift */; };
 		5C9FD3CC20A52B6400B1D5A1 /* ShaddowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9FD3CB20A52B6400B1D5A1 /* ShaddowImageView.swift */; };
 		5CA49F5B1FD78DA100B0A993 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA49F5A1FD78DA000B0A993 /* MessageViewController.swift */; };
@@ -68,7 +72,6 @@
 		5CCF0C811D898BFB0089F39D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CCF0C7F1D898BFB0089F39D /* LaunchScreen.storyboard */; };
 		5CCF0C8D1D898D090089F39D /* Groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C8C1D898D090089F39D /* Groups.swift */; };
 		5CCF0C931D898D9F0089F39D /* NannyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C921D898D9F0089F39D /* NannyTableViewCell.swift */; };
-		5CCF0C971D898E940089F39D /* NannyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C961D898E940089F39D /* NannyImageView.swift */; };
 		5CCF0C991D898EC40089F39D /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C981D898EC40089F39D /* CustomButton.swift */; };
 		5CCF0C9D1D898F110089F39D /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C9C1D898F110089F39D /* StartViewController.swift */; };
 		5CCF0C9F1D898F300089F39D /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C9E1D898F300089F39D /* InfoViewController.swift */; };
@@ -168,6 +171,9 @@
 		5C8925A320810C1F0032CEAA /* ReviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCollectionViewCell.swift; sourceTree = "<group>"; };
 		5C89EE9D1FA48072005341ED /* DTTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTTextField.swift; sourceTree = "<group>"; };
 		5C9859AD2081D1F6006AA58A /* AnimatedRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedRingView.swift; sourceTree = "<group>"; };
+		5C9D522420B6CD830083CE13 /* NannyImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NannyImageView.swift; sourceTree = "<group>"; };
+		5C9D522620B6CE180083CE13 /* NannyImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NannyImageView.swift; sourceTree = "<group>"; };
+		5C9D522820B6F1D60083CE13 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		5C9FC62B1FF6E95000906B05 /* FriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewCell.swift; sourceTree = "<group>"; };
 		5C9FD3CB20A52B6400B1D5A1 /* ShaddowImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaddowImageView.swift; sourceTree = "<group>"; };
 		5CA49F5A1FD78DA000B0A993 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
@@ -322,6 +328,7 @@
 		5CAD362E20A8EFBC00C56FCE /* NotificationMessageResponse */ = {
 			isa = PBXGroup;
 			children = (
+				5CCF0C961D898E940089F39D /* NannyImageView.swift */,
 				5CAD362F20A8EFBC00C56FCE /* NotificationViewController.swift */,
 				5C3D884C20B5F276008C84D4 /* NotificationMessageCell.swift */,
 				5CAD363120A8EFBC00C56FCE /* MainInterface.storyboard */,
@@ -336,6 +343,7 @@
 				5C85A7ED1DB84D83008C5FBB /* DataService.swift */,
 				5CDE08041FB27A5000E97D97 /* LocalService.swift */,
 				5C6D422A1EDE0DFA001037CE /* Notifications.swift */,
+				5C9D522820B6F1D60083CE13 /* LoginManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -351,11 +359,11 @@
 				5C093A4A1FE099E700144A32 /* Request.swift */,
 				5C042AE3209248B10022C5DD /* Message.swift */,
 				5C9859AD2081D1F6006AA58A /* AnimatedRingView.swift */,
-				5CCF0C961D898E940089F39D /* NannyImageView.swift */,
 				5CCAB5CE2075F0A20006CDF4 /* MenuImageView.swift */,
 				5C592B731DAE9DF300238E7E /* CustomImageView.swift */,
 				5CE55E181FF7446F00E89D86 /* CustomTableView.swift */,
 				5CCF0C981D898EC40089F39D /* CustomButton.swift */,
+				5C9D522620B6CE180083CE13 /* NannyImageView.swift */,
 				5C89EE9D1FA48072005341ED /* DTTextField.swift */,
 				5CB7FE571FE4362900D41E6F /* FrostyTabBar.swift */,
 				5CB7FE551FE435B600D41E6F /* FrostyView.swift */,
@@ -444,6 +452,7 @@
 		5CE12DF2202A9C82003495D3 /* NotificationContentExtensions */ = {
 			isa = PBXGroup;
 			children = (
+				5C9D522420B6CD830083CE13 /* NannyImageView.swift */,
 				5CE12DF3202A9C82003495D3 /* NotificationViewController.swift */,
 				5CE12DF5202A9C82003495D3 /* MainInterface.storyboard */,
 				5CE12DF8202A9C82003495D3 /* Info.plist */,
@@ -730,6 +739,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CAD363020A8EFBC00C56FCE /* NotificationViewController.swift in Sources */,
+				5C9D522320B6CD7A0083CE13 /* NannyImageView.swift in Sources */,
 				5C3D884D20B5F276008C84D4 /* NotificationMessageCell.swift in Sources */,
 				5C3D884A20B5F1C7008C84D4 /* Extensions.swift in Sources */,
 			);
@@ -744,6 +754,7 @@
 				5C6D422B1EDE0DFA001037CE /* Notifications.swift in Sources */,
 				5CA49F5B1FD78DA100B0A993 /* MessageViewController.swift in Sources */,
 				5C9FD3CC20A52B6400B1D5A1 /* ShaddowImageView.swift in Sources */,
+				5C9D522920B6F1D60083CE13 /* LoginManager.swift in Sources */,
 				5C70E62E2082153E0076CC4A /* RequestBodyCell.swift in Sources */,
 				5CFDC33320A535CC00ACB61C /* PassThroughView.swift in Sources */,
 				5C592B741DAE9DF300238E7E /* CustomImageView.swift in Sources */,
@@ -771,6 +782,7 @@
 				5C1104151DF56A4200C7FB46 /* Extensions.swift in Sources */,
 				5CB7FE5A1FE4368900D41E6F /* FrostyCornerView.swift in Sources */,
 				5C4C9A8D1F71BBDF00D431F3 /* NannyDetailVC.swift in Sources */,
+				5C9D522720B6CE190083CE13 /* NannyImageView.swift in Sources */,
 				5CCF0C751D898BFB0089F39D /* AppDelegate.swift in Sources */,
 				5C558A081FA772BE0076A17D /* LoginZeroVC.swift in Sources */,
 				5C093A4B1FE099E700144A32 /* Request.swift in Sources */,
@@ -784,7 +796,6 @@
 				5CCF0C9F1D898F300089F39D /* InfoViewController.swift in Sources */,
 				5C558A0A1FA772E80076A17D /* LoginOneVC.swift in Sources */,
 				5C85A7EE1DB84D83008C5FBB /* DataService.swift in Sources */,
-				5CCF0C971D898E940089F39D /* NannyImageView.swift in Sources */,
 				5C8925A420810C1F0032CEAA /* ReviewCollectionViewCell.swift in Sources */,
 				5CC0C6972095DFD1005317FA /* RequestDetailVC.swift in Sources */,
 				5CCF0C771D898BFB0089F39D /* NannyViewController.swift in Sources */,
@@ -806,6 +817,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CE12DF4202A9C82003495D3 /* NotificationViewController.swift in Sources */,
+				5C9D522520B6CD830083CE13 /* NannyImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
