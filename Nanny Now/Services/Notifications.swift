@@ -127,15 +127,17 @@ class Notifications {
                                     // DataService.instance.postToMessage(with: message)
                                     
                                     // For Advanced Rich Notificaiton Setup
-                                    let mediaUrl = message._toUser?.imageName ?? getFacebookProfilePictureUrl(id, .large)
-                                    let userUrl = message._fromUser?.imageName ?? "userUrl"
+                                    let remoteURL = message._toUser?.imageName ?? getFacebookProfilePictureUrl(id, .large)
+                                    let userURL = message._fromUser?.imageName ?? "userUrl"
                                     
                                     let dictionary =
                                         ["data":
                                             [ "category": category,
-                                              "mediaUrl": mediaUrl,
-                                              "userUrl": userUrl,
                                               "requestID": requestID,
+                                              
+                                              "remoteURL": remoteURL,
+                                              "userURL": userURL,
+                                              
                                               "remoteID": remoteID,
                                               "userID"  : userID ],
                                          "registration_ids" : registration_ids,
@@ -246,8 +248,11 @@ class Notifications {
                                         badgeRef.setValue(badge)
                                     }
                                     
-                                    let longitude = 5.9254423
-                                    let latitude = 60.1890322
+                                    let remoteLat = 60.1890322
+                                    let remoteLong = 5.9254423
+                                    
+                                    let userLat = 60.12424245
+                                    let userLong = 5.4343453
                                     
                                     // Get tokens from Database
                                     let registration_ids = tokens
@@ -321,17 +326,23 @@ class Notifications {
                                     }
                                     
                                     // For Advanced Rich Notificaiton Setup
-                                    let mediaUrl = getFacebookProfilePictureUrl(id, .large)
+                                    let remoteURL = request._nanny?.imageName ?? getFacebookProfilePictureUrl(id, .large)
+                                    guard let userURL = request._user?.imageName else { return }
                                     
                                     let dictionary =
                                         ["data":
                                             [ "category": category,
-                                              "mediaUrl": mediaUrl,
-                                              "latitude": latitude,
-                                              "longitude" : longitude,
                                               "requestID": requestID,
+                                              
                                               "remoteID": remoteID,
-                                              "userID"  : userID ],
+                                              "remoteURL": remoteURL,
+                                              "remoteLat": remoteLat,
+                                              "remoteLong": remoteLong,
+                                              
+                                              "userID"  : userID,
+                                              "userURL": userURL,
+                                              "userLat": userLat,
+                                              "userLong": userLong ],
                                          "registration_ids" : registration_ids,
                                          "notification":
                                             ["title" : title,
@@ -437,9 +448,6 @@ class Notifications {
                                         badgeRef.setValue(badge)
                                     }
                                     
-                                    let longitude = 5.9254423
-                                    let latitude = 60.1890322
-                                    
                                     // Get tokens from Database
                                     let registration_ids = tokens
                                     let message = text
@@ -504,14 +512,12 @@ class Notifications {
                                     }
                                     
                                     // For Advanced Rich Notificaiton Setup
-                                    let mediaUrl = getFacebookProfilePictureUrl(id, .large)
+                                    let remoteURL = getFacebookProfilePictureUrl(id, .large)
                                     
                                     let dictionary =
                                         ["data":
                                             [ "category": category,
-                                              "mediaUrl": mediaUrl,
-                                              "latitude": latitude,
-                                              "longitude" : longitude,
+                                              "remoteURL": remoteURL,
                                               "requestID": requestID,
                                               "remoteID": remoteID,
                                               "userID"  : userID ],
@@ -568,12 +574,12 @@ class Notifications {
         let category = "nannyAccept" // "messageRequest"
         
         // For Advanced Rich Notificaiton Setup
-        let mediaUrl = getFacebookProfilePictureUrl("100753693854368", .large)
+        let remoteURL = getFacebookProfilePictureUrl("100753693854368", .large)
         
         let dictionary =
             ["data":
                 [ "category": category,
-                  "mediaUrl": mediaUrl,
+                  "remoteURL": remoteURL,
                   "remoteID": remoteID,
                   "userID" : userID ],
              "registration_ids" : registration_ids,

@@ -12,6 +12,41 @@ import Contacts
 import UserNotifications
 import UserNotificationsUI
 
+// Completion Typealias
+public typealias Completion = () -> Void
+
+extension UIImageView {
+    /**
+     Load Image from Catch or Get from URL function
+     
+     [Tutorial on YouTube]:
+     https://www.youtube.com/watch?v=GX4mcOOUrWQ "Click to Go"
+     
+     [Tutorial on YouTube] made by **Brian Voong**
+     
+     - parameter urlString: URL to the image
+     */
+    func loadImageUsingCacheWith(urlString: String, completion: Completion? = nil) {
+        // If not,, download with dispatchqueue
+        let url = URL(string: urlString)
+        // URL Request
+        URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            // Run on its own threads with DispatchQueue
+            DispatchQueue.main.async(execute: { () -> Void in
+                if let downloadedImage = UIImage(data: data!) {
+                    self.image = downloadedImage
+                    completion?()
+                }
+            })
+        }).resume( )
+    }
+}
+
 class FrostyView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -44,13 +79,13 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
 
     @IBOutlet var displayView: FrostyView!
     @IBOutlet weak var mapView: MKMapView!
-
+    
+    @IBOutlet weak var remoteImageView: UIImageView!
+    @IBOutlet weak var yourImageView: UIImageView!
+    
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    
-    var yourLocation = CLLocationCoordinate2D()
-    var userLocation = CLLocationCoordinate2D()
     
     let regionRadius: CLLocationDistance = 20000
     // var locationManager: CLLocationManager!
@@ -59,20 +94,38 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         super.viewDidLoad()
         // The solution to not drawing polyline
         mapView.delegate = self
+        
+        print("viewDidLoad")
     }
     
     func didReceive(_ notification: UNNotification) {
-
+        
+        let userURL = AnyHashable("userURL")
+        let remoteURL = AnyHashable("remoteURL")
+        
+        guard let yourImageUrl = notification.request.content.userInfo[userURL] as? String else { return }
+        guard let remoteImageUrl = notification.request.content.userInfo[remoteURL] as? String else { return }
+        
+        self.yourImageView.loadImageUsingCacheWith(urlString:yourImageUrl)
+        self.remoteImageView.loadImageUsingCacheWith(urlString: remoteImageUrl)
+        
         let userInfo = notification.request.content.userInfo
         
-        let latitude = userInfo["latitude"] as? String
-        let longitude = userInfo["longitude"] as? String
+        let remoteLat = userInfo["userLat"] as? Double ?? 60.4661447    // Åsane Senter
+        let remoteLong = userInfo["userLong"] as? Double ?? 5.3205239
         
-        // Set mapView properties and Render mapView
-        self.renderedMap("\(notification.request.content.title)", subtitle: "\(notification.request.content.body)", latitude: latitude!, longitude: longitude!)
+        let userLat = userInfo["remoteLat"] as? Double ?? 60.3896067    // Laksevåg Senter
+        let userLong = userInfo["remoteLong"] as? Double ?? 5.2874327
+
+        let title = notification.request.content.title
+        let subtitle = notification.request.content.body
+        
+        let yourLocation = CLLocationCoordinate2D(latitude: userLat, longitude: userLong)
+        let remoteLocation = CLLocationCoordinate2D(latitude: remoteLat, longitude: remoteLong)
+        
+        self.renderedMap(title, subtitle: subtitle, remoteLocation: remoteLocation, yourLocation: yourLocation)
         
         let message = "\(notification.request.content.title): \(notification.request.content.body) "
-        
         self.messageLabel?.text = message
     }
     
@@ -136,35 +189,21 @@ extension NotificationViewController : MKMapViewDelegate {
     
     /// Rendered MapView with coordinates
     ///
-    fileprivate func renderedMap(_ title:String, subtitle:String, latitude:String, longitude:String) {
-        
-        guard let lat = Double(latitude) else { return }
-        guard let lon = Double(longitude) else { return }
-        
-        userLocation.latitude = lat
-        userLocation.longitude = lon
-        
-        yourLocation.latitude = 60.3890322
-        yourLocation.longitude = 5.3254423
-        
-        // let span = MKCoordinateSpanMake(0.05, 0.05)
-        // let region = MKCoordinateRegion(center: userLocation, span: span)
-        
-        // mapView.setRegion(region, animated: false)
-        
+    fileprivate func renderedMap(_ title:String, subtitle:String, remoteLocation: CLLocationCoordinate2D, yourLocation: CLLocationCoordinate2D) {
+
         // show artwork on map
-        let userArt = Artwork(title: title,
-                               locationName: "Adressen",
-                               discipline: "(nanny?.returnDistanceString())!",
-                               coordinate: (self.userLocation))
+        let remoteArt = Artwork(title: title,
+                              locationName: "Adressen",
+                              discipline: "(nanny?.returnDistanceString())!",
+                              coordinate: remoteLocation)
         
-        mapView.addAnnotation(userArt)
+        mapView.addAnnotation(remoteArt)
         
         let yourArt = Artwork(title: "Dette er deg",
                               locationName: "",
                               discipline: "",
-                              coordinate: (self.yourLocation))
-
+                              coordinate: yourLocation)
+        
         mapView.addAnnotation(yourArt)
         
         centerMapOnLocation(location: calculateCenterPositionFromArrayOfLocations(mapView.annotations))
@@ -263,7 +302,7 @@ extension NotificationViewController : MKMapViewDelegate {
                     
                     // https://stackoverflow.com/questions/23127795/how-to-offset-properly-an-mkmaprect
                     let mapRect = route.polyline.boundingMapRect
-                    self.mapView.setVisibleMapRect(mapRect, edgePadding: UIEdgeInsetsMake(40, 20, 85, 20), animated: true)
+                    self.mapView.setVisibleMapRect(mapRect, edgePadding: UIEdgeInsetsMake(40, 20, 85, 40), animated: true)
                     
                     // let mapCamera = MKMapCamera(lookingAtCenter: (self.userLocation), fromEyeCoordinate: (self.yourLocation), eyeAltitude: 400.0)
                     // mapCamera.heading = 80 // rotation

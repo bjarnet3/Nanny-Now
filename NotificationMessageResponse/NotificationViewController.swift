@@ -187,6 +187,8 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         // let userImageUrl = AnyHashable("userUrl")
         let remoteImageUrl = AnyHashable("mediaUrl")
         
+        print(remoteImageUrl)
+        
         let userID = userInfo["userID"] as? String
         let remoteID = userInfo["remoteID"] as? String
         

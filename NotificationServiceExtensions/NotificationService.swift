@@ -10,7 +10,7 @@ import UserNotifications
 
 class NotificationService: UNNotificationServiceExtension {
     
-    let imageKey = AnyHashable("mediaUrl")
+    let remoteURL = AnyHashable("remoteURL")
 
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?
@@ -20,12 +20,12 @@ class NotificationService: UNNotificationServiceExtension {
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         bestAttemptContent?.categoryIdentifier = bestAttemptContent?.userInfo["category"] as! String
         
-        if let imageUrl = request.content.userInfo[imageKey] as? String {
+        if let remoteUrl = request.content.userInfo[remoteURL] as? String {
             let session = URLSession(configuration: URLSessionConfiguration.default)
-            let task = session.dataTask(with: URL(string: imageUrl)!, completionHandler: { [weak self] (data, response, error) in
+            let task = session.dataTask(with: URL(string: remoteUrl)!, completionHandler: { [weak self] (data, response, error) in
                 if let data = data {
                     do {
-                        let writePath = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("push.png")
+                        let writePath = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("remoteImage.png")
                         try data.write(to: writePath)
                         guard let wself = self else {
                             return
@@ -33,11 +33,8 @@ class NotificationService: UNNotificationServiceExtension {
                         if let bestAttemptContent = wself.bestAttemptContent {
                             // Can this be the Notification Content Extension :-o :-o
                             // With identifier
-                            let attachment = try UNNotificationAttachment(identifier: "nnsnodnb_demo", url: writePath, options: nil)
+                            let attachment = try UNNotificationAttachment(identifier: "remoteImage", url: writePath, options: nil)
                             bestAttemptContent.attachments = [attachment]
-                            
-                            print("NotificaitonSeviceExtensions")
-                            print(attachment.identifier)
                             
                             contentHandler(bestAttemptContent)
                         }

@@ -386,6 +386,7 @@ public func addParallaxEffectOnView<T>(_ view: T, _ relativeMotionValue: Int) {
     } else {
         print("unable to add parallax Effect on View / ImageView")
     }
+    
 }
 
 /// removes motionEffects (on view), if any

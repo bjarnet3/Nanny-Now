@@ -405,11 +405,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         completionHandler: do {
             // DataService.instance.REF_NANNIES.child("-Kb0HQzRoxbSIrp0zfFu").removeValue()
         }
-        
-        
-        
-        
-        
     }
     
 }
