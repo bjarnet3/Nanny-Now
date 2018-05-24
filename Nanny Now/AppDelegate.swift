@@ -107,8 +107,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Notification Actions
         // --------------------
-        
-        
         let nannyAccept = UNNotificationAction(identifier: NotificationCategory.nannyAccept.rawValue, title: "Aksepter", options: [ .foreground, .authenticationRequired])
         let nannyConfirm = UNNotificationAction(identifier: NotificationCategory.nannyConfirmed.rawValue, title: "OK", options: [.destructive, .foreground])
         let nannyReject = UNNotificationAction(identifier: NotificationCategory.nannyReject.rawValue, title: "Avvis", options: [.destructive, .authenticationRequired])
@@ -121,20 +119,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // let actionShowDetails = UNNotificationAction(identifier: "actionShowDetails", title: "Vis detaljer", options: [.foreground])
         // let actionReject = UNNotificationAction(identifier: "actionReject", title: "Avvis", options: [.destructive, .authenticationRequired])
         
-        let messageRequest = UNNotificationAction(identifier: NotificationCategory.messageRequest.rawValue, title: "Svar", options: [.foreground, .authenticationRequired])
-        let messageAccept = UNNotificationAction(identifier: NotificationCategory.messageAccept.rawValue, title: "Ok", options: [.destructive, .authenticationRequired])
+        let messageRespond = UNNotificationAction(identifier: "messageRespond", title: "Svar", options: [.foreground, .authenticationRequired])
+        let messageConfirm = UNNotificationAction(identifier: "messageConfirm", title: "OK", options: [.destructive, .authenticationRequired])
         
         // Notification Categories
         // -----------------------
-        
         let nannyCategory = UNNotificationCategory(identifier: NotificationCategory.nannyRequest.rawValue, actions: [nannyAccept, nannyConfirm, nannyReject], intentIdentifiers: [], options: [])
         let nannyMapRequest = UNNotificationCategory(identifier: NotificationCategory.nannyMapRequest.rawValue, actions: [nannyAccept, nannyConfirm, nannyReject], intentIdentifiers: [], options: [])
         
         let familyCategory = UNNotificationCategory(identifier: NotificationCategory.familyRequest.rawValue, actions: [familyAccept, familyConfirm, familyReject], intentIdentifiers: [], options: [])
         let familyMapAccept = UNNotificationCategory(identifier: NotificationCategory.nannyMapRequest.rawValue, actions: [familyAccept, familyReject], intentIdentifiers: [], options: [])
         
-        let messageCategory = UNNotificationCategory(identifier: NotificationCategory.messageRequest.rawValue, actions: [messageRequest, messageAccept], intentIdentifiers: [], options: [])
-        UNUserNotificationCenter.current().setNotificationCategories([nannyCategory, nannyMapRequest, familyCategory, familyMapAccept, messageCategory])
+        let messageRequest = UNNotificationCategory(identifier: NotificationCategory.messageRequest.rawValue, actions: [messageRespond, messageConfirm], intentIdentifiers: [], options: [])
+        let messageAccept = UNNotificationCategory(identifier: NotificationCategory.messageAccept.rawValue, actions: [messageConfirm], intentIdentifiers: [], options: [])
+        
+        UNUserNotificationCenter.current().setNotificationCategories([nannyCategory, nannyMapRequest, familyCategory, familyMapAccept, messageRequest, messageAccept])
     }
     
     // Facebook Part 3
@@ -388,7 +387,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                 window?.rootViewController = vc
                 guard let tabBarController = window?.rootViewController as? RAMAnimatedTabBarController else { return  }
                 
-                tabBarController.setSelectIndex(from: 0, to: 1)
+                tabBarController.setSelectIndex(from: 0, to: 3)
                 tabBarController.tabBarItem.badgeValue = nil
             case .messageAccept:
                 print("")

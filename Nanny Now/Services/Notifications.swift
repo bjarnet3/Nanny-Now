@@ -47,7 +47,7 @@ class Notifications {
         let remoteID = message._toUser?.userUID ?? message._toUID
         let text = message._message
         let categoryRequest: NotificationCategory = message._requestCategory
-        let requestID = message._messageID
+        let messageID = message._messageID
         
         let url = NSURL(string: "https://fcm.googleapis.com/fcm/send")!
         let session = URLSession.shared
@@ -109,20 +109,23 @@ class Notifications {
                                     
                                     // Get tokens from Database
                                     let registration_ids = tokens
-                                    let title = "\(firstName)"
+                                    var title = "\(firstName)"
+                                    
+                                    let userName = firstName
+                                    let remoteName = message._toUser?.firstName ?? "unknown"
                                     
                                     // MARK: - Change this to display different Notificaiton Categories
                                     let category = categoryRequest.rawValue // "messageRequest"
                                     
                                     switch categoryRequest {
                                     case .messageRequest:
-                                        // title = "Melding fra \(firstName):"
+                                        title = "Melding fra \(firstName):"
                                         DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(text)")
-                                    case .messageAccept:
-                                        // title = "Melding fra \(firstName):"
-                                        DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(text)")
+                                    
                                     default:
-                                        print("default")
+                                        //.messageAccept:
+                                        title = "Rask beskjed fra \(firstName)"
+                                        DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(text)")
                                     }
                                     // DataService.instance.postToMessage(with: message)
                                     
@@ -133,13 +136,17 @@ class Notifications {
                                     let dictionary =
                                         ["data":
                                             [ "category": category,
-                                              "requestID": requestID,
+                                              "messageID": messageID,
                                               
                                               "remoteURL": remoteURL,
                                               "userURL": userURL,
                                               
                                               "remoteID": remoteID,
-                                              "userID"  : userID ],
+                                              "userID"  : userID,
+                                              
+                                              "remoteName": remoteName,
+                                              "userName" : userName
+                                            ],
                                          "registration_ids" : registration_ids,
                                          "notification":
                                             ["title" : title,
@@ -212,7 +219,7 @@ class Notifications {
                     if !snapshot.exists() { return }
                     
                     if snapshot.key == "fid" {
-                        let id = snapshot.value as! String
+                        // let id = snapshot.value as! String
                         
                         var tokens = [String]()
                         var tokenRef = DataService.instance.REF_USERS_PRIVATE.child(remoteID).child("tokens")

@@ -370,7 +370,6 @@ class MessageViewController: UIViewController {
         self.observeUser(with: message, userRef: userREF)
     }
     
-    
     func fetchRequestObserver(_ requestSnap: Dictionary<String, AnyObject>, remoteUID: String) {
         let userREF = DataService.instance.REF_USERS_PRIVATE.child(remoteUID)
         let request = Request(
@@ -389,7 +388,6 @@ class MessageViewController: UIViewController {
             requestREF: userREF)
         self.observeUser(request: request, userRef: userREF)
     }
-    
     
     func observeUser(request: Request, userRef: DatabaseReference) {
         print("observeUser")

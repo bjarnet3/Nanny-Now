@@ -71,28 +71,16 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     var activeLocations = [String:CLLocation]()
     
     var activeLocationNames = [String]()
-    var activeLocationName = "home"
+    var activeLocationName = "current"
 
-    var locationMenuShowing = false
-    var orderMenuShowing = false
+    var locationMenuShowing = true
+    var orderMenuShowing = true
     var requestMenuShowing = true
     
     var animator: UIViewPropertyAnimator?
     
     // MARK: - IBAction: Methods connected to UI
     // ----------------------------------------
-    @IBAction func testButtonAction(_ sender: UIButton) {
-        setActiveLocation()
-    }
-    
-    @IBAction func testButtonAction2(_ sender: UIButton) {
-        
-    }
-    
-    @IBAction func testButtonAction3(_ sender: UIButton) {
-
-    }
-    
     @IBAction func nannyAdAction(_ sender: UISwitch) {
         self.nannyAd.alpha = 1
         updateAd(turnOn: sender.isOn)
@@ -132,29 +120,29 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     // Send Simple Message
     @IBAction func sendRequest(_ sender: UIButton) {
         if let lastRow = lastRowSelected?.row {
-            let lastNanny = self.nannies[lastRow]
-            
-            var requestMessage = "Melding til: \(lastNanny.firstName)"
-            if let text = self.requestMessage.text, text != "" { requestMessage = text }
-            
-            self.setActiveLocation()
-            
-            guard let user = self.user else { return }
-            
-            if self.requestType.selectedSegmentIndex <= 1 {
+            if let user = self.user {
+                let lastNanny = self.nannies[lastRow]
                 
-                // Send Request
-                var request = Request(nanny: lastNanny, user: user, timeFrom: self.fromDateTime.date, timeTo: self.toDateTime.date, message: requestMessage)
-                if self.requestType.selectedSegmentIndex == 1 {
-                    request.requestCategory = NotificationCategory.nannyMapRequest.rawValue
+                var requestMessage = "Melding til: \(lastNanny.firstName)"
+                if let text = self.requestMessage.text, text != "" { requestMessage = text }
+                
+                self.setActiveLocation()
+                // guard let user = self.user else { return }
+                
+                if self.requestType.selectedSegmentIndex <= 1 {
+                    // Send Request
+                    var request = Request(nanny: lastNanny, user: user, timeFrom: self.fromDateTime.date, timeTo: self.toDateTime.date, message: requestMessage)
+                    if self.requestType.selectedSegmentIndex == 1 {
+                        request.requestCategory = NotificationCategory.nannyMapRequest.rawValue
+                    } else {
+                        request.requestCategory = NotificationCategory.nannyRequest.rawValue
+                    }
+                    Notifications.instance.sendNotification(with: request)
                 } else {
-                    request.requestCategory = NotificationCategory.nannyRequest.rawValue
+                    // Send Message
+                    let message = Message(from: user, to: lastNanny, message: requestMessage)
+                    Notifications.instance.sendNotifications(with: message)
                 }
-                Notifications.instance.sendNotification(with: request)
-            } else {
-                // Send Message
-                let message = Message(from: user, to: lastNanny, message: requestMessage)
-                Notifications.instance.sendNotifications(with: message)
             }
         }
         
@@ -224,6 +212,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     func getUserSettings() {
         if let user = LocalService.instance.getUser() {
             self.user = user
+            // self.setActiveLocation()
             self.user?.location = returnCurrentLocation
             self.checkForBlocked(user.userUID)
         }
@@ -268,19 +257,12 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     
     func updateAd(turnOn: Bool) {
         // Animate View
-        if lowPowerModeDisabled {
+        if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             UIView.animate(withDuration: 2.0, delay: 0.450, usingSpringWithDamping: 0.85, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
                 self.nannyAd.alpha = 0
             })
-        } else {
-            self.nannyAd.alpha = 0
-        }
-        
-        if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             if let location = returnCurrentLocation {
                 DataService.instance.updateLocationAndPostcodeOnUser(from: location, userID: userID)
-            } else {
-                printDebug(object: "ERROR: updateLocationAndPostcodeOnUser in NannyViewController")
             }
             if turnOn {
                 self.nannyAd.setTitle("Nanny Annonse er Aktiv", for: .normal)
@@ -288,7 +270,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                 self.nannyAd.backgroundColor = hexStringToUIColor("#FF1744")
                 
                 self.locationManager.startUpdatingLocation()
-                
                 self.setActiveLocation()
                 
                 DataService.instance.addTokenToDatabase(for: userID)
@@ -326,8 +307,10 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                 
                 self.nannyBadge = 0
                 
+                // Remove Nanny Active from Database
                 let nannyActive = DataService.instance.REF_NANNIES_ACTIVE
                 DataService.instance.removeReferenceChildValues(uid: userID, reference: nannyActive)
+                
                 self.nannyAdOn.updateValue(false, forKey: userID)
             }
         }
@@ -361,20 +344,17 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     }
     
     func setActiveLocation() {
-        // let currentActive = self.activeLocationName
+        let active = self.activeLocationName
         if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
-            DataService.instance.REF_USERS_PRIVATE.child(userID).child("location").child("home").observeSingleEvent(of: .value, with: { (snapshot) in
+            DataService.instance.REF_USERS_PRIVATE.child(userID).child("location").child(active).observeSingleEvent(of: .value, with: { (snapshot) in
                 if let snapshot = snapshot.value as? Dictionary<String, AnyObject> {
                     for (key, val) in snapshot {
-                        guard let latitude = val as? Double, key == "latitude" else { continue }
-                        guard let longitude = val as? Double, key == "longitude" else { continue }
+                        guard let latitude = val as? String, key == "latitude" else { continue }
+                        guard let longitude = val as? String, key == "longitude" else { continue }
                         
-                        let location = CLLocation(latitude: latitude, longitude: longitude)
+                        let location = CLLocation(latitude: Double(latitude)!, longitude: Double(longitude)!)
                         self.user?.location = location
-                        
-                        print(location)
                     }
-                    
                 }
             })
         }
@@ -385,20 +365,10 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
             for (key, value) in locations {
                 if key != "active" {
                     let locationkey = key
-                    let locationValue = value as! [String:Any]
-                    for (k,v) in locationValue {
-                        guard let latitude = v as? Double, k == "latitude" else { return }
-                        guard let longitude = v as? Double, k == "longitude" else { return }
-                        let location = CLLocation(latitude: latitude, longitude: longitude)
-                        activeLocations.updateValue(location, forKey: locationkey)
-                        
-                        print(location)
-                        printDebug(object: locationkey)
-                    }
+                    self.activeLocationNames.append(locationkey)
                 } else if key == "active" {
                     if let active = value as? String {
                         self.activeLocationName = active
-                        print(active)
                     }
                 }
             }
@@ -551,16 +521,18 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
             if animated {
                 UIView.animate(withDuration: 0.6, delay: 0.03, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
                     self.locationMenu.alpha = 1.0
-                    self.locationMenu.frame = self.locationMenu.frame.offsetBy(dx: 0, dy: 175)
+                    // self.locationMenu.frame.offsetBy(dx: 0, dy: 175)
+                    self.locationMenu.transform = CGAffineTransform(translationX: 0, y: 20) // self.locationMenu.frame.offsetBy(dx: 0, dy: 175)
                     self.locationMenuShowing = true
                 })
             } else {
                 self.locationMenu.alpha = 1.0
-                self.locationMenu.frame = self.locationMenu.frame.offsetBy(dx: 0, dy: 175)
+                // self.locationMenu.frame.offsetBy(dx: 0, dy: 175)
+                self.locationMenu.transform = CGAffineTransform(translationX: 0, y: 20)
                 self.locationMenuShowing = true
             }
         } else {
-            print("enterLocationMenu - locationMenuShowing or Error")
+            self.locationMenuShowing = true
         }
     }
     
@@ -570,14 +542,18 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
             if animated {
                 UIView.animate(withDuration: 0.6, delay: 0.03, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
                     self.locationMenu.alpha = 0.0
-                    self.locationMenu.frame = self.locationMenu.frame.offsetBy(dx: 0, dy: -175)
+                    // self.locationMenu.frame.offsetBy(dx: 0, dy: -135)
+                    self.locationMenu.transform = CGAffineTransform(translationX: 0, y: -20)
                     self.locationMenuShowing = false
                 })
             } else {
                 self.locationMenu.alpha = 0.0
-                self.locationMenu.frame = self.locationMenu.frame.offsetBy(dx: 0, dy: -175)
+                // self.locationMenu.frame.offsetBy(dx: 0, dy: -135)
+                self.locationMenu.transform = CGAffineTransform(translationX: 0, y: -20)
                 self.locationMenuShowing = false
             }
+        } else {
+            self.locationMenuShowing = false
         }
     }
     
@@ -588,23 +564,19 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
             if animated {
                 UIView.animate(withDuration: 0.6, delay: delay, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
                     self.orderMenu.alpha = 1.0
-                    self.orderMenu.frame = self.orderMenu.frame.offsetBy(dx: 0, dy: -80)
+                    // self.orderMenu.frame = self.orderMenu.frame.offsetBy(dx: 0, dy: -80)
+                    self.orderMenu.transform = CGAffineTransform(translationX: 0, y: -20)
                     self.orderMenuShowing = true
                 })
                 
             } else {
                 self.orderMenu.alpha = 1.0
-                self.orderMenu.frame = self.orderMenu.frame.offsetBy(dx: 0, dy: -80)
+                // self.orderMenu.frame = self.orderMenu.frame.offsetBy(dx: 0, dy: -80)
+                self.orderMenu.transform = CGAffineTransform(translationX: 0, y: -20)
                 self.orderMenuShowing = true
             }
         } else {
-            print("enterOrder - orderMenuShowing or Error")
-        }
-    }
-    
-    var exitOrderMenu: Bool = true {
-        didSet {
-            print("exitOrderMenu")
+            self.orderMenuShowing = true
         }
     }
     
@@ -614,14 +586,18 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
             if animated {
                 UIView.animate(withDuration: 0.6, delay: 0.03, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
                     self.orderMenu.alpha = 0.0
-                    self.orderMenu.frame = self.orderMenu.frame.offsetBy(dx: 0, dy: 80)
+                    // self.orderMenu.frame = self.orderMenu.frame.offsetBy(dx: 0, dy: 80)
+                    self.orderMenu.transform = CGAffineTransform(translationX: 0, y: 20)
                     self.orderMenuShowing = false
                 })
             } else {
                 self.orderMenu.alpha = 0.0
-                self.orderMenu.frame = self.orderMenu.frame.offsetBy(dx: 0, dy: 80)
+                // self.orderMenu.frame = self.orderMenu.frame.offsetBy(dx: 0, dy: 80)
+                self.orderMenu.transform = CGAffineTransform(translationX: 0, y: -20)
                 self.orderMenuShowing = false
             }
+        } else {
+            self.orderMenuShowing = false
         }
     }
     
@@ -652,6 +628,8 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                 self.requestMenu.alpha = 1.0
             }
             self.requestMenuShowing = true
+        } else {
+            self.requestMenuShowing = true
         }
     }
     
@@ -679,6 +657,8 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                 self.requestMenu.alpha = 0.0
             }
             self.requestMenuShowing = false
+        } else {
+            self.requestMenuShowing = false
         }
     }
     
@@ -696,14 +676,15 @@ extension NannyViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.exitRequestMenu(animated: false)
-        self.exitLocationMenu(animated: false)
+        // Animation / Hide
+        // self.exitRequestMenu(animated: false)
+        // self.exitLocationMenu(animated: false)
+        self.exitAllMenu()
         
-        self.getUserSettings()
+        // Settings & Setup
         self.enableLocationServices()
         self.getLocationsFromUserInfo()
-        
-        // self.activeLocation = self.returnActiveLocation()
+        self.getUserSettings()
         
         // TableView and MapView Delegate and Datasource
         self.mapView.alpha = 0
@@ -714,14 +695,17 @@ extension NannyViewController {
         self.tableView.dataSource = self
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.tabBarController!.tabBar.frame.height, 0)
         
+        // PickerView Delegate and Datasource
         self.locationPicker.delegate = self
         self.locationPicker.dataSource = self
         
         self.requestMenu.backgroundColor = UIColor.clear
         
+        // Observer Methods
         self.observeChildRemoved(self.exemptIDs)
         self.observeChildAdded(self.exemptIDs)
 
+        // Animation
         revealingSplashAnimation(self.view , type: SplashAnimationType.swingAndZoomOut, duration: 1.9, delay: 2.9, completion: {
             self.viewDidLoadAnimation()
         })
@@ -741,7 +725,6 @@ extension NannyViewController {
     
     // Is called later then View Did load (One time)
     override func viewDidLayoutSubviews() {
-        
         if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             checkIfNannyAdActive(userID)
         }
@@ -875,7 +858,7 @@ extension NannyViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func singelTapToEnterOrderMenu(_ tableView: UITableView, indexPath: IndexPath)  {
-        exitOrderMenu()
+        exitAllMenu()
         if let last = lastRowSelected, last == indexPath {
             goToDetail(row: last.row)
         } else {
@@ -1142,7 +1125,10 @@ extension NannyViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.activeLocationName = self.activeLocationNames[row]
+        
+        let active = self.activeLocationNames[row]
+        self.activeLocationName = active
+        
      // self.activeLocation = orderMenuShowing ? activeLocations[row] : fromDateTime.accessibilityElement(at: row) as! String
         // self.mapView.setCenter(self.activeLocation[row], animated: true)
     }

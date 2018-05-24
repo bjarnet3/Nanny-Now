@@ -45,6 +45,10 @@ struct Message {
         self._imageURL = imageURL
     }
     
+    mutating func setCategory(category: NotificationCategory) {
+        self._requestCategory = category
+    }
+    
     init(from fromUser: User, to toUser: User, message: String) {
         self._toUser = toUser
         self._fromUser = fromUser

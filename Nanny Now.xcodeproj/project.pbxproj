@@ -16,7 +16,6 @@
 		5C2F4BBB20A7FB1100BFB313 /* MessageDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F4BBA20A7FB1100BFB313 /* MessageDetailTableCell.swift */; };
 		5C33CFC71DB422830075675E /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C33CFC61DB422830075675E /* Functions.swift */; };
 		5C389686208968FD008C7E12 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C389685208968FD008C7E12 /* Friends.swift */; };
-		5C3D884A20B5F1C7008C84D4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1104141DF56A4200C7FB46 /* Extensions.swift */; };
 		5C3D884D20B5F276008C84D4 /* NotificationMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3D884C20B5F276008C84D4 /* NotificationMessageCell.swift */; };
 		5C3D9ACA202AE128007A9147 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3D9AC9202AE128007A9147 /* MapKit.framework */; };
 		5C3D9ACB202AE131007A9147 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3D9AC9202AE128007A9147 /* MapKit.framework */; };
@@ -741,7 +740,6 @@
 				5CAD363020A8EFBC00C56FCE /* NotificationViewController.swift in Sources */,
 				5C9D522320B6CD7A0083CE13 /* NannyImageView.swift in Sources */,
 				5C3D884D20B5F276008C84D4 /* NotificationMessageCell.swift in Sources */,
-				5C3D884A20B5F1C7008C84D4 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

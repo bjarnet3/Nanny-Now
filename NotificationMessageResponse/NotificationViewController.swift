@@ -10,6 +10,59 @@ import UIKit
 import UserNotifications
 import UserNotificationsUI
 
+// Completion Typealias
+public typealias Completion = () -> Void
+
+extension UIImageView {
+    /**
+     Load Image from Catch or Get from URL function
+     
+     [Tutorial on YouTube]:
+     https://www.youtube.com/watch?v=GX4mcOOUrWQ "Click to Go"
+     
+     [Tutorial on YouTube] made by **Brian Voong**
+     
+     - parameter urlString: URL to the image
+     */
+    func loadImageUsingCacheWith(urlString: String, completion: Completion? = nil) {
+        // If not,, download with dispatchqueue
+        let url = URL(string: urlString)
+        // URL Request
+        URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            // Run on its own threads with DispatchQueue
+            DispatchQueue.main.async(execute: { () -> Void in
+                if let downloadedImage = UIImage(data: data!) {
+                    self.image = downloadedImage
+                    completion?()
+                }
+            })
+        }).resume( )
+    }
+}
+
+/**
+ - DateFormat = "yyyy-MM-dd-HH:mm:ss"
+ - TimeZone = TimeZone(secondsFromGMT: 86400)
+ - Locale = Locale(identifier: "en_US_POSIX")
+ 
+ - Returns: **yyyy-MM-dd-HH:mm:ss** ex: (**2017-12-31-17:40:59**)
+ */
+public func returnTimeStamp() -> String {
+    let date = Date()
+    let formatter = DateFormatter()
+    
+    formatter.dateFormat = "yyyy-MM-dd-HH:mm:ss"
+    formatter.timeZone = TimeZone(secondsFromGMT: 86400)
+    formatter.locale = Locale(identifier: "en_US_POSIX")
+    
+    return formatter.string(from: date)
+}
+
 class User {
     // Identification
     // --------------
@@ -119,7 +172,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     
     @IBAction func sendButton(_ sender: UIButton) {
         if sender.titleLabel?.text == "SEND" {
-            sendMessage()
+            sendMessage(message: "the message")
         } else {
             self.view.endEditing(true)
         }
@@ -128,7 +181,10 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     @IBAction func textFieldEnter(_ sender: UITextField) {
         if (sender.returnKeyType==UIReturnKeyType.send)
         {
-            sendMessage()
+            if let message = self.textField.text {
+                
+                sendMessage(message: message)
+            }
         }
     }
     
@@ -142,68 +198,61 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     
     // MARK: - Functions, Database & Animation
     // ----------------------------------------
-    func setupView(user: User, remoteUser: User) {
+    private func setupView(user: User, remoteUser: User) {
         self.user = user
         self.remoteUser = remoteUser
     }
     
-    private func sendMessage() {
-        if let messageText = textField.text {
-            // Send Message to remoteUser
-            // sendNotification(messageText: text)
-            addMessage(messageText: messageText)
-            // Remove text from Textfield
-            self.textField.text = ""
-            // Dismiss Keyboard
-            self.textField.endEditing(true)
-            // Set Title To AVBRYT
-            self.sendButton.setTitle("AVBRYT", for: .normal)
-        }
-    }
-    
-    private func getMessage(messageText: String) {
-        let message = Message(from: (self.remoteUser?.userUID)!, to: (self.user?.userUID)!, messageID: "messageID", message: messageText, messageTime: "messageTime")
+    private func addMessage(message: Message) {
+        // let message = Message(from: user.userUID, to: remote.userUID, messageID: "messageID", message: messageText, messageTime: "messageTime")
         self.messages.append(message)
+        self.messages.sort(by: { $0._messageTime > $1._messageTime })
+        
+        self.totalMessages += 1
     }
     
-    private func addMessage(messageText: String) {
-        if let remote = self.remoteUser {
-            if let user = self.user {
-                let message = Message(from: user.userUID, to: remote.userUID, messageID: "messageID", message: messageText, messageTime: "messageTime")
-                
-                self.messages.append(message)
-                self.messages.sort(by: { $0._messageTime > $1._messageTime })
-                
-                self.totalMessages += 1
-                self.tableView.reloadData()
+    private func sendMessage(message: String) {
+        if let user = self.user {
+            if let remoteUser = self.remoteUser {
+                let textMessage = ""
+                let message = Message(from: user, to: remoteUser, message: textMessage)
+                addMessage(message: message)
             }
         }
     }
     
     func didReceive(_ notification: UNNotification) {
         
+        let remoteURL = AnyHashable("userURL")
+        let userURL = AnyHashable("remoteURL")
+        
+        // let title = notification.request.content.title
+        let messageText = notification.request.content.body
+        
         let userInfo = notification.request.content.userInfo
         
-        let userID = userInfo["userID"] as? String
-        let remoteID = userInfo["remoteID"] as? String
+        guard let userImageName = userInfo[userURL] as? String else { return }
+        guard let remoteImageName = userInfo[remoteURL] as? String else { return }
         
-        // let userImageUrl = AnyHashable("userUrl")
-        let userURL = AnyHashable("remoteURL")
-        let remoteURL = AnyHashable("userURL")
+        // self.yourImageView.loadImageUsingCacheWith(urlString:yourImageUrl)
+        // self.remoteImageView.loadImageUsingCacheWith(urlString: remoteImageUrl)
         
-        let userImageName = userInfo[userURL]! as? String
-        let remoteImageName = userInfo[remoteURL]! as? String
+        let userID = userInfo["remoteID"] as? String
+        let remoteID = userInfo["userID"] as? String
         
-        let messageText = notification.request.content.body
+        let messagesCount = self.messages.count + 1
+        
+        let messageID = "\(messagesCount)"  // userInfo["messageID"] as? String ??
+        let messageTime = returnTimeStamp() // userInfo["messageTime"] as? String ??
         
         let user = User(userUID: userID, imageName: userImageName, firstName: "userName")
         let remoteUser = User(userUID: remoteID, imageName: remoteImageName, firstName: "remoteName")
         
-        setupView(user: user, remoteUser: remoteUser)
+        let message = Message(from: user.userUID, to: remoteUser.userUID, messageID: messageID, message: messageText, messageTime: messageTime)
         
-        self.getMessage(messageText: messageText)
-        // let title = notification.request.content.title
-        // let body = notification.request.content.body
+        // getMessage(messageText: messageText)
+        addMessage(message: message)
+        setupView(user: user, remoteUser: remoteUser)
     }
 
 }
@@ -219,7 +268,7 @@ extension NotificationViewController {
         self.tableView.dataSource = self
         
         self.tableView.reloadData()
-        print(messages.count)
+        print(self.messages.count)
     }
 }
 

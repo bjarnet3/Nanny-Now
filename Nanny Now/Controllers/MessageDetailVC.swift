@@ -109,13 +109,9 @@ class MessageDetailVC: UIViewController {
     private func addMessage(messageText: String) {
         if let remote = self.remoteUser {
             if let user = self.user {
-                var message = Message(
-                    from: user.userUID,
-                    to: remote.userUID,
-                    message: messageText,
-                    messageTime:  returnTimeStamp(),
-                    highlighted: true)
-                message.setMessageID()
+                
+                var message = Message(from: user, to: remote, message: messageText)
+                message.setCategory(category: .messageAccept)
                 sendNotification(message: message)
                 
                 self.messages.append(message)
@@ -313,7 +309,6 @@ extension MessageDetailVC {
         removeKeyboard()
         removeMessagesObserver()
     }
-    
     
 }
 

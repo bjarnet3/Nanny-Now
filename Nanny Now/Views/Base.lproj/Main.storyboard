@@ -513,7 +513,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="355"/>
                             </mapView>
                             <view clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DTX-sg-XRF" customClass="FrostyCornerView" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="5" y="70" width="365" height="155"/>
+                                <rect key="frame" x="5" y="50" width="365" height="155"/>
                                 <subviews>
                                     <pickerView alpha="0.90000000000000002" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jdI-tu-qC3">
                                         <rect key="frame" x="8" y="53" width="349" height="94"/>
@@ -546,49 +546,6 @@
                                     <constraint firstItem="Yvb-uK-UFP" firstAttribute="top" secondItem="DTX-sg-XRF" secondAttribute="top" constant="8" id="mxD-pO-voT"/>
                                     <constraint firstAttribute="height" constant="155" id="pb9-FV-Mha"/>
                                 </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="jQn-Cz-20f" appends="YES" id="JRo-hc-7eM"/>
-                                </connections>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bTw-Kk-cBC">
-                                <rect key="frame" x="0.0" y="68" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pv9-33-efn">
-                                        <rect key="frame" x="8" y="7" width="90" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="TestButton">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="testButtonAction:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="n6B-X5-pKM"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqW-JO-JT6">
-                                        <rect key="frame" x="142" y="7" width="90" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="TestButton">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="testButtonAction2:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="zgr-C5-VQ1"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fD8-0q-CnB">
-                                        <rect key="frame" x="277" y="7" width="90" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="TestButton">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="testButtonAction3:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="VCg-Q6-g2Q"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XUZ-0u-kIB" customClass="FrostyView" customModule="Nanny_Now" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
@@ -601,7 +558,7 @@
                                         </constraints>
                                         <state key="normal" image="noun_1052547_cc"/>
                                         <connections>
-                                            <action selector="locationMenuAction" destination="8rJ-Kc-sve" eventType="touchUpInside" id="tuM-Xl-75L"/>
+                                            <outletCollection property="gestureRecognizers" destination="jQn-Cz-20f" appends="YES" id="JIj-KK-FfV"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Re8-tW-c3f" customClass="CustomButton" customModule="Nanny_Now" customModuleProvider="target">
@@ -633,7 +590,7 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1t-h7-Cay" customClass="FrostyCornerView" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="5" y="253" width="365" height="60"/>
+                                <rect key="frame" x="5" y="273" width="365" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bE1-2J-cPW">
                                         <rect key="frame" x="337" y="8" width="20" height="20"/>
@@ -824,10 +781,10 @@
                                 </connections>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U8B-NQ-UBo" customClass="FrostyCornerView" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="20" y="120" width="335" height="468"/>
+                                <rect key="frame" x="20" y="40" width="335" height="508"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BGN-0q-cBy">
-                                        <rect key="frame" x="0.0" y="213" width="335" height="80"/>
+                                        <rect key="frame" x="0.0" y="253" width="335" height="80"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fra:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HW3-ly-50X">
                                                 <rect key="frame" x="0.0" y="0.0" width="49" height="80"/>
@@ -853,7 +810,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PNr-J2-lfD">
-                                        <rect key="frame" x="0.0" y="308" width="335" height="80"/>
+                                        <rect key="frame" x="0.0" y="348" width="335" height="80"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Til:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E8A-Pd-2Dd">
                                                 <rect key="frame" x="0.0" y="0.0" width="45" height="80"/>
@@ -879,7 +836,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="qn0-5b-IBr">
-                                        <rect key="frame" x="0.0" y="408" width="335" height="60"/>
+                                        <rect key="frame" x="0.0" y="448" width="335" height="60"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ylw-iU-Ue0">
                                                 <rect key="frame" x="0.0" y="0.0" width="167.5" height="60"/>
@@ -1031,14 +988,14 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ONb-Zb-kXf" firstAttribute="top" secondItem="wh9-qW-ONR" secondAttribute="bottom" constant="263" id="5ia-Wb-iuM"/>
-                            <constraint firstItem="U8B-NQ-UBo" firstAttribute="top" secondItem="V8P-cS-sdd" secondAttribute="bottom" constant="100" id="75F-SM-IIn"/>
-                            <constraint firstItem="ONb-Zb-kXf" firstAttribute="top" secondItem="U8B-NQ-UBo" secondAttribute="bottom" constant="30" id="Ff2-zA-2xw"/>
+                            <constraint firstItem="U8B-NQ-UBo" firstAttribute="top" secondItem="V8P-cS-sdd" secondAttribute="bottom" constant="20" id="75F-SM-IIn"/>
+                            <constraint firstItem="ONb-Zb-kXf" firstAttribute="top" secondItem="U8B-NQ-UBo" secondAttribute="bottom" constant="70" id="Ff2-zA-2xw"/>
                             <constraint firstAttribute="trailing" secondItem="K1t-h7-Cay" secondAttribute="trailing" constant="5" id="ITX-3g-mZr"/>
-                            <constraint firstItem="dgZ-cO-BAT" firstAttribute="top" secondItem="K1t-h7-Cay" secondAttribute="bottom" constant="10" id="IbG-nX-C5i"/>
+                            <constraint firstItem="dgZ-cO-BAT" firstAttribute="top" secondItem="K1t-h7-Cay" secondAttribute="bottom" constant="-10" id="IbG-nX-C5i"/>
                             <constraint firstAttribute="trailing" secondItem="DTX-sg-XRF" secondAttribute="trailing" constant="5" id="N9L-Rm-y3O"/>
                             <constraint firstItem="WdX-gQ-KRL" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="QCy-K4-LdU"/>
                             <constraint firstItem="K1t-h7-Cay" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" constant="5" id="Tqh-f6-C2m"/>
-                            <constraint firstItem="DTX-sg-XRF" firstAttribute="top" secondItem="XUZ-0u-kIB" secondAttribute="bottom" constant="10" id="VLL-zc-Ts2"/>
+                            <constraint firstItem="DTX-sg-XRF" firstAttribute="top" secondItem="XUZ-0u-kIB" secondAttribute="bottom" constant="-10" id="VLL-zc-Ts2"/>
                             <constraint firstAttribute="trailing" secondItem="dgZ-cO-BAT" secondAttribute="trailing" id="Ymu-vT-HX6"/>
                             <constraint firstAttribute="bottom" secondItem="WdX-gQ-KRL" secondAttribute="bottom" id="a33-AH-Jbp"/>
                             <constraint firstItem="ONb-Zb-kXf" firstAttribute="top" secondItem="dgZ-cO-BAT" secondAttribute="bottom" constant="-49" id="be3-Gn-Y0v"/>
