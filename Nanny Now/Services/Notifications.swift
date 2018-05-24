@@ -205,7 +205,6 @@ class Notifications {
             
             if snapshot.key == "first_name" {
                 let firstName = snapshot.value as! String
-                // print(snapshot.value as! String)
                 
                 let idRef = DataService.instance.REF_USERS_PRIVATE.child(userUID).child("fid")
                 idRef.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -217,7 +216,6 @@ class Notifications {
                         
                         var tokens = [String]()
                         var tokenRef = DataService.instance.REF_USERS_PRIVATE.child(remoteID).child("tokens")
-                        
                         
                         switch categoryRequest {
                         case .nannyRequest:
@@ -252,11 +250,11 @@ class Notifications {
                                         badgeRef.setValue(badge)
                                     }
                                     
-                                    let userLat = user.location?.coordinate.latitude ?? 60.12424245
-                                    let userLong = user.location?.coordinate.longitude ?? 5.4343453
+                                    guard let userLat = user.location?.coordinate.latitude else { return } // ?? 60.12424245
+                                    guard let userLong = user.location?.coordinate.longitude else { return } // ?? 5.4343453
                                     
-                                    let remoteLat = remote.location?.coordinate.latitude ?? 60.1890322
-                                    let remoteLong = remote.location?.coordinate.longitude ?? 5.9254423
+                                    guard let remoteLat = remote.location?.coordinate.latitude else { return } // ?? 60.1890322
+                                    guard let remoteLong = remote.location?.coordinate.longitude else { return } // ?? 5.9254423
                                     
                                     // Get tokens from Database
                                     let registration_ids = tokens
@@ -330,8 +328,8 @@ class Notifications {
                                     }
 
                                     // For Advanced Rich Notificaiton Setup
-                                    let remoteURL = request._nanny?.imageName ?? ""
-                                    let userURL = request._user?.imageName ?? getFacebookProfilePictureUrl(id, .large)
+                                    let remoteURL = remote.imageName
+                                    let userURL = user.imageName
                                     
                                     let dictionary =
                                         ["data":
@@ -340,13 +338,13 @@ class Notifications {
                                               
                                               "remoteID": remoteID,
                                               "remoteURL": remoteURL,
-                                              "remoteLat": remoteLat,
-                                              "remoteLong": remoteLong,
+                                              "remoteLat": String(remoteLat),
+                                              "remoteLong": String(remoteLong),
                                               
                                               "userID"  : userUID,
                                               "userURL": userURL,
-                                              "userLat": userLat,
-                                              "userLong": userLong ],
+                                              "userLat": String(userLat),
+                                              "userLong": String(userLong) ],
                                          "registration_ids" : registration_ids,
                                          "notification":
                                             ["title" : title,
@@ -516,15 +514,16 @@ class Notifications {
                                     }
                                     
                                     // For Advanced Rich Notificaiton Setup
-                                    let remoteURL = getFacebookProfilePictureUrl(id, .large)
+                                    let userURL = getFacebookProfilePictureUrl(id, .large)
                                     
                                     let dictionary =
                                         ["data":
                                             [ "category": category,
-                                              "remoteURL": remoteURL,
                                               "requestID": requestID,
                                               "remoteID": remoteID,
-                                              "userID"  : userID ],
+                                              "userID"  : userID,
+                                              "userURL": userURL
+                                            ],
                                          "registration_ids" : registration_ids,
                                          "notification":
                                             ["title" : title,
@@ -578,14 +577,15 @@ class Notifications {
         let category = "nannyAccept" // "messageRequest"
         
         // For Advanced Rich Notificaiton Setup
-        let remoteURL = getFacebookProfilePictureUrl("100753693854368", .large)
+        let userURL = getFacebookProfilePictureUrl("100753693854368", .large)
         
         let dictionary =
             ["data":
                 [ "category": category,
-                  "remoteURL": remoteURL,
                   "remoteID": remoteID,
-                  "userID" : userID ],
+                  "userID" : userID,
+                  "userURL": userURL
+                ],
              "registration_ids" : registration_ids,
              "notification":
                 ["title":title,

@@ -10,7 +10,7 @@ import UserNotifications
 
 class NotificationService: UNNotificationServiceExtension {
     
-    let remoteURL = AnyHashable("remoteURL")
+    let remoteURL = AnyHashable("userURL")
 
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?

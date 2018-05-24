@@ -135,6 +135,9 @@ struct Request {
         self._requestREF = DataService.instance.REF_REQUESTS.childByAutoId()
         self._requestID = self._requestREF.key
         
+        self._nanny = nanny
+        self._user = user
+        
         self._nannyID = nanny.userUID
         self._userID = user.userUID
         self._familyID = user.userUID

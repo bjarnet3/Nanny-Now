@@ -98,33 +98,35 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     
     func didReceive(_ notification: UNNotification) {
         
-        let userURL = AnyHashable("userURL")
-        let remoteURL = AnyHashable("remoteURL")
+        let remoteURL = AnyHashable("userURL")
+        let userURL = AnyHashable("remoteURL")
         
-        guard let yourImageUrl = notification.request.content.userInfo[userURL] as? String else { return }
-        guard let remoteImageUrl = notification.request.content.userInfo[remoteURL] as? String else { return }
+        let title = notification.request.content.title
+        let subtitle = notification.request.content.body
+        
+        let userInfo = notification.request.content.userInfo
+        
+        guard let yourImageUrl = userInfo[userURL] as? String else { return }
+        guard let remoteImageUrl = userInfo[remoteURL] as? String else { return }
         
         self.yourImageView.loadImageUsingCacheWith(urlString:yourImageUrl)
         self.remoteImageView.loadImageUsingCacheWith(urlString: remoteImageUrl)
         
-        let userInfo = notification.request.content.userInfo
+        let remoteLatitude = userInfo["remoteLat"] as? String ?? "60.0001"  // Åsane Senter
+        let remoteLongitude = userInfo["remoteLong"] as? String ?? "5.0001"
         
-        let remoteLat = userInfo["userLat"] as? Double ?? 60.4661447    // Åsane Senter
-        let remoteLong = userInfo["userLong"] as? Double ?? 5.3205239
+        let userLatitude = userInfo["userLat"] as? String ?? "60.1001" // Laksevåg Senter
+        let userLongitude = userInfo["userLong"] as? String ?? "5.10000"
         
-        let userLat = userInfo["remoteLat"] as? Double ?? 60.3896067    // Laksevåg Senter
-        let userLong = userInfo["remoteLong"] as? Double ?? 5.2874327
-
-        let title = notification.request.content.title
-        let subtitle = notification.request.content.body
-        
-        let yourLocation = CLLocationCoordinate2D(latitude: userLat, longitude: userLong)
-        let remoteLocation = CLLocationCoordinate2D(latitude: remoteLat, longitude: remoteLong)
+        let yourLocation = CLLocationCoordinate2D(latitude: Double(userLatitude)!, longitude: Double(userLongitude)!)
+        let remoteLocation = CLLocationCoordinate2D(latitude: Double(remoteLatitude)!, longitude: Double(remoteLongitude)!)
         
         self.renderedMap(title, subtitle: subtitle, remoteLocation: remoteLocation, yourLocation: yourLocation)
         
-        let message = "\(notification.request.content.title): \(notification.request.content.body) "
+        // let message = "\(notification.request.content.title): \(notification.request.content.body) "
+        let message = "\(remoteLatitude): \(remoteLongitude)  -  \(userLatitude):\(userLongitude)"
         self.messageLabel?.text = message
+        self.timeLabel.text = message
     }
     
     /**
@@ -295,7 +297,7 @@ extension NotificationViewController : MKMapViewDelegate {
                     let routeTimeMessage = "Det tar ca \(routeMinutes) minutter \(transportTypeString)"
                     let routeDistanceMessage = "Avstanden er \(routeDistance) km"
                     
-                    self.timeLabel.text = routeTimeMessage
+                    // self.timeLabel.text = routeTimeMessage
                     self.distanceLabel.text = routeDistanceMessage
                     
                     // https://stackoverflow.com/questions/23127795/how-to-offset-properly-an-mkmaprect
