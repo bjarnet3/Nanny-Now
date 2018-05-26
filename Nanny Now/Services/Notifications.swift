@@ -377,7 +377,7 @@ class Notifications {
         let requestID = request.requestID ?? requestREFID.key // maybe add requestID argument
         
         // let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(remoteUID).child(requestID)
-        let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(requestID)
+        let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(remoteUID).child(requestID)
         let setUserID = ["userID" : userUID,
                          "requestID": requestID ]
         

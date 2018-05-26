@@ -380,15 +380,17 @@ class DataService {
     func addFriendsToDatabase(friends: [String:String]) {
         if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             
-            var userFID: String = ""
             var userName: String = ""
+            var userUID: String = ""
+            var userFID: String = ""
             
             var friendsFIDs: [String] = []
             var friendsUserIDs: [String] = []
             
+            var uidFriends: [String:String] = [:]
+            
             for keys in friends.keys {
                 friendsFIDs.append(keys)
-                // print("friend keys \(keys)")
             }
             
             DataService.instance.REF_USERS_PRIVATE.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -399,12 +401,14 @@ class DataService {
                                 if let friendUID = userBase["userID"] as? String {
                                     if let name = userBase["first_name"] as? String {
                                         if friendUID == userID {
+                                            userUID = friendUID
                                             userFID = fid
                                             userName = name
                                         }
                                         if friendsFIDs.contains(fid) {
                                             friendsUserIDs.append(friendUID)
-                                            // print("\(friendUID) is found in keys")
+                                            uidFriends[friendUID] = name
+                                            print("\(friendUID) - \(name)")
                                         }
                                     }
                                 }
@@ -412,14 +416,20 @@ class DataService {
                         }
                     }
                     for uid in friendsUserIDs {
-                        // print("id in friendsUserID \(id)")
-                        let baseFirebase = DataService.instance.REF_USERS_PRIVATE.child(uid).child("friends")
-                        baseFirebase.updateChildValues([userFID:userName])
+                        let userPrivateFID = DataService.instance.REF_USERS_PRIVATE.child(uid).child("friends")
+                        userPrivateFID.updateChildValues([userFID:userName])
+                        
+                        let userPublicUID = DataService.instance.REF_USERS_PUBLIC.child(uid).child("friends")
+                        userPublicUID.updateChildValues([userUID:userName])
                     }
                 }
+                print(uidFriends)
+                let uidFirebase = DataService.instance.REF_USERS_PUBLIC.child(userID).child("friends")
+                uidFirebase.updateChildValues(uidFriends)
             })
-            let baseFirebase = DataService.instance.REF_USERS_PRIVATE.child(userID).child("friends")
-            baseFirebase.updateChildValues(friends)
+            print(friends)
+            let fidFirebase = DataService.instance.REF_USERS_PRIVATE.child(userID).child("friends")
+            fidFirebase.updateChildValues(friends)
         }
     }
     
@@ -485,7 +495,6 @@ class DataService {
         DataService.instance.REF_USERS_PRIVATE.child(userID).child("location").child(fromLocation).observeSingleEvent(of: .value, with: { snapshot in
             let snapshotChildValues = snapshot.value as? [AnyHashable : Any] ?? [:]
             reference.child(userID).updateChildValues(snapshotChildValues)
-            // DataService.instance.REF_NANNIESACTIVE.child(userID).updateChildValues(snapshotChildValues)
         })
     }
     
@@ -494,7 +503,6 @@ class DataService {
         from.observeSingleEvent(of: .value, with: { snapshot in
             let snapshotChildValues = snapshot.value as? [AnyHashable : Any] ?? [:]
             toReference.child(userID).updateChildValues(snapshotChildValues)
-            // DataService.instance.REF_NANNIESACTIVE.child(userID).updateChildValues(snapshotChildValues)
         })
     }
     

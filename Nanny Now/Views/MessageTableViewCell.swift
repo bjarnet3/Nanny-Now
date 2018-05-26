@@ -39,6 +39,7 @@ class MessageTableViewCell: UITableViewCell {
     
     func setupView(with message: Message, animated: Bool = true) {
         if let user = message._fromUser {
+            self.cellImageLoaded = false
             self.profileImage.loadImageUsingCacheWith(urlString: user.imageName, completion: {
                 if animated {
                     self.animateView(direction: .enter)

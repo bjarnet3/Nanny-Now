@@ -12,6 +12,9 @@ class NannyImageView: UIImageView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.layer.borderWidth = 0.60
+        self.layer.borderColor = PINK_NANNY_LOGO.cgColor
     }
     
     override func layoutSubviews() {

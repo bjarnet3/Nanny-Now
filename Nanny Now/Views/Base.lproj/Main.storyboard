@@ -2026,7 +2026,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                             <rect key="frame" x="0.0" y="0.0" width="355" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Iy-Xb-SVl" customClass="CustomImageView" customModule="Nanny_Now" customModuleProvider="target">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Iy-Xb-SVl" customClass="NannyImageView" customModule="Nanny_Now" customModuleProvider="target">
                                                     <rect key="frame" x="15" y="-24" width="56" height="56"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="56" id="uBT-Wx-FG7"/>
@@ -2153,6 +2153,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                 </progressView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nanny-profil" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tJ0-v9-xoF" customClass="NannyImageView" customModule="Nanny_Now" customModuleProvider="target">
                                                     <rect key="frame" x="10" y="15" width="50" height="50"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="tJ0-v9-xoF" secondAttribute="height" multiplier="1:1" id="ci7-CH-twc"/>
                                                     </constraints>

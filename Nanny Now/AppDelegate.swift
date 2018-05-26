@@ -300,22 +300,30 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         let action = response.actionIdentifier
         
         func actionForNotificaion(notificationCategory: NotificationAction) {
+            
+            guard let userID = userInfo["remoteID"] as? String else { return }
+            guard let remoteID = userInfo["userID"] as? String else { return }
+            guard let requestID = userInfo["requestID"] as? String else { return }
+            
+            let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(userID).child(requestID)
+            let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(userID).child("requests").child(requestID)
+            
+            let publicRemote = DataService.instance.REF_REQUESTS.child("public").child(remoteID).child(requestID)
+            // let privateRemote = DataService.instance.REF_REQUESTS.child("private").child(remoteID).child("requests").child(requestID)
+            
+            func returnRequestStatus(requestStatus: RequestStatus) -> [String:String] {
+                return [ "requestStatus":requestStatus.rawValue ]
+            }
+
             switch notificationCategory {
             case .nannyAccept:
                 // Switch
-                guard let userID = userInfo["remoteID"] as? String else { return }
-                // guard let remoteID = userInfo["userID"] as? String else { return }
-                guard let requestID = userInfo["requestID"] as? String else { return }
+                let updateStatus = returnRequestStatus(requestStatus: .accepted)
                 
-                let requestStatus: RequestStatus = .accepted
-                let updateStatus = [ "requestStatus":requestStatus.rawValue]
-                
-                let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(requestID)
-                let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(userID).child("requests").child(requestID)
-                
-                DataService.instance.REF_REQUESTS.child("public").child(requestID).updateChildValues(updateStatus)
+                publicRequest.updateChildValues(updateStatus)
                 DataService.instance.moveValuesFromRefToRef(fromReference: publicRequest, toReference: privateRequest)
                 
+                publicRemote.updateChildValues(updateStatus)
                 DataService.instance.REF_NANNIES.child("active").child(userID).removeValue()
                 
                 // Go to Message / Request location
@@ -327,10 +335,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                 tabBarController.setSelectIndex(from: 0, to: 3)
                 tabBarController.tabBarItem.badgeValue = nil
             case .nannyRespond:
-                let remoteID = userInfo["remoteID"] as? String ?? "noRemoteID"
-                let userID = userInfo["userID"] as? String ?? "noUserID"
-                let requestID = userInfo["requestID"] as? String ?? "noRequestID"
-                
                 let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(remoteID).child("requests").child(requestID)
                 let updateUserID = ["userID": userID]
                 privateRequest.updateChildValues(updateUserID)
@@ -341,12 +345,13 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                 let updateStatus = ["requestStatus":RequestStatus.accepted.rawValue]
                 publicRequest.updateChildValues(updateStatus)
             case .nannyReject:
-                let remoteID = userInfo["userID"] as? String ?? "noRemoteID"
-                let userID = userInfo["remoteID"] as? String ?? "noUserID"
-                let aps = userInfo["aps"] as? [String: Any]
-                let badge = aps?["badge"] as! Int
+                let updateStatus = returnRequestStatus(requestStatus: .rejected)
                 
-                DataService.instance.REF_USERS_PRIVATE.child(remoteID).child("badge").setValue(badge - 1)
+                publicRequest.setValue(updateStatus)
+                DataService.instance.moveValuesFromRefToRef(fromReference: publicRequest, toReference: privateRequest)
+                
+                publicRemote.updateChildValues(updateStatus)
+                DataService.instance.REF_NANNIES.child("active").child(userID).removeValue()
             case .familyAccept:
                 print("")
             case .familyReject:

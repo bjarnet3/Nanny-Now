@@ -98,13 +98,17 @@ class MessageViewController: UIViewController {
         setBlurEffectWithAnimator(on: self.mainTable, duration: 0.42, startBlur: true, curve: .easeIn)
         self.blurAnimator?.startAnimation()
         
+        self.mainTable.reloadData()
+        self.mainTable.setNeedsDisplay()
+        
         UIView.animate(withDuration: 0.45, delay: 0.045, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
             self.enterMainTable()
         }, completion: { (true) in
             self.mainTableMinimized = false
             self.animatorIsBusy = false
             
-            self.view.setNeedsDisplay()
+            self.backTable.reloadData()
+            self.backTable.setNeedsDisplay()
             
             self.setBlurEffectWithAnimator(on: self.mainTable, startBlur: false)
             self.setScrollEffectWithAnimator(on: self.mainTable, reversed: false)
@@ -118,16 +122,17 @@ class MessageViewController: UIViewController {
         setBlurEffectWithAnimator(on: self.mainTable, duration: 0.45, startBlur: false, curve: .easeIn)
         self.blurAnimator?.startAnimation()
         
+        self.backTable.reloadData()
+        self.backTable.setNeedsDisplay()
+        
         UIView.animate(withDuration: 0.45, delay: 0.010, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
             
             self.enterBackTable()
+            
         }, completion: { (true) in
             self.mainTableMinimized = true
             self.animatorIsBusy = false
             
-            self.view.setNeedsDisplay()
-            
-            // self.setBlurEffectWithAnimator(on: self.backTable, startBlur: true)
             self.setScrollEffectWithAnimator(on: self.backTable, reversed: true)
         })
     }
@@ -211,13 +216,25 @@ class MessageViewController: UIViewController {
     }
     
     // Check if image is loaded for RequestUserCell
-    func lastCellLayout() {
+    func lastMainCellLayout() {
         for cell in mainTable.visibleCells {
             if cell is RequestUserCell {
                 if let customCell = cell as? RequestUserCell {
                     if customCell.cellImageLoaded != true {
-                        print("RequestUserCell is not loaded - reloadData")
                         self.mainTable.reloadData()
+                    }
+                }
+            }
+        }
+    }
+    
+    // Check if image is loaded for MessageTableViewCell
+    func lastBackCellLayout() {
+        for cell in backTable.visibleCells {
+            if cell is MessageTableViewCell {
+                if let backCells = cell as? MessageTableViewCell {
+                    if backCells.cellImageLoaded != true {
+                        self.backTable.reloadData()
                     }
                 }
             }
@@ -503,10 +520,6 @@ class MessageViewController: UIViewController {
                                 if key == "requestStatus", val as? String != "pending" {
                                     DataService.instance.moveValuesFromRefToRef(fromReference: publicRequest, toReference: privateRequest)
                                 }
-                                if key == "userID" {
-                                    // Remove subValue "userID"
-                                    // publicRequest.child(snap.key).child(key).removeValue()
-                                }
                             }
                             
                         }
@@ -563,6 +576,9 @@ extension MessageViewController {
             }, completion: { (true) in
                 self.introAnimationLoaded = true
                 self.animatorIsBusy = false
+                
+                self.backTable.reloadData()
+                self.backTable.setNeedsDisplay()
                 
                 self.setBlurEffectWithAnimator(on: self.mainTable, startBlur: false)
                 self.setScrollEffectWithAnimator(on: self.mainTable, reversed: false)
@@ -682,7 +698,6 @@ extension MessageViewController: UIScrollViewDelegate {
                             // print("scrollAnimator.state is not stopped")
                             let scrollResult = returnScrollValue(with: scrollView.contentOffset.y, valueOffset: 0.15)
                             scrollAnimator?.fractionComplete = scrollResult
-                            print(scrollResult)
                         }
                     }
                     
@@ -803,11 +818,8 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
                         present(requestDetail, animated: false)
                         
                         if !requestCell.hasSelected {
-                            print("hasSelected is false")
                             self.messageBadge = (messageBadge > 0) ? (messageBadge - 1) : 0
                             requestCell.hasSelected = true
-                        } else {
-                            print("hasSelected is true")
                         }
                     }
                 }
@@ -857,8 +869,6 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
                 self.backTable.isEditing = false
                 self.backTable.deleteRows(at: [indexPath], with: .fade)
             }
-            // Update badgeValue
-            // self.nannyTabBar.badgeValue = "\(self.nannies.count)"
         }
         
         let request = UITableViewRowAction(style: .destructive, title: " ☑︎ ") { (action , indexPath) -> Void in
