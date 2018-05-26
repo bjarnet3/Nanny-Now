@@ -117,7 +117,6 @@ extension PassThroughView {
 
         let view = UIImageView(image: image)
         view.translatesAutoresizingMaskIntoConstraints = false
-
         return view
     }
 

@@ -61,4 +61,8 @@ class LocalService {
     func getSettings() -> [Settings] {
         return settings
     }
+    
+    func getSubSettings() -> [Settings] {
+        return subSettings
+    }
 }

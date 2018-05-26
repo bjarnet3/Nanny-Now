@@ -12,7 +12,6 @@ import QuartzCore
 class RequestBodyCell: UITableViewCell {
     
     @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var view: PassThroughView!
     
     var user: User?
     
@@ -23,7 +22,7 @@ class RequestBodyCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        view.layer.cornerRadius = view.frame.height / 2
+        
         profileImage.layer.cornerRadius = profileImage.layer.frame.height / 2
     }
     

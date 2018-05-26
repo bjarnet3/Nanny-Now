@@ -155,13 +155,10 @@ class StartViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func goToSubSettings() {
-        print("goToSubSettings")
-        
         guard let subSettings = storyboard?.instantiateViewController(withIdentifier: "SubSettingsViewController") as? SubSettingsViewController else {
             return
         }
         present(subSettings, animated: true)
-        
     }
     
     func logout(service: Service = .All) {
@@ -207,28 +204,24 @@ extension StartViewController {
             signedIn = false
             self.goToRegister(pageToLoadFirst: 0)
         }
-        self.settings = LocalService.instance.getSettings()
         
+        self.settings = LocalService.instance.getSettings()
         self.tableView.dataSource = self
         self.tableView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         // Set Frosty TabBar
         let tab = self.tabBarController?.tabBar as! FrostyTabBar
         tab.setEffect(blurEffect: .extraLight)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("--- viewDidAppear ---")
         if viewAnimationLoaded {
             fadeView(self.tableView)
         }
-        if !signedIn {
-            print("not signed in")
-            self.goToRegister()
-        }
+        
+        if !signedIn { self.goToRegister() }
         hapticButton(.heavy, lowPowerModeDisabled)
     }
     
@@ -335,7 +328,6 @@ extension StartViewController {
         
         let cancelAction = UIAlertAction(title: "Avbryt", style: .cancel) { (_) in
             self.view.unBlur()
-
         }
         
         alertController.addAction(infoAction)
@@ -367,20 +359,17 @@ extension StartViewController {
         alertController.addAction(logoutAction)
         alertController.addAction(cancelAction)
         
-        self.present(alertController, animated: true) {
-        }
+        self.present(alertController, animated: true) { }
     }
     
     func sendRequestAlert() {
         self.view.blur(blurRadius: 10.0)
-
-        let controller = UIAlertController(title: "Title ", message: "Message", preferredStyle: .alert)
         
+        let controller = UIAlertController(title: "Title ", message: "Message", preferredStyle: .alert)
         let cancelButton = UIAlertAction(title: "Avbryt", style: .cancel) { (action) in
             self.view.unBlur()
             hapticButton(.warning, lowPowerModeDisabled)
         }
-        
         let sendButton = UIAlertAction(title: "Send", style: .default) { (action) in
             let text = controller.textFields?.first?.text
             print(text ?? "sendButton")
@@ -388,7 +377,6 @@ extension StartViewController {
             self.view.unBlur()
             hapticButton(.success, lowPowerModeDisabled)
         }
-        
         controller.addAction(cancelButton)
         controller.addAction(sendButton)
         
@@ -396,7 +384,6 @@ extension StartViewController {
             textField.placeholder = "  placeholder text  "
             textField.keyboardType = .numbersAndPunctuation
         }
-        
         self.present(controller, animated: true, completion: nil)
     }
 }

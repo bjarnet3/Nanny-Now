@@ -90,7 +90,6 @@
 		5CF50D85209CD5F800136167 /* MessageDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF50D84209CD5F800136167 /* MessageDetailVC.swift */; };
 		5CFDC33120A5355100ACB61C /* UIImage+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFDC33020A5355100ACB61C /* UIImage+Shadow.swift */; };
 		5CFDC33320A535CC00ACB61C /* PassThroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFDC33220A535CC00ACB61C /* PassThroughView.swift */; };
-		5CFDC33520A535F400ACB61C /* GripBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFDC33420A535F300ACB61C /* GripBarView.swift */; };
 		5CFE968820A4E1F1003C08A4 /* RequestExtendedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE968720A4E1F1003C08A4 /* RequestExtendedCell.swift */; };
 		D76AEE53A84CCAADE054300E /* Pods_Nanny_Now.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C06149E4985579864421B59A /* Pods_Nanny_Now.framework */; };
 /* End PBXBuildFile section */
@@ -223,7 +222,6 @@
 		5CF50D84209CD5F800136167 /* MessageDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailVC.swift; sourceTree = "<group>"; };
 		5CFDC33020A5355100ACB61C /* UIImage+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIImage+Shadow.swift"; path = "Nanny Now/Models/UIImage+Shadow.swift"; sourceTree = SOURCE_ROOT; };
 		5CFDC33220A535CC00ACB61C /* PassThroughView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassThroughView.swift; sourceTree = "<group>"; };
-		5CFDC33420A535F300ACB61C /* GripBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GripBarView.swift; sourceTree = "<group>"; };
 		5CFE968720A4E1F1003C08A4 /* RequestExtendedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestExtendedCell.swift; sourceTree = "<group>"; };
 		77AACDD398985A24EF2F229E /* Pods-Nanny Now.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nanny Now.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nanny Now/Pods-Nanny Now.release.xcconfig"; sourceTree = "<group>"; };
 		C06149E4985579864421B59A /* Pods_Nanny_Now.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nanny_Now.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -365,7 +363,6 @@
 				5CB7FE551FE435B600D41E6F /* FrostyView.swift */,
 				5CB7FE591FE4368900D41E6F /* FrostyCornerView.swift */,
 				5C9FD3CB20A52B6400B1D5A1 /* ShaddowImageView.swift */,
-				5CFDC33420A535F300ACB61C /* GripBarView.swift */,
 				5CFDC33220A535CC00ACB61C /* PassThroughView.swift */,
 				5CFDC33020A5355100ACB61C /* UIImage+Shadow.swift */,
 			);
@@ -752,7 +749,6 @@
 				5C70E62E2082153E0076CC4A /* RequestBodyCell.swift in Sources */,
 				5CFDC33320A535CC00ACB61C /* PassThroughView.swift in Sources */,
 				5C592B741DAE9DF300238E7E /* CustomImageView.swift in Sources */,
-				5CFDC33520A535F400ACB61C /* GripBarView.swift in Sources */,
 				5C55C1011DAAFC5600581EF3 /* Constants.swift in Sources */,
 				5CCF0C791D898BFB0089F39D /* FamilyViewController.swift in Sources */,
 				5CC849351FCA11BE003AE163 /* SettingsTableViewCell.swift in Sources */,
