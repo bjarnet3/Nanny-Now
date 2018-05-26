@@ -31,8 +31,9 @@ class User : MKPointAnnotation {
     
     private(set) public var _ratings: [String:Int]?
     private(set) public var _location: CLLocation?
+    private(set) public var _activeLocation: CLLocation?
     
-    // Personal information (Public)
+    // Personal information (Public) - Testing Testing,
     // -----------------------------
     public var _locations: [String:CLLocation]?
     public var _distance: Double?
@@ -64,6 +65,7 @@ class User : MKPointAnnotation {
     var returnIntDistance: Int { return Int(_distance ?? 8888.0) }
     
     var location: CLLocation? { get { return _location! } set { _location = newValue } }
+    var activeLocation: CLLocation? { get { return _activeLocation } set { _activeLocation = newValue } }
     
     // Options Configurations (set)
     // ----------------------------

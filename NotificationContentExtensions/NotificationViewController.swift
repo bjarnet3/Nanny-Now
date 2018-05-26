@@ -112,21 +112,20 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         self.yourImageView.loadImageUsingCacheWith(urlString:yourImageUrl)
         self.remoteImageView.loadImageUsingCacheWith(urlString: remoteImageUrl)
         
-        let remoteLatitude = userInfo["remoteLat"] as? String ?? "60.0001"  // Åsane Senter
-        let remoteLongitude = userInfo["remoteLong"] as? String ?? "5.0001"
+        let remoteLatitude = userInfo["userLat"] as? String ?? "60.0001"  // Åsane Senter
+        let remoteLongitude = userInfo["userLong"] as? String ?? "5.0001"
         
-        let userLatitude = userInfo["userLat"] as? String ?? "60.1001" // Laksevåg Senter
-        let userLongitude = userInfo["userLong"] as? String ?? "5.10000"
+        let userLatitude = userInfo["remoteLat"] as? String ?? "60.1001" // Laksevåg Senter
+        let userLongitude = userInfo["remoteLong"] as? String ?? "5.10000"
         
         let yourLocation = CLLocationCoordinate2D(latitude: Double(userLatitude)!, longitude: Double(userLongitude)!)
         let remoteLocation = CLLocationCoordinate2D(latitude: Double(remoteLatitude)!, longitude: Double(remoteLongitude)!)
         
         self.renderedMap(title, subtitle: subtitle, remoteLocation: remoteLocation, yourLocation: yourLocation)
         
-        // let message = "\(notification.request.content.title): \(notification.request.content.body) "
-        let message = "\(remoteLatitude): \(remoteLongitude)  -  \(userLatitude):\(userLongitude)"
+        let message = "\(notification.request.content.title): \(notification.request.content.body) "
+        // let message = "\(remoteLatitude): \(remoteLongitude)  -  \(userLatitude):\(userLongitude)"
         self.messageLabel?.text = message
-        self.timeLabel.text = message
     }
     
     /**
@@ -297,7 +296,7 @@ extension NotificationViewController : MKMapViewDelegate {
                     let routeTimeMessage = "Det tar ca \(routeMinutes) minutter \(transportTypeString)"
                     let routeDistanceMessage = "Avstanden er \(routeDistance) km"
                     
-                    // self.timeLabel.text = routeTimeMessage
+                    self.timeLabel.text = routeTimeMessage
                     self.distanceLabel.text = routeDistanceMessage
                     
                     // https://stackoverflow.com/questions/23127795/how-to-offset-properly-an-mkmaprect

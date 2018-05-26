@@ -66,8 +66,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     
     // Location
     var locationManager = CLLocationManager()
-
-    var activeLocation: CLLocation?
     var activeLocations = [String:CLLocation]()
     
     var activeLocationNames = [String]()
@@ -125,10 +123,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                 
                 var requestMessage = "Melding til: \(lastNanny.firstName)"
                 if let text = self.requestMessage.text, text != "" { requestMessage = text }
-                
-                self.setActiveLocation()
-                // guard let user = self.user else { return }
-                
                 if self.requestType.selectedSegmentIndex <= 1 {
                     // Send Request
                     var request = Request(nanny: lastNanny, user: user, timeFrom: self.fromDateTime.date, timeTo: self.toDateTime.date, message: requestMessage)
@@ -166,6 +160,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
             enterLocationMenu()
         } else {
             exitLocationMenu()
+            setActiveLocation()
         }
     }
     
@@ -212,7 +207,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     func getUserSettings() {
         if let user = LocalService.instance.getUser() {
             self.user = user
-            // self.setActiveLocation()
             self.user?.location = returnCurrentLocation
             self.checkForBlocked(user.userUID)
         }
@@ -261,17 +255,13 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
             UIView.animate(withDuration: 2.0, delay: 0.450, usingSpringWithDamping: 0.85, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
                 self.nannyAd.alpha = 0
             })
-            if let location = returnCurrentLocation {
-                DataService.instance.updateLocationAndPostcodeOnUser(from: location, userID: userID)
-            }
+            DataService.instance.updateLocationAndPostcodeOnUser(from: returnCurrentLocation, userID: userID)
             if turnOn {
                 self.nannyAd.setTitle("Nanny Annonse er Aktiv", for: .normal)
                 self.nannyAd.setTitleColor(UIColor.white, for: .normal)
                 self.nannyAd.backgroundColor = hexStringToUIColor("#FF1744")
                 
                 self.locationManager.startUpdatingLocation()
-                self.setActiveLocation()
-                
                 DataService.instance.addTokenToDatabase(for: userID)
                 
                 if let gender = userInfo["gender"] as? String {
@@ -303,7 +293,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                 self.nannyAd.setTitleColor(UIColor.black, for: .normal)
                 self.nannyAd.backgroundColor = UIColor.white
                 self.locationManager.stopUpdatingLocation()
-                self.setActiveLocation()
                 
                 self.nannyBadge = 0
                 
@@ -331,8 +320,8 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         locationManager.startUpdatingLocation()
     }
     
-    var returnCurrentLocation: CLLocation? {
-        var location: CLLocation?
+    var returnCurrentLocation: CLLocation {
+        var location: CLLocation
         if let currentLocation = locationManager.location {
             location = currentLocation
         } else if let userLocation = user?.location {
@@ -343,17 +332,30 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         return location
     }
     
+    var returnActiveLocation: CLLocation {
+        return self.user?.activeLocation ?? returnCurrentLocation
+    }
+    
     func setActiveLocation() {
         let active = self.activeLocationName
         if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            var location: (latitude: Double?, longitude: Double?)
+            // var longitude: Double?
             DataService.instance.REF_USERS_PRIVATE.child(userID).child("location").child(active).observeSingleEvent(of: .value, with: { (snapshot) in
                 if let snapshot = snapshot.value as? Dictionary<String, AnyObject> {
+                    
                     for (key, val) in snapshot {
-                        guard let latitude = val as? String, key == "latitude" else { continue }
-                        guard let longitude = val as? String, key == "longitude" else { continue }
+                        if let longitude = val as? Double, key == "longitude" {
+                            location.longitude = longitude
+                        }
                         
-                        let location = CLLocation(latitude: Double(latitude)!, longitude: Double(longitude)!)
-                        self.user?.location = location
+                        if let latitude = val as? Double, key == "latitude" {
+                            location.latitude = latitude
+                        }
+                    }
+                    
+                    if location.latitude != nil && location.longitude != nil {
+                        self.user?.activeLocation = CLLocation(latitude: location.latitude!, longitude: location.longitude!)
                     }
                 }
             })
@@ -369,6 +371,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                 } else if key == "active" {
                     if let active = value as? String {
                         self.activeLocationName = active
+                        self.setActiveLocation()
                     }
                 }
             }
@@ -992,19 +995,15 @@ extension NannyViewController {
         
         let sendMapRequest = UIAlertAction(title: "Send Kart Forespørsel", style: .default) { (_) in
             if lowPowerModeDisabled {
+                
                 if let lastRow = self.lastRowSelected?.row {
                     let lastNanny = self.nannies[lastRow]
                     
-                    guard let user = self.user else { return }
-                    self.setActiveLocation()
-                    
-                    printDebug(object: user.location!)
-                    
-                    var requestMessage = "Melding til: \(lastNanny.firstName)"
+                    var requestMessage = "Request To: \(lastNanny.firstName)"
                     if let text = self.requestMessage.text, text != "" { requestMessage = text }
                     
                     // Send Request
-                    var request = Request(nanny: lastNanny, user: user, timeFrom: self.fromDateTime.date, timeTo: self.toDateTime.date, message: requestMessage)
+                    var request = Request(nanny: lastNanny, user: self.user!, timeFrom: self.fromDateTime.date, timeTo: self.toDateTime.date, message: requestMessage)
                     
                     request.requestCategory = NotificationCategory.nannyMapRequest.rawValue
                     Notifications.instance.sendNotification(with: request)

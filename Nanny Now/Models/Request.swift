@@ -42,7 +42,7 @@ struct Request {
     
     // Service information (Request)
     // -----------------------------
-    private(set) public var _requestID: String
+    private(set) public var _requestID: String?
     private(set) public var _requestREF: DatabaseReference
     private(set) public var _requestStatus: RequestStatus = .pending
     private(set) public var _requestCategory: NotificationCategory = .nannyRequest
@@ -58,7 +58,7 @@ struct Request {
     
     // Computed Properties
     // -------------------
-    var requestID: String {
+    var requestID: String? {
         get { return _requestID }
             set { self._requestID = newValue} }
     

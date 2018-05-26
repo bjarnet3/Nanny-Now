@@ -16,25 +16,46 @@ var sendNotifications = Notifications.instance.sendNotifications
 public enum NotificationCategory : String {
     case nannyRequest = "nannyRequest"
     case nannyMapRequest = "nannyMapRequest"
-    case nannyAccept = "nannyAccept"
-    case nannyConfirmed = "nannyConfirmed"
-    case nannyReject = "nannyReject"
+    case nannyConfirm = "nannyConfirm"
     
     case familyRequest = "familyRequest"
-    case familyAccept = "familyAccept"
-    case familyMapAccept = "familyMapAccept"
-    case familyConfirmed = "familyConfirmed"
-    case familyReject = "familyReject"
+    case familyMapRequest = "familyMapRequest"
+    case familyConfirm = "familyConfirm"
     
     case messageRequest = "messageRequest"
-    case messageAccept = "messageAccept"
+    case messageConfirm = "messageConfirm"
     
-    case defaultValue = "default"
+    case defaultCategory = "defaultCategory"
+}
+
+public enum NotificationAction: String {
+    case nannyAccept = "nannyAccept"
+    case nannyReject = "nannyReject"
+    case nannyRespond = "nannyRespond"
+    
+    case familyAccept = "familyAccept"
+    case familyReject = "familyReject"
+    case familyRespond = "familyRespond"
+    
+    case messageAccept = "messageAccept"
+    case messageReject = "messageReject"
+    case messageRespond = "messageRespond"
+    
+    case defaultAccept = "defaultAccept"
+    case defaultReject = "defaultReject"
+    case defaultRemind = "defaultRemind"
+    
+    case defaultAction = "defaultAction"
 }
 
 public func notificationRequest(category: String) -> NotificationCategory {
-    guard let notificaitonCategory = NotificationCategory(rawValue: category) else { return NotificationCategory.defaultValue }
+    guard let notificaitonCategory = NotificationCategory(rawValue: category) else { return NotificationCategory.defaultCategory }
     return notificaitonCategory
+}
+
+public func notificationRequest(action: String) -> NotificationAction {
+    guard let notificaitonAction = NotificationAction(rawValue: action) else { return NotificationAction.defaultAction }
+    return notificaitonAction
 }
 
 /// Notification Singleton / with sendNotification() and sendNotificationResponse() function
@@ -43,10 +64,12 @@ class Notifications {
     // Create singleton of Notification Class "itself"
     static let instance = Notifications()
     
+    // Send Notification using Message Object
+    // --------------------------------------
     func sendNotifications(with message: Message) {
         let remoteID = message._toUser?.userUID ?? message._toUID
         let text = message._message
-        let categoryRequest: NotificationCategory = message._requestCategory
+        let categoryRequest = message._requestCategory
         let messageID = message._messageID
         
         let url = NSURL(string: "https://fcm.googleapis.com/fcm/send")!
@@ -116,22 +139,23 @@ class Notifications {
                                     
                                     // MARK: - Change this to display different Notificaiton Categories
                                     let category = categoryRequest.rawValue // "messageRequest"
+                                    var contentAvailable = false
                                     
                                     switch categoryRequest {
                                     case .messageRequest:
                                         title = "Melding fra \(firstName):"
                                         DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(text)")
-                                    
+                                        contentAvailable = true
                                     default:
                                         //.messageAccept:
                                         title = "Rask beskjed fra \(firstName)"
                                         DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(text)")
+                                        contentAvailable = false
                                     }
-                                    // DataService.instance.postToMessage(with: message)
                                     
                                     // For Advanced Rich Notificaiton Setup
                                     let remoteURL = message._toUser?.imageName ?? getFacebookProfilePictureUrl(id, .large)
-                                    let userURL = message._fromUser?.imageName ?? "userUrl"
+                                    let userURL = message._fromUser?.imageName ?? "nanny-profil"
                                     
                                     let dictionary =
                                         ["data":
@@ -154,7 +178,7 @@ class Notifications {
                                              "sound" : "notification48.wav",
                                              "badge" : badge],
                                          "priority":10,
-                                         // "content_available": true,
+                                          "content_available": contentAvailable,
                                             "mutable_content": true,
                                             "category" : category
                                             ] as [String : Any]
@@ -184,15 +208,18 @@ class Notifications {
         })
     }
     
+    // Send Notification using Request Object
+    // --------------------------------------
     func sendNotification(with request: Request) {
-        let requestID = request.requestID
+        let requestID = request.requestID ?? DataService.instance.REF_REQUESTS.childByAutoId().key
         let message = request.message
-        let categoryRequest: NotificationCategory = NotificationCategory(rawValue: request.requestCategory)!
+        let remoteID = request.nannyID
+        let categoryRequest = NotificationCategory(rawValue: request.requestCategory)!
         
         guard let user = request._user else { return }
         guard let remote = request._nanny else { return }
-        
-        let remoteID = request.nannyID
+        // guard let activeLocation = user.activeLocation ?? user.location else { return }
+        guard let userUID = KeychainWrapper.standard.string(forKey: KEY_UID) else { return }
         
         let url = NSURL(string: "https://fcm.googleapis.com/fcm/send")!
         let session = URLSession.shared
@@ -200,10 +227,6 @@ class Notifications {
         let urlRequest = NSMutableURLRequest(url: url as URL)
         urlRequest.httpMethod = "POST"
         urlRequest.cachePolicy = URLRequest.CachePolicy.reloadIgnoringCacheData
-        
-        guard let userUID = KeychainWrapper.standard.string(forKey: KEY_UID) else {
-            return
-        }
         
         let nameRef = DataService.instance.REF_USERS_PRIVATE.child(userUID).child("first_name")
         nameRef.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -257,8 +280,8 @@ class Notifications {
                                         badgeRef.setValue(badge)
                                     }
                                     
-                                    guard let userLat = user.location?.coordinate.latitude else { return } // ?? 60.12424245
-                                    guard let userLong = user.location?.coordinate.longitude else { return } // ?? 5.4343453
+                                    guard let userLat = user.activeLocation?.coordinate.latitude else { return }// ?? 60.12424245
+                                    guard let userLong = user.activeLocation?.coordinate.longitude else { return } // ?? 5.4343453
                                     
                                     guard let remoteLat = remote.location?.coordinate.latitude else { return } // ?? 60.1890322
                                     guard let remoteLong = remote.location?.coordinate.longitude else { return } // ?? 5.9254423
@@ -267,77 +290,35 @@ class Notifications {
                                     let registration_ids = tokens
                                     let message = message
                                     var title = "\(firstName)"
-                                    var requestID = requestID
+                                    let contentAvailable = false
                                     
-                                    // MARK: - Change this to display different Notificaiton Categories
-                                    let category = categoryRequest.rawValue // "messageRequest"
-                                    
-                                    switch categoryRequest {
-                                    case .nannyRequest:
-                                        title = "Forespørsel fra \(firstName):"
-                                        
-                                        let requestREFID = DataService.instance.REF_REQUESTS.childByAutoId()
-                                        requestID = requestREFID.key
-                                        
-                                        let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(remoteID).child(requestID)
-                                        
-                                        DataService.instance.postToRequest(with: request, reference: publicRequest)
-                                        
-                                        let setUserID = ["userID" : userUID,
-                                                         "requestID": requestID
-                                                         ]
-                                        publicRequest.updateChildValues(setUserID)
-                                        
-                                        let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(userUID).child("requests").child(requestID)
-                                        
-                                        DataService.instance.postToRequest(with: request, reference: privateRequest)
-                                        
-                                        let setRemoteID = ["userID" : remoteID,
-                                                           "requestID": requestID
-                                                           ]
-                                        privateRequest.updateChildValues(setRemoteID)
-                                        
-                                        let familyPrivate = DataService.instance.REF_FAMILIES.child("private").child(userUID)
-                                        let familyStored = DataService.instance.REF_FAMILIES.child("stored").child(remoteID).child(userUID)
-                                        DataService.instance.copyValuesFromRefToRef(fromReference: familyPrivate, toReference: familyStored)
-                                        
-                                    case .nannyMapRequest:
-                                        print("testing mapRequest")
-                                        
-                                    case .nannyAccept:
-                                        title = "\(firstName)"
-                                        // DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(message)")
-                                        // category = "default"
-                                        
-                                    case .nannyConfirmed:
-                                        title = "Barnevakten \(firstName):"
-                                        
-                                        let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(requestID)
-                                        publicRequest.child("nannyID").removeValue()
-                                        
-                                    case .nannyReject:
-                                        title = "\(firstName)"
-
-                                    case .familyRequest:
-                                        print("familyRequest")
-                                    case .familyAccept:
-                                        print("familyAccept")
-                                    case .familyMapAccept:
-                                        print("familyMapAccept")
-                                    case .familyConfirmed:
-                                        print("familyConfirmed")
-                                    case .familyReject:
-                                        print("familyReject")
-                                        
-                                    default:
-                                        title = "\(firstName)"
-                                        // DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(title): \(message)")
-                                    }
-
                                     // For Advanced Rich Notificaiton Setup
                                     let remoteURL = remote.imageName
                                     let userURL = user.imageName
                                     
+                                    // MARK: - Change this to display different Notificaiton Categories
+                                    let category = categoryRequest.rawValue // "messageRequest"
+
+                                    switch categoryRequest {
+                                    case .nannyRequest, .nannyMapRequest:
+                                        title = "Forespørsel fra \(firstName):"
+                                        
+                                        self.nannyRequest(userUID: userUID, remoteUID: remoteID, request: request)
+                                    case .nannyConfirm:
+                                        title = "Barnevakten \(firstName):"
+                                        
+                                        let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(requestID)
+                                        publicRequest.child("nannyID").removeValue()
+                                    case .familyRequest:
+                                        print("familyRequest")
+                                    case .familyMapRequest:
+                                        print("familyMapAccept")
+                                    case .familyConfirm:
+                                        print("familyConfirmed")
+                                    default:
+                                        title = "\(firstName)"
+                                    }
+
                                     let dictionary =
                                         ["data":
                                             [ "category": category,
@@ -360,7 +341,7 @@ class Notifications {
                                              "sound" : "notification11.wav",
                                              "badge" : badge],
                                          "priority":10,
-                                         // "content_available": true,
+                                            "content_available": contentAvailable,
                                             "mutable_content": true,
                                             "category" : category
                                             ] as [String : Any]
@@ -388,8 +369,27 @@ class Notifications {
                 })
             }
         })
-        
 
+    }
+    
+    func nannyRequest(userUID: String, remoteUID: String, request: Request) {
+        let requestREFID = DataService.instance.REF_REQUESTS.childByAutoId()
+        let requestID = request.requestID ?? requestREFID.key // maybe add requestID argument
+        
+        // let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(remoteUID).child(requestID)
+        let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(requestID)
+        let setUserID = ["userID" : userUID,
+                         "requestID": requestID ]
+        
+        DataService.instance.postToRequest(with: request, reference: publicRequest)
+        publicRequest.updateChildValues(setUserID)
+        
+        let setRemoteID = ["userID" : remoteUID,
+                           "requestID": requestID
+        ]
+        let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(userUID).child("requests").child(requestID)
+        DataService.instance.postToRequest(with: request, reference: privateRequest)
+        privateRequest.updateChildValues(setRemoteID)
     }
     
     func sendNotification(to remoteID: String, text: String, categoryRequest: NotificationCategory,_ requestID: String = "") {
@@ -467,10 +467,7 @@ class Notifications {
                                     // MARK: - Change this to display different Notificaiton Categories
                                     let category = categoryRequest.rawValue // "messageRequest"
                                     
-                                    switch categoryRequest {
-                                    case .nannyRequest:
-                                        title = "Forespørsel fra \(firstName):"
-                                        
+                                    func nannyRequestAction() {
                                         let requestREFID = DataService.instance.REF_REQUESTS.childByAutoId()
                                         requestID = requestREFID.key
                                         
@@ -490,32 +487,24 @@ class Notifications {
                                         let nannyID = ["userID" : remoteID]
                                         privateRequest.updateChildValues(nannyID)
                                         privateUsers.updateChildValues(nannyID)
+                                    }
+                                    
+                                    switch categoryRequest {
+                                    case .nannyRequest, .nannyMapRequest:
+                                        title = "Forespørsel fra \(firstName):"
                                         
-                                    case .nannyMapRequest:
-                                        print("nannyMapRequest")
-                                        
-                                    case .nannyAccept:
-                                        title = "\(firstName)"
-                                        // DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(message)")
-                                    // category = "default"
-                                    case .nannyConfirmed:
+                                        nannyRequestAction()
+                                    case .nannyConfirm:
                                         title = "Barnevakten \(firstName):"
                                         
                                         let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(requestID)
                                         publicRequest.child("nannyID").removeValue()
-                                    
-                                    case .nannyReject:
-                                        print("nannyReject")
-                                        
-                                        
                                     case .messageRequest:
                                         title = "Melding fra \(firstName):"
                                         DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(title) \(message)")
-                                    
-                                    case .messageAccept:
+                                    case .messageConfirm:
                                         title = "Melding fra \(firstName):"
                                         DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(title) \(message)")
-
                                     default:
                                         title = "\(firstName)"
                                         // DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(title): \(message)")
@@ -569,59 +558,6 @@ class Notifications {
         })
     }
     
-    // SHIT THIS IS MESSY,, but it works: YAHOO
-    func sendNotificationResponse(userID: String, remoteID: String, title: String, text: String, categoryRequest: NotificationCategory) {
-        
-        let url = NSURL(string: "https://fcm.googleapis.com/fcm/send")!
-        let session = URLSession.shared
-        
-        let request = NSMutableURLRequest(url: url as URL)
-        request.httpMethod = "POST"
-        request.cachePolicy = URLRequest.CachePolicy.reloadIgnoringCacheData
-        
-        let registration_ids = ["fgeEPLe_WC8:APA91bHCGbXHYkF8FLlzu63HefA5yoTJTr2SwJNJ_kfyUdCUBuPZdeRUtT0cVFvsp8AAgWqByWHigElq98GNV-kCu1gZCK9Nut3WyEn4xgchUZ3fT8uGExdN12iUexkkRwUhmYVPWb2S", "ccDJKeFfbXI:APA91bHJWgGUmBzGv1mQ4Kny7VRf5EnF4GHYMSKE95TqKJsrLSp0djopYmJ4lAXm-jfQZBfIXs_mMWtp75Ov0uhzNPbLMfck_EExWnvwRDvUXmWIaFyiJuOPbOsoXwilHBojak9Lb93E"]
-        
-        // MARK: - Change this to display different Notificaiton Categories
-        let category = "nannyAccept" // "messageRequest"
-        
-        // For Advanced Rich Notificaiton Setup
-        let userURL = getFacebookProfilePictureUrl("100753693854368", .large)
-        
-        let dictionary =
-            ["data":
-                [ "category": category,
-                  "remoteID": remoteID,
-                  "userID" : userID,
-                  "userURL": userURL
-                ],
-             "registration_ids" : registration_ids,
-             "notification":
-                ["title":title,
-                 "body":text,
-                 "sound": "default",
-                 "badge" : 1],
-             "priority":10,
-             // "content_available": true,
-                "mutable_content": true,
-                "category" : category
-            ] as [String : Any]
-        do {
-            try request.httpBody = JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)
-        }
-        catch {}
-        
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("key=AAAAd-nNctg:APA91bGhfGrYaRg-QOHx0LlfTyqU9cwOECMvm6jGHMZaeLGsToNPJtgV0y-EfcmMVFZbfbxdkF3ubJ8NC94-B-I74lV-UG2f-kuvjLtOnG_wbHecjdBc93Y59tv7XCJCEXEW3hTKH4oC", forHTTPHeaderField: "Authorization")
-        
-        let task = session.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
-            _ = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-            var json = NSDictionary()
-            do { json = try JSONSerialization.jsonObject(with: data!, options: .mutableLeaves) as! NSDictionary } catch {}
-            let parseJSON = json
-            _ = parseJSON["success"] as? Int
-        })
-        task.resume()
-    }
 }
 
 /* Testing av Notifications med Curl in Terminal

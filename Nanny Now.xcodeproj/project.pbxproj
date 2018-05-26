@@ -43,7 +43,6 @@
 		5C9D522320B6CD7A0083CE13 /* NannyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C961D898E940089F39D /* NannyImageView.swift */; };
 		5C9D522520B6CD830083CE13 /* NannyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D522420B6CD830083CE13 /* NannyImageView.swift */; };
 		5C9D522720B6CE190083CE13 /* NannyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D522620B6CE180083CE13 /* NannyImageView.swift */; };
-		5C9D522920B6F1D60083CE13 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D522820B6F1D60083CE13 /* LoginManager.swift */; };
 		5C9FC62C1FF6E95000906B05 /* FriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9FC62B1FF6E95000906B05 /* FriendsCollectionViewCell.swift */; };
 		5C9FD3CC20A52B6400B1D5A1 /* ShaddowImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9FD3CB20A52B6400B1D5A1 /* ShaddowImageView.swift */; };
 		5CA49F5B1FD78DA100B0A993 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA49F5A1FD78DA000B0A993 /* MessageViewController.swift */; };
@@ -172,7 +171,6 @@
 		5C9859AD2081D1F6006AA58A /* AnimatedRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedRingView.swift; sourceTree = "<group>"; };
 		5C9D522420B6CD830083CE13 /* NannyImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NannyImageView.swift; sourceTree = "<group>"; };
 		5C9D522620B6CE180083CE13 /* NannyImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NannyImageView.swift; sourceTree = "<group>"; };
-		5C9D522820B6F1D60083CE13 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		5C9FC62B1FF6E95000906B05 /* FriendsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewCell.swift; sourceTree = "<group>"; };
 		5C9FD3CB20A52B6400B1D5A1 /* ShaddowImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaddowImageView.swift; sourceTree = "<group>"; };
 		5CA49F5A1FD78DA000B0A993 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
@@ -342,7 +340,6 @@
 				5C85A7ED1DB84D83008C5FBB /* DataService.swift */,
 				5CDE08041FB27A5000E97D97 /* LocalService.swift */,
 				5C6D422A1EDE0DFA001037CE /* Notifications.swift */,
-				5C9D522820B6F1D60083CE13 /* LoginManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -752,7 +749,6 @@
 				5C6D422B1EDE0DFA001037CE /* Notifications.swift in Sources */,
 				5CA49F5B1FD78DA100B0A993 /* MessageViewController.swift in Sources */,
 				5C9FD3CC20A52B6400B1D5A1 /* ShaddowImageView.swift in Sources */,
-				5C9D522920B6F1D60083CE13 /* LoginManager.swift in Sources */,
 				5C70E62E2082153E0076CC4A /* RequestBodyCell.swift in Sources */,
 				5CFDC33320A535CC00ACB61C /* PassThroughView.swift in Sources */,
 				5C592B741DAE9DF300238E7E /* CustomImageView.swift in Sources */,

@@ -24,9 +24,11 @@ class Family: MKPointAnnotation {
     private(set) public var _kids: [String:Int]?
     
     // Feedback
+    // --------
     private(set) public var _ratings: [String:Int]?
     
     // Location
+    // --------
     private(set) public var _location: CLLocation?
     
     // Family information (Public)

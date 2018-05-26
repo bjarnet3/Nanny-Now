@@ -280,8 +280,9 @@ class DataService {
     }
     
     func postToRequest(with request: Request, reference: DatabaseReference) {
-            let timeStamp = returnTimeStamp()
+            // let timeStamp = returnTimeStamp()
             let requestREF = reference
+            let requestID = request.requestID ?? reference.childByAutoId().key
             
             let requestValues : [String : Any] = [
                 "highlighted" : request.highlighted,
@@ -289,8 +290,8 @@ class DataService {
                 "nannyID" : request.nannyID,
                 "requestAmount" : request.amount,
                 "requestCategory" : request.requestCategory,
-                "requestDate" : timeStamp,
-                "requestID": request.requestID,
+                "requestDate" : request.timeRequested,
+                "requestID": requestID,
                 "requestMessage" : request.message,
                 "requestStatus" : request.requestStatus,
                 "requestType" : request.requestCategory,
@@ -501,10 +502,7 @@ class DataService {
         let from = fromReference
         from.observeSingleEvent(of: .value, with: { snapshot in
             let snapshotChildValues = snapshot.value as? [AnyHashable : Any] ?? [:]
-            // toReference.setValue(snapshotChildValues)
             toReference.updateChildValues(snapshotChildValues)
-            // DataService.instance.REF_REQUESTS.updateChildValues(snapshotChildValues)
-            // DataService.instance.REF_NANNIESACTIVE.child(userID).updateChildValues(snapshotChildValues)
         })
     }
     

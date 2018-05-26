@@ -111,7 +111,7 @@ class MessageDetailVC: UIViewController {
             if let user = self.user {
                 
                 var message = Message(from: user, to: remote, message: messageText)
-                message.setCategory(category: .messageAccept)
+                message.setCategory(category: .messageConfirm)
                 sendNotification(message: message)
                 
                 self.messages.append(message)
