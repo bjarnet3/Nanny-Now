@@ -240,7 +240,6 @@ public func dateTimeToString(_ date: Date) -> String {
     return stringFromDateTime
 }
 
-
 /// This will be used when Nanny and Family Request are ready
 public func returnDayTimeString(from date: Date, day: Bool = true) -> String {
     let todayDate = Date()
@@ -294,6 +293,86 @@ public func returnDayTimeString(from date: Date, day: Bool = true) -> String {
         returnString = "kl: \(tidspunkt) \(returnString)"
     }
     return returnString
+}
+
+/// This will be used when Nanny and Family Request are ready
+public func returnDayTimeString(from date: Date) -> String {
+    let todayDate = Date()
+    let tomorrowDate = Date(timeInterval: 86400, since: todayDate)
+    let yesterDayDate = Date(timeInterval: -86400, since: todayDate)
+    
+    let from = Calendar.current.component(.weekday, from: date)
+    let today = Calendar.current.component(.weekday, from: todayDate)
+    let tomorrow = Calendar.current.component(.weekday, from: tomorrowDate)
+    let yesterDay = Calendar.current.component(.weekday, from: yesterDayDate)
+    
+    var returnString = ""
+    
+    let formatter = DateFormatter()
+    formatter.timeZone = TimeZone(secondsFromGMT: 86400)
+    formatter.locale = Locale(identifier: "en_US_POSIX")
+    
+    formatter.dateFormat = "HH:mm"
+    let klokken = formatter.string(from: date)
+    
+    formatter.dateFormat = "HH"
+    let time = formatter.string(from: date)
+    let timeInt = Int(time) ?? 12
+    
+    formatter.dateFormat = "dd/MM"
+    let dato = formatter.string(from: date)
+    
+    var tidsPeriode = ""
+    
+    // https://forum.kvinneguiden.no/topic/359451-formiddag-ettermiddag/
+    switch timeInt {
+    case 0..<6:
+        tidsPeriode = "natt"
+    case 6..<9:
+        tidsPeriode = from == tomorrow ? "tidlig" : "morgen"
+    case 9..<12:
+        tidsPeriode = "formiddag"
+    case 12..<15:
+        tidsPeriode = ""
+    case 15..<18:
+        tidsPeriode = "ettermiddag"
+    default:
+        tidsPeriode = "kveld"
+    }
+    
+    switch from {
+    case 1:
+        returnString = "søndag"
+    case 2:
+        returnString = "mandag"
+    case 3:
+        returnString = "tirsdag"
+    case 4:
+        returnString = "onsdag"
+    case 5:
+        returnString = "torsdag"
+    case 6:
+        returnString = "fredag"
+    case 7:
+        returnString = "lørdag"
+    default:
+        returnString = dato
+    }
+    
+    let nattEllerDag = timeInt < 5 ? "natt" : "dag"
+    let tidspunkt = timeInt >= 18 ? "kveld" : nattEllerDag
+    
+    if from == today {
+        returnString = "i \(tidspunkt)"
+    } else if from == tomorrow {
+        returnString = "i morgen \(tidsPeriode)"
+    } else if from == yesterDay {
+        returnString = "i går"
+    } else {
+        returnString = dato
+    }
+    
+    return "\(returnString)  \(klokken)"
 }
 
 /// argument **String** of **#HEX** returns **UIColor** value

@@ -248,7 +248,7 @@ class Notifications {
                         var tokenRef = DataService.instance.REF_USERS_PRIVATE.child(remoteID).child("tokens")
                         
                         switch categoryRequest {
-                        case .nannyRequest:
+                        case .nannyRequest, .nannyMapRequest:
                             tokenRef = DataService.instance.REF_NANNIES_ACTIVE.child(remoteID).child("tokens")
                         default:
                             tokenRef = DataService.instance.REF_USERS_PRIVATE.child(remoteID).child("tokens")
@@ -290,7 +290,7 @@ class Notifications {
                                     let registration_ids = tokens
                                     let message = message
                                     var title = "\(firstName)"
-                                    let contentAvailable = false
+                                    // let contentAvailable = false
                                     
                                     // For Advanced Rich Notificaiton Setup
                                     let remoteURL = remote.imageName
@@ -341,7 +341,7 @@ class Notifications {
                                              "sound" : "notification11.wav",
                                              "badge" : badge],
                                          "priority":10,
-                                            "content_available": contentAvailable,
+                                            // "content_available": contentAvailable,
                                             "mutable_content": true,
                                             "category" : category
                                             ] as [String : Any]

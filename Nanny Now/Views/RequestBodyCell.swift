@@ -11,7 +11,7 @@ import QuartzCore
 
 class RequestBodyCell: UITableViewCell {
     
-    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var cellImageView: NannyImageView!
     
     var user: User?
     
@@ -23,13 +23,13 @@ class RequestBodyCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        profileImage.layer.cornerRadius = profileImage.layer.frame.height / 2
+        cellImageView.layer.cornerRadius = cellImageView.layer.frame.height / 2
     }
     
     func animateView( direction: Direction) {
         if direction == .enter {
             self.contentView.alpha = 0
-            self.setNeedsDisplay(profileImage.frame)
+            self.setNeedsDisplay(cellImageView.frame)
             self.contentView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
             // self.layer.transform = CATransform3DMakeRotation(CGFloat.pi / 16, 1, 0, 0)
         } else {
@@ -42,7 +42,7 @@ class RequestBodyCell: UITableViewCell {
     // MARK: - Update View
     func setupView(user: User, animated: Bool = false) {
         animateView(direction: .enter)
-        self.profileImage.loadImageUsingCacheWith(urlString: user.imageName, completion: {
+        self.cellImageView.loadImageUsingCacheWith(urlString: user.imageName, completion: {
             if animated {
                 let random = Double(arc4random_uniform(UInt32(1000))) / 2000 
                 UIView.animate(withDuration: 0.6, delay: random * 1.5, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {

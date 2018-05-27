@@ -11,11 +11,10 @@ import UIKit
 class RequestUserCell: UITableViewCell {
     
     @IBOutlet weak var progressIndicatior: UIProgressView!
+    @IBOutlet weak var cellImageView: NannyImageView!
     
-    @IBOutlet weak var imageName: NannyImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
-    
     @IBOutlet weak var timeFromLabel: UILabel!
     @IBOutlet weak var timeToLabel: UILabel!
     @IBOutlet weak var amount: UILabel!
@@ -24,8 +23,27 @@ class RequestUserCell: UITableViewCell {
     var hasSelected = false
     var hasOpened = false
     
+    var timeFrom: Date? {
+        didSet {
+            if let timeFrom = self.timeFrom {
+                self.timeFromLabel.text = returnDayTimeString(from: timeFrom)
+            }
+            
+        }
+    }
+    
+    var timeTo: Date? {
+        didSet {
+            if let timeTo = self.timeTo {
+                self.timeToLabel.text = returnDayTimeString(from: timeTo)
+            }
+        }
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        self.amount.layer.cornerRadius = 8.0
     }
     
     // MARK: - CATransform3DRotate
@@ -41,8 +59,8 @@ class RequestUserCell: UITableViewCell {
                 self.timeFromLabel.isHighlighted = true
                 self.amount.isHighlighted = true
                 self.timeToLabel.isHighlighted = true
-                self.imageName.isHighlighted = true
-                self.imageName.alpha = 1.0
+                self.cellImageView.isHighlighted = true
+                self.cellImageView.alpha = 1.0
             })
         }
         else {
@@ -62,8 +80,8 @@ class RequestUserCell: UITableViewCell {
                 self.timeFromLabel.isHighlighted = false
                 self.amount.isHighlighted = false
                 self.timeToLabel.isHighlighted = false
-                self.imageName.isHighlighted = false
-                self.imageName.alpha = 0.9
+                self.cellImageView.isHighlighted = false
+                self.cellImageView.alpha = 0.9
                 
                 self.transform = CGAffineTransform(scaleX: 1.08, y: 1.08)
                 hapticButton(.selection)
@@ -84,7 +102,7 @@ class RequestUserCell: UITableViewCell {
     func animateView( direction: Direction) {
         if direction == .enter {
             self.contentView.alpha = 0
-            self.setNeedsDisplay(imageName.frame)
+            self.setNeedsDisplay(cellImageView.frame)
             self.contentView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
             // self.layer.transform = CATransform3DMakeRotation(CGFloat.pi / 16, 0, 1, 0)
         } else {
@@ -97,25 +115,29 @@ class RequestUserCell: UITableViewCell {
     func setupView(request: Request, animated: Bool = true) {
         if animated {
             animateView(direction: .enter)
-            self.imageName.loadImageUsingCacheWith(urlString: request.imageName, completion: {
+            self.cellImageView.loadImageUsingCacheWith(urlString: request.imageName, completion: {
                 let random = Double(arc4random_uniform(UInt32(1000))) / 3000
                 UIView.animate(withDuration: 0.6, delay: random, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
                     self.animateView(direction: .exit)
                     
                     self.nameLabel.text = request.firstName
                     self.messageLabel.text = request.message
-                    self.timeFromLabel.text = request.timeFrom.description
-                    self.timeToLabel.text = request.timeTo.description
-                    self.amount.text = "\(request.amount.description) kr / time"
+                    // self.timeFromLabel.text = request.timeFrom.description
+                    self.timeFrom = stringToDateTime(request.timeFrom.description)
+                    // self.timeToLabel.text = request.timeTo.description
+                    self.timeTo = stringToDateTime(request.timeTo.description)
+                    self.amount.text = " \(request.amount.description) kr  "
                 })
                 self.cellImageLoaded = true
             })
         } else {
             self.nameLabel.text = request.firstName
             self.messageLabel.text = request.message
-            self.timeFromLabel.text = request.timeRequested.description
-            self.timeToLabel.text = request.timeTo.description
-            self.amount.text = "\(request.amount.description) kr / time"
+            // self.timeFromLabel.text = request.timeFrom.description
+            self.timeFrom = stringToDateTime(request.timeFrom.description)
+            // self.timeToLabel.text = request.timeTo.description
+            self.timeTo = stringToDateTime(request.timeTo.description)
+            self.amount.text = " \(request.amount.description) kr  "
         }
     }
 }

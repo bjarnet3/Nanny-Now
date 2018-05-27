@@ -8,13 +8,13 @@
 
 import UIKit
 
-class NannyImageView: UIImageView {
+class UserImageView: UIImageView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.layer.borderWidth = 0.60
-        self.layer.borderColor = PINK_NANNY_LOGO.cgColor
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = ORANGE_SOLID.cgColor
     }
     
     override func layoutSubviews() {
@@ -27,12 +27,12 @@ class NannyImageView: UIImageView {
     }
 }
 
-class UserImageView: NannyImageView {
+class NannyImageView: UserImageView {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        self.layer.borderWidth = 0.5
-        self.layer.borderColor = ORANGE_SOLID.cgColor
+        self.layer.borderWidth = 0.6
+        self.layer.borderColor = PINK_NANNY_LOGO.cgColor
     }
 }
 

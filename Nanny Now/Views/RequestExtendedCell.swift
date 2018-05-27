@@ -11,7 +11,7 @@ import UIKit
 class RequestExtendedCell: UITableViewCell {
     
     @IBOutlet weak var progressIndicatior: UIProgressView!
-    @IBOutlet weak var imageName: NannyImageView!
+    @IBOutlet weak var cellImageView: UserImageView!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var timeDurationLabel: UILabel!
     
@@ -32,8 +32,8 @@ class RequestExtendedCell: UITableViewCell {
                 self.hasSelected = true
                 
                 self.messageLabel.isHighlighted = true
-                self.imageName.isHighlighted = true
-                self.imageName.alpha = 1.0
+                self.cellImageView.isHighlighted = true
+                self.cellImageView.alpha = 1.0
             })
         }
         else {
@@ -49,8 +49,8 @@ class RequestExtendedCell: UITableViewCell {
             UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in
                 
                 self.messageLabel.isHighlighted = false
-                self.imageName.isHighlighted = false
-                self.imageName.alpha = 0.9
+                self.cellImageView.isHighlighted = false
+                self.cellImageView.alpha = 0.9
                 
                 self.transform = CGAffineTransform(scaleX: 1.10, y: 1.10)
                 hapticButton(.selection)
@@ -71,7 +71,7 @@ class RequestExtendedCell: UITableViewCell {
     func animateView( direction: Direction) {
         if direction == .enter {
             self.contentView.alpha = 0
-            self.setNeedsDisplay(imageName.frame)
+            self.setNeedsDisplay(cellImageView.frame)
             self.contentView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
             // self.layer.transform = CATransform3DMakeRotation(CGFloat.pi / 16, 0, 1, 0)
         } else {
@@ -84,7 +84,7 @@ class RequestExtendedCell: UITableViewCell {
     func setupView(request: Request, animated: Bool = true) {
         if animated {
             animateView(direction: .enter)
-            self.imageName.loadImageUsingCacheWith(urlString: request.imageName, completion: {
+            self.cellImageView.loadImageUsingCacheWith(urlString: request.imageName, completion: {
                 let random = Double(arc4random_uniform(UInt32(1000))) / 3000
                 UIView.animate(withDuration: 0.6, delay: random, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
                     self.animateView(direction: .exit)
