@@ -29,16 +29,18 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
 
     @IBOutlet weak var locationMenu: FrostyCornerView!
     @IBOutlet weak var locationPicker: UIPickerView!
+    
     @IBOutlet weak var effectView: UIVisualEffectView!
-    
-    // https://medium.com/@brianclouser/swift-3-creating-a-custom-view-from-a-xib-ecdfe5b3a960
     @IBOutlet weak var requestMenu: RequestMenu!
-    
+
+    // https://medium.com/@brianclouser/swift-3-creating-a-custom-view-from-a-xib-ecdfe5b3a960
     // MARK: - Properties: Array & Varables
     // -------------------------------------
     var user: User?
     var nannies = [Nanny]()
     var request: Request?
+    
+        var animator: UIViewPropertyAnimator?
     
     // Property Observer
     var nannyBadge: Int = 0 {
@@ -63,8 +65,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     var locationMenuShowing = true
     var orderMenuShowing = true
     var requestMenuShowing = true
-    
-    var animator: UIViewPropertyAnimator?
     
     // MARK: - IBAction: Methods connected to UI
     // ----------------------------------------
@@ -91,6 +91,13 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         }
     }
     
+    @IBAction func requestOrder(_ sender: Any) {
+        self.exitOrderMenu()
+        self.enterRequestMenu()
+        
+        // self.enterRequestMenu()
+    }
+    
     @IBAction func goToUser(_ sender: Any) {
         goToDetail(row: (lastRowSelected?.row)!)
         exitAllMenu()
@@ -98,27 +105,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     
     // MARK: - Functions, Database & Animation
     // ---------------------------------------
-    
-    // Experimental
-    func sendMessageRequest(with requestCategory: NotificationCategory? = nil, message: String? = nil) {
-        if let lastRow = lastRowSelected?.row {
-            guard let user = self.user else { return }
-            let lastNanny = self.nannies[lastRow]
-            
-            let requestMessage = "Melding til: \(lastNanny.firstName)"
-            // Send Message
-            let message = Message(from: user.userUID, to: lastNanny.userUID, messageID: nil, message: message ?? requestMessage, messageTime: returnTimeStamp() , highlighted: true, requestCategory: requestCategory ?? .messageRequest)
-            
-            // let anotherMessage = Message(from: self.user!, to: lastNanny, message: requestMessage)
-            Notifications.instance.sendNotifications(with: message)
-        }
-        
-        self.exitAllMenu()
-        for selectedAnnotation in self.mapView.selectedAnnotations {
-            self.mapView.deselectAnnotation(selectedAnnotation, animated: true) }
-        self.mapView.showAnnotations(self.nannies, animated: lowPowerModeDisabled)
-    }
-
     func getUserSettings() {
         if let user = LocalService.instance.getUser() {
             self.user = user
@@ -513,33 +499,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         }
     }
     
-    /*
-    
-    @IBAction func requestOrder(_ sender: Any) {
-        // self.exitOrderMenu()
-
-        self.requestMenu.initData(user: self.user, nanny: self.nannies[(lastRowSelected?.row)!])
-        
-            /*
-            let lastNanny = self.nannies[(lastRowSelected?.row)!]
-            
-            self.requestImage.loadImageUsingCacheWith(urlString: lastNanny.imageName)
-            self.requestName.text = lastNanny.firstName
-            self.requestAge.text = "\(lastNanny.age) år"
-            self.requestTitle.text = lastNanny.jobTitle
-            self.requestGender.text = lastNanny.gender
-            self.requestRating.text = lastNanny.ratingStar
-            self.requestDistance.text = lastNanny.returnDistance
-            
-            self.fromDateTime.minimumDate = Date(timeIntervalSinceNow: 900.0)
-            self.toDateTime.minimumDate = Date(timeIntervalSinceNow: 4800.0)
-         
-         */
-        
-        self.enterRequestMenu()
-
-    }
-    */
     
     // Animate Request Menu
     func enterRequestMenu(_ duration: TimeInterval = 0.5, delay: TimeInterval = 0.09, animated: Bool = true) {
@@ -560,26 +519,27 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                 }
                 
                 UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
-                    self.requestMenu.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                    self.requestMenu.alpha = 1.0
-                    
                     self.animator?.startAnimation()
                     self.effectView.isUserInteractionEnabled = true
+                    
+                    self.requestMenu.alpha = 1.0
+                    self.requestMenu.isUserInteractionEnabled = true
+                    self.requestMenu.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                 })
             } else {
-                self.requestMenu.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                 self.requestMenu.alpha = 1.0
+                self.requestMenu.isUserInteractionEnabled = true
+                self.requestMenu.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                
             }
             self.requestMenuShowing = true
         } else {
             self.requestMenuShowing = true
         }
-        
-        
     }
     
     func exitRequestMenu(_ duration: TimeInterval = 0.5, delay: TimeInterval = 0.09, animated: Bool = true) {
-
+        
         let animated = animated && lowPowerModeDisabled ? true : false
         if requestMenuShowing {
             self.requestMenu.transform = CGAffineTransform(scaleX: 1.00, y: 1.00)
@@ -591,16 +551,17 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
             
             if animated {
                 UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
-                    self.requestMenu.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
-                    self.requestMenu.alpha = 0.0
-                    
                     self.animator?.startAnimation()
                     self.effectView.isUserInteractionEnabled = false
                     
+                    self.requestMenu.alpha = 0.0
+                    self.requestMenu.isUserInteractionEnabled = false
+                    self.requestMenu.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
                 })
             } else {
-                self.requestMenu.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
                 self.requestMenu.alpha = 0.0
+                self.requestMenu.isUserInteractionEnabled = false
+                self.requestMenu.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
             }
             self.requestMenuShowing = false
         } else {
@@ -776,7 +737,10 @@ extension NannyViewController : UITableViewDelegate, UITableViewDataSource {
         }
         
         let request = UITableViewRowAction(style: .destructive, title: " ☑︎ ") { (action , indexPath) -> Void in
+
             self.enterRequestMenu()
+            
+            // self.enterRequestMenu()
             // self.sendRequestAlert(row: indexPath.row)
         }
         
@@ -973,7 +937,8 @@ extension NannyViewController {
         }
         
         let sendRequest = UIAlertAction(title: "Send Forespørsel", style: .default) { (_) in
-            self.enterRequestMenu()
+            self.requestMenu.initData(user: self.user, nanny: self.nannies[(self.lastRowSelected?.row)!])
+            self.requestMenu.sendRequest()
         }
         
         let cancelAction = UIAlertAction(title: "Avbryt", style: .destructive) { (_) in

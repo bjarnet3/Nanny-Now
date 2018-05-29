@@ -10,7 +10,7 @@ import UIKit
 
 class RequestMenu: UIView {
 
-    @IBOutlet var requestView: UIView!
+    @IBOutlet var requestView: FrostyCornerView!
     
     @IBOutlet weak var requestImage: CustomImageView!
     @IBOutlet weak var requestTitle: UILabel!
@@ -61,6 +61,24 @@ class RequestMenu: UIView {
         dismissKeyboard()
     }
     
+    // Send Simple Message
+    @IBAction func sendRequestAction(_ sender: UIButton) {
+        self.sendRequest()
+    }
+    
+    @IBAction func cancelRequestAction(_ sender: Any) {
+        /* self.exitAllMenu()
+         for selectedAnnotation in self.mapView.selectedAnnotations {
+         self.mapView.deselectAnnotation(selectedAnnotation, animated: true)
+         }
+         self.mapView.showAnnotations(self.nannies, animated: lowPowerModeDisabled)
+         */
+    }
+    
+    @IBAction func resignKeyboard(_ sender: Any) {
+        dismissKeyboard()
+    }
+
     // MARK: - Functions, Database & Animation
     // ---------------------------------------
     func sendRequest() {
@@ -88,24 +106,6 @@ class RequestMenu: UIView {
         */
     }
     
-    // Send Simple Message
-    @IBAction func sendRequestAction(_ sender: UIButton) {
-        self.sendRequest()
-    }
-    
-    @IBAction func cancelRequestAction(_ sender: Any) {
-        /* self.exitAllMenu()
-        for selectedAnnotation in self.mapView.selectedAnnotations {
-            self.mapView.deselectAnnotation(selectedAnnotation, animated: true)
-        }
-        self.mapView.showAnnotations(self.nannies, animated: lowPowerModeDisabled)
-        */
-    }
-    
-    @IBAction func resignKeyboard(_ sender: Any) {
-        dismissKeyboard()
-    }
-    
     //Calls this function when the tap is recognized.
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
@@ -131,7 +131,7 @@ class RequestMenu: UIView {
         requestView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
     
-    /*
+
     private func loadViewFromNib() -> UIView {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
@@ -139,7 +139,7 @@ class RequestMenu: UIView {
         
         return nibView
     }
-    */
+
     
     /*
     init(user: User?, nanny: Nanny?) {
@@ -181,7 +181,6 @@ class RequestMenu: UIView {
             
             self.fromDateTime.minimumDate = Date(timeIntervalSinceNow: 900.0)
             self.toDateTime.minimumDate = Date(timeIntervalSinceNow: 4800.0)
-            
             // self.enterRequestMenu()
         }
         if let user = user {
