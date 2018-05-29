@@ -26,24 +26,13 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     @IBOutlet weak var profileButton: CustomButton!
     @IBOutlet weak var orderMenu: UIView!
     @IBOutlet weak var orderMenuImage: MenuImageView!
-    @IBOutlet weak var requestMenu: FrostyCornerView!
+
     @IBOutlet weak var locationMenu: FrostyCornerView!
     @IBOutlet weak var locationPicker: UIPickerView!
-    
-    // Request Outlets ------------------------
-    @IBOutlet weak var requestImage: CustomImageView!
-    @IBOutlet weak var requestTitle: UILabel!
-    @IBOutlet weak var requestName: UILabel!
-    @IBOutlet weak var requestRating: UILabel!
-    @IBOutlet weak var requestAge: UILabel!
-    @IBOutlet weak var requestGender: UILabel!
-    @IBOutlet weak var requestDistance: UILabel!
-    @IBOutlet weak var requestMessage: UITextField!
-    @IBOutlet weak var requestType: UISegmentedControl!
-    
-    @IBOutlet weak var fromDateTime: UIDatePicker!
-    @IBOutlet weak var toDateTime: UIDatePicker!
     @IBOutlet weak var effectView: UIVisualEffectView!
+    
+    // https://medium.com/@brianclouser/swift-3-creating-a-custom-view-from-a-xib-ecdfe5b3a960
+    @IBOutlet weak var requestMenu: RequestMenu!
     
     // MARK: - Properties: Array & Varables
     // -------------------------------------
@@ -85,76 +74,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         self.exitAllMenu()
     }
     
-    @IBAction func requestTypeAction(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
-            fromDateTime.alpha = 1.0
-            toDateTime.alpha = 1.0
-        } else {
-            fromDateTime.alpha = 0.2
-            toDateTime.alpha = 0.2
-        }
-    }
-    
-    @IBAction func requestOrder(_ sender: Any) {
-        self.exitOrderMenu()
-        if let lastRow = lastRowSelected?.row {
-            let lastNanny = self.nannies[lastRow]
-            
-            self.requestImage.loadImageUsingCacheWith(urlString: lastNanny.imageName)
-            self.requestName.text = lastNanny.firstName
-            self.requestAge.text = "\(lastNanny.age) år"
-            self.requestTitle.text = lastNanny.jobTitle
-            self.requestGender.text = lastNanny.gender
-            self.requestRating.text = lastNanny.ratingStar
-            self.requestDistance.text = lastNanny.returnDistance
-            
-            self.fromDateTime.minimumDate = Date(timeIntervalSinceNow: 900.0)
-            self.toDateTime.minimumDate = Date(timeIntervalSinceNow: 4800.0)
-            
-            self.enterRequestMenu()
-        }
-    }
-    
-    // Send Simple Message
-    @IBAction func sendRequest(_ sender: UIButton) {
-        if let lastRow = lastRowSelected?.row {
-            if let user = self.user {
-                let lastNanny = self.nannies[lastRow]
-                
-                var requestMessage = "Melding til: \(lastNanny.firstName)"
-                if let text = self.requestMessage.text, text != "" { requestMessage = text }
-                if self.requestType.selectedSegmentIndex <= 1 {
-                    // Send Request
-                    var request = Request(nanny: lastNanny, user: user, timeFrom: self.fromDateTime.date, timeTo: self.toDateTime.date, message: requestMessage)
-                    if self.requestType.selectedSegmentIndex == 1 {
-                        request.requestCategory = NotificationCategory.nannyMapRequest.rawValue
-                    } else {
-                        request.requestCategory = NotificationCategory.nannyRequest.rawValue
-                    }
-                    Notifications.instance.sendNotification(with: request)
-                } else {
-                    // Send Message
-                    let message = Message(from: user, to: lastNanny, message: requestMessage)
-                    Notifications.instance.sendNotifications(with: message)
-                }
-            }
-        }
-        
-        self.exitAllMenu()
-        for selectedAnnotation in self.mapView.selectedAnnotations {
-            self.mapView.deselectAnnotation(selectedAnnotation, animated: true) }
-        self.mapView.showAnnotations(self.nannies, animated: lowPowerModeDisabled)
-    }
-    
-    
-    @IBAction func cancelRequest(_ sender: Any) {
-        self.exitAllMenu()
-        for selectedAnnotation in self.mapView.selectedAnnotations {
-            self.mapView.deselectAnnotation(selectedAnnotation, animated: true)
-        }
-        self.mapView.showAnnotations(self.nannies, animated: lowPowerModeDisabled)
-    }
-    
     @IBAction func locationMenuAction() {
         if !locationMenuShowing {
             enterLocationMenu()
@@ -177,12 +96,8 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         exitAllMenu()
     }
     
-    @IBAction func resignKeyboard(_ sender: Any) {
-        dismissKeyboard()
-    }
-    
     // MARK: - Functions, Database & Animation
-    // ----------------------------------------
+    // ---------------------------------------
     
     // Experimental
     func sendMessageRequest(with requestCategory: NotificationCategory? = nil, message: String? = nil) {
@@ -303,12 +218,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                 self.nannyAdOn.updateValue(false, forKey: userID)
             }
         }
-    }
-    
-    //Calls this function when the tap is recognized.
-    func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
     }
     
     // LocationManager
@@ -604,8 +513,39 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         }
     }
     
+    /*
+    
+    @IBAction func requestOrder(_ sender: Any) {
+        // self.exitOrderMenu()
+
+        self.requestMenu.initData(user: self.user, nanny: self.nannies[(lastRowSelected?.row)!])
+        
+            /*
+            let lastNanny = self.nannies[(lastRowSelected?.row)!]
+            
+            self.requestImage.loadImageUsingCacheWith(urlString: lastNanny.imageName)
+            self.requestName.text = lastNanny.firstName
+            self.requestAge.text = "\(lastNanny.age) år"
+            self.requestTitle.text = lastNanny.jobTitle
+            self.requestGender.text = lastNanny.gender
+            self.requestRating.text = lastNanny.ratingStar
+            self.requestDistance.text = lastNanny.returnDistance
+            
+            self.fromDateTime.minimumDate = Date(timeIntervalSinceNow: 900.0)
+            self.toDateTime.minimumDate = Date(timeIntervalSinceNow: 4800.0)
+         
+         */
+        
+        self.enterRequestMenu()
+
+    }
+    */
+    
     // Animate Request Menu
     func enterRequestMenu(_ duration: TimeInterval = 0.5, delay: TimeInterval = 0.09, animated: Bool = true) {
+        
+        self.requestMenu.initData(user: self.user, nanny: self.nannies[(lastRowSelected?.row)!])
+        
         let animated = animated && lowPowerModeDisabled ? true : false
         if !requestMenuShowing {
             
@@ -634,9 +574,12 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         } else {
             self.requestMenuShowing = true
         }
+        
+        
     }
     
     func exitRequestMenu(_ duration: TimeInterval = 0.5, delay: TimeInterval = 0.09, animated: Bool = true) {
+
         let animated = animated && lowPowerModeDisabled ? true : false
         if requestMenuShowing {
             self.requestMenu.transform = CGAffineTransform(scaleX: 1.00, y: 1.00)
@@ -993,6 +936,7 @@ extension NannyViewController {
             }
         }
         
+        /*
         let sendMapRequest = UIAlertAction(title: "Send Kart Forespørsel", style: .default) { (_) in
             if lowPowerModeDisabled {
                 
@@ -1019,6 +963,7 @@ extension NannyViewController {
                 self.view.fadeIn()
             }
         }
+        */
         
         let sendMessageRequest = UIAlertAction(title: "Send MSG Response", style: .default) { (_) in
             if lowPowerModeDisabled {
@@ -1041,7 +986,7 @@ extension NannyViewController {
         
         alertController.addAction(profileAction)
         alertController.addAction(sendRequest)
-        alertController.addAction(sendMapRequest)
+        // alertController.addAction(sendMapRequest)
         alertController.addAction(sendMessageRequest)
         alertController.addAction(cancelAction)
         
