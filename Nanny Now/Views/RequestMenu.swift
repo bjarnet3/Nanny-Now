@@ -19,8 +19,9 @@ class RequestMenu: UIView {
     @IBOutlet weak var requestAge: UILabel!
     @IBOutlet weak var requestGender: UILabel!
     @IBOutlet weak var requestDistance: UILabel!
-    @IBOutlet weak var requestMessage: UITextField!
-    @IBOutlet weak var requestMessageCheck: UILabel!
+    
+    @IBOutlet weak var requestTextField: UITextField!
+    @IBOutlet weak var requestCheck: UILabel!
     
     @IBOutlet weak var requestType: UISegmentedControl!
     
@@ -34,58 +35,101 @@ class RequestMenu: UIView {
     
     // MARK: - Properties: Array & Varables
     // -------------------------------------
-    var user: User?
-    var nanny: Nanny?
-    var request: Request?
+    private var user: User?
+    private var nanny: Nanny?
+    
+    private var completion: Completion?
     
     @IBAction func requestTypeAction(_ sender: UISegmentedControl) {
+        // Request Mode
         if sender.selectedSegmentIndex == 0 {
-            fromDateTime.alpha = 1.0
-            fromDateTime.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            toDateTime.alpha = 1.0
-            toDateTime.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            // TextField & CheckLabel
+            requestTextField.alpha = 0.2
+            requestTextField.isUserInteractionEnabled = false
+            
+            requestCheck.text = "x"
+            requestCheck.textColor = UIColor.lightGray
+            
+            dismissKeyboard()
+            
+            // From Switch, DatePicker & CheckLabel
             fromSwitch.setOn(true, animated: true)
+            fromSwitch.isUserInteractionEnabled = true
+            fromSwitch.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            fromDateTime.alpha = 1.0
+            fromDateTime.isUserInteractionEnabled = true
+            fromDateTime.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            fromCheck.text = "✓"
+            fromCheck.textColor = UIColor.darkGray
+            
+            // To Switch, DatePicker & CheckLabel
             toSwitch.setOn(true, animated: true)
+            toSwitch.isUserInteractionEnabled = true
+            toSwitch.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            toDateTime.alpha = 1.0
+            toDateTime.isUserInteractionEnabled = true
+            toDateTime.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            toCheck.text = "✓"
+            toCheck.textColor = UIColor.darkGray
         } else {
+            // Message Mode
+            
+            // TextField & CheckLabel
+            requestTextField.alpha = 1.0
+            requestTextField.isUserInteractionEnabled = true
+            
+            requestCheck.text = "✓"
+            requestCheck.textColor = UIColor.darkGray
+
+            // From Switch, DatePicker & CheckLabel
+            fromSwitch.setOn(false, animated: true)
+            fromSwitch.isUserInteractionEnabled = false
+            fromSwitch.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            
             fromDateTime.alpha = 0.2
             fromDateTime.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
             fromDateTime.isUserInteractionEnabled = false
+            fromCheck.text = "x"
+            fromCheck.textColor = UIColor.lightGray
+            
+            // To Switch, DatePicker & CheckLabel
+            toSwitch.setOn(false, animated: true)
+            toSwitch.isUserInteractionEnabled = false
+            toSwitch.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
             toDateTime.alpha = 0.2
             toDateTime.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
             toDateTime.isUserInteractionEnabled = false
-            fromSwitch.setOn(false, animated: true)
-            fromSwitch.isUserInteractionEnabled = false
-            toSwitch.setOn(false, animated: true)
-            toSwitch.isUserInteractionEnabled = false
+            toCheck.text = "x"
+            toCheck.textColor = UIColor.lightGray
+            requestTextField.becomeFirstResponder()
         }
-        dismissKeyboard()
     }
     
     // Send Simple Message
-    @IBAction func sendRequestAction(_ sender: UIButton) {
+    @IBAction private func sendRequestAction(_ sender: UIButton) {
         self.sendRequest()
     }
     
-    @IBAction func cancelRequestAction(_ sender: Any) {
-        /* self.exitAllMenu()
-         for selectedAnnotation in self.mapView.selectedAnnotations {
-         self.mapView.deselectAnnotation(selectedAnnotation, animated: true)
-         }
-         self.mapView.showAnnotations(self.nannies, animated: lowPowerModeDisabled)
-         */
+    @IBAction private func cancelRequestAction(_ sender: Any) {
+        self.cancelRequest()
     }
     
-    @IBAction func resignKeyboard(_ sender: Any) {
-        dismissKeyboard()
+    @IBAction private func tapBackground(_ sender: Any) {
+        self.dismissKeyboard()
+    }
+    
+    @IBAction private func resignKeyboard(_ sender: Any) {
+        self.dismissKeyboard()
     }
 
     // MARK: - Functions, Database & Animation
     // ---------------------------------------
     func sendRequest() {
+        print("sendRequest")
         if let nanny = self.nanny {
             if let user = self.user {
                 var requestMessage = "Melding til: \(nanny.firstName)"
-                if let text = self.requestMessage.text, text != "" { requestMessage = text }
+                if let text = self.requestTextField.text, text != "" { requestMessage = text }
                 if self.requestType.selectedSegmentIndex == 0 {
                     // Send Request
                     var request = Request(nanny: nanny, user: user, timeFrom: self.fromDateTime.date, timeTo: self.toDateTime.date, message: requestMessage)
@@ -98,99 +142,64 @@ class RequestMenu: UIView {
                 }
             }
         }
-        /*
-        self.exitAllMenu()
-        for selectedAnnotation in self.mapView.selectedAnnotations {
-            self.mapView.deselectAnnotation(selectedAnnotation, animated: true) }
-        self.mapView.showAnnotations(self.nannies, animated: lowPowerModeDisabled)
-        */
+        self.completion?()
+    }
+    
+    func cancelRequest() {
+        self.completion?()
+    }
+    
+    func resignSegmentResponder() {
+        
     }
     
     //Calls this function when the tap is recognized.
-    func dismissKeyboard() {
+    private func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         self.endEditing(true)
     }
 
     // This initializer hides init(frame:) from subclasses
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        commonInit()
-        
+        initNib()
     }
     
-    private func commonInit() {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        initNib()
+    }
+
+    private func initNib() {
         Bundle.main.loadNibNamed("RequestMenu", owner: self, options: nil)
         addSubview(requestView)
         requestView.frame = self.bounds
         requestView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
     
-
-    private func loadViewFromNib() -> UIView {
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: String(describing: type(of: self)), bundle: bundle)
-        let nibView = nib.instantiate(withOwner: self, options: nil).first as! UIView
-        
-        return nibView
-    }
-
-    
-    /*
-    init(user: User?, nanny: Nanny?) {
-        super.init(frame: CGRect.zero)
-        
-        if let nanny = self.nanny {
-            let lastNanny = nanny
-            
-            self.requestImage.loadImageUsingCacheWith(urlString: lastNanny.imageName)
-            self.requestName.text = lastNanny.firstName
-            self.requestAge.text = "\(lastNanny.age) år"
-            self.requestTitle.text = lastNanny.jobTitle
-            self.requestGender.text = lastNanny.gender
-            self.requestRating.text = lastNanny.ratingStar
-            self.requestDistance.text = lastNanny.returnDistance
+    func initData(user: User?, nanny: Nanny?, completion: Completion? = nil) {
+        if let nanny = nanny {
+            self.requestImage.loadImageUsingCacheWith(urlString: nanny.imageName)
+            self.requestName.text = nanny.firstName
+            self.requestAge.text = "\(nanny.age) år"
+            self.requestTitle.text = nanny.jobTitle
+            self.requestGender.text = nanny.gender
+            self.requestRating.text = nanny.ratingStar
+            self.requestDistance.text = nanny.returnDistance
             
             self.fromDateTime.minimumDate = Date(timeIntervalSinceNow: 900.0)
             self.toDateTime.minimumDate = Date(timeIntervalSinceNow: 4800.0)
             
-            // self.enterRequestMenu()
+            self.nanny = nanny
         }
         if let user = user {
             self.user = user
         }
-    }
-    */
-    
-    func initData(user: User?, nanny: Nanny?) {
-        if let nanny = self.nanny {
-            let lastNanny = nanny
-            
-            self.requestImage.loadImageUsingCacheWith(urlString: lastNanny.imageName)
-            self.requestName.text = lastNanny.firstName
-            self.requestAge.text = "\(lastNanny.age) år"
-            self.requestTitle.text = lastNanny.jobTitle
-            self.requestGender.text = lastNanny.gender
-            self.requestRating.text = lastNanny.ratingStar
-            self.requestDistance.text = lastNanny.returnDistance
-            
-            self.fromDateTime.minimumDate = Date(timeIntervalSinceNow: 900.0)
-            self.toDateTime.minimumDate = Date(timeIntervalSinceNow: 4800.0)
-            // self.enterRequestMenu()
-        }
-        if let user = user {
-            self.user = user
-        }
+        self.completion = completion
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        print("requestMenu layoutSubViews")
     }
 
 }

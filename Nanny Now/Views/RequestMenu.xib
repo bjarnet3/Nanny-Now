@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -15,13 +15,13 @@
                 <outlet property="fromDateTime" destination="M1b-dC-bR2" id="lsA-pz-toY"/>
                 <outlet property="fromSwitch" destination="mnE-c6-2Bv" id="KAS-nW-soo"/>
                 <outlet property="requestAge" destination="D4g-FH-0jQ" id="gLJ-ID-c2D"/>
+                <outlet property="requestCheck" destination="C3n-Tx-Uzy" id="sLg-fn-5PJ"/>
                 <outlet property="requestDistance" destination="52O-CX-41v" id="VYi-Dh-4ep"/>
                 <outlet property="requestGender" destination="5Df-wz-u7o" id="EwE-x1-B25"/>
                 <outlet property="requestImage" destination="yEE-Vi-VMc" id="uWV-4G-piw"/>
-                <outlet property="requestMessage" destination="sVD-TB-TyG" id="399-qt-DqZ"/>
-                <outlet property="requestMessageCheck" destination="C3n-Tx-Uzy" id="sLg-fn-5PJ"/>
                 <outlet property="requestName" destination="0I2-e4-vHj" id="ush-Sx-9t6"/>
                 <outlet property="requestRating" destination="1At-2y-gdW" id="uha-gB-YZJ"/>
+                <outlet property="requestTextField" destination="sVD-TB-TyG" id="399-qt-DqZ"/>
                 <outlet property="requestTitle" destination="u6P-sI-OWd" id="6kg-hy-YqN"/>
                 <outlet property="requestType" destination="LgB-i4-65x" id="MUK-4f-hya"/>
                 <outlet property="requestView" destination="jGj-RL-c9y" id="MQI-Lm-A0j"/>
@@ -69,13 +69,13 @@
                             </date>
                             <locale key="locale" localeIdentifier="nb"/>
                         </datePicker>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✓" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwz-bK-U3b">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwz-bK-U3b">
                             <rect key="frame" x="286" y="0.0" width="18" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="18" id="gkn-15-Gj4"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -114,13 +114,13 @@
                             </date>
                             <locale key="locale" localeIdentifier="nb"/>
                         </datePicker>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✓" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fLL-wS-AZO">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fLL-wS-AZO">
                             <rect key="frame" x="286" y="0.0" width="18" height="80"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="18" id="jY8-oO-gRX"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -141,7 +141,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EfA-rs-Ckd">
                             <rect key="frame" x="160" y="0.0" width="160" height="60"/>
-                            <color key="backgroundColor" red="0.98656708000000004" green="0.18414348359999999" blue="0.57283514739999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.9882352941176471" green="0.18431372549019609" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                             <state key="normal" title="SEND   ▶︎">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -240,10 +240,9 @@
                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ds4-7z-w7m">
                     <rect key="frame" x="8" y="194" width="304" height="40"/>
                     <subviews>
-                        <textField opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Skriv en liten melding her . . ." textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="14" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="sVD-TB-TyG">
+                        <textField opaque="NO" userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleAspectFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Skriv en liten melding her . . ." textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="14" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="sVD-TB-TyG">
                             <rect key="frame" x="0.0" y="0.0" width="286" height="40"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" red="0.98823529409999999" green="0.1843137255" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="79t-DR-PwU"/>
                             </constraints>
@@ -251,16 +250,17 @@
                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                             <connections>
+                                <action selector="resignKeyboard:" destination="-1" eventType="primaryActionTriggered" id="VUq-XJ-4uJ"/>
                                 <action selector="resignKeyboard:" destination="-1" eventType="editingDidEnd" id="Y8e-d7-sQE"/>
                             </connections>
                         </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✓" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C3n-Tx-Uzy">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C3n-Tx-Uzy">
                             <rect key="frame" x="286" y="0.0" width="18" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="18" id="lqx-8u-XFe"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                            <color key="textColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -290,8 +290,16 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="3pq-M2-6o5"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="2s0-sJ-q1B" appends="YES" id="HeA-UO-1rF"/>
+            </connections>
             <point key="canvasLocation" x="459.5" y="113"/>
         </view>
+        <tapGestureRecognizer id="2s0-sJ-q1B">
+            <connections>
+                <action selector="tapBackground:" destination="-1" id="U1o-Xc-QWH"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="nanny-profil" width="550" height="550"/>

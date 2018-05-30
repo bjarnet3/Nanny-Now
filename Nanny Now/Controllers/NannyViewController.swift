@@ -30,8 +30,8 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     @IBOutlet weak var locationMenu: FrostyCornerView!
     @IBOutlet weak var locationPicker: UIPickerView!
     
-    @IBOutlet weak var effectView: UIVisualEffectView!
     @IBOutlet weak var requestMenu: RequestMenu!
+    @IBOutlet weak var effectView: UIVisualEffectView!
 
     // https://medium.com/@brianclouser/swift-3-creating-a-custom-view-from-a-xib-ecdfe5b3a960
     // MARK: - Properties: Array & Varables
@@ -40,7 +40,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     var nannies = [Nanny]()
     var request: Request?
     
-        var animator: UIViewPropertyAnimator?
+    var animator: UIViewPropertyAnimator?
     
     // Property Observer
     var nannyBadge: Int = 0 {
@@ -94,8 +94,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     @IBAction func requestOrder(_ sender: Any) {
         self.exitOrderMenu()
         self.enterRequestMenu()
-        
-        // self.enterRequestMenu()
     }
     
     @IBAction func goToUser(_ sender: Any) {
@@ -419,13 +417,11 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
             if animated {
                 UIView.animate(withDuration: 0.6, delay: 0.03, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
                     self.locationMenu.alpha = 1.0
-                    // self.locationMenu.frame.offsetBy(dx: 0, dy: 175)
                     self.locationMenu.transform = CGAffineTransform(translationX: 0, y: 20) // self.locationMenu.frame.offsetBy(dx: 0, dy: 175)
                     self.locationMenuShowing = true
                 })
             } else {
                 self.locationMenu.alpha = 1.0
-                // self.locationMenu.frame.offsetBy(dx: 0, dy: 175)
                 self.locationMenu.transform = CGAffineTransform(translationX: 0, y: 20)
                 self.locationMenuShowing = true
             }
@@ -440,13 +436,11 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
             if animated {
                 UIView.animate(withDuration: 0.6, delay: 0.03, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
                     self.locationMenu.alpha = 0.0
-                    // self.locationMenu.frame.offsetBy(dx: 0, dy: -135)
                     self.locationMenu.transform = CGAffineTransform(translationX: 0, y: -20)
                     self.locationMenuShowing = false
                 })
             } else {
                 self.locationMenu.alpha = 0.0
-                // self.locationMenu.frame.offsetBy(dx: 0, dy: -135)
                 self.locationMenu.transform = CGAffineTransform(translationX: 0, y: -20)
                 self.locationMenuShowing = false
             }
@@ -462,14 +456,12 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
             if animated {
                 UIView.animate(withDuration: 0.6, delay: delay, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
                     self.orderMenu.alpha = 1.0
-                    // self.orderMenu.frame = self.orderMenu.frame.offsetBy(dx: 0, dy: -80)
                     self.orderMenu.transform = CGAffineTransform(translationX: 0, y: -20)
                     self.orderMenuShowing = true
                 })
                 
             } else {
                 self.orderMenu.alpha = 1.0
-                // self.orderMenu.frame = self.orderMenu.frame.offsetBy(dx: 0, dy: -80)
                 self.orderMenu.transform = CGAffineTransform(translationX: 0, y: -20)
                 self.orderMenuShowing = true
             }
@@ -484,13 +476,11 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
             if animated {
                 UIView.animate(withDuration: 0.6, delay: 0.03, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
                     self.orderMenu.alpha = 0.0
-                    // self.orderMenu.frame = self.orderMenu.frame.offsetBy(dx: 0, dy: 80)
                     self.orderMenu.transform = CGAffineTransform(translationX: 0, y: 20)
                     self.orderMenuShowing = false
                 })
             } else {
                 self.orderMenu.alpha = 0.0
-                // self.orderMenu.frame = self.orderMenu.frame.offsetBy(dx: 0, dy: 80)
                 self.orderMenu.transform = CGAffineTransform(translationX: 0, y: -20)
                 self.orderMenuShowing = false
             }
@@ -502,9 +492,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     
     // Animate Request Menu
     func enterRequestMenu(_ duration: TimeInterval = 0.5, delay: TimeInterval = 0.09, animated: Bool = true) {
-        
-        self.requestMenu.initData(user: self.user, nanny: self.nannies[(lastRowSelected?.row)!])
-        
         let animated = animated && lowPowerModeDisabled ? true : false
         if !requestMenuShowing {
             
@@ -530,16 +517,17 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                 self.requestMenu.alpha = 1.0
                 self.requestMenu.isUserInteractionEnabled = true
                 self.requestMenu.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                
             }
             self.requestMenuShowing = true
+            self.requestMenu.initData(user: self.user, nanny: self.nannies[(lastRowSelected?.row)!], completion: {
+                self.exitAllMenu()
+            })
         } else {
             self.requestMenuShowing = true
         }
     }
     
     func exitRequestMenu(_ duration: TimeInterval = 0.5, delay: TimeInterval = 0.09, animated: Bool = true) {
-        
         let animated = animated && lowPowerModeDisabled ? true : false
         if requestMenuShowing {
             self.requestMenu.transform = CGAffineTransform(scaleX: 1.00, y: 1.00)
@@ -564,9 +552,17 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                 self.requestMenu.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
             }
             self.requestMenuShowing = false
+            self.resetMapView()
         } else {
             self.requestMenuShowing = false
         }
+    }
+    
+    func resetMapView() {
+        for selectedAnnotation in self.mapView.selectedAnnotations {
+            self.mapView.deselectAnnotation(selectedAnnotation, animated: true)
+        }
+        self.mapView.showAnnotations(self.nannies, animated: lowPowerModeDisabled)
     }
     
     func exitAllMenu() {
@@ -584,8 +580,6 @@ extension NannyViewController {
         super.viewDidLoad()
         
         // Animation / Hide
-        // self.exitRequestMenu(animated: false)
-        // self.exitLocationMenu(animated: false)
         self.exitAllMenu()
         
         // Settings & Setup
@@ -805,9 +799,6 @@ extension NannyViewController : UITableViewDelegate, UITableViewDataSource {
             self.mapView.selectAnnotation(self.nannies[indexPath.row], animated: lowPowerModeDisabled)
             
             enterOrderMenu(delay: 1.0)
-            // Meny Animation
-            // enterOrderMenu()
-            
         } else {
             lastRowSelected = indexPath
             hapticButton(.selection, lowPowerModeDisabled)
