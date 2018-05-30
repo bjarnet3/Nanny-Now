@@ -43,15 +43,6 @@ class RequestMenu: UIView {
     @IBAction func requestTypeAction(_ sender: UISegmentedControl) {
         // Request Mode
         if sender.selectedSegmentIndex == 0 {
-            // TextField & CheckLabel
-            requestTextField.alpha = 0.2
-            requestTextField.isUserInteractionEnabled = false
-            
-            requestCheck.text = "x"
-            requestCheck.textColor = UIColor.lightGray
-            
-            dismissKeyboard()
-            
             // From Switch, DatePicker & CheckLabel
             fromSwitch.setOn(true, animated: true)
             fromSwitch.isUserInteractionEnabled = true
@@ -71,15 +62,16 @@ class RequestMenu: UIView {
             toDateTime.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             toCheck.text = "✓"
             toCheck.textColor = UIColor.darkGray
-        } else {
-            // Message Mode
             
             // TextField & CheckLabel
-            requestTextField.alpha = 1.0
-            requestTextField.isUserInteractionEnabled = true
+            requestTextField.alpha = 0.2
+            requestTextField.isUserInteractionEnabled = false
             
-            requestCheck.text = "✓"
-            requestCheck.textColor = UIColor.darkGray
+            requestCheck.text = "x"
+            requestCheck.textColor = UIColor.lightGray
+            dismissKeyboard()
+        } else {
+            // Message Mode
 
             // From Switch, DatePicker & CheckLabel
             fromSwitch.setOn(false, animated: true)
@@ -101,6 +93,13 @@ class RequestMenu: UIView {
             toDateTime.isUserInteractionEnabled = false
             toCheck.text = "x"
             toCheck.textColor = UIColor.lightGray
+            
+            // TextField & CheckLabel
+            requestTextField.alpha = 1.0
+            requestTextField.isUserInteractionEnabled = true
+            
+            requestCheck.text = "✓"
+            requestCheck.textColor = UIColor.darkGray
             requestTextField.becomeFirstResponder()
         }
     }
@@ -147,10 +146,6 @@ class RequestMenu: UIView {
     
     func cancelRequest() {
         self.completion?()
-    }
-    
-    func resignSegmentResponder() {
-        
     }
     
     //Calls this function when the tap is recognized.

@@ -275,8 +275,8 @@
 			children = (
 				5CCF0C7A1D898BFB0089F39D /* Main.storyboard */,
 				5CCF0C7F1D898BFB0089F39D /* LaunchScreen.storyboard */,
-				5C2E696A20BCFA81000F7AFC /* RequestMenu.xib */,
 				5C2E696820BCDA93000F7AFC /* RequestMenu.swift */,
+				5C2E696A20BCFA81000F7AFC /* RequestMenu.xib */,
 				5CC849321FCA1198003AE163 /* FirstTableViewCell.swift */,
 				5CC849341FCA11BE003AE163 /* SettingsTableViewCell.swift */,
 				5CCF0C921D898D9F0089F39D /* NannyTableViewCell.swift */,
