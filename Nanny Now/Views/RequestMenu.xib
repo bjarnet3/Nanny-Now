@@ -156,7 +156,7 @@
                     </constraints>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="COS-qj-y0q">
-                    <rect key="frame" x="20" y="20" width="280" height="69"/>
+                    <rect key="frame" x="20" y="35" width="280" height="69"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nanny-profil" translatesAutoresizingMaskIntoConstraints="NO" id="yEE-Vi-VMc" customClass="CustomImageView" customModule="Nanny_Now" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="69" height="69"/>
@@ -224,7 +224,7 @@
                     </constraints>
                 </stackView>
                 <segmentedControl opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="LgB-i4-65x">
-                    <rect key="frame" x="8" y="136" width="304" height="41"/>
+                    <rect key="frame" x="8" y="134" width="304" height="41"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="xMA-x1-cq2"/>
                     </constraints>
@@ -238,9 +238,9 @@
                     </connections>
                 </segmentedControl>
                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ds4-7z-w7m">
-                    <rect key="frame" x="8" y="194" width="304" height="40"/>
+                    <rect key="frame" x="8" y="192" width="304" height="40"/>
                     <subviews>
-                        <textField opaque="NO" userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleAspectFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Skriv en liten melding her . . ." textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="14" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="sVD-TB-TyG">
+                        <textField opaque="NO" userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleAspectFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Skriv en liten melding her . . ." textAlignment="natural" minimumFontSize="14" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="sVD-TB-TyG">
                             <rect key="frame" x="0.0" y="0.0" width="286" height="40"/>
                             <color key="tintColor" red="0.98823529409999999" green="0.1843137255" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
@@ -265,12 +265,24 @@
                         </label>
                     </subviews>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cSj-uP-TiL">
+                    <rect key="frame" x="292" y="8" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="aZt-Sf-5xF"/>
+                        <constraint firstAttribute="width" constant="20" id="g11-QZ-UDg"/>
+                    </constraints>
+                    <state key="normal" image="close_user_settings"/>
+                    <connections>
+                        <action selector="cancelRequestAction:" destination="-1" eventType="touchUpInside" id="pU9-Tw-pxQ"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="JI4-dC-9yB" firstAttribute="top" secondItem="gVr-LV-0SJ" secondAttribute="bottom" constant="20" id="2Kb-iy-KII"/>
-                <constraint firstItem="COS-qj-y0q" firstAttribute="top" secondItem="jGj-RL-c9y" secondAttribute="top" constant="20" id="Cka-RE-T4K"/>
+                <constraint firstItem="cSj-uP-TiL" firstAttribute="top" secondItem="jGj-RL-c9y" secondAttribute="top" constant="8" id="5wV-Vl-BfR"/>
+                <constraint firstItem="COS-qj-y0q" firstAttribute="top" secondItem="jGj-RL-c9y" secondAttribute="top" constant="35" id="Cka-RE-T4K"/>
                 <constraint firstAttribute="trailing" secondItem="gVr-LV-0SJ" secondAttribute="trailing" constant="8" id="FCo-4N-Jrk"/>
                 <constraint firstAttribute="trailing" secondItem="JI4-dC-9yB" secondAttribute="trailing" id="KIu-vI-e5L"/>
                 <constraint firstItem="Ds4-7z-w7m" firstAttribute="top" secondItem="LgB-i4-65x" secondAttribute="bottom" constant="18" id="QXw-Rt-QQS"/>
@@ -284,7 +296,8 @@
                 <constraint firstItem="LgB-i4-65x" firstAttribute="leading" secondItem="jGj-RL-c9y" secondAttribute="leading" constant="8" id="jvz-lN-iMq"/>
                 <constraint firstItem="gVr-LV-0SJ" firstAttribute="top" secondItem="dM9-bu-LSQ" secondAttribute="bottom" constant="15" id="mDi-Q1-vOA"/>
                 <constraint firstAttribute="bottom" secondItem="JI4-dC-9yB" secondAttribute="bottom" id="n2Y-Ni-thM"/>
-                <constraint firstItem="LgB-i4-65x" firstAttribute="top" secondItem="COS-qj-y0q" secondAttribute="bottom" constant="47" id="oVL-do-FND"/>
+                <constraint firstItem="3pq-M2-6o5" firstAttribute="trailing" secondItem="cSj-uP-TiL" secondAttribute="trailing" constant="8" id="nWZ-x1-Kjr"/>
+                <constraint firstItem="LgB-i4-65x" firstAttribute="top" secondItem="COS-qj-y0q" secondAttribute="bottom" constant="30" id="oVL-do-FND"/>
                 <constraint firstItem="COS-qj-y0q" firstAttribute="leading" secondItem="jGj-RL-c9y" secondAttribute="leading" constant="20" id="q0y-FM-pve"/>
                 <constraint firstItem="Ds4-7z-w7m" firstAttribute="leading" secondItem="jGj-RL-c9y" secondAttribute="leading" constant="8" id="rrq-lp-bKk"/>
             </constraints>
@@ -302,6 +315,7 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
+        <image name="close_user_settings" width="481" height="481"/>
         <image name="nanny-profil" width="550" height="550"/>
     </resources>
 </document>

@@ -495,37 +495,46 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         }
     }
     
+    // Display Request Menu "View"
     func enterRequestMenu() {
+        // Instantiate Visual Blur View
         let visualView = UIVisualEffectView(frame: UIScreen.main.bounds)
         self.visualView = visualView
         
+        // Instantiate RequestMenu View
         let requestFrame = CGRect(x: 15, y: 30, width: UIScreen.main.bounds.width - 30, height: 520)
         let requestMenu = RequestMenu(frame: requestFrame)
         self.requestMenu = requestMenu
         
+        // Set properties
+        visualView.effect = nil
         requestMenu.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
         requestMenu.alpha = 0.0
         requestMenu.backgroundColor = UIColor.clear
-        
-        visualView.effect = nil
-        
+
+        // Instantiate UIPropertyAnimator
         animator = UIViewPropertyAnimator(duration: 0.38, curve: .easeOut) {
             visualView.effect = UIBlurEffect(style: .light)
             // self.effectView.effect = UIBlurEffect(style: .light)
         }
         
+        // Add Visual and RequestView to subview
         self.view.addSubview(visualView)
         self.view.addSubview(requestMenu)
         
+        // Start Animator Animation (visualView)
         animator?.startAnimation()
         visualView.isUserInteractionEnabled = true
         
+        // Start Request Animation
         UIView.animate(withDuration: 0.42, delay: 0.05, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
             requestMenu.alpha = 1.0
             requestMenu.isUserInteractionEnabled = true
             requestMenu.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         })
+        // Init Data to requestMenu
         requestMenu.initData(user: self.user, nanny: self.nannies[(lastRowSelected?.row)!], completion: {
+            // Run exit process when done...
             self.exitAllMenu()
         })
     }
