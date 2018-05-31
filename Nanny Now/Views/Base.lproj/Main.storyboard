@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -19,7 +16,7 @@
                         <viewControllerLayoutGuide type="bottom" id="XIf-UZ-wFe"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Nanny-Now-Background-color" translatesAutoresizingMaskIntoConstraints="NO" id="R3Y-1X-Xfk">
@@ -28,14 +25,14 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hGb-nX-uWq">
-                                <rect key="frame" x="0.0" y="45" width="375" height="622"/>
+                                <rect key="frame" x="0.0" y="45" width="600" height="555"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FirstCell" rowHeight="220" id="zzj-Ec-fdU" customClass="FirstTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="220"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="220"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zzj-Ec-fdU" id="90q-cD-CLc">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="220"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Photosynthesize" translatesAutoresizingMaskIntoConstraints="NO" id="etE-Tb-FR6">
@@ -98,10 +95,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SettingsCell" rowHeight="65" id="1Dz-w1-UcJ" customClass="SettingsTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="248" width="375" height="65"/>
+                                        <rect key="frame" x="0.0" y="248" width="600" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1Dz-w1-UcJ" id="Vgc-ek-BsD">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="UWr-Qs-4MY">
@@ -149,7 +146,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e6x-PD-MAb" customClass="FrostyView" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Myw-x5-f1v"/>
@@ -213,19 +210,19 @@
                         <viewControllerLayoutGuide type="bottom" id="uTA-2q-2bG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="KHz-1H-S2t">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pkt-1T-54j">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="28" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FamilyCell" rowHeight="312" id="dLQ-0m-lEL" customClass="FamilyTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="312"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="312"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dLQ-0m-lEL" id="g9S-eO-zqP">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="312"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="312"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yjw-CT-a4J" customClass="RotatedView" customModule="Nanny_Now" customModuleProvider="target">
@@ -355,10 +352,10 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yph-vp-Vsb" customClass="FrostyView" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Familier" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="neA-zx-Of2">
-                                        <rect key="frame" x="149" y="15.5" width="78" height="30.5"/>
+                                        <rect key="frame" x="261.5" y="15.5" width="78" height="30.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="22"/>
                                         <color key="textColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -428,7 +425,7 @@
                         <viewControllerLayoutGuide type="bottom" id="w56-kb-a9k"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="P3a-hA-oq1">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Text" translatesAutoresizingMaskIntoConstraints="NO" id="eAi-n7-JSK">
@@ -448,7 +445,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5c6-5g-P5l" customClass="CustomButton" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="20" y="598" width="335" height="49"/>
+                                <rect key="frame" x="20" y="531" width="560" height="49"/>
                                 <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="49" id="Ozb-WC-VS6"/>
@@ -506,29 +503,29 @@
                         <viewControllerLayoutGuide type="bottom" id="ONb-Zb-kXf"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.94999999999999996" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wh9-qW-ONR">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="355"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="288"/>
                             </mapView>
                             <view clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DTX-sg-XRF" customClass="FrostyCornerView" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="5" y="50" width="365" height="155"/>
+                                <rect key="frame" x="5" y="50" width="590" height="155"/>
                                 <subviews>
                                     <pickerView alpha="0.90000000000000002" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jdI-tu-qC3">
-                                        <rect key="frame" x="8" y="53" width="349" height="94"/>
+                                        <rect key="frame" x="8" y="53" width="574" height="94"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </pickerView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Velg Lokasjon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FkL-aB-hSe">
-                                        <rect key="frame" x="77" y="8" width="210" height="27"/>
+                                        <rect key="frame" x="77" y="8" width="435" height="27"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                         <color key="textColor" red="0.98656708000000004" green="0.18414348359999999" blue="0.57283514739999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yvb-uK-UFP">
-                                        <rect key="frame" x="337" y="8" width="20" height="20"/>
+                                        <rect key="frame" x="562" y="8" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="UNb-2Q-yiO"/>
                                             <constraint firstAttribute="width" constant="20" id="Wt6-UY-8XQ"/>
@@ -548,7 +545,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XUZ-0u-kIB" customClass="FrostyView" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AG7-jh-DnT" customClass="CustomButton" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="15" y="22" width="32" height="32"/>
@@ -562,7 +559,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Re8-tW-c3f" customClass="CustomButton" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="62" y="21" width="234" height="33"/>
+                                        <rect key="frame" x="62" y="21" width="459" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                         <state key="normal" title="Nanny Annonse er Slått Av">
@@ -570,7 +567,7 @@
                                         </state>
                                     </button>
                                     <switch opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gKx-ad-eRv">
-                                        <rect key="frame" x="311" y="23" width="51" height="31"/>
+                                        <rect key="frame" x="536" y="23" width="51" height="31"/>
                                         <color key="onTintColor" red="1" green="0.090196078430000007" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="nannyAdAction:" destination="8rJ-Kc-sve" eventType="valueChanged" id="xoG-Wq-J17"/>
@@ -590,10 +587,10 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1t-h7-Cay" customClass="FrostyCornerView" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="5" y="273" width="365" height="60"/>
+                                <rect key="frame" x="5" y="206" width="590" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bE1-2J-cPW">
-                                        <rect key="frame" x="337" y="8" width="20" height="20"/>
+                                        <rect key="frame" x="562" y="8" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="1sG-aI-jMi"/>
                                             <constraint firstAttribute="height" constant="20" id="NZj-zW-cLA"/>
@@ -611,7 +608,7 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gP8-Md-mPB" customClass="CustomButton" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="67" y="13.5" width="119" height="33"/>
+                                        <rect key="frame" x="67" y="13.5" width="231.5" height="33"/>
                                         <color key="backgroundColor" red="0.98656708000000004" green="0.18414348359999999" blue="0.57283514739999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                         <state key="normal" title="Forespørsel">
@@ -622,7 +619,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jm8-o2-4a3" customClass="CustomButton" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="206" y="13.5" width="119" height="33"/>
+                                        <rect key="frame" x="318.5" y="13.5" width="231.5" height="33"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                         <state key="normal" title="Se Profil">
@@ -654,14 +651,14 @@
                                 </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dgZ-cO-BAT" customClass="CustomTableView" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="323" width="375" height="344"/>
+                                <rect key="frame" x="0.0" y="256" width="600" height="344"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NannyCell" rowHeight="65" id="RIO-tA-f2n" customClass="NannyTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="65"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RIO-tA-f2n" id="n0q-TZ-FRH">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dyk-Uy-luO" customClass="UserImageView" customModule="Nanny_Now" customModuleProvider="target">
@@ -773,7 +770,7 @@
                                 </prototypes>
                             </tableView>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WdX-gQ-KRL" customClass="UIVisualEffectView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                             </view>
@@ -833,7 +830,7 @@
                         <outlet property="orderMenu" destination="K1t-h7-Cay" id="YUB-3o-htg"/>
                         <outlet property="orderMenuImage" destination="1FO-9L-Jmc" id="Tgs-Ee-zdc"/>
                         <outlet property="profileButton" destination="AG7-jh-DnT" id="OKl-R0-2Uh"/>
-                        <outlet property="requestMenu" destination="OFn-c4-hEf" id="HlF-n7-U8o"/>
+                        <outlet property="requestMenuOrder" destination="OFn-c4-hEf" id="HlF-n7-U8o"/>
                         <outlet property="tableView" destination="dgZ-cO-BAT" id="jrj-cB-lni"/>
                     </connections>
                 </viewController>
@@ -870,18 +867,18 @@
                         <viewControllerLayoutGuide type="bottom" id="Ama-mL-yRp"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="h76-Dv-gTv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="eTY-QZ-N0z">
-                                <rect key="frame" x="0.0" y="28" width="375" height="639"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="572"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubSettingsHeaderCell" rowHeight="65" id="Mfa-HX-e5d" customClass="SettingsTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="375" height="65"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="600" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mfa-HX-e5d" id="XsF-N8-TCp">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ULj-dU-Q6I">
@@ -922,10 +919,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubSettingsBodyCell" rowHeight="65" id="FT2-lR-cWs" customClass="SettingsTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="120.5" width="375" height="65"/>
+                                        <rect key="frame" x="0.0" y="120.5" width="600" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FT2-lR-cWs" id="Cyc-zS-h5q">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DMx-Gx-CrC">
@@ -971,10 +968,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SubSettingsFooterCell" rowHeight="65" id="hu1-ga-nhF" customClass="SettingsTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="185.5" width="375" height="65"/>
+                                        <rect key="frame" x="0.0" y="185.5" width="600" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hu1-ga-nhF" id="X3D-LE-9yl">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HCi-p3-f1a">
@@ -1050,11 +1047,11 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2f-Xo-g75" customClass="FrostyView" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N2f-Xo-g75" customClass="FrostyView" customModule="Nanny_Now" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Personvern / Bruker innstillinger" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25B-G3-3vY">
-                                        <rect key="frame" x="52" y="17" width="270" height="26"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Personvern / Bruker innstillinger" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25B-G3-3vY">
+                                        <rect key="frame" x="164.5" y="17" width="270" height="26"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="19"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1096,22 +1093,22 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                         <viewControllerLayoutGuide type="bottom" id="GW4-jM-tkh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="rJz-V0-0FY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="mutedStandard" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPv-tH-Vmw">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="246"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="246"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </mapView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="160" sectionHeaderHeight="20" estimatedSectionHeaderHeight="-1" sectionFooterHeight="20" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="x2W-Wj-T8H" customClass="CustomTableView" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="225" width="375" height="442"/>
+                                <rect key="frame" x="0.0" y="225" width="600" height="375"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HeaderTableViewCell" rowHeight="40" id="J5t-ME-zdu" customClass="HeaderTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="20" width="375" height="40"/>
+                                        <rect key="frame" x="0.0" y="20" width="600" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="J5t-ME-zdu" id="iPS-CC-1WE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Felles forbindelser" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2wq-01-8wh">
@@ -1133,10 +1130,10 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FriendsTableViewCell" rowHeight="160" id="Gy3-t4-ssP" customClass="FriendsTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="60" width="375" height="160"/>
+                                        <rect key="frame" x="0.0" y="60" width="600" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gy3-t4-ssP" id="bD9-Fk-Kw8">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="160"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IYV-tL-D4Y">
@@ -1204,10 +1201,10 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReviewTableViewCell" rowHeight="200" id="u6U-qF-qPH" customClass="ReviewTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="220" width="375" height="200"/>
+                                        <rect key="frame" x="0.0" y="220" width="600" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="u6U-qF-qPH" id="CQU-HV-Leo">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ARb-Y3-ywq">
@@ -1306,7 +1303,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zea-ul-MgI" customClass="CustomButton" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="16" y="601" width="343" height="46"/>
+                                <rect key="frame" x="20" y="534" width="560" height="46"/>
                                 <color key="backgroundColor" red="1" green="0.1843137255" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="46" id="lhW-Qd-gLD"/>
@@ -1320,7 +1317,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                 </connections>
                             </button>
                             <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xrC-bD-lTG" customClass="CustomImageView" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="20" y="58" width="335" height="100"/>
+                                <rect key="frame" x="20" y="58" width="560" height="100"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Fornavn og Etternavn..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XNE-1z-FX4">
                                         <rect key="frame" x="108" y="19" width="219" height="24"/>
@@ -1356,7 +1353,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                 </constraints>
                             </view>
                             <segmentedControl opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="I3b-ec-HgB">
-                                <rect key="frame" x="221" y="189" width="134" height="29"/>
+                                <rect key="frame" x="446" y="189" width="134" height="29"/>
                                 <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <segments>
                                     <segment title="Gå"/>
@@ -1422,7 +1419,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                         <viewControllerLayoutGuide type="bottom" id="m1z-0O-haq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="amY-35-0Ac">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="header" translatesAutoresizingMaskIntoConstraints="NO" id="nYV-Zw-i4F">
@@ -1531,38 +1528,38 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                         <viewControllerLayoutGuide type="bottom" id="JaC-8R-l9d"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dES-fn-VXg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_image" translatesAutoresizingMaskIntoConstraints="NO" id="phn-L9-sVt">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Nanny-Now-Background-color" translatesAutoresizingMaskIntoConstraints="NO" id="skj-FM-cTr">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Registrering" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZ9-E7-d8h">
-                                <rect key="frame" x="16" y="60" width="343" height="72"/>
+                                <rect key="frame" x="20" y="60" width="560" height="5"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="44"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="20"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Personlig Info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nlo-6e-mQw">
-                                <rect key="frame" x="16" y="120" width="343" height="47"/>
+                                <rect key="frame" x="20" y="120" width="560" height="27.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
                                 <color key="textColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" translatesAutoresizingMaskIntoConstraints="NO" id="lN7-Jc-8S9">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bNN-U5-InO">
                                         <rect key="frame" x="0.0" y="152" width="375" height="472"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMb-LY-zxV" customClass="CustomButton" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="540" width="355" height="49"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMb-LY-zxV" customClass="CustomButton" customModule="Nanny_Now" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="540" width="580" height="49"/>
                                         <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
                                         <state key="normal" title="Oppdater Profilen">
@@ -1573,13 +1570,13 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="76d-db-aa1">
-                                        <rect key="frame" x="10" y="160" width="355" height="198"/>
+                                        <rect key="frame" x="10" y="160" width="580" height="198"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="wlW-KE-Mbg">
-                                                <rect key="frame" x="0.0" y="0.0" width="355" height="42"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="580" height="42"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Fornavn" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="mO7-7M-TUJ" customClass="DTTextField" customModule="Nanny_Now" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="172.5" height="42"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="285" height="42"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardAppearance="alert" returnKeyType="done" textContentType="given-name"/>
@@ -1588,7 +1585,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Etternavn" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="1Nx-6g-3Fm" customClass="DTTextField" customModule="Nanny_Now" customModuleProvider="target">
-                                                        <rect key="frame" x="182.5" y="0.0" width="172.5" height="42"/>
+                                                        <rect key="frame" x="295" y="0.0" width="285" height="42"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardAppearance="alert" returnKeyType="done" textContentType="family-name"/>
@@ -1602,7 +1599,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                 </constraints>
                                             </stackView>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Epost" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="TUo-Mj-afA" customClass="DTTextField" customModule="Nanny_Now" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="52" width="355" height="42"/>
+                                                <rect key="frame" x="0.0" y="52" width="580" height="42"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="done" textContentType="email"/>
@@ -1611,7 +1608,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Yrke / Stilling" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="u1z-Mr-tu4" customClass="DTTextField" customModule="Nanny_Now" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="104" width="355" height="42"/>
+                                                <rect key="frame" x="0.0" y="104" width="580" height="42"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes" keyboardAppearance="alert" returnKeyType="done" textContentType="organization-title"/>
@@ -1620,7 +1617,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                 </connections>
                                             </textField>
                                             <segmentedControl opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" segmentControlStyle="bordered" translatesAutoresizingMaskIntoConstraints="NO" id="y9U-RR-xFB">
-                                                <rect key="frame" x="0.0" y="156" width="355" height="43"/>
+                                                <rect key="frame" x="0.0" y="156" width="580" height="43"/>
                                                 <color key="backgroundColor" red="0.98656708002090454" green="0.18414348363876343" blue="0.57283514738082886" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <segments>
                                                     <segment title="Kvinne  ♀"/>
@@ -1631,8 +1628,8 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                             </segmentedControl>
                                         </subviews>
                                     </stackView>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DYN-YW-hbc">
-                                        <rect key="frame" x="10" y="369" width="355" height="96"/>
+                                    <datePicker contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DYN-YW-hbc">
+                                        <rect key="frame" x="10" y="369" width="580" height="96"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <date key="date" timeIntervalSinceReferenceDate="-31609672.829605103">
                                             <!--2000-01-01 03:32:07 +0000-->
@@ -1716,11 +1713,11 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                         <viewControllerLayoutGuide type="bottom" id="iPF-Xg-Bif"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ODV-9K-2ge">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Nanny-Now-Background-color" translatesAutoresizingMaskIntoConstraints="NO" id="Qbv-he-RAe">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5v-ES-z0k" customClass="CustomButton" customModule="Nanny_Now" customModuleProvider="target">
                                 <rect key="frame" x="10" y="541" width="355" height="49"/>
@@ -1784,7 +1781,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                         <viewControllerLayoutGuide type="bottom" id="Ftl-JD-GCd"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="x4L-4W-Qr8">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView autoresizesSubviews="NO" clipsSubviews="YES" alpha="0.40000000000000002" contentMode="scaleToFill" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1S9-DO-AYS" customClass="CustomTableView" customModule="Nanny_Now" customModuleProvider="target">
@@ -1863,15 +1860,15 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                 </prototypes>
                             </tableView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" directionalLockEnabled="YES" alwaysBounceVertical="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="scrollableAxes" indicatorStyle="black" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6BB-7Z-reE" userLabel="Main Table" customClass="CustomTableView" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55" width="375" height="612"/>
+                                <rect key="frame" x="0.0" y="55" width="600" height="545"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="50" maxX="0.0" maxY="100"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RequestHeaderCell" focusStyle="custom" rowHeight="40" id="qh9-q2-Ylx" customClass="RequestHeaderCell" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="40"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qh9-q2-Ylx" id="SLg-S1-lp1">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <gestureRecognizers/>
@@ -1880,10 +1877,10 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RequestBodyCell" rowHeight="180" id="hDV-X7-JOj" customClass="RequestBodyCell" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="68" width="375" height="180"/>
+                                        <rect key="frame" x="0.0" y="68" width="600" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hDV-X7-JOj" id="GD0-48-R5b">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="180"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nanny-profil" translatesAutoresizingMaskIntoConstraints="NO" id="p07-i7-HlN" customClass="NannyImageView" customModule="Nanny_Now" customModuleProvider="target">
@@ -1905,10 +1902,10 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RequestUserCell" rowHeight="80" id="Hem-Ml-rcr" customClass="RequestUserCell" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="248" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="248" width="600" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hem-Ml-rcr" id="nxJ-6K-edE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="1Jd-0d-Yqy">
@@ -2024,10 +2021,10 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RequestExtendedCell" rowHeight="40" id="xGL-hd-QgU" customClass="RequestExtendedCell" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="328" width="375" height="40"/>
+                                        <rect key="frame" x="0.0" y="328" width="600" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xGL-hd-QgU" id="TzO-8g-YTF">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.80000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="Qaa-7z-php">
@@ -2133,18 +2130,18 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                         <viewControllerLayoutGuide type="bottom" id="NnS-Ij-5k3"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="aty-UC-zmS">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bCr-ei-flI">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageDetailLeftCell" id="AzS-p7-tDQ" customClass="MessageDetailTableCell" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AzS-p7-tDQ" id="CgU-XN-3z2">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Halloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!!" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o17-Wa-e0J">
@@ -2166,10 +2163,10 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageDetailRightCell" id="zvC-Jb-tXR" customClass="MessageDetailTableCell" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="72" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zvC-Jb-tXR" id="EMY-c6-wuJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Halloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!!" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F3l-xh-AYD">
@@ -2208,10 +2205,10 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i9K-I6-gHO" customClass="FrostyView" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="612" width="375" height="55"/>
+                                <rect key="frame" x="0.0" y="545" width="600" height="55"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="epV-9u-eCf">
-                                        <rect key="frame" x="8" y="8" width="293" height="39"/>
+                                        <rect key="frame" x="8" y="8" width="518" height="39"/>
                                         <color key="textColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
@@ -2221,7 +2218,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nEX-VP-fz7">
-                                        <rect key="frame" x="311" y="15" width="54" height="24"/>
+                                        <rect key="frame" x="536" y="15" width="54" height="24"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                         <state key="normal" title="AVBRYT">
                                             <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2285,7 +2282,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                         <viewControllerLayoutGuide type="bottom" id="ywO-tF-qyo"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hol-2I-Bz9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yp8-aH-sb3">

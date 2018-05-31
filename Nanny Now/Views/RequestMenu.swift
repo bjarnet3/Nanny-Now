@@ -9,7 +9,6 @@
 import UIKit
 
 class RequestMenu: UIView {
-
     @IBOutlet var requestView: FrostyCornerView!
     
     @IBOutlet weak var requestImage: CustomImageView!
@@ -22,7 +21,6 @@ class RequestMenu: UIView {
     
     @IBOutlet weak var requestTextField: UITextField!
     @IBOutlet weak var requestCheck: UILabel!
-    
     @IBOutlet weak var requestType: UISegmentedControl!
     
     @IBOutlet weak var fromSwitch: UISwitch!
@@ -37,71 +35,48 @@ class RequestMenu: UIView {
     // -------------------------------------
     private var user: User?
     private var nanny: Nanny?
-    
     private var completion: Completion?
     
     @IBAction func requestTypeAction(_ sender: UISegmentedControl) {
-        // Request Mode
-        if sender.selectedSegmentIndex == 0 {
-            // From Switch, DatePicker & CheckLabel
-            fromSwitch.setOn(true, animated: true)
-            fromSwitch.isUserInteractionEnabled = true
-            fromSwitch.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            fromDateTime.alpha = 1.0
-            fromDateTime.isUserInteractionEnabled = true
-            fromDateTime.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            fromCheck.text = "✓"
+        
+        enum RequestType {
+            case request
+            case message
+        }
+        
+        let requestType = sender.selectedSegmentIndex == 0 ? RequestType.request : RequestType.message
+        
+        func switchSegment(segmentType: RequestType) {
+            let segment: Bool = segmentType == .request ? true : false
+            fromSwitch.setOn(segment, animated: true)
+            fromSwitch.isUserInteractionEnabled = segment
+            fromSwitch.transform = segment ? CGAffineTransform(scaleX: 1.0, y: 1.0) : CGAffineTransform(scaleX: 0.9, y: 0.9)
+            fromDateTime.alpha = segment ? 1.0 : 0.2
+            fromDateTime.isUserInteractionEnabled = segment
+            fromDateTime.transform = segment ? CGAffineTransform(scaleX: 1.0, y: 1.0) : CGAffineTransform(scaleX: 0.9, y: 0.9)
+            fromCheck.text = segment ? "✓" : "x"
             fromCheck.textColor = UIColor.darkGray
             
             // To Switch, DatePicker & CheckLabel
-            toSwitch.setOn(true, animated: true)
-            toSwitch.isUserInteractionEnabled = true
-            toSwitch.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            toDateTime.alpha = 1.0
-            toDateTime.isUserInteractionEnabled = true
-            toDateTime.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            toCheck.text = "✓"
-            toCheck.textColor = UIColor.darkGray
+            toSwitch.setOn(segment, animated: true)
+            toSwitch.isUserInteractionEnabled = segment
+            toSwitch.transform = segment ? CGAffineTransform(scaleX: 1.0, y: 1.0) : CGAffineTransform(scaleX: 0.9, y: 0.9)
+            toDateTime.alpha = segment ? 1.0 : 0.2
+            toDateTime.isUserInteractionEnabled = segment
+            toDateTime.transform = segment ? CGAffineTransform(scaleX: 1.0, y: 1.0) : CGAffineTransform(scaleX: 0.9, y: 0.9)
+            toCheck.text = segment ? "✓" : "x"
+            toCheck.textColor = segment ? UIColor.darkGray : UIColor.lightGray
             
             // TextField & CheckLabel
-            requestTextField.alpha = 0.2
-            requestTextField.isUserInteractionEnabled = false
+            requestTextField.alpha = segment ? 0.2 : 1.0
+            requestTextField.isUserInteractionEnabled = !segment
             
-            requestCheck.text = "x"
-            requestCheck.textColor = UIColor.lightGray
-            dismissKeyboard()
-        } else {
-            // Message Mode
-
-            // From Switch, DatePicker & CheckLabel
-            fromSwitch.setOn(false, animated: true)
-            fromSwitch.isUserInteractionEnabled = false
-            fromSwitch.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+            requestCheck.text = segment ? "x" : "✓"
+            requestCheck.textColor = segment ? UIColor.lightGray : UIColor.darkGray
             
-            fromDateTime.alpha = 0.2
-            fromDateTime.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            fromDateTime.isUserInteractionEnabled = false
-            fromCheck.text = "x"
-            fromCheck.textColor = UIColor.lightGray
-            
-            // To Switch, DatePicker & CheckLabel
-            toSwitch.setOn(false, animated: true)
-            toSwitch.isUserInteractionEnabled = false
-            toSwitch.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            toDateTime.alpha = 0.2
-            toDateTime.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-            toDateTime.isUserInteractionEnabled = false
-            toCheck.text = "x"
-            toCheck.textColor = UIColor.lightGray
-            
-            // TextField & CheckLabel
-            requestTextField.alpha = 1.0
-            requestTextField.isUserInteractionEnabled = true
-            
-            requestCheck.text = "✓"
-            requestCheck.textColor = UIColor.darkGray
-            requestTextField.becomeFirstResponder()
+            if segment { dismissKeyboard() } else { requestTextField.becomeFirstResponder() }
         }
+        switchSegment(segmentType: requestType)
     }
     
     // Send Simple Message
