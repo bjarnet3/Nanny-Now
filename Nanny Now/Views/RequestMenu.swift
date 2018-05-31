@@ -36,16 +36,14 @@ class RequestMenu: UIView {
     private var user: User?
     private var nanny: Nanny?
     private var completion: Completion?
+    private var message: String = ""
     
-    @IBAction func requestTypeAction(_ sender: UISegmentedControl) {
-        
+    @IBAction private func requestTypeAction(_ sender: UISegmentedControl) {
         enum RequestType {
             case request
             case message
         }
-        
         let requestType = sender.selectedSegmentIndex == 0 ? RequestType.request : RequestType.message
-        
         func switchSegment(segmentType: RequestType) {
             let segment: Bool = segmentType == .request ? true : false
             fromSwitch.setOn(segment, animated: true)
@@ -70,6 +68,9 @@ class RequestMenu: UIView {
             // TextField & CheckLabel
             requestTextField.alpha = segment ? 0.2 : 1.0
             requestTextField.isUserInteractionEnabled = !segment
+            
+            // Just enjoy it
+            (requestTextField.text, self.message) = (self.message, requestTextField.text ?? "")
             
             requestCheck.text = segment ? "x" : "✓"
             requestCheck.textColor = segment ? UIColor.lightGray : UIColor.darkGray
@@ -106,6 +107,7 @@ class RequestMenu: UIView {
                 if let text = self.requestTextField.text, text != "" { requestMessage = text }
                 if self.requestType.selectedSegmentIndex == 0 {
                     // Send Request
+                    requestMessage = "Forespørsel til: \(nanny.firstName)"
                     var request = Request(nanny: nanny, user: user, timeFrom: self.fromDateTime.date, timeTo: self.toDateTime.date, message: requestMessage)
                     request.requestCategory = NotificationCategory.nannyRequest.rawValue
                     Notifications.instance.sendNotification(with: request)
