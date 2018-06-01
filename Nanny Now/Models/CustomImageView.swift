@@ -8,10 +8,7 @@
 
 import UIKit
 
-// @IBDesignable
-
 class CustomImageView: UIImageView {
-
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -24,6 +21,6 @@ class CustomImageView: UIImageView {
         
         self.clipsToBounds = true
         self.layer.cornerRadius = self.frame.height / 2
-        
     }
+    
 }

@@ -22,8 +22,6 @@ class UserImageView: UIImageView {
         
         self.clipsToBounds = true
         self.layer.cornerRadius = self.frame.width / 2
-        // self.layer.addShadow()
-        
     }
 }
 
@@ -34,6 +32,7 @@ class NannyImageView: UserImageView {
         self.layer.borderWidth = 0.6
         self.layer.borderColor = PINK_NANNY_LOGO.cgColor
     }
+    
 }
 
 /// Inspiration: https://stackoverflow.com/a/25475536/129202

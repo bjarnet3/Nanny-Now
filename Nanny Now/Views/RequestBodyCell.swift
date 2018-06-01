@@ -11,7 +11,8 @@ import QuartzCore
 
 class RequestBodyCell: UITableViewCell {
     
-    @IBOutlet weak var cellImageView: NannyImageView!
+    @IBOutlet weak var cellImageView: CustomImageView!
+    @IBOutlet weak var profileView: StatusView!
     
     var user: User?
     
@@ -46,9 +47,15 @@ class RequestBodyCell: UITableViewCell {
             if animated {
                 let random = Double(arc4random_uniform(UInt32(1000))) / 2000 
                 UIView.animate(withDuration: 0.6, delay: random * 1.5, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
+                    if let image = self.cellImageView.image {
+                        self.profileView.setImage(image: image)
+                    }
                     self.animateView(direction: .exit)
                 })
             } else {
+                if let image = self.cellImageView.image {
+                    self.profileView.setImage(image: image)
+                }
                 self.animateView(direction: .exit)
             }
             self.user = user

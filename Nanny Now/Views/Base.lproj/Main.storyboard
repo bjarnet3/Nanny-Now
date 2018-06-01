@@ -603,7 +603,7 @@
                                             <action selector="orderMenuAction" destination="8rJ-Kc-sve" eventType="touchUpInside" id="elH-a4-ksQ"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="40B52118-FA0A-4978-8A6F-47A5E2137F95" translatesAutoresizingMaskIntoConstraints="NO" id="1FO-9L-Jmc" customClass="MenuImageView" customModule="Nanny_Now" customModuleProvider="target">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="40B52118-FA0A-4978-8A6F-47A5E2137F95" translatesAutoresizingMaskIntoConstraints="NO" id="1FO-9L-Jmc" customClass="UserImageView" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="10" y="10" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="cg0-c3-4Da"/>
@@ -1870,22 +1870,36 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nanny-profil" translatesAutoresizingMaskIntoConstraints="NO" id="p07-i7-HlN" customClass="NannyImageView" customModule="Nanny_Now" customModuleProvider="target">
-                                                    <rect key="frame" x="117.5" y="20" width="140" height="140"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nanny-profil" translatesAutoresizingMaskIntoConstraints="NO" id="p07-i7-HlN" customClass="StatusImageView" customModule="Nanny_Now" customModuleProvider="target">
+                                                    <rect key="frame" x="117" y="20" width="140" height="140"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="p07-i7-HlN" secondAttribute="height" multiplier="1:1" id="bp0-hb-pE1"/>
                                                     </constraints>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6MP-gp-Jjf" customClass="StatusView" customModule="Nanny_Now" customModuleProvider="target">
+                                                    <rect key="frame" x="108" y="11" width="158" height="158"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="6MP-gp-Jjf" secondAttribute="height" multiplier="1:1" id="Gfw-fe-XsJ"/>
+                                                        <constraint firstAttribute="width" constant="158" id="Nnz-44-KhT"/>
+                                                        <constraint firstAttribute="height" constant="158" id="ZuS-2Q-5qK"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="6MP-gp-Jjf" secondAttribute="bottom" constant="11" id="9V9-bf-UKh"/>
                                                 <constraint firstItem="p07-i7-HlN" firstAttribute="centerX" secondItem="GD0-48-R5b" secondAttribute="centerX" id="S0D-bk-Yqi"/>
                                                 <constraint firstItem="p07-i7-HlN" firstAttribute="top" secondItem="GD0-48-R5b" secondAttribute="top" constant="20" id="TND-3q-9OA"/>
+                                                <constraint firstItem="6MP-gp-Jjf" firstAttribute="leading" secondItem="GD0-48-R5b" secondAttribute="leading" constant="108" id="dQv-Ja-DPr"/>
                                                 <constraint firstAttribute="bottom" secondItem="p07-i7-HlN" secondAttribute="bottom" constant="20" id="oiC-ug-bfD"/>
+                                                <constraint firstItem="6MP-gp-Jjf" firstAttribute="top" secondItem="GD0-48-R5b" secondAttribute="top" constant="11" id="v6o-yl-hCZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="6MP-gp-Jjf" secondAttribute="trailing" constant="109" id="xXX-Ch-2ZN"/>
                                                 <constraint firstItem="p07-i7-HlN" firstAttribute="centerY" secondItem="GD0-48-R5b" secondAttribute="centerY" id="yym-3y-V2f"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="cellImageView" destination="p07-i7-HlN" id="JT2-Zr-oKO"/>
+                                            <outlet property="profileView" destination="6MP-gp-Jjf" id="4V5-Lb-nGs"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RequestUserCell" rowHeight="80" id="Hem-Ml-rcr" customClass="RequestUserCell" customModule="Nanny_Now" customModuleProvider="target">

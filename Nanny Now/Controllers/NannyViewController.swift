@@ -25,7 +25,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     
     @IBOutlet weak var profileButton: CustomButton!
     @IBOutlet weak var orderMenu: FrostyCornerView!
-    @IBOutlet weak var orderMenuImage: MenuImageView!
+    @IBOutlet weak var orderMenuImage: UserImageView!
 
     @IBOutlet weak var locationMenu: FrostyCornerView!
     @IBOutlet weak var locationPicker: UIPickerView!
