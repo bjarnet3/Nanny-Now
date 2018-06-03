@@ -23,6 +23,8 @@ class MessageDetailVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
+    
+    @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var bottomLayoutTextField: NSLayoutConstraint!
     
     // MARK: - Properties: Array & Varables
@@ -36,6 +38,8 @@ class MessageDetailVC: UIViewController {
     // MARK: - IBAction: Methods connected to UI
     // ----------------------------------------
     @IBAction func backButton(_ sender: Any) {
+        self.progressView.setProgress(0.0, animated: false)
+        self.progressView.alpha = 1.0
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -177,67 +181,7 @@ class MessageDetailVC: UIViewController {
                                                 self.fetchMessageObserver(snapMessage, remoteUID: fromUID, userUID: toUID)
                                                 
                                             } else if fromUID == remoteID {
-                                                
-                                                self.fetchMessageObserver(snapMessage, remoteUID: remoteID, userUID: userID)
-                                                
-                                            }
-                                        }
-                                    }
-                                }
-                            } else {
-                                if let firstUID = snapMessage["fromUID"] as? String, firstUID == userID {
-                                    if let secondUID = snapMessage["toUID"] as? String, secondUID == remoteID {
-                                        self.fetchMessageObserver(snapMessage, remoteUID: remoteID, userUID: userID)
-                                    }
-                                }
-                            }
-                            
-                        }
-                    }
-                }
-                
-            })
-        }
-    }
-    
-    private func observeMessagesOnce() {
-        if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
-            DataService.instance.REF_MESSAGES.child("private").child(UID).child("all").queryOrdered(byChild: "messageTime").observeSingleEvent(of: .value, with: { (snapshot) in
-                
-                if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
-                    self.totalMessages = snapValue.keys.count
-                    
-                    print("snapshot count: \(snapValue.keys.count)")
-                    print("------------------")
-                    
-                    for (_,value) in snapValue.reversed() {
-                        if let snapMessage = value as? [String:AnyObject] {
-                            
-                            guard let userID = self.user?.userUID else { return }
-                            guard let remoteID = self.remoteUser?.userUID else { return }
-                            
-                            if let remoteU = self.remoteUser?.familyID {
-                                print(remoteU)
-                            }
-                            
-                            print(snapMessage)
-                            print("userID \(userID)")
-                            print("remoteID \(remoteID)")
-                            
-                            if userID != remoteID {
-                                
-                                if let fromUID = snapMessage["fromUID"] as? String, fromUID == userID || fromUID == remoteID {
-                                    
-                                    if let toUID = snapMessage["toUID"] as? String, toUID == userID || toUID == remoteID {
-                                        
-                                        if fromUID != toUID {
-                                            
-                                            if fromUID == userID {
-                                                
-                                                self.fetchMessageObserver(snapMessage, remoteUID: fromUID, userUID: toUID)
-                                                
-                                            } else if fromUID == remoteID {
-                                                
+
                                                 self.fetchMessageObserver(snapMessage, remoteUID: remoteID, userUID: userID)
                                                 
                                             }
@@ -302,7 +246,15 @@ extension MessageDetailVC {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        animateCells(in: self.tableView, true)
+        
+        let progress = self.progressView
+        progress?.setProgress(0.0, animated: false)
+        progress?.alpha = 1.0
+        
+        animateCellsWithProgress(in: self.tableView, true, progress: progress!, completion: {
+            print("complete home")
+        })
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -315,6 +267,10 @@ extension MessageDetailVC {
 // MARK: - TableView, Delegate & Datasource
 // ----------------------------------------
 extension MessageDetailVC: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 55.0
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count

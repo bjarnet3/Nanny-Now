@@ -208,9 +208,7 @@ class DataService {
     
     func postToMessage(with message: Message) {
         if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
-            
             let remoteID = message._toUser?.userUID ?? message._toUID
-            
             let messageREF = DataService.instance.REF_MESSAGES
             let messageID = message._messageID
             
@@ -288,7 +286,6 @@ class DataService {
     }
     
     func postToRequest(with request: Request, reference: DatabaseReference) {
-            // let timeStamp = returnTimeStamp()
             let requestREF = reference
             let requestID = request.requestID ?? reference.childByAutoId().key
             

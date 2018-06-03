@@ -564,7 +564,7 @@ public enum TableViewCellAnimation {
     case blur(() -> Void)
 }
 
-public func animateCells(in tableView: UITableView,_ animated: Bool = true) {
+public func animateCells(in tableView: UITableView,_ animated: Bool = true, completion: Completion? = nil) {
     if animated && lowPowerModeDisabled {
         let cells = tableView.visibleCells
         
@@ -582,9 +582,44 @@ public func animateCells(in tableView: UITableView,_ animated: Bool = true) {
                 // sett "end" transition point
                 cell.transform = CGAffineTransform(scaleX: 1, y: 1)
             }, completion: { (true) in
-                // print("animateTable completion")
+                
             })
             index += 1
+        }
+        completion?()
+    } else {
+        tableView.alpha = 1
+    }
+}
+
+public func animateCellsWithProgress(in tableView: UITableView,_ animated: Bool = true, progress: UIProgressView, completion: Completion? = nil) {
+    if animated && lowPowerModeDisabled {
+        let cells = tableView.visibleCells
+        progress.setProgress(0.05, animated: true)
+        for cell in cells { cell.alpha = 0 }
+        tableView.alpha = 1
+        var index = 0
+        for cell in cells {
+            // cell.layer.transform = CATransform3DMakeRotation(CGFloat.pi / 4, 1, 0, 0)
+            cell.transform = CGAffineTransform(scaleX: 0.89, y: 0.89)
+            UIView.animate(withDuration: 0.800, delay: 0.040 * Double(index), usingSpringWithDamping: 0.75, initialSpringVelocity: 0.65, options: .curveEaseOut, animations: {
+                cell.alpha = 1
+                // sett "end" transition point
+                let value = (Float(index)/(Float(cells.count))) * (0.3 + Float(index)/100.0)
+                progress.progress = value
+                // cell.layer.transform = CATransform3DMakeRotation(0, 1, 0, 0)
+                cell.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }, completion: { (true) in
+                
+            })
+            index += 1
+            if index == cells.count {
+                print("index and cells.count is equal")
+                UIView.animate(withDuration: 0.60, delay: 0.75, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
+                    progress.setProgress(1.0, animated: true)
+                    progress.alpha = 0.0
+                })
+            }
         }
     } else {
         tableView.alpha = 1
@@ -610,7 +645,7 @@ public func animateCells3d(in tableView: UITableView,_ animated: Bool = true) {
         for cell in cells {
             cell.layer.transform = CATransform3DMakeRotation(CGFloat.pi / 4, 0, 1, 0)
             
-            UIView.animate(withDuration: 0.905, delay: 0.050 * Double(index), usingSpringWithDamping: 1.3, initialSpringVelocity: 0.5, options: .allowAnimatedContent, animations: {
+            UIView.animate(withDuration: 0.805, delay: 0.048 * Double(index), usingSpringWithDamping: 1.3, initialSpringVelocity: 0.4, options: .allowAnimatedContent, animations: {
                 cell.alpha = 1
                 // sett "end" transition point
                 cell.layer.transform = CATransform3DMakeRotation(0, 0, 1, 0)

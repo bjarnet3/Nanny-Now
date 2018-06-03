@@ -43,7 +43,7 @@ class MessageViewController: UIViewController {
     let mainTableMaxY: CGFloat = 55
     var mainTableMinimized = false
     let mainTableMaximizedHeight: CGFloat = UIScreen.main.bounds.height - 55
-    let mainTableMinimizedHeight: CGFloat = 105
+    let mainTableMinimizedHeight: CGFloat = 95
     
     let backTableOffset: CGFloat = 25
     
@@ -145,6 +145,7 @@ class MessageViewController: UIViewController {
         self.mainTable.layer.cornerRadius = cornerRadius
         // Specify which corners to round = [ upper left , upper right ]
         self.mainTable.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        self.mainTable.contentInset.bottom = 60
     }
     
     func setBackTable() {
@@ -154,6 +155,7 @@ class MessageViewController: UIViewController {
         // Specify which corners to round = [ upper left , upper right ]
         self.backTable.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         self.backTable.contentInset.top = 35
+        self.backTable.contentInset.bottom = 100
         self.backTable.contentOffset.y = 35
     }
     
@@ -253,7 +255,7 @@ class MessageViewController: UIViewController {
                 self.backTable.alpha = 0.7
                 self.backTable.transform = CGAffineTransform(scaleX: 0.96, y: 0.96)
                 self.backTable.layoutIfNeeded()
-                self.mainTable.transform = CGAffineTransform(translationX: 0, y: 35)
+                self.mainTable.transform = CGAffineTransform(translationX: 0, y: 25)
             }
         }
     }
@@ -335,6 +337,7 @@ class MessageViewController: UIViewController {
                 
                 if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
                     self.totalRequests = snapValue.keys.count
+                    
                     self.requests.removeAll()
                     
                     for (_,value) in snapValue {
@@ -427,21 +430,15 @@ class MessageViewController: UIViewController {
                         }
                     }
                 }
-                if let index = self.requests.index(where: { $0.timeRequested >= requestVal.timeRequested }) {
+                if let index = self.requests.index(where: { $0.timeRequested <= requestVal.timeRequested }) {
                     self.requests.insert(requestVal, at: index)
                     let indexPath = IndexPath(row: index.advanced(by: 2), section: 0)
-                    
                     self.mainTable.insertRows(at: [indexPath], with: .automatic)
-                    self.mainTable.reloadData()
                 } else {
                     self.requests.append(requestVal)
-                    self.mainTable.reloadData()
                 }
+                self.mainTable.reloadData()
                 self.messageBadge += 1
-                if self.requests.count == self.totalRequests - 1 {
-                    print("observeUser last request")
-                    self.mainTable.reloadData()
-                }
             })
         } else {
             self.mainTable.reloadData()
@@ -521,14 +518,20 @@ class MessageViewController: UIViewController {
                         if let snapValue = snap.value as? [String: AnyObject] {
                             for (key,val) in snapValue {
                                 if key == "familyID" || key == "nannyID" {
-                                    print("family and nannyID")
                                     if let remoteUID = val as? String, remoteUID != UID {
                                         publicRequest.child(snap.key).child("userID").setValue(remoteUID)
                                     }
                                 }
                                 if key == "requestStatus", val as? String != "pending" {
-                                    DataService.instance.moveValuesFromRefToRef(fromReference: publicRequest, toReference: privateRequest)
+                                    if let requestValue = val as? String {
+                                        privateRequest.child(snap.key).child(key).setValue(requestValue)
+                                        publicRequest.child(snap.key).removeValue()
+                                    }
+                                } else {
+                                    DataService.instance.copyValuesFromRefToRef(fromReference: publicRequest, toReference: privateRequest)
                                 }
+                                // self.requests.removeAll()
+                                self.mainTable.reloadData()
                             }
                             
                         }
@@ -562,7 +565,7 @@ extension MessageViewController {
         
         getUserSettings()
         
-        observeRequestsOnce()
+        observeRequests()
         observeMessages()
         
         revealingSplashAnimation(self.view, type: SplashAnimationType.swingAndZoomOut, completion: {

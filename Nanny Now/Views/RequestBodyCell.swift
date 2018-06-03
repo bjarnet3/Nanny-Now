@@ -11,9 +11,10 @@ import QuartzCore
 
 class RequestBodyCell: UITableViewCell {
     
-    @IBOutlet weak var cellImageView: CustomImageView!
+    // @IBOutlet weak var cellImageView: CustomImageView!
     @IBOutlet weak var profileView: StatusView!
     
+    var cellImageView = UIImageView()
     var user: User?
     
     public enum Direction {
@@ -24,13 +25,13 @@ class RequestBodyCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        cellImageView.layer.cornerRadius = cellImageView.layer.frame.height / 2
+        // cellImageView.layer.cornerRadius = cellImageView.layer.frame.height / 2
     }
     
     func animateView( direction: Direction) {
         if direction == .enter {
             self.contentView.alpha = 0
-            self.setNeedsDisplay(cellImageView.frame)
+            // self.setNeedsDisplay(profileView.frame)
             self.contentView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
             // self.layer.transform = CATransform3DMakeRotation(CGFloat.pi / 16, 1, 0, 0)
         } else {

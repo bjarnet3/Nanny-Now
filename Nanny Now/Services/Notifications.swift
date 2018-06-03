@@ -67,6 +67,8 @@ class Notifications {
     // Send Notification using Message Object
     // --------------------------------------
     func sendNotifications(with message: Message) {
+        DataService.instance.updateUserStatus(with: .active)
+        
         let remoteID = message._toUser?.userUID ?? message._toUID
         let text = message._message
         let categoryRequest = message._requestCategory
@@ -211,6 +213,8 @@ class Notifications {
     // Send Notification using Request Object
     // --------------------------------------
     func sendNotification(with request: Request) {
+        DataService.instance.updateUserStatus(with: .active)
+        
         let requestID = request.requestID ?? DataService.instance.REF_REQUESTS.childByAutoId().key
         let message = request.message
         let remoteID = request.nannyID
@@ -393,6 +397,7 @@ class Notifications {
     }
     
     func sendNotification(to remoteID: String, text: String, categoryRequest: NotificationCategory,_ requestID: String = "") {
+        DataService.instance.updateUserStatus(with: .active)
         
         let url = NSURL(string: "https://fcm.googleapis.com/fcm/send")!
         let session = URLSession.shared

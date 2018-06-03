@@ -54,8 +54,8 @@ class RequestUserCell: UITableViewCell {
         let timeSince = now.timeIntervalSince(date)
         
         let minutes = Int(timeSince) / 60
-        let hours = minutes % 60
-        // let days = hours % 24
+        let hours = minutes / 60
+        let days = hours / 24
         
         switch minutes {
         case 0 ..< 30:
@@ -67,17 +67,14 @@ class RequestUserCell: UITableViewCell {
         case 90 ..< 120:
             self.userStatusLbl.text = "1,5 time"
             self.userIndicatorLbl.textColor = UIColor.orange
-        case 120 ..< 300:
+        case 120 ..< 1440:
             self.userStatusLbl.text = "\(hours) timer"
             self.userIndicatorLbl.textColor = UIColor.orange
-        case 300 ..< 1440:
-            self.userStatusLbl.text = "flere timer"
-            self.userIndicatorLbl.textColor = UIColor.orange
         case 1440 ..< 2880:
-            self.userStatusLbl.text = "< 2 dager"
+            self.userStatusLbl.text = " 1 døgn siden"
             self.userIndicatorLbl.textColor = UIColor.red
         default:
-            self.userStatusLbl.text = "dager siden"
+            self.userStatusLbl.text = "\(days) dager"
             self.userIndicatorLbl.textColor = UIColor.gray
         }
         print(minutes)
@@ -207,7 +204,7 @@ class RequestUserCell: UITableViewCell {
                     
                     self.timeFrom = stringToDateTime(request.timeFrom)
                     self.timeTo = stringToDateTime(request.timeTo)
-                    self.amount.text = " \(request.amount) kr  "
+                    self.amount.text = " \(request.amount) kr   "
                 })
                 self.cellImageLoaded = true
             })
@@ -220,7 +217,7 @@ class RequestUserCell: UITableViewCell {
             
             self.timeFrom = stringToDateTime(request.timeFrom)
             self.timeTo = stringToDateTime(request.timeTo)
-            self.amount.text = " \(request.amount) kr  "
+            self.amount.text = " \(request.amount) kr   "
         }
     }
 }

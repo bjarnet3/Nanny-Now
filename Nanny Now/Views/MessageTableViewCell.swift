@@ -25,30 +25,27 @@ class MessageTableViewCell: UITableViewCell {
         let timeSince = now.timeIntervalSince(date)
         
         let minutes = Int(timeSince) / 60
-        let hours = minutes % 60
-        // let days = hours % 24
+        let hours = minutes / 60
+        let days = hours / 24
         
         switch minutes {
         case 0 ..< 30:
-            self.userStatusLbl.text = " \(minutes) min "
+            self.userStatusLbl.text = " \(minutes) min   "
             self.userIndicatorLbl.textColor = UIColor.green
         case 30 ..< 90:
-            self.userStatusLbl.text = " \(minutes) min siden "
+            self.userStatusLbl.text = " \(minutes) min siden   "
             self.userIndicatorLbl.textColor = UIColor.yellow
         case 90 ..< 120:
-            self.userStatusLbl.text = " 1,5 time siden "
+            self.userStatusLbl.text = " 1,5 time siden   "
             self.userIndicatorLbl.textColor = UIColor.orange
-        case 120 ..< 300:
-            self.userStatusLbl.text = " \(hours) timer siden "
-            self.userIndicatorLbl.textColor = UIColor.orange
-        case 300 ..< 1440:
-            self.userStatusLbl.text = " flere timer siden "
+        case 120 ..< 1440:
+            self.userStatusLbl.text = " \(hours) timer siden   "
             self.userIndicatorLbl.textColor = UIColor.orange
         case 1440 ..< 2880:
-            self.userStatusLbl.text = " < 2 dager side "
+            self.userStatusLbl.text = " 1 døgn siden   "
             self.userIndicatorLbl.textColor = UIColor.red
         default:
-            self.userStatusLbl.text = " flere dager siden "
+            self.userStatusLbl.text = " \(days) dager siden   "
             self.userIndicatorLbl.textColor = UIColor.gray
         }
         print(minutes)
