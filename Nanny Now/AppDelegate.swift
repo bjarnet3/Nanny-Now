@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.addObserver(forName: Notification.Name.MessagingRegistrationTokenRefreshed, object: nil, queue: nil, using: tokenRefreshNotification(_:))
         
         // User Status
-        DataService.instance.updateStatusOnUser(with: .active)
+        DataService.instance.updateUserStatus(with: .active)
         
         var performShortcutDelegate = true
         if let launchOptions = launchOptions {
@@ -144,13 +144,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Tells the delegate that the app is about to become inactive.
     func applicationWillResignActive(_ application: UIApplication) {
         // User Status
-        DataService.instance.updateStatusOnUser(with: .inactive)
+        DataService.instance.updateUserStatus(with: .inactive)
     }
     
     /// Tells the delegate that the app is about to enter the foreground.
     func applicationWillEnterForeground(_ application: UIApplication) {
         // User Status
-        DataService.instance.updateStatusOnUser(with: .active)
+        DataService.instance.updateUserStatus(with: .active)
         
         // Clear badge when app is or resumed
         application.applicationIconBadgeNumber = 0
@@ -159,7 +159,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Tells the delegate that the app has become active.
     func applicationDidBecomeActive(_ application: UIApplication) {
         // User Status
-        DataService.instance.updateStatusOnUser(with: .active)
+        DataService.instance.updateUserStatus(with: .active)
         
         // Clear badge when app is or resumed
         application.applicationIconBadgeNumber = 0
@@ -176,7 +176,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Tells the delegate that the app is now in the background.
     func applicationDidEnterBackground(_ application: UIApplication) {
         // User Status
-        DataService.instance.updateStatusOnUser(with: .inactive)
+        DataService.instance.updateUserStatus(with: .inactive)
         
         // Messaging.messaging().disconnect()
         Messaging.messaging().shouldEstablishDirectChannel = false
@@ -185,7 +185,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Tells the delegate when the app is about to terminate.
     func applicationWillTerminate(_ application: UIApplication) {
         // User Status
-        DataService.instance.updateStatusOnUser(with: .terminate)
+        DataService.instance.updateUserStatus(with: .terminate)
     }
     
     // [START refresh_token]

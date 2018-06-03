@@ -299,12 +299,12 @@ public func returnDayTimeString(from date: Date, day: Bool = true) -> String {
 public func returnDayTimeString(from date: Date) -> String {
     let todayDate = Date()
     let tomorrowDate = Date(timeInterval: 86400, since: todayDate)
-    let yesterDayDate = Date(timeInterval: -86400, since: todayDate)
+    let yesterdayDate = Date(timeInterval: -86400, since: todayDate)
     
-    let from = Calendar.current.component(.weekday, from: date)
-    let today = Calendar.current.component(.weekday, from: todayDate)
-    let tomorrow = Calendar.current.component(.weekday, from: tomorrowDate)
-    let yesterDay = Calendar.current.component(.weekday, from: yesterDayDate)
+    let weekday = Calendar.current.component(.weekday, from: date)
+    // let today = Calendar.current.component(.weekday, from: todayDate)
+    // let tomorrow = Calendar.current.component(.weekday, from: tomorrowDate)
+    // let yesterDay = Calendar.current.component(.weekday, from: yesterDayDate)
     
     var returnString = ""
     
@@ -321,6 +321,13 @@ public func returnDayTimeString(from date: Date) -> String {
     
     formatter.dateFormat = "dd/MM"
     let dato = formatter.string(from: date)
+    
+    formatter.dateFormat = "yyyy-MM-dd"
+    let from = formatter.string(from: date)
+    let today = formatter.string(from: todayDate)
+    let tomorrow = formatter.string(from: tomorrowDate)
+    let yesterday = formatter.string(from: yesterdayDate)
+    
     
     var tidsPeriode = ""
     
@@ -340,7 +347,7 @@ public func returnDayTimeString(from date: Date) -> String {
         tidsPeriode = "kveld"
     }
     
-    switch from {
+    switch weekday {
     case 1:
         returnString = "søndag"
     case 2:
@@ -366,7 +373,7 @@ public func returnDayTimeString(from date: Date) -> String {
         returnString = "i \(tidspunkt)"
     } else if from == tomorrow {
         returnString = "i morgen \(tidsPeriode)"
-    } else if from == yesterDay {
+    } else if from == yesterday {
         returnString = "i går"
     } else {
         returnString = dato

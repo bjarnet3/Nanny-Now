@@ -31,7 +31,7 @@ class MessageViewController: UIViewController {
     var totalMessages: Int = 0
     
     var lastRowSelected: IndexPath?
-    var heightForRow:[CGFloat] = [40,180,80]
+    var heightForRow:[CGFloat] = [50,180,80]
     
     var animatorIsBusy = false
     var introAnimationLoaded = false
@@ -388,7 +388,8 @@ class MessageViewController: UIViewController {
     }
     
     func fetchRequestObserver(_ requestSnap: Dictionary<String, AnyObject>, remoteUID: String) {
-        let userREF = DataService.instance.REF_USERS_PRIVATE.child(remoteUID)
+        let userRef = DataService.instance.REF_USERS_PRIVATE.child(remoteUID)
+        // let userPublicREF = DataService.instance.REF_USERS_PUBLIC.child(remoteUID)
         let request = Request(
             requestID: requestSnap["requestID"] as! String,
             nannyID: requestSnap["nannyID"] as! String,
@@ -402,8 +403,8 @@ class MessageViewController: UIViewController {
             requestAmount: requestSnap["requestAmount"] as! Int,
             requestStatus: requestSnap["requestStatus"] as! String,
             requestCategory: requestSnap["requestCategory"] as! String,
-            requestREF: userREF)
-        self.observeUser(request: request, userRef: userREF)
+            requestREF: userRef)
+        self.observeUser(request: request, userRef: userRef)
     }
     
     func observeUser(request: Request, userRef: DatabaseReference) {
@@ -420,6 +421,8 @@ class MessageViewController: UIViewController {
                                 requestVal.firstName = userValue
                             } else if key == "imageUrl" {
                                 requestVal.imageName = userValue
+                            } else if key == "status" {
+                                requestVal.userStatus = stringToDateTime(userValue)
                             }
                         }
                     }
@@ -452,6 +455,7 @@ class MessageViewController: UIViewController {
                     
                     var imageName: String?
                     var firstName: String?
+                    var userStatus: Date?
                     
                     for (key, val) in snapValue {
                         
@@ -460,6 +464,9 @@ class MessageViewController: UIViewController {
                         }
                         if key == "first_name" {
                             firstName = val as? String
+                        }
+                        if let timeString = val as? String, key == "status" {
+                            userStatus = stringToDateTime(timeString)
                         }
                     }
                     
@@ -470,6 +477,8 @@ class MessageViewController: UIViewController {
                     
                     let remote = User(userUID: message._toUID, imageName: imageName, firstName: firstName)
                     message.setTo(user: remote)
+                    
+                    message.userStatus = userStatus!
                     
                     self.messages.sort(by: { $0._messageTime > $1._messageTime })
                     self.messages.append(message)

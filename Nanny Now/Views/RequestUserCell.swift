@@ -14,6 +14,12 @@ class RequestUserCell: UITableViewCell {
     @IBOutlet weak var cellImageView: NannyImageView!
     
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var requestStatusLbl: UILabel!
+    @IBOutlet weak var requestIndicatorLbl: UILabel!
+    
+    @IBOutlet weak var userStatusLbl: UILabel!
+    @IBOutlet weak var userIndicatorLbl: UILabel!
+    
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var timeFromLabel: UILabel!
     @IBOutlet weak var timeToLabel: UILabel!
@@ -23,12 +29,83 @@ class RequestUserCell: UITableViewCell {
     var hasSelected = false
     var hasOpened = false
     
+    func returnRequestIndicator(status: RequestStatus = .pending) {
+        switch status {
+        case .accepted:
+            self.requestIndicatorLbl.textColor = UIColor.green
+            self.requestIndicatorLbl.text = "•"
+        case .complete:
+            self.requestIndicatorLbl.textColor = PINK_TABBAR_UNSELECTED
+            self.requestIndicatorLbl.text = "•"
+        case .pending:
+            self.requestIndicatorLbl.textColor = UIColor.orange
+            self.requestIndicatorLbl.text = "•"
+        case .rejected:
+            self.requestIndicatorLbl.textColor = UIColor.red
+            self.requestIndicatorLbl.text = "•"
+        default:
+            self.requestIndicatorLbl.textColor = ORANGE_NANNY_LOGO
+            self.requestIndicatorLbl.text = "•"
+        }
+    }
+    
+    func returnUserIndicator(from date: Date) {
+        let now = Date()
+        let timeSince = now.timeIntervalSince(date)
+        
+        let minutes = Int(timeSince) / 60
+        let hours = minutes % 60
+        // let days = hours % 24
+        
+        switch minutes {
+        case 0 ..< 30:
+            self.userStatusLbl.text = "\(minutes) min"
+            self.userIndicatorLbl.textColor = UIColor.green
+        case 30 ..< 90:
+            self.userStatusLbl.text = "\(minutes) min"
+            self.userIndicatorLbl.textColor = UIColor.yellow
+        case 90 ..< 120:
+            self.userStatusLbl.text = "1,5 time"
+            self.userIndicatorLbl.textColor = UIColor.orange
+        case 120 ..< 300:
+            self.userStatusLbl.text = "\(hours) timer"
+            self.userIndicatorLbl.textColor = UIColor.orange
+        case 300 ..< 1440:
+            self.userStatusLbl.text = "flere timer"
+            self.userIndicatorLbl.textColor = UIColor.orange
+        case 1440 ..< 2880:
+            self.userStatusLbl.text = "< 2 dager"
+            self.userIndicatorLbl.textColor = UIColor.red
+        default:
+            self.userStatusLbl.text = "dager siden"
+            self.userIndicatorLbl.textColor = UIColor.gray
+        }
+        print(minutes)
+    }
+    
+    var requestStatus: RequestStatus? {
+        didSet {
+            if let requestStatus = self.requestStatus {
+                self.requestStatusLbl.text = requestStatus.rawValue
+                returnRequestIndicator(status: requestStatus)
+            }
+        }
+    }
+    
+    var userStatus: Date? {
+        didSet {
+            if let userStatus = self.userStatus {
+                self.userStatusLbl.text = userStatus.description
+                self.returnUserIndicator(from: userStatus)
+            }
+        }
+    }
+    
     var timeFrom: Date? {
         didSet {
             if let timeFrom = self.timeFrom {
                 self.timeFromLabel.text = returnDayTimeString(from: timeFrom)
             }
-            
         }
     }
     
@@ -39,11 +116,11 @@ class RequestUserCell: UITableViewCell {
             }
         }
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.amount.layer.cornerRadius = 8.0
+        self.amount.layer.cornerRadius = self.amount.frame.height / 2
     }
     
     // MARK: - CATransform3DRotate
@@ -122,22 +199,28 @@ class RequestUserCell: UITableViewCell {
                     
                     self.nameLabel.text = request.firstName
                     self.messageLabel.text = request.message
-                    // self.timeFromLabel.text = request.timeFrom.description
-                    self.timeFrom = stringToDateTime(request.timeFrom.description)
-                    // self.timeToLabel.text = request.timeTo.description
-                    self.timeTo = stringToDateTime(request.timeTo.description)
-                    self.amount.text = " \(request.amount.description) kr  "
+                    
+                    self.requestStatus = requestStatusString(request: request.requestStatus)
+                    self.userStatus = request.userStatus
+                    
+                    print(request.userStatus.description)
+                    
+                    self.timeFrom = stringToDateTime(request.timeFrom)
+                    self.timeTo = stringToDateTime(request.timeTo)
+                    self.amount.text = " \(request.amount) kr  "
                 })
                 self.cellImageLoaded = true
             })
         } else {
             self.nameLabel.text = request.firstName
             self.messageLabel.text = request.message
-            // self.timeFromLabel.text = request.timeFrom.description
-            self.timeFrom = stringToDateTime(request.timeFrom.description)
-            // self.timeToLabel.text = request.timeTo.description
-            self.timeTo = stringToDateTime(request.timeTo.description)
-            self.amount.text = " \(request.amount.description) kr  "
+            
+            self.requestStatus = requestStatusString(request: request.requestStatus)
+            self.userStatus = request.userStatus
+            
+            self.timeFrom = stringToDateTime(request.timeFrom)
+            self.timeTo = stringToDateTime(request.timeTo)
+            self.amount.text = " \(request.amount) kr  "
         }
     }
 }

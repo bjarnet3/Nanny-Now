@@ -37,6 +37,7 @@ struct Request {
     
     private(set) public var _imageName: String?
     private(set) public var _firstName: String?
+    private(set) public var _userStatus: Date?
     
     private(set) public var _highlighted: Bool = false
     
@@ -94,6 +95,16 @@ struct Request {
         }
         set {
             self._imageName = newValue
+        }
+    }
+    
+    var userStatus: Date {
+        get {
+            guard let userDate = _userStatus else { return _timeRequested }
+            return userDate
+        }
+        set {
+            self._userStatus = newValue
         }
     }
     

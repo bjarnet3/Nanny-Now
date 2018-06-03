@@ -19,18 +19,22 @@ import SwiftKeychainWrapper
 let DB_BASE = Database.database().reference()
 let STORAGE_BASE = Storage.storage().reference()
 
-enum Service {
+public enum Service {
     case Facebook
     case Firebase
     case All
 }
 
-enum State: String {
+public enum State: String {
     case active = "active"
     case inactive = "inactive"
     case foreground = "foreground"
     case background = "background"
     case terminate = "terminate"
+}
+
+public func returnState(state: String) -> State? {
+    return State(rawValue: state)
 }
 
 /// DataService Singleton / Database and Datastorage References to Firebase
@@ -124,6 +128,21 @@ class DataService {
         REF_NANNIES_ACTIVE.child(uid).updateChildValues(userData)
     }
     
+    func updateUserStatus(with state: State) {
+        if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            let time = returnTimeStamp()
+            let state: [String: String] = [
+                "state": state.rawValue,
+                "status" : time
+            ]
+            let publicREF = REF_USERS_PUBLIC
+            publicREF.child(userID).child("status").updateChildValues(state)
+            
+            let privateREF = REF_USERS_PRIVATE
+            privateREF.child(userID).updateChildValues(state)
+        }
+    }
+    
     func removeUserChildValues(uid: String) {
         REF_USERS_PRIVATE.child(uid).removeValue()
     }
@@ -143,18 +162,7 @@ class DataService {
             printDebug(object: "clearBadge couldn't get userID from KeychainWrapper")
         }
     }
-    
-    func updateStatusOnUser(with state: State) {
-        if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
-            let status: [String: String] = [
-                "state": state.rawValue,
-                "time" : returnTimeStamp()
-            ]
-            let publicREF = DataService.instance.REF_USERS_PUBLIC.child(userID).child("status")
-            publicREF.updateChildValues(status)
-        }
-    }
-    
+
     func updateLocationAndPostcodeOnUser(from location: CLLocation, userID: String) {
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(location, completionHandler: { placemarks, error in

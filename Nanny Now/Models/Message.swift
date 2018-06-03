@@ -19,6 +19,7 @@ struct Message {
     private(set) public var _fromUID: String
     
     private(set) public var _imageURL: String?
+    private(set) public var _userStatus: Date?
     
     // Service information (Request)
     // -----------------------------
@@ -28,6 +29,16 @@ struct Message {
     
     private(set) public var _requestCategory: NotificationCategory = .messageRequest
     private(set) public var _highlighted: Bool = false
+    
+    var userStatus: Date {
+        get {
+            guard let userDate = _userStatus else { return stringToDateTime(_messageTime) }
+            return userDate
+        }
+        set {
+            self._userStatus = newValue
+        }
+    }
     
     mutating func setMessageID() {
         self._messageID = DataService.instance.REF_MESSAGES.childByAutoId().key

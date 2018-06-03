@@ -15,10 +15,66 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
+    @IBOutlet weak var userStatusLbl: UILabel!
+    @IBOutlet weak var userIndicatorLbl: UILabel!
+
     var cellImageLoaded = false
+    
+    func returnUserIndicator(from date: Date) {
+        let now = Date()
+        let timeSince = now.timeIntervalSince(date)
+        
+        let minutes = Int(timeSince) / 60
+        let hours = minutes % 60
+        // let days = hours % 24
+        
+        switch minutes {
+        case 0 ..< 30:
+            self.userStatusLbl.text = " \(minutes) min "
+            self.userIndicatorLbl.textColor = UIColor.green
+        case 30 ..< 90:
+            self.userStatusLbl.text = " \(minutes) min siden "
+            self.userIndicatorLbl.textColor = UIColor.yellow
+        case 90 ..< 120:
+            self.userStatusLbl.text = " 1,5 time siden "
+            self.userIndicatorLbl.textColor = UIColor.orange
+        case 120 ..< 300:
+            self.userStatusLbl.text = " \(hours) timer siden "
+            self.userIndicatorLbl.textColor = UIColor.orange
+        case 300 ..< 1440:
+            self.userStatusLbl.text = " flere timer siden "
+            self.userIndicatorLbl.textColor = UIColor.orange
+        case 1440 ..< 2880:
+            self.userStatusLbl.text = " < 2 dager side "
+            self.userIndicatorLbl.textColor = UIColor.red
+        default:
+            self.userStatusLbl.text = " flere dager siden "
+            self.userIndicatorLbl.textColor = UIColor.gray
+        }
+        print(minutes)
+    }
+    
+    var time: Date? {
+        didSet {
+            if let time = self.time {
+                self.timeLabel.text = returnDayTimeString(from: time)
+            }
+        }
+    }
+    
+    var userStatus: Date? {
+        didSet {
+            if let userStatus = self.userStatus {
+                self.returnUserIndicator(from: userStatus)
+            }
+        }
+    }
+
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        self.userStatusLbl.layer.cornerRadius = self.userStatusLbl.frame.height / 2
     }
     
     public enum Direction {
@@ -49,12 +105,14 @@ class MessageTableViewCell: UITableViewCell {
                         
                         self.nameLabel.text = user.firstName
                         self.messageLabel.text = message._message
-                        self.timeLabel.text = message._messageTime
+                        self.time = stringToDateTime(message._messageTime)
+                        self.userStatus = message.userStatus
                     })
                 } else {
                     self.nameLabel.text = user.firstName
                     self.messageLabel.text = message._message
-                    self.timeLabel.text = message._messageTime
+                    self.time = stringToDateTime(message._messageTime)
+                    self.userStatus = message.userStatus
                 }
                 self.cellImageLoaded = true
             })
