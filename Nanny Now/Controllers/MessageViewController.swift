@@ -31,7 +31,7 @@ class MessageViewController: UIViewController {
     var totalMessages: Int = 0
     
     var lastRowSelected: IndexPath?
-    var heightForRow:[CGFloat] = [50,180,80]
+    var heightForRow:[CGFloat] = [50,160,80]
     
     var animatorIsBusy = false
     var introAnimationLoaded = false

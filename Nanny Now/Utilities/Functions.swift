@@ -329,6 +329,7 @@ public func returnDayTimeString(from date: Date) -> String {
     let yesterday = formatter.string(from: yesterdayDate)
     
     
+    /*
     var tidsPeriode = ""
     
     // https://forum.kvinneguiden.no/topic/359451-formiddag-ettermiddag/
@@ -346,6 +347,7 @@ public func returnDayTimeString(from date: Date) -> String {
     default:
         tidsPeriode = "kveld"
     }
+    */
     
     switch weekday {
     case 1:
@@ -372,7 +374,7 @@ public func returnDayTimeString(from date: Date) -> String {
     if from == today {
         returnString = "i \(tidspunkt)"
     } else if from == tomorrow {
-        returnString = "i morgen \(tidsPeriode)"
+        returnString =  "i morgen" // "i morgen \(tidsPeriode)"
     } else if from == yesterday {
         returnString = "i går"
     } else {

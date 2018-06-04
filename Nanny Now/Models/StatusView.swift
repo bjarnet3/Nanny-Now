@@ -18,7 +18,7 @@ class StatusView: UIView {
     override func layoutSubviews() {
         self.layer.cornerRadius = self.layer.frame.height / 2
         self.layer.borderColor = PINK_TABBAR_SELECTED.cgColor
-        self.layer.borderWidth = 1.2
+        self.layer.borderWidth = 1.05
         
         self.layer.addShadow()
     }
@@ -26,11 +26,11 @@ class StatusView: UIView {
     func setImage(image: UIImage) {
         self.imageView = UIImageView(frame: bounds)
         self.imageView.image = image
-        self.imageView.layer.cornerRadius = self.imageView.frame.height / 2
-        self.imageView.transform = CGAffineTransform(scaleX: 0.94, y: 0.94)
+        self.imageView.layer.cornerRadius = self.imageView.layer.frame.height / 2
+        self.imageView.transform = CGAffineTransform(scaleX: 0.99, y: 0.99)
         self.imageView.clipsToBounds = true
-        self.imageView.layer.borderWidth = 1.0
-        self.imageView.layer.borderColor = UIColor.gray.cgColor
+        self.imageView.layer.borderWidth = 1.05
+        self.imageView.layer.borderColor = UIColor.lightGray.cgColor
         
         self.addSubview(self.imageView)
         setNeedsDisplay()
