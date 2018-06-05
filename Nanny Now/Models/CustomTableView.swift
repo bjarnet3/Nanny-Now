@@ -21,7 +21,6 @@ class CustomTableView: UITableView {
         self.layer.cornerRadius = 22.0
         self.layer.borderWidth = 0.29
         self.layer.borderColor = UIColor.lightGray.cgColor
-        
     }
     
 }

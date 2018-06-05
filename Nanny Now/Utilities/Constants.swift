@@ -25,6 +25,8 @@ let WHITE_ALPHA = hexStringToUIColor("#FFFFFF", 0.3)
 // Nanny Colors
 let PINK_SOLID = hexStringToUIColor("#cc00cc")
 let PINK_DARK_SOLID = hexStringToUIColor("#660033")
+let PINK_DARK_SHARP = hexStringToUIColor("#FF3191") // FF3191
+
 let ORANGE_SOLID = hexStringToUIColor("#cc3300")
 let RED_SOLID = hexStringToUIColor("#cc0000")
 
@@ -37,6 +39,8 @@ let PINK_TABBAR_UNSELECTED = hexStringToUIColor("#FF85FF")
 let LIGHT_GREY = hexStringToUIColor("#EBEBEB")
 let LIGHT_PINK = hexStringToUIColor("#FF72C8")
 let LIGHT_BLUE = hexStringToUIColor("#0096FF")
+
+let AQUA_BLUE = hexStringToUIColor("#0096FF")
 
 let STRAWBERRY = hexStringToUIColor("#FF2F92")
 let SILVER     = hexStringToUIColor("#D6D6D6")

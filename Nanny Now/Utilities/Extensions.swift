@@ -19,6 +19,23 @@ public extension String {
     var isEmptyStr:Bool{
         return self.trimmingCharacters(in: NSCharacterSet.whitespaces).isEmpty
     }
+    
+    // https://stackoverflow.com/questions/45373702/swift-3-uitextview-total-line-counter
+    func linesFor(font : UIFont, width : CGFloat) -> Int {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        // let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [kCTFontAttributeName as NSAttributedStringKey: font], context: nil)
+        return Int(boundingBox.height/font.lineHeight)
+    }
+    
+    // https://code.i-harness.com/en/q/1d0a302
+    func widthFor(font: UIFont) -> CGFloat {
+        let txtField = UITextField(frame: .zero)
+        txtField.font = font
+        txtField.text = self
+        txtField.sizeToFit()
+        return txtField.frame.size.width
+    }
 }
 
 /// The size of this picture. It can be one of the following values: small, normal, large, album, square.

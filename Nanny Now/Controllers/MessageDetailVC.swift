@@ -16,6 +16,10 @@ private extension Selector {
     static let keyboardWillDisappear = #selector(MessageDetailVC.keyboardWillDisappear(notification:))
 }
 
+public enum ActionType : String {
+    case start = " START ▲", avbryt = "AVBRYT ▼", send = "SEND ▶︎", setup = "SETUP"
+}
+
 class MessageDetailVC: UIViewController {
     
     // MARK: - IBOutlet: Connection to Storyboard
@@ -25,7 +29,10 @@ class MessageDetailVC: UIViewController {
     @IBOutlet weak var sendButton: UIButton!
     
     @IBOutlet weak var progressView: UIProgressView!
-    @IBOutlet weak var bottomLayoutTextField: NSLayoutConstraint!
+    @IBOutlet weak var textFieldBackView: FrostyView!
+    
+    @IBOutlet weak var tableViewBottom: NSLayoutConstraint!
+    @IBOutlet weak var textFieldBottom: NSLayoutConstraint!
     
     // MARK: - Properties: Array & Varables
     // -------------------------------------
@@ -38,16 +45,19 @@ class MessageDetailVC: UIViewController {
     // MARK: - IBAction: Methods connected to UI
     // ----------------------------------------
     @IBAction func backButton(_ sender: Any) {
+        self.view.endEditing(true)
         self.progressView.setProgress(0.0, animated: false)
         self.progressView.alpha = 1.0
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func sendButton(_ sender: UIButton) {
-        if sender.titleLabel?.text == "SEND" {
+        if sender.titleLabel?.text == "SEND ▶︎" {
             sendMessage()
-        } else {
+        } else if sender.titleLabel?.text == "AVBRYT ▼" {
             self.view.endEditing(true)
+        } else if sender.titleLabel?.text == " START ▲" {
+            textField.becomeFirstResponder()
         }
     }
     
@@ -65,9 +75,16 @@ class MessageDetailVC: UIViewController {
     
     @IBAction func textFieldValue(_ sender: UITextField) {
         if (sender.text?.isEmpty)! {
-            self.sendButton.setTitle("AVBRYT", for: .normal)
+            performAction(for: .avbryt)
+            // self.sendButton.setTitle("AVBRYT ▼", for: .normal)
+            // self.sendButton.setTitleColor(WHITE_SOLID, for: .normal)
+            // self.sendButton.backgroundColor = PINK_DARK_SHARP
         } else {
-            self.sendButton.setTitle("SEND", for: .normal)
+            performAction(for: .send)
+            
+            // self.sendButton.setTitle("SEND ▶︎", for: .normal)
+            // self.sendButton.setTitleColor(WHITE_SOLID, for: .normal)
+            // self.sendButton.backgroundColor = AQUA_BLUE
         }
     }
     
@@ -97,8 +114,61 @@ class MessageDetailVC: UIViewController {
             self.textField.text = ""
             // Dismiss Keyboard
             self.textField.endEditing(true)
-            // Set Title To AVBRYT
-            self.sendButton.setTitle("AVBRYT", for: .normal)
+            // Set Title To START
+            performAction(for: .start)
+        }
+    }
+    
+    private func performAction(for actionType: ActionType, onlyButton: Bool = false) {
+        switch actionType {
+        case .start:
+            self.sendButton.setTitle(" START ▲", for: .normal)
+            self.sendButton.setTitleColor(PINK_DARK_SHARP, for: .normal)
+            self.sendButton.backgroundColor = WHITE_SOLID
+            
+            if !onlyButton {
+                self.textField.textColor = WHITE_ALPHA
+                self.textField.tintColor = WHITE_SOLID
+                self.textField.backgroundColor = PINK_DARK_SHARP
+                
+                self.textField.layer.borderColor = WHITE_SOLID.cgColor
+                self.textField.layer.borderWidth = 1.5
+                
+                if self.textField.text == "" {
+                    self.textField.text = ". . . TAP TAP . . . "
+                }
+            }
+        case .send:
+            self.sendButton.setTitle("SEND ▶︎", for: .normal)
+            self.sendButton.setTitleColor(WHITE_SOLID, for: .normal)
+            self.sendButton.backgroundColor = AQUA_BLUE
+        case .avbryt:
+            self.sendButton.setTitle("AVBRYT ▼", for: .normal)
+            self.sendButton.setTitleColor(WHITE_SOLID, for: .normal)
+            self.sendButton.backgroundColor = PINK_DARK_SHARP
+            
+            if !onlyButton {
+                self.textField.textColor = PINK_DARK_SHARP
+                self.textField.tintColor = PINK_DARK_SHARP
+                self.textField.backgroundColor = WHITE_ALPHA
+                
+                self.textField.layer.borderColor = LIGHT_GREY.cgColor
+                self.textField.layer.borderWidth = 0.8
+                
+                if self.textField.text == ". . . TAP TAP . . . " {
+                    self.textField.text = nil
+                }
+            }
+        case .setup:
+            self.sendButton.layer.borderWidth = 1.5
+            self.sendButton.layer.borderColor = LIGHT_GREY.cgColor
+            
+            if !onlyButton {
+                self.textField.layer.cornerRadius = textField.layer.frame.height / 2
+                self.textField.layer.masksToBounds = true
+            }
+            performAction(for: .start, onlyButton: onlyButton)
+            
         }
     }
     
@@ -111,8 +181,10 @@ class MessageDetailVC: UIViewController {
     }
     
     private func addMessage(messageText: String) {
+        setProgress(progress: 0.0, animated: false, alpha: 1.0)
         if let remote = self.remoteUser {
             if let user = self.user {
+                setProgress(progress: 0.5, animated: true, alpha: 1.0)
                 
                 var message = Message(from: user, to: remote, message: messageText)
                 message.setCategory(category: .messageConfirm)
@@ -130,15 +202,91 @@ class MessageDetailVC: UIViewController {
     @objc fileprivate func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.45, delay: 0.045, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
-                self.bottomLayoutTextField.constant = keyboardSize.height
+                
+                print(keyboardSize.height)
+                
+                self.tableViewBottom.constant = keyboardSize.height
+                self.textFieldBottom.constant = keyboardSize.height
+                
+                // self.textFieldBackView.frame = self.textFieldBackView.frame.offsetBy(dx: 0, dy: -keyboardSize.height)
+                // self.tableView.frame = self.tableView.frame.offsetBy(dx: 0, dy: -keyboardSize.height)
+                // size = CGSize(width: self.tableView.frame.width, height: self.tableView.frame.height - keyboardSize.height)
+                
+                self.performAction(for: .avbryt)
+                
+                /*
+                self.textField.textColor = PINK_DARK_SHARP
+                self.textField.backgroundColor = WHITE_ALPHA
+                self.textField.tintColor = PINK_DARK_SHARP
+                self.textField.layer.borderColor = UIColor.lightGray.cgColor
+                self.textField.layer.borderWidth = 0.8
+                
+                if self.textField.text == ". . . TAP TAP . . . " {
+                    self.textField.text = nil
+                }
+                
+                self.sendButton.setTitle("AVBRYT ▼", for: .normal)
+                self.sendButton.setTitleColor(WHITE_SOLID, for: .normal)
+                self.sendButton.backgroundColor = PINK_DARK_SHARP
+                */
+                
+                hapticButton(.selection)
             })
         }
     }
     
     @objc fileprivate func keyboardWillDisappear(notification: NSNotification) {
-        UIView.animate(withDuration: 0.45, delay: 0.045, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
-            self.bottomLayoutTextField.constant = 0.0
-        })
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.45, delay: 0.045, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseOut, animations: {
+                // self.bottomLayoutTextField.constant = 0.0
+                print(keyboardSize.height)
+                
+                // let mainBounds = UIScreen.main.bounds
+                // let mainBar: CGFloat = 20.0
+                
+                self.tableViewBottom.constant = 0.0
+                self.textFieldBottom.constant = 0.0
+                
+                self.performAction(for: .start)
+                
+                // self.textFieldBackView.frame.origin.y = mainBounds.size.height - self.textFieldBackView.frame.height  // 612.0
+                // self.tableView.frame = CGRect(x: mainBounds.origin.x, y: 20.0, width: mainBounds.width, height: mainBounds.height - mainBar)
+                    // CGRect(x: mainBounds.origin.x, y: 20.0, width: mainBounds.width, height: mainBounds.height - mainBar)
+                
+                /*
+                self.textField.textColor = WHITE_ALPHA
+                self.textField.backgroundColor = PINK_DARK_SHARP
+                self.textField.tintColor = WHITE_SOLID
+                self.textField.layer.borderColor = WHITE_SOLID.cgColor
+                self.textField.layer.borderWidth = 2.0
+                
+                if self.textField.text == "" {
+                    self.textField.text = ". . . TAP TAP . . . "
+                }
+                
+                self.sendButton.setTitle(" START ▲", for: .normal)
+                self.sendButton.setTitleColor(PINK_DARK_SHARP, for: .normal)
+                self.sendButton.backgroundColor = WHITE_SOLID
+                */
+                
+                
+                hapticButton(.light)
+            })
+        }
+    }
+    
+    private func setProgress(progress: Float = 1.0, animated: Bool = true, alpha: CGFloat = 1.0) {
+        if let progressView = self.progressView {
+            if animated {
+                progressView.setProgress(progress, animated: animated)
+                UIView.animate(withDuration: 0.60, delay: 0.75, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
+                    progressView.alpha = alpha
+                })
+            } else {
+                progressView.setProgress(progress, animated: animated)
+                progressView.alpha = alpha
+            }
+        }
     }
     
     // MARK: - Observer, Firebase Database Functions
@@ -215,7 +363,9 @@ class MessageDetailVC: UIViewController {
         self.messages.append(message)
         self.messages.sort(by: { $0._messageTime > $1._messageTime })
         self.tableView.reloadData()
+        self.setProgress(progress: 1.0, animated: true, alpha: 0.0)
     }
+    
 }
 
 // MARK: - ViewDidLoad, ViewWillLoad etc...
@@ -235,6 +385,8 @@ extension MessageDetailVC {
         
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
         // tableView.transform = CGAffineTransform(rotationAngle: -CGFloat.pi)
+        
+        performAction(for: .setup)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -246,15 +398,10 @@ extension MessageDetailVC {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
-        let progress = self.progressView
-        progress?.setProgress(0.0, animated: false)
-        progress?.alpha = 1.0
-        
-        animateCellsWithProgress(in: self.tableView, true, progress: progress!, completion: {
-            print("complete home")
+        setProgress(progress: 0.0, animated: false, alpha: 1.0)
+        animateCellsWithProgress(in: self.tableView, true, progress: self.progressView, completion: {
+            print("animateCellsWithProgress completion")
         })
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -269,7 +416,20 @@ extension MessageDetailVC {
 extension MessageDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 55.0
+        let mainBoundsWidth = self.view.frame.width - 106
+        // let characterCount = self.messages[indexPath.row]._message.count
+        
+        let firstRow: CGFloat = 54.5 // 51.0 // UIFont(name: "Avenir-Book", size: 12.0)
+        let extraRowHeight: CGFloat = 19.75 // 18.0 // UIFont(name: "Avenir-Book", size: 12.0)
+        // let charactersEachRow = 55
+        // let extraRowCount = characterCount / charactersEachRow
+        // let rowHeight: CGFloat = firstRow + CGFloat(Int(extraRowHeight) * extraRowCount)
+        let messageText = self.messages[indexPath.row]._message
+        let messageTextRows = messageText.linesFor(font: UIFont(name: "Avenir-Book", size: 14.0)!, width: mainBoundsWidth)
+        
+        let rowHeight: CGFloat = firstRow - extraRowHeight + CGFloat(Double(messageTextRows) * Double(extraRowHeight))
+        
+        return rowHeight // 55.0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

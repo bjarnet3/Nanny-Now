@@ -11,7 +11,8 @@ import UIKit
 class MessageDetailTableCell: UITableViewCell {
     
     @IBOutlet weak var profileImage: NannyImageView!
-    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var messageTextView: UITextView!
+    @IBOutlet weak var messageTextContraint: NSLayoutConstraint!
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -35,20 +36,37 @@ class MessageDetailTableCell: UITableViewCell {
     
     func setupView(with message: Message, to user: User, animated: Bool = false) {
         self.animateView(direction: .enter)
-        self.profileImage.loadImageUsingCacheWith(urlString: user.imageName, completion: {
-            if animated {
-                let random = Double(arc4random_uniform((UInt32(1000))) / 3000) + 250
-                UIView.animate(withDuration: 0.6, delay: random, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
-                    
-                    self.messageLabel.text = message._message
+        
+        if let font = messageTextView.font {
+            let mainBoundsWith = self.frame.width
+            
+            let messageText = message._message
+            let messageTextWidth = mainBoundsWith - 106.0
+            
+            let linesForText = messageText.linesFor(font: font, width: messageTextWidth)
+            let widthForText = messageText.widthFor(font: font)
+            
+            let constraintMin: CGFloat = 48.0
+            let constraintMax: CGFloat = mainBoundsWith - 75.0
+            
+            print("widthForText \(widthForText), linesForText \(linesForText)")
+            
+            self.messageTextContraint.constant = linesForText == 1 ? constraintMax - widthForText : constraintMin
+            
+            self.profileImage.loadImageUsingCacheWith(urlString: user.imageName, completion: {
+                if animated {
+                    let random = Double(arc4random_uniform((UInt32(1000))) / 3000) + 250
+                    UIView.animate(withDuration: 0.6, delay: random, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
+                        self.messageTextView.text = messageText
+                    })
                     self.animateView(direction: .exit)
-                })
-            } else {
-                self.messageLabel.text = message._message
-                self.animateView(direction: .exit)
-            }
-            print(user.imageName)
-        })
+                } else {
+                    self.messageTextView.text = messageText
+                    self.animateView(direction: .exit)
+                }
+                print(user.imageName)
+            })
+        }
     }
     
 }

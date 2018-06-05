@@ -32,17 +32,17 @@ class MessageTableViewCell: UITableViewCell {
         case 0 ..< 30:
             self.userStatusLbl.text = " \(minutes) min   "
             self.userIndicatorLbl.textColor = UIColor.green
-        case 30 ..< 90:
+        case 30 ..< 60:
             self.userStatusLbl.text = " \(minutes) min siden   "
             self.userIndicatorLbl.textColor = UIColor.yellow
-        case 90 ..< 120:
-            self.userStatusLbl.text = " 1,5 time siden   "
+        case 60 ..< 100:
+            self.userStatusLbl.text = " 1 time siden   "
             self.userIndicatorLbl.textColor = UIColor.orange
-        case 120 ..< 1440:
+        case 100 ..< 1440:
             self.userStatusLbl.text = " \(hours) timer siden   "
             self.userIndicatorLbl.textColor = UIColor.orange
         case 1440 ..< 2880:
-            self.userStatusLbl.text = " 1 døgn siden   "
+            self.userStatusLbl.text = " 1 dag siden   "
             self.userIndicatorLbl.textColor = UIColor.red
         default:
             self.userStatusLbl.text = " \(days) dager siden   "

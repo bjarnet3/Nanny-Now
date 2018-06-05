@@ -23,7 +23,7 @@ extension UIImageView {
     }
 }
 
-class ShaddowImageView : UIImageView {
+class ShadowImageView : UIImageView {
     var backLayer = CALayer()
     
     override func layoutSubviews() {
