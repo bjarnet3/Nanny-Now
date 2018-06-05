@@ -10,7 +10,15 @@ import UIKit
 
 class MessageDetailLineBreak: UITableViewCell {
     
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var dateTimeLabel: UILabel!
+    
+    var date: Date? {
+        didSet {
+            if let date = self.date {
+                self.dateTimeLabel.text = dateTimeToString(from: date)
+            }
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,7 +32,7 @@ class MessageDetailLineBreak: UITableViewCell {
     }
     
     func setupView(date: Date) {
-        self.dateLabel.text = dateTimeToString(date)
+        self.date = date
     }
 
 }

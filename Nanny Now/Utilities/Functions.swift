@@ -240,6 +240,34 @@ public func dateTimeToString(_ date: Date) -> String {
     return stringFromDateTime
 }
 
+public func timeToString(from date: Date) -> String {
+    let dateFormater = DateFormatter()
+    dateFormater.dateFormat = "HH:mm"
+    
+    let timeToString = dateFormater.string(from: date)
+    return timeToString
+}
+
+/**
+ - http://nsdateformatter.com/
+ 
+ - DateFormat = "E d MMMM h:mm"
+ - TimeZone = TimeZone(secondsFromGMT: 86400)
+ - Locale = Locale(identifier: "nb_NO")
+ 
+ - Returns: **E d MMMM h:mm** ex: (**tir. 5 juni 9:04**)
+ */
+public func dateTimeToString(from date: Date, with locale:String = "nb_NO") -> String {
+    let dateFormater = DateFormatter()
+
+    dateFormater.dateFormat = "E d MMMM h:mm"
+    dateFormater.timeZone = TimeZone(secondsFromGMT: 86400)
+    dateFormater.locale = Locale(identifier: locale)
+    
+    let dateTimeToString = dateFormater.string(from: date)
+    return dateTimeToString
+}
+
 /// This will be used when Nanny and Family Request are ready
 public func returnDayTimeString(from date: Date, day: Bool = true) -> String {
     let todayDate = Date()
