@@ -309,6 +309,7 @@ class MessageDetailVC: UIViewController {
             highlighted:  messageSnap["highlighted"] as? Bool ?? true)
         self.messages.append(message)
         self.messages.sort(by: { $0._messageTime > $1._messageTime })
+        
         self.tableView.reloadData()
         self.setProgress(progress: 1.0, animated: true, alpha: 0.0)
     }
@@ -362,6 +363,13 @@ extension MessageDetailVC {
 // ----------------------------------------
 extension MessageDetailVC: UITableViewDelegate, UITableViewDataSource {
     
+    func tableViewCellHasLabel(tableView: UITableView, indexPath: IndexPath) -> Bool {
+        let previousRow: Int? = indexPath.row != 0 ? indexPath.row - 1 : nil
+        let previousPost = previousRow == nil ? false : true
+        let previousMessage = previousPost == true ? messages[previousRow!].messageTime.timeIntervalSince(messages[indexPath.row].messageTime) > 3600 : false
+        return previousMessage
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let mainBoundsWidth = self.view.frame.width - 106
         // let characterCount = self.messages[indexPath.row]._message.count
@@ -369,6 +377,7 @@ extension MessageDetailVC: UITableViewDelegate, UITableViewDataSource {
         let firstRow: CGFloat = 54.5 // 51.0 // UIFont(name: "Avenir-Book", size: 12.0)
         let extraRowHeight: CGFloat = 19.75 // 18.0 // UIFont(name: "Avenir-Book", size: 12.0)
         
+        let addedRow: CGFloat = tableViewCellHasLabel(tableView: tableView, indexPath: indexPath) ? 20.0 : 0.0
         // let charactersEachRow = 55
         // let extraRowCount = characterCount / charactersEachRow
         // let rowHeight: CGFloat = firstRow + CGFloat(Int(extraRowHeight) * extraRowCount)
@@ -376,8 +385,7 @@ extension MessageDetailVC: UITableViewDelegate, UITableViewDataSource {
         let messageText = self.messages[indexPath.row]._message
         let messageTextRows = messageText.linesFor(font: UIFont(name: "Avenir-Book", size: 14.0)!, width: mainBoundsWidth)
         
-        let rowHeight: CGFloat = firstRow - extraRowHeight + CGFloat(Double(messageTextRows) * Double(extraRowHeight))
-        
+        let rowHeight: CGFloat = firstRow - extraRowHeight + CGFloat(Double(messageTextRows) * Double(extraRowHeight)) + addedRow
         return rowHeight // 55.0
     }
     
@@ -386,16 +394,30 @@ extension MessageDetailVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        /*
+        let previousRow: Int? = indexPath.row != 0 ? indexPath.row - 1 : nil
+        
+        let previousPost = previousRow == nil ? false : true
+        let previousMessage = previousPost == true ? messages[previousRow!].messageTime.timeIntervalSince(messages[indexPath.row].messageTime) > 3600 : false
+        */
+        
+        let hasLabel = tableViewCellHasLabel(tableView: tableView, indexPath: indexPath)
+        
+        let leftIdentifier = hasLabel ? "MessageDetailLeftLabelCell" : "MessageDetailLeftCell"
+        let rightIdentifier = hasLabel ? "MessageDetailRightLabelCell" : "MessageDetailRightCell"
+        
         if let user = self.user, messages[indexPath.row]._fromUID == user.userUID {
-            if let leftCell = tableView.dequeueReusableCell(withIdentifier: "MessageDetailLeftCell", for: indexPath) as? MessageDetailTableCell {
-                leftCell.setupView(with: self.messages[indexPath.row], to: user)
-                // leftCell.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+            
+            if let leftCell = tableView.dequeueReusableCell(withIdentifier: leftIdentifier, for: indexPath) as? MessageDetailTableCell {
+                leftCell.setupView(with: self.messages[indexPath.row], to: user, hasDateTime: hasLabel)
                 return leftCell
+                
             }
         } else if let remoteUser = self.remoteUser {
-            if let rightCell = tableView.dequeueReusableCell(withIdentifier: "MessageDetailRightCell", for: indexPath) as? MessageDetailTableCell {
-                rightCell.setupView(with: self.messages[indexPath.row], to: remoteUser)
-                // rightCell.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+            
+            if let rightCell = tableView.dequeueReusableCell(withIdentifier: rightIdentifier, for: indexPath) as? MessageDetailTableCell {
+                rightCell.setupView(with: self.messages[indexPath.row], to: remoteUser, hasDateTime: hasLabel)
                 return rightCell
             }
         }

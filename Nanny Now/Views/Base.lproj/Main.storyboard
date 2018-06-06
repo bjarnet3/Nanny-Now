@@ -2332,30 +2332,163 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                             <outlet property="profileImage" destination="vys-q4-s52" id="5WE-C5-R3H"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageDetailLeftLabelCell" rowHeight="75" id="8Rl-Pb-Yyt" customClass="MessageDetailTableCell" customModule="Nanny_Now" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="256" width="414" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8Rl-Pb-Yyt" id="klj-GY-Cb0">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nanny-profil" translatesAutoresizingMaskIntoConstraints="NO" id="Zqh-QI-7c4" customClass="NannyImageView" customModule="Nanny_Now" customModuleProvider="target">
+                                                    <rect key="frame" x="10" y="35" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="4vb-8C-qqS"/>
+                                                        <constraint firstAttribute="height" constant="24" id="STc-va-wlT"/>
+                                                        <constraint firstAttribute="width" secondItem="Zqh-QI-7c4" secondAttribute="height" multiplier="1:1" id="ZUF-Iz-tUH"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RLD-6t-fHB" customClass="CustomView" customModule="Nanny_Now" customModuleProvider="target">
+                                                    <rect key="frame" x="42" y="30" width="324" height="35"/>
+                                                    <subviews>
+                                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Halloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!!" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WjL-Sm-5Ye">
+                                                            <rect key="frame" x="8" y="0.0" width="308" height="35"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="textColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="1" green="0.19215686269999999" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="WjL-Sm-5Ye" firstAttribute="leading" secondItem="RLD-6t-fHB" secondAttribute="leading" constant="8" id="6cD-bi-I2J"/>
+                                                        <constraint firstItem="WjL-Sm-5Ye" firstAttribute="top" secondItem="RLD-6t-fHB" secondAttribute="top" id="6ep-Kb-bMl"/>
+                                                        <constraint firstAttribute="trailing" secondItem="WjL-Sm-5Ye" secondAttribute="trailing" constant="8" id="baJ-Kv-i2P"/>
+                                                        <constraint firstAttribute="bottom" secondItem="WjL-Sm-5Ye" secondAttribute="bottom" id="hD3-hF-CJv"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fre.03.juni  22:53" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tg4-1B-yQH">
+                                                    <rect key="frame" x="40" y="7" width="77" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="16" id="wcu-TF-eDC"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="10"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="RLD-6t-fHB" firstAttribute="top" secondItem="Tg4-1B-yQH" secondAttribute="bottom" constant="7" id="1eP-vo-vQU"/>
+                                                <constraint firstAttribute="trailing" secondItem="RLD-6t-fHB" secondAttribute="trailing" constant="48" id="30Y-Kj-G8k"/>
+                                                <constraint firstItem="RLD-6t-fHB" firstAttribute="top" secondItem="klj-GY-Cb0" secondAttribute="top" constant="30" id="4UZ-5m-PP2"/>
+                                                <constraint firstItem="Tg4-1B-yQH" firstAttribute="top" secondItem="klj-GY-Cb0" secondAttribute="top" constant="7" id="CSm-6N-opx"/>
+                                                <constraint firstItem="RLD-6t-fHB" firstAttribute="leading" secondItem="Zqh-QI-7c4" secondAttribute="trailing" constant="8" id="JyV-dn-0kJ"/>
+                                                <constraint firstItem="Tg4-1B-yQH" firstAttribute="leading" secondItem="klj-GY-Cb0" secondAttribute="leading" constant="40" id="Vrd-vG-Nyf"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Tg4-1B-yQH" secondAttribute="trailing" id="rWg-eG-uCe"/>
+                                                <constraint firstAttribute="bottom" secondItem="RLD-6t-fHB" secondAttribute="bottom" constant="10" id="w7V-dm-10Q"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="Zqh-QI-7c4" firstAttribute="leading" secondItem="8Rl-Pb-Yyt" secondAttribute="leading" constant="10" id="XBA-0p-i1j"/>
+                                            <constraint firstItem="Zqh-QI-7c4" firstAttribute="top" secondItem="8Rl-Pb-Yyt" secondAttribute="top" constant="35" id="fRJ-x6-x6a"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Zqh-QI-7c4" secondAttribute="bottom" constant="4" id="q5s-zK-YLp"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="Tg4-1B-yQH" id="AP4-cI-n5I"/>
+                                            <outlet property="messageTextContraint" destination="30Y-Kj-G8k" id="zlb-pi-7Vg"/>
+                                            <outlet property="messageTextView" destination="WjL-Sm-5Ye" id="Icm-p2-bx7"/>
+                                            <outlet property="profileImage" destination="Zqh-QI-7c4" id="wfA-AD-z22"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageDetailRightLabelCell" rowHeight="173" id="AST-cy-XFO" customClass="MessageDetailTableCell" customModule="Nanny_Now" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="331" width="414" height="173"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AST-cy-XFO" id="DN5-UE-rXS">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="173"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LhT-OF-15D" customClass="CustomView" customModule="Nanny_Now" customModuleProvider="target">
+                                                    <rect key="frame" x="48" y="30" width="324" height="133"/>
+                                                    <subviews>
+                                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="right" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wk3-Bs-Lpd">
+                                                            <rect key="frame" x="8" y="0.0" width="308" height="133"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <mutableString key="text">Halloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibility</mutableString>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="Wk3-Bs-Lpd" firstAttribute="top" secondItem="LhT-OF-15D" secondAttribute="top" id="6ve-pV-Yke"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Wk3-Bs-Lpd" secondAttribute="bottom" id="KXR-zd-GWf"/>
+                                                        <constraint firstItem="Wk3-Bs-Lpd" firstAttribute="leading" secondItem="LhT-OF-15D" secondAttribute="leading" constant="8" id="iJH-a0-Dl2"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Wk3-Bs-Lpd" secondAttribute="trailing" constant="8" id="kFE-MO-Zxo"/>
+                                                    </constraints>
+                                                </view>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nanny-profil" translatesAutoresizingMaskIntoConstraints="NO" id="s1y-Qd-OKn" customClass="NannyImageView" customModule="Nanny_Now" customModuleProvider="target">
+                                                    <rect key="frame" x="380" y="35" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="s1y-Qd-OKn" secondAttribute="height" multiplier="1:1" id="2on-7f-1iM"/>
+                                                        <constraint firstAttribute="height" constant="24" id="c12-aH-coa"/>
+                                                        <constraint firstAttribute="width" constant="24" id="yH2-hJ-Ud7"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="søn.10.juni  18:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xt2-jy-6D3">
+                                                    <rect key="frame" x="293" y="7" width="81" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="16" id="wFP-a0-8Fr"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="10"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="LhT-OF-15D" firstAttribute="leading" secondItem="DN5-UE-rXS" secondAttribute="leading" constant="48" id="36u-Xy-TC3"/>
+                                                <constraint firstAttribute="trailing" secondItem="xt2-jy-6D3" secondAttribute="trailing" constant="40" id="5xT-gs-SCJ"/>
+                                                <constraint firstItem="s1y-Qd-OKn" firstAttribute="leading" secondItem="LhT-OF-15D" secondAttribute="trailing" constant="8" id="HJu-uH-Ane"/>
+                                                <constraint firstItem="LhT-OF-15D" firstAttribute="top" secondItem="DN5-UE-rXS" secondAttribute="top" constant="30" id="ICv-tN-DcQ"/>
+                                                <constraint firstAttribute="bottom" secondItem="LhT-OF-15D" secondAttribute="bottom" constant="10" id="KEd-84-3Sh"/>
+                                                <constraint firstAttribute="trailing" secondItem="s1y-Qd-OKn" secondAttribute="trailing" constant="10" id="ex1-TD-rIp"/>
+                                                <constraint firstItem="Wk3-Bs-Lpd" firstAttribute="top" secondItem="xt2-jy-6D3" secondAttribute="bottom" constant="7" id="fFO-lK-0ZV"/>
+                                                <constraint firstItem="xt2-jy-6D3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DN5-UE-rXS" secondAttribute="leading" id="hMv-lA-igi"/>
+                                                <constraint firstItem="xt2-jy-6D3" firstAttribute="top" secondItem="DN5-UE-rXS" secondAttribute="top" constant="7" id="klr-58-3M3"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="s1y-Qd-OKn" secondAttribute="bottom" constant="4" id="zBD-bE-xIl"/>
+                                            <constraint firstItem="s1y-Qd-OKn" firstAttribute="top" secondItem="AST-cy-XFO" secondAttribute="top" constant="35" id="zXX-Ck-SA7"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="xt2-jy-6D3" id="dMA-RN-sL7"/>
+                                            <outlet property="messageTextContraint" destination="36u-Xy-TC3" id="WBf-3w-sGp"/>
+                                            <outlet property="messageTextView" destination="Wk3-Bs-Lpd" id="oKw-OJ-9IU"/>
+                                            <outlet property="profileImage" destination="s1y-Qd-OKn" id="U0p-3S-0uT"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageDetailLeftLineBreak" focusStyle="custom" rowHeight="18" id="Bd4-ef-f9Q" userLabel="MessageDetailLeftLineBreak" customClass="MessageDetailLineBreak" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="256" width="414" height="18"/>
+                                        <rect key="frame" x="0.0" y="504" width="414" height="18"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bd4-ef-f9Q" id="lXV-OQ-CAE">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="18"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="fre.03.juni" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tg4-1B-yQH">
-                                                    <rect key="frame" x="49" y="4" width="120" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="fre.03.juni 22:53" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4rI-dX-3Di">
+                                                    <rect key="frame" x="35" y="2" width="120" height="14"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="10"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="10"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <connections>
-                                            <outlet property="dateTimeLabel" destination="Tg4-1B-yQH" id="4VY-2N-mbm"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageDetailRightLineBreak" focusStyle="custom" rowHeight="18" id="kDJ-Lc-144" userLabel="MessageDetailRightLineBreak" customClass="MessageDetailLineBreak" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="274" width="414" height="18"/>
+                                        <rect key="frame" x="0.0" y="522" width="414" height="18"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kDJ-Lc-144" id="VfG-MP-UCF">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="18"/>
@@ -2372,12 +2505,9 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <connections>
-                                            <outlet property="dateTimeLabel" destination="dO3-9P-Iue" id="lrx-ap-QW2"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageDetailCenterLineBreak" focusStyle="custom" rowHeight="18" id="Xc9-yf-0hv" customClass="MessageDetailLineBreak" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="292" width="414" height="18"/>
+                                        <rect key="frame" x="0.0" y="540" width="414" height="18"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xc9-yf-0hv" id="NjJ-ss-ltD">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="18"/>
@@ -2416,9 +2546,6 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <connections>
-                                            <outlet property="dateTimeLabel" destination="fQ5-yA-FqG" id="YO5-X6-Tbg"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

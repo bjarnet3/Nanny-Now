@@ -13,6 +13,19 @@ class MessageDetailTableCell: UITableViewCell {
     @IBOutlet weak var profileImage: NannyImageView!
     @IBOutlet weak var messageTextView: UITextView!
     @IBOutlet weak var messageTextContraint: NSLayoutConstraint!
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    var dateTime: Date? {
+        didSet {
+            if self.hasDateTime {
+                if let date = self.dateTime {
+                    self.dateLabel.text = dateTimeToString(from: date)
+                }
+            }
+        }
+    }
+    
+    var hasDateTime: Bool = false
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -34,8 +47,10 @@ class MessageDetailTableCell: UITableViewCell {
         }
     }
     
-    func setupView(with message: Message, to user: User, animated: Bool = false) {
+    func setupView(with message: Message, to user: User, animated: Bool = false, hasDateTime: Bool = false) {
         self.animateView(direction: .enter)
+        
+        self.hasDateTime = hasDateTime
         
         if let font = messageTextView.font {
             let mainBoundsWith = self.frame.width
@@ -50,7 +65,6 @@ class MessageDetailTableCell: UITableViewCell {
             let constraintMax: CGFloat = mainBoundsWith - 75.0
             
             print("widthForText \(widthForText), linesForText \(linesForText)")
-            
             self.messageTextContraint.constant = linesForText == 1 ? constraintMax - widthForText : constraintMin
             
             self.profileImage.loadImageUsingCacheWith(urlString: user.imageName, completion: {
@@ -58,13 +72,14 @@ class MessageDetailTableCell: UITableViewCell {
                     let random = Double(arc4random_uniform((UInt32(1000))) / 3000) + 250
                     UIView.animate(withDuration: 0.6, delay: random, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
                         self.messageTextView.text = messageText
+                        self.dateTime = message.messageTime
                     })
                     self.animateView(direction: .exit)
                 } else {
                     self.messageTextView.text = messageText
+                    self.dateTime = message.messageTime
                     self.animateView(direction: .exit)
                 }
-                print(user.imageName)
             })
         }
     }

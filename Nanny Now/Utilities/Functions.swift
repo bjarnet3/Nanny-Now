@@ -226,13 +226,11 @@ public func dateToString(_ date: Date) -> String {
 }
 
 /**
- - DateFormat = "yyyy-MM-dd"
- - TimeZone = TimeZone(secondsFromGMT: 86400)
- - Locale = Locale(identifier: "en_US_POSIX")
+ - DateFormat = "yyyy-MM-dd-HH:mm:ss"
  
  - Returns: **yyyy-MM-dd** ex: (**2017-12-31**)
  */
-public func dateTimeToString(_ date: Date) -> String {
+public func dateTimeToTimeStampString(_ date: Date) -> String {
     let dateFormater = DateFormatter()
     dateFormater.dateFormat = "yyyy-MM-dd-HH:mm:ss"
     

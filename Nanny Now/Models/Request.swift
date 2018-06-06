@@ -145,15 +145,15 @@ struct Request {
     // Time & Date
     // -----------
     var timeRequested: String {
-        get { return dateTimeToString(_timeRequested) }
+        get { return dateTimeToTimeStampString(_timeRequested) }
             set { self._timeRequested = stringToDateTime(newValue) } }
     
     var timeFrom: String {
-        get { return dateTimeToString(_timeFrom) }
+        get { return dateTimeToTimeStampString(_timeFrom) }
             set { self._timeFrom = stringToDateTime(newValue) } }
     
     var timeTo: String {
-        get { return dateTimeToString(_timeTo)  }
+        get { return dateTimeToTimeStampString(_timeTo)  }
             set { self._timeTo = stringToDateTime(newValue) } }
     
     // Price & Money

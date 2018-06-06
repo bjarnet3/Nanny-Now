@@ -15,32 +15,38 @@ struct Message {
     private(set) public var _toUser: User?
     private(set) public var _fromUser: User?
     
-    private(set) public var _toUID: String?
-    private(set) public var _fromUID: String?
+    private(set) public var _toUID: String
+    private(set) public var _fromUID: String
     
     private(set) public var _imageURL: String?
     private(set) public var _userStatus: Date?
     
     // Service information (Request)
     // -----------------------------
-    private(set) public var _messageID: String?
-    private(set) public var _messageTime: String?
-    private(set) public var _message: String?
+    private(set) public var _messageID: String
+    private(set) public var _messageTime: String
+    private(set) public var _message: String
+    
+    private(set) public var _timeBreak: Bool = false
     
     private(set) public var _requestCategory: NotificationCategory = .messageRequest
-    
-    private(set) public var _lineBreak: Bool = false
-    private(set) public var _lineBreakDate: Date? = nil
-    
     private(set) public var _highlighted: Bool = false
     
     var userStatus: Date {
         get {
-            guard let userDate = _userStatus else { return stringToDateTime(_messageTime!) }
+            guard let userDate = _userStatus else { return stringToDateTime(_messageTime) }
             return userDate
         }
         set {
             self._userStatus = newValue
+        }
+    }
+    
+    var messageTime: Date {
+        get {
+            return stringToDateTime(_messageTime)
+        } set {
+            self._messageTime = dateTimeToTimeStampString(newValue)
         }
     }
     
@@ -58,6 +64,10 @@ struct Message {
     
     mutating func setImageUrl(imageURL: String) {
         self._imageURL = imageURL
+    }
+    
+    mutating func setTimeBreak(timeBreak: Bool) {
+        self._timeBreak = timeBreak
     }
     
     mutating func setCategory(category: NotificationCategory) {
@@ -92,8 +102,4 @@ struct Message {
         self._requestCategory = requestCategory ?? .messageRequest
     }
     
-    init(date: Date, lineBreak: Bool = true) {
-        self._lineBreak = lineBreak
-        self._lineBreakDate = date
-    }
 }
