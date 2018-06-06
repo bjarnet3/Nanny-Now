@@ -10,6 +10,10 @@ import UIKit
 import MapKit
 import Firebase
 import SwiftKeychainWrapper
+// For the Sounds and Audio
+import AVFoundation
+
+var player: AVAudioPlayer?
 
 private extension Selector {
     static let keyboardWillShow = #selector(MessageDetailVC.keyboardWillShow(notification:))
@@ -53,7 +57,7 @@ class MessageDetailVC: UIViewController {
     
     @IBAction func sendButton(_ sender: UIButton) {
         if sender.titleLabel?.text == "SEND ▶︎" {
-            sendMessage()
+            self.sendMessage()  // self.checkAndSendMessage()
         } else if sender.titleLabel?.text == "AVBRYT ▼" {
             self.view.endEditing(true)
         } else if sender.titleLabel?.text == " START ▲" {
@@ -98,8 +102,19 @@ class MessageDetailVC: UIViewController {
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide , object: nil)
     }
     
+    private func checkAndSendMessage() {
+        if let messageText = textField.text {
+            if messageText.count <= 1 {
+                sendRequestAlert(message: messageText, completion: sendMessage)
+            } else {
+                sendMessage()
+            }
+        }
+    }
+    
     private func sendMessage() {
         if let messageText = textField.text {
+            playSound(soundLibrary: .success_notification)
             // Send Message to remoteUser
             // sendNotification(messageText: text)
             addMessage(messageText: messageText)
@@ -112,6 +127,26 @@ class MessageDetailVC: UIViewController {
         }
     }
     
+    func sendRequestAlert(message: String, completion: Completion? = nil) {
+        playSound(soundLibrary: .falure_notification)
+        
+        let controller = UIAlertController(title: " Sikker på at du vil sende denne meldingen? ", message: message, preferredStyle: .alert)
+        let cancelButton = UIAlertAction(title: "Avbryt", style: .destructive) { (action) in }
+        let sendButton = UIAlertAction(title: "Send", style: .default) { (action) in completion?() }
+        
+        controller.addTextField { (textField) in
+            textField.placeholder = "Request Alert Placeholder"
+            textField.keyboardType = .numbersAndPunctuation
+        }
+        
+        controller.addAction(cancelButton)
+        controller.addAction(sendButton)
+        
+        self.present(controller, animated: lowPowerModeDisabled, completion: { () in
+            controller.view.superview?.isUserInteractionEnabled = true
+        })
+    }
+    
     private func performAction(for actionType: ActionType, onlyButton: Bool = false) {
         switch actionType {
         case .start:
@@ -119,13 +154,16 @@ class MessageDetailVC: UIViewController {
             self.sendButton.setTitleColor(PINK_DARK_SHARP, for: .normal)
             self.sendButton.backgroundColor = WHITE_SOLID
             
+            self.sendButton.layer.borderWidth = 1.0
+            self.sendButton.layer.borderColor = LIGHT_GREY.cgColor
+            
             if !onlyButton {
                 self.textField.textColor = WHITE_ALPHA
                 self.textField.tintColor = WHITE_SOLID
                 self.textField.backgroundColor = PINK_DARK_SHARP
                 
+                self.textField.layer.borderWidth = 1.0
                 self.textField.layer.borderColor = WHITE_SOLID.cgColor
-                self.textField.layer.borderWidth = 1.5
                 
                 if self.textField.text == "" {
                     self.textField.text = ". . . TAP TAP . . . "
@@ -135,44 +173,69 @@ class MessageDetailVC: UIViewController {
             self.sendButton.setTitle("SEND ▶︎", for: .normal)
             self.sendButton.setTitleColor(WHITE_SOLID, for: .normal)
             self.sendButton.backgroundColor = AQUA_BLUE
+            
+            self.sendButton.layer.borderWidth = 1.0
+            self.sendButton.layer.borderColor = WHITE_SOLID.cgColor
         case .avbryt:
             self.sendButton.setTitle("AVBRYT ▼", for: .normal)
             self.sendButton.setTitleColor(WHITE_SOLID, for: .normal)
-            self.sendButton.backgroundColor = PINK_DARK_SHARP
+            // self.sendButton.backgroundColor = PINK_DARK_SHARP
+            self.sendButton.backgroundColor = RED_PINK_SOLID // RED_DARK_SHARP
+            
+            self.sendButton.layer.borderWidth = 1.2
+            self.sendButton.layer.borderColor = UIColor.white.cgColor
             
             if !onlyButton {
                 self.textField.textColor = PINK_DARK_SHARP
                 self.textField.tintColor = PINK_DARK_SHARP
                 self.textField.backgroundColor = WHITE_ALPHA
                 
+                self.textField.layer.borderWidth = 1.0
                 self.textField.layer.borderColor = LIGHT_GREY.cgColor
-                self.textField.layer.borderWidth = 0.8
                 
                 if self.textField.text == ". . . TAP TAP . . . " {
                     self.textField.text = nil
                 }
             }
         case .setup:
-            self.sendButton.layer.borderWidth = 1.5
-            self.sendButton.layer.borderColor = LIGHT_GREY.cgColor
+            performAction(for: .start, onlyButton: onlyButton)
+            // self.sendButton.layer.borderColor = LIGHT_GREY.cgColor
             
             if !onlyButton {
                 self.textField.layer.cornerRadius = textField.layer.frame.height / 2
                 self.textField.layer.masksToBounds = true
             }
-            
-            performAction(for: .start, onlyButton: onlyButton)
-            
         }
     }
     
     private func sendNotification(message: Message) {
-        
         // Send Notification Message
         Notifications.instance.sendNotifications(with: message)
         
         self.tableView.layoutIfNeeded()
         self.tableView.reloadData()
+    }
+    
+    private func playSound(soundLibrary: SoundLibrary) {
+        let (fileName, fileType) = returnFilenameAndExtensionFromSound(soundName: soundLibrary)
+        print(fileName)
+        print(fileType)
+        guard let url = Bundle.main.url(forResource: fileName, withExtension: fileType) else { return }
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            
+            /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            // player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.wav.rawValue)
+            guard let player = player else { return }
+            
+            player.play()
+        } catch let error {
+            
+            print(error.localizedDescription)
+        }
     }
     
     private func addMessage(messageText: String) {
@@ -214,7 +277,7 @@ class MessageDetailVC: UIViewController {
             
             self.tableViewBottom.constant = 0.0
             self.textFieldBottom.constant = 0.0
-            
+        
             self.performAction(for: .start)
             
             
@@ -367,7 +430,10 @@ extension MessageDetailVC: UITableViewDelegate, UITableViewDataSource {
         let previousRow: Int? = indexPath.row != 0 ? indexPath.row - 1 : nil
         let previousPost = previousRow == nil ? false : true
         let previousMessage = previousPost == true ? messages[previousRow!].messageTime.timeIntervalSince(messages[indexPath.row].messageTime) > 3600 : false
-        return previousMessage
+        
+        let lastCell = tableView.cellForRow(at: IndexPath(row: self.messages.count - 1, section: 0))
+        let firstCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0))
+        return (lastCell != nil) || (firstCell != nil) ? true : previousMessage
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -394,14 +460,6 @@ extension MessageDetailVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        /*
-        let previousRow: Int? = indexPath.row != 0 ? indexPath.row - 1 : nil
-        
-        let previousPost = previousRow == nil ? false : true
-        let previousMessage = previousPost == true ? messages[previousRow!].messageTime.timeIntervalSince(messages[indexPath.row].messageTime) > 3600 : false
-        */
-        
         let hasLabel = tableViewCellHasLabel(tableView: tableView, indexPath: indexPath)
         
         let leftIdentifier = hasLabel ? "MessageDetailLeftLabelCell" : "MessageDetailLeftCell"

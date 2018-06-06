@@ -56,6 +56,39 @@ class MessageViewController: UIViewController {
     }
     
     // Property Observer
+    var pendingCount: Int = 0 {
+        didSet {
+            let secondCell = mainTable.cellForRow(at: IndexPath(row: 1, section: 0)) as? RequestBodyCell
+            secondCell?.pendingCount = pendingCount
+        }
+    }
+    
+    var acceptedCount: Int = 0 {
+        didSet {
+            let secondCell = mainTable.cellForRow(at: IndexPath(row: 1, section: 0)) as? RequestBodyCell
+            secondCell?.acceptedCount = acceptedCount
+        }
+    }
+    
+    var completeCount: Int = 0 {
+        didSet {
+            let secondCell = mainTable.cellForRow(at: IndexPath(row: 1, section: 0)) as? RequestBodyCell
+            secondCell?.completeCount = completeCount
+        }
+    }
+        
+    var rejectedCount: Int = 0 {
+        didSet {
+            print("rejectedCount")
+        }
+    }
+    
+    var runningCount: Int = 0 {
+        didSet {
+            print("running")
+        }
+    }
+    
     var messageBadge: Int = 0 {
         didSet {
             self.tabBarItem.badgeValue = messageBadge != 0 ? "\(messageBadge)" : nil
@@ -329,6 +362,31 @@ class MessageViewController: UIViewController {
         }
     }
     
+    func resetRequestStatusCount() {
+        self.acceptedCount = 0
+        self.pendingCount = 0
+        self.completeCount = 0
+        self.acceptedCount = 0
+        self.runningCount = 0
+    }
+    
+    func setRequestStatusCountFrom(request: Request) {
+        if let requestStatus = requestStatusString(request: request.requestStatus) {
+            switch requestStatus {
+            case .accepted:
+                self.acceptedCount += 1
+            case .complete:
+                self.completeCount += 1
+            case .pending:
+                self.pendingCount += 1
+            case .rejected:
+                self.rejectedCount += 1
+            case .running:
+                self.runningCount += 1
+            }
+        }
+    }
+    
     // MARK: - Observer, Firebase Database Functions
     // ----------------------------------------
     func observeRequests(_ exemptIDs: [String] = []) {
@@ -339,6 +397,7 @@ class MessageViewController: UIViewController {
                     self.totalRequests = snapValue.keys.count
                     
                     self.requests.removeAll()
+                    self.resetRequestStatusCount()
                     
                     for (_,value) in snapValue {
                         if let snapRequest = value as? [String:AnyObject] {
@@ -362,7 +421,9 @@ class MessageViewController: UIViewController {
                 
                 if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
                     self.totalRequests = snapValue.keys.count
+                    
                     self.requests.removeAll()
+                    self.resetRequestStatusCount()
                     
                     for (_,value) in snapValue {
                         if let snapRequest = value as? [String:AnyObject] {
@@ -411,7 +472,7 @@ class MessageViewController: UIViewController {
     }
     
     func observeUser(request: Request, userRef: DatabaseReference) {
-        print("observeUser")
+        setRequestStatusCountFrom(request: request)
         
         if self.requests.count < self.totalRequests {
             var requestVal = request

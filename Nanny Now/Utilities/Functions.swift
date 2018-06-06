@@ -258,7 +258,7 @@ public func timeToString(from date: Date) -> String {
 public func dateTimeToString(from date: Date, with locale:String = "nb_NO") -> String {
     let dateFormater = DateFormatter()
 
-    dateFormater.dateFormat = "E d MMMM h:mm"
+    dateFormater.dateFormat = "E d MMMM H:mm"
     dateFormater.timeZone = TimeZone(secondsFromGMT: 86400)
     dateFormater.locale = Locale(identifier: locale)
     

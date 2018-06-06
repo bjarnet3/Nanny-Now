@@ -11,11 +11,32 @@ import QuartzCore
 
 class RequestBodyCell: UITableViewCell {
     
-    // @IBOutlet weak var cellImageView: CustomImageView!
-    @IBOutlet weak var profileView: StatusView!
+    @IBOutlet weak var cellImageView: CustomImageView!
     
-    var cellImageView = UIImageView()
+    @IBOutlet weak var pendingLabel: UILabel!
+    @IBOutlet weak var acceptedLabel: UILabel!
+    @IBOutlet weak var completeLabel: UILabel!
+    
     var user: User?
+    
+    // Property Observer
+    var pendingCount: Int = 0 {
+        didSet {
+            self.pendingLabel.text = "\(pendingCount) pending"
+        }
+    }
+    
+    var acceptedCount: Int = 0 {
+        didSet {
+            self.acceptedLabel.text = "\(acceptedCount) accepted"
+        }
+    }
+    
+    var completeCount: Int = 0 {
+        didSet {
+            self.completeLabel.text = "\(completeCount) complete"
+        }
+    }
     
     public enum Direction {
         case enter
@@ -48,15 +69,9 @@ class RequestBodyCell: UITableViewCell {
             if animated {
                 let random = Double(arc4random_uniform(UInt32(1000))) / 2000 
                 UIView.animate(withDuration: 0.6, delay: random * 1.5, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
-                    if let image = self.cellImageView.image {
-                        self.profileView.setImage(image: image)
-                    }
                     self.animateView(direction: .exit)
                 })
             } else {
-                if let image = self.cellImageView.image {
-                    self.profileView.setImage(image: image)
-                }
                 self.animateView(direction: .exit)
             }
             self.user = user

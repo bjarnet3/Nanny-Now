@@ -57,6 +57,11 @@
 		5CAD363020A8EFBC00C56FCE /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAD362F20A8EFBC00C56FCE /* NotificationViewController.swift */; };
 		5CAD363320A8EFBC00C56FCE /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CAD363120A8EFBC00C56FCE /* MainInterface.storyboard */; };
 		5CAD363720A8EFBC00C56FCE /* NotificationMessageResponse.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5CAD362B20A8EFBB00C56FCE /* NotificationMessageResponse.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5CB41F1220C7E872003A86C0 /* sundarbans.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CB41F0F20C7E872003A86C0 /* sundarbans.mp3 */; };
+		5CB41F1720C7EF85003A86C0 /* duo_notification.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CB41F1320C7EF83003A86C0 /* duo_notification.mp3 */; };
+		5CB41F1820C7EF85003A86C0 /* csd_notification_01.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CB41F1420C7EF84003A86C0 /* csd_notification_01.mp3 */; };
+		5CB41F1920C7EF85003A86C0 /* short_notification.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CB41F1520C7EF84003A86C0 /* short_notification.mp3 */; };
+		5CB41F1A20C7EF85003A86C0 /* simple_notification.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CB41F1620C7EF85003A86C0 /* simple_notification.mp3 */; };
 		5CB7FE561FE435B600D41E6F /* FrostyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7FE551FE435B600D41E6F /* FrostyView.swift */; };
 		5CB7FE581FE4362900D41E6F /* FrostyTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7FE571FE4362900D41E6F /* FrostyTabBar.swift */; };
 		5CB7FE5A1FE4368900D41E6F /* FrostyCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7FE591FE4368900D41E6F /* FrostyCornerView.swift */; };
@@ -78,7 +83,6 @@
 		5CCF0C991D898EC40089F39D /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C981D898EC40089F39D /* CustomButton.swift */; };
 		5CCF0C9D1D898F110089F39D /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C9C1D898F110089F39D /* StartViewController.swift */; };
 		5CCF0C9F1D898F300089F39D /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C9E1D898F300089F39D /* InfoViewController.swift */; };
-		5CD5AF7920C485BA00CEA564 /* MessageDetailLineBreak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD5AF7820C485BA00CEA564 /* MessageDetailLineBreak.swift */; };
 		5CDE08051FB27A5000E97D97 /* LocalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDE08041FB27A5000E97D97 /* LocalService.swift */; };
 		5CE12DF0202A9C82003495D3 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE4A9E71EBBBEF40018A831 /* UserNotifications.framework */; };
 		5CE12DF1202A9C82003495D3 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE4A9E91EBBBEF40018A831 /* UserNotificationsUI.framework */; };
@@ -187,6 +191,11 @@
 		5CAD362F20A8EFBC00C56FCE /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		5CAD363220A8EFBC00C56FCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		5CAD363420A8EFBC00C56FCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CB41F0F20C7E872003A86C0 /* sundarbans.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = sundarbans.mp3; sourceTree = "<group>"; };
+		5CB41F1320C7EF83003A86C0 /* duo_notification.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = duo_notification.mp3; sourceTree = "<group>"; };
+		5CB41F1420C7EF84003A86C0 /* csd_notification_01.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = csd_notification_01.mp3; sourceTree = "<group>"; };
+		5CB41F1520C7EF84003A86C0 /* short_notification.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = short_notification.mp3; sourceTree = "<group>"; };
+		5CB41F1620C7EF85003A86C0 /* simple_notification.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = simple_notification.mp3; sourceTree = "<group>"; };
 		5CB7FE551FE435B600D41E6F /* FrostyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyView.swift; sourceTree = "<group>"; };
 		5CB7FE571FE4362900D41E6F /* FrostyTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyTabBar.swift; sourceTree = "<group>"; };
 		5CB7FE591FE4368900D41E6F /* FrostyCornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyCornerView.swift; sourceTree = "<group>"; };
@@ -212,7 +221,6 @@
 		5CCF0C9C1D898F110089F39D /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		5CCF0C9E1D898F300089F39D /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		5CCF0CA61D89901C0089F39D /* Nanny Now.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Nanny Now.entitlements"; sourceTree = "<group>"; };
-		5CD5AF7820C485BA00CEA564 /* MessageDetailLineBreak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailLineBreak.swift; sourceTree = "<group>"; };
 		5CDE08041FB27A5000E97D97 /* LocalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalService.swift; sourceTree = "<group>"; };
 		5CE12DEF202A9C82003495D3 /* NotificationContentExtensions.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationContentExtensions.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CE12DF3202A9C82003495D3 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
@@ -290,7 +298,6 @@
 				5C8925A320810C1F0032CEAA /* ReviewCollectionViewCell.swift */,
 				5CF50D82209C49D300136167 /* MessageTableViewCell.swift */,
 				5C2F4BBA20A7FB1100BFB313 /* MessageDetailTableCell.swift */,
-				5CD5AF7820C485BA00CEA564 /* MessageDetailLineBreak.swift */,
 				5C70E62B208214F00076CC4A /* RequestHeaderCell.swift */,
 				5C70E62D2082153E0076CC4A /* RequestBodyCell.swift */,
 				5C093A481FE0985100144A32 /* RequestUserCell.swift */,
@@ -404,6 +411,11 @@
 		5CB7FE5E1FE4C94100D41E6F /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				5CB41F1420C7EF84003A86C0 /* csd_notification_01.mp3 */,
+				5CB41F1320C7EF83003A86C0 /* duo_notification.mp3 */,
+				5CB41F1520C7EF84003A86C0 /* short_notification.mp3 */,
+				5CB41F1620C7EF85003A86C0 /* simple_notification.mp3 */,
+				5CB41F0F20C7E872003A86C0 /* sundarbans.mp3 */,
 				5CF50D7E209C1E5E00136167 /* success_notification.wav */,
 				5CF50D7C209C1E5E00136167 /* failure_notification.wav */,
 				5CB7FE5F1FE4CC8900D41E6F /* notification11.wav */,
@@ -661,15 +673,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CB41F1920C7EF85003A86C0 /* short_notification.mp3 in Resources */,
 				5CF50D81209C1E5F00136167 /* success_notification.wav in Resources */,
 				5CCF0C811D898BFB0089F39D /* LaunchScreen.storyboard in Resources */,
+				5CB41F1820C7EF85003A86C0 /* csd_notification_01.mp3 in Resources */,
 				5CB7FE601FE4CC8900D41E6F /* notification11.wav in Resources */,
 				5CF50D80209C1E5F00136167 /* notification50.wav in Resources */,
 				5CBD1C2E1DA81E7900CAC8CF /* GoogleService-Info.plist in Resources */,
 				5CF50D7B209C19FE00136167 /* notification48.wav in Resources */,
+				5CB41F1A20C7EF85003A86C0 /* simple_notification.mp3 in Resources */,
 				5C2E696B20BCFA81000F7AFC /* RequestMenu.xib in Resources */,
 				5CF50D7F209C1E5F00136167 /* failure_notification.wav in Resources */,
+				5CB41F1720C7EF85003A86C0 /* duo_notification.mp3 in Resources */,
 				5CCF0C7E1D898BFB0089F39D /* Assets.xcassets in Resources */,
+				5CB41F1220C7E872003A86C0 /* sundarbans.mp3 in Resources */,
 				5CCF0C7C1D898BFB0089F39D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -798,7 +815,6 @@
 				5C389686208968FD008C7E12 /* Friends.swift in Sources */,
 				5CB7FE581FE4362900D41E6F /* FrostyTabBar.swift in Sources */,
 				5CCF0C9F1D898F300089F39D /* InfoViewController.swift in Sources */,
-				5CD5AF7920C485BA00CEA564 /* MessageDetailLineBreak.swift in Sources */,
 				5C558A0A1FA772E80076A17D /* LoginOneVC.swift in Sources */,
 				5C85A7EE1DB84D83008C5FBB /* DataService.swift in Sources */,
 				5C8925A420810C1F0032CEAA /* ReviewCollectionViewCell.swift in Sources */,

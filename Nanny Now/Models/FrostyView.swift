@@ -19,10 +19,9 @@ class FrostyView: UIView {
 }
 
 extension FrostyView {
-    func setEffect(blurEffect: UIBlurEffectStyle = .light) {
+    func setEffect(blurEffect: UIBlurEffectStyle = .extraLight) {
         for view in subviews {
             if view is UIVisualEffectView {
-                print(view.description)
                 view.removeFromSuperview()
             }
         }

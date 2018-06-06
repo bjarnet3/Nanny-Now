@@ -12,6 +12,32 @@ import SwiftKeychainWrapper
 
 var sendNotifications = Notifications.instance.sendNotifications
 
+/// Library / Sounds / ....
+public enum SoundLibrary: String  {
+    case notification11 = "notification11.wav"
+    case notification48 = "notification48.wav"
+    case notification50 = "notification50.wav"
+    case success_notification = "success_notification.wav"
+    case falure_notification = "failure_notification.wav"
+    case sundarbans = "sundarbans.mp3"
+    case simple_notification = "simple_notification.mp3"
+    case short_notification = "short_notification.mp3"
+    case duo_notification = "duo_notification.mp3"
+    case csd_notification_01 = "csd_notification_01.mp3"
+}
+
+func returnSoundFromLibrary(soundName: SoundLibrary) -> String {
+    return soundName.rawValue
+}
+
+// INCOMPLETE FUNCTION
+func returnFilenameAndExtensionFromSound(soundName: SoundLibrary) -> (String, String) {
+    var soundfileName = returnSoundFromLibrary(soundName: soundName)
+    let audioExtension = soundfileName.suffix(3)
+    soundfileName.removeLast(4)
+    return (soundfileName, String(audioExtension))
+}
+
 /// Defination of category types will come here !!
 public enum NotificationCategory : String {
     case nannyRequest = "nannyRequest"

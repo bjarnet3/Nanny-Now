@@ -29,6 +29,10 @@ let PINK_DARK_SHARP = hexStringToUIColor("#FF3191") // FF3191
 
 let ORANGE_SOLID = hexStringToUIColor("#cc3300")
 let RED_SOLID = hexStringToUIColor("#cc0000")
+let RED_SHARP_SOLID = hexStringToUIColor("#FF0D23")
+let RED_SHARP_ALPHA = hexStringToUIColor("#FF0D23", 0.5)
+
+let RED_PINK_SOLID = hexStringToUIColor("#FF294C")
 
 let PINK_NANNY_LOGO = hexStringToUIColor("#ff3366")
 let ORANGE_NANNY_LOGO = hexStringToUIColor("#ff6633")

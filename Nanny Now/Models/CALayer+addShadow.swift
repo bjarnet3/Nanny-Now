@@ -35,7 +35,7 @@ extension CALayer {
     
     func addShadow() {
         self.shadowOffset = CGSize(width: 1, height: 1)
-        self.shadowOpacity = 0.2
+        self.shadowOpacity = 0.3
         self.shadowRadius = 4
         self.shadowColor = UIColor.black.cgColor
         self.masksToBounds = false
