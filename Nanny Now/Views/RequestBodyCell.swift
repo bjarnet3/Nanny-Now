@@ -13,6 +13,9 @@ class RequestBodyCell: UITableViewCell {
     
     @IBOutlet weak var cellImageView: CustomImageView!
     
+    @IBOutlet weak var welcomeTitleLabel: UILabel!
+    @IBOutlet weak var welcomeMsgLabel: UILabel!
+    
     @IBOutlet weak var pendingLabel: UILabel!
     @IBOutlet weak var acceptedLabel: UILabel!
     @IBOutlet weak var completeLabel: UILabel!
@@ -47,6 +50,7 @@ class RequestBodyCell: UITableViewCell {
         super.awakeFromNib()
         
         // cellImageView.layer.cornerRadius = cellImageView.layer.frame.height / 2
+        
     }
     
     func animateView( direction: Direction) {
@@ -74,6 +78,8 @@ class RequestBodyCell: UITableViewCell {
             } else {
                 self.animateView(direction: .exit)
             }
+            self.welcomeTitleLabel.text = "Hello, \(user.firstName)..."
+            self.welcomeMsgLabel.text = "Prepare yourself for your next appointment."
             self.user = user
         })
         

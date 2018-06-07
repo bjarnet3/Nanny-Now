@@ -19,6 +19,8 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var userIndicatorLbl: UILabel!
 
     var cellImageLoaded = false
+    var hasSelected = false
+    var hasOpened = false
     
     func returnUserIndicator(from date: Date) {
         let now = Date()
@@ -78,6 +80,20 @@ class MessageTableViewCell: UITableViewCell {
         case exit
     }
     
+    func setHighlightedOnTextAnd(highlighted: Bool = false) {
+        self.nameLabel.textColor = BLACK_SOLID
+        self.nameLabel.highlightedTextColor = UIColor.darkGray
+        self.nameLabel.isHighlighted = highlighted
+        
+        self.messageLabel.textColor = PINK_DARK_SHARP
+        self.messageLabel.highlightedTextColor = PINK_TABBAR_UNSELECTED
+        self.messageLabel.isHighlighted = highlighted
+        
+        self.timeLabel.textColor = UIColor.darkGray
+        self.timeLabel.highlightedTextColor = UIColor.lightGray
+        self.timeLabel.isHighlighted = highlighted
+    }
+    
     func animateView( direction: Direction) {
         if direction == .enter {
             self.contentView.alpha = 0
@@ -105,11 +121,14 @@ class MessageTableViewCell: UITableViewCell {
                         self.userStatus = message.userStatus
                     })
                 } else {
+                    self.hasOpened = message._highlighted
+                    
                     self.nameLabel.text = user.firstName
                     self.messageLabel.text = message._message
                     self.time = stringToDateTime(message._messageTime)
                     self.userStatus = message.userStatus
                 }
+                self.setHighlightedOnTextAnd(highlighted: message._highlighted)
                 self.cellImageLoaded = true
             })
         }

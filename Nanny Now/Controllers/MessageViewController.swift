@@ -20,6 +20,8 @@ class MessageViewController: UIViewController {
     @IBOutlet weak var backTable: CustomTableView!
     @IBOutlet weak var mainTable: CustomTableView!
     
+    // let label = UILabel(frame: CGRect()
+    
     // MARK: - Properties: Array & Varables
     // -------------------------------------
     var user: User?
@@ -809,8 +811,10 @@ extension MessageViewController: UIScrollViewDelegate {
             if scrollAnimator?.state != .stopped {
                 
                 if scrollView.contentOffset.y <= 0 {
+                    
                     self.mainTable.contentOffset = .zero
-                    // self.backTable.contentOffset = CGPoint(x: 0, y: 35)
+                    // self.backTable.contentOffset = .zero
+                    
                 }
             }
         }

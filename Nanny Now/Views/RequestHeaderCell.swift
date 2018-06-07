@@ -10,8 +10,19 @@ import UIKit
 
 class RequestHeaderCell: UITableViewCell {
     
+    @IBOutlet weak var brandingLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.brandingLabel.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        self.brandingLabel.layer.cornerRadius = self.brandingLabel.frame.height / 2
+        self.brandingLabel.clipsToBounds = true
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

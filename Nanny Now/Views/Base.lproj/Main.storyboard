@@ -869,7 +869,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ULj-dU-Q6I">
-                                                    <rect key="frame" x="10" y="10" width="394" height="45"/>
+                                                    <rect key="frame" x="10" y="10" width="355" height="45"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noun_1086663_cc" translatesAutoresizingMaskIntoConstraints="NO" id="WGR-vH-AUG">
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="45"/>
@@ -878,16 +878,16 @@
                                                             </constraints>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="OrE-Ct-nqI">
-                                                            <rect key="frame" x="60" y="0.0" width="334" height="45"/>
+                                                            <rect key="frame" x="60" y="0.0" width="295" height="45"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifikasjoner / Varslinger" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L3o-SB-BAD">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="334" height="22.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="295" height="22.5"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                                     <color key="textColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For å forandre på melding, og notificasjoner." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agD-06-OP7">
-                                                                    <rect key="frame" x="0.0" y="22.5" width="334" height="22.5"/>
+                                                                    <rect key="frame" x="0.0" y="22.5" width="295" height="22.5"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                                     <color key="textColor" red="0.98823529409999999" green="0.1843137255" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -913,7 +913,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DMx-Gx-CrC">
-                                                    <rect key="frame" x="10" y="10" width="394" height="45"/>
+                                                    <rect key="frame" x="10" y="10" width="355" height="45"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noun_182952_cc" translatesAutoresizingMaskIntoConstraints="NO" id="pwH-BN-hje">
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="45"/>
@@ -922,16 +922,16 @@
                                                             </constraints>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Y3g-0B-LGG">
-                                                            <rect key="frame" x="60" y="0.0" width="334" height="45"/>
+                                                            <rect key="frame" x="60" y="0.0" width="295" height="45"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lokasjon / Posisjonering" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ULJ-QJ-o1g">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="334" height="22.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="295" height="22.5"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                                     <color key="textColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set ønsket innstillinger for lokasjonstjenestene." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GCR-5x-niQ">
-                                                                    <rect key="frame" x="0.0" y="22.5" width="334" height="22.5"/>
+                                                                    <rect key="frame" x="0.0" y="22.5" width="295" height="22.5"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                                     <color key="textColor" red="0.98823529409999999" green="0.1843137255" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -962,7 +962,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="HCi-p3-f1a">
-                                                    <rect key="frame" x="10" y="10" width="394" height="45"/>
+                                                    <rect key="frame" x="10" y="10" width="355" height="45"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noun_590438_cc_Modified2" translatesAutoresizingMaskIntoConstraints="NO" id="bBU-RI-2Q5">
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="45"/>
@@ -971,16 +971,16 @@
                                                             </constraints>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ugq-nF-gNw">
-                                                            <rect key="frame" x="60" y="0.0" width="334" height="45"/>
+                                                            <rect key="frame" x="60" y="0.0" width="295" height="45"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brukere / Blokkering / Tillgang" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fGz-zO-wDk">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="334" height="22.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="295" height="22.5"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                                     <color key="textColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set dine innstillinger for andre sin tilgang til deg." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEl-Mw-36l">
-                                                                    <rect key="frame" x="0.0" y="22.5" width="334" height="22.5"/>
+                                                                    <rect key="frame" x="0.0" y="22.5" width="295" height="22.5"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                                     <color key="textColor" red="0.98823529409999999" green="0.1843137255" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -1803,7 +1803,6 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                                             <rect key="frame" x="0.0" y="0.0" width="41" height="18"/>
                                                                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
                                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                            <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IpG-LJ-Aue">
                                                                             <rect key="frame" x="46" y="0.0" width="7" height="18"/>
@@ -1886,6 +1885,14 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                     <color key="textColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="REQUESTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qUW-NY-wXN">
+                                                    <rect key="frame" x="270" y="0.0" width="90" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="1" green="0.050980392159999999" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="10"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
@@ -1897,6 +1904,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <gestureRecognizers/>
                                         <connections>
+                                            <outlet property="brandingLabel" destination="qUW-NY-wXN" id="xEF-6g-Auv"/>
                                             <outletCollection property="gestureRecognizers" destination="vJJ-EC-gA4" appends="YES" id="1aB-cL-3ZE"/>
                                         </connections>
                                     </tableViewCell>
@@ -1993,6 +2001,8 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                             <outlet property="cellImageView" destination="5Ho-hP-UZo" id="yQf-N1-aRP"/>
                                             <outlet property="completeLabel" destination="hbN-nw-qwq" id="l8m-zT-DRY"/>
                                             <outlet property="pendingLabel" destination="QxR-2I-avv" id="Vtf-fx-oyS"/>
+                                            <outlet property="welcomeMsgLabel" destination="UsX-gR-Aeg" id="IeP-Hh-mhc"/>
+                                            <outlet property="welcomeTitleLabel" destination="HBi-b6-Rpm" id="C2y-pg-7DZ"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RequestUserCell" rowHeight="80" id="Hem-Ml-rcr" customClass="RequestUserCell" customModule="Nanny_Now" customModuleProvider="target">

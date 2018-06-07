@@ -10,7 +10,6 @@ import UIKit
 
 class RequestUserCell: UITableViewCell {
     
-    @IBOutlet weak var progressIndicatior: UIProgressView!
     @IBOutlet weak var cellImageView: NannyImageView!
     
     @IBOutlet weak var nameLabel: UILabel!
@@ -140,7 +139,13 @@ class RequestUserCell: UITableViewCell {
         else {
             UIView.animate(withDuration: 0.20, delay: 0.05, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in
                 
-                
+                self.messageLabel.isHighlighted = false
+                self.nameLabel.isHighlighted = false
+                self.timeFromLabel.isHighlighted = false
+                self.amount.isHighlighted = false
+                self.timeToLabel.isHighlighted = false
+                self.cellImageView.isHighlighted = false
+                self.cellImageView.alpha = 1.0
             })
         }
     }
