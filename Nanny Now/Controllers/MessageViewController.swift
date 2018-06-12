@@ -22,6 +22,9 @@ class MessageViewController: UIViewController {
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var backTable: CustomTableView!
     
+    @IBOutlet weak var mainLabel: UILabel!
+    @IBOutlet weak var backLabel: UILabel!
+    
     // MARK: - Properties: Array & Varables
     // -------------------------------------
     var user: User?
@@ -33,7 +36,7 @@ class MessageViewController: UIViewController {
     var totalMessages: Int = 0
     
     var lastRowSelected: IndexPath?
-    var heightForRow:[CGFloat] = [20,160,80]
+    var heightForRow:[CGFloat] = [5,160,80]
     
     var animatorIsBusy = false
     var introAnimationLoaded = false
@@ -45,7 +48,7 @@ class MessageViewController: UIViewController {
     let mainTableMaxY: CGFloat = 85
     var mainTableMinimized = false
     let mainTableMaximizedHeight: CGFloat = UIScreen.main.bounds.height - 85
-    let mainTableMinimizedHeight: CGFloat = 95
+    let mainTableMinimizedHeight: CGFloat = 97
     
     let backTableOffset: CGFloat = 0
     let backTableMaxY: CGFloat = 22
@@ -114,21 +117,32 @@ class MessageViewController: UIViewController {
     }
     
     func mainAction() {
+        hapticButton(.selection)
         if mainTableMinimized {
             maxiMizeTableView()
             self.animatorIsBusy = true
             self.mainTableMinimized = false
+            
+            self.mainLabel.text = "• • •"
+            self.backLabel.text = "◦ ◦ ◦"
         } else {
             miniMizeTableView()
             self.animatorIsBusy = true
             self.mainTableMinimized = true
+            
+            self.mainLabel.text = "◦ ◦ ◦"
+            self.backLabel.text = "• • •"
         }
     }
     
     // MARK: - IBAction: Methods connected to UI
     // ----------------------------------------
-    @IBAction func tapAction(_ sender: UIButton) {
-        hapticButton(.selection)
+    
+    @IBAction func backAction(_ sender: Any) {
+        mainAction()
+    }
+    
+    @IBAction func mainAction(_ sender: Any) {
         mainAction()
     }
     
@@ -138,6 +152,8 @@ class MessageViewController: UIViewController {
         self.blurAnimator?.stopAnimation(true)
         self.scrollAnimator?.stopAnimation(true)
 
+        self.blurAnimator?.startAnimation()
+        
         UIView.animate(withDuration: 0.45, delay: 0.045, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
             self.enterMainTable()
             
@@ -165,6 +181,8 @@ class MessageViewController: UIViewController {
         }, completion: { (true) in
             self.mainTableMinimized = true
             self.animatorIsBusy = false
+            
+            self.setBlurEffectWithAnimator(on: self.mainTable, duration: 0.45, startBlur: true, curve: .easeOut)
             self.setScrollEffectWithAnimator(on: self.backTable, reversed: true)
         })
     }
@@ -173,11 +191,12 @@ class MessageViewController: UIViewController {
     // ----------------------
     func setMainTable() {
         self.mainView.frame = CGRect(x: 0, y: self.mainTableMaxY, width: self.mainScreenWidth, height: self.mainScreenHeight - self.mainTableMaxY)
-        self.mainView.frame = self.mainView.frame.offsetBy(dx: 0, dy: inactiveOffset)
+        // self.mainView.frame = self.mainView.frame.offsetBy(dx: 0, dy: inactiveOffset)
         self.mainView.layer.cornerRadius = self.cornerRadius
         // Specify which corners to round = [ upper left , upper right ]
         self.mainView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
+        self.mainTable.contentInset.top = 5
         self.mainTable.contentInset.bottom = 50
     }
     
@@ -185,6 +204,10 @@ class MessageViewController: UIViewController {
         self.mainView.frame = CGRect(x: 0, y: self.mainTableMaxY, width: self.mainScreenWidth, height: self.mainScreenHeight - self.mainTableMaxY)
         self.mainView.layer.cornerRadius = self.cornerRadius
         self.mainTable.isScrollEnabled = true
+        
+
+        self.mainLabel.text = "• • •"
+        self.backLabel.text = "◦ ◦ ◦"
     }
     
     func hideMainTable() {
@@ -216,12 +239,15 @@ class MessageViewController: UIViewController {
         
         self.backTable.isScrollEnabled = true
         self.backTable.layoutIfNeeded()
+        
+        self.mainLabel.text = "◦ ◦ ◦"
+        self.backLabel.text = "• • •"
     }
     
     func midBackTable() {
         self.backView.layer.cornerRadius = self.cornerRadius
         self.backView.alpha = 0.65
-        self.backView.transform = CGAffineTransform(scaleX: 0.97, y: 0.945)
+        self.backView.transform = CGAffineTransform(scaleX: 0.97, y: 0.940)
         
         // self.backTable.isScrollEnabled = false
         // self.backTable.layoutIfNeeded()
@@ -230,7 +256,7 @@ class MessageViewController: UIViewController {
     func hideBackTable() {
         self.backView.layer.cornerRadius = self.cornerRadius
         self.backView.alpha = 0.45
-        self.backView.transform = CGAffineTransform(scaleX: 0.94, y: 0.91)
+        self.backView.transform = CGAffineTransform(scaleX: 0.94, y: 0.90)
         
         self.backTable.isScrollEnabled = false
         // self.backTable.layoutIfNeeded()
@@ -287,7 +313,7 @@ class MessageViewController: UIViewController {
                 self.midBackTable()
             } else {
                 self.midBackTable()
-                self.mainView.transform = CGAffineTransform(translationX: 0, y: 30)
+                self.mainView.transform = CGAffineTransform(translationX: 0, y: 25)
             }
         }
     }
@@ -653,6 +679,7 @@ extension MessageViewController {
                 self.backTable.setNeedsDisplay()
                 
                 self.setBlurEffectWithAnimator(on: self.mainTable, startBlur: false)
+                
                 self.setScrollEffectWithAnimator(on: self.mainTable, reversed: false)
             })
         })
@@ -669,7 +696,7 @@ extension MessageViewController {
         self.mainTable.isUserInteractionEnabled = true
         
         self.removeDatabaseSubValue()
-        
+
         if !self.returnWithDismiss {
             if self.introAnimationLoaded {
                 if !self.mainTableMinimized {
@@ -677,7 +704,9 @@ extension MessageViewController {
                     // self.showBackTable()
                     self.midBackTable()
                     self.mainView.frame = self.mainView.frame.offsetBy(dx: 0, dy: inactiveOffset)
-                    self.setBlurEffect(on: self.mainTable)
+                    // self.setBlurEffect(on: self.mainTable)
+                    
+                    self.setBlurEffectWithAnimator(on: self.mainTable, duration: 0.40, startBlur: true, curve: .easeOut)
                     
                     self.maxiMizeTableView()
                     self.mainTable.layoutIfNeeded()

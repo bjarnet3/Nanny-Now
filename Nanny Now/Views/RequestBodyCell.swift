@@ -78,8 +78,8 @@ class RequestBodyCell: UITableViewCell {
             } else {
                 self.animateView(direction: .exit)
             }
-            self.welcomeTitleLabel.text = "Hello, \(user.firstName)..."
-            self.welcomeMsgLabel.text = "Prepare yourself for your next appointment."
+            self.welcomeTitleLabel.text = "Halloen, \(user.firstName)..."
+            self.welcomeMsgLabel.text = "Forbered deg selv til ditt neste oppdrag . . . "
             self.user = user
         })
         
