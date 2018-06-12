@@ -380,7 +380,7 @@ class MessageDetailVC: UIViewController {
         self.tableView.reloadData()
         
         for message in messages {
-            let dateString = dateTimeToString(from: message.messageTime)
+            let dateString = dateTimeToTimeStampString(message.messageTime) //  dateTimeToString(from: message.messageTime)
             print("\(dateString) \(message._message)")
         }
         
@@ -437,30 +437,26 @@ extension MessageDetailVC {
 extension MessageDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableViewCellHasLabel(tableView: UITableView, indexPath: IndexPath) -> Bool {
-        let first = indexPath.row == messages.count - 1 ? true : false
+        let first = indexPath.row == messages.count - 1
+        let last = indexPath.row == 0
+        
         let previous: Int? = indexPath.row < messages.count - 1 ? indexPath.row + 1 : nil
+        
         let previousRow = previous == nil ? false : true
         let previousMessage = previousRow == true ?
             messages[indexPath.row].messageTime.timeIntervalSince(messages[previous!].messageTime) > 3600 : first
         
-        let lastCell = tableView.cellForRow(at: IndexPath(row: self.messages.count - 1, section: 0))
-        let firstCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0))
-        
-        return (lastCell != nil) || (firstCell != nil) ? true : previousMessage
+        return first || last ? true : previousMessage
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let mainBoundsWidth = self.view.frame.width - 106
-        // let characterCount = self.messages[indexPath.row]._message.count
         
         let firstRowHeight: CGFloat = 54.5 // 51.0 // UIFont(name: "Avenir-Book", size: 12.0)
-        let extraRowHeight: CGFloat = 19.75 // 18.0 // UIFont(name: "Avenir-Book", size: 12.0)
+        let extraRowHeight: CGFloat = 20.00 // 18.0 // UIFont(name: "Avenir-Book", size: 12.0)
         
-        let firstRow: CGFloat = indexPath.row == 0 ? 20.0 : 0.0
-        let addedRow: CGFloat = tableViewCellHasLabel(tableView: tableView, indexPath: indexPath) ? 20.0 : firstRow
-        // let charactersEachRow = 55
-        // let extraRowCount = characterCount / charactersEachRow
-        // let rowHeight: CGFloat = firstRow + CGFloat(Int(extraRowHeight) * extraRowCount)
+        let firstRow: CGFloat = indexPath.row == 0 ? extraRowHeight : 0.0
+        let addedRow: CGFloat = tableViewCellHasLabel(tableView: tableView, indexPath: indexPath) ? extraRowHeight : firstRow
         
         let messageText = self.messages[indexPath.row]._message
         let messageTextRows = messageText.linesFor(font: UIFont(name: "Avenir-Book", size: 14.0)!, width: mainBoundsWidth)

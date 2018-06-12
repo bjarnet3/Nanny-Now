@@ -15,6 +15,8 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
+    @IBOutlet weak var brandingLabel: UILabel!
+    
     @IBOutlet weak var userStatusLbl: UILabel!
     @IBOutlet weak var userIndicatorLbl: UILabel!
 
@@ -73,6 +75,10 @@ class MessageTableViewCell: UITableViewCell {
         super.layoutSubviews()
         
         self.userStatusLbl.layer.cornerRadius = self.userStatusLbl.frame.height / 2
+        
+        self.brandingLabel.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        self.brandingLabel.layer.cornerRadius = self.brandingLabel.frame.height / 2
+        self.brandingLabel.clipsToBounds = true
     }
     
     public enum Direction {

@@ -17,10 +17,10 @@ class MessageViewController: UIViewController {
     
     // MARK: - IBOutlet: Connection to Storyboard
     // ----------------------------------------
-    @IBOutlet weak var backTable: CustomTableView!
+    @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var mainTable: CustomTableView!
-    
-    // let label = UILabel(frame: CGRect()
+    @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var backTable: CustomTableView!
     
     // MARK: - Properties: Array & Varables
     // -------------------------------------
@@ -33,7 +33,7 @@ class MessageViewController: UIViewController {
     var totalMessages: Int = 0
     
     var lastRowSelected: IndexPath?
-    var heightForRow:[CGFloat] = [50,160,80]
+    var heightForRow:[CGFloat] = [20,160,80]
     
     var animatorIsBusy = false
     var introAnimationLoaded = false
@@ -42,12 +42,15 @@ class MessageViewController: UIViewController {
     let cornerRadius: CGFloat = 22.0
     let inactiveOffset: CGFloat = 80
     
-    let mainTableMaxY: CGFloat = 55
+    let mainTableMaxY: CGFloat = 85
     var mainTableMinimized = false
-    let mainTableMaximizedHeight: CGFloat = UIScreen.main.bounds.height - 55
+    let mainTableMaximizedHeight: CGFloat = UIScreen.main.bounds.height - 85
     let mainTableMinimizedHeight: CGFloat = 95
     
-    let backTableOffset: CGFloat = 25
+    let backTableOffset: CGFloat = 0
+    let backTableMaxY: CGFloat = 22
+    let backTableMaximizedHeight: CGFloat = UIScreen.main.bounds.height - 22
+    let backTableMinimizedWidth: CGFloat = UIScreen.main.bounds.width - 22
     
     var mainScreenHeight: CGFloat {
         return UIScreen.main.bounds.height
@@ -110,18 +113,23 @@ class MessageViewController: UIViewController {
         }
     }
     
-    // MARK: - IBAction: Methods connected to UI
-    // ----------------------------------------
-    @IBAction func tapToMinimize(_ sender: UITapGestureRecognizer) {
-        if self.mainTable.frame.height > mainTableMinimizedHeight {
+    func mainAction() {
+        if mainTableMinimized {
+            maxiMizeTableView()
             self.animatorIsBusy = true
             self.mainTableMinimized = false
-            miniMizeTableView()
         } else {
+            miniMizeTableView()
             self.animatorIsBusy = true
             self.mainTableMinimized = true
-            maxiMizeTableView()
         }
+    }
+    
+    // MARK: - IBAction: Methods connected to UI
+    // ----------------------------------------
+    @IBAction func tapAction(_ sender: UIButton) {
+        hapticButton(.selection)
+        mainAction()
     }
     
     // MARK: - Functions, Database & Animation
@@ -129,15 +137,10 @@ class MessageViewController: UIViewController {
     func maxiMizeTableView() {
         self.blurAnimator?.stopAnimation(true)
         self.scrollAnimator?.stopAnimation(true)
-        
-        setBlurEffectWithAnimator(on: self.mainTable, duration: 0.42, startBlur: true, curve: .easeIn)
-        self.blurAnimator?.startAnimation()
-        
-        self.mainTable.reloadData()
-        self.mainTable.setNeedsDisplay()
-        
+
         UIView.animate(withDuration: 0.45, delay: 0.045, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
             self.enterMainTable()
+            
         }, completion: { (true) in
             self.mainTableMinimized = false
             self.animatorIsBusy = false
@@ -156,18 +159,12 @@ class MessageViewController: UIViewController {
         
         setBlurEffectWithAnimator(on: self.mainTable, duration: 0.45, startBlur: false, curve: .easeIn)
         self.blurAnimator?.startAnimation()
-        
-        self.backTable.reloadData()
-        self.backTable.setNeedsDisplay()
-        
         UIView.animate(withDuration: 0.45, delay: 0.010, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
-            
             self.enterBackTable()
             
         }, completion: { (true) in
             self.mainTableMinimized = true
             self.animatorIsBusy = false
-            
             self.setScrollEffectWithAnimator(on: self.backTable, reversed: true)
         })
     }
@@ -175,62 +172,68 @@ class MessageViewController: UIViewController {
     // THIS NEEDS TO BE FIXED
     // ----------------------
     func setMainTable() {
-        self.mainTable.frame = CGRect(x: 0, y: self.mainTableMaxY, width: self.mainScreenWidth, height: self.mainScreenHeight - self.mainTableMaxY)
-        self.mainTable.frame = self.mainTable.frame.offsetBy(dx: 0, dy: inactiveOffset)
-        self.mainTable.layer.cornerRadius = cornerRadius
+        self.mainView.frame = CGRect(x: 0, y: self.mainTableMaxY, width: self.mainScreenWidth, height: self.mainScreenHeight - self.mainTableMaxY)
+        self.mainView.frame = self.mainView.frame.offsetBy(dx: 0, dy: inactiveOffset)
+        self.mainView.layer.cornerRadius = self.cornerRadius
         // Specify which corners to round = [ upper left , upper right ]
-        self.mainTable.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        self.mainTable.contentInset.bottom = 60
+        self.mainView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
+        self.mainTable.contentInset.bottom = 50
     }
     
-    func setBackTable() {
-        self.backTable.frame = UIScreen.main.bounds
-        self.backTable.alpha = 0.70
-        self.backTable.layer.cornerRadius = 0
-        // Specify which corners to round = [ upper left , upper right ]
-        self.backTable.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        self.backTable.contentInset.top = 35
-        self.backTable.contentInset.bottom = 100
-        self.backTable.contentOffset.y = 35
-    }
-    
-    func hideBackTable() {
-        self.backTable.layer.cornerRadius = self.cornerRadius
-        self.backTable.alpha = 0.35
-        self.backTable.transform = CGAffineTransform(scaleX: 0.89, y: 0.89)
-        // self.backTable.isScrollEnabled = false
-        self.backTable.layoutIfNeeded()
-    }
-    
-    func midBackTable() {
-        self.backTable.layer.cornerRadius = self.cornerRadius * 0.8
-        self.backTable.alpha = 0.45
-        self.backTable.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
-        // self.backTable.isScrollEnabled = false
-        self.backTable.layoutIfNeeded()
-    }
-    
-    func showBackTable() {
-        self.backTable.layer.cornerRadius = 0
-        self.backTable.alpha = 1.0
-        self.backTable.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        self.backTable.isScrollEnabled = true
-        self.backTable.layoutIfNeeded()
+    func showMainTable() {
+        self.mainView.frame = CGRect(x: 0, y: self.mainTableMaxY, width: self.mainScreenWidth, height: self.mainScreenHeight - self.mainTableMaxY)
+        self.mainView.layer.cornerRadius = self.cornerRadius
+        self.mainTable.isScrollEnabled = true
     }
     
     func hideMainTable() {
-        self.mainTable.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        self.mainTable.frame = CGRect(x: 0, y: self.mainScreenHeight - self.mainTableMinimizedHeight, width: self.mainScreenWidth, height: self.mainTableMinimizedHeight)
-        self.mainTable.layer.cornerRadius = 0
+        self.mainView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        self.mainView.frame = CGRect(x: 0, y: self.mainScreenHeight - self.mainTableMinimizedHeight, width: self.mainScreenWidth, height: self.mainTableMinimizedHeight)
+        self.mainView.layer.cornerRadius = 0
+        
         self.mainTable.isScrollEnabled = false
         self.mainTable.scrollToRow(at: IndexPath(row: 0, section: 0), at:.top, animated: true)
         self.mainTable.layoutIfNeeded()
     }
     
-    func showMainTable() {
-        self.mainTable.frame = CGRect(x: 0, y: self.mainTableMaxY, width: self.mainScreenWidth, height: self.mainScreenHeight - self.mainTableMaxY)
-        self.mainTable.layer.cornerRadius = self.cornerRadius
-        self.mainTable.isScrollEnabled = true
+    func setBackTable() {
+        // self.backView.frame = CGRect(x: self.backTableOffset, y: self.backTableMaxY, width: self.mainScreenWidth - (self.backTableOffset * 2), height: self.mainScreenHeight - self.backTableMaxY)
+        self.backView.frame = CGRect(x: 0, y: self.backTableMaxY, width: self.mainScreenWidth, height: self.mainScreenHeight - self.backTableMaxY)
+        self.backView.alpha = 0.75
+        self.backView.layer.cornerRadius = self.cornerRadius
+        // Specify which corners to round = [ upper left , upper right ]
+        self.backView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        self.backTable.contentInset.top = 35
+        self.backTable.contentInset.bottom = 100
+        // self.backTable.contentOffset.y = 35
+    }
+    
+    func showBackTable() {
+        self.backView.layer.cornerRadius = self.cornerRadius
+        self.backView.alpha = 1.0
+        self.backView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        
+        self.backTable.isScrollEnabled = true
+        self.backTable.layoutIfNeeded()
+    }
+    
+    func midBackTable() {
+        self.backView.layer.cornerRadius = self.cornerRadius
+        self.backView.alpha = 0.65
+        self.backView.transform = CGAffineTransform(scaleX: 0.97, y: 0.945)
+        
+        // self.backTable.isScrollEnabled = false
+        // self.backTable.layoutIfNeeded()
+    }
+    
+    func hideBackTable() {
+        self.backView.layer.cornerRadius = self.cornerRadius
+        self.backView.alpha = 0.45
+        self.backView.transform = CGAffineTransform(scaleX: 0.94, y: 0.91)
+        
+        self.backTable.isScrollEnabled = false
+        // self.backTable.layoutIfNeeded()
     }
     
     func enterMainTable() {
@@ -279,18 +282,12 @@ class MessageViewController: UIViewController {
     }
     
     func setScrollEffectWithAnimator(on view: UIView, reversed: Bool = false, curve: UIViewAnimationCurve = .easeOut) {
-        scrollAnimator = UIViewPropertyAnimator(duration: 0.8, curve: curve) {
+        scrollAnimator = UIViewPropertyAnimator(duration: 0.6, curve: curve) {
             if reversed {
-                self.backTable.layer.cornerRadius = 22.0
-                self.backTable.alpha = 0.4
-                self.backTable.transform = CGAffineTransform(translationX: 0, y: 35)
-                self.backTable.layoutIfNeeded()
+                self.midBackTable()
             } else {
-                self.backTable.layer.cornerRadius = 9
-                self.backTable.alpha = 0.7
-                self.backTable.transform = CGAffineTransform(scaleX: 0.96, y: 0.96)
-                self.backTable.layoutIfNeeded()
-                self.mainTable.transform = CGAffineTransform(translationX: 0, y: 25)
+                self.midBackTable()
+                self.mainView.transform = CGAffineTransform(translationX: 0, y: 30)
             }
         }
     }
@@ -645,8 +642,8 @@ extension MessageViewController {
                 // backTableView
                 self.hideBackTable()
                 
-                self.mainTable.frame = self.mainTable.frame.offsetBy(dx: 0, dy: -self.inactiveOffset)
-                self.mainTable.layoutIfNeeded()
+                self.mainView.frame = self.mainView.frame.offsetBy(dx: 0, dy: -self.inactiveOffset)
+                self.mainView.layoutIfNeeded()
                 
             }, completion: { (true) in
                 self.introAnimationLoaded = true
@@ -679,18 +676,24 @@ extension MessageViewController {
                     
                     // self.showBackTable()
                     self.midBackTable()
-                    self.mainTable.frame = self.mainTable.frame.offsetBy(dx: 0, dy: inactiveOffset)
+                    self.mainView.frame = self.mainView.frame.offsetBy(dx: 0, dy: inactiveOffset)
                     self.setBlurEffect(on: self.mainTable)
                     
                     self.maxiMizeTableView()
                     self.mainTable.layoutIfNeeded()
                 } else {
                     animateCells(in: self.backTable, true)
-                    // animateCells3d(in: self.backTable, true)
                     
                     // tableView
-                    self.mainTable.layer.cornerRadius = 0
-                    self.mainTable.frame = CGRect(x: 0, y: self.mainScreenHeight - self.mainTableMinimizedHeight, width: self.mainScreenWidth, height: self.mainTableMinimizedHeight)
+                    self.mainView.layer.cornerRadius = 0
+                    self.mainView.frame = CGRect(x: 0, y: self.mainScreenHeight - self.mainTableMinimizedHeight, width: self.mainScreenWidth, height: self.mainTableMinimizedHeight)
+                    
+                    // backTable - scrollEffect
+
+                    self.mainTableMinimized = true
+                    self.animatorIsBusy = false
+                    self.setScrollEffectWithAnimator(on: self.backTable, reversed: true)
+                    
                 }
             } else {
                 let tab = self.tabBarController?.tabBar as! FrostyTabBar
@@ -753,7 +756,6 @@ extension MessageViewController: UIScrollViewDelegate {
                             // print("scrollAnimator.state is not stopped")
                             let scrollResult = returnScrollValue(with: scrollView.contentOffset.y, valueOffset: 0.50)
                             scrollAnimator?.fractionComplete = scrollResult
-                            print(scrollResult)
                         }
                     }
                     
@@ -784,11 +786,13 @@ extension MessageViewController: UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         print("scrollViewWillEndDragging: \(velocity)")
         
-        if scrollView.contentOffset.y < -80  {
-            if scrollView == mainTable {
-                self.miniMizeTableView()
-            } else {
-                self.maxiMizeTableView()
+        if scrollView.contentOffset.y <= -80  {
+            if scrollAnimator?.state != .stopped {
+                if scrollView == mainTable {
+                    self.miniMizeTableView()
+                } else {
+                    self.maxiMizeTableView()
+                }
             }
         }
     }
@@ -806,15 +810,16 @@ extension MessageViewController: UIScrollViewDelegate {
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         print("scrollViewDidEndDecelerating")
-        if scrollView.contentOffset.y >= -80 {
-            print(scrollView.contentOffset.y)
+        // Drag down
+        if scrollView.contentOffset.y <= -80 {
             if scrollAnimator?.state != .stopped {
-                
-                if scrollView.contentOffset.y <= 0 {
-                    
+                // self.mainTable.contentOffset = .zero
+                if scrollView == mainTable {
+                    self.miniMizeTableView()
+                    // self.backTable.scrollToRow(at: IndexPath(row: 0, section: 0), at:.top, animated: true)
+                } else {
+                    self.maxiMizeTableView()
                     self.mainTable.contentOffset = .zero
-                    // self.backTable.contentOffset = .zero
-                    
                 }
             }
         }
@@ -913,9 +918,6 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
             if let remoteFrom = messages[indexPath.row]._fromUser {
                 if let user = self.user {
                     if let remoteUser = remoteFrom.userUID != user.userUID ? remoteFrom : messages[indexPath.row]._toUser {
-                        
-                        print(remoteFrom)
-                        print(remoteUser)
                         
                         messageDetailVC.setupView(user: user, remoteUser: remoteUser)
                         
