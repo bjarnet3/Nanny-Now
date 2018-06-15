@@ -11,6 +11,7 @@ import UIKit
 class MessageTableViewCell: UITableViewCell {
     
     @IBOutlet weak var profileImage: UIImageView!
+    
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -108,7 +109,7 @@ class MessageTableViewCell: UITableViewCell {
     func animateView( direction: Direction) {
         if direction == .enter {
             self.contentView.alpha = 0
-            self.setNeedsDisplay(profileImage.frame)
+            // self.setNeedsDisplay(profileImage.frame)
             self.contentView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
         } else {
             self.contentView.alpha = 1
