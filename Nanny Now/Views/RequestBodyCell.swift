@@ -19,25 +19,33 @@ class RequestBodyCell: UITableViewCell {
     @IBOutlet weak var pendingLabel: UILabel!
     @IBOutlet weak var acceptedLabel: UILabel!
     @IBOutlet weak var completeLabel: UILabel!
+    @IBOutlet weak var rejectedLabel: UILabel!
+    
     
     var user: User?
     
     // Property Observer
     var pendingCount: Int = 0 {
         didSet {
-            self.pendingLabel.text = "\(pendingCount) pending"
+            self.pendingLabel.text = " \(pendingCount) pending "
         }
     }
     
     var acceptedCount: Int = 0 {
         didSet {
-            self.acceptedLabel.text = "\(acceptedCount) accepted"
+            self.acceptedLabel.text = " \(acceptedCount) accepted "
+        }
+    }
+    
+    var rejectedCount: Int = 0 {
+        didSet {
+            self.rejectedLabel.text = " \(rejectedCount) rejected "
         }
     }
     
     var completeCount: Int = 0 {
         didSet {
-            self.completeLabel.text = "\(completeCount) complete"
+            self.completeLabel.text = " \(completeCount) complete "
         }
     }
     
@@ -50,7 +58,10 @@ class RequestBodyCell: UITableViewCell {
         super.awakeFromNib()
         
         // cellImageView.layer.cornerRadius = cellImageView.layer.frame.height / 2
-        
+        self.pendingLabel.layer.cornerRadius = self.pendingLabel.layer.bounds.height / 2
+        self.acceptedLabel.layer.cornerRadius = self.acceptedLabel.layer.bounds.height / 2
+        self.rejectedLabel.layer.cornerRadius = self.rejectedLabel.layer.bounds.height / 2
+        self.completeLabel.layer.cornerRadius = self.completeLabel.layer.bounds.height / 2
     }
     
     func animateView( direction: Direction) {

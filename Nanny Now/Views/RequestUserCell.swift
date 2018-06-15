@@ -10,7 +10,7 @@ import UIKit
 
 class RequestUserCell: UITableViewCell {
     
-    @IBOutlet weak var cellImageView: NannyImageView!
+    @IBOutlet weak var cellImageView: UIImageView!
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var requestStatusLbl: UILabel!
@@ -115,6 +115,12 @@ class RequestUserCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        self.cellImageView.layer.borderColor = UIColor.white.cgColor
+        self.cellImageView.layer.cornerRadius = self.cellImageView.layer.bounds.height / 2
+        self.cellImageView.layer.borderWidth = 0.85
+        self.cellImageView.layer.masksToBounds = true
+        self.cellImageView.layer.addShadow()
         
         self.amount.layer.cornerRadius = self.amount.frame.height / 2
     }

@@ -52,7 +52,6 @@ class MessageTableViewCell: UITableViewCell {
             self.userStatusLbl.text = " \(days) dager siden   "
             self.userIndicatorLbl.textColor = UIColor.gray
         }
-        print(minutes)
     }
     
     var time: Date? {
@@ -73,6 +72,12 @@ class MessageTableViewCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        self.profileImage.layer.borderColor = UIColor.white.cgColor
+        self.profileImage.layer.cornerRadius = self.profileImage.layer.bounds.height / 2
+        self.profileImage.layer.borderWidth = 0.85
+        self.profileImage.layer.masksToBounds = true
+        self.profileImage.layer.addShadow()
         
         self.userStatusLbl.layer.cornerRadius = self.userStatusLbl.frame.height / 2
         

@@ -705,6 +705,8 @@ extension NannyViewController : UITableViewDelegate, UITableViewDataSource {
         // Haptic Light
         hapticButton(.light, lowPowerModeDisabled)
         
+        self.lastRowSelected = indexPath
+        
         let delete = UITableViewRowAction(style: .destructive, title: " ⊗ ") { (action , indexPath ) -> Void in
             // if true, crash (because didEndEditingRow is called)
             tableView.isEditing = false
@@ -891,7 +893,9 @@ extension NannyViewController {
         }
         
         let sendRequest = UIAlertAction(title: "Send Forespørsel", style: .default) { (_) in
-            self.requestMenu?.initData(user: self.user, nanny: self.nannies[(self.lastRowSelected?.row)!])
+            
+            let row = self.lastRowSelected?.row ?? row
+            self.requestMenu?.initData(user: self.user, nanny: self.nannies[row])
             // self.requestMenuOrder.initData(user: self.user, nanny: self.nannies[(self.lastRowSelected?.row)!])
             // self.requestMenuOrder.sendRequest()
             self.requestMenu?.sendRequest()

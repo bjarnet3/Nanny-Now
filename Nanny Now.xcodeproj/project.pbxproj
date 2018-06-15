@@ -291,20 +291,20 @@
 				5CC849341FCA11BE003AE163 /* SettingsTableViewCell.swift */,
 				5CCF0C921D898D9F0089F39D /* NannyTableViewCell.swift */,
 				5C4C30811FD9DF9500151AB6 /* FamilyTableViewCell.swift */,
+				5C4C30831FD9E7F800151AB6 /* FoldingCell.swift */,
 				5C76202E20891DC0005D7647 /* HeaderTableViewCell.swift */,
 				5C41A4E9207C34B00025A4AE /* FriendsTableViewCell.swift */,
 				5C9FC62B1FF6E95000906B05 /* FriendsCollectionViewCell.swift */,
 				5C8925A120810A060032CEAA /* ReviewTableViewCell.swift */,
 				5C8925A320810C1F0032CEAA /* ReviewCollectionViewCell.swift */,
-				5CF50D82209C49D300136167 /* MessageTableViewCell.swift */,
-				5C2F4BBA20A7FB1100BFB313 /* MessageDetailTableCell.swift */,
 				5C70E62B208214F00076CC4A /* RequestHeaderCell.swift */,
 				5C70E62D2082153E0076CC4A /* RequestBodyCell.swift */,
 				5C093A481FE0985100144A32 /* RequestUserCell.swift */,
 				5CFE968720A4E1F1003C08A4 /* RequestExtendedCell.swift */,
+				5CF50D82209C49D300136167 /* MessageTableViewCell.swift */,
+				5C2F4BBA20A7FB1100BFB313 /* MessageDetailTableCell.swift */,
 				5C2E696A20BCFA81000F7AFC /* RequestMenu.xib */,
 				5C2E696820BCDA93000F7AFC /* RequestMenu.swift */,
-				5C4C30831FD9E7F800151AB6 /* FoldingCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

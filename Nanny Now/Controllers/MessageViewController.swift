@@ -36,7 +36,7 @@ class MessageViewController: UIViewController {
     var totalMessages: Int = 0
     
     var lastRowSelected: IndexPath?
-    var heightForRow:[CGFloat] = [5,160,80]
+    var heightForRow:[CGFloat] = [5,170,80]
     
     var animatorIsBusy = false
     var introAnimationLoaded = false
@@ -87,7 +87,8 @@ class MessageViewController: UIViewController {
         
     var rejectedCount: Int = 0 {
         didSet {
-            print("rejectedCount")
+            let secondCell = mainTable.cellForRow(at: IndexPath(row: 1, section: 0)) as? RequestBodyCell
+            secondCell?.rejectedCount = rejectedCount
         }
     }
     
@@ -156,7 +157,6 @@ class MessageViewController: UIViewController {
         
         UIView.animate(withDuration: 0.45, delay: 0.045, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
             self.enterMainTable()
-            
         }, completion: { (true) in
             self.mainTableMinimized = false
             self.animatorIsBusy = false
@@ -170,11 +170,16 @@ class MessageViewController: UIViewController {
     }
     
     func miniMizeTableView() {
-        self.blurAnimator?.stopAnimation(true)
-        self.scrollAnimator?.stopAnimation(true)
+        self.animatorIsBusy = true
         
-        setBlurEffectWithAnimator(on: self.mainTable, duration: 0.45, startBlur: false, curve: .easeIn)
-        self.blurAnimator?.startAnimation()
+        self.blurAnimator?.stopAnimation(true)
+        // self.scrollAnimator?.stopAnimation(true)
+        self.scrollAnimator?.stopAnimation(true)
+        // self.scrollAnimator?.pauseAnimation()
+        
+        // setBlurEffectWithAnimator(on: self.mainTable, duration: 0.45, startBlur: false, curve: .easeIn)
+        // self.blurAnimator?.startAnimation()
+        
         UIView.animate(withDuration: 0.45, delay: 0.010, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
             self.enterBackTable()
             
@@ -183,7 +188,9 @@ class MessageViewController: UIViewController {
             self.animatorIsBusy = false
             
             self.setBlurEffectWithAnimator(on: self.mainTable, duration: 0.45, startBlur: true, curve: .easeOut)
-            self.setScrollEffectWithAnimator(on: self.backTable, reversed: true)
+            // self.setScrollEffectWithAnimator(on: self.backTable, reversed: true)
+            self.setScrollEffectWithAnimator(on: self.backTable, reversed: true, curve: .easeOut)
+            // self.scrollAnimator?.fractionComplete = 0.0
         })
     }
     
@@ -205,7 +212,6 @@ class MessageViewController: UIViewController {
         self.mainView.layer.cornerRadius = self.cornerRadius
         self.mainTable.isScrollEnabled = true
         
-
         self.mainLabel.text = "• • •"
         self.backLabel.text = "◦ ◦ ◦"
     }
@@ -227,15 +233,15 @@ class MessageViewController: UIViewController {
         self.backView.layer.cornerRadius = self.cornerRadius
         // Specify which corners to round = [ upper left , upper right ]
         self.backView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        self.backTable.contentInset.top = 35
-        self.backTable.contentInset.bottom = 100
+        self.backTable.contentInset.top = 20
+        self.backTable.contentInset.bottom = 110
         // self.backTable.contentOffset.y = 35
     }
     
     func showBackTable() {
+        self.backView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         self.backView.layer.cornerRadius = self.cornerRadius
         self.backView.alpha = 1.0
-        self.backView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         
         self.backTable.isScrollEnabled = true
         self.backTable.layoutIfNeeded()
@@ -245,21 +251,21 @@ class MessageViewController: UIViewController {
     }
     
     func midBackTable() {
+        
+        self.backView.transform = CGAffineTransform(scaleX: 0.97, y: 0.940)
         self.backView.layer.cornerRadius = self.cornerRadius
         self.backView.alpha = 0.65
-        self.backView.transform = CGAffineTransform(scaleX: 0.97, y: 0.940)
         
-        // self.backTable.isScrollEnabled = false
-        // self.backTable.layoutIfNeeded()
+        self.backTable.layoutIfNeeded()
     }
     
     func hideBackTable() {
+        self.backView.transform = CGAffineTransform(scaleX: 0.94, y: 0.90)
         self.backView.layer.cornerRadius = self.cornerRadius
         self.backView.alpha = 0.45
-        self.backView.transform = CGAffineTransform(scaleX: 0.94, y: 0.90)
         
         self.backTable.isScrollEnabled = false
-        // self.backTable.layoutIfNeeded()
+        self.backTable.layoutIfNeeded()
     }
     
     func enterMainTable() {
@@ -310,7 +316,7 @@ class MessageViewController: UIViewController {
     func setScrollEffectWithAnimator(on view: UIView, reversed: Bool = false, curve: UIViewAnimationCurve = .easeOut) {
         scrollAnimator = UIViewPropertyAnimator(duration: 0.6, curve: curve) {
             if reversed {
-                self.midBackTable()
+                self.showBackTable()
             } else {
                 self.midBackTable()
                 self.mainView.transform = CGAffineTransform(translationX: 0, y: 25)
@@ -593,7 +599,7 @@ class MessageViewController: UIViewController {
     }
     
     
-    func removeDatabaseSubValue() {
+    func updatePublicRequestValue() {
         if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(UID).child("requests")
             let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(UID)
@@ -679,7 +685,6 @@ extension MessageViewController {
                 self.backTable.setNeedsDisplay()
                 
                 self.setBlurEffectWithAnimator(on: self.mainTable, startBlur: false)
-                
                 self.setScrollEffectWithAnimator(on: self.mainTable, reversed: false)
             })
         })
@@ -695,7 +700,7 @@ extension MessageViewController {
         self.animatorIsBusy = false
         self.mainTable.isUserInteractionEnabled = true
         
-        self.removeDatabaseSubValue()
+        self.updatePublicRequestValue()
 
         if !self.returnWithDismiss {
             if self.introAnimationLoaded {
@@ -780,14 +785,13 @@ extension MessageViewController: UIScrollViewDelegate {
         if backTable == scrollView {
             if blurAnimator != nil && scrollAnimator != nil {
                 if !animatorIsBusy {
-                    if scrollView.contentOffset.y < -25 {
+                    if scrollView.contentOffset.y < -30 {
                         if scrollAnimator?.state != .stopped {
                             // print("scrollAnimator.state is not stopped")
-                            let scrollResult = returnScrollValue(with: scrollView.contentOffset.y, valueOffset: 0.50)
+                            let scrollResult = returnScrollValue(with: scrollView.contentOffset.y, valueOffset: 0.30)
                             scrollAnimator?.fractionComplete = scrollResult
                         }
                     }
-                    
                 }
             }
         }
@@ -796,13 +800,13 @@ extension MessageViewController: UIScrollViewDelegate {
             if blurAnimator != nil && scrollAnimator != nil {
                 if !mainTableMinimized || !animatorIsBusy {
                     
-                    if scrollView.contentOffset.y < -15 {
-                        let blurResult = returnScrollValue(with: scrollView.contentOffset.y, valueOffset: 0.25)
+                    if scrollView.contentOffset.y < -15 && scrollView.contentOffset.y > -125 {
+                        let blurResult = returnScrollValue(with: scrollView.contentOffset.y, valueOffset: 0.30)
                         blurAnimator?.fractionComplete = blurResult
                         
                         if scrollAnimator?.state != .stopped {
                             // print("scrollAnimator.state is not stopped")
-                            let scrollResult = returnScrollValue(with: scrollView.contentOffset.y, valueOffset: 0.15)
+                            let scrollResult = returnScrollValue(with: scrollView.contentOffset.y, valueOffset: 0.30)
                             scrollAnimator?.fractionComplete = scrollResult
                         }
                     }
@@ -810,16 +814,19 @@ extension MessageViewController: UIScrollViewDelegate {
                 }
             }
         }
+        
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         print("scrollViewWillEndDragging: \(velocity)")
         
-        if scrollView.contentOffset.y <= -80  {
+        if scrollView.contentOffset.y <= -80 {
             if scrollAnimator?.state != .stopped {
                 if scrollView == mainTable {
+                    // self.mainAction()
                     self.miniMizeTableView()
                 } else {
+                    // self.mainAction()
                     self.maxiMizeTableView()
                 }
             }
@@ -842,13 +849,10 @@ extension MessageViewController: UIScrollViewDelegate {
         // Drag down
         if scrollView.contentOffset.y <= -80 {
             if scrollAnimator?.state != .stopped {
-                // self.mainTable.contentOffset = .zero
                 if scrollView == mainTable {
-                    self.miniMizeTableView()
-                    // self.backTable.scrollToRow(at: IndexPath(row: 0, section: 0), at:.top, animated: true)
+                    miniMizeTableView()
                 } else {
-                    self.maxiMizeTableView()
-                    self.mainTable.contentOffset = .zero
+                    maxiMizeTableView()
                 }
             }
         }
@@ -924,7 +928,7 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
                         let adminUser = self.user!
                         let guestUser = User(userUID: request.userID, imageName: request.imageName, firstName: request.firstName)
                         
-                        requestDetail.initWith(adminUser: adminUser, guestUser: guestUser, viewRect: mainTable.frame)
+                        requestDetail.initWith(adminUser: adminUser, guestUser: guestUser, viewRect: mainTable.bounds)
                         self.returnWithDismiss = true
                         present(requestDetail, animated: false)
                         
@@ -987,6 +991,10 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
         let more = UITableViewRowAction(style: .default, title: " ⋮ ") { (action, indexPath) -> Void in
             // Show on map
             // self.standardAlert(row: indexPath.row)
+            
+            if tableView == self.mainTable {
+                self.standardAlert(request: self.requests[indexPath.row - 2])
+            }
         }
         
         delete.backgroundColor = SILVER
@@ -998,3 +1006,84 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+// SET STATUS
+extension MessageViewController {
+    func standardAlert(request: Request) {
+        
+        guard let userID = self.user?.userUID else { return }
+        let remoteID = request.userID
+        guard let requestID = request.requestID else { return }
+        
+        let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(userID).child(requestID)
+        let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(userID).child("requests").child(requestID)
+        
+        let publicRemote = DataService.instance.REF_REQUESTS.child("public").child(remoteID).child(requestID)
+        // let privateRemote = DataService.instance.REF_REQUESTS.child("private").child(remoteID).child("requests").child(requestID)
+        
+        func returnRequestStatus(requestStatus: RequestStatus) -> [String:String] {
+            return [ "requestStatus":requestStatus.rawValue ]
+        }
+        
+        let alertController = UIAlertController(title: "Oppdater Forespørsel", message: "Sett status og svar på forespørsel", preferredStyle: .alert)
+        
+        let setAccept = UIAlertAction(title: "Aksepter", style: .default) { (_) in
+            let updateStatus = returnRequestStatus(requestStatus: RequestStatus.accepted)
+            
+            publicRequest.updateChildValues(updateStatus)
+            DataService.instance.moveValuesFromRefToRef(fromReference: publicRequest, toReference: privateRequest)
+            
+            publicRemote.updateChildValues(updateStatus)
+            
+            var returnRequest = request
+            returnRequest.requestStatus = RequestStatus.accepted.rawValue
+            returnRequest.userID = userID
+            
+            Notifications.instance.sendNotification(with: returnRequest)
+        }
+        
+        let setPending = UIAlertAction(title: "Venter", style: .default) { (_) in
+            let updateStatus = returnRequestStatus(requestStatus: RequestStatus.pending)
+            
+            publicRequest.updateChildValues(updateStatus)
+            DataService.instance.moveValuesFromRefToRef(fromReference: publicRequest, toReference: privateRequest)
+            
+            publicRemote.updateChildValues(updateStatus)
+            
+            var returnRequest = request
+            returnRequest.requestStatus = RequestStatus.pending.rawValue
+            returnRequest.userID = userID
+            
+            Notifications.instance.sendNotification(with: returnRequest)
+        }
+        
+        let setReject = UIAlertAction(title: "Avvis", style: .destructive) { (_) in
+            let updateStatus = returnRequestStatus(requestStatus: RequestStatus.rejected)
+            
+            publicRequest.updateChildValues(updateStatus)
+            DataService.instance.moveValuesFromRefToRef(fromReference: publicRequest, toReference: privateRequest)
+            
+            publicRemote.updateChildValues(updateStatus)
+            
+            var returnRequest = request
+            returnRequest.requestStatus = RequestStatus.rejected.rawValue
+            returnRequest.userID = userID
+            
+            Notifications.instance.sendNotification(with: returnRequest)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Tilbake", style: .cancel) { (_) in
+        }
+        
+        setAccept.isEnabled = request.requestStatus == RequestStatus.accepted.rawValue ? false : true
+        setPending.isEnabled = request.requestStatus == RequestStatus.pending.rawValue ? false : true
+        setReject.isEnabled = request.requestStatus == RequestStatus.rejected.rawValue ? false : true
+        
+        alertController.addAction(setAccept)
+        alertController.addAction(setPending)
+        alertController.addAction(setReject)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: lowPowerModeDisabled) {
+        }
+    }
+}

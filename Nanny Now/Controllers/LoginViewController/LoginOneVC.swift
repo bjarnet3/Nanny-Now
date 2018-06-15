@@ -25,7 +25,7 @@ class LoginOneVC: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var overlayView: UIImageView!
     
-    @IBOutlet weak var scrollView: UIScrollView!
+    // @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var txtFirstName: DTTextField!
     @IBOutlet weak var txtLastName: DTTextField!
@@ -53,7 +53,7 @@ class LoginOneVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scrollView.alpha = 0
+        // scrollView.alpha = 0
         
         addTextToRegistration()
         
@@ -199,12 +199,12 @@ class LoginOneVC: UIViewController {
         if enter {
             UIView.animate(withDuration: 0.45, delay: delay, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.85, options: .curveEaseIn, animations: {
                 self.imageView.alpha = 0.25
-                self.scrollView.alpha = 1.0
+                // self.scrollView.alpha = 1.0
             })
         } else {
             UIView.animate(withDuration: 0.35, delay: delay, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.85, options: .curveEaseIn, animations: {
                 self.imageView.alpha = 0.0
-                self.scrollView.alpha = 0.0
+                // self.scrollView.alpha = 0.0
             })
         }
     }
@@ -219,7 +219,7 @@ class LoginOneVC: UIViewController {
                 self.subLbl.alpha = 1
                 self.subLbl.frame = self.subLbl.frame.offsetBy(dx: 0, dy: -30)
                 
-                self.scrollView.alpha = 1.0
+                // self.scrollView.alpha = 1.0
             })
         } else {
             UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.85, options: .curveEaseIn, animations: {
@@ -230,7 +230,7 @@ class LoginOneVC: UIViewController {
                 self.mainLbl.alpha = 0.0
                 self.mainLbl.frame = self.mainLbl.frame.offsetBy(dx: 0, dy: 30)
                 
-                self.scrollView.alpha = 0.0
+                // self.scrollView.alpha = 0.0
             })
         }
     }
@@ -242,11 +242,11 @@ extension LoginOneVC {
     
     @objc func keyboardWillShow(notification:Notification) {
         guard let keyboardHeight = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue else { return }
-        scrollView.contentInset = UIEdgeInsetsMake(0, 0, keyboardHeight.height, 0)
+        // scrollView.contentInset = UIEdgeInsetsMake(0, 0, keyboardHeight.height, 0)
     }
     
     @objc func keyboardWillHide(notification:Notification) {
-        scrollView.contentInset = .zero
+        // scrollView.contentInset = .zero
     }
     
     func uploadUserData() -> Bool {
