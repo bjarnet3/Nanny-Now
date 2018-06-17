@@ -222,8 +222,6 @@ class MessageDetailVC: UIViewController {
     
     private func playSound(soundLibrary: SoundLibrary) {
         let (fileName, fileType) = returnFilenameAndExtensionFromSound(soundName: soundLibrary)
-        print(fileName)
-        print(fileType)
         guard let url = Bundle.main.url(forResource: fileName, withExtension: fileType) else { return }
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)

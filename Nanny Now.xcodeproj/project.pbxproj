@@ -18,7 +18,6 @@
 		5C2F4BBB20A7FB1100BFB313 /* MessageDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F4BBA20A7FB1100BFB313 /* MessageDetailTableCell.swift */; };
 		5C33CFC71DB422830075675E /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C33CFC61DB422830075675E /* Functions.swift */; };
 		5C389686208968FD008C7E12 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C389685208968FD008C7E12 /* Friends.swift */; };
-		5C3D884D20B5F276008C84D4 /* NotificationMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3D884C20B5F276008C84D4 /* NotificationMessageCell.swift */; };
 		5C3D9ACA202AE128007A9147 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3D9AC9202AE128007A9147 /* MapKit.framework */; };
 		5C3D9ACB202AE131007A9147 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3D9AC9202AE128007A9147 /* MapKit.framework */; };
 		5C41A4EA207C34B00025A4AE /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C41A4E9207C34B00025A4AE /* FriendsTableViewCell.swift */; };
@@ -44,7 +43,6 @@
 		5C9BAB7520C5DFE20063BD20 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAB7420C5DFE20063BD20 /* CustomView.swift */; };
 		5C9BAB7720C5FE2E0063BD20 /* CALayer+addShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAB7620C5FE2E0063BD20 /* CALayer+addShadow.swift */; };
 		5C9BAB7920C6CF4B0063BD20 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAB7820C6CF4B0063BD20 /* CustomTextField.swift */; };
-		5C9D522320B6CD7A0083CE13 /* NannyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C961D898E940089F39D /* NannyImageView.swift */; };
 		5C9D522520B6CD830083CE13 /* NannyImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D522420B6CD830083CE13 /* NannyImageView.swift */; };
 		5C9D522720B6CE190083CE13 /* UserImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D522620B6CE180083CE13 /* UserImageView.swift */; };
 		5C9FC62C1FF6E95000906B05 /* FriendsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9FC62B1FF6E95000906B05 /* FriendsCollectionViewCell.swift */; };
@@ -155,7 +153,6 @@
 		5C2F4BBA20A7FB1100BFB313 /* MessageDetailTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailTableCell.swift; sourceTree = "<group>"; };
 		5C33CFC61DB422830075675E /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		5C389685208968FD008C7E12 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
-		5C3D884C20B5F276008C84D4 /* NotificationMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationMessageCell.swift; sourceTree = "<group>"; };
 		5C3D9AC9202AE128007A9147 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		5C41A4E9207C34B00025A4AE /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
 		5C4C30811FD9DF9500151AB6 /* FamilyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyTableViewCell.swift; sourceTree = "<group>"; };
@@ -216,7 +213,6 @@
 		5CCF0C821D898BFB0089F39D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CCF0C8C1D898D090089F39D /* Groups.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Groups.swift; sourceTree = "<group>"; };
 		5CCF0C921D898D9F0089F39D /* NannyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NannyTableViewCell.swift; sourceTree = "<group>"; };
-		5CCF0C961D898E940089F39D /* NannyImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NannyImageView.swift; sourceTree = "<group>"; };
 		5CCF0C981D898EC40089F39D /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		5CCF0C9C1D898F110089F39D /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		5CCF0C9E1D898F300089F39D /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
@@ -341,9 +337,7 @@
 		5CAD362E20A8EFBC00C56FCE /* NotificationMessageResponse */ = {
 			isa = PBXGroup;
 			children = (
-				5CCF0C961D898E940089F39D /* NannyImageView.swift */,
 				5CAD362F20A8EFBC00C56FCE /* NotificationViewController.swift */,
-				5C3D884C20B5F276008C84D4 /* NotificationMessageCell.swift */,
 				5CAD363120A8EFBC00C56FCE /* MainInterface.storyboard */,
 				5CAD363420A8EFBC00C56FCE /* Info.plist */,
 			);
@@ -762,8 +756,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CAD363020A8EFBC00C56FCE /* NotificationViewController.swift in Sources */,
-				5C9D522320B6CD7A0083CE13 /* NannyImageView.swift in Sources */,
-				5C3D884D20B5F276008C84D4 /* NotificationMessageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
