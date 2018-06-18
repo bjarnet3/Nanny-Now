@@ -206,9 +206,9 @@ class Notifications {
                                              "sound" : "notification48.wav",
                                              "badge" : badge],
                                          "priority":10,
-                                          "content_available": contentAvailable,
-                                            "mutable_content": true,
-                                            "category" : category
+                                         "content_available": contentAvailable,
+                                         "mutable_content": true,
+                                         "category" : category
                                             ] as [String : Any]
                                     
                                     do {
@@ -559,7 +559,7 @@ class Notifications {
                                              "sound" : "notification11.wav",
                                              "badge" : badge],
                                          "priority":10,
-                                         // "content_available": true,
+                                            "content_available": true,
                                             "mutable_content": true,
                                             "category" : category
                                             ] as [String : Any]

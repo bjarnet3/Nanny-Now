@@ -17,13 +17,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CXE-Fy-LEo" customClass="FrostyView" customModule="Nanny_Now" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CXE-Fy-LEo" customClass="FrostyView" customModule="NotificationMessageResponse" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="2" width="375" height="55"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="uvM-Rs-AYN">
                                         <rect key="frame" x="8" y="8" width="359" height="39"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text=". . . TAP TAP . . . " placeholder="   WHO IS THERE . . . " textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ivz-iA-5uz" customClass="CustomTextField" customModule="Nanny_Now" customModuleProvider="target">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text=". . . TAP TAP . . . " placeholder="   WHO IS THERE . . . " textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="12" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ivz-iA-5uz" customClass="CustomTextField" customModule="NotificationMessageResponse" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="250" height="39"/>
                                                 <color key="backgroundColor" red="1" green="0.19215686269999999" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="tintColor" red="0.98823529409999999" green="0.1843137255" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -35,7 +35,7 @@
                                                     <action selector="textFieldValue:" destination="M4Y-Lb-cyx" eventType="valueChanged" id="jE5-Ce-TVA"/>
                                                 </connections>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gxv-g8-1ko" customClass="CustomButton" customModule="Nanny_Now" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gxv-g8-1ko" customClass="CustomButton" customModule="NotificationMessageResponse" customModuleProvider="target">
                                                 <rect key="frame" x="255" y="0.0" width="104" height="39"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -88,6 +88,7 @@
                     <connections>
                         <outlet property="sendButton" destination="gxv-g8-1ko" id="BV7-iN-GZh"/>
                         <outlet property="textField" destination="Ivz-iA-5uz" id="bsP-p1-CT9"/>
+                        <outlet property="textFieldBottom" destination="Lyo-wX-spZ" id="rjf-wV-o3W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
