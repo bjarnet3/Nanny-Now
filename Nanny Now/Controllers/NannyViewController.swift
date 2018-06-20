@@ -38,8 +38,8 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     var request: Request?
     
     var animator: UIViewPropertyAnimator?
-    var visualView: UIVisualEffectView?
-    var requestMenu: RequestMenu?
+    // var visualView: UIVisualEffectView?
+    // var requestMenu: NannyRequestMenu?
     
     // Property Observer
     var nannyBadge: Int = 0 {
@@ -499,12 +499,14 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     func enterRequestMenu() {
         // Instantiate Visual Blur View
         let visualView = UIVisualEffectView(frame: UIScreen.main.bounds)
-        self.visualView = visualView
+        // self.visualView = visualView
+        self.view.addSubview(visualView)
         
         // Instantiate RequestMenu View
         let requestFrame = CGRect(x: 15, y: 30, width: UIScreen.main.bounds.width - 30, height: 520)
-        let requestMenu = RequestMenu(frame: requestFrame)
-        self.requestMenu = requestMenu
+        let requestMenu = NannyRequestMenu(frame: requestFrame)
+        // self.view.addSubview(requestMenu)
+        // self.requestMenu = requestMenu
         
         // Set properties
         visualView.effect = nil
@@ -540,21 +542,39 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     }
     
     func exitRequestMenu() {
-        if let requestMenu = self.requestMenu {
-            if let visualView = self.visualView {
-                self.animator = UIViewPropertyAnimator(duration: 0.38, curve: .easeOut) {
-                    visualView.effect = nil
+        var visualView: UIVisualEffectView?
+        var requestMenu: NannyRequestMenu?
+        
+        for view in self.view.subviews {
+            if view is UIVisualEffectView {
+                print("VisualEffectView is found")
+                visualView = (view as? UIVisualEffectView)!
+            }
+            if view is NannyRequestMenu {
+                if let requestMenuView = view as? NannyRequestMenu {
+                    requestMenu = requestMenuView
+                    print("requestMenu found")
+                    
+                    if let visualView = visualView {
+                        self.animator = UIViewPropertyAnimator(duration: 0.38, curve: .easeOut) {
+                            visualView.effect = nil
+                        }
+                        self.animator?.startAnimation()
+                        visualView.isUserInteractionEnabled = false
+                        
+                        UIView.animate(withDuration: 0.35, delay: 0.00, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
+                            
+                            requestMenu?.alpha = 0.0
+                            requestMenu?.isUserInteractionEnabled = false
+                            requestMenu?.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
+                        })
+                        requestMenu = nil
+                    }
+                    
                 }
-                self.animator?.startAnimation()
-                visualView.isUserInteractionEnabled = false
-                UIView.animate(withDuration: 0.35, delay: 0.00, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
-                    requestMenu.alpha = 0.0
-                    requestMenu.isUserInteractionEnabled = false
-                    requestMenu.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
-                })
-                self.requestMenu = nil
             }
         }
+        
         self.resetMapView()
     }
     
@@ -895,10 +915,21 @@ extension NannyViewController {
         let sendRequest = UIAlertAction(title: "Send Forespørsel", style: .default) { (_) in
             
             let row = self.lastRowSelected?.row ?? row
-            self.requestMenu?.initData(user: self.user, nanny: self.nannies[row])
+            for view in self.view.subviews {
+                if view is NannyRequestMenu {
+                    if let requestMenu = view as? NannyRequestMenu {
+                        requestMenu.initData(user: self.user, nanny: self.nannies[row])
+                        requestMenu.sendRequest()
+                    }
+                }
+            }
+            // LAST / ONLY requestMenu vas Outlet
+            // self.requestMenu?.initData(user: self.user, nanny: self.nannies[row])
+            // self.requestMenu?.sendRequest()
+            
+            // REALLY OLD / WHEN MENUS WAS OUTLETS
             // self.requestMenuOrder.initData(user: self.user, nanny: self.nannies[(self.lastRowSelected?.row)!])
             // self.requestMenuOrder.sendRequest()
-            self.requestMenu?.sendRequest()
         }
         
         let cancelAction = UIAlertAction(title: "Avbryt", style: .destructive) { (_) in

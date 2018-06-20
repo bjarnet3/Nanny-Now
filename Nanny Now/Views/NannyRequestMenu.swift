@@ -8,7 +8,8 @@
 
 import UIKit
 
-class RequestMenu: UIView {
+class NannyRequestMenu: UIView {
+    
     @IBOutlet var requestView: FrostyCornerView!
     
     @IBOutlet weak var requestImage: CustomImageView!
@@ -35,9 +36,11 @@ class RequestMenu: UIView {
     // -------------------------------------
     private var user: User?
     private var nanny: Nanny?
-    private var completion: Completion?
     private var message: String = ""
+    private var completion: Completion?
     
+    // MARK: - IBAction: Methods connected to UI
+    // ----------------------------------------
     @IBAction private func requestTypeAction(_ sender: UISegmentedControl) {
         enum RequestType {
             case request
@@ -99,7 +102,7 @@ class RequestMenu: UIView {
 
     // MARK: - Functions, Database & Animation
     // ---------------------------------------
-    func sendRequest() {
+    public func sendRequest() {
         print("sendRequest")
         if let nanny = self.nanny {
             if let user = self.user {
@@ -121,7 +124,7 @@ class RequestMenu: UIView {
         self.completion?()
     }
     
-    func cancelRequest() {
+    private func cancelRequest() {
         self.completion?()
     }
     
@@ -130,7 +133,10 @@ class RequestMenu: UIView {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         self.endEditing(true)
     }
-
+    
+    // MARK: - Initializers
+    // ---------------------------------------
+    
     // This initializer hides init(frame:) from subclasses
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -143,13 +149,13 @@ class RequestMenu: UIView {
     }
 
     private func initNib() {
-        Bundle.main.loadNibNamed("RequestMenu", owner: self, options: nil)
+        Bundle.main.loadNibNamed("NannyRequestMenu", owner: self, options: nil)
         addSubview(requestView)
         requestView.frame = self.bounds
         requestView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
     
-    func initData(user: User?, nanny: Nanny?, completion: Completion? = nil) {
+    public func initData(user: User?, nanny: Nanny?, completion: Completion? = nil) {
         if let nanny = nanny {
             self.requestImage.loadImageUsingCacheWith(urlString: nanny.imageName)
             self.requestName.text = nanny.firstName
@@ -170,8 +176,10 @@ class RequestMenu: UIView {
         self.completion = completion
     }
     
+    // MARK: - ViewLoad / LayoutView
+    // ---------------------------------------
     override func layoutSubviews() {
         super.layoutSubviews()
     }
-
+    
 }

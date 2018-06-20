@@ -13,8 +13,8 @@
 		5C1104151DF56A4200C7FB46 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1104141DF56A4200C7FB46 /* Extensions.swift */; };
 		5C17A1DE20817D87004CCBC6 /* SubSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17A1DD20817D87004CCBC6 /* SubSettingsViewController.swift */; };
 		5C2895551FDB52A50009F6D5 /* FamilyDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2895541FDB52A50009F6D5 /* FamilyDetailVC.swift */; };
-		5C2E696920BCDA93000F7AFC /* RequestMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2E696820BCDA93000F7AFC /* RequestMenu.swift */; };
-		5C2E696B20BCFA81000F7AFC /* RequestMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C2E696A20BCFA81000F7AFC /* RequestMenu.xib */; };
+		5C2E696920BCDA93000F7AFC /* NannyRequestMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2E696820BCDA93000F7AFC /* NannyRequestMenu.swift */; };
+		5C2E696B20BCFA81000F7AFC /* NannyRequestMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C2E696A20BCFA81000F7AFC /* NannyRequestMenu.xib */; };
 		5C2F4BBB20A7FB1100BFB313 /* MessageDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F4BBA20A7FB1100BFB313 /* MessageDetailTableCell.swift */; };
 		5C33CFC71DB422830075675E /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C33CFC61DB422830075675E /* Functions.swift */; };
 		5C389686208968FD008C7E12 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C389685208968FD008C7E12 /* Friends.swift */; };
@@ -148,8 +148,8 @@
 		5C1104141DF56A4200C7FB46 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		5C17A1DD20817D87004CCBC6 /* SubSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSettingsViewController.swift; sourceTree = "<group>"; };
 		5C2895541FDB52A50009F6D5 /* FamilyDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyDetailVC.swift; sourceTree = "<group>"; };
-		5C2E696820BCDA93000F7AFC /* RequestMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMenu.swift; sourceTree = "<group>"; };
-		5C2E696A20BCFA81000F7AFC /* RequestMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestMenu.xib; sourceTree = "<group>"; };
+		5C2E696820BCDA93000F7AFC /* NannyRequestMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NannyRequestMenu.swift; sourceTree = "<group>"; };
+		5C2E696A20BCFA81000F7AFC /* NannyRequestMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NannyRequestMenu.xib; sourceTree = "<group>"; };
 		5C2F4BBA20A7FB1100BFB313 /* MessageDetailTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailTableCell.swift; sourceTree = "<group>"; };
 		5C33CFC61DB422830075675E /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		5C389685208968FD008C7E12 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
@@ -286,6 +286,8 @@
 				5CC849321FCA1198003AE163 /* FirstTableViewCell.swift */,
 				5CC849341FCA11BE003AE163 /* SettingsTableViewCell.swift */,
 				5CCF0C921D898D9F0089F39D /* NannyTableViewCell.swift */,
+				5C2E696A20BCFA81000F7AFC /* NannyRequestMenu.xib */,
+				5C2E696820BCDA93000F7AFC /* NannyRequestMenu.swift */,
 				5C4C30811FD9DF9500151AB6 /* FamilyTableViewCell.swift */,
 				5C4C30831FD9E7F800151AB6 /* FoldingCell.swift */,
 				5C76202E20891DC0005D7647 /* HeaderTableViewCell.swift */,
@@ -299,8 +301,6 @@
 				5CFE968720A4E1F1003C08A4 /* RequestExtendedCell.swift */,
 				5CF50D82209C49D300136167 /* MessageTableViewCell.swift */,
 				5C2F4BBA20A7FB1100BFB313 /* MessageDetailTableCell.swift */,
-				5C2E696A20BCFA81000F7AFC /* RequestMenu.xib */,
-				5C2E696820BCDA93000F7AFC /* RequestMenu.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -676,7 +676,7 @@
 				5CBD1C2E1DA81E7900CAC8CF /* GoogleService-Info.plist in Resources */,
 				5CF50D7B209C19FE00136167 /* notification48.wav in Resources */,
 				5CB41F1A20C7EF85003A86C0 /* simple_notification.mp3 in Resources */,
-				5C2E696B20BCFA81000F7AFC /* RequestMenu.xib in Resources */,
+				5C2E696B20BCFA81000F7AFC /* NannyRequestMenu.xib in Resources */,
 				5CF50D7F209C1E5F00136167 /* failure_notification.wav in Resources */,
 				5CB41F1720C7EF85003A86C0 /* duo_notification.mp3 in Resources */,
 				5CCF0C7E1D898BFB0089F39D /* Assets.xcassets in Resources */,
@@ -820,7 +820,7 @@
 				5C76202B2088DCAA005D7647 /* Review.swift in Sources */,
 				5C2895551FDB52A50009F6D5 /* FamilyDetailVC.swift in Sources */,
 				5C9BAB7920C6CF4B0063BD20 /* CustomTextField.swift in Sources */,
-				5C2E696920BCDA93000F7AFC /* RequestMenu.swift in Sources */,
+				5C2E696920BCDA93000F7AFC /* NannyRequestMenu.swift in Sources */,
 				5CCF0C931D898D9F0089F39D /* NannyTableViewCell.swift in Sources */,
 				5CDE08051FB27A5000E97D97 /* LocalService.swift in Sources */,
 			);

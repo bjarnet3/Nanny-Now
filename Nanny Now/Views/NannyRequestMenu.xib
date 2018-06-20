@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RequestMenu" customModule="Nanny_Now" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NannyRequestMenu" customModule="Nanny_Now" customModuleProvider="target">
             <connections>
                 <outlet property="fromCheck" destination="jwz-bK-U3b" id="Eib-yA-xkC"/>
                 <outlet property="fromDateTime" destination="M1b-dC-bR2" id="lsA-pz-toY"/>
@@ -24,7 +24,7 @@
                 <outlet property="requestTextField" destination="sVD-TB-TyG" id="399-qt-DqZ"/>
                 <outlet property="requestTitle" destination="u6P-sI-OWd" id="6kg-hy-YqN"/>
                 <outlet property="requestType" destination="LgB-i4-65x" id="MUK-4f-hya"/>
-                <outlet property="requestView" destination="jGj-RL-c9y" id="MQI-Lm-A0j"/>
+                <outlet property="requestView" destination="jGj-RL-c9y" id="vRL-H4-KGp"/>
                 <outlet property="toCheck" destination="fLL-wS-AZO" id="o4m-LW-eRf"/>
                 <outlet property="toDateTime" destination="GQd-YX-8td" id="N1S-1s-Xbe"/>
                 <outlet property="toSwitch" destination="HMq-wb-fSQ" id="Prp-ZW-Zf1"/>
