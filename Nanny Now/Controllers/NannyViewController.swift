@@ -893,23 +893,16 @@ extension NannyViewController {
         // Show on map
         self.centerMapOnLocation(self.nannies[row].location!, regionRadius: AltitudeDistance.XSmall, animated: lowPowerModeDisabled)
         
-        if lowPowerModeDisabled {
-            self.view.fadeOut()
-        }
+        let user = self.user ?? LocalService.instance.user!
+        let remoteUser = self.nannies[row]
         
-        let alertController = UIAlertController(title: "\(self.nannies[row].firstName) ( \(self.nannies[row].gender) \(self.nannies[row].age) år )", message: "\(self.nannies[row].jobTitle) - \(self.nannies[row].policeAttest ? "Godkjent Vandel" : "Ikke levert Vandel")", preferredStyle: .actionSheet)
+        var message = Message(from: user, to: remoteUser, message: "Standard Message", messageID: nil)
+        var request = Request(nanny: remoteUser, user: user, timeFrom: Date(timeIntervalSinceNow: 3600.0), timeTo: Date(timeIntervalSinceNow: 7200.0), message: "Nanny Map Request")
+        
+        let alertController = UIAlertController(title: "\(remoteUser.firstName) ( \(remoteUser.gender) \(remoteUser.age) år )", message: "\(remoteUser.jobTitle) - \(remoteUser.policeAttest ? "Godkjent Vandel" : "Ikke levert Vandel")", preferredStyle: .actionSheet)
         
         let profileAction = UIAlertAction(title: "Mer informasjon", style: .default) { (_) in
-            if lowPowerModeDisabled {
-                self.view.fadeIn()
-            }
-        }
-
-        let sendMessageRequest = UIAlertAction(title: "Send MSG Response", style: .default) { (_) in
-            if lowPowerModeDisabled {
-                Notifications.instance.sendNotification(to: self.nannies[row].userUID, text: "This is a message response", categoryRequest: .messageRequest)
-                self.view.fadeIn()
-            }
+            print("Mer informasjon --- ")
         }
         
         let sendRequest = UIAlertAction(title: "Send Forespørsel", style: .default) { (_) in
@@ -918,7 +911,7 @@ extension NannyViewController {
             for view in self.view.subviews {
                 if view is NannyRequestMenu {
                     if let requestMenu = view as? NannyRequestMenu {
-                        requestMenu.initData(user: self.user, nanny: self.nannies[row])
+                        requestMenu.initData(user: user, nanny: remoteUser)
                         requestMenu.sendRequest()
                     }
                 }
@@ -932,16 +925,42 @@ extension NannyViewController {
             // self.requestMenuOrder.sendRequest()
         }
         
+        let sendMapRequest = UIAlertAction(title: "Send Map Forespørsel", style: .default) { (_) in
+            let row = self.lastRowSelected?.row ?? row
+            // var request = Request(nanny: self.nannies[row], user: self.user!, timeFrom: Date(timeIntervalSinceNow: 3600), timeTo: Date(timeIntervalSinceNow: 7200 ), message: "Barnevakt forespørsel")
+            
+            request.requestCategory = NotificationCategory.nannyMapRequest.rawValue
+            Notifications.instance.sendNotification(with: request)
+        }
+        
+        let sendMessage = UIAlertAction(title: "Send Message", style: .default) { (_) in
+            if lowPowerModeDisabled {
+                message.setCategory(category: .messageConfirm)
+                Notifications.instance.sendNotification(with: message)
+                
+            }
+        }
+        
+        let sendMessageRequest = UIAlertAction(title: "Send Message Request", style: .default) { (_) in
+            if lowPowerModeDisabled {
+                message.setCategory(category: .messageRequest)
+                message.setMessage(message: "This is a message with response")
+                Notifications.instance.sendNotification(with: message)
+                
+            }
+        }
+        
         let cancelAction = UIAlertAction(title: "Avbryt", style: .destructive) { (_) in
             self.tableView.setEditing(false, animated: lowPowerModeDisabled)
-            if lowPowerModeDisabled {
-                self.view.fadeIn()
-            }
             self.exitOrderMenu()
+            
         }
         
         alertController.addAction(profileAction)
         alertController.addAction(sendRequest)
+        alertController.addAction(sendMapRequest)
+        
+        alertController.addAction(sendMessage)
         alertController.addAction(sendMessageRequest)
         alertController.addAction(cancelAction)
         
@@ -954,6 +973,11 @@ extension NannyViewController {
             self.view.blur(blurRadius: 7.0)
         }
         
+        let user = self.user ?? LocalService.instance.user!
+        let remoteUser = self.nannies[row]
+        
+        var request = Request(nanny: remoteUser, user: user, timeFrom: Date(timeIntervalSinceNow: 3600.0), timeTo: Date(timeIntervalSinceNow: 7200.0), message: "Nanny Request")
+        
         let controller = UIAlertController(title: "Forespørsel til \(self.nannies[row].firstName)", message: "Skriv bare tidspunktet, og hvilken dag (Kl. 'fra - til' og 'i dag' / 'dato)", preferredStyle: .alert)
         
         let cancelButton = UIAlertAction(title: "Avbryt", style: .destructive) { (action) in
@@ -963,11 +987,9 @@ extension NannyViewController {
         }
         
         let sendButton = UIAlertAction(title: "Send", style: .default) { (action) in
-            let text = controller.textFields?.first?.text
-            
-            let userIDatRow = self.nannies[row].userUID
-            Notifications.instance.sendNotification(to: userIDatRow, text: text!, categoryRequest: .nannyRequest)
-            // sendNotification(userIDatRow, text!, .nannyRequest, "")
+            request.message = controller.textFields?.first?.text ?? "Nanny Request"
+            request.requestCategory = NotificationCategory.nannyRequest.rawValue
+            Notifications.instance.sendNotification(with: request)
             
             self.exitOrderMenu()
             self.view.unBlur()

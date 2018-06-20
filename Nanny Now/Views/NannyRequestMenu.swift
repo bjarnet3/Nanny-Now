@@ -117,7 +117,7 @@ class NannyRequestMenu: UIView {
                 } else {
                     // Send Message
                     let message = Message(from: user, to: nanny, message: requestMessage)
-                    Notifications.instance.sendNotifications(with: message)
+                    Notifications.instance.sendNotification(with: message)
                 }
             }
         }

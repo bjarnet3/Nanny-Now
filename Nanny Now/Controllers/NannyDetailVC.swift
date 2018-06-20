@@ -344,8 +344,9 @@ extension NannyDetailVC {
         let send = UIPreviewAction(title: "Send Forespørsel",
                                    style: .default,
                                    handler: { previewAction, viewController in
-                                    // sendNotification((self.nanny?.userID)!,"message",.nannyRequest, "")
-                                    Notifications.instance.sendNotification(to: (self.nanny?.userUID)!, text: "message", categoryRequest: .nannyRequest)
+                                    var request = Request(nanny: self.nanny!, user: self.user!, timeFrom: Date(timeIntervalSinceNow: 3600.0), timeTo: Date(timeIntervalSinceNow: 7200.0), message: "Send Forespørsel")
+                                    request.requestCategory = NotificationCategory.nannyRequest.rawValue
+                                    Notifications.instance.sendNotification(with: request)
         })
         
         let avbryt = UIPreviewAction(title: "Avbryt",

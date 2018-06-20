@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 import SwiftKeychainWrapper
 
-var sendNotifications = Notifications.instance.sendNotifications
+// var sendNotifications = Notifications.instance.sendNotifications
 
 /// Library / Sounds / ....
 public enum SoundLibrary: String  {
@@ -57,15 +57,15 @@ public enum NotificationCategory : String {
 public enum NotificationAction: String {
     case nannyAccept = "nannyAccept"
     case nannyReject = "nannyReject"
-    case nannyRespond = "nannyRespond"
+    case nannyResponse = "nannyResponse"
     
     case familyAccept = "familyAccept"
     case familyReject = "familyReject"
-    case familyRespond = "familyRespond"
+    case familyResponse = "familyResponse"
     
     case messageAccept = "messageAccept"
     case messageReject = "messageReject"
-    case messageRespond = "messageRespond"
+    case messageResponse = "messageResponse"
     
     case defaultAccept = "defaultAccept"
     case defaultReject = "defaultReject"
@@ -92,7 +92,7 @@ class Notifications {
     
     // Send Notification using Message Object
     // --------------------------------------
-    func sendNotifications(with message: Message) {
+    func sendNotification(with message: Message) {
         DataService.instance.updateUserStatus(with: .active)
         
         let remoteID = message._toUser?.userUID ?? message._toUID
@@ -167,13 +167,13 @@ class Notifications {
                                     
                                     // MARK: - Change this to display different Notificaiton Categories
                                     let category = categoryRequest.rawValue // "messageRequest"
-                                    var contentAvailable = false
+                                    var contentAvailable = true
                                     
                                     switch categoryRequest {
                                     case .messageRequest:
                                         title = "Melding fra \(firstName):"
                                         DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(text)")
-                                        contentAvailable = true
+                                        contentAvailable = false
                                     default:
                                         //.messageAccept:
                                         title = "Rask beskjed fra \(firstName)"
@@ -320,7 +320,7 @@ class Notifications {
                                     let registration_ids = tokens
                                     let message = message
                                     var title = "\(firstName)"
-                                    // let contentAvailable = false
+                                    let contentAvailable = false
                                     
                                     // For Advanced Rich Notificaiton Setup
                                     let remoteURL = remote.imageName
@@ -371,7 +371,7 @@ class Notifications {
                                              "sound" : "notification11.wav",
                                              "badge" : badge],
                                          "priority":10,
-                                            // "content_available": contentAvailable,
+                                            "content_available": contentAvailable,
                                             "mutable_content": true,
                                             "category" : category
                                             ] as [String : Any]
@@ -422,6 +422,7 @@ class Notifications {
         privateRequest.updateChildValues(setRemoteID)
     }
     
+    /*
     func sendNotification(to remoteID: String, text: String, categoryRequest: NotificationCategory,_ requestID: String = "") {
         DataService.instance.updateUserStatus(with: .active)
         
@@ -494,6 +495,7 @@ class Notifications {
                                     let message = text
                                     var title = "\(firstName)"
                                     var requestID = requestID
+                                    var content_available = false
                                     
                                     // MARK: - Change this to display different Notificaiton Categories
                                     let category = categoryRequest.rawValue // "messageRequest"
@@ -559,7 +561,7 @@ class Notifications {
                                              "sound" : "notification11.wav",
                                              "badge" : badge],
                                          "priority":10,
-                                            "content_available": true,
+                                            "content_available": content_available,
                                             "mutable_content": true,
                                             "category" : category
                                             ] as [String : Any]
@@ -588,6 +590,7 @@ class Notifications {
             }
         })
     }
+    */
     
 }
 

@@ -45,6 +45,8 @@ class DataService {
     private var _REF_BASE = DB_BASE
     
     // DB child references // Base "folders"
+    private var _REF_AI = DB_BASE.child("AI")
+    
     private var _REF_USERS = DB_BASE.child("users")
     private var _REF_FRIENDS = DB_BASE.child("friends")
     
@@ -61,6 +63,12 @@ class DataService {
         return _REF_BASE
     }
     
+    // REF AI
+    var REF_AI: DatabaseReference {
+        return _REF_AI
+    }
+    
+    // REF USERS
     var REF_USERS: DatabaseReference {
         return _REF_USERS
     }
@@ -73,6 +81,7 @@ class DataService {
         return _REF_USERS.child("public")
     }
     
+    // REF FRIENDS
     var REF_FRIENDS: DatabaseReference {
         return _REF_FRIENDS
     }
@@ -93,6 +102,7 @@ class DataService {
         return _REF_FAMILIES.child("active")
     }
     
+    // REF REQUESTS / MESSAGES
     var REF_REQUESTS: DatabaseReference {
         return _REF_REQUESTS
     }

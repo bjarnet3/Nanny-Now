@@ -214,7 +214,7 @@ class MessageDetailVC: UIViewController {
     
     private func sendNotification(message: Message) {
         // Send Notification Message
-        Notifications.instance.sendNotifications(with: message)
+        Notifications.instance.sendNotification(with: message)
         
         self.tableView.layoutIfNeeded()
         self.tableView.reloadData()

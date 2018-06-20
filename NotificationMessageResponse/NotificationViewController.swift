@@ -10,123 +10,186 @@ import UIKit
 import UserNotifications
 import UserNotificationsUI
 
-private extension Selector {
-    static let keyboardWillShow = #selector(NotificationViewController.keyboardWillShow(notification:))
-    static let keyboardWillDisappear = #selector(NotificationViewController.keyboardWillDisappear(notification:))
-}
-
 class NotificationViewController: UIViewController, UNNotificationContentExtension {
     
     // MARK: - IBOutlet: Connection to Storyboard
     // ----------------------------------------
-    @IBOutlet weak var sendButton: UIButton!
-    @IBOutlet weak var textField: UITextField!
-    
-    @IBOutlet weak var textFieldBottom: NSLayoutConstraint!
+    @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Properties: Array & Varables
     // -------------------------------------
-    @IBAction func sendButton(_ sender: UIButton) {
-        if sender.titleLabel?.text == "SEND" {
-            sendMessage(message: "the message")
-        } else {
-            self.view.endEditing(true)
-        }
-    }
+    var user: User?
+    var remoteUser: User?
     
-    @IBAction func textFieldEnter(_ sender: UITextField) {
-        if (sender.returnKeyType==UIReturnKeyType.send)
-        {
-            if let message = self.textField.text {
-                
-                sendMessage(message: message)
-            }
-        }
-    }
+    var messages = [Message]()
     
-    @IBAction func textFieldValue(_ sender: UITextField) {
-        if (sender.text?.isEmpty)! {
-            self.sendButton.setTitle("AVBRYT", for: .normal)
-        } else {
-            self.sendButton.setTitle("SEND", for: .normal)
-        }
-    }
+    var contentHandler: ((UNNotificationContent) -> Void)?
+    var bestAttemptContent: UNMutableNotificationContent?
     
-    @objc fileprivate func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            UIView.animate(withDuration: 0.45, delay: 0.045, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
-                
-                // self.tableViewBottom.constant = keyboardSize.height
-                self.textFieldBottom.constant = keyboardSize.height + 55.0
-            })
-        }
-    }
-    
-    @objc fileprivate func keyboardWillDisappear(notification: NSNotification) {
-        UIView.animate(withDuration: 0.45, delay: 0.045, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseOut, animations: {
-            
-            // self.tableViewBottom.constant = 0.0
-            self.textFieldBottom.constant = 55.0
-        })
-    }
+    // MARK: - IBAction: Methods connected to UI
+    // ----------------------------------------
     
     // MARK: - Functions, Database & Animation
     // ----------------------------------------
-    private func sendMessage(message: String) {
-    }
-    
-    private func setUpKeyboard() {
-        NotificationCenter.default.addObserver(self, selector: .keyboardWillShow, name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: .keyboardWillDisappear, name: .UIKeyboardWillHide, object: nil)
-    }
-    
-    private func removeKeyboard() {
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow , object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide , object: nil)
-    }
     
     func didReceive(_ notification: UNNotification) {
+        
+        bestAttemptContent = (notification.request.content.mutableCopy() as? UNMutableNotificationContent)
+        
+        let remoteID = AnyHashable("userID")
+        let userID = AnyHashable("remoteID")
         
         let remoteURL = AnyHashable("userURL")
         let userURL = AnyHashable("remoteURL")
         
-        // let title = notification.request.content.title
-        let messageText = notification.request.content.body
+        if let bestAttemptContent = bestAttemptContent {
+            
+            // let remoteUserName = notification.request.content.title
+            let remoteMessage = bestAttemptContent.body
+            let userInfo = bestAttemptContent.userInfo
+            
+            guard let userUID = userInfo[userID] as? String else { return }
+            let user = User(userUID: userUID)
+            
+            guard let remoteUID = userInfo[remoteID] as? String else { return }
+            let remoteUser = User(userUID: remoteUID)
+            
+            guard let userImage = userInfo[userURL] as? String else { return }
+            user.imageName = userImage
+            
+            self.user = user
+            
+            guard let remoteImage = userInfo[remoteURL] as? String else { return }
+            remoteUser.imageName = remoteImage
+            
+            self.remoteUser = remoteUser
+            
+            let message = Message(from: remoteUser, to: user, message: remoteMessage)
+            
+            self.messages.append(message)
+            self.tableView.reloadData()
+        }
+    }
+    
+    func didReceive(_ response: UNNotificationResponse, completionHandler completion: @escaping (UNNotificationContentExtensionResponseOption) -> Void) {
         
-        let userInfo = notification.request.content.userInfo
-        
-        guard let userImageName = userInfo[userURL] as? String else { return }
-        guard let remoteImageName = userInfo[remoteURL] as? String else { return }
-        
-        // self.yourImageView.loadImageUsingCacheWith(urlString:yourImageUrl)
-        // self.remoteImageView.loadImageUsingCacheWith(urlString: remoteImageUrl)
-        
-        let userID = userInfo["remoteID"] as? String
-        let remoteID = userInfo["userID"] as? String
+        func returnFunction() {
+     
+            if response.actionIdentifier == "messageResponse" {
+                
+                if let textResponse = response as? UNTextInputNotificationResponse {
+                    let toMessage = Message(from: self.user!, to: self.remoteUser!, message: textResponse.userText)
+                    self.messages.append(toMessage)
+                    self.tableView.reloadData()
+                }
+                // completion(.dismissAndForwardAction)
+            }
+        }
+        completion(.dismiss)
+        // completion(.dismiss)
+    }
+    
+    // Return something before time expires.
+    func serviceExtensionTimeWillExpire() {
+        if let contentHandler = contentHandler,
+            let bestAttemptContent = bestAttemptContent {
+            
+            // Mark the message as still encrypted.
+            // bestAttemptContent.subtitle = "(Encrypted)"
+            // bestAttemptContent.body = ""
+            contentHandler(bestAttemptContent)
+        }
     }
 
+
+    
 }
 
 // MARK: - ViewDidLoad, ViewWillLoad etc...
 // ----------------------------------------
 extension NotificationViewController {
     
+    /*
     override var inputView: UIView? {
-        return self.view
+        return keyboardView
     }
     
     override var inputAccessoryView: UIView? {
-        return self.view
+        return self.textField
     }
     
     override var canBecomeFirstResponder: Bool {
         return true
     }
     
+    */
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpKeyboard()
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.scrollsToTop = true
+        
+        tableView.contentInset.top = 65
+        tableView.contentInset.bottom = 45
+        
+        tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
+        // tableView.transform = CGAffineTransform(rotationAngle: -CGFloat.pi)
+        
     }
+    
+}
+
+extension NotificationViewController : UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let mainBoundsWidth = self.view.frame.width - 106
+        
+        let firstRowHeight: CGFloat = 54.5 // 51.0 // UIFont(name: "Avenir-Book", size: 12.0)
+        let extraRowHeight: CGFloat = 20.0 // 18.0 // UIFont(name: "Avenir-Book", size: 12.0)
+        
+        // let firstRow: CGFloat = indexPath.row == 0 ? extraRowHeight : 0.0
+        let addedRow: CGFloat = 20.0
+        
+        let messageText = self.messages[indexPath.row]._message
+        let messageTextRows = messageText.linesFor(font: UIFont(name: "Avenir-Book", size: 14.0)!, width: mainBoundsWidth)
+        
+        let rowHeight: CGFloat = firstRowHeight - extraRowHeight + CGFloat(Double(messageTextRows) * Double(extraRowHeight)) + addedRow
+        return rowHeight // 55.0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let leftIdentifier = "NotificationLeftDateCell"
+        let rightIdentifier = "NotificationRightDateCell"
+        
+        guard let user = self.user else { return NotificationTableCell(style: .default, reuseIdentifier: leftIdentifier) }
+        guard let remoteUser = self.remoteUser else { return NotificationTableCell(style: .default, reuseIdentifier: rightIdentifier) }
+        
+        if indexPath.row == 0 {
+            if let leftCell = tableView.dequeueReusableCell(withIdentifier: leftIdentifier, for: indexPath) as? NotificationTableCell {
+                leftCell.setupView(with: self.messages[indexPath.row], to: self.user!)
+                return leftCell
+                
+            }
+        } else {
+            if let rightCell = tableView.dequeueReusableCell(withIdentifier: rightIdentifier, for: indexPath) as? NotificationTableCell {
+                rightCell.setupView(with: self.messages[indexPath.row], to: self.remoteUser!)
+                return rightCell
+            }
+        }
+        return NotificationTableCell()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.messages.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
     
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2018 Digital Mood. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Firebase
 
 struct Message {
@@ -54,6 +54,10 @@ struct Message {
         self._messageID = DataService.instance.REF_MESSAGES.childByAutoId().key
     }
     
+    mutating func setMessage(message: String) {
+        self._message = message
+    }
+    
     mutating func setTo(user: User) {
         self._toUser = user
     }
@@ -74,7 +78,7 @@ struct Message {
         self._requestCategory = category
     }
     
-    init(from fromUser: User, to toUser: User, message: String) {
+    init(from fromUser: User, to toUser: User, message: String, messageID: String? = nil) {
         self._toUser = toUser
         self._fromUser = fromUser
         
@@ -84,7 +88,7 @@ struct Message {
         self._imageURL = fromUser.imageName
         
         self._message = message
-        self._messageID = DataService.instance.REF_MESSAGES.childByAutoId().key
+        self._messageID = messageID ?? DataService.instance.REF_MESSAGES.childByAutoId().key
         self._messageTime = returnTimeStamp()
         self._highlighted = false
     }

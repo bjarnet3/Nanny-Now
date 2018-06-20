@@ -2,13 +2,13 @@
 //  MessageDetailTableCell.swift
 //  Nanny Now
 //
-//  Created by Bjarne Tvedten on 20.06.2018.
+//  Created by Bjarne Tvedten on 13.05.2018.
 //  Copyright © 2018 Digital Mood. All rights reserved.
 //
 
 import UIKit
 
-class MessageDetailTableCell: UITableViewCell {
+class NotificationTableCell: UITableViewCell {
     
     @IBOutlet weak var profileImage: NannyImageView!
     @IBOutlet weak var messageTextView: UITextView!
@@ -18,8 +18,8 @@ class MessageDetailTableCell: UITableViewCell {
     var dateTime: Date? {
         didSet {
             if self.hasDateTime {
-                if let date = self.dateTime {
-                    self.dateLabel.text = dateTimeToString(from: date)
+                if let dateTime = self.dateTime {
+                    self.dateLabel.text = dateTimeToString(from: dateTime)
                 }
             }
         }
@@ -83,5 +83,49 @@ class MessageDetailTableCell: UITableViewCell {
             })
         }
     }
+    
+    /*
+    func setupView(with message: NotificationMessage, animated: Bool = false, hasDateTime: Bool = false) {
+        
+        
+        self.animateView(direction: .enter)
+        
+        self.hasDateTime = hasDateTime
+        
+        if let font = messageTextView.font {
+            let mainBoundsWith = self.frame.width
+            
+            let messageText = message.message
+            let messageTextWidth = mainBoundsWith - 106.0
+            
+            let linesForText = messageText.linesFor(font: font, width: messageTextWidth)
+            let widthForText = messageText.widthFor(font: font)
+            
+            let constraintMin: CGFloat = 48.0
+            let constraintMax: CGFloat = mainBoundsWith - 75.0
+            
+            print("widthForText \(widthForText), linesForText \(linesForText)")
+            self.messageTextContraint.constant = linesForText == 1 ? constraintMax - widthForText : constraintMin
+            
+            self.profileImage.loadImageUsingCacheWith(urlString: message.imageName, completion: {
+                if animated {
+                    let random = Double(arc4random_uniform((UInt32(1000))) / 3000) + 250
+                    UIView.animate(withDuration: 0.6, delay: random, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
+                        self.messageTextView.text = messageText
+                        self.dateTime = Date(timeIntervalSinceNow: 0)
+                        
+                    })
+                    self.animateView(direction: .exit)
+                } else {
+                    self.messageTextView.text = messageText
+                    self.dateTime = Date(timeIntervalSinceNow: 0)
+                    
+                    self.animateView(direction: .exit)
+                }
+            })
+        }
+    }
+    
+    */
     
 }

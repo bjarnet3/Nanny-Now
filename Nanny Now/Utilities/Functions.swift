@@ -8,51 +8,9 @@
 
 import UIKit
 import MapKit
-import Firebase
-import RevealingSplashView
-import RAMAnimatedTabBarController
-
-func createAnnotation(annotation: User, mapScale: Double = 0.90) -> MKAnnotationView {
-    // print("anView is nil")
-    
-    let anView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotation.userUID)
-    anView.canShowCallout = true
-    
-    let userAnnotation = annotation
-    let imageName = userAnnotation.imageName
-    
-    if userAnnotation._gender == nil {
-        userAnnotation.gender = "other"
-    }
-    
-    let pinName = userAnnotation.returnPinImage()
-    let color = userAnnotation.returnPinColor().cgColor
-    
-    let imgWidth: Double = 25 * mapScale
-    let imgHeight: Double = 25 * mapScale
-    
-    let pinWidth: Double = 31 * mapScale
-    let pinHeight: Double = 44 * mapScale
-    let pinXY: Double = 2.70 * mapScale
-    
-    let imageView = UIImageView()
-    imageView.loadImageUsingCacheWith(urlString: imageName)
-    
-    imageView.frame = CGRect(x: pinXY, y: pinXY, width: imgWidth, height: imgHeight)
-    imageView.layer.cornerRadius = imageView.frame.size.width / 2
-    imageView.layer.borderWidth = 0.1
-    imageView.layer.borderColor = color
-    
-    imageView.clipsToBounds = true
-    
-    let pinImageView = UIImageView(image: UIImage(named: pinName))
-    pinImageView.frame = CGRect(x: 0, y: 0, width: pinWidth, height: pinHeight)
-    
-    anView.addSubview(pinImageView)
-    anView.addSubview(imageView)
-    
-    return anView
-}
+// import Firebase
+// import RevealingSplashView
+// import RAMAnimatedTabBarController
 
 public func returnGender(_ gender:String?) -> String {
     switch gender! {
@@ -693,44 +651,6 @@ public func animateCells3d(in tableView: UITableView,_ animated: Bool = true, de
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
         animateCells3d(in: tableView)
     }
-}
-
-/// Splash Animations of type SplashAnimationType with default value of nil
-public func revealingSplashAnimation(_ view: UIView, type: SplashAnimationType? = nil, completion: SplashAnimatableCompletion? = nil) {
-    let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "logo_1024_cornered")!,iconInitialSize: CGSize(width: 120, height: 120), backgroundColor: UIColor(red:255, green:255, blue:255, alpha:1.0))
-    
-    // SplashAnimationType, if nil "Twitter" first anmimation
-    if type != nil {
-        revealingSplashView.animationType = type!
-    }
-    
-    // This is just a test...
-    revealingSplashView.duration = 1.9
-    
-    //Adds the revealing splash view as a sub view
-    view.addSubview(revealingSplashView)
-    
-    //Starts animation
-    revealingSplashView.startAnimation(completion)
-}
-
-public func revealingSplashAnimation(_ view: UIView, type: SplashAnimationType? = nil, duration: Double, delay: Double, completion: SplashAnimatableCompletion? = nil) {
-    let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "logo_1024_cornered")!,iconInitialSize: CGSize(width: 120, height: 120), backgroundColor: UIColor(red:255, green:255, blue:255, alpha:1.0))
-    
-    // SplashAnimationType, if nil "Twitter" first anmimation
-    if type != nil {
-        revealingSplashView.animationType = type!
-    }
-    
-    // This is just a test...
-    revealingSplashView.duration = duration
-    revealingSplashView.delay = delay
-    
-    //Adds the revealing splash view as a sub view
-    view.addSubview(revealingSplashView)
-    
-    //Starts animation
-    revealingSplashView.startAnimation(completion)
 }
 
 /**

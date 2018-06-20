@@ -495,7 +495,7 @@ class MessageViewController: UIViewController {
             timeFrom: requestSnap["timeFrom"] as! String,
             timeTo: requestSnap["timeTo"] as! String,
             message: requestSnap["requestMessage"] as? String,
-            requestAmount: requestSnap["requestAmount"] as! Int,
+            requestAmount: requestSnap["requestAmount"] as? Int ?? 0,
             requestStatus: requestSnap["requestStatus"] as! String,
             requestCategory: requestSnap["requestCategory"] as! String,
             requestREF: userRef)

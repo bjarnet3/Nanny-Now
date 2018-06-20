@@ -70,8 +70,8 @@ struct Request {
     
     var requestCategory: String {
         get { return _requestCategory.rawValue }
-            set {
-                let request = notificationRequest(category: newValue)
+            set(newCategory) {
+                let request = notificationRequest(category: newCategory)
                 self._requestCategory = request  } }
     
     var highlighted: Bool {

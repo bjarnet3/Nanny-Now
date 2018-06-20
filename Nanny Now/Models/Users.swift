@@ -37,7 +37,7 @@ class User : MKPointAnnotation {
     // -----------------------------
     public var _locations: [String:CLLocation]?
     public var _distance: Double?
-    public var _status: State?
+    public var _status: String?
     
     // Computed Properties
     // -------------------
@@ -144,6 +144,48 @@ class Nanny : User {
     init(userUID: String?, userFID: String? = nil, imageName: String?, firstName: String, birthDay: String?, gender: String?, jobTitle: String?, policeAttest: Bool? = nil, location: CLLocation?, ratings: [String:Int]?) {
         super.init(userUID: userUID, userFID: userFID, imageName: imageName, firstName: firstName, lastName: nil, birthDay: birthDay, gender: gender, jobTitle: jobTitle, policeAttest: policeAttest, location: location)
     }
+}
+
+func createAnnotation(annotation: User, mapScale: Double = 0.90) -> MKAnnotationView {
+    // print("anView is nil")
+    
+    let anView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotation.userUID)
+    anView.canShowCallout = true
+    
+    let userAnnotation = annotation
+    let imageName = userAnnotation.imageName
+    
+    if userAnnotation._gender == nil {
+        userAnnotation.gender = "other"
+    }
+    
+    let pinName = userAnnotation.returnPinImage()
+    let color = userAnnotation.returnPinColor().cgColor
+    
+    let imgWidth: Double = 25 * mapScale
+    let imgHeight: Double = 25 * mapScale
+    
+    let pinWidth: Double = 31 * mapScale
+    let pinHeight: Double = 44 * mapScale
+    let pinXY: Double = 2.70 * mapScale
+    
+    let imageView = UIImageView()
+    imageView.loadImageUsingCacheWith(urlString: imageName)
+    
+    imageView.frame = CGRect(x: pinXY, y: pinXY, width: imgWidth, height: imgHeight)
+    imageView.layer.cornerRadius = imageView.frame.size.width / 2
+    imageView.layer.borderWidth = 0.1
+    imageView.layer.borderColor = color
+    
+    imageView.clipsToBounds = true
+    
+    let pinImageView = UIImageView(image: UIImage(named: pinName))
+    pinImageView.frame = CGRect(x: 0, y: 0, width: pinWidth, height: pinHeight)
+    
+    anView.addSubview(pinImageView)
+    anView.addSubview(imageView)
+    
+    return anView
 }
 
 
