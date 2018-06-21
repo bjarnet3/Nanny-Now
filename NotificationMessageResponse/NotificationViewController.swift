@@ -18,10 +18,10 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     
     // MARK: - Properties: Array & Varables
     // -------------------------------------
-    var user: User?
-    var remoteUser: User?
+    var user: UserLite?
+    var remoteUser: UserLite?
     
-    var messages = [Message]()
+    var messages = [MessageLite]()
     
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?
@@ -49,10 +49,10 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
             let userInfo = bestAttemptContent.userInfo
             
             guard let userUID = userInfo[userID] as? String else { return }
-            let user = User(userUID: userUID)
+            let user = UserLite(userUID: userUID)
             
             guard let remoteUID = userInfo[remoteID] as? String else { return }
-            let remoteUser = User(userUID: remoteUID)
+            let remoteUser = UserLite(userUID: remoteUID)
             
             guard let userImage = userInfo[userURL] as? String else { return }
             user.imageName = userImage
@@ -64,7 +64,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
             
             self.remoteUser = remoteUser
             
-            let message = Message(from: remoteUser, to: user, message: remoteMessage)
+            let message = MessageLite(from: remoteUser, to: user, message: remoteMessage)
             
             self.messages.append(message)
             self.tableView.reloadData()
@@ -73,59 +73,45 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     
     func didReceive(_ response: UNNotificationResponse, completionHandler completion: @escaping (UNNotificationContentExtensionResponseOption) -> Void) {
         
-        func returnFunction() {
-     
-            if response.actionIdentifier == "messageResponse" {
+        guard let user = self.user else { return }
+        guard let remoteUser = self.remoteUser else { return }
+        
+        if response.actionIdentifier == "messageResponse" {
+            if let textResponse = response as? UNTextInputNotificationResponse {
                 
-                if let textResponse = response as? UNTextInputNotificationResponse {
-                    let toMessage = Message(from: self.user!, to: self.remoteUser!, message: textResponse.userText)
-                    self.messages.append(toMessage)
-                    self.tableView.reloadData()
+                let toMessage = MessageLite(from: user, to: remoteUser, message: textResponse.userText)
+                
+                self.messages.append(toMessage)
+                self.tableView.reloadData()
+                
+                animateCells(in: self.tableView, true, delay: 0.01)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.9) { // this is the best delay
+                    completion(.dismissAndForwardAction)
                 }
-                // completion(.dismissAndForwardAction)
+
             }
         }
-        completion(.dismiss)
-        // completion(.dismiss)
     }
-    
+
     // Return something before time expires.
     func serviceExtensionTimeWillExpire() {
-        if let contentHandler = contentHandler,
-            let bestAttemptContent = bestAttemptContent {
-            
-            // Mark the message as still encrypted.
-            // bestAttemptContent.subtitle = "(Encrypted)"
-            // bestAttemptContent.body = ""
+        
+        if let contentHandler = contentHandler, let bestAttemptContent = bestAttemptContent {
             contentHandler(bestAttemptContent)
         }
+ 
     }
-
-
-    
 }
 
 // MARK: - ViewDidLoad, ViewWillLoad etc...
 // ----------------------------------------
 extension NotificationViewController {
     
-    /*
-    override var inputView: UIView? {
-        return keyboardView
-    }
-    
-    override var inputAccessoryView: UIView? {
-        return self.textField
-    }
-    
-    override var canBecomeFirstResponder: Bool {
-        return true
-    }
-    
-    */
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.alpha = 0
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -136,10 +122,12 @@ extension NotificationViewController {
         tableView.contentInset.bottom = 45
         
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
-        // tableView.transform = CGAffineTransform(rotationAngle: -CGFloat.pi)
-        
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        animateCells(in: self.tableView, delay: 0.15)
+    }
 }
 
 extension NotificationViewController : UITableViewDelegate, UITableViewDataSource {
@@ -164,19 +152,18 @@ extension NotificationViewController : UITableViewDelegate, UITableViewDataSourc
         
         let leftIdentifier = "NotificationLeftDateCell"
         let rightIdentifier = "NotificationRightDateCell"
-        
-        guard let user = self.user else { return NotificationTableCell(style: .default, reuseIdentifier: leftIdentifier) }
-        guard let remoteUser = self.remoteUser else { return NotificationTableCell(style: .default, reuseIdentifier: rightIdentifier) }
-        
+
         if indexPath.row == 0 {
+            // guard let user = self.user else { return NotificationTableCell(style: .default, reuseIdentifier: leftIdentifier) }
             if let leftCell = tableView.dequeueReusableCell(withIdentifier: leftIdentifier, for: indexPath) as? NotificationTableCell {
-                leftCell.setupView(with: self.messages[indexPath.row], to: self.user!)
+                leftCell.setupView(with: self.messages[indexPath.row], to: self.remoteUser!)
                 return leftCell
                 
             }
         } else {
+            // guard let remoteUser = self.remoteUser else { return NotificationTableCell(style: .default, reuseIdentifier: rightIdentifier) }
             if let rightCell = tableView.dequeueReusableCell(withIdentifier: rightIdentifier, for: indexPath) as? NotificationTableCell {
-                rightCell.setupView(with: self.messages[indexPath.row], to: self.remoteUser!)
+                rightCell.setupView(with: self.messages[indexPath.row], to: self.user!)
                 return rightCell
             }
         }

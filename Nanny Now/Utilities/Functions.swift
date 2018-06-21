@@ -495,7 +495,7 @@ public func fadeView(_ view: UIView, direction: Fade.Direction = .Left, distance
 /// animate tableView Cells (Very generic) #Swift_3.0 - Animation Base
 public func animateTable(_ tableView: UITableView,_ animated: Bool = true,_ mapView: MKMapView? = nil) {
     tableView.reloadData()
-    if animated && lowPowerModeDisabled {
+    if animated /* && lowPowerModeDisabled */ {
         guard let mapView = mapView else {
             return
         }
@@ -551,7 +551,7 @@ public enum TableViewCellAnimation {
 }
 
 public func animateCells(in tableView: UITableView,_ animated: Bool = true, completion: Completion? = nil) {
-    if animated && lowPowerModeDisabled {
+    if animated /* && lowPowerModeDisabled */ {
         let cells = tableView.visibleCells
         
         for cell in cells { cell.alpha = 0 }
@@ -579,7 +579,7 @@ public func animateCells(in tableView: UITableView,_ animated: Bool = true, comp
 }
 
 public func animateCellsWithProgress(in tableView: UITableView,_ animated: Bool = true, progress: UIProgressView, completion: Completion? = nil) {
-    if animated && lowPowerModeDisabled {
+    if animated /* && lowPowerModeDisabled */ {
         let cells = tableView.visibleCells
         progress.setProgress(0.05, animated: true)
         for cell in cells { cell.alpha = 0 }
@@ -612,7 +612,7 @@ public func animateCellsWithProgress(in tableView: UITableView,_ animated: Bool 
     }
 }
 
-public func animateCells(in tableView: UITableView,_ animated: Bool = true, delay: Double) {
+public func animateCells(in tableView: UITableView,_ animated: Bool = true, delay: Double, completion: Completion? = nil) {
     let delayInSeconds = delay
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
         animateCells(in: tableView)
@@ -621,7 +621,7 @@ public func animateCells(in tableView: UITableView,_ animated: Bool = true, dela
 
 // @available(iOS, deprecated, message: "Use animateCells3d() method instead.")
 public func animateCells3d(in tableView: UITableView,_ animated: Bool = true) {
-    if animated && lowPowerModeDisabled {
+    if animated /* && lowPowerModeDisabled */ {
         let cells = tableView.visibleCells
         
         for cell in cells { cell.alpha = 0 }

@@ -291,14 +291,62 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                        willPresent notification: UNNotification,
                                        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
 
-        // Change this to your preferred presentation option
-        DataService.instance.REF_AI.child("foreground").setValue("foreground")
+        completionHandler([.alert, .sound])
         
+        // Change this to your preferred presentation option
+        /*
         if notification.request.content.categoryIdentifier == NotificationCategory.messageRequest.rawValue {
             completionHandler([.alert, .sound])
-            return
         } else {
             completionHandler([])
+        }
+        */
+        
+    }
+    
+    
+    func notificationResponse(response: UNNotificationResponse, completionHandler: Completion? = nil) {
+        let userInfo = response.notification.request.content.userInfo
+        
+        let remoteID = AnyHashable("userID")
+        let userID = AnyHashable("remoteID")
+        
+        let remoteURL = AnyHashable("userURL")
+        let userURL = AnyHashable("remoteURL")
+        
+        let remoteFirst = AnyHashable("userName")
+        let userFirst = AnyHashable("remoteName")
+        
+        if response.actionIdentifier == "messageResponse" {
+            
+            guard let userUID = userInfo[userID] as? String else { return }
+            let user = User(userUID: userUID)
+            
+            guard let remoteUID = userInfo[remoteID] as? String else { return }
+            let remoteUser = User(userUID: remoteUID)
+            
+            guard let userImage = userInfo[userURL] as? String else { return }
+            user.imageName = userImage
+            
+            guard let remoteImage = userInfo[remoteURL] as? String else { return }
+            remoteUser.imageName = remoteImage
+            
+            guard let userName = userInfo[userFirst] as? String else { return }
+            user.firstName = userName
+            
+            guard let remoteName = userInfo[remoteFirst] as? String else { return }
+            remoteUser.firstName = remoteName
+            
+            if let textResponse = response as? UNTextInputNotificationResponse {
+                let messageResponse = textResponse.userText
+                
+                var message = Message(from: user, to: remoteUser, message: messageResponse)
+                message.setCategory(category: .messageConfirm)
+                
+                Notifications.instance.sendNotification(with: message)
+                
+                completionHandler?()
+            }
         }
     }
     
@@ -307,17 +355,14 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     public func userNotificationCenter(_ center: UNUserNotificationCenter,
                                        didReceive response: UNNotificationResponse,
                                        withCompletionHandler completionHandler: @escaping () -> Void) {
-        
-        DataService.instance.REF_AI.child("foreground").setValue("foreground")
-        
-        // let action = response.actionIdentifier
-        
-        actionForNotificaion(notificationAction: notificationRequest(action: response.actionIdentifier), response: response, completion: completionHandler)
-        
-        // MARK: Action will happen on all Notification Events "including" all responses
-        // Not launched if Notficitaion is ignored
-        // completionHandler()
+    
+        notificationResponse(response: response, completionHandler: completionHandler)
     }
+    
+    
+    
+    
+    
     
     func actionForNotificaion(notificationAction: NotificationAction, response: UNNotificationResponse, completion: Completion? = nil) {
         let userInfo = response.notification.request.content.userInfo
@@ -336,7 +381,93 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         func returnRequestStatus(requestStatus: RequestStatus) -> [String:String] {
             return [ "requestStatus":requestStatus.rawValue ]
         }
+    }
+    
+    
+    
+    
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
+        let userInfo = userInfo
+        
+        let remoteID = AnyHashable("userID")
+        let userID = AnyHashable("remoteID")
+        
+        let remoteURL = AnyHashable("userURL")
+        let userURL = AnyHashable("remoteURL")
+        
+        let remoteFirst = AnyHashable("userName")
+        let userFirst = AnyHashable("remoteName")
+        
+        // let state = application.applicationState
+            
+            guard let userUID = userInfo[userID] as? String else { return }
+            let user = User(userUID: userUID)
+            
+            guard let remoteUID = userInfo[remoteID] as? String else { return }
+            let remoteUser = User(userUID: remoteUID)
+            
+            guard let userImage = userInfo[userURL] as? String else { return }
+            user.imageName = userImage
+            
+            guard let remoteImage = userInfo[remoteURL] as? String else { return }
+            remoteUser.imageName = remoteImage
+            
+            guard let userName = userInfo[userFirst] as? String else { return }
+            user.firstName = userName
+            
+            guard let remoteName = userInfo[remoteFirst] as? String else { return }
+            remoteUser.firstName = remoteName
+        
+        // completionHandler(.newData)
+        
+        /*
+            if let textResponse = response as? UNTextInputNotificationResponse {
+                // DataService.instance.REF_AI.child("foreground").setValue(textResponse.userText)
+                
+                var message = Message(from: user, to: remoteUser, message: textResponse.userText)
+                message.setCategory(category: .messageConfirm)
+                
+                Notifications.instance.sendNotification(with: message)
+                
+                completionHandler()
+            }
+        */
+
+        
+    }
+    
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    }
+    
+    
+}
+
+
+// [START ios_10_data_message_handling]
+extension AppDelegate : MessagingDelegate {
+    
+    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+        print("Received data message 10 +: \(remoteMessage)")
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: gcmMessageIDKey), object: nil, userInfo: remoteMessage.appData)
+    }
+    
+    private func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+    }
+    
+    // Receive data message on iOS 10 devices while app is in the foreground.
+    func application(received remoteMessage: MessagingRemoteMessage) {
+        
+        Messaging.messaging().delegate = self
+        Messaging.messaging().shouldEstablishDirectChannel = true
+    }
+    
+}
+
+extension AppDelegate {
+    /*
+    func checkNotificaitonAction(action: NotificationAction) {
         switch notificationAction {
         case .nannyAccept:
             // Switch
@@ -383,46 +514,29 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             tabBarController.setSelectIndex(from: 0, to: 3)
             tabBarController.tabBarItem.badgeValue = nil
         case .messageResponse:
-            
-            DataService.instance.REF_AI.child("messageResponse").setValue("responseMessage")
-            
             if let responseText = response as? UNTextInputNotificationResponse {
                 let responseMessage = responseText.userText
                 
+                DataService.instance.REF_AI.child("messageResponse").setValue(responseMessage)
+                
                 let user = User(userUID: userID)
                 let remote = User(userUID: remoteID)
+                
                 // let responseText = "messageResponse Text"
                 var message = Message(from: user, to: remote, message: responseMessage, messageID: requestID)
                 message.setCategory(category: .messageConfirm)
                 
                 DataService.instance.REF_AI.child("messageResponse").setValue(responseMessage)
                 Notifications.instance.sendNotification(with: message)
+                
+                completion?()
             }
-            completion?()
-            return
         default:
             print("")
         }
-        completion?()
     }
-    
-}
-
-
-// [START ios_10_data_message_handling]
-extension AppDelegate : MessagingDelegate {
-    func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
-        print("didRefreshRegistrationToken")
-    }
-    
-    // Receive data message on iOS 10 devices while app is in the foreground.
-    func application(received remoteMessage: MessagingRemoteMessage) {
-        
-        Messaging.messaging().delegate = self
-        Messaging.messaging().shouldEstablishDirectChannel = true
-        
-        print("applicatioRecievdRemoteMessage \(remoteMessage.appData)")
-    }
+ 
+    */
     
 }
 // [END ios_10_data_message_handling]

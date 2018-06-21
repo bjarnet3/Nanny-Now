@@ -37,11 +37,11 @@
                                                         <constraint firstAttribute="width" secondItem="dyJ-ml-lPS" secondAttribute="height" multiplier="1:1" id="Uio-My-MBY"/>
                                                     </constraints>
                                                 </imageView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hzj-nd-Bmg" customClass="CustomView" customModule="Nanny_Now" customModuleProvider="target">
-                                                    <rect key="frame" x="42" y="30" width="285" height="35"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hzj-nd-Bmg" customClass="CustomView" customModule="NotificationMessageResponse" customModuleProvider="target">
+                                                    <rect key="frame" x="42" y="30" width="285" height="34"/>
                                                     <subviews>
                                                         <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Halloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!!" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1jP-rk-K1m">
-                                                            <rect key="frame" x="8" y="0.0" width="269" height="35"/>
+                                                            <rect key="frame" x="8" y="0.0" width="269" height="34"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="textColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
@@ -92,11 +92,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="173"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hfR-uf-cku" customClass="CustomView" customModule="Nanny_Now" customModuleProvider="target">
-                                                    <rect key="frame" x="48" y="30" width="285" height="133"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hfR-uf-cku" customClass="CustomView" customModule="NotificationMessageResponse" customModuleProvider="target">
+                                                    <rect key="frame" x="48" y="30" width="285" height="132"/>
                                                     <subviews>
                                                         <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="right" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2LD-Hh-YsS">
-                                                            <rect key="frame" x="8" y="0.0" width="269" height="133"/>
+                                                            <rect key="frame" x="8" y="0.0" width="269" height="132"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <string key="text">Halloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibility</string>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>

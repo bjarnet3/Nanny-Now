@@ -12,12 +12,12 @@
 		<key>NotificationContentExtensions.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>12</integer>
+			<integer>19</integer>
 		</dict>
 		<key>NotificationMessageResponse.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>13</integer>
+			<integer>20</integer>
 		</dict>
 		<key>NotificationRequestMap.xcscheme</key>
 		<dict>

@@ -47,7 +47,7 @@ class NotificationTableCell: UITableViewCell {
         }
     }
     
-    func setupView(with message: Message, to user: User, animated: Bool = false, hasDateTime: Bool = false) {
+    func setupView(with message: MessageLite, to user: UserLite, animated: Bool = true, hasDateTime: Bool = false) {
         self.animateView(direction: .enter)
         
         self.hasDateTime = hasDateTime
@@ -83,49 +83,5 @@ class NotificationTableCell: UITableViewCell {
             })
         }
     }
-    
-    /*
-    func setupView(with message: NotificationMessage, animated: Bool = false, hasDateTime: Bool = false) {
-        
-        
-        self.animateView(direction: .enter)
-        
-        self.hasDateTime = hasDateTime
-        
-        if let font = messageTextView.font {
-            let mainBoundsWith = self.frame.width
-            
-            let messageText = message.message
-            let messageTextWidth = mainBoundsWith - 106.0
-            
-            let linesForText = messageText.linesFor(font: font, width: messageTextWidth)
-            let widthForText = messageText.widthFor(font: font)
-            
-            let constraintMin: CGFloat = 48.0
-            let constraintMax: CGFloat = mainBoundsWith - 75.0
-            
-            print("widthForText \(widthForText), linesForText \(linesForText)")
-            self.messageTextContraint.constant = linesForText == 1 ? constraintMax - widthForText : constraintMin
-            
-            self.profileImage.loadImageUsingCacheWith(urlString: message.imageName, completion: {
-                if animated {
-                    let random = Double(arc4random_uniform((UInt32(1000))) / 3000) + 250
-                    UIView.animate(withDuration: 0.6, delay: random, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
-                        self.messageTextView.text = messageText
-                        self.dateTime = Date(timeIntervalSinceNow: 0)
-                        
-                    })
-                    self.animateView(direction: .exit)
-                } else {
-                    self.messageTextView.text = messageText
-                    self.dateTime = Date(timeIntervalSinceNow: 0)
-                    
-                    self.animateView(direction: .exit)
-                }
-            })
-        }
-    }
-    
-    */
     
 }

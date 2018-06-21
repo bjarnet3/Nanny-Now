@@ -173,12 +173,12 @@ class Notifications {
                                     case .messageRequest:
                                         title = "Melding fra \(firstName):"
                                         DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(text)")
-                                        contentAvailable = false
+                                        contentAvailable = true
                                     default:
                                         //.messageAccept:
                                         title = "Rask beskjed fra \(firstName)"
                                         DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(text)")
-                                        contentAvailable = false
+                                        contentAvailable = true
                                     }
                                     
                                     // For Advanced Rich Notificaiton Setup

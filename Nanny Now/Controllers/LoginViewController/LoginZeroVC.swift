@@ -221,9 +221,6 @@ class LoginZeroVC: UIViewController {
         DataService.instance.createFirbaseDBUser(uid: id, userData: userData)
         _ = KeychainWrapper.standard.set(id, forKey: KEY_UID)
         animateButton(isSignedIn: true)
-        // FIXME: - FIX THIS (getFacebookProfilePicture)
-        
-        // print("PRINT: Data saved to Keychain \(keychainResult)")
     }
     
     // Post Image To Firebase (and update DB)
@@ -244,12 +241,19 @@ class LoginZeroVC: UIViewController {
                             print(error!)
                         } else {
                             // print("postImageToFirebase: Successfully uploaded image to Firebase storage")
-                            let downloadURL = metadata?.downloadURL()?.absoluteString
-                            if downloadURL != nil {
-                                userInfo.updateValue(downloadURL!, forKey: "imageUrl")
-                                print("postImageToFirebase userInfo : \(userInfo)")
-                                self.postUserInfoToFirebase(imgUrl: downloadURL!, userFirebaseInfo: userInfo)
-                            }
+                            metadata?.storageReference?.downloadURL(completion: {
+                                (url, error) in
+                                if (error == nil) {
+                                    if let downloadUrl = url {
+                                        let downloadString = downloadUrl.absoluteString
+                                        userInfo.updateValue(downloadString, forKey: "imageUrl")
+                                    }
+                                } else {
+                                    // error handling
+                                    // error handling
+                                    // error handling
+                                }
+                            })
                         }
                     }
                 }
