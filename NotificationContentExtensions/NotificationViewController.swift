@@ -98,6 +98,8 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     
     func didReceive(_ notification: UNNotification) {
         
+        guard notification.request.content.categoryIdentifier == "nannyMapRequest" else { return }
+        
         let remoteURL = AnyHashable("userURL")
         let userURL = AnyHashable("remoteURL")
         

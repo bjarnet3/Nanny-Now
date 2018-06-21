@@ -57,6 +57,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // User Status
         DataService.instance.updateUserStatus(with: .active)
         
+        // Experimental
+        // application.registerForRemoteNotifications()
+        
         var performShortcutDelegate = true
         if let launchOptions = launchOptions {
         
@@ -68,6 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 performShortcutDelegate = false
             }
         }
+        
         return performShortcutDelegate
     }
     
@@ -86,7 +90,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         return
                     }
                     if grand {
-                        // DispatchQueue.main.async(execute: {} )
                         DispatchQueue.main.async {
                             UIApplication.shared.registerForRemoteNotifications()
                         }
@@ -100,7 +103,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             DispatchQueue.main.async {
                 UIApplication.shared.registerUserNotificationSettings(settings)
-                // UIApplication.shared.registerForRemoteNotifications()
             }
         }
     }
@@ -121,7 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // let actionReject = UNNotificationAction(identifier: "actionReject", title: "Avvis", options: [.destructive, .authenticationRequired])
         
         let messageAccept = UNNotificationAction(identifier: NotificationAction.messageAccept.rawValue, title: "OK", options: [.destructive])
-        let messageResponse = UNTextInputNotificationAction(identifier: NotificationAction.messageResponse.rawValue, title: "Svar", options: [.authenticationRequired], textInputButtonTitle: "Send", textInputPlaceholder: "Svar")
+        let messageResponse = UNTextInputNotificationAction(identifier: NotificationAction.messageResponse.rawValue, title: "Svar", options: [], textInputButtonTitle: "Send", textInputPlaceholder: "Svar")
         let messageReject = UNNotificationAction(identifier: NotificationAction.messageReject.rawValue, title: "Avvis", options: [.destructive])
         
         // Notification Categories
@@ -207,7 +209,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         // Disconnect previous FCM connection if it exists.
         Messaging.messaging().shouldEstablishDirectChannel = true
-        // Messaging.messaging().shouldEstablishDirectChannel = true
+        
+        
+    }
+    
+    // MARK : FCM Push Notification . . .
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        print("Firebase Registration Token \(fcmToken)")
+    }
+    
+    func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+        print(fcmToken)
     }
     
     
@@ -285,39 +297,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate : UNUserNotificationCenterDelegate {
     
     // Receive displayed notifications for iOS 10 devices.
-    
-    /// Called when a notification is delivered to a foreground app
+
+    // Called when a notification is delivered to a foreground app
+    //  --------------------------------------------------
+    //  willPresent    /   notification     /   Foreground
+    //  --------------------------------------------------
     public func userNotificationCenter(_ center: UNUserNotificationCenter,
                                        willPresent notification: UNNotification,
                                        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-
         completionHandler([.alert, .sound])
-        
-        // Change this to your preferred presentation option
-        /*
-        if notification.request.content.categoryIdentifier == NotificationCategory.messageRequest.rawValue {
-            completionHandler([.alert, .sound])
-        } else {
-            completionHandler([])
-        }
-        */
-        
     }
     
+    // Called to let your app know which action was selected by the user for a given notification.
+    // Called when a notitication is delivered to background
+    //  -------------------------------------------
+    //  didRecieve    /   response      /   running
+    //  -------------------------------------------
+    public func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                       didReceive response: UNNotificationResponse,
+                                       withCompletionHandler completionHandler: @escaping () -> Void) {
+        notificationResponse(response: response, completionHandler: completionHandler)
+        return
+    }
     
+    //  notificationResponse    /   response
     func notificationResponse(response: UNNotificationResponse, completionHandler: Completion? = nil) {
-        let userInfo = response.notification.request.content.userInfo
+
         
-        let remoteID = AnyHashable("userID")
-        let userID = AnyHashable("remoteID")
-        
-        let remoteURL = AnyHashable("userURL")
-        let userURL = AnyHashable("remoteURL")
-        
-        let remoteFirst = AnyHashable("userName")
-        let userFirst = AnyHashable("remoteName")
-        
-        if response.actionIdentifier == "messageResponse" {
+        if let textResponse = response as? UNTextInputNotificationResponse {
+            let messageResponse = textResponse.userText
+            
+            let userInfo = response.notification.request.content.userInfo
+            
+            let remoteID = AnyHashable("userID")
+            let userID = AnyHashable("remoteID")
+            
+            let remoteURL = AnyHashable("userURL")
+            let userURL = AnyHashable("remoteURL")
+            
+            let remoteFirst = AnyHashable("userName")
+            let userFirst = AnyHashable("remoteName")
             
             guard let userUID = userInfo[userID] as? String else { return }
             let user = User(userUID: userUID)
@@ -337,33 +356,22 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             guard let remoteName = userInfo[remoteFirst] as? String else { return }
             remoteUser.firstName = remoteName
             
-            if let textResponse = response as? UNTextInputNotificationResponse {
-                let messageResponse = textResponse.userText
-                
-                var message = Message(from: user, to: remoteUser, message: messageResponse)
-                message.setCategory(category: .messageConfirm)
-                
-                Notifications.instance.sendNotification(with: message)
-                
-                completionHandler?()
-            }
+            var message = Message(from: user, to: remoteUser, message: messageResponse)
+            message.setCategory(category: .messageConfirm)
+            // message.setCategory(category: .messageRequest)
+            message.setMessage(message: messageResponse)
+            
+            let notification = Notifications()
+            notification.sendMiniNotification(with: message)
+            
+            // Notifications.instance.sendNotification(with: message)
+            // Notifications.instance.sendMiniNotification(with: message)
+            // Notifications.instance.sendNotification(with: request)
         }
+        completionHandler?()
     }
-    
-    /// Called to let your app know which action was selected by the user for a given notification.
-    /// Called when a notitication is delivered to background
-    public func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                       didReceive response: UNNotificationResponse,
-                                       withCompletionHandler completionHandler: @escaping () -> Void) {
-    
-        notificationResponse(response: response, completionHandler: completionHandler)
-    }
-    
-    
-    
-    
-    
-    
+
+    //  actionForNotification    /   fetchCompletionHandler
     func actionForNotificaion(notificationAction: NotificationAction, response: UNNotificationResponse, completion: Completion? = nil) {
         let userInfo = response.notification.request.content.userInfo
         let action = response.actionIdentifier
@@ -383,63 +391,28 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         }
     }
     
-    
-    
-    
-    
+    //
+    //  didReceiveRemoteNotification    /   fetchCompletionHandler      / Background
+    //
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
-        let userInfo = userInfo
+        guard let category = userInfo["category"] as? String else { return }
         
-        let remoteID = AnyHashable("userID")
-        let userID = AnyHashable("remoteID")
+        print("fetch complete")
         
-        let remoteURL = AnyHashable("userURL")
-        let userURL = AnyHashable("remoteURL")
-        
-        let remoteFirst = AnyHashable("userName")
-        let userFirst = AnyHashable("remoteName")
-        
-        // let state = application.applicationState
-            
-            guard let userUID = userInfo[userID] as? String else { return }
-            let user = User(userUID: userUID)
-            
-            guard let remoteUID = userInfo[remoteID] as? String else { return }
-            let remoteUser = User(userUID: remoteUID)
-            
-            guard let userImage = userInfo[userURL] as? String else { return }
-            user.imageName = userImage
-            
-            guard let remoteImage = userInfo[remoteURL] as? String else { return }
-            remoteUser.imageName = remoteImage
-            
-            guard let userName = userInfo[userFirst] as? String else { return }
-            user.firstName = userName
-            
-            guard let remoteName = userInfo[remoteFirst] as? String else { return }
-            remoteUser.firstName = remoteName
-        
-        // completionHandler(.newData)
-        
-        /*
-            if let textResponse = response as? UNTextInputNotificationResponse {
-                // DataService.instance.REF_AI.child("foreground").setValue(textResponse.userText)
-                
-                var message = Message(from: user, to: remoteUser, message: textResponse.userText)
-                message.setCategory(category: .messageConfirm)
-                
-                Notifications.instance.sendNotification(with: message)
-                
-                completionHandler()
-            }
-        */
-
+        completionHandler(.newData)
         
     }
     
+    //
+    //  performFetchViewCompletionHandler   /   Background
+    //
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        print("performFetchWithCompletionHandler")
+        
     }
+ 
     
     
 }
@@ -453,12 +426,8 @@ extension AppDelegate : MessagingDelegate {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: gcmMessageIDKey), object: nil, userInfo: remoteMessage.appData)
     }
     
-    private func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
-    }
-    
     // Receive data message on iOS 10 devices while app is in the foreground.
     func application(received remoteMessage: MessagingRemoteMessage) {
-        
         Messaging.messaging().delegate = self
         Messaging.messaging().shouldEstablishDirectChannel = true
     }
@@ -466,6 +435,8 @@ extension AppDelegate : MessagingDelegate {
 }
 
 extension AppDelegate {
+    
+    
     /*
     func checkNotificaitonAction(action: NotificationAction) {
         switch notificationAction {
@@ -537,6 +508,7 @@ extension AppDelegate {
     }
  
     */
+    
     
 }
 // [END ios_10_data_message_handling]

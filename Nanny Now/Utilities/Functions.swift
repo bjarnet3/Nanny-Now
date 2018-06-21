@@ -619,7 +619,7 @@ public func animateCells(in tableView: UITableView,_ animated: Bool = true, dela
     }
 }
 
-// @available(iOS, deprecated, message: "Use animateCells3d() method instead.")
+/// @available(iOS, deprecated, message: "Use animateCells3d() method instead.")
 public func animateCells3d(in tableView: UITableView,_ animated: Bool = true) {
     if animated /* && lowPowerModeDisabled */ {
         let cells = tableView.visibleCells

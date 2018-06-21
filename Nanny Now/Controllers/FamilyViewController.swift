@@ -19,6 +19,7 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
     // ----------------------------------------
     @IBOutlet weak var familyTabBar: UITabBarItem!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var paymentMenu: FrostyCornerView!
     
     // MARK: - Array, Constants & Varables
     // -------------------------------------
@@ -63,6 +64,12 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
     struct CellHeight {
             static let close: CGFloat = 120 // equal or greater foregroundView height
             static let open: CGFloat = 220 // equal or greater containerView height
+    }
+    
+    // MARK: - Action Buttons
+    // ----------------------------------------
+    @IBAction func AnimateButton(_ sender: UIButton) {
+        self.paymentAnimation()
     }
 
     // MARK: - Functions:
@@ -170,8 +177,58 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
         self.tableView.insertRows(at: indexPath, with: .automatic)
     }
     
+    // ----------------------
+    // PAYMENT SYSTEM TESTING
+    func paymentAnimation(animated: Bool = true) {
+        if paymentShowing {
+            exitPayment(animated: animated)
+        } else {
+            enterPayment(animated: animated)
+        }
+    }
+    
+    var paymentShowing = true
+    
+    func enterPayment(animated: Bool = true) {
+        func initialValue() {
+            self.paymentMenu.alpha = 1.0
+            self.paymentMenu.layer.transform = CATransform3DMakeRotation(0, 0, 1, 0)
+            self.paymentMenu.layer.transform = CATransform3DMakeScale(1.05, 1.05, 1.1)  // CGAffineTransform(scaleX: 1.00, y: 1.00)
+        }
+        if animated {
+            UIView.animate(withDuration: 0.351, delay: 0.051, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.155, options: .curveEaseOut, animations: {
+                initialValue()
+            })
+        } else {
+            initialValue()
+        }
+        paymentShowing = true
+    }
+    
+    func exitPayment(animated: Bool = true) {
+        func initialValue() {
+            self.paymentMenu.alpha = 0.0
+            self.paymentMenu.layer.transform = CATransform3DMakeRotation(0, CGFloat.pi / 2, 1, 0)
+            self.paymentMenu.layer.transform = CATransform3DMakeScale(0.9, 0.9, 0.9)
+            // self.paymentMenu.transform = CGAffineTransform(scaleX: 0.80, y: 0.80)
+        }
+        if animated {
+            UIView.animate(withDuration: 0.351, delay: 0.051, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.155, options: .curveEaseOut, animations: {
+                initialValue()
+            })
+        } else {
+            initialValue()
+        }
+        paymentShowing = false
+    }
+    // PAYMENT SYSTEM TESTING
+    // ----------------------
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.exitPayment()
         
         self.setUserSettings()
         self.enableLocationServices()

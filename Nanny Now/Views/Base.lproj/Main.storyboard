@@ -218,7 +218,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pkt-1T-54j">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="28" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FamilyCell" rowHeight="312" id="dLQ-0m-lEL" customClass="FamilyTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
@@ -451,8 +451,25 @@
                                     <constraint firstItem="neA-zx-Of2" firstAttribute="centerX" secondItem="yph-vp-Vsb" secondAttribute="centerX" id="U8C-3t-2JJ"/>
                                 </constraints>
                             </view>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gyt-lz-pV1" customClass="FrostyCornerView" customModule="Nanny_Now" customModuleProvider="target">
+                                <rect key="frame" x="16" y="68" width="343" height="270"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TL6-ab-LTv">
+                                <rect key="frame" x="0.0" y="560" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.98823529409999999" green="0.1843137255" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="ANIMATE">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="AnimateButton:" destination="aIV-BS-qGB" eventType="touchUpInside" id="z8p-ci-P8k"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="pkt-1T-54j" secondAttribute="bottom" id="1BQ-dQ-RE3"/>
                             <constraint firstAttribute="trailing" secondItem="pkt-1T-54j" secondAttribute="trailing" id="48e-7i-TWy"/>
@@ -481,6 +498,7 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="familyTabBar" destination="gtk-8M-0RP" id="fBX-TK-Zwr"/>
+                        <outlet property="paymentMenu" destination="gyt-lz-pV1" id="zn4-Gz-f96"/>
                         <outlet property="tableView" destination="pkt-1T-54j" id="D0Q-qE-Ugd"/>
                     </connections>
                 </viewController>
@@ -2824,7 +2842,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yp8-aH-sb3">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z4L-wg-aqo" customClass="UserImageView" customModule="Nanny_Now" customModuleProvider="target">
@@ -2883,7 +2901,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XnZ-cb-od5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="984.05797101449286" y="1495.9239130434785"/>
+            <point key="canvasLocation" x="983.20000000000005" y="1495.5022488755624"/>
         </scene>
     </scenes>
     <resources>

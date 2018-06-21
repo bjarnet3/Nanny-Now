@@ -67,6 +67,7 @@
 		5CB7575320DB0ED8003B0F09 /* MessageLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7575220DB0ED8003B0F09 /* MessageLite.swift */; };
 		5CB7575820DB12B0003B0F09 /* UserLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7575720DB12B0003B0F09 /* UserLite.swift */; };
 		5CB7575920DB1485003B0F09 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC8493A1FCA34C3003AE163 /* Users.swift */; };
+		5CB7575F20DBE21E003B0F09 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB7575E20DBE21E003B0F09 /* NetworkExtension.framework */; };
 		5CB7FE561FE435B600D41E6F /* FrostyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7FE551FE435B600D41E6F /* FrostyView.swift */; };
 		5CB7FE581FE4362900D41E6F /* FrostyTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7FE571FE4362900D41E6F /* FrostyTabBar.swift */; };
 		5CB7FE5A1FE4368900D41E6F /* FrostyCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7FE591FE4368900D41E6F /* FrostyCornerView.swift */; };
@@ -207,6 +208,7 @@
 		5CB7575720DB12B0003B0F09 /* UserLite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLite.swift; sourceTree = "<group>"; };
 		5CB7575A20DB4715003B0F09 /* NotificationMessageResponse.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationMessageResponse.entitlements; sourceTree = "<group>"; };
 		5CB7575B20DB47EC003B0F09 /* NotificationContentExtensions.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationContentExtensions.entitlements; sourceTree = "<group>"; };
+		5CB7575E20DBE21E003B0F09 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		5CB7FE551FE435B600D41E6F /* FrostyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyView.swift; sourceTree = "<group>"; };
 		5CB7FE571FE4362900D41E6F /* FrostyTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyTabBar.swift; sourceTree = "<group>"; };
 		5CB7FE591FE4368900D41E6F /* FrostyCornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyCornerView.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D76AEE53A84CCAADE054300E /* Pods_Nanny_Now.framework in Frameworks */,
+				5CB7575F20DBE21E003B0F09 /* NetworkExtension.framework in Frameworks */,
 				151FC996AE525AF26C8878F5 /* Pods_Nanny_Now.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -517,6 +520,7 @@
 		B9B2A5F96FB68004FDC86950 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5CB7575E20DBE21E003B0F09 /* NetworkExtension.framework */,
 				5CBC8BA920DAE57B00A225A8 /* Pods_Nanny_Now.framework */,
 				5C3D9AC9202AE128007A9147 /* MapKit.framework */,
 				C06149E4985579864421B59A /* Pods_Nanny_Now.framework */,
@@ -639,7 +643,7 @@
 								enabled = 1;
 							};
 							com.apple.NetworkExtensions.iOS = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.Push = {
 								enabled = 1;

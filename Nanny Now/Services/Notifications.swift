@@ -92,6 +92,127 @@ class Notifications {
     
     // Send Notification using Message Object
     // --------------------------------------
+    func sendMiniNotification(with message: Message) {
+        
+        guard let userID = KeychainWrapper.standard.string(forKey: KEY_UID) else { return }
+        let remoteID = message._toUser?.userUID ?? message._toUID
+        let messageText = message._message
+        let messageID = message._messageID
+        let category = message._requestCategory
+        
+        var tokens = [String]()
+        let tokenREF = DataService.instance.REF_USERS_PRIVATE.child(remoteID).child("tokens")
+        
+        tokenREF.observeSingleEvent(of: .value, with: { (snapshot) in
+            if !snapshot.exists() { return }
+            
+            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                for snap in snapshot {
+                    if let snapValue = snap.value as? [String: String] {
+                        for (key,val) in snapValue {
+                            if key == "token" {
+                                tokens.append(val)
+                            }
+                        }
+                    }
+                }
+                
+                var badge = 0
+                let badgeRef = DataService.instance.REF_USERS_PRIVATE.child(remoteID).child("badge")
+                badgeRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                    
+                    if !snapshot.exists() { return }
+                    if snapshot.key == "badge" {
+                        
+                        badge = snapshot.value as! Int
+                        badge += 1
+                        
+                        badgeRef.setValue(badge)
+                    }
+                    
+                    // Get tokens from Database
+                    let registration_ids = tokens
+                    
+                    // Name / Username
+                    let userName = message._fromUser?.firstName ?? "_fromUser"
+                    let remoteName = message._toUser?.firstName ?? "_toUser"
+                    
+                    // ImageName / ProfileImage
+                    let remoteURL = message._toUser?.imageName ?? "_remoteURL"
+                    let userURL = message._fromUser?.imageName ?? "_userURL"
+                    
+                    // Title
+                    var title = "\(userName)"
+                    
+                    // MARK: - Change this to display different Notificaiton Categories
+                    // let category = category.rawValue // "messageRequest"
+                    // var content_available = true
+                    
+                    switch category {
+                    case .messageRequest:
+                        title = "Melding fra \(userName):"
+                        DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(messageText)")
+                        // content_available = false
+                    default:
+                        //.messageReponse:
+                        title = "Beskjed fra \(userName)"
+                        DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(messageText)")
+                        // content_available = true
+                    }
+                    
+                    let taskDictionary =
+                        ["data":
+                            [ "category": category.rawValue,
+                              "messageID": messageID,
+                              
+                              "remoteURL": remoteURL,
+                              "userURL": userURL,
+                              
+                              "remoteID": remoteID,
+                              "userID"  : userID,
+                              
+                              "remoteName": remoteName,
+                              "userName" : userName
+                            ],
+                         "registration_ids" : registration_ids,
+                         "notification":
+                            ["title" : title,
+                             "body"  : messageText,
+                             "sound" : "notification48.wav",
+                             "badge" : badge],
+                         "priority":10,
+                         // "content_available": content_available,
+                         "mutable_content": true,
+                         "category" : category.rawValue
+                            ] as [String : Any]
+                    
+                    self.sendNotification(taskDictionary: taskDictionary)
+
+                })
+            }
+        })
+
+    }
+    
+    func sendNotification(taskDictionary : [String:Any] ) {
+        if let url = URL(string:"https://fcm.googleapis.com/fcm/send"){
+            
+            let serverKey = "AAAAd-nNctg:APA91bGhfGrYaRg-QOHx0LlfTyqU9cwOECMvm6jGHMZaeLGsToNPJtgV0y-EfcmMVFZbfbxdkF3ubJ8NC94-B-I74lV-UG2f-kuvjLtOnG_wbHecjdBc93Y59tv7XCJCEXEW3hTKH4oC"
+            
+            var request = URLRequest(url:url)
+            request.allHTTPHeaderFields = ["Content-Type":"application/json","Authorization":"key=\(serverKey)"]
+            request.httpMethod = "POST"
+            request.httpBody = try? JSONSerialization.data(withJSONObject: taskDictionary, options: .sortedKeys)
+            request.cachePolicy = .reloadIgnoringCacheData
+            
+            URLSession.shared.dataTask(with: request, completionHandler: { (data, urlresponse, error) in
+                if error != nil{
+                    print(error!)
+                }
+            }).resume()
+        }
+    }
+
     func sendNotification(with message: Message) {
         DataService.instance.updateUserStatus(with: .active)
         
@@ -167,18 +288,18 @@ class Notifications {
                                     
                                     // MARK: - Change this to display different Notificaiton Categories
                                     let category = categoryRequest.rawValue // "messageRequest"
-                                    var contentAvailable = true
+                                    // var contentAvailable = true
                                     
                                     switch categoryRequest {
                                     case .messageRequest:
                                         title = "Melding fra \(firstName):"
                                         DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(text)")
-                                        contentAvailable = true
+                                        // contentAvailable = true
                                     default:
                                         //.messageAccept:
-                                        title = "Rask beskjed fra \(firstName)"
+                                        title = "Beskjed fra \(firstName)"
                                         DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(text)")
-                                        contentAvailable = true
+                                        // contentAvailable = true
                                     }
                                     
                                     // For Advanced Rich Notificaiton Setup
@@ -206,7 +327,7 @@ class Notifications {
                                              "sound" : "notification48.wav",
                                              "badge" : badge],
                                          "priority":10,
-                                         "content_available": contentAvailable,
+                                         // "content_available": contentAvailable,
                                          "mutable_content": true,
                                          "category" : category
                                             ] as [String : Any]
@@ -320,7 +441,7 @@ class Notifications {
                                     let registration_ids = tokens
                                     let message = message
                                     var title = "\(firstName)"
-                                    let contentAvailable = false
+                                    // let contentAvailable = false
                                     
                                     // For Advanced Rich Notificaiton Setup
                                     let remoteURL = remote.imageName
@@ -371,7 +492,7 @@ class Notifications {
                                              "sound" : "notification11.wav",
                                              "badge" : badge],
                                          "priority":10,
-                                            "content_available": contentAvailable,
+                                            // "content_available": contentAvailable,
                                             "mutable_content": true,
                                             "category" : category
                                             ] as [String : Any]
