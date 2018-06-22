@@ -214,7 +214,10 @@ class MessageDetailVC: UIViewController {
     
     private func sendNotification(message: Message) {
         // Send Notification Message
-        Notifications.instance.sendNotification(with: message)
+        var mutableMessage = message
+        mutableMessage.setCategory(category: .messageRequest)
+        
+        Notifications.instance.sendNotification(with: mutableMessage)
         
         self.tableView.layoutIfNeeded()
         self.tableView.reloadData()
@@ -383,7 +386,6 @@ class MessageDetailVC: UIViewController {
         }
         self.setProgress(progress: 1.0, animated: true, alpha: 0.0)
     }
-    
 }
 
 // MARK: - ViewDidLoad, ViewWillLoad etc...

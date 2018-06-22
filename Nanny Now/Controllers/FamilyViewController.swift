@@ -19,7 +19,7 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
     // ----------------------------------------
     @IBOutlet weak var familyTabBar: UITabBarItem!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var paymentMenu: FrostyCornerView!
+    @IBOutlet weak var paymentMenu: UIView!
     
     // MARK: - Array, Constants & Varables
     // -------------------------------------
@@ -229,6 +229,7 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         
         self.exitPayment()
+        self.paymentMenu.layer.cornerRadius = 20.0
         
         self.setUserSettings()
         self.enableLocationServices()
