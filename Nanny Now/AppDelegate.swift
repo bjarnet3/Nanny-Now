@@ -316,13 +316,26 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     public func userNotificationCenter(_ center: UNUserNotificationCenter,
                                        didReceive response: UNNotificationResponse,
                                        withCompletionHandler completionHandler: @escaping () -> Void) {
-        notificationResponse(response: response, completionHandler: completionHandler)
-        return
+        notificationMessageResponse(response: response, completionHandler: completionHandler)
     }
     
+    // notificationMessageResponse      /   response
+    func notificationMessageResponse(response: UNNotificationResponse, completionHandler: Completion? = nil) {
+        if let textResponse = response as? UNTextInputNotificationResponse {
+            let messageResponse = textResponse.userText
+            
+            let userInfo = response.notification.request.content.userInfo
+            let remoteID = AnyHashable("userID")
+            
+            guard let remoteUID = userInfo[remoteID] as? String else { return }
+            DataService.instance.postToMessage(recieveUserID: remoteUID, message: messageResponse)
+        }
+        completionHandler?()
+    }
+    
+    /*
     //  notificationResponse    /   response
     func notificationResponse(response: UNNotificationResponse, completionHandler: Completion? = nil) {
-
         
         if let textResponse = response as? UNTextInputNotificationResponse {
             let messageResponse = textResponse.userText
@@ -340,7 +353,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             
             guard let userUID = userInfo[userID] as? String else { return }
             let user = User(userUID: userUID)
-            
+           
             guard let remoteUID = userInfo[remoteID] as? String else { return }
             let remoteUser = User(userUID: remoteUID)
             
@@ -370,6 +383,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         }
         completionHandler?()
     }
+    */
 
     //  actionForNotification    /   fetchCompletionHandler
     func actionForNotificaion(notificationAction: NotificationAction, response: UNNotificationResponse, completion: Completion? = nil) {
@@ -391,17 +405,16 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         }
     }
     
+    /*
     //
     //  didReceiveRemoteNotification    /   fetchCompletionHandler      / Background
     //
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
-        guard let category = userInfo["category"] as? String else { return }
+        // guard let category = userInfo["category"] as? String else { return }
+        // print("fetch complete")
         
-        print("fetch complete")
-        
-        completionHandler(.newData)
-        
+        completionHandler(.noData)
     }
     
     //
@@ -409,11 +422,12 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     //
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
+        DataService.instance.REF_AI.child("performFetchWithCompletionHandler").setValue("newData")
+        completionHandler(.newData)
         print("performFetchWithCompletionHandler")
-        
     }
+    */
  
-    
     
 }
 
@@ -431,7 +445,6 @@ extension AppDelegate : MessagingDelegate {
         Messaging.messaging().delegate = self
         Messaging.messaging().shouldEstablishDirectChannel = true
     }
-    
 }
 
 extension AppDelegate {
