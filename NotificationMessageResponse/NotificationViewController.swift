@@ -63,7 +63,6 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
             remoteUser.imageName = remoteImage
             
             self.remoteUser = remoteUser
-            
             let message = MessageLite(from: remoteUser, to: user, message: remoteMessage)
             
             self.messages.append(message)
@@ -77,6 +76,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         guard let remoteUser = self.remoteUser else { return }
         
         if response.actionIdentifier == "messageResponse" {
+            
             if let textResponse = response as? UNTextInputNotificationResponse {
                 
                 let toMessage = MessageLite(from: user, to: remoteUser, message: textResponse.userText)
@@ -86,11 +86,14 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
                 
                 animateCells(in: self.tableView, true, delay: 0.01)
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.9) { // this is the best delay
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { // this is the best delay
                     completion(.dismissAndForwardAction)
                 }
-
             }
+        } else if response.actionIdentifier == "messageAccept" {
+            completion(.dismissAndForwardAction)
+        } else {
+            completion(.dismiss)
         }
     }
 
@@ -100,8 +103,8 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         if let contentHandler = contentHandler, let bestAttemptContent = bestAttemptContent {
             contentHandler(bestAttemptContent)
         }
- 
     }
+    
 }
 
 // MARK: - ViewDidLoad, ViewWillLoad etc...

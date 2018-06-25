@@ -165,8 +165,12 @@ class DataService {
         DispatchQueue.main.async(execute: {
             UIApplication.shared.applicationIconBadgeNumber = 0
         })
+        updateBadge(for: 0)
+    }
+    
+    func updateBadge(for value: Int) {
         if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
-            let badge = ["badge" : 0]
+            let badge = ["badge" : value]
             updateUserChildValues(uid: userID, userData: badge)
         } else {
             printDebug(object: "clearBadge couldn't get userID from KeychainWrapper")

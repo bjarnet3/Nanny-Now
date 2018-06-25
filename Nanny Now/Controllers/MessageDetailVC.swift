@@ -380,10 +380,13 @@ class MessageDetailVC: UIViewController {
         
         self.tableView.reloadData()
         
+        /* Display the messages
         for message in messages {
             let dateString = dateTimeToTimeStampString(message.messageTime) //  dateTimeToString(from: message.messageTime)
             print("\(dateString) \(message._message)")
         }
+        */
+        
         self.setProgress(progress: 1.0, animated: true, alpha: 0.0)
     }
 }

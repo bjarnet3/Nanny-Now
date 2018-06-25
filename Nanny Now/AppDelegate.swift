@@ -23,9 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //
     // ********************************
     var window: UIWindow?
-    static var shared: AppDelegate { return UIApplication.shared.delegate as! AppDelegate }
-    
     var shortcutItem: UIApplicationShortcutItem?
+    
+    static var shared: AppDelegate { return UIApplication.shared.delegate as! AppDelegate }
     let gcmMessageIDKey = "gcm.message_id"
     
     // ********************************
@@ -75,6 +75,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return performShortcutDelegate
     }
     
+    // Set Notificaiton Authentication
+    // -------------------------------
     func setNotificationAuth() {
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
@@ -107,7 +109,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    // Set Notificaiton Categories with Actions
+    // ----------------------------------------
     func setNotifications() {
+        
         // Notification Actions
         // --------------------
         let nannyAccept = UNNotificationAction(identifier: NotificationAction.nannyAccept.rawValue, title: "Aksepter", options: [.foreground, .authenticationRequired])
@@ -122,9 +127,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // let actionShowDetails = UNNotificationAction(identifier: "actionShowDetails", title: "Vis detaljer", options: [.foreground])
         // let actionReject = UNNotificationAction(identifier: "actionReject", title: "Avvis", options: [.destructive, .authenticationRequired])
         
-        let messageAccept = UNNotificationAction(identifier: NotificationAction.messageAccept.rawValue, title: "OK", options: [.destructive])
+        let messageAccept = UNNotificationAction(identifier: NotificationAction.messageAccept.rawValue, title: "Gå til Chat", options: [.foreground, .authenticationRequired])
         let messageResponse = UNTextInputNotificationAction(identifier: NotificationAction.messageResponse.rawValue, title: "Svar", options: [], textInputButtonTitle: "Send", textInputPlaceholder: "Svar")
-        let messageReject = UNNotificationAction(identifier: NotificationAction.messageReject.rawValue, title: "Avvis", options: [.destructive])
+        let messageReject = UNNotificationAction(identifier: NotificationAction.messageReject.rawValue, title: "OK", options: [.destructive])
         
         // Notification Categories
         // -----------------------
@@ -137,21 +142,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let messageRequest = UNNotificationCategory(identifier: NotificationCategory.messageRequest.rawValue, actions: [messageAccept, messageResponse, messageReject], intentIdentifiers: [], options: [])
         let messageConfirm = UNNotificationCategory(identifier: NotificationCategory.messageConfirm.rawValue, actions: [messageAccept], intentIdentifiers: [], options: [])
         
+        // Set Notification Categories
+        // ---------------------------
         UNUserNotificationCenter.current().setNotificationCategories([nannyRequest, nannyMapRequest, familyRequest, familyMapRequest, messageRequest, messageConfirm])
     }
     
     // Facebook Part 3
+    // ---------------
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(app, open: url as URL?, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
     }
     
     /// Tells the delegate that the app is about to become inactive.
+    /// -----------------------------------------------------------
     func applicationWillResignActive(_ application: UIApplication) {
         // User Status
         DataService.instance.updateUserStatus(with: .inactive)
     }
     
     /// Tells the delegate that the app is about to enter the foreground.
+    /// ----------------------------------------------------------------
     func applicationWillEnterForeground(_ application: UIApplication) {
         // User Status
         DataService.instance.updateUserStatus(with: .active)
@@ -161,6 +171,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     /// Tells the delegate that the app has become active.
+    /// -------------------------------------------------
     func applicationDidBecomeActive(_ application: UIApplication) {
         // User Status
         DataService.instance.updateUserStatus(with: .active)
@@ -178,6 +189,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     /// Tells the delegate that the app is now in the background.
+    /// --------------------------------------------------------
     func applicationDidEnterBackground(_ application: UIApplication) {
         // User Status
         DataService.instance.updateUserStatus(with: .inactive)
@@ -187,21 +199,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     /// Tells the delegate when the app is about to terminate.
+    /// -----------------------------------------------------
     func applicationWillTerminate(_ application: UIApplication) {
         // User Status
         DataService.instance.updateUserStatus(with: .terminate)
     }
     
     // [START refresh_token]
+    // ---------------------
     func tokenRefreshNotification(_ notification: Notification) {
         if let refreshedToken = InstanceID.instanceID().token() {
             print("InstanceID token: \(refreshedToken)")
         }
-        
         // Connect to FCM since connection may have failed when attempted before having a token.
         connectToFcm()
     }
     
+    // FCM Connect
+    // ---------------------
     func connectToFcm() {
         // Won't connect since there is no token
         guard InstanceID.instanceID().token() != nil else {
@@ -209,11 +224,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         // Disconnect previous FCM connection if it exists.
         Messaging.messaging().shouldEstablishDirectChannel = true
-        
-        
     }
     
     // MARK : FCM Push Notification . . .
+    // ----------------------------------
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("Firebase Registration Token \(fcmToken)")
     }
@@ -249,7 +263,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If you are receiving a notification message while your app is in the background,
         // this callback will not be fired till the user taps on the notification launching the application.
         
-        application.applicationIconBadgeNumber = application.applicationIconBadgeNumber != 0 ? application.applicationIconBadgeNumber - 1 : 0
+        decreaseBadge(application)
         
         // TODO: Handle data of notification
         if let mediaUrl = userInfo["remoteURL"] as? String {
@@ -265,6 +279,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         completionHandler( handleShortcut(shortcutItem: shortcutItem) )
     }
     
+    // Shortcut identifiers
+    // --------------------
     func handleShortcut(shortcutItem: UIApplicationShortcutItem ) -> Bool {
         var succeeded = false
         
@@ -291,6 +307,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return succeeded
     }
+    
+    // Increase and Decrease Badge (on Application)
+    // -------------------------------------------
+    func increaseBadge(_ application: UIApplication) {
+        let badge = application.applicationIconBadgeNumber != 0 ? application.applicationIconBadgeNumber + 1 : 1
+        application.applicationIconBadgeNumber = badge
+        DataService.instance.updateBadge(for: badge)
+    }
+    
+    func decreaseBadge(_ application: UIApplication) {
+        let badge = application.applicationIconBadgeNumber != 0 ? application.applicationIconBadgeNumber - 1 : 0
+        application.applicationIconBadgeNumber = badge
+        DataService.instance.updateBadge(for: badge)
+    }
+    
 }
 // [END ios_10_data_message_handling]
 @available(iOS 10, *)
@@ -300,93 +331,58 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 
     // Called when a notification is delivered to a foreground app
     //  --------------------------------------------------
-    //  willPresent    /   notification     /   Foreground
+    //  willPresent    /   foreground     /   notification
     //  --------------------------------------------------
     public func userNotificationCenter(_ center: UNUserNotificationCenter,
                                        willPresent notification: UNNotification,
                                        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert, .sound])
+        completionHandler([.sound])
     }
     
     // Called to let your app know which action was selected by the user for a given notification.
     // Called when a notitication is delivered to background
     //  -------------------------------------------
-    //  didRecieve    /   response      /   running
+    //  didRecieve    /   background      /   response
     //  -------------------------------------------
     public func userNotificationCenter(_ center: UNUserNotificationCenter,
                                        didReceive response: UNNotificationResponse,
                                        withCompletionHandler completionHandler: @escaping () -> Void) {
-        notificationMessageResponse(response: response, completionHandler: completionHandler)
+        notificationResponse(response: response, completionHandler: completionHandler)
     }
     
+    // ---------------------------------------------
     // notificationMessageResponse      /   response
-    func notificationMessageResponse(response: UNNotificationResponse, completionHandler: Completion? = nil) {
-        if let textResponse = response as? UNTextInputNotificationResponse {
-            let messageResponse = textResponse.userText
-            
-            let userInfo = response.notification.request.content.userInfo
-            let remoteID = AnyHashable("userID")
-            
-            guard let remoteUID = userInfo[remoteID] as? String else { return }
-            DataService.instance.postToMessage(recieveUserID: remoteUID, message: messageResponse)
+    // ---------------------------------------------
+    func notificationResponse(response: UNNotificationResponse, completionHandler: Completion? = nil) {
+        let notificationAction = notificationRequest(action: response.actionIdentifier)
+        
+        switch notificationAction {
+        case .nannyAccept:
+            notificationRequestAction(notificationAction: .nannyAccept, response: response)
+            completionHandler?()
+        case .nannyResponse:
+            notificationRequestAction(notificationAction: .nannyResponse, response: response)
+            completionHandler?()
+        case .nannyReject:
+            notificationRequestAction(notificationAction: .nannyReject, response: response)
+            completionHandler?()
+        case .messageAccept:
+            notificationMessageAction(notificationAction: .messageAccept, response: response)
+            completionHandler?()
+        case .messageResponse:
+            notificationMessageAction(notificationAction: .messageResponse, response: response)
+            completionHandler?()
+        default:
+            print("default")
+            completionHandler?()
         }
         completionHandler?()
     }
     
-    /*
-    //  notificationResponse    /   response
-    func notificationResponse(response: UNNotificationResponse, completionHandler: Completion? = nil) {
-        
-        if let textResponse = response as? UNTextInputNotificationResponse {
-            let messageResponse = textResponse.userText
-            
-            let userInfo = response.notification.request.content.userInfo
-            
-            let remoteID = AnyHashable("userID")
-            let userID = AnyHashable("remoteID")
-            
-            let remoteURL = AnyHashable("userURL")
-            let userURL = AnyHashable("remoteURL")
-            
-            let remoteFirst = AnyHashable("userName")
-            let userFirst = AnyHashable("remoteName")
-            
-            guard let userUID = userInfo[userID] as? String else { return }
-            let user = User(userUID: userUID)
-           
-            guard let remoteUID = userInfo[remoteID] as? String else { return }
-            let remoteUser = User(userUID: remoteUID)
-            
-            guard let userImage = userInfo[userURL] as? String else { return }
-            user.imageName = userImage
-            
-            guard let remoteImage = userInfo[remoteURL] as? String else { return }
-            remoteUser.imageName = remoteImage
-            
-            guard let userName = userInfo[userFirst] as? String else { return }
-            user.firstName = userName
-            
-            guard let remoteName = userInfo[remoteFirst] as? String else { return }
-            remoteUser.firstName = remoteName
-            
-            var message = Message(from: user, to: remoteUser, message: messageResponse)
-            message.setCategory(category: .messageConfirm)
-            // message.setCategory(category: .messageRequest)
-            message.setMessage(message: messageResponse)
-            
-            let notification = Notifications()
-            notification.sendMiniNotification(with: message)
-            
-            // Notifications.instance.sendNotification(with: message)
-            // Notifications.instance.sendMiniNotification(with: message)
-            // Notifications.instance.sendNotification(with: request)
-        }
-        completionHandler?()
-    }
-    */
-
-    //  actionForNotification    /   fetchCompletionHandler
-    func actionForNotificaion(notificationAction: NotificationAction, response: UNNotificationResponse, completion: Completion? = nil) {
+    // ---------------------------------------------
+    // notificationRequestAction      /   response
+    // ---------------------------------------------
+    func notificationRequestAction(notificationAction: NotificationAction, response: UNNotificationResponse) {
         let userInfo = response.notification.request.content.userInfo
         let action = response.actionIdentifier
         
@@ -403,55 +399,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         func returnRequestStatus(requestStatus: RequestStatus) -> [String:String] {
             return [ "requestStatus":requestStatus.rawValue ]
         }
-    }
-    
-    /*
-    //
-    //  didReceiveRemoteNotification    /   fetchCompletionHandler      / Background
-    //
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
-        // guard let category = userInfo["category"] as? String else { return }
-        // print("fetch complete")
-        
-        completionHandler(.noData)
-    }
-    
-    //
-    //  performFetchViewCompletionHandler   /   Background
-    //
-    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        
-        DataService.instance.REF_AI.child("performFetchWithCompletionHandler").setValue("newData")
-        completionHandler(.newData)
-        print("performFetchWithCompletionHandler")
-    }
-    */
- 
-    
-}
-
-
-// [START ios_10_data_message_handling]
-extension AppDelegate : MessagingDelegate {
-    
-    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-        print("Received data message 10 +: \(remoteMessage)")
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: gcmMessageIDKey), object: nil, userInfo: remoteMessage.appData)
-    }
-    
-    // Receive data message on iOS 10 devices while app is in the foreground.
-    func application(received remoteMessage: MessagingRemoteMessage) {
-        Messaging.messaging().delegate = self
-        Messaging.messaging().shouldEstablishDirectChannel = true
-    }
-}
-
-extension AppDelegate {
-    
-    
-    /*
-    func checkNotificaitonAction(action: NotificationAction) {
         switch notificationAction {
         case .nannyAccept:
             // Switch
@@ -480,7 +428,7 @@ extension AppDelegate {
             
             let updateStatus = ["requestStatus":RequestStatus.accepted.rawValue]
             publicRequest.updateChildValues(updateStatus)
-        case .nannyReject:
+        default:
             let updateStatus = returnRequestStatus(requestStatus: .rejected)
             
             publicRequest.setValue(updateStatus)
@@ -488,6 +436,14 @@ extension AppDelegate {
             
             publicRemote.updateChildValues(updateStatus)
             DataService.instance.REF_NANNIES.child("active").child(userID).removeValue()
+        }
+    }
+    
+    // ---------------------------------------------
+    // notificationMessageAction      /   response
+    // ---------------------------------------------
+    func notificationMessageAction(notificationAction: NotificationAction, response: UNNotificationResponse) {
+        switch notificationAction {
         case .messageAccept:
             // Go to Message / Request location
             let sb = UIStoryboard(name: "Main", bundle: nil)
@@ -498,32 +454,120 @@ extension AppDelegate {
             tabBarController.setSelectIndex(from: 0, to: 3)
             tabBarController.tabBarItem.badgeValue = nil
         case .messageResponse:
-            if let responseText = response as? UNTextInputNotificationResponse {
-                let responseMessage = responseText.userText
+            if let textResponse = response as? UNTextInputNotificationResponse {
+                let messageResponse = textResponse.userText
                 
-                DataService.instance.REF_AI.child("messageResponse").setValue(responseMessage)
+                let userInfo = response.notification.request.content.userInfo
+                let remoteID = AnyHashable("userID")
+                guard let remoteUID = userInfo[remoteID] as? String else { return }
                 
-                let user = User(userUID: userID)
-                let remote = User(userUID: remoteID)
+                DataService.instance.postToMessage(recieveUserID: remoteUID, message: messageResponse)
                 
-                // let responseText = "messageResponse Text"
-                var message = Message(from: user, to: remote, message: responseMessage, messageID: requestID)
-                message.setCategory(category: .messageConfirm)
-                
-                DataService.instance.REF_AI.child("messageResponse").setValue(responseMessage)
-                Notifications.instance.sendNotification(with: message)
-                
-                completion?()
+                decreaseBadge(.shared)
             }
         default:
-            print("")
+            print("messageReject")
         }
     }
- 
-    */
     
-    
+
 }
+
+
+// [START ios_10_data_message_handling]
+extension AppDelegate : MessagingDelegate {
+    
+    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+        print("Received data message 10 +: \(remoteMessage)")
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: gcmMessageIDKey), object: nil, userInfo: remoteMessage.appData)
+    }
+    
+    // Receive data message on iOS 10 devices while app is in the foreground.
+    func application(received remoteMessage: MessagingRemoteMessage) {
+        Messaging.messaging().delegate = self
+        Messaging.messaging().shouldEstablishDirectChannel = true
+    }
+}
+
+extension AppDelegate {
+    /*
+    func actionForNotificaion(notificationAction: NotificationAction, response: UNNotificationResponse, completion: Completion? = nil) {
+        let userInfo = response.notification.request.content.userInfo
+        let action = response.actionIdentifier
+        
+        guard let userID = userInfo["remoteID"] as? String else { return }
+        guard let remoteID = userInfo["userID"] as? String else { return }
+        guard let requestID = userInfo["requestID"] as? String else { return }
+        
+        let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(userID).child(requestID)
+        let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(userID).child("requests").child(requestID)
+        
+        let publicRemote = DataService.instance.REF_REQUESTS.child("public").child(remoteID).child(requestID)
+        // let privateRemote = DataService.instance.REF_REQUESTS.child("private").child(remoteID).child("requests").child(requestID)
+        
+        func returnRequestStatus(requestStatus: RequestStatus) -> [String:String] {
+            return [ "requestStatus":requestStatus.rawValue ]
+        }
+        
+        switch notificationAction {
+        case .nannyAccept:
+            // Switch
+            let updateStatus = returnRequestStatus(requestStatus: .accepted)
+            
+            publicRequest.updateChildValues(updateStatus)
+            DataService.instance.moveValuesFromRefToRef(fromReference: publicRequest, toReference: privateRequest)
+            publicRemote.updateChildValues(updateStatus)
+            DataService.instance.REF_NANNIES.child("active").child(userID).removeValue()
+            
+            // Go to Message / Request location
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateInitialViewController()
+            window?.rootViewController = vc
+            guard let tabBarController = window?.rootViewController as? RAMAnimatedTabBarController else { return  }
+            
+            tabBarController.setSelectIndex(from: 0, to: 3)
+            tabBarController.tabBarItem.badgeValue = nil
+            completion?()
+        case .nannyResponse:
+            let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(remoteID).child("requests").child(requestID)
+            let updateUserID = ["userID": userID]
+            privateRequest.updateChildValues(updateUserID)
+            
+            let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(requestID)
+            publicRequest.child("familyID").removeValue()
+            
+            let updateStatus = ["requestStatus":RequestStatus.accepted.rawValue]
+            publicRequest.updateChildValues(updateStatus)
+            completion?()
+        case .nannyReject:
+            let updateStatus = returnRequestStatus(requestStatus: .rejected)
+            
+            publicRequest.setValue(updateStatus)
+            DataService.instance.moveValuesFromRefToRef(fromReference: publicRequest, toReference: privateRequest)
+            
+            publicRemote.updateChildValues(updateStatus)
+            DataService.instance.REF_NANNIES.child("active").child(userID).removeValue()
+            completion?()
+        case .messageAccept:
+            // Go to Message / Request location
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sb.instantiateInitialViewController()
+            window?.rootViewController = vc
+            guard let tabBarController = window?.rootViewController as? RAMAnimatedTabBarController else { return  }
+            
+            tabBarController.setSelectIndex(from: 0, to: 3)
+            tabBarController.tabBarItem.badgeValue = nil
+            print("messageAccept")
+            completion?()
+        default:
+            print("")
+            completion?()
+        }
+        completion?()
+    }
+    */
+}
+
 // [END ios_10_data_message_handling]
 
 // Rich Notification Hero

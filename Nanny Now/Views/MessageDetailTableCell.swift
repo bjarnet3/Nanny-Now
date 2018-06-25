@@ -64,7 +64,7 @@ class MessageDetailTableCell: UITableViewCell {
             let constraintMin: CGFloat = 48.0
             let constraintMax: CGFloat = mainBoundsWith - 75.0
             
-            print("widthForText \(widthForText), linesForText \(linesForText)")
+            // print("widthForText \(widthForText), linesForText \(linesForText)")
             self.messageTextContraint.constant = linesForText == 1 ? constraintMax - widthForText : constraintMin
             
             self.profileImage.loadImageUsingCacheWith(urlString: user.imageName, completion: {
