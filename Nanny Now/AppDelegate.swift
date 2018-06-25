@@ -215,8 +215,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         connectToFcm()
     }
     
-    // FCM Connect
-    // ---------------------
+    // FCM Connect and Establish Direct Channel.
+    // ----------------------------------------
     func connectToFcm() {
         // Won't connect since there is no token
         guard InstanceID.instanceID().token() != nil else {
@@ -242,6 +242,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // the InstanceID token.
     
     /// Tells the delegate that the app successfully registered with Apple Push Notification service (APNs).
+    /// ---------------------------------------------------------------------------------------------------
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         print("APNs token retrieved: \(deviceToken)")
         
@@ -253,12 +254,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // InstanceID.instanceID().setAPNSToken(deviceToken, type: InstanceIDAPNSTokenType.sandbox)
     }
     
-    /// Sent to the delegate when Apple Push Notification service cannot successfully complete the registration process
+    /// Sent to the delegate when Apple Push Notification service cannot successfully complete the registration process.
+    /// ---------------------------------------------------------------------------------------------------------------
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Unable to register for remote notifications: \(error.localizedDescription)")
     }
     
     /// Tells the app that a remote notification arrived that indicates there is data to be fetched.
+    /// -------------------------------------------------------------------------------------------
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         // If you are receiving a notification message while your app is in the background,
         // this callback will not be fired till the user taps on the notification launching the application.
@@ -273,6 +276,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // Closure @escaping ...
+    // ---------------------
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         
         print("Application performActionForShortcutItem")
@@ -402,7 +406,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         switch notificationAction {
         case .nannyAccept:
-            // Switch
             let updateStatus = returnRequestStatus(requestStatus: .accepted)
             
             publicRequest.updateChildValues(updateStatus)
@@ -411,6 +414,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             DataService.instance.REF_NANNIES.child("active").child(userID).removeValue()
             
             // Go to Message / Request location
+            // --------------------------------
             let sb = UIStoryboard(name: "Main", bundle: nil)
             let vc = sb.instantiateInitialViewController()
             window?.rootViewController = vc
@@ -473,7 +477,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 
 }
 
-
 // [START ios_10_data_message_handling]
 extension AppDelegate : MessagingDelegate {
     
@@ -487,85 +490,6 @@ extension AppDelegate : MessagingDelegate {
         Messaging.messaging().delegate = self
         Messaging.messaging().shouldEstablishDirectChannel = true
     }
-}
-
-extension AppDelegate {
-    /*
-    func actionForNotificaion(notificationAction: NotificationAction, response: UNNotificationResponse, completion: Completion? = nil) {
-        let userInfo = response.notification.request.content.userInfo
-        let action = response.actionIdentifier
-        
-        guard let userID = userInfo["remoteID"] as? String else { return }
-        guard let remoteID = userInfo["userID"] as? String else { return }
-        guard let requestID = userInfo["requestID"] as? String else { return }
-        
-        let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(userID).child(requestID)
-        let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(userID).child("requests").child(requestID)
-        
-        let publicRemote = DataService.instance.REF_REQUESTS.child("public").child(remoteID).child(requestID)
-        // let privateRemote = DataService.instance.REF_REQUESTS.child("private").child(remoteID).child("requests").child(requestID)
-        
-        func returnRequestStatus(requestStatus: RequestStatus) -> [String:String] {
-            return [ "requestStatus":requestStatus.rawValue ]
-        }
-        
-        switch notificationAction {
-        case .nannyAccept:
-            // Switch
-            let updateStatus = returnRequestStatus(requestStatus: .accepted)
-            
-            publicRequest.updateChildValues(updateStatus)
-            DataService.instance.moveValuesFromRefToRef(fromReference: publicRequest, toReference: privateRequest)
-            publicRemote.updateChildValues(updateStatus)
-            DataService.instance.REF_NANNIES.child("active").child(userID).removeValue()
-            
-            // Go to Message / Request location
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let vc = sb.instantiateInitialViewController()
-            window?.rootViewController = vc
-            guard let tabBarController = window?.rootViewController as? RAMAnimatedTabBarController else { return  }
-            
-            tabBarController.setSelectIndex(from: 0, to: 3)
-            tabBarController.tabBarItem.badgeValue = nil
-            completion?()
-        case .nannyResponse:
-            let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(remoteID).child("requests").child(requestID)
-            let updateUserID = ["userID": userID]
-            privateRequest.updateChildValues(updateUserID)
-            
-            let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(requestID)
-            publicRequest.child("familyID").removeValue()
-            
-            let updateStatus = ["requestStatus":RequestStatus.accepted.rawValue]
-            publicRequest.updateChildValues(updateStatus)
-            completion?()
-        case .nannyReject:
-            let updateStatus = returnRequestStatus(requestStatus: .rejected)
-            
-            publicRequest.setValue(updateStatus)
-            DataService.instance.moveValuesFromRefToRef(fromReference: publicRequest, toReference: privateRequest)
-            
-            publicRemote.updateChildValues(updateStatus)
-            DataService.instance.REF_NANNIES.child("active").child(userID).removeValue()
-            completion?()
-        case .messageAccept:
-            // Go to Message / Request location
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let vc = sb.instantiateInitialViewController()
-            window?.rootViewController = vc
-            guard let tabBarController = window?.rootViewController as? RAMAnimatedTabBarController else { return  }
-            
-            tabBarController.setSelectIndex(from: 0, to: 3)
-            tabBarController.tabBarItem.badgeValue = nil
-            print("messageAccept")
-            completion?()
-        default:
-            print("")
-            completion?()
-        }
-        completion?()
-    }
-    */
 }
 
 // [END ios_10_data_message_handling]

@@ -1914,10 +1914,10 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                             </constraints>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="IJx-Vb-tAd">
-                                                            <rect key="frame" x="81" y="10" width="284" height="60"/>
+                                                            <rect key="frame" x="81" y="10" width="509" height="60"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="A6U-zG-Xhi">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="284" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="509" height="18"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="JaJ-hs-a0h">
                                                                             <rect key="frame" x="0.0" y="0.0" width="109.5" height="18"/>
@@ -1947,7 +1947,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                                             </subviews>
                                                                         </stackView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="i dag 20:50" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiH-Fq-QwT">
-                                                                            <rect key="frame" x="228.5" y="0.0" width="55.5" height="18"/>
+                                                                            <rect key="frame" x="453.5" y="0.0" width="55.5" height="18"/>
                                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
                                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -1955,10 +1955,10 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                                     </subviews>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="bNa-mq-76Q">
-                                                                    <rect key="frame" x="0.0" y="23" width="284" height="37"/>
+                                                                    <rect key="frame" x="0.0" y="23" width="509" height="37"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a message to alle people around the table.." lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vm-gs-kuY">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="284" height="16.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="509" height="16.5"/>
                                                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                                                             <color key="textColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -2199,7 +2199,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                                         <stackView opaque="NO" contentMode="left" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="X5f-aS-xFB">
                                                                             <rect key="frame" x="0.0" y="0.0" width="81.5" height="23"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cJ-1x-LSf">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0cJ-1x-LSf">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="38.5" height="23"/>
                                                                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                                                                     <color key="highlightedColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2420,12 +2420,12 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                         </connections>
                     </tabBarItem>
                     <connections>
-                        <outlet property="backLabel" destination="CU5-fv-cWh" id="GDR-sw-GUh"/>
-                        <outlet property="backTable" destination="1S9-DO-AYS" id="Hmn-Co-29Q"/>
-                        <outlet property="backView" destination="XVF-ye-IV8" id="YCS-RL-roI"/>
-                        <outlet property="mainLabel" destination="n5a-jz-SNb" id="ufn-hd-jc1"/>
-                        <outlet property="mainTable" destination="6BB-7Z-reE" id="oji-7L-bGF"/>
-                        <outlet property="mainView" destination="Tg9-OF-pSS" id="VsX-Nh-GpB"/>
+                        <outlet property="messageLabel" destination="CU5-fv-cWh" id="GDR-sw-GUh"/>
+                        <outlet property="messageTable" destination="1S9-DO-AYS" id="Hmn-Co-29Q"/>
+                        <outlet property="messageView" destination="XVF-ye-IV8" id="YCS-RL-roI"/>
+                        <outlet property="requestLabel" destination="n5a-jz-SNb" id="ufn-hd-jc1"/>
+                        <outlet property="requestTable" destination="6BB-7Z-reE" id="oji-7L-bGF"/>
+                        <outlet property="requestView" destination="Tg9-OF-pSS" id="VsX-Nh-GpB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PMc-Yb-Aqh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2441,12 +2441,12 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                 </customObject>
                 <tapGestureRecognizer id="sbn-uy-9fa">
                     <connections>
-                        <action selector="backAction:" destination="fy0-hk-GP9" id="tRL-dR-ec6"/>
+                        <action selector="messageAction:" destination="fy0-hk-GP9" id="tRL-dR-ec6"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="7EA-ip-s7A">
                     <connections>
-                        <action selector="mainAction:" destination="fy0-hk-GP9" id="J4E-ac-imU"/>
+                        <action selector="requestAction:" destination="fy0-hk-GP9" id="J4E-ac-imU"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -2486,7 +2486,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Zy-4E-ort" customClass="CustomView" customModule="Nanny_Now" customModuleProvider="target">
                                                     <rect key="frame" x="42" y="10" width="285" height="35"/>
                                                     <subviews>
-                                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Halloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!!" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ECd-Mn-1ug">
+                                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Halloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!!" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ECd-Mn-1ug">
                                                             <rect key="frame" x="8" y="0.0" width="269" height="35"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="textColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2532,7 +2532,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kzd-vP-aVG" customClass="CustomView" customModule="Nanny_Now" customModuleProvider="target">
                                                     <rect key="frame" x="48" y="10" width="285" height="153"/>
                                                     <subviews>
-                                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="right" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9zg-dQ-8no">
+                                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="right" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9zg-dQ-8no">
                                                             <rect key="frame" x="8" y="0.0" width="269" height="153"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <string key="text">Halloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibility</string>
@@ -2595,7 +2595,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RLD-6t-fHB" customClass="CustomView" customModule="Nanny_Now" customModuleProvider="target">
                                                     <rect key="frame" x="42" y="30" width="285" height="35"/>
                                                     <subviews>
-                                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Halloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!!" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WjL-Sm-5Ye">
+                                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Halloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!!" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WjL-Sm-5Ye">
                                                             <rect key="frame" x="8" y="0.0" width="269" height="35"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <color key="textColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2611,7 +2611,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                         <constraint firstAttribute="bottom" secondItem="WjL-Sm-5Ye" secondAttribute="bottom" id="hD3-hF-CJv"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fre.03.juni  22:53" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tg4-1B-yQH">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fre.03.juni  22:53" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tg4-1B-yQH">
                                                     <rect key="frame" x="40" y="8" width="77" height="14"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="10"/>
                                                     <nil key="highlightedColor"/>
@@ -2650,7 +2650,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LhT-OF-15D" customClass="CustomView" customModule="Nanny_Now" customModuleProvider="target">
                                                     <rect key="frame" x="48" y="30" width="285" height="133"/>
                                                     <subviews>
-                                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="right" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wk3-Bs-Lpd">
+                                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="right" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wk3-Bs-Lpd">
                                                             <rect key="frame" x="8" y="0.0" width="269" height="133"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <string key="text">Halloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibility</string>
@@ -2675,7 +2675,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                         <constraint firstAttribute="width" constant="24" id="yH2-hJ-Ud7"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="søn.10.juni  18:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xt2-jy-6D3">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="søn.10.juni  18:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xt2-jy-6D3">
                                                     <rect key="frame" x="254" y="8" width="81" height="14"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="10"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
