@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var shortcutItem: UIApplicationShortcutItem?
     
-    static var shared: AppDelegate { return UIApplication.shared.delegate as! AppDelegate }
+    var shared: AppDelegate { return UIApplication.shared.delegate as! AppDelegate }
     let gcmMessageIDKey = "gcm.message_id"
     
     // ********************************
@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DataService.instance.updateUserStatus(with: .active)
         
         // Experimental
-        // application.registerForRemoteNotifications()
+        application.registerForRemoteNotifications()
         
         var performShortcutDelegate = true
         if let launchOptions = launchOptions {
@@ -97,7 +97,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         }
                     }
             })
-            
             // For iOS 10 data message (sent via FCM)
             Messaging.messaging().delegate = self
         } else {
@@ -116,30 +115,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Notification Actions
         // --------------------
         let nannyAccept = UNNotificationAction(identifier: NotificationAction.nannyAccept.rawValue, title: "Aksepter", options: [.foreground, .authenticationRequired])
-        let nannyResponse = UNNotificationAction(identifier: NotificationAction.nannyResponse.rawValue, title: "Svar", options: [.foreground, .authenticationRequired])
+        // let nannyResponse = UNNotificationAction(identifier: NotificationAction.nannyResponse.rawValue, title: "Svar", options: [.foreground, .authenticationRequired])
         let nannyReject = UNNotificationAction(identifier: NotificationAction.nannyReject.rawValue, title: "Avvis", options: [.destructive, .authenticationRequired])
         
         let familyAccept = UNNotificationAction(identifier: NotificationAction.familyAccept.rawValue, title: "Aksepter", options: [ .foreground, .authenticationRequired])
         let familyResponse = UNNotificationAction(identifier: NotificationAction.familyResponse.rawValue, title: "Svar", options: [ .foreground, .authenticationRequired])
         let familyReject = UNNotificationAction(identifier: NotificationAction.familyReject.rawValue, title: "Avvis", options: [.destructive, .authenticationRequired])
         
-        // let actionLater = UNNotificationAction(identifier: "actionLater", title: "Påminnelse om 10 sekunder", options: [])
-        // let actionShowDetails = UNNotificationAction(identifier: "actionShowDetails", title: "Vis detaljer", options: [.foreground])
-        // let actionReject = UNNotificationAction(identifier: "actionReject", title: "Avvis", options: [.destructive, .authenticationRequired])
-        
-        let messageAccept = UNNotificationAction(identifier: NotificationAction.messageAccept.rawValue, title: "Gå til Chat", options: [.foreground, .authenticationRequired])
-        let messageResponse = UNTextInputNotificationAction(identifier: NotificationAction.messageResponse.rawValue, title: "Svar", options: [], textInputButtonTitle: "Send", textInputPlaceholder: "Svar")
-        let messageReject = UNNotificationAction(identifier: NotificationAction.messageReject.rawValue, title: "OK", options: [.destructive])
+        let messageAccept = UNNotificationAction(identifier: NotificationAction.messageAccept.rawValue, title: "Meldinger", options: [.authenticationRequired, .foreground])
+        let messageResponse = UNTextInputNotificationAction(identifier: NotificationAction.messageResponse.rawValue, title: "Svar", options: [.authenticationRequired], textInputButtonTitle: "Send", textInputPlaceholder: "Svar")
+        let messageReject = UNNotificationAction(identifier: NotificationAction.messageReject.rawValue, title: "Mottatt", options: [.destructive])
         
         // Notification Categories
         // -----------------------
-        let nannyRequest = UNNotificationCategory(identifier: NotificationCategory.nannyRequest.rawValue, actions: [nannyAccept, nannyResponse, nannyReject], intentIdentifiers: [], options: [])
-        let nannyMapRequest = UNNotificationCategory(identifier: NotificationCategory.nannyMapRequest.rawValue, actions: [nannyAccept, nannyReject], intentIdentifiers: [], options: [])
+        let nannyRequest = UNNotificationCategory(identifier: NotificationCategory.nannyRequest.rawValue, actions: [nannyAccept, messageResponse, nannyReject], intentIdentifiers: [], options: [])
+        let nannyMapRequest = UNNotificationCategory(identifier: NotificationCategory.nannyMapRequest.rawValue, actions: [nannyAccept, messageResponse, nannyReject], intentIdentifiers: [], options: [])
         
         let familyRequest = UNNotificationCategory(identifier: NotificationCategory.familyRequest.rawValue, actions: [familyAccept, familyResponse, familyReject], intentIdentifiers: [], options: [])
         let familyMapRequest = UNNotificationCategory(identifier: NotificationCategory.nannyMapRequest.rawValue, actions: [familyAccept, familyReject], intentIdentifiers: [], options: [])
         
-        let messageRequest = UNNotificationCategory(identifier: NotificationCategory.messageRequest.rawValue, actions: [messageAccept, messageResponse, messageReject], intentIdentifiers: [], options: [])
+        let messageRequest = UNNotificationCategory(identifier: NotificationCategory.messageRequest.rawValue, actions: [messageAccept, messageResponse, messageReject], intentIdentifiers: [], options: [.customDismissAction])
         let messageConfirm = UNNotificationCategory(identifier: NotificationCategory.messageConfirm.rawValue, actions: [messageAccept], intentIdentifiers: [], options: [])
         
         // Set Notification Categories
@@ -147,7 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UNUserNotificationCenter.current().setNotificationCategories([nannyRequest, nannyMapRequest, familyRequest, familyMapRequest, messageRequest, messageConfirm])
     }
     
-    // Facebook Part 3
+    // Facebook     /      FBSDKApplicationDelegate      /
     // ---------------
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(app, open: url as URL?, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
@@ -208,22 +203,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // [START refresh_token]
     // ---------------------
     func tokenRefreshNotification(_ notification: Notification) {
-        if let refreshedToken = InstanceID.instanceID().token() {
-            print("InstanceID token: \(refreshedToken)")
+        
+        InstanceID.instanceID().instanceID { (result, error) in
+            if let error = error {
+                print("Error fetching remote instange ID: \(error)")
+            } else if let refreshedToken = result?.token {
+                print("InstanceID token: \(refreshedToken)")
+                // Connect to FCM since connection may have failed when attempted before having a token.
+                self.connectToFcm()
+            }
         }
-        // Connect to FCM since connection may have failed when attempted before having a token.
-        connectToFcm()
     }
     
     // FCM Connect and Establish Direct Channel.
     // ----------------------------------------
     func connectToFcm() {
-        // Won't connect since there is no token
-        guard InstanceID.instanceID().token() != nil else {
-            return
-        }
+        /*
+        guard InstanceID.instanceID().token() != nil else { return }
+ 
         // Disconnect previous FCM connection if it exists.
         Messaging.messaging().shouldEstablishDirectChannel = true
+        */
+        
+        InstanceID.instanceID().instanceID { (result, error) in
+            if let error = error {
+                print("Error fetching remote instange ID: \(error)")
+            } else if let refreshedToken = result?.token {
+                print("InstanceID token: \(refreshedToken)")
+                
+                // Disconnect previous FCM connection if it exists.
+                Messaging.messaging().shouldEstablishDirectChannel = true
+            }
+        }
     }
     
     // MARK : FCM Push Notification . . .
@@ -235,7 +246,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
         print(fcmToken)
     }
-    
     
     // This function is added here only for debugging purposes, and can be removed if swizzling is enabled.
     // If swizzling is disabled then this function must be implemented so that the APNs token can be paired to
@@ -265,22 +275,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         // If you are receiving a notification message while your app is in the background,
         // this callback will not be fired till the user taps on the notification launching the application.
-        
         decreaseBadge(application)
         
         // TODO: Handle data of notification
+        /*
         if let mediaUrl = userInfo["remoteURL"] as? String {
             print("-- did Recieve Remote Notification")
             print(mediaUrl)
         }
+        */
     }
+    
     
     // Closure @escaping ...
     // ---------------------
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         
         print("Application performActionForShortcutItem")
-        completionHandler( handleShortcut(shortcutItem: shortcutItem) )
+        completionHandler(handleShortcut(shortcutItem: shortcutItem))
     }
     
     // Shortcut identifiers
@@ -466,7 +478,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                 guard let remoteUID = userInfo[remoteID] as? String else { return }
                 
                 DataService.instance.postToMessage(recieveUserID: remoteUID, message: messageResponse)
-                
                 decreaseBadge(.shared)
             }
         default:
@@ -474,7 +485,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         }
     }
     
-
 }
 
 // [START ios_10_data_message_handling]

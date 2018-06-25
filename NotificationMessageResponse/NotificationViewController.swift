@@ -33,7 +33,6 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     // ----------------------------------------
     
     func didReceive(_ notification: UNNotification) {
-        
         bestAttemptContent = (notification.request.content.mutableCopy() as? UNMutableNotificationContent)
         
         let remoteID = AnyHashable("userID")
@@ -43,8 +42,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         let userURL = AnyHashable("remoteURL")
         
         if let bestAttemptContent = bestAttemptContent {
-            
-            // let remoteUserName = notification.request.content.title
+
             let remoteMessage = bestAttemptContent.body
             let userInfo = bestAttemptContent.userInfo
             
@@ -71,12 +69,11 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     }
     
     func didReceive(_ response: UNNotificationResponse, completionHandler completion: @escaping (UNNotificationContentExtensionResponseOption) -> Void) {
-        
+
         guard let user = self.user else { return }
         guard let remoteUser = self.remoteUser else { return }
         
         if response.actionIdentifier == "messageResponse" {
-            
             if let textResponse = response as? UNTextInputNotificationResponse {
                 
                 let toMessage = MessageLite(from: user, to: remoteUser, message: textResponse.userText)
@@ -85,7 +82,6 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
                 self.tableView.reloadData()
                 
                 animateCells(in: self.tableView, true, delay: 0.01)
-                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { // this is the best delay
                     completion(.dismissAndForwardAction)
                 }

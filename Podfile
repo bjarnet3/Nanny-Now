@@ -1,7 +1,9 @@
 # Uncomment this line to define a global platform for your project
-platform :ios, '11.0'
+platform :ios, '11.4'
 
 def import_public_pods
+    # Silence all warnings
+    # pod 'Firebase', inhibit_warnings: true
     pod 'FBSDKLoginKit'
     pod 'Firebase'
     pod 'Firebase/Core'
@@ -12,6 +14,7 @@ def import_public_pods
     pod 'SwiftKeychainWrapper'
     pod 'RevealingSplashView'
     pod 'RAMAnimatedTabBarController'
+    pod 'MapKitGoogleStyler'
 end
 
 target 'Nanny Now' do

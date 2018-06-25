@@ -182,13 +182,13 @@ class LoginZeroVC: UIViewController {
     // -------------------------------
     func firebaseAuth(_ credential: AuthCredential) {
         // This line is Auth for Firebase,, the rest is just Error handling :-)
-        Auth.auth().signIn(with: credential, completion: { (user, error) in
+        Auth.auth().signInAndRetrieveData(with: credential, completion: { (data, error) in
             if error != nil {
                 /// This didn't work
                 print("PRINT: Unable to authenticate with Firebase - \(String(describing: error))")
             } else {
                 // print("PRINT: Firebase Authentication Successfull")
-                if let user = user {
+                if let user = data?.user {
                     // SET: userData to DB
                     if let gender = userInfo["gender"] as? String {
                         let userData = [
@@ -478,9 +478,21 @@ extension LoginZeroVC {
         loginBtnImage.alpha = 0
         
         self.getInfoFromFirebase()
+        
+        InstanceID.instanceID().instanceID { (result, error) in
+            if let error = error {
+                print("Error fetching remote instange ID: \(error)")
+            } else if let result = result {
+                print("Remote instance ID token: \(result.token)")
+            }
+        }
+        
+        // Old token
+        /*
         if let refreshedToken = InstanceID.instanceID().token() {
             print("InstanceID token: \(String(describing: refreshedToken))")
         }
+        */
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -907,7 +907,7 @@ extension NannyViewController {
         
         let sendRequest = UIAlertAction(title: "Send Forespørsel", style: .default) { (_) in
             
-            let row = self.lastRowSelected?.row ?? row
+            // let row = self.lastRowSelected?.row ?? row
             for view in self.view.subviews {
                 if view is NannyRequestMenu {
                     if let requestMenu = view as? NannyRequestMenu {
@@ -926,7 +926,7 @@ extension NannyViewController {
         }
         
         let sendMapRequest = UIAlertAction(title: "Send Map Forespørsel", style: .default) { (_) in
-            let row = self.lastRowSelected?.row ?? row
+            // let row = self.lastRowSelected?.row ?? row
             // var request = Request(nanny: self.nannies[row], user: self.user!, timeFrom: Date(timeIntervalSinceNow: 3600), timeTo: Date(timeIntervalSinceNow: 7200 ), message: "Barnevakt forespørsel")
             
             request.requestCategory = NotificationCategory.nannyMapRequest.rawValue
@@ -935,7 +935,9 @@ extension NannyViewController {
         
         let sendMessage = UIAlertAction(title: "Send Message", style: .default) { (_) in
             if lowPowerModeDisabled {
+                
                 message.setCategory(category: .messageConfirm)
+                message.setMessage(message: "This is a simple message")
                 Notifications.instance.sendNotification(with: message)
                 
             }
@@ -943,10 +945,10 @@ extension NannyViewController {
         
         let sendMessageRequest = UIAlertAction(title: "Send Message Request", style: .default) { (_) in
             if lowPowerModeDisabled {
+                
                 message.setCategory(category: .messageRequest)
                 message.setMessage(message: "This is a message with response")
                 Notifications.instance.sendNotification(with: message)
-                
             }
         }
         

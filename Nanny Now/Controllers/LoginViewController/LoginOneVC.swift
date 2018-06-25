@@ -243,6 +243,7 @@ extension LoginOneVC {
     @objc func keyboardWillShow(notification:Notification) {
         guard let keyboardHeight = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue else { return }
         // scrollView.contentInset = UIEdgeInsetsMake(0, 0, keyboardHeight.height, 0)
+        print(keyboardHeight)
     }
     
     @objc func keyboardWillHide(notification:Notification) {

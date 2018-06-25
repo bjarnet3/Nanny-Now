@@ -452,8 +452,8 @@ class DataService {
         }
     }
     
-    // Add Token To OldNannies - REMOVE
-    func addTokenToDatabase(for userID: String) {
+    /*
+    func addOldTokenToDatabase(for userID: String) {
         if let refreshedToken = InstanceID.instanceID().token() {
             
             let deviceName = UIDevice.current.name
@@ -469,7 +469,7 @@ class DataService {
                 "date"      :   returnDateStamp()
                 // "NSUUID"    :   deviceNSUUID,
                 // "VendorID"  :   deviceVendorID
-                ]
+            ]
             
             let tokenREF = DataService.instance.REF_USERS_PRIVATE.child(userID).child("tokens")
             tokenREF.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -501,6 +501,66 @@ class DataService {
                 
             })
         }
+    }
+    */
+    
+    // Add Token To OldNannies - REMOVE
+    func addTokenToDatabase(for userID: String) {
+        InstanceID.instanceID().instanceID { (result, error) in
+            if let error = error {
+                print("Error fetching remote instange ID: \(error)")
+            } else if let refreshedToken = result?.token {
+                print("Remote instance ID token: \(refreshedToken)")
+                
+                let deviceName = UIDevice.current.name
+                // You will get multiple UUID if you have different versions of the application, even with the same phone
+                // Unique ID generated from App1 + Device1 = Unique
+                let deviceUUID = UIDevice.current.identifierForVendor!.uuidString
+                // let deviceNSUUID = NSUUID().description
+                // let deviceVendorID = UIDevice.current.identifierForVendor?.description
+                
+                let tokenUUID = [
+                    "name"      :   deviceName,
+                    "token"     :   refreshedToken,
+                    "date"      :   returnDateStamp()
+                    // "NSUUID"    :   deviceNSUUID,
+                    // "VendorID"  :   deviceVendorID
+                ]
+                
+                let tokenREF = DataService.instance.REF_USERS_PRIVATE.child(userID).child("tokens")
+                tokenREF.observeSingleEvent(of: .value, with: { (snapshot) in
+                    if !snapshot.exists() { tokenREF.child(deviceUUID).updateChildValues(tokenUUID) }
+                    if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                        for snap in snapshot {
+                            if let userBase = snap.value as? [String: AnyObject] {
+                                if let token = userBase["token"] as? String {
+                                    if token != refreshedToken {
+                                        print("token is not equal")
+                                        if let device = userBase["name"] as? String, device == deviceName {
+                                            print("device name is equal")
+                                            tokenREF.child(snap.key).removeValue()
+                                            print("removed equel token")
+                                        }
+                                        print("update Token")
+                                        tokenREF.child(deviceUUID).updateChildValues(tokenUUID)
+                                    }
+                                } else {
+                                    tokenREF.child(snap.key).removeValue()
+                                    print("no token for \(snap.key)")
+                                    print(snap.key)
+                                    tokenREF.child(deviceUUID).updateChildValues(tokenUUID)
+                                }
+                                
+                            }
+                        }
+                    }
+                    
+                })
+                
+            }
+        }
+            
+        
     }
 
     func copyTokenToREF(for userID: String, reference: DatabaseReference) {

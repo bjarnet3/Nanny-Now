@@ -81,7 +81,7 @@ DEPENDENCIES:
   - SwiftKeychainWrapper
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Bolts
     - FBSDKCoreKit
     - FBSDKLoginKit
@@ -123,6 +123,6 @@ SPEC CHECKSUMS:
   RevealingSplashView: 0794eecad3a8983ac11a1fe474e9a9b51b926780
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
 
-PODFILE CHECKSUM: 2b19eae265c44766c871f255e5fe8a413494f8b8
+PODFILE CHECKSUM: 8209b8926b66c35fb099e9c171bed91efa2f602f
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3
