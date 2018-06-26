@@ -21,6 +21,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     @IBOutlet var nannyTabBar: UITabBarItem!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var mapView: MKMapView!
+    
     @IBOutlet weak var nannyAd: CustomButton!
     @IBOutlet weak var nannyAdSwitch: UISwitch!
     
@@ -34,36 +35,86 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     // https://medium.com/@brianclouser/swift-3-creating-a-custom-view-from-a-xib-ecdfe5b3a960
     // MARK: - Properties: Array & Varables
     // -------------------------------------
-    var user: User?
-    var nannies = [Nanny]()
-    var request: Request?
+    private var user: User?
+    private var nannies = [Nanny]()
+    private var request: Request?
     
-    var animator: UIViewPropertyAnimator?
+    private var animator: UIViewPropertyAnimator?
     // var visualView: UIVisualEffectView?
     // var requestMenu: NannyRequestMenu?
     
     // Property Observer
-    var nannyBadge: Int = 0 {
+    private var nannyBadge: Int = 0 {
         didSet {
             self.nannyTabBar.badgeValue = nannyBadge != 0 ? "\(nannyBadge)" : nil
         }
     }
     
-    var nannyAdOn = [String:Bool]()
-    var nanniesUID = [String]()
+    private func setup() {
+        addCirleMaskWithFrostOn(self.mapView)
+    }
     
-    var lastRowSelected: IndexPath?
-    var exemptIDs = [String]()
+    private func addCirleMaskWithFrostOn(_ subView: UIView) {
+        // Create the view
+        let blurEffect = UIBlurEffect(style: .extraLight)
+        let maskView = UIVisualEffectView(effect: blurEffect)
+        maskView.frame = subView.bounds
+        
+        // Set the radius to 1/3 of the screen width
+        let radius : CGFloat = subView.bounds.width/2.6
+        // Create a path with the rectangle in it.
+        let path = UIBezierPath(rect: subView.bounds)
+        // Put a circle path in the middle
+        path.addArc(withCenter: subView.center, radius: radius, startAngle: 0.0, endAngle: CGFloat(2*CGFloat.pi), clockwise: true)
+        
+        // Create the shapeLayer
+        let shapeLayer = CAShapeLayer()
+        // set arc to shapeLayer
+        shapeLayer.path = path.cgPath
+        shapeLayer.fillRule = kCAFillRuleEvenOdd
+        
+        // Create the boarderLayer
+        let boarderLayer = CAShapeLayer()
+        boarderLayer.path = UIBezierPath(arcCenter: subView.center, radius: radius, startAngle: 0.0, endAngle: CGFloat(2*CGFloat.pi), clockwise: true).cgPath
+        boarderLayer.lineWidth = 3.0
+        boarderLayer.strokeColor = UIColor.white.cgColor
+        boarderLayer.fillColor = nil
+        
+        // add shapeLayer to maskView
+        maskView.layer.mask = shapeLayer
+        
+        // set properties
+        maskView.clipsToBounds = true
+        maskView.layer.borderColor = UIColor.gray.cgColor
+        maskView.backgroundColor = nil
+        // maskView.layer.masksToBounds = true
+        maskView.layer.addSublayer(boarderLayer)
+        // add mask to mapView
+        
+        subView.addSubview(maskView)
+    }
+    
+    private var nannyAdOn = [String:Bool]()
+    private var nanniesUID = [String]()
+    
+    private var lastRowSelected: IndexPath?
+    private var exemptIDs = [String]()
     
     // Location
-    var locationManager = CLLocationManager()
-    var activeLocations = [String:CLLocation]()
+    private var locationManager = CLLocationManager()
+    private var activeLocations = [String:CLLocation]()
     
-    var activeLocationNames = [String]()
-    var activeLocationName = "current"
+    private var activeLocationNames = [String]()
+    private var activeLocationName = "current"
 
-    var locationMenuShowing = true
-    var orderMenuShowing = true
+    private var locationMenuShowing = true
+    private var orderMenuShowing = true
+    
+    private var currentMapStyle:MapStyleForView = .blueAndGrayMap
+    private var backgroundMapViewIsRendered = false
+    private var index = 0
+    
+    private var mapStyle: [MapStyleForView] = [.blueAndGrayMap, .blackAndRegularMap, .dayMap, .pinkBlackMap, .pinkStinkMap, .pinkWhiteMap, .veryLightMap, .whiteAndBlackMap, .blackAndBlueGrayMap, .lightBlueGrayMap]
     
     // MARK: - IBAction: Methods connected to UI
     // ----------------------------------------
@@ -101,9 +152,55 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         exitAllMenu()
     }
     
+    func displayOnTitle(displayMessage: String) {
+        UIView.animate(withDuration: 0.5, delay: 0.2, usingSpringWithDamping: 0.85, initialSpringVelocity: 0.25, options: .curveEaseOut, animations: {
+            self.nannyAd.alpha = 1.0
+            self.nannyAd.setTitle(displayMessage, for: .normal)
+            self.nannyAd.setTitleColor(UIColor.white, for: .normal)
+            self.nannyAd.backgroundColor = hexStringToUIColor("#FF1744")
+        }, completion: { (_) in
+            UIView.animate(withDuration: 0.7, delay: 1.6, usingSpringWithDamping: 0.85, initialSpringVelocity: 0.38, options: .curveEaseOut, animations: {
+                self.nannyAd.alpha = 0.0
+                self.nannyAd.backgroundColor = UIColor.white
+            }, completion: { (_) in
+                self.nannyAd.setTitle("", for: .normal)
+                self.nannyAd.setTitleColor(UIColor.black, for: .normal)
+            })
+        })
+    }
+    
     // MARK: - Functions, Database & Animation
     // ---------------------------------------
-    func getUserSettings() {
+    func setMapView(for mapStyleForView: MapStyleForView) {
+        self.backgroundMapViewIsRendered = false
+        self.mapView.removeOverlays(mapView.overlays)
+        
+        switch mapStyleForView {
+        case .blueAndGrayMap:
+            self.setMapBackgroundOverlay(mapName: .blueAndGrayMap)
+        case .blackAndRegularMap:
+            self.setMapBackgroundOverlay(mapName: .blackAndRegularMap)
+        case .dayMap:
+            self.setMapBackgroundOverlay(mapName: .dayMap)
+        case .pinkBlackMap:
+            self.setMapBackgroundOverlay(mapName: .pinkBlackMap)
+        case .pinkStinkMap:
+            self.setMapBackgroundOverlay(mapName: .pinkStinkMap)
+        case .pinkWhiteMap:
+            self.setMapBackgroundOverlay(mapName: .pinkWhiteMap)
+        case .veryLightMap:
+            self.setMapBackgroundOverlay(mapName: .veryLightMap)
+        case .whiteAndBlackMap:
+            self.setMapBackgroundOverlay(mapName: .whiteAndBlackMap)
+        case .blackAndBlueGrayMap:
+            self.setMapBackgroundOverlay(mapName: .blackAndBlueGrayMap)
+        case .lightBlueGrayMap:
+            self.setMapBackgroundOverlay(mapName: .lightBlueGrayMap)
+        }
+        displayOnTitle(displayMessage: "Map Title  \(mapStyleForView.rawValue)")
+    }
+    
+    private func getUserSettings() {
         if let user = LocalService.instance.getUser() {
             self.user = user
             self.user?.location = returnCurrentLocation
@@ -111,7 +208,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         }
     }
     
-    func checkForBlocked(_ userID: String) {
+    private func checkForBlocked(_ userID: String) {
         DataService.instance.REF_USERS_PUBLIC.child(userID).child("blocked").observeSingleEvent(of: .value, with: { snapshot in
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshot {
@@ -131,7 +228,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         })
     }
     
-    func checkIfNannyAdActive(_ userID: String) {
+    private func checkIfNannyAdActive(_ userID: String) {
         DataService.instance.REF_NANNIES_ACTIVE.observeSingleEvent(of: .value, with: { snapshot in
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshot {
@@ -148,7 +245,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         })
     }
     
-    func updateAd(turnOn: Bool) {
+    private func updateAd(turnOn: Bool) {
         // Animate View
         if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             UIView.animate(withDuration: 2.0, delay: 0.450, usingSpringWithDamping: 0.85, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
@@ -205,7 +302,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     }
     
     // LocationManager
-    func enableLocationServices() {
+    private func enableLocationServices() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
@@ -213,7 +310,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         locationManager.startUpdatingLocation()
     }
     
-    var returnCurrentLocation: CLLocation {
+    private var returnCurrentLocation: CLLocation {
         var location: CLLocation
         if let currentLocation = locationManager.location {
             location = currentLocation
@@ -225,11 +322,11 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         return location
     }
     
-    var returnActiveLocation: CLLocation {
+    private var returnActiveLocation: CLLocation {
         return self.user?.activeLocation ?? returnCurrentLocation
     }
     
-    func setActiveLocation() {
+    private func setActiveLocation() {
         let active = self.activeLocationName
         if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             var location: (latitude: Double?, longitude: Double?)
@@ -246,7 +343,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                             location.latitude = latitude
                         }
                     }
-                    
                     if location.latitude != nil && location.longitude != nil {
                         self.user?.activeLocation = CLLocation(latitude: location.latitude!, longitude: location.longitude!)
                     }
@@ -255,7 +351,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         }
     }
     
-    func getLocationsFromUserInfo() {
+    private func getLocationsFromUserInfo() {
         if let locations = userInfo["location"] as? [String: Any] {
             for (key, value) in locations {
                 if key != "active" {
@@ -271,7 +367,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         }
     }
     
-    private func configureTileOverlay(mapName: MapStyleForView) {
+    private func setMapBackgroundOverlay(mapName: MapStyleForView) {
         // We first need to have the path of the overlay configuration JSON
         guard let overlayFileURLString = Bundle.main.path(forResource: mapName.rawValue, ofType: "json") else {
             return
@@ -285,9 +381,10 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         
         // And finally add it to your MKMapView
         mapView.add(tileOverlay)
+        self.backgroundMapViewIsRendered = true
     }
     
-    func resetMapView() {
+    private func resetMapView() {
         for selectedAnnotation in self.mapView.selectedAnnotations {
             self.mapView.deselectAnnotation(selectedAnnotation, animated: true)
         }
@@ -295,7 +392,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     }
     
     // Observe Nannies .childRemoved & Remove from [nannies] at index - Reload TableView
-    func observeChildRemoved(_ exemptIDs: [String]) {
+    private func observeChildRemoved(_ exemptIDs: [String]) {
         let zipMin = 5000
         let zipMax = 5200
         
@@ -340,7 +437,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         })
     }
     
-    func observeChildAdded(_ exemptIDs: [String]) {
+    private func observeChildAdded(_ exemptIDs: [String]) {
         let zipMin = 5000
         let zipMax = 5200
         
@@ -363,7 +460,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     }
     
     // ERROR: This will leave an error here
-    func fetchNannyObserver(_ nannyID: String, long: Double, lat: Double) {
+    private func fetchNannyObserver(_ nannyID: String, long: Double, lat: Double) {
         DataService.instance.REF_USERS_PRIVATE.child(nannyID).observeSingleEvent(of:.value, with: { snapshot in
             if let snapValue = snapshot.value as? Dictionary<String, AnyObject>  {
                 if !self.exemptIDs.contains(nannyID) {
@@ -393,7 +490,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         })
     }
 
-    func updateNannyArrayAndAnnotation( nanny: Nanny) {
+    private func updateNannyArrayAndAnnotation( nanny: Nanny) {
         nanny.setAnnotation()
         nanny._distance = self.locationManager.location?.distance(from: nanny.location!)
         
@@ -420,19 +517,19 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         self.mapView.showAnnotations(self.nannies, animated: lowPowerModeDisabled)
     }
     
-    func removeNannyArrayAndAnnotation() {
+    private func removeNannyArrayAndAnnotation() {
         self.nannies.removeAll()
         let allAnnotations = self.mapView.annotations
         self.mapView.removeAnnotations(allAnnotations)
     }
     
     // Remove DatabaseObservers
-    func removeDatabaseObservers() {
+    private func removeDatabaseObservers() {
         DataService.instance.REF_NANNIES_ACTIVE.removeAllObservers()
     }
 
     // Location Menu
-    func enterLocationMenu(animated: Bool = true) {
+    private func enterLocationMenu(animated: Bool = true) {
         let animated = animated && lowPowerModeDisabled ? true : false
         if !locationMenuShowing {
             self.nannyAdSwitch.setOn(false, animated: animated)
@@ -453,7 +550,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         }
     }
     
-    func exitLocationMenu(animated: Bool = true) {
+    private func exitLocationMenu(animated: Bool = true) {
         let animated = animated && lowPowerModeDisabled ? true : false
         if locationMenuShowing {
             if animated {
@@ -472,8 +569,18 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         }
     }
     
+    private func changeMap() {
+        if index < mapStyle.count {
+            setMapView(for: mapStyle[index])
+            index += 1
+        } else {
+            index = 0
+        }
+    }
+    
     // Request Menu
-    func enterOrderMenu(_ animated: Bool = true, delay: TimeInterval = 0.03) {
+    private func enterOrderMenu(_ animated: Bool = true, delay: TimeInterval = 0.03) {
+        
         let animated = animated && lowPowerModeDisabled ? true : false
         if !orderMenuShowing {
             if animated {
@@ -482,7 +589,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                     self.orderMenu.transform = CGAffineTransform(translationX: 0, y: -20)
                     self.orderMenuShowing = true
                 })
-                
             } else {
                 self.orderMenu.alpha = 1.0
                 self.orderMenu.transform = CGAffineTransform(translationX: 0, y: -20)
@@ -493,7 +599,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         }
     }
     
-    func exitOrderMenu(animated: Bool = true) {
+    private func exitOrderMenu(animated: Bool = true) {
         let animated = animated && lowPowerModeDisabled ? true : false
         if orderMenuShowing {
             if animated {
@@ -501,6 +607,8 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                     self.orderMenu.alpha = 0.0
                     self.orderMenu.transform = CGAffineTransform(translationX: 0, y: 20)
                     self.orderMenuShowing = false
+                }, completion: { (_) in
+                    self.changeMap()
                 })
             } else {
                 self.orderMenu.alpha = 0.0
@@ -513,7 +621,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     }
     
     // Display Request Menu "View"
-    func enterRequestMenu() {
+    private func enterRequestMenu() {
         // Instantiate Visual Blur View
         let visualView = UIVisualEffectView(frame: UIScreen.main.bounds)
         // self.visualView = visualView
@@ -558,7 +666,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         })
     }
     
-    func exitRequestMenu() {
+    private func exitRequestMenu() {
         var visualView: UIVisualEffectView?
         var requestMenu: NannyRequestMenu?
         
@@ -595,7 +703,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         self.resetMapView()
     }
     
-    func exitAllMenu() {
+    private func exitAllMenu() {
         exitLocationMenu()
         exitOrderMenu()
         exitRequestMenu()
@@ -621,7 +729,7 @@ extension NannyViewController {
         self.mapView.alpha = 0
         self.mapView.delegate = self
         
-        self.configureTileOverlay(mapName: .veryLight)
+        self.setMapBackgroundOverlay(mapName: .whiteAndBlackMap)
         
         self.tableView.alpha = 0
         self.tableView.delegate = self
@@ -645,6 +753,8 @@ extension NannyViewController {
         if traitCollection.forceTouchCapability == .available {
             registerForPreviewing(with: self, sourceView: tableView)
         }
+        
+        setup()
     }
     
     func viewDidLoadAnimation() {

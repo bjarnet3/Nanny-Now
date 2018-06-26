@@ -13,7 +13,7 @@ class CustomTable: UIView {
         super.awakeFromNib()
         
         self.layer.shadowColor = UIColor(red: SHADOW_GRAY, green: SHADOW_GRAY, blue: SHADOW_GRAY, alpha: 0.93).cgColor
-        self.layer.shadowOpacity = 0.65
+        self.layer.shadowOpacity = 0.75
         self.layer.shadowRadius = 10.0
         self.layer.shadowOffset = CGSize(width: 1.1, height: 1.1)
         

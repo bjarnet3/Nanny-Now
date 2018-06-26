@@ -7,11 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A53B3AFC35EDEF529B7B5C3 /* Pods_NotificationContentExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABBF400D8B1157A7252FEA1 /* Pods_NotificationContentExtensions.framework */; };
 		5C00FBFD20E19D5C003C6F49 /* dayMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C00FBFB20E19D5B003C6F49 /* dayMap.json */; };
-		5C00FBFE20E19D5C003C6F49 /* nightMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C00FBFC20E19D5C003C6F49 /* nightMap.json */; };
 		5C00FBFF20E19D67003C6F49 /* dayMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C00FBFB20E19D5B003C6F49 /* dayMap.json */; };
-		5C00FC0020E19D67003C6F49 /* nightMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C00FBFC20E19D5C003C6F49 /* nightMap.json */; };
-		5C00FC0220E1A486003C6F49 /* veryLight.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C00FC0120E1A486003C6F49 /* veryLight.json */; };
 		5C042AE4209248B10022C5DD /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C042AE3209248B10022C5DD /* Message.swift */; };
 		5C093A491FE0985100144A32 /* RequestUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C093A481FE0985100144A32 /* RequestUserCell.swift */; };
 		5C093A4B1FE099E700144A32 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C093A4A1FE099E700144A32 /* Request.swift */; };
@@ -27,6 +25,10 @@
 		5C3D9ACA202AE128007A9147 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3D9AC9202AE128007A9147 /* MapKit.framework */; };
 		5C3D9ACB202AE131007A9147 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C3D9AC9202AE128007A9147 /* MapKit.framework */; };
 		5C41A4EA207C34B00025A4AE /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C41A4E9207C34B00025A4AE /* FriendsTableViewCell.swift */; };
+		5C48AD3A20E268F8006EA0D3 /* lightBlueGrayMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C48AD3820E268F6006EA0D3 /* lightBlueGrayMap.json */; };
+		5C48AD3B20E268F8006EA0D3 /* blackAndBlueGrayMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C48AD3920E268F7006EA0D3 /* blackAndBlueGrayMap.json */; };
+		5C48AD3C20E268FE006EA0D3 /* blackAndBlueGrayMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C48AD3920E268F7006EA0D3 /* blackAndBlueGrayMap.json */; };
+		5C48AD3D20E268FE006EA0D3 /* lightBlueGrayMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C48AD3820E268F6006EA0D3 /* lightBlueGrayMap.json */; };
 		5C4C30821FD9DF9500151AB6 /* FamilyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4C30811FD9DF9500151AB6 /* FamilyTableViewCell.swift */; };
 		5C4C30841FD9E7F800151AB6 /* FoldingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4C30831FD9E7F800151AB6 /* FoldingCell.swift */; };
 		5C4C9A8D1F71BBDF00D431F3 /* NannyDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4C9A8C1F71BBDF00D431F3 /* NannyDetailVC.swift */; };
@@ -44,6 +46,23 @@
 		5C70E62E2082153E0076CC4A /* RequestBodyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C70E62D2082153E0076CC4A /* RequestBodyCell.swift */; };
 		5C76202B2088DCAA005D7647 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C76202A2088DCAA005D7647 /* Review.swift */; };
 		5C76202F20891DC0005D7647 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C76202E20891DC0005D7647 /* HeaderTableViewCell.swift */; };
+		5C78D0EA20E1C03C0064FAC0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1104141DF56A4200C7FB46 /* Extensions.swift */; };
+		5C78D0EE20E1C79D0064FAC0 /* pinkStinkMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C78D0EB20E1C79B0064FAC0 /* pinkStinkMap.json */; };
+		5C78D0EF20E1C79D0064FAC0 /* veryLightMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C78D0EC20E1C79C0064FAC0 /* veryLightMap.json */; };
+		5C78D0F020E1C79D0064FAC0 /* pinkBlackMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C78D0ED20E1C79D0064FAC0 /* pinkBlackMap.json */; };
+		5C78D0F120E1D1910064FAC0 /* pinkBlackMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C78D0ED20E1C79D0064FAC0 /* pinkBlackMap.json */; };
+		5C78D0F220E1D1910064FAC0 /* pinkStinkMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C78D0EB20E1C79B0064FAC0 /* pinkStinkMap.json */; };
+		5C78D0F320E1D1910064FAC0 /* veryLightMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C78D0EC20E1C79C0064FAC0 /* veryLightMap.json */; };
+		5C78D0FA20E1D82E0064FAC0 /* pinkWhiteMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C78D0F420E1D8280064FAC0 /* pinkWhiteMap.json */; };
+		5C78D0FB20E1D82E0064FAC0 /* whiteAndBlackMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C78D0F520E1D8290064FAC0 /* whiteAndBlackMap.json */; };
+		5C78D0FC20E1D82E0064FAC0 /* blackAndRegularMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C78D0F620E1D82B0064FAC0 /* blackAndRegularMap.json */; };
+		5C78D0FF20E1D82E0064FAC0 /* whiteBlackMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C78D0F920E1D82E0064FAC0 /* whiteBlackMap.json */; };
+		5C78D10120E1DC4E0064FAC0 /* blueAndGrayMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C78D10020E1DC4E0064FAC0 /* blueAndGrayMap.json */; };
+		5C78D10220E1DF070064FAC0 /* blueAndGrayMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C78D10020E1DC4E0064FAC0 /* blueAndGrayMap.json */; };
+		5C78D10320E1DF070064FAC0 /* blackAndRegularMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C78D0F620E1D82B0064FAC0 /* blackAndRegularMap.json */; };
+		5C78D10420E1DF070064FAC0 /* pinkWhiteMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C78D0F420E1D8280064FAC0 /* pinkWhiteMap.json */; };
+		5C78D10520E1DF070064FAC0 /* whiteAndBlackMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C78D0F520E1D8290064FAC0 /* whiteAndBlackMap.json */; };
+		5C78D10620E1DF070064FAC0 /* whiteBlackMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C78D0F920E1D82E0064FAC0 /* whiteBlackMap.json */; };
 		5C85A7EE1DB84D83008C5FBB /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C85A7ED1DB84D83008C5FBB /* DataService.swift */; };
 		5C860FC41FCF36870063B0BB /* PrintDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C860FC31FCF36870063B0BB /* PrintDebug.swift */; };
 		5C8925A220810A060032CEAA /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8925A120810A060032CEAA /* ReviewTableViewCell.swift */; };
@@ -157,8 +176,6 @@
 /* Begin PBXFileReference section */
 		0CA99DE7D370AAFC2FC961D1 /* Pods-Nanny Now.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nanny Now.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nanny Now/Pods-Nanny Now.debug.xcconfig"; sourceTree = "<group>"; };
 		5C00FBFB20E19D5B003C6F49 /* dayMap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dayMap.json; sourceTree = "<group>"; };
-		5C00FBFC20E19D5C003C6F49 /* nightMap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nightMap.json; sourceTree = "<group>"; };
-		5C00FC0120E1A486003C6F49 /* veryLight.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = veryLight.json; sourceTree = "<group>"; };
 		5C042AE3209248B10022C5DD /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		5C093A481FE0985100144A32 /* RequestUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestUserCell.swift; sourceTree = "<group>"; };
 		5C093A4A1FE099E700144A32 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
@@ -172,6 +189,8 @@
 		5C389685208968FD008C7E12 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
 		5C3D9AC9202AE128007A9147 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		5C41A4E9207C34B00025A4AE /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
+		5C48AD3820E268F6006EA0D3 /* lightBlueGrayMap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lightBlueGrayMap.json; sourceTree = "<group>"; };
+		5C48AD3920E268F7006EA0D3 /* blackAndBlueGrayMap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = blackAndBlueGrayMap.json; sourceTree = "<group>"; };
 		5C4C30811FD9DF9500151AB6 /* FamilyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyTableViewCell.swift; sourceTree = "<group>"; };
 		5C4C30831FD9E7F800151AB6 /* FoldingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldingCell.swift; sourceTree = "<group>"; };
 		5C4C9A8C1F71BBDF00D431F3 /* NannyDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NannyDetailVC.swift; sourceTree = "<group>"; };
@@ -186,6 +205,14 @@
 		5C70E62D2082153E0076CC4A /* RequestBodyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBodyCell.swift; sourceTree = "<group>"; };
 		5C76202A2088DCAA005D7647 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		5C76202E20891DC0005D7647 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
+		5C78D0EB20E1C79B0064FAC0 /* pinkStinkMap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pinkStinkMap.json; sourceTree = "<group>"; };
+		5C78D0EC20E1C79C0064FAC0 /* veryLightMap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = veryLightMap.json; sourceTree = "<group>"; };
+		5C78D0ED20E1C79D0064FAC0 /* pinkBlackMap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pinkBlackMap.json; sourceTree = "<group>"; };
+		5C78D0F420E1D8280064FAC0 /* pinkWhiteMap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pinkWhiteMap.json; sourceTree = "<group>"; };
+		5C78D0F520E1D8290064FAC0 /* whiteAndBlackMap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = whiteAndBlackMap.json; sourceTree = "<group>"; };
+		5C78D0F620E1D82B0064FAC0 /* blackAndRegularMap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = blackAndRegularMap.json; sourceTree = "<group>"; };
+		5C78D0F920E1D82E0064FAC0 /* whiteBlackMap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = whiteBlackMap.json; sourceTree = "<group>"; };
+		5C78D10020E1DC4E0064FAC0 /* blueAndGrayMap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = blueAndGrayMap.json; sourceTree = "<group>"; };
 		5C85A7ED1DB84D83008C5FBB /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		5C860FC31FCF36870063B0BB /* PrintDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintDebug.swift; sourceTree = "<group>"; };
 		5C8925A120810A060032CEAA /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
@@ -258,10 +285,12 @@
 		5CF50D84209CD5F800136167 /* MessageDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailVC.swift; sourceTree = "<group>"; };
 		5CFE968720A4E1F1003C08A4 /* RequestExtendedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestExtendedCell.swift; sourceTree = "<group>"; };
 		6ABBF400D8B1157A7252FEA1 /* Pods_NotificationContentExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NotificationContentExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E6DF2A035D3313085010699 /* Pods-NotificationContentExtensions.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationContentExtensions.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NotificationContentExtensions/Pods-NotificationContentExtensions.debug.xcconfig"; sourceTree = "<group>"; };
 		77AACDD398985A24EF2F229E /* Pods-Nanny Now.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nanny Now.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nanny Now/Pods-Nanny Now.release.xcconfig"; sourceTree = "<group>"; };
 		B3B105EF4CB2F58E7A23B4E7 /* Pods_NotificationMessageResponse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NotificationMessageResponse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C06149E4985579864421B59A /* Pods_Nanny_Now.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nanny_Now.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA85BF80930DF3F326650A30 /* Pods_NotificationServiceExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NotificationServiceExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E35AB05157F1E78A44D2E312 /* Pods-NotificationContentExtensions.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotificationContentExtensions.release.xcconfig"; path = "Pods/Target Support Files/Pods-NotificationContentExtensions/Pods-NotificationContentExtensions.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,6 +318,7 @@
 				5CE12DF1202A9C82003495D3 /* UserNotificationsUI.framework in Frameworks */,
 				5C3D9ACA202AE128007A9147 /* MapKit.framework in Frameworks */,
 				5CE12DF0202A9C82003495D3 /* UserNotifications.framework in Frameworks */,
+				5A53B3AFC35EDEF529B7B5C3 /* Pods_NotificationContentExtensions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,9 +336,17 @@
 		5C00FBFA20E19D48003C6F49 /* MapOverlay */ = {
 			isa = PBXGroup;
 			children = (
-				5C00FC0120E1A486003C6F49 /* veryLight.json */,
+				5C48AD3920E268F7006EA0D3 /* blackAndBlueGrayMap.json */,
+				5C48AD3820E268F6006EA0D3 /* lightBlueGrayMap.json */,
+				5C78D10020E1DC4E0064FAC0 /* blueAndGrayMap.json */,
+				5C78D0ED20E1C79D0064FAC0 /* pinkBlackMap.json */,
+				5C78D0EB20E1C79B0064FAC0 /* pinkStinkMap.json */,
+				5C78D0F620E1D82B0064FAC0 /* blackAndRegularMap.json */,
+				5C78D0F420E1D8280064FAC0 /* pinkWhiteMap.json */,
+				5C78D0F520E1D8290064FAC0 /* whiteAndBlackMap.json */,
+				5C78D0F920E1D82E0064FAC0 /* whiteBlackMap.json */,
+				5C78D0EC20E1C79C0064FAC0 /* veryLightMap.json */,
 				5C00FBFB20E19D5B003C6F49 /* dayMap.json */,
-				5C00FBFC20E19D5C003C6F49 /* nightMap.json */,
 			);
 			path = MapOverlay;
 			sourceTree = "<group>";
@@ -526,6 +564,8 @@
 			children = (
 				0CA99DE7D370AAFC2FC961D1 /* Pods-Nanny Now.debug.xcconfig */,
 				77AACDD398985A24EF2F229E /* Pods-Nanny Now.release.xcconfig */,
+				6E6DF2A035D3313085010699 /* Pods-NotificationContentExtensions.debug.xcconfig */,
+				E35AB05157F1E78A44D2E312 /* Pods-NotificationContentExtensions.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -591,6 +631,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5CE12DFE202A9C82003495D3 /* Build configuration list for PBXNativeTarget "NotificationContentExtensions" */;
 			buildPhases = (
+				0DCB3ACA7A0EB29C3BF3373E /* [CP] Check Pods Manifest.lock */,
 				5CE12DEB202A9C82003495D3 /* Sources */,
 				5CE12DEC202A9C82003495D3 /* Frameworks */,
 				5CE12DED202A9C82003495D3 /* Resources */,
@@ -721,21 +762,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C00FBFE20E19D5C003C6F49 /* nightMap.json in Resources */,
+				5C78D0EF20E1C79D0064FAC0 /* veryLightMap.json in Resources */,
 				5CB41F1920C7EF85003A86C0 /* short_notification.mp3 in Resources */,
-				5C00FC0220E1A486003C6F49 /* veryLight.json in Resources */,
 				5CF50D81209C1E5F00136167 /* success_notification.wav in Resources */,
 				5CCF0C811D898BFB0089F39D /* LaunchScreen.storyboard in Resources */,
+				5C78D0FA20E1D82E0064FAC0 /* pinkWhiteMap.json in Resources */,
+				5C48AD3A20E268F8006EA0D3 /* lightBlueGrayMap.json in Resources */,
+				5C78D0FB20E1D82E0064FAC0 /* whiteAndBlackMap.json in Resources */,
 				5CB41F1820C7EF85003A86C0 /* csd_notification_01.mp3 in Resources */,
 				5CB7FE601FE4CC8900D41E6F /* notification11.wav in Resources */,
 				5CF50D80209C1E5F00136167 /* notification50.wav in Resources */,
 				5CBD1C2E1DA81E7900CAC8CF /* GoogleService-Info.plist in Resources */,
+				5C78D0F020E1C79D0064FAC0 /* pinkBlackMap.json in Resources */,
 				5CF50D7B209C19FE00136167 /* notification48.wav in Resources */,
 				5CB41F1A20C7EF85003A86C0 /* simple_notification.mp3 in Resources */,
+				5C78D0EE20E1C79D0064FAC0 /* pinkStinkMap.json in Resources */,
+				5C48AD3B20E268F8006EA0D3 /* blackAndBlueGrayMap.json in Resources */,
 				5C2E696B20BCFA81000F7AFC /* NannyRequestMenu.xib in Resources */,
 				5CF50D7F209C1E5F00136167 /* failure_notification.wav in Resources */,
+				5C78D0FF20E1D82E0064FAC0 /* whiteBlackMap.json in Resources */,
 				5CB41F1720C7EF85003A86C0 /* duo_notification.mp3 in Resources */,
 				5CCF0C7E1D898BFB0089F39D /* Assets.xcassets in Resources */,
+				5C78D10120E1DC4E0064FAC0 /* blueAndGrayMap.json in Resources */,
+				5C78D0FC20E1D82E0064FAC0 /* blackAndRegularMap.json in Resources */,
 				5CB41F1220C7E872003A86C0 /* sundarbans.mp3 in Resources */,
 				5CCF0C7C1D898BFB0089F39D /* Main.storyboard in Resources */,
 				5C00FBFD20E19D5C003C6F49 /* dayMap.json in Resources */,
@@ -746,9 +795,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C00FC0020E19D67003C6F49 /* nightMap.json in Resources */,
 				5CE12DF7202A9C82003495D3 /* MainInterface.storyboard in Resources */,
+				5C78D10520E1DF070064FAC0 /* whiteAndBlackMap.json in Resources */,
+				5C48AD3D20E268FE006EA0D3 /* lightBlueGrayMap.json in Resources */,
+				5C48AD3C20E268FE006EA0D3 /* blackAndBlueGrayMap.json in Resources */,
+				5C78D10220E1DF070064FAC0 /* blueAndGrayMap.json in Resources */,
+				5C78D10420E1DF070064FAC0 /* pinkWhiteMap.json in Resources */,
+				5C78D10620E1DF070064FAC0 /* whiteBlackMap.json in Resources */,
+				5C78D0F120E1D1910064FAC0 /* pinkBlackMap.json in Resources */,
+				5C78D10320E1DF070064FAC0 /* blackAndRegularMap.json in Resources */,
+				5C78D0F220E1D1910064FAC0 /* pinkStinkMap.json in Resources */,
 				5C00FBFF20E19D67003C6F49 /* dayMap.json in Resources */,
+				5C78D0F320E1D1910064FAC0 /* veryLightMap.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -762,6 +820,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0DCB3ACA7A0EB29C3BF3373E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NotificationContentExtensions-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		CE3589B2711F3C40B7A3C741 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -912,6 +988,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CE12DF4202A9C82003495D3 /* NotificationViewController.swift in Sources */,
+				5C78D0EA20E1C03C0064FAC0 /* Extensions.swift in Sources */,
 				5C9D522520B6CD830083CE13 /* NannyImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1198,6 +1275,7 @@
 		};
 		5CE12DFC202A9C82003495D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E6DF2A035D3313085010699 /* Pods-NotificationContentExtensions.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1220,6 +1298,7 @@
 		};
 		5CE12DFD202A9C82003495D3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E35AB05157F1E78A44D2E312 /* Pods-NotificationContentExtensions.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

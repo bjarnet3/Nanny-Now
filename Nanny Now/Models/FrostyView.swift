@@ -25,6 +25,7 @@ extension FrostyView {
                 view.removeFromSuperview()
             }
         }
+        
         let frost = UIVisualEffectView(effect: UIBlurEffect(style: blurEffect))
         frost.frame = bounds
         frost.autoresizingMask = .flexibleWidth

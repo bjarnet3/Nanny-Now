@@ -4,16 +4,6 @@ platform :ios, '11.4'
 def import_public_pods
     # Silence all warnings
     # pod 'Firebase', inhibit_warnings: true
-    pod 'FBSDKLoginKit'
-    pod 'Firebase'
-    pod 'Firebase/Core'
-    pod 'Firebase/Auth'
-    pod 'Firebase/Storage'
-    pod 'Firebase/Database'
-    pod 'Firebase/Messaging'
-    pod 'SwiftKeychainWrapper'
-    pod 'RevealingSplashView'
-    pod 'RAMAnimatedTabBarController'
     pod 'MapKitGoogleStyler'
 end
 
@@ -22,10 +12,20 @@ target 'Nanny Now' do
   use_frameworks!
   # Pods for Nanny Now
 import_public_pods
-
+pod 'FBSDKLoginKit'
+pod 'Firebase'
+pod 'Firebase/Core'
+pod 'Firebase/Auth'
+pod 'Firebase/Storage'
+pod 'Firebase/Database'
+pod 'Firebase/Messaging'
+pod 'SwiftKeychainWrapper'
+pod 'RevealingSplashView'
+pod 'RAMAnimatedTabBarController'
 end
 
 target 'NotificationContentExtensions' do
-    pod 'MapKitGoogleStyler'
+    use_frameworks!
+    import_public_pods
 end
 

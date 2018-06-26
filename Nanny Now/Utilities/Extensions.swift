@@ -39,7 +39,7 @@ public extension String {
 }
 
 public enum MapStyleForView: String {
-    case dayMap = "dayMap", nightMap = "nightMap", veryLight = "veryLight"
+    case dayMap = "dayMap", blueAndGrayMap = "blueAndGrayMap", veryLightMap = "veryLightMap", pinkStinkMap = "pinkStinkMap", pinkBlackMap = "pinkBlackMap", blackAndRegularMap = "blackAndRegularMap", pinkWhiteMap = "pinkWhiteMap", whiteAndBlackMap = "whiteAndBlackMap", blackAndBlueGrayMap = "blackAndBlueGrayMap", lightBlueGrayMap = "lightBlueGrayMap"
 }
 
 /// The size of this picture. It can be one of the following values: small, normal, large, album, square.
@@ -146,11 +146,8 @@ extension Blurable
         }
         
         UIGraphicsBeginImageContextWithOptions(CGSize(width: frame.width, height: frame.height), false, 1)
-        
         layer.render(in: UIGraphicsGetCurrentContext()!)
-        
         let image = UIGraphicsGetImageFromCurrentImageContext()
-        
         UIGraphicsEndImageContext();
         
         guard let blur = CIFilter(name: "CIGaussianBlur"),
@@ -163,9 +160,7 @@ extension Blurable
         blur.setValue(blurRadius, forKey: kCIInputRadiusKey)
         
         let ciContext = CIContext(options: nil)
-        
         let result = blur.value(forKey: kCIOutputImageKey) as! CIImage?
-        
         let boundingRect = CGRect(x:0,
                                   y: 0,
                                   width: frame.width,

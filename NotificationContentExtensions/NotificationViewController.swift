@@ -8,44 +8,10 @@
 
 import UIKit
 import MapKit
+import MapKitGoogleStyler
 import Contacts
 import UserNotifications
 import UserNotificationsUI
-
-// Completion Typealias
-public typealias Completion = () -> Void
-
-extension UIImageView {
-    /**
-     Load Image from Catch or Get from URL function
-     
-     [Tutorial on YouTube]:
-     https://www.youtube.com/watch?v=GX4mcOOUrWQ "Click to Go"
-     
-     [Tutorial on YouTube] made by **Brian Voong**
-     
-     - parameter urlString: URL to the image
-     */
-    func loadImageUsingCacheWith(urlString: String, completion: Completion? = nil) {
-        // If not,, download with dispatchqueue
-        let url = URL(string: urlString)
-        // URL Request
-        URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-            if let error = error {
-                print(error)
-                return
-            }
-            
-            // Run on its own threads with DispatchQueue
-            DispatchQueue.main.async(execute: { () -> Void in
-                if let downloadedImage = UIImage(data: data!) {
-                    self.image = downloadedImage
-                    completion?()
-                }
-            })
-        }).resume( )
-    }
-}
 
 class FrostyView: UIView {
     required init?(coder aDecoder: NSCoder) {
@@ -77,8 +43,8 @@ extension FrostyView {
 
 class NotificationViewController: UIViewController, UNNotificationContentExtension, CLLocationManagerDelegate {
 
-    @IBOutlet var displayView: FrostyView!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var maskingView: UIView!
     
     @IBOutlet weak var remoteImageView: UIImageView!
     @IBOutlet weak var yourImageView: UIImageView!
@@ -89,15 +55,23 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     
     let regionRadius: CLLocationDistance = 20000
     // var locationManager: CLLocationManager!
+    var backgroundMapViewIsRendered = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // The solution to not drawing polyline
         mapView.delegate = self
+        self.setMapBackgroundOverlay(mapName: .veryLightMap)
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.addCirleMaskWithFrostOn(self.maskingView)
     }
     
     func didReceive(_ notification: UNNotification) {
-        
         guard notification.request.content.categoryIdentifier == "nannyMapRequest" else { return }
         
         let remoteURL = AnyHashable("userURL")
@@ -128,6 +102,52 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         let message = "\(notification.request.content.title): \(notification.request.content.body) "
         // let message = "\(remoteLatitude): \(remoteLongitude)  -  \(userLatitude):\(userLongitude)"
         self.messageLabel?.text = message
+    }
+    
+    private func addCirleMaskWithFrostOn(_ subView: UIView) {
+        // Create the view
+        let blurEffect = UIBlurEffect(style: .extraLight)
+        let maskView = UIVisualEffectView(effect: blurEffect)
+        maskView.frame = subView.bounds
+        
+        // Set the radius to 1/3 of the screen width
+        let radius : CGFloat = subView.bounds.width/2.6
+        // Create a path with the rectangle in it.
+        let path = UIBezierPath(rect: subView.bounds)
+        // Put a circle path in the middle
+        path.addArc(withCenter: subView.center, radius: radius, startAngle: 0.0, endAngle: CGFloat(2*CGFloat.pi), clockwise: true)
+        
+        // Create the shapeLayer
+        let shapeLayer = CAShapeLayer()
+        // set arc to shapeLayer
+        shapeLayer.path = path.cgPath
+        shapeLayer.fillRule = kCAFillRuleEvenOdd
+        
+        // Create the boarderLayer
+        let boarderLayer = CAShapeLayer()
+        boarderLayer.path = UIBezierPath(arcCenter: subView.center, radius: radius, startAngle: 0.0, endAngle: CGFloat(2*CGFloat.pi), clockwise: true).cgPath
+        boarderLayer.lineWidth = 3.0
+        boarderLayer.strokeColor = UIColor.white.cgColor
+        boarderLayer.fillColor = nil
+        
+        // add shapeLayer to maskView
+        maskView.layer.mask = shapeLayer
+        
+        // set properties
+        maskView.clipsToBounds = true
+        maskView.layer.borderColor = UIColor.gray.cgColor
+        maskView.backgroundColor = nil
+        // maskView.layer.masksToBounds = true
+        maskView.layer.addSublayer(boarderLayer)
+        // add mask to mapView
+        
+        // maskView.contentMode = .scaleAspectFill
+        // maskView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        // subView.insertSubview(maskView, at: 0)
+        self.maskingView.addSubview(maskView)
+        
+        // subView.insertSubview(maskView, aboveSubview: self.mapView)
+        // subView.addSubview(maskView) // addSubview(maskView)
     }
     
     /**
@@ -240,12 +260,48 @@ extension NotificationViewController : MKMapViewDelegate {
         location.mapItem().openInMaps(launchOptions: launchOptions)
     }
     
-    // Thank You : https://stackoverflow.com/questions/29319643/how-to-draw-a-route-between-two-locations-using-mapkit-in-swift
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+    private func setMapBackgroundOverlay(mapName: MapStyleForView) {
+        // We first need to have the path of the overlay configuration JSON
+        guard let overlayFileURLString = Bundle.main.path(forResource: mapName.rawValue, ofType: "json") else {
+            return
+        }
+        let overlayFileURL = URL(fileURLWithPath: overlayFileURLString)
+        
+        // After that, you can create the tile overlay using MapKitGoogleStyler
+        guard let tileOverlay = try? MapKitGoogleStyler.buildOverlay(with: overlayFileURL) else {
+            return
+        }
+        // And finally add it to your MKMapView
+        mapView.add(tileOverlay)
+        self.backgroundMapViewIsRendered = true
+    }
+    
+    // https://github.com/fmo91/MapKitGoogleStyler
+    func mkOverlayRender(_ overlay: MKOverlay) -> MKOverlayRenderer {
+        // This is the final step. This code can be copied and pasted into your project
+        // without thinking on it so much. It simply instantiates a MKTileOverlayRenderer
+        // for displaying the tile overlay.
+        if let tileOverlay = overlay as? MKTileOverlay {
+            return MKTileOverlayRenderer(tileOverlay: tileOverlay)
+        } else {
+            return MKOverlayRenderer(overlay: overlay)
+        }
+    }
+    
+    func mkPolyLineRender(_ overlay: MKOverlay) -> MKPolylineRenderer {
         let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
         renderer.strokeColor = UIColor.purple
         renderer.lineWidth = 5
         return renderer
+    }
+    
+    // Thank You : https://stackoverflow.com/questions/29319643/how-to-draw-a-route-between-two-locations-using-mapkit-in-swift
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if !backgroundMapViewIsRendered {
+            return mkOverlayRender(overlay)
+        } else {
+            return mkPolyLineRender(overlay)
+        }
     }
     
     func showRouteOnMap(transportType: MKDirectionsTransportType = .automobile) {

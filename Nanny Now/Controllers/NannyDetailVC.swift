@@ -50,16 +50,16 @@ class NannyDetailVC: UIViewController {
         self.mapView.removeOverlays(mapView.overlays)
         switch sender.selectedSegmentIndex {
         case 0:
-            self.setMapBackgroundOverlay(mapName: .dayMap)
+            self.setMapBackgroundOverlay(mapName: .blueAndGrayMap)
             self.showRouteOnMap(transportType: .walking)
         case 1:
-            self.setMapBackgroundOverlay(mapName: .veryLight)
+            self.setMapBackgroundOverlay(mapName: .pinkStinkMap)
             self.showRouteOnMap(transportType: .transit)
         case 2:
-            self.setMapBackgroundOverlay(mapName: .nightMap)
+            self.setMapBackgroundOverlay(mapName: .whiteAndBlackMap)
             self.showRouteOnMap(transportType: .automobile)
         default:
-            self.setMapBackgroundOverlay(mapName: .veryLight)
+            self.setMapBackgroundOverlay(mapName: .pinkWhiteMap)
             self.showRouteOnMap(transportType: .automobile)
         }
         self.tableView.reloadData()
@@ -173,7 +173,7 @@ class NannyDetailVC: UIViewController {
         self.tableView.reloadData()
         
         mapView.delegate = self
-        self.setMapBackgroundOverlay(mapName: .veryLight)
+        self.setMapBackgroundOverlay(mapName: .veryLightMap)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -201,7 +201,6 @@ class NannyDetailVC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         print(self.reviews.count)
-        
     }
     
     var backgroundMapViewIsRendered = false
