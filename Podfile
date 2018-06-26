@@ -25,3 +25,7 @@ import_public_pods
 
 end
 
+target 'NotificationContentExtensions' do
+    pod 'MapKitGoogleStyler'
+end
+

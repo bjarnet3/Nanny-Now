@@ -38,6 +38,10 @@ public extension String {
     }
 }
 
+public enum MapStyleForView: String {
+    case dayMap = "dayMap", nightMap = "nightMap", veryLight = "veryLight"
+}
+
 /// The size of this picture. It can be one of the following values: small, normal, large, album, square.
 public enum PictureSize : String {
     case small = "small", normal = "normal", large = "large", album = "album", square = "square"

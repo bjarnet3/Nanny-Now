@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8F0023890339847B953A5FEC9BB83F61"
-               BlueprintName = "RevealingSplashView"
+               BlueprintIdentifier = "EE5E5833139587538B11079D16100243"
+               BlueprintName = "MapKitGoogleStyler"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "RevealingSplashView.framework">
+               BuildableName = "MapKitGoogleStyler.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

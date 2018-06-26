@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import MapKitGoogleStyler
 import Firebase
 import SwiftKeychainWrapper
 import UserNotifications
@@ -268,6 +269,22 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                 }
             }
         }
+    }
+    
+    private func configureTileOverlay(mapName: MapStyleForView) {
+        // We first need to have the path of the overlay configuration JSON
+        guard let overlayFileURLString = Bundle.main.path(forResource: mapName.rawValue, ofType: "json") else {
+            return
+        }
+        let overlayFileURL = URL(fileURLWithPath: overlayFileURLString)
+        
+        // After that, you can create the tile overlay using MapKitGoogleStyler
+        guard let tileOverlay = try? MapKitGoogleStyler.buildOverlay(with: overlayFileURL) else {
+            return
+        }
+        
+        // And finally add it to your MKMapView
+        mapView.add(tileOverlay)
     }
     
     func resetMapView() {
@@ -604,6 +621,8 @@ extension NannyViewController {
         self.mapView.alpha = 0
         self.mapView.delegate = self
         
+        self.configureTileOverlay(mapName: .veryLight)
+        
         self.tableView.alpha = 0
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -861,6 +880,18 @@ extension NannyViewController : MKMapViewDelegate {
     func centerMapOnLocation(_ location: CLLocation, regionRadius: CLLocationDistance, animated: Bool) {
         let coordinateRadius = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2.2, regionRadius * 2.2)
         mapView.setRegion(coordinateRadius, animated: animated)
+    }
+    
+    // https://github.com/fmo91/MapKitGoogleStyler
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        // This is the final step. This code can be copied and pasted into your project
+        // without thinking on it so much. It simply instantiates a MKTileOverlayRenderer
+        // for displaying the tile overlay.
+        if let tileOverlay = overlay as? MKTileOverlay {
+            return MKTileOverlayRenderer(tileOverlay: tileOverlay)
+        } else {
+            return MKOverlayRenderer(overlay: overlay)
+        }
     }
     
     // MapView & Annotation (functions)

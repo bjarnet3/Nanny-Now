@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import MapKitGoogleStyler
 import Contacts
 
 class NannyDetailVC: UIViewController {
@@ -45,20 +46,22 @@ class NannyDetailVC: UIViewController {
     // MARK: - IBAction: Methods connected to UI
     // ----------------------------------------
     @IBAction func changeTransportType(_ sender: UISegmentedControl) {
-        // Remove overlays
+        self.backgroundMapViewIsRendered = false
         self.mapView.removeOverlays(mapView.overlays)
-        
         switch sender.selectedSegmentIndex {
         case 0:
+            self.setMapBackgroundOverlay(mapName: .dayMap)
             self.showRouteOnMap(transportType: .walking)
         case 1:
+            self.setMapBackgroundOverlay(mapName: .veryLight)
             self.showRouteOnMap(transportType: .transit)
         case 2:
+            self.setMapBackgroundOverlay(mapName: .nightMap)
             self.showRouteOnMap(transportType: .automobile)
         default:
+            self.setMapBackgroundOverlay(mapName: .veryLight)
             self.showRouteOnMap(transportType: .automobile)
         }
-        
         self.tableView.reloadData()
     }
     
@@ -170,6 +173,8 @@ class NannyDetailVC: UIViewController {
         self.tableView.reloadData()
         
         mapView.delegate = self
+        self.setMapBackgroundOverlay(mapName: .veryLight)
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -189,7 +194,7 @@ class NannyDetailVC: UIViewController {
         
         mapView.addAnnotation(user!)
         mapView.addAnnotation(nanny!)
-        
+
         centerMapOnLocation(location: calculateCenterPositionFromArrayOfLocations(mapView.annotations))
         showRouteOnMap()
     }
@@ -198,11 +203,57 @@ class NannyDetailVC: UIViewController {
         print(self.reviews.count)
         
     }
+    
+    var backgroundMapViewIsRendered = false
 }
 
 // MARK: - MKMapView, showRouteOnMap...
 // ----------------------------------------
 extension NannyDetailVC: MKMapViewDelegate {
+    
+    private func setMapBackgroundOverlay(mapName: MapStyleForView) {
+        // We first need to have the path of the overlay configuration JSON
+        guard let overlayFileURLString = Bundle.main.path(forResource: mapName.rawValue, ofType: "json") else {
+            return
+        }
+        let overlayFileURL = URL(fileURLWithPath: overlayFileURLString)
+        
+        // After that, you can create the tile overlay using MapKitGoogleStyler
+        guard let tileOverlay = try? MapKitGoogleStyler.buildOverlay(with: overlayFileURL) else {
+            return
+        }
+        // And finally add it to your MKMapView
+        mapView.add(tileOverlay)
+        self.backgroundMapViewIsRendered = true
+    }
+    
+    // https://github.com/fmo91/MapKitGoogleStyler
+    func mkOverlayRender(_ overlay: MKOverlay) -> MKOverlayRenderer {
+        // This is the final step. This code can be copied and pasted into your project
+        // without thinking on it so much. It simply instantiates a MKTileOverlayRenderer
+        // for displaying the tile overlay.
+        if let tileOverlay = overlay as? MKTileOverlay {
+            return MKTileOverlayRenderer(tileOverlay: tileOverlay)
+        } else {
+            return MKOverlayRenderer(overlay: overlay)
+        }
+    }
+    
+    func mkPolyLineRender(_ overlay: MKOverlay) -> MKPolylineRenderer {
+        let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
+        renderer.strokeColor = UIColor.purple
+        renderer.lineWidth = 5
+        return renderer
+    }
+    
+    // Thank You : https://stackoverflow.com/questions/29319643/how-to-draw-a-route-between-two-locations-using-mapkit-in-swift
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if !backgroundMapViewIsRendered {
+            return mkOverlayRender(overlay)
+        } else {
+            return mkPolyLineRender(overlay)
+        }
+    }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
@@ -222,14 +273,6 @@ extension NannyDetailVC: MKMapViewDelegate {
         
         anView?.centerOffset = CGPoint(x: -12.1, y: -40.4)
         return anView
-    }
-    
-    // Thank You : https://stackoverflow.com/questions/29319643/how-to-draw-a-route-between-two-locations-using-mapkit-in-swift
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
-        renderer.strokeColor = UIColor.purple
-        renderer.lineWidth = 5
-        return renderer
     }
     
     func showRouteOnMap(transportType: MKDirectionsTransportType = .automobile) {
