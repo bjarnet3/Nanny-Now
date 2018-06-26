@@ -14,15 +14,24 @@ import SwiftKeychainWrapper
 
 /// Library / Sounds / ....
 public enum SoundLibrary: String  {
+    /// Notificaiton Request Default Sound
     case notification11 = "notification11.wav"
+    /// Notification Message Request Sound
     case notification48 = "notification48.wav"
     case notification50 = "notification50.wav"
+    /// Notificaiton Send From Chat Confirmation
     case success_notification = "success_notification.wav"
+    /// Notification - Can be suitable as Recieve Sound compared to Success
     case falure_notification = "failure_notification.wav"
+    /// Sounds like a SMS Recieving Sound from a phone Company
     case sundarbans = "sundarbans.mp3"
+    /// Sharp Short Notification Sound
     case simple_notification = "simple_notification.mp3"
+    /// Short Notification Sound
     case short_notification = "short_notification.mp3"
+    /// Notification Sound "DUO Notificaiton is a proper name"
     case duo_notification = "duo_notification.mp3"
+    /// Notificaiton Sound "With a funny twist in the end"
     case csd_notification_01 = "csd_notification_01.mp3"
 }
 
@@ -489,7 +498,7 @@ class Notifications {
                                          "notification":
                                             ["title" : title,
                                              "body"  : message,
-                                             "sound" : "notification11.wav",
+                                             "sound" : returnSoundFromLibrary(soundName: .notification11),
                                              "badge" : badge],
                                          "priority":10,
                                             // "content_available": contentAvailable,

@@ -111,7 +111,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         maskView.frame = subView.bounds
         
         // Set the radius to 1/3 of the screen width
-        let radius : CGFloat = subView.bounds.width/2.6
+        let radius : CGFloat = subView.bounds.width/2.4
         // Create a path with the rectangle in it.
         let path = UIBezierPath(rect: subView.bounds)
         // Put a circle path in the middle
