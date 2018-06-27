@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstTableViewCell: UITableViewCell {
+class StartTableViewCell: UITableViewCell {
     
     @IBOutlet weak var backImageView: UIImageView!
     @IBOutlet weak var backMiddleView: CustomImageView!

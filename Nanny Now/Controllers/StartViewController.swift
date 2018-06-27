@@ -275,7 +275,7 @@ extension StartViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "FirstCell") as? FirstTableViewCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "FirstCell") as? StartTableViewCell {
                 if let user = self.user {
                     cell.setupView(user: user)
                     return cell

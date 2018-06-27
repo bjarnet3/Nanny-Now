@@ -111,7 +111,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         maskView.frame = subView.bounds
         
         // Set the radius to 1/3 of the screen width
-        let radius : CGFloat = subView.bounds.width/2.4
+        let radius : CGFloat = subView.bounds.width/2.25
         // Create a path with the rectangle in it.
         let path = UIBezierPath(rect: subView.bounds)
         // Put a circle path in the middle
@@ -359,7 +359,7 @@ extension NotificationViewController : MKMapViewDelegate {
                     
                     // https://stackoverflow.com/questions/23127795/how-to-offset-properly-an-mkmaprect
                     let mapRect = route.polyline.boundingMapRect
-                    self.mapView.setVisibleMapRect(mapRect, edgePadding: UIEdgeInsetsMake(40, 20, 85, 40), animated: true)
+                    self.mapView.setVisibleMapRect(mapRect, edgePadding: UIEdgeInsetsMake(65, 30, 85, 65), animated: true)
                     
                     // let mapCamera = MKMapCamera(lookingAtCenter: (self.userLocation), fromEyeCoordinate: (self.yourLocation), eyeAltitude: 400.0)
                     // mapCamera.heading = 80 // rotation

@@ -347,7 +347,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 
     // Called when a notification is delivered to a foreground app
     //  --------------------------------------------------
-    //  willPresent    /   foreground     /   notification
+    //  willPresent    /   foreground     /   notification    /   Main
     //  --------------------------------------------------
     public func userNotificationCenter(_ center: UNUserNotificationCenter,
                                        willPresent notification: UNNotification,
@@ -358,7 +358,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     // Called to let your app know which action was selected by the user for a given notification.
     // Called when a notitication is delivered to background
     //  -------------------------------------------
-    //  didRecieve    /   background      /   response
+    //  didRecieve    /   background      /   response    /   Main
     //  -------------------------------------------
     public func userNotificationCenter(_ center: UNUserNotificationCenter,
                                        didReceive response: UNNotificationResponse,
@@ -367,7 +367,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     }
     
     // ---------------------------------------------
-    // notificationMessageResponse      /   response
+    // notificationMessageResponse      /   response    /   helper
     // ---------------------------------------------
     func notificationResponse(response: UNNotificationResponse, completionHandler: Completion? = nil) {
         let notificationAction = notificationRequest(action: response.actionIdentifier)
@@ -396,7 +396,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     }
     
     // ---------------------------------------------
-    // notificationRequestAction      /   response
+    // notificationRequestAction      /   response    /   helper
     // ---------------------------------------------
     func notificationRequestAction(notificationAction: NotificationAction, response: UNNotificationResponse) {
         let userInfo = response.notification.request.content.userInfo
@@ -456,7 +456,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     }
     
     // ---------------------------------------------
-    // notificationMessageAction      /   response
+    // notificationMessageAction      /   response    /   helper
     // ---------------------------------------------
     func notificationMessageAction(notificationAction: NotificationAction, response: UNNotificationResponse) {
         switch notificationAction {

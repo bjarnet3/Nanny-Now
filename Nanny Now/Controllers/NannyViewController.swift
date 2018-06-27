@@ -56,7 +56,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     
     private func addCirleMaskWithFrostOn(_ subView: UIView) {
         // Create the view
-        let blurEffect = UIBlurEffect(style: .extraLight)
+        let blurEffect = UIBlurEffect(style: .regular)
         let maskView = UIVisualEffectView(effect: blurEffect)
         maskView.frame = subView.bounds
         
@@ -100,7 +100,10 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     private var lastRowSelected: IndexPath?
     private var exemptIDs = [String]()
     
-    // Location
+    // -------------------------------------
+    // -------------------------------------
+    // LocationManager  /   LocationService
+    // -------------------------------------
     private var locationManager = CLLocationManager()
     private var activeLocations = [String:CLLocation]()
     
@@ -295,7 +298,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                 // Remove Nanny Active from Database
                 let nannyActive = DataService.instance.REF_NANNIES_ACTIVE
                 DataService.instance.removeReferenceChildValues(uid: userID, reference: nannyActive)
-                
                 self.nannyAdOn.updateValue(false, forKey: userID)
             }
         }
