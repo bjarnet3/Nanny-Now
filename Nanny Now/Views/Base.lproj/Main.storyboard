@@ -361,7 +361,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dh1-zb-uFt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="985" y="-18"/>
+            <point key="canvasLocation" x="1666" y="-18"/>
         </scene>
         <!--Nanny-->
         <scene sceneID="wg7-f3-ORb">
@@ -1264,7 +1264,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                 <pageViewController storyboardIdentifier="LoginPageVC" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Sdh-ed-5vs" customClass="LoginPageVC" customModule="Nanny_Now" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TRd-AO-FsS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3090" y="-18"/>
+            <point key="canvasLocation" x="-1711" y="-19"/>
         </scene>
         <!--Login ZeroVC-->
         <scene sceneID="0Ab-kD-Frg">
@@ -1403,7 +1403,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jzH-Qo-xam" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2343.1999999999998" y="-18.440779610194905"/>
+            <point key="canvasLocation" x="-1023" y="-19"/>
         </scene>
         <!--Login OneVC-->
         <scene sceneID="asi-hR-wxt">
@@ -1573,7 +1573,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1687.2" y="-19.340329835082461"/>
+            <point key="canvasLocation" x="-343" y="-19"/>
         </scene>
         <!--Login TwoVC-->
         <scene sceneID="ju1-hb-cMq">
@@ -1623,7 +1623,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iab-Bj-A1U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1023" y="-18"/>
+            <point key="canvasLocation" x="326" y="-19"/>
         </scene>
         <!--Animated Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -1646,7 +1646,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7" y="-18"/>
+            <point key="canvasLocation" x="983" y="-19"/>
         </scene>
         <!--Melding-->
         <scene sceneID="upN-Sl-MMP">

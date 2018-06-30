@@ -359,7 +359,7 @@ extension NotificationViewController : MKMapViewDelegate {
                     
                     // https://stackoverflow.com/questions/23127795/how-to-offset-properly-an-mkmaprect
                     let mapRect = route.polyline.boundingMapRect
-                    self.mapView.setVisibleMapRect(mapRect, edgePadding: UIEdgeInsetsMake(65, 30, 85, 65), animated: true)
+                    self.mapView.setVisibleMapRect(mapRect, edgePadding: UIEdgeInsetsMake(65, 60, 85, 60), animated: true)
                     
                     // let mapCamera = MKMapCamera(lookingAtCenter: (self.userLocation), fromEyeCoordinate: (self.yourLocation), eyeAltitude: 400.0)
                     // mapCamera.heading = 80 // rotation
