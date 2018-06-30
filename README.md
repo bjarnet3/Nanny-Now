@@ -1,6 +1,6 @@
 # ![Nanny Now](/Nanny%20Now/Library/Assets.xcassets/Nanny%20Now%20-%20App%20Icon%20Small.imageset/Nanny%20Now%20-%20App%20Icon%20Small.png) Nanny Now
 [![Nanny Now Version](https://img.shields.io/badge/Version-1.35%20Beta-ff69b4.svg)](https://github.com/bjarnet3/Nanny-Now/releases)
-[![iOS 11](https://img.shields.io/badge/Platform-iOS%2011-lightgrey.svg)](https://developer.apple.com/ios/)
+[![iOS 11.3](https://img.shields.io/badge/Platform-iOS%2011.3-lightgrey.svg)](https://developer.apple.com/ios/)
 [![Swift 4.1](https://img.shields.io/badge/Swift-4.1-orange.svg?style=flat)](https://swift.org)
 [![Firebase Database](https://img.shields.io/badge/Database-Firebase-yellow.svg)](https://firebase.google.com/)
 [![Facebook Login API](https://img.shields.io/badge/Login%20API-Facebook-blue.svg)](https://developers.facebook.com/)
