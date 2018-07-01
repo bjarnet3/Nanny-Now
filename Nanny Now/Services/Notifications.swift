@@ -35,12 +35,12 @@ public enum SoundLibrary: String  {
     case csd_notification_01 = "csd_notification_01.mp3"
 }
 
-func returnSoundFromLibrary(soundName: SoundLibrary) -> String {
+public func returnSoundFromLibrary(soundName: SoundLibrary) -> String {
     return soundName.rawValue
 }
 
 // INCOMPLETE FUNCTION
-func returnFilenameAndExtensionFromSound(soundName: SoundLibrary) -> (String, String) {
+public func returnFilenameAndExtensionFromSound(soundName: SoundLibrary) -> (String, String) {
     var soundfileName = returnSoundFromLibrary(soundName: soundName)
     let audioExtension = soundfileName.suffix(3)
     soundfileName.removeLast(4)
@@ -101,7 +101,7 @@ class Notifications {
     
     // Send Notification using Message Object
     // --------------------------------------
-    func sendMiniNotification(with message: Message) {
+    func sendNotification(with message: Message) {
         
         guard let userID = KeychainWrapper.standard.string(forKey: KEY_UID) else { return }
         let remoteID = message._toUser?.userUID ?? message._toUID
@@ -153,20 +153,14 @@ class Notifications {
                     // Title
                     var title = "\(userName)"
                     
-                    // MARK: - Change this to display different Notificaiton Categories
-                    // let category = category.rawValue // "messageRequest"
-                    // var content_available = true
-                    
                     switch category {
                     case .messageRequest:
                         title = "Melding fra \(userName):"
                         DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(messageText)")
-                        // content_available = false
                     default:
                         //.messageReponse:
                         title = "Beskjed fra \(userName)"
                         DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(messageText)")
-                        // content_available = true
                     }
                     
                     let taskDictionary =
@@ -190,20 +184,18 @@ class Notifications {
                              "sound" : "notification48.wav",
                              "badge" : badge],
                          "priority":10,
-                         // "content_available": content_available,
                          "mutable_content": true,
                          "category" : category.rawValue
                             ] as [String : Any]
                     
-                    self.sendNotification(taskDictionary: taskDictionary)
-
+                    self.performPOST(with: taskDictionary)
                 })
             }
         })
 
     }
     
-    func sendNotification(taskDictionary : [String:Any] ) {
+    func performPOST(with taskDictionary : [String:Any] ) {
         if let url = URL(string:"https://fcm.googleapis.com/fcm/send"){
             
             let serverKey = "AAAAd-nNctg:APA91bGhfGrYaRg-QOHx0LlfTyqU9cwOECMvm6jGHMZaeLGsToNPJtgV0y-EfcmMVFZbfbxdkF3ubJ8NC94-B-I74lV-UG2f-kuvjLtOnG_wbHecjdBc93Y59tv7XCJCEXEW3hTKH4oC"
@@ -220,150 +212,6 @@ class Notifications {
                 }
             }).resume()
         }
-    }
-
-    func sendNotification(with message: Message) {
-        DataService.instance.updateUserStatus(with: .active)
-        
-        let remoteID = message._toUser?.userUID ?? message._toUID
-        let text = message._message
-        let categoryRequest = message._requestCategory
-        let messageID = message._messageID
-        
-        let url = NSURL(string: "https://fcm.googleapis.com/fcm/send")!
-        let session = URLSession.shared
-        
-        let urlRequest = NSMutableURLRequest(url: url as URL)
-        urlRequest.httpMethod = "POST"
-        urlRequest.cachePolicy = URLRequest.CachePolicy.reloadIgnoringCacheData
-        
-        guard let userID = KeychainWrapper.standard.string(forKey: KEY_UID) else {
-            return
-        }
-        
-        let nameRef = DataService.instance.REF_USERS_PRIVATE.child(userID).child("first_name")
-        nameRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            if !snapshot.exists() { return }
-            
-            if snapshot.key == "first_name" {
-                let firstName = snapshot.value as! String
-                // print(snapshot.value as! String)
-                
-                let fidREF = DataService.instance.REF_USERS_PRIVATE.child(userID).child("fid")
-                fidREF.observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    if !snapshot.exists() { return }
-                    
-                    if snapshot.key == "fid" {
-                        let id = snapshot.value as! String
-                        
-                        var tokens = [String]()
-                        let tokenREF = DataService.instance.REF_USERS_PRIVATE.child(remoteID).child("tokens")
-                        
-                        tokenREF.observeSingleEvent(of: .value, with: { (snapshot) in
-                            if !snapshot.exists() { return }
-                            
-                            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
-                                for snap in snapshot {
-                                    if let snapValue = snap.value as? [String: String] {
-                                        for (key,val) in snapValue {
-                                            if key == "token" {
-                                                tokens.append(val)
-                                            }
-                                        }
-                                    }
-                                }
-                                
-                                var badge = 0
-                                let badgeRef = DataService.instance.REF_USERS_PRIVATE.child(remoteID).child("badge")
-                                badgeRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                                    
-                                    if !snapshot.exists() { return }
-                                    if snapshot.key == "badge" {
-                                        
-                                        badge = snapshot.value as! Int
-                                        badge += 1
-                                        
-                                        badgeRef.setValue(badge)
-                                    }
-                                    
-                                    // Get tokens from Database
-                                    let registration_ids = tokens
-                                    var title = "\(firstName)"
-                                    
-                                    let userName = firstName
-                                    let remoteName = message._toUser?.firstName ?? "unknown"
-                                    
-                                    // MARK: - Change this to display different Notificaiton Categories
-                                    let category = categoryRequest.rawValue // "messageRequest"
-                                    // var contentAvailable = true
-                                    
-                                    switch categoryRequest {
-                                    case .messageRequest:
-                                        title = "Melding fra \(firstName):"
-                                        DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(text)")
-                                        // contentAvailable = true
-                                    default:
-                                        //.messageAccept:
-                                        title = "Beskjed fra \(firstName)"
-                                        DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(text)")
-                                        // contentAvailable = true
-                                    }
-                                    
-                                    // For Advanced Rich Notificaiton Setup
-                                    let remoteURL = message._toUser?.imageName ?? getFacebookProfilePictureUrl(id, .large)
-                                    let userURL = message._fromUser?.imageName ?? "nanny-profil"
-                                    
-                                    let dictionary =
-                                        ["data":
-                                            [ "category": category,
-                                              "messageID": messageID,
-                                              
-                                              "remoteURL": remoteURL,
-                                              "userURL": userURL,
-                                              
-                                              "remoteID": remoteID,
-                                              "userID"  : userID,
-                                              
-                                              "remoteName": remoteName,
-                                              "userName" : userName
-                                            ],
-                                         "registration_ids" : registration_ids,
-                                         "notification":
-                                            ["title" : title,
-                                             "body"  : text,
-                                             "sound" : "notification48.wav",
-                                             "badge" : badge],
-                                         "priority":10,
-                                         // "content_available": contentAvailable,
-                                         "mutable_content": true,
-                                         "category" : category
-                                            ] as [String : Any]
-                                    
-                                    do {
-                                        try urlRequest.httpBody = JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)
-                                    }
-                                    catch {}
-                                    
-                                    urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                                    urlRequest.addValue("key=AAAAd-nNctg:APA91bGhfGrYaRg-QOHx0LlfTyqU9cwOECMvm6jGHMZaeLGsToNPJtgV0y-EfcmMVFZbfbxdkF3ubJ8NC94-B-I74lV-UG2f-kuvjLtOnG_wbHecjdBc93Y59tv7XCJCEXEW3hTKH4oC", forHTTPHeaderField: "Authorization")
-                                    
-                                    let task = session.dataTask(with: urlRequest as URLRequest, completionHandler: {data, response, error -> Void in
-                                        _ = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-                                        var json = NSDictionary()
-                                        do { json = try JSONSerialization.jsonObject(with: data!, options: .mutableLeaves) as! NSDictionary } catch {}
-                                        let parseJSON = json
-                                        _ = parseJSON["success"] as? Int
-                                    })
-                                    task.resume()
-                                })
-                            }
-                        })
-                    }
-                })
-            }
-        })
     }
     
     // Send Notification using Request Object
@@ -551,176 +399,6 @@ class Notifications {
         DataService.instance.postToRequest(with: request, reference: privateRequest)
         privateRequest.updateChildValues(setRemoteID)
     }
-    
-    /*
-    func sendNotification(to remoteID: String, text: String, categoryRequest: NotificationCategory,_ requestID: String = "") {
-        DataService.instance.updateUserStatus(with: .active)
-        
-        let url = NSURL(string: "https://fcm.googleapis.com/fcm/send")!
-        let session = URLSession.shared
-        
-        let request = NSMutableURLRequest(url: url as URL)
-        request.httpMethod = "POST"
-        request.cachePolicy = URLRequest.CachePolicy.reloadIgnoringCacheData
-        
-        guard let userID = KeychainWrapper.standard.string(forKey: KEY_UID) else {
-            return
-        }
-        
-        let nameRef = DataService.instance.REF_USERS_PRIVATE.child(userID).child("first_name")
-        nameRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            if !snapshot.exists() { return }
-            
-            if snapshot.key == "first_name" {
-                let firstName = snapshot.value as! String
-                // print(snapshot.value as! String)
-                
-                let idRef = DataService.instance.REF_USERS_PRIVATE.child(userID).child("fid")
-                idRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    if !snapshot.exists() { return }
-                    
-                    if snapshot.key == "fid" {
-                        let id = snapshot.value as! String
-                        
-                        var tokens = [String]()
-                        var tokenRef = DataService.instance.REF_USERS_PRIVATE.child(remoteID).child("tokens")
-                        
-                        switch categoryRequest {
-                        case .nannyRequest:
-                            tokenRef = DataService.instance.REF_NANNIES_ACTIVE.child(remoteID).child("tokens")
-                        default:
-                            tokenRef = DataService.instance.REF_USERS_PRIVATE.child(remoteID).child("tokens")
-                        }
-                        tokenRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                            if !snapshot.exists() { return }
-                            
-                            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
-                                for snap in snapshot {
-                                    if let snapValue = snap.value as? [String: String] {
-                                        for (key,val) in snapValue {
-                                            if key == "token" {
-                                                tokens.append(val)
-                                            }
-                                        }
-                                    }
-                                }
-                                
-                                var badge = 0
-                                let badgeRef = DataService.instance.REF_USERS_PRIVATE.child(remoteID).child("badge")
-                                badgeRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                                    
-                                    if !snapshot.exists() { return }
-                                    if snapshot.key == "badge" {
-                                        
-                                        badge = snapshot.value as! Int
-                                        badge += 1
-                                        
-                                        badgeRef.setValue(badge)
-                                    }
-                                    
-                                    // Get tokens from Database
-                                    let registration_ids = tokens
-                                    let message = text
-                                    var title = "\(firstName)"
-                                    var requestID = requestID
-                                    var content_available = false
-                                    
-                                    // MARK: - Change this to display different Notificaiton Categories
-                                    let category = categoryRequest.rawValue // "messageRequest"
-                                    
-                                    func nannyRequestAction() {
-                                        let requestREFID = DataService.instance.REF_REQUESTS.childByAutoId()
-                                        requestID = requestREFID.key
-                                        
-                                        let nannyRequest = DataService.instance.REF_REQUESTS.child("public").child(requestID)
-                                        DataService.instance.postToTheRequest(recieveUserID: remoteID, requestID: requestID, message: message, status: "pending", reference: nannyRequest)
-                                        
-                                        let familyPrivate = DataService.instance.REF_FAMILIES.child("private").child(userID)
-                                        let familyStored = DataService.instance.REF_FAMILIES.child("stored").child(remoteID).child(userID)
-                                        DataService.instance.copyValuesFromRefToRef(fromReference: familyPrivate, toReference: familyStored)
-                                        
-                                        let privateUsers = DataService.instance.REF_REQUESTS.child("private").child(userID).child("users").child(remoteID)
-                                        let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(userID).child("requests").child(requestID)
-                                        
-                                        DataService.instance.copyValuesFromRefToRef(fromReference: nannyRequest, toReference: privateUsers)
-                                        DataService.instance.copyValuesFromRefToRef(fromReference: nannyRequest, toReference: privateRequest)
-                                        
-                                        let nannyID = ["userID" : remoteID]
-                                        privateRequest.updateChildValues(nannyID)
-                                        privateUsers.updateChildValues(nannyID)
-                                    }
-                                    
-                                    switch categoryRequest {
-                                    case .nannyRequest, .nannyMapRequest:
-                                        title = "Forespørsel fra \(firstName):"
-                                        
-                                        nannyRequestAction()
-                                    case .nannyConfirm:
-                                        title = "Barnevakten \(firstName):"
-                                        
-                                        let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(requestID)
-                                        publicRequest.child("nannyID").removeValue()
-                                    case .messageRequest:
-                                        title = "Melding fra \(firstName):"
-                                        DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(title) \(message)")
-                                    case .messageConfirm:
-                                        title = "Melding fra \(firstName):"
-                                        DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(title) \(message)")
-                                    default:
-                                        title = "\(firstName)"
-                                        // DataService.instance.postToMessage(recieveUserID: remoteID, message: "\(title): \(message)")
-                                    }
-                                    
-                                    // For Advanced Rich Notificaiton Setup
-                                    let userURL = getFacebookProfilePictureUrl(id, .large)
-                                    
-                                    let dictionary =
-                                        ["data":
-                                            [ "category": category,
-                                              "requestID": requestID,
-                                              "remoteID": remoteID,
-                                              "userID"  : userID,
-                                              "userURL": userURL
-                                            ],
-                                         "registration_ids" : registration_ids,
-                                         "notification":
-                                            ["title" : title,
-                                             "body"  : message,
-                                             "sound" : "notification11.wav",
-                                             "badge" : badge],
-                                         "priority":10,
-                                            "content_available": content_available,
-                                            "mutable_content": true,
-                                            "category" : category
-                                            ] as [String : Any]
-                                    
-                                    do {
-                                        try request.httpBody = JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)
-                                    }
-                                    catch {}
-                                    
-                                    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-                                    request.addValue("key=AAAAd-nNctg:APA91bGhfGrYaRg-QOHx0LlfTyqU9cwOECMvm6jGHMZaeLGsToNPJtgV0y-EfcmMVFZbfbxdkF3ubJ8NC94-B-I74lV-UG2f-kuvjLtOnG_wbHecjdBc93Y59tv7XCJCEXEW3hTKH4oC", forHTTPHeaderField: "Authorization")
-                                    
-                                    let task = session.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
-                                        _ = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-                                        var json = NSDictionary()
-                                        do { json = try JSONSerialization.jsonObject(with: data!, options: .mutableLeaves) as! NSDictionary } catch {}
-                                        let parseJSON = json
-                                        _ = parseJSON["success"] as? Int
-                                    })
-                                    task.resume()
-                                })
-                            }
-                        })
-                    }
-                })
-            }
-        })
-    }
-    */
     
 }
 
