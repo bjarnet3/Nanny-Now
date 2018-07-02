@@ -377,9 +377,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.94999999999999996" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wh9-qW-ONR">
-                                <rect key="frame" x="0.0" y="20" width="375" height="385"/>
+                                <rect key="frame" x="-9" y="20" width="397" height="409"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="wh9-qW-ONR" secondAttribute="height" multiplier="1:1" constant="-10" id="Bkh-1H-dqT"/>
+                                    <constraint firstAttribute="width" secondItem="wh9-qW-ONR" secondAttribute="height" multiplier="1:1" constant="-12" id="Bkh-1H-dqT"/>
                                 </constraints>
                             </mapView>
                             <view clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DTX-sg-XRF" customClass="FrostyCornerView" customModule="Nanny_Now" customModuleProvider="target">
@@ -460,7 +460,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dgZ-cO-BAT" customClass="CustomTableView" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="392" width="375" height="275"/>
+                                <rect key="frame" x="0.0" y="405" width="375" height="262"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="NannyCell" rowHeight="65" id="RIO-tA-f2n" customClass="NannyTableViewCell" customModule="Nanny_Now" customModuleProvider="target">
@@ -579,7 +579,7 @@
                                 </prototypes>
                             </tableView>
                             <view clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1t-h7-Cay" customClass="FrostyCornerView" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="5" y="345" width="365" height="60"/>
+                                <rect key="frame" x="5" y="358" width="365" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bE1-2J-cPW">
                                         <rect key="frame" x="337" y="8" width="20" height="20"/>
@@ -643,9 +643,9 @@
                                 </connections>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ONb-Zb-kXf" firstAttribute="top" secondItem="wh9-qW-ONR" secondAttribute="bottom" constant="213" id="5ia-Wb-iuM"/>
+                            <constraint firstItem="ONb-Zb-kXf" firstAttribute="top" secondItem="wh9-qW-ONR" secondAttribute="bottom" constant="189" id="5ia-Wb-iuM"/>
                             <constraint firstAttribute="trailing" secondItem="K1t-h7-Cay" secondAttribute="trailing" constant="5" id="ITX-3g-mZr"/>
                             <constraint firstItem="dgZ-cO-BAT" firstAttribute="top" secondItem="K1t-h7-Cay" secondAttribute="bottom" constant="-13" id="IbG-nX-C5i"/>
                             <constraint firstAttribute="trailing" secondItem="DTX-sg-XRF" secondAttribute="trailing" constant="5" id="N9L-Rm-y3O"/>
@@ -653,14 +653,14 @@
                             <constraint firstItem="DTX-sg-XRF" firstAttribute="top" secondItem="XUZ-0u-kIB" secondAttribute="bottom" constant="8" id="VLL-zc-Ts2"/>
                             <constraint firstAttribute="trailing" secondItem="dgZ-cO-BAT" secondAttribute="trailing" id="Ymu-vT-HX6"/>
                             <constraint firstItem="ONb-Zb-kXf" firstAttribute="top" secondItem="dgZ-cO-BAT" secondAttribute="bottom" constant="-49" id="be3-Gn-Y0v"/>
-                            <constraint firstAttribute="trailing" secondItem="wh9-qW-ONR" secondAttribute="trailing" id="eAd-gi-4KR"/>
+                            <constraint firstAttribute="trailing" secondItem="wh9-qW-ONR" secondAttribute="trailing" constant="-13" id="eAd-gi-4KR"/>
                             <constraint firstItem="DTX-sg-XRF" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" constant="5" id="eBE-3l-LKs"/>
                             <constraint firstItem="XUZ-0u-kIB" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="fhP-6a-vdv"/>
                             <constraint firstAttribute="trailing" secondItem="XUZ-0u-kIB" secondAttribute="trailing" id="k7f-dr-orj"/>
                             <constraint firstItem="XUZ-0u-kIB" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="topMargin" constant="-20" id="kzV-e1-S0I"/>
-                            <constraint firstItem="wh9-qW-ONR" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="mH3-0z-AqJ"/>
+                            <constraint firstItem="wh9-qW-ONR" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" constant="-9" id="mH3-0z-AqJ"/>
                             <constraint firstItem="wh9-qW-ONR" firstAttribute="top" secondItem="V8P-cS-sdd" secondAttribute="bottom" id="oaf-sW-dz4"/>
-                            <constraint firstItem="dgZ-cO-BAT" firstAttribute="top" secondItem="wh9-qW-ONR" secondAttribute="bottom" constant="-13" id="ubq-fB-oDT"/>
+                            <constraint firstItem="dgZ-cO-BAT" firstAttribute="top" secondItem="wh9-qW-ONR" secondAttribute="bottom" constant="-24" id="ubq-fB-oDT"/>
                             <constraint firstItem="dgZ-cO-BAT" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="z57-mK-kD6"/>
                         </constraints>
                     </view>

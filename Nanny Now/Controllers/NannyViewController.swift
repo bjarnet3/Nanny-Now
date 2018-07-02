@@ -50,7 +50,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         }
     }
     
-    private func setup() {
+    private func setupOverLay() {
         addCirleMaskWithFrostOn(self.mapView)
     }
     
@@ -58,10 +58,12 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         // Create the view
         let blurEffect = UIBlurEffect(style: .regular)
         let maskView = UIVisualEffectView(effect: blurEffect)
+        
         maskView.frame = subView.bounds
+        // maskView.frame.insetBy(dx: 1.10, dy: 1.10)
         
         // Set the radius to 1/3 of the screen width
-        let radius : CGFloat = subView.bounds.width/2.6
+        let radius : CGFloat = subView.bounds.width / 2.6 //  subView.bounds.width/2.6
         // Create a path with the rectangle in it.
         let path = UIBezierPath(rect: subView.bounds)
         // Put a circle path in the middle
@@ -84,12 +86,13 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         maskView.layer.mask = shapeLayer
         
         // set properties
-        maskView.clipsToBounds = true
+        maskView.clipsToBounds = false
         maskView.layer.borderColor = UIColor.gray.cgColor
         maskView.backgroundColor = nil
         // maskView.layer.masksToBounds = true
         maskView.layer.addSublayer(boarderLayer)
         // add mask to mapView
+        addParallaxEffectOnView(maskView, 12)
         
         subView.addSubview(maskView)
     }
@@ -738,6 +741,8 @@ extension NannyViewController {
         self.tableView.dataSource = self
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.tabBarController!.tabBar.frame.height, 0)
         
+        
+        
         // PickerView Delegate and Datasource
         self.locationPicker.delegate = self
         self.locationPicker.dataSource = self
@@ -756,7 +761,19 @@ extension NannyViewController {
             registerForPreviewing(with: self, sourceView: tableView)
         }
         
-        setup()
+        setupOverLay()
+        setupParallex()
+        
+    }
+    
+    func setupParallex() {
+        addParallaxEffectOnView(self.mapView, -6)
+        addParallaxEffectOnView(self.tableView, 14)
+    }
+    
+    func remoteParallex() {
+        removeParallaxEffectOnView(self.mapView)
+        removeParallaxEffectOnView(self.tableView)
     }
     
     func viewDidLoadAnimation() {
@@ -779,6 +796,8 @@ extension NannyViewController {
         let tab = self.tabBarController?.tabBar as! FrostyTabBar
         tab.setEffect(blurEffect: .light)
         
+        hapticButton(.light, lowPowerModeDisabled)
+        
         if !mapView.selectedAnnotations.isEmpty {
             for selectedAnnotation in mapView.selectedAnnotations {
                 mapView.deselectAnnotation(selectedAnnotation, animated: false)
@@ -794,7 +813,6 @@ extension NannyViewController {
         if nannies.count != 0 {
             self.mapView.showAnnotations(self.nannies, animated: lowPowerModeDisabled)
             animateTable(self.tableView, delay: 0.15, animated: lowPowerModeDisabled, mapView: self.mapView)
-            hapticButton(.light, lowPowerModeDisabled)
         }
         self.nannyBadge = 0
     }

@@ -81,7 +81,12 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
                 self.messages.append(toMessage)
                 self.tableView.reloadData()
                 
-                animateCells(in: self.tableView, true, delay: 0.01)
+                // Animate cell exept the first cell
+                var cells = tableView.visibleCells
+                cells.remove(at: 0)
+                
+                animate(cells: cells, in: self.tableView, true, delay: 0.01)
+                // animateCells(in: self.tableView, true, delay: 0.01)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { // this is the best delay
                     completion(.dismissAndForwardAction)
                 }

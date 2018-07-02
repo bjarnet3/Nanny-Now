@@ -67,8 +67,6 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    // -------------------------------------
-    // -------------------------------------
     // LocationManager  /   LocationService
     // -------------------------------------
     private var locationManager = CLLocationManager()
@@ -178,12 +176,9 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
         self.mapView.showAnnotations(self.users, animated: lowPowerModeDisabled)
     }
     
-    // -------------------------------------
-    // LocationManager  /   LocationService
     // ------------------------------------
-    // -------------------------------------
+    // ------------------------------------
 
-    
     private func checkForBlocked(_ userID: String) {
         DataService.instance.REF_USERS_PUBLIC.child(userID).child("blocked").observeSingleEvent(of: .value, with: { snapshot in
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
@@ -221,6 +216,8 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
         })
     }
     
+    // ---- Temporary Functions
+    // ------------------------
     private func setupDummyUsers() {
         
         let user0 = User(userUID: "RGG1KFpGfMSM5BEbzbsg0QlcgW33", imageName: "https://firebasestorage.googleapis.com/v0/b/nanny-now-d2596.appspot.com/o/profile-images%2FRGG1KFpGfMSM5BEbzbsg0QlcgW33%2FD5F95261-EEC9-43F4-A753-483E0BD9083B?alt=media&token=c1da5a37-1f83-4ec6-ac43-ef35aa6eb503", firstName: "Bjarne")
@@ -249,17 +246,16 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
         let family2 = Family()
     }
     
-    
+    // MARK: - Actions  /  Functions
+    // -----------------------------
     @IBAction func addPlussButton(_ sender: UIButton) {
         
         changeMapStyle()
     }
     
     
-    // -------------------------------------
-    // -------------------------------------
-    // viewDidLoad  /   viewDidAppear
-    // -------------------------------------
+    // MARK: - viewDidLoad  /   viewDidAppear
+    // --------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -269,7 +265,7 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
         self.getUserSettings()
         
         // TableView and MapView Delegate and Datasource
-        self.mapView.alpha = 0
+        self.mapView.alpha = 1
         self.mapView.delegate = self
         
         self.setupDummyUsers()
@@ -318,10 +314,7 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    // -------------------------------------
-    // viewDidLoad  /   viewDidAppear
-    // -------------------------------------
-    // -------------------------------------
+
 }
 
 extension FamilyViewController: MKMapViewDelegate {

@@ -203,7 +203,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // [START refresh_token]
     // ---------------------
     func tokenRefreshNotification(_ notification: Notification) {
-        
         InstanceID.instanceID().instanceID { (result, error) in
             if let error = error {
                 print("Error fetching remote instange ID: \(error)")
@@ -218,21 +217,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // FCM Connect and Establish Direct Channel.
     // ----------------------------------------
     func connectToFcm() {
-        /*
-        guard InstanceID.instanceID().token() != nil else { return }
- 
         // Disconnect previous FCM connection if it exists.
         Messaging.messaging().shouldEstablishDirectChannel = true
-        */
         
         InstanceID.instanceID().instanceID { (result, error) in
             if let error = error {
                 print("Error fetching remote instange ID: \(error)")
             } else if let refreshedToken = result?.token {
                 print("InstanceID token: \(refreshedToken)")
-                
                 // Disconnect previous FCM connection if it exists.
-                Messaging.messaging().shouldEstablishDirectChannel = true
+                // Messaging.messaging().shouldEstablishDirectChannel = true
             }
         }
     }
@@ -254,13 +248,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Tells the delegate that the app successfully registered with Apple Push Notification service (APNs).
     /// ---------------------------------------------------------------------------------------------------
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        print("APNs token retrieved: \(deviceToken)")
-        
-        // FIXME: - Device Token to be changed to ".prod"
-        // FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: .prod)
+        InstanceID.instanceID().instanceID(handler: { (result, error) in
+            if let error = error {
+                print("Error fetching remote instange ID: \(error)")
+            } else if let result = result {
+                print("Remote instance ID token: \(result.token)")
+            }
+        })
         
         // With swizzling disabled you must set the APNs token here.
-        Messaging.messaging().apnsToken = deviceToken
+        // Messaging.messaging().apnsToken = deviceToken
         // InstanceID.instanceID().setAPNSToken(deviceToken, type: InstanceIDAPNSTokenType.sandbox)
     }
     
@@ -276,22 +273,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If you are receiving a notification message while your app is in the background,
         // this callback will not be fired till the user taps on the notification launching the application.
         decreaseBadge(application)
-        
-        // TODO: Handle data of notification
-        /*
-        if let mediaUrl = userInfo["remoteURL"] as? String {
-            print("-- did Recieve Remote Notification")
-            print(mediaUrl)
-        }
-        */
     }
     
     
     // Closure @escaping ...
     // ---------------------
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        
-        print("Application performActionForShortcutItem")
         completionHandler(handleShortcut(shortcutItem: shortcutItem))
     }
     

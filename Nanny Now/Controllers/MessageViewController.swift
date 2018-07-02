@@ -693,6 +693,9 @@ extension MessageViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         print("- viewWillAppear")
+        if !self.returnWithDismiss {
+            hapticButton(.heavy, lowPowerModeDisabled)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -734,7 +737,7 @@ extension MessageViewController {
                 let tab = self.tabBarController?.tabBar as! FrostyTabBar
                 tab.setEffect(blurEffect: .extraLight)
             }
-            hapticButton(.heavy, lowPowerModeDisabled)
+            // hapticButton(.heavy, lowPowerModeDisabled)
         } else {
             self.returnWithDismiss = false
             self.requestTable.reloadData()

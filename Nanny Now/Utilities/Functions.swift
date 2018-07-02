@@ -550,6 +550,34 @@ public enum TableViewCellAnimation {
     case blur(() -> Void)
 }
 
+/// Animate only chosen sequence of cells
+/// -------------------------------------
+public func animate(cells: [UITableViewCell], in tableView: UITableView,_ animated: Bool = true, completion: Completion? = nil) {
+    if animated /* && lowPowerModeDisabled */ {
+        for cell in cells { cell.alpha = 0 }
+        
+        tableView.alpha = 1
+        
+        var index = 0
+        for cell in cells {
+            
+            cell.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
+            
+            UIView.animate(withDuration: 0.905, delay: 0.050 * Double(index), usingSpringWithDamping: 1.3, initialSpringVelocity: 0.5, options: .allowAnimatedContent, animations: {
+                cell.alpha = 1
+                // sett "end" transition point
+                cell.transform = CGAffineTransform(scaleX: 1, y: 1)
+            }, completion: { (true) in
+                
+            })
+            index += 1
+        }
+        completion?()
+    } else {
+        tableView.alpha = 1
+    }
+}
+
 public func animateCells(in tableView: UITableView,_ animated: Bool = true, completion: Completion? = nil) {
     if animated /* && lowPowerModeDisabled */ {
         let cells = tableView.visibleCells
@@ -612,6 +640,17 @@ public func animateCellsWithProgress(in tableView: UITableView,_ animated: Bool 
     }
 }
 
+/// Animate only chosen sequence of cells with delay
+/// -------------------------------------
+public func animate(cells: [UITableViewCell], in tableView: UITableView,_ animated: Bool = true, delay: Double, completion: Completion? = nil) {
+    let delayInSeconds = delay
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+        animate(cells: cells, in: tableView, animated, completion: completion)
+    }
+}
+
+/// Animate cells with delay
+/// -------------------------------------
 public func animateCells(in tableView: UITableView,_ animated: Bool = true, delay: Double, completion: Completion? = nil) {
     let delayInSeconds = delay
     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
