@@ -392,18 +392,18 @@ public func hexStringToUIColor (_ hex:String, _ alpha: Float? = 1.0) -> UIColor 
     )
 }
 
-// Not in use - Struct with Constants is Used
-// Static CLLocationDistance in Meters as Double ;-)
+/// Not in use - Struct with Constants is Used
+/// Static CLLocationDistance in Meters as Double ;-)
 public enum locationAltitude : CLLocationDistance {
     case tiny = 600, XSmall = 900, small = 2500, normal = 5500, medium = 6500, large = 11200, XLarge = 20000, XXLarge = 200000
 }
 
-// Altitude that uses locationAltitude Enum
+/// Altitude that uses locationAltitude Enum
 public func setAltitude (_ altitude: locationAltitude) -> CLLocationDistance {
     return altitude.rawValue
 }
 
-// First understandable and usefull enum - (enum here used for typo arguments)
+/// First understandable and usefull enum - (enum here used for typo arguments)
 public enum HapticEngineTypes {
     case error, success, warning, light, medium, heavy, selection
 }

@@ -248,6 +248,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Family" image="tabbar@2x_customer" id="gtk-8M-0RP" customClass="RAMAnimatedTabBarItem" customModule="RAMAnimatedTabBarController">
                         <userDefinedRuntimeAttributes>

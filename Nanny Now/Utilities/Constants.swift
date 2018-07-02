@@ -45,10 +45,8 @@ let LIGHT_PINK = hexStringToUIColor("#FF72C8")
 let LIGHT_BLUE = hexStringToUIColor("#0096FF")
 
 let AQUA_BLUE = hexStringToUIColor("#0096FF")
-
 let STRAWBERRY = hexStringToUIColor("#FF2F92")
 let SILVER     = hexStringToUIColor("#D6D6D6")
-
 
 // Struct Altitude Constants
 struct AltitudeDistance {
