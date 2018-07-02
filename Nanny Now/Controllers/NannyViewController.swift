@@ -287,6 +287,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                             DataService.instance.copyLocationToREF(for: userID, fromLocation: self.activeLocationName, reference: nanniesActive)
                             
                             self.nannyAdOn.updateValue(true, forKey: userID)
+                            self.changeMap()
                         }
                     }
                 }
@@ -302,6 +303,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                 let nannyActive = DataService.instance.REF_NANNIES_ACTIVE
                 DataService.instance.removeReferenceChildValues(uid: userID, reference: nannyActive)
                 self.nannyAdOn.updateValue(false, forKey: userID)
+                self.changeMap()
             }
         }
     }
@@ -613,7 +615,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                     self.orderMenu.transform = CGAffineTransform(translationX: 0, y: 20)
                     self.orderMenuShowing = false
                 }, completion: { (_) in
-                    self.changeMap()
+                    // self.changeMap()
                 })
             } else {
                 self.orderMenu.alpha = 0.0

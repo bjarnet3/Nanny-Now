@@ -199,7 +199,7 @@ class DataService {
      
      - Parameter fid: Facebook ID
      - Parameter size: Facebook Size
-     - Returns : Facebook Image
+     - Return : Facebook Image
      
      */
     @available(iOS, deprecated, message: "Use imageView.loadFacebookImageUsingCache() instead")
@@ -559,7 +559,6 @@ class DataService {
                 
             }
         }
-            
         
     }
 
