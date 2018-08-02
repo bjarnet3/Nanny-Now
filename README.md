@@ -533,13 +533,13 @@ Summary:
 - [ ] Nanny Now - Create Instillinger «seque» - Part 1
 - [ ] Nanny Now - Send Request «DatePicker» - Part 1
 
-#### Week 10: (Identity Politics & Feminism)
+#### Week 10: (3D Force Touch & Annotation Artwork)
 - [x] Nanny Now - Update 3D / Force Touch icons.
 - [x] Nanny Now - Remove Artwork (Annotation) - Part 1
 - [ ] Nanny Now - Send Request «DatePicker» - Part 1
 - [ ] Nanny Now - Mutual Friends dissaperad (Nanny Detali VC)
 
-#### Week 11: (Gledespikene og Landssvikerne)
+#### Week 11: (Property Observer)
 - [ ] Nanny Now - Fix Constraints for iPhone 8 Plus and iPhone X
 - [ ] Nanny Now - Send Request «DatePicker» - Part 1
 - [x] Nanny Now - Mutual Friends dissaperad (Nanny Detali VC) - OK
@@ -552,7 +552,7 @@ Summary:
 - [x] Nanny Now - Fix Constraints for iPhone 8 Plus and iPhone X
 - [x] Nanny Now - Release v.1.23
 
-#### Week 14: (Criminal Aliens & Cognitive Dissonance)
+#### Week 14: (Multiple inheritance + Assert)
 - [x] Nanny Now - Send Request «DatePicker» - Part 1
 Summary:
 - self.requests.count == self.totalRequests - 1 <— This was the solution for tableView and reloadData
@@ -564,14 +564,14 @@ Summary:
 - Dictionary is also a Collection, as is Set and String
 - Equatable protocol, to match objects together 
 
-#### Week 15: ()
+#### Week 15: (Feedback & Review)
 - [ ] Nanny Now - Send Request «DatePicker» - Part 2
 - [x] Nanny Now - Mutual Friends (Nanny Detali VC) (FID) - OK
 - [x] Nanny Now - Review Feedback (FID) - OK
 - [x] Nanny Now - Extend SettingsViewController / SubSettingsViewController - Part 1
 - [ ] Nanny Now - Cleanup
 
-#### Week 16: (Versace & Garage)
+#### Week 16: (Remove & Improve)
 - [x] Nanny Now - MessageViewController()
 - [x] Nanny Now - Removed RequestPageViewController
 - [x] Nanny Now - Add Blur Effect with PropertyAnimatorView
@@ -581,7 +581,7 @@ Summary:
 - [x] Nanny Now - Launch New Version v1.24
 - [ ] Add Nanny Now to Github
 
-#### Week 17: (Github & Version Control)
+#### Week 17: (NO LOGO)
 - [x] Nanny Now - Fixed Token and Location Manager in Nanny
 
 #### Week 18: (Github & Version Control)
@@ -595,13 +595,111 @@ Summary:
 #### Week 19: (Deprecated & Obsolete)
 - [x] Nanny Now - MessageDetailView - Part 1
 - [x] Nanny Now - RequestDetailView - Part 1
+- [x] Nanny Now - Create Message Object, with notification category - IMPORTANT
 - [ ] Nanny Now - Login PVC / Firstname, job Title and imageName not Loading
+- [x] Nanny Now - Notification Message Response - Part 1
 - [ ] Nanny Now - Create SubSettings «Seque» - Part 1
 - [ ] Nanny Now - Nedtelling / Takstameter / Pris
-- [ ] Update Github 2.
+- [x] Update Github
 Summary:
 - Unowned vs Weak : https://medium.com/@fahad_29644/unowned-vs-weak-614ac71ac516
 - Driving Records Blockchain in iOS : https://hackernoon.com/implementing-driving-records-blockchain-in-ios-using-swift-23fb258819b1
+
+#### Week 20: (Unowned vs Weak)
+- [ ] Nanny Now - Login PVC / Firstname, job Title and imageName not Loading
+- [x] Nanny Now - MessageDetailView - Part 2
+- [ ] Nanny Now - Notification Message Response - Part 2
+- [x] Nanny Now - TableView Content Inset & Offset
+- [x] Nanny Now - Fix TextField in MessageDetailVC
+- [ ] Nanny Now - Create SubSettings «Seque» - Part 1
+- [ ] Nanny Now - Nedtelling / Takstameter / Pris
+- [x] Nanny Now - v.1.27-beta on TestFlight
+- [x] Update Github
+Summary:
+- Unowned vs Weak : https://medium.com/@fahad_29644/unowned-vs-weak-614ac71ac516
+- Driving Records Blockchain in iOS : https://hackernoon.com/implementing-driving-records-blockchain-in-ios-using-swift-23fb258819b1
+
+#### Week 21: (Github Update)
+- [x] Nanny Now - FIXME: «When I am sending messages» in BackTable (MessageViewController)
+- [ ] Nanny Now - FIXME: «When resuming MessageViewController»
+- [x] Nanny Now - FIXME: Only Show Notification When Inactive
+- [x] Nanny Now - FIXME: OrderMenu and RequestMenu View Animations in NannyVC - MORE INDEPENDENT VIEW
+- [ ] Nanny Now - Add «Arrow» to Meldinger Dropdown menu
+- [x] Nanny Now - Notification Message Response - Part 2
+- [ ] Nanny Now - Login PVC / Firstname, job Title and imageName not Loading
+- [ ] Nanny Now - Create SubSettings «Seque» - Part 1
+- [ ] Nanny Now - Nedtelling / Takstameter / Pris
+- [x] Nanny Now - v.1.28-beta on TestFlight
+- [x] Update Github
+Summary:
+- git update-index --assume-unchanged <file> : https://stackoverflow.com/questions/4308610/how-to-ignore-certain-files-in-git
+
+#### Week 22: (Tuple Swaps)
+- [x] Nanny Now - Add «Arrow» to Meldinger Dropdown menu
+- [x] Nanny Now - FIXME: «When resuming MessageViewController» - Almost
+- [ ] Nanny Now - FIXME: Notification Request & Message Request «App Delegate»
+- [x] Nanny Now - Create RequestMenu SubClass and Remove the Outlet «NannyVC»
+- [x] Nanny Now - MessageViewController (Request) / Added Status indicatior
+- [x] Nanny Now - Create Request Status in Request TableView «Pending, Accepted, Complete»
+- [ ] Nanny Now - Login PVC / Firstname, job Title and imageName not Loading
+- [ ] Nanny Now - Create SubSettings «Seque» - Part 1
+- [ ] Nanny Now - Nedtelling / Takstameter / Pris
+- [x] Nanny Now - v.1.29-beta on TestFlight
+- [x] Nanny Now - Added Login Information,,, last logged in…
+- [x] Update Github
+Summary:
+- (a, b) = (b, a) == Tuple Swap «Values»
+
+#### Week 23: (#FREE)
+
+#### Week 24: (UX + UI + FIX + GITHUB)
+- [x] Nanny Now - FIX Dato in MessageDetail
+- [x] Nanny Now - UX / UI in MessageDetail…
+- [ ] Nanny Now - FIXME: Notification Request & Message Request «App Delegate»
+- [ ] Nanny Now - Login PVC / Firstname, job Title and imageName not Loading
+- [ ] Nanny Now - Create SubSettings «Seque» - Part 1
+- [x] Nanny Now - MessageViewController - Set Status on Request / Forespørsel
+- [ ] Nanny Now - Nedtelling / Takstameter / Pris
+- [x] Nanny Now - Notification Response - Part 1
+- [x] Nanny Now - v.1.34-beta on TestFlight
+- [x] Update Github
+
+#### Week 25: (Custom MapKit Style)
+- [x] Nanny Now - FIXME: OrderMenu and RequestMenu View Animations in NannyVC - ALMOST INDEPENDENT VIEW
+- [x] Nanny Now - Notification Response - ALMOST DONE
+- [x] Nanny Now - Different Colors in MapKit using CocoaPods «MapKitGoogleStyler» Part 1
+- [x] Nanny Now - Update Cocoa Pods and remove Errors (145 errors)!!
+- [x] Nanny Now - App Delegate Cleanup - Part 1
+Summary: 
+- https://github.com/fmo91/MapKitGoogleStyler && https://medium.com/@ortizfernandomartin/customize-mapkits-mkmapview-with-google-maps-styling-wizard-a5dcc095e19f &&  https://mapstyle.withgoogle.com/  
+
+#### Week 26 - 27: (Hangman)
+- …
+
+#### Week 28: (Lirc on Raspberry Pi)
+- [x] TV-Remote - Cleanup
+- [ ] TV-Remote - Switch Between RPIs
+- [x] Setup Raspberry Pi : TV-Remote2
+- [x] Setup Lirc on RPI: TV-Remote2
+
+#### Week 29 - 30: (Vacation & Holiday)
+- …
+
+#### Week 31: (Protocol Composition)
+- [ ] Nanny Now - Different Colors in MapKit using CocoaPods «MapKitGoogleStyler» Part 2
+- [ ] Nanny Now - App Delegate Cleanup - Part 2
+- [ ] Nanny Now - Update Cocoa Pods and remove Errors (20 errors)
+- [ ] Nanny Now - Fix Notificaiton Send Request (Infinite Loop 50+ Requests)
+- [ ] Nanny Now - FamilyTableViewController (Part 1) - IMPORTANT - Remake / Redesign
+- [x] TV-Remote - Playground with View (Part 1)
+Summary:
+- Codable (protocol composition type)
+- https://benscheirman.com/2017/06/swift-json/
+
+#### Week 32: (Intermediate Design Patterns in Swift)
+- https://www.raywenderlich.com/86053/intermediate-design-patterns-in-swift
+
+#### Week 33: (Functional Refactoring)
 
 
 # Contributors:
