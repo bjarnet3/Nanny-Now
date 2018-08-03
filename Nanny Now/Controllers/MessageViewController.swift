@@ -617,6 +617,7 @@ class MessageViewController: UIViewController {
                                 }
                                 if key == "requestStatus", val as? String != "pending" {
                                     if let requestValue = val as? String {
+                                        self.requests.removeAll()
                                         privateRequest.child(snap.key).child(key).setValue(requestValue)
                                         publicRequest.child(snap.key).removeValue()
                                     }

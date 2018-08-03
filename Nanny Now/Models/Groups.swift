@@ -30,9 +30,6 @@ class Family: MKPointAnnotation {
     // Location
     // --------
     private(set) public var _location: CLLocation?
-    
-    // Family information
-    // ---------------------------
     private(set) public var _locations: [String:CLLocation]?
     private(set) public var _distance: Double?
     
@@ -74,4 +71,10 @@ class Unregistered {
     init(userName: String) {
         self._userName = userName
     }
+}
+
+struct Friends {
+    var name: String = ""
+    var userUID: String = ""
+    var imageURL: String = ""
 }
