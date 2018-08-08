@@ -13,12 +13,12 @@ class FriendsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileNameLabel: UILabel!
     
-    public enum Direction {
+    private enum Direction {
         case enter
         case exit
     }
 
-    func animateView( direction: Direction) {
+    private func animateView( direction: Direction) {
         if direction == .enter {
             self.contentView.alpha = 0
             self.setNeedsDisplay(profileImageView.frame)

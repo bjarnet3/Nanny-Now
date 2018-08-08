@@ -21,11 +21,11 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var userStatusLbl: UILabel!
     @IBOutlet weak var userIndicatorLbl: UILabel!
 
-    var cellImageLoaded = false
-    var hasSelected = false
-    var hasOpened = false
+    public var cellImageLoaded = false
+    public var hasSelected = false
+    public var hasOpened = false
     
-    func returnUserIndicator(from date: Date) {
+    private func returnUserIndicator(from date: Date) {
         let now = Date()
         let timeSince = now.timeIntervalSince(date)
         
@@ -55,7 +55,7 @@ class MessageTableViewCell: UITableViewCell {
         }
     }
     
-    var time: Date? {
+    private var time: Date? {
         didSet {
             if let time = self.time {
                 self.timeLabel.text = returnDayTimeString(from: time)
@@ -63,7 +63,7 @@ class MessageTableViewCell: UITableViewCell {
         }
     }
     
-    var userStatus: Date? {
+    private var userStatus: Date? {
         didSet {
             if let userStatus = self.userStatus {
                 self.returnUserIndicator(from: userStatus)
@@ -92,7 +92,7 @@ class MessageTableViewCell: UITableViewCell {
         case exit
     }
     
-    func setHighlightedOnTextAnd(highlighted: Bool = false) {
+    private func setHighlightedOnTextAnd(highlighted: Bool = false) {
         self.nameLabel.textColor = BLACK_SOLID
         self.nameLabel.highlightedTextColor = UIColor.darkGray
         self.nameLabel.isHighlighted = highlighted
@@ -106,7 +106,7 @@ class MessageTableViewCell: UITableViewCell {
         self.timeLabel.isHighlighted = highlighted
     }
     
-    func animateView( direction: Direction) {
+    private func animateView( direction: Direction) {
         if direction == .enter {
             self.contentView.alpha = 0
             // self.setNeedsDisplay(profileImage.frame)

@@ -11,12 +11,12 @@ import UIKit
 // Rename to ConfigurationPageVC
 class LoginPageVC: UIPageViewController {
     
+    public var pageToLoadFirst = 0
+    private var pages = [UIViewController]()
+    
     private var currentIndex: Int?
     private var pendingIndex: Int?
 
-    var pages = [UIViewController]()
-    var pageToLoadFirst = 0
-    
     private var pageControl = UIPageControl(frame: .zero)
     private func setupPageControl() {
         

@@ -188,14 +188,14 @@ class Notifications {
                          "category" : category.rawValue
                             ] as [String : Any]
                     
-                    self.performPOST(with: taskDictionary)
+                    self.completeRequest(with: taskDictionary)
                 })
             }
         })
 
     }
     
-    func performPOST(with taskDictionary : [String:Any] ) {
+    func completeRequest(with taskDictionary : [String:Any] ) {
         if let url = URL(string:"https://fcm.googleapis.com/fcm/send"){
             
             let serverKey = "AAAAd-nNctg:APA91bGhfGrYaRg-QOHx0LlfTyqU9cwOECMvm6jGHMZaeLGsToNPJtgV0y-EfcmMVFZbfbxdkF3ubJ8NC94-B-I74lV-UG2f-kuvjLtOnG_wbHecjdBc93Y59tv7XCJCEXEW3hTKH4oC"
@@ -401,15 +401,3 @@ class Notifications {
     }
     
 }
-
-/* Testing av Notifications med Curl in Terminal
- 
- // Irina with nannyCategory
- curl -H "Content-type: application/json" -H "Authorization:key=AAAAd-nNctg:APA91bGhfGrYaRg-QOHx0LlfTyqU9cwOECMvm6jGHMZaeLGsToNPJtgV0y-EfcmMVFZbfbxdkF3ubJ8NC94-B-I74lV-UG2f-kuvjLtOnG_wbHecjdBc93Y59tv7XCJCEXEW3hTKH4oC"  -X POST -d '{ "data": { "category": "nannyRequest","mediaUrl": "https://video-images.vice.com/articles/58dbd4fdd229e46c744447aa/lede/1490802358036-Sovereign-Syre-by-Richard-Avery-2.jpeg?crop=0.9491787439613527xw:1xh;center,center&resize=525:*"},"registration_ids" : ["fgeEPLe_WC8:APA91bHCGbXHYkF8FLlzu63HefA5yoTJTr2SwJNJ_kfyUdCUBuPZdeRUtT0cVFvsp8AAgWqByWHigElq98GNV-kCu1gZCK9Nut3WyEn4xgchUZ3fT8uGExdN12iUexkkRwUhmYVPWb2S", "ccDJKeFfbXI:APA91bHJWgGUmBzGv1mQ4Kny7VRf5EnF4GHYMSKE95TqKJsrLSp0djopYmJ4lAXm-jfQZBfIXs_mMWtp75Ov0uhzNPbLMfck_EExWnvwRDvUXmWIaFyiJuOPbOsoXwilHBojak9Lb93E"],"notification":{"title":"Irina kan stille som barnevakt","body":"14:00 - 22:00 i morgen","sound":"bingbong.aiff","badge":1},"priority":10, "content_available": true, "mutable_content": true }' https://fcm.googleapis.com/fcm/send
- 
- // Irina with nannyAccept
- curl -H "Content-type: application/json" -H "Authorization:key=AAAAd-nNctg:APA91bGhfGrYaRg-QOHx0LlfTyqU9cwOECMvm6jGHMZaeLGsToNPJtgV0y-EfcmMVFZbfbxdkF3ubJ8NC94-B-I74lV-UG2f-kuvjLtOnG_wbHecjdBc93Y59tv7XCJCEXEW3hTKH4oC"  -X POST -d '{ "data": { "category": "nannyAccept","mediaUrl": "https://video-images.vice.com/articles/58dbd4fdd229e46c744447aa/lede/1490802358036-Sovereign-Syre-by-Richard-Avery-2.jpeg?crop=0.9491787439613527xw:1xh;center,center&resize=525:*"},"registration_ids" : ["fgeEPLe_WC8:APA91bHCGbXHYkF8FLlzu63HefA5yoTJTr2SwJNJ_kfyUdCUBuPZdeRUtT0cVFvsp8AAgWqByWHigElq98GNV-kCu1gZCK9Nut3WyEn4xgchUZ3fT8uGExdN12iUexkkRwUhmYVPWb2S", "ccDJKeFfbXI:APA91bHJWgGUmBzGv1mQ4Kny7VRf5EnF4GHYMSKE95TqKJsrLSp0djopYmJ4lAXm-jfQZBfIXs_mMWtp75Ov0uhzNPbLMfck_EExWnvwRDvUXmWIaFyiJuOPbOsoXwilHBojak9Lb93E"],"notification":{"title":"Irina kan stille som barnevakt","body":"14:00 - 22:00 i morgen","sound":"bingbong.aiff","badge":1},"priority":10, "content_available": true, "mutable_content": true }' https://fcm.googleapis.com/fcm/send
- 
- // Sender with messageRequest
- curl -H "Content-type: application/json" -H "Authorization:key=AAAAd-nNctg:APA91bGhfGrYaRg-QOHx0LlfTyqU9cwOECMvm6jGHMZaeLGsToNPJtgV0y-EfcmMVFZbfbxdkF3ubJ8NC94-B-I74lV-UG2f-kuvjLtOnG_wbHecjdBc93Y59tv7XCJCEXEW3hTKH4oC"  -X POST -d '{ "data": { "category": "messageRequest","mediaUrl": "https://graph.facebook.com/10157516443970641/picture?type=large"},"registration_ids" : ["fgeEPLe_WC8:APA91bHCGbXHYkF8FLlzu63HefA5yoTJTr2SwJNJ_kfyUdCUBuPZdeRUtT0cVFvsp8AAgWqByWHigElq98GNV-kCu1gZCK9Nut3WyEn4xgchUZ3fT8uGExdN12iUexkkRwUhmYVPWb2S", "ccDJKeFfbXI:APA91bHJWgGUmBzGv1mQ4Kny7VRf5EnF4GHYMSKE95TqKJsrLSp0djopYmJ4lAXm-jfQZBfIXs_mMWtp75Ov0uhzNPbLMfck_EExWnvwRDvUXmWIaFyiJuOPbOsoXwilHBojak9Lb93E"],"notification":{"title":"Bjarne Tvedten","body":"Nanny Now - Please","sound":"default","badge":1},"priority":10, "content_available": true, "mutable_content": true }' https://fcm.googleapis.com/fcm/send
- */

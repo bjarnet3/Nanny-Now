@@ -17,11 +17,11 @@ class CustomTextField: UITextField {
         // Drawing code
     }
     */
-    let textPadding = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
-    let placePadding = UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 0)
-    let editPadding = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
+    private let textPadding = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+    private let placePadding = UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 0)
+    private let editPadding = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
     
-    let clearOffset: CGFloat = 30
+    private let clearOffset: CGFloat = 30
 
     // Paddging for place holder
     override func placeholderRect(forBounds bounds: CGRect) -> CGRect {

@@ -42,7 +42,7 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
     
     // Property Observer
     // -----------------
-    var familyBadge: Int = 0 {
+    private var familyBadge: Int = 0 {
         didSet {
             self.familyTabBar.badgeValue = self.familyBadge != 0 ? "\(self.familyBadge)" : nil
         }
@@ -321,7 +321,7 @@ extension FamilyViewController: MKMapViewDelegate {
     
     // MARK: - Functions, Database & Animation
     // ---------------------------------------
-    func setMapView(for mapStyleForView: MapStyleForView) {
+    private func setMapView(for mapStyleForView: MapStyleForView) {
         self.backgroundMapViewIsRendered = false
         self.mapView.removeOverlays(mapView.overlays)
         

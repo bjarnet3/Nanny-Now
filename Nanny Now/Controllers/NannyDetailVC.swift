@@ -26,22 +26,22 @@ class NannyDetailVC: UIViewController {
     
     // MARK: - Properties: Array and Varables
     // -------------------------------------
-    var nannyImage: UIImage!
+    private var nannyImage: UIImage!
     
     // The "Nanny" Object from Nanny ViewController
-    var user: User?
-    var nanny: Nanny?
+    private var user: User?
+    private var nanny: Nanny?
     
-    var headerTitles = ["Felles Forbindelser", "Tilbakemelding"]
-    var cellHeight: [CGFloat] = [100.0, 125.0]
-    var rowsInSection = [2,2,1]
+    private var headerTitles = ["Felles Forbindelser", "Tilbakemelding"]
+    private var cellHeight: [CGFloat] = [100.0, 125.0]
+    private var rowsInSection = [2,2,1]
     
     // var mutualFriends = [String:String]()
     
-    var reviews = [Review]()
-    var friends = [Friends]()
+    private var reviews = [Review]()
+    private var friends = [Friends]()
     
-    let regionRadius: CLLocationDistance = 30000
+    private let regionRadius: CLLocationDistance = 30000
     
     // MARK: - IBAction: Methods connected to UI
     // ----------------------------------------
@@ -71,7 +71,7 @@ class NannyDetailVC: UIViewController {
     
     // MARK: - Functions:
     // ----------------------------------------
-    func initData(forImage image: UIImage, nanny: Nanny, user: User, myLocation: CLLocation) {
+    public func initData(forImage image: UIImage, nanny: Nanny, user: User, myLocation: CLLocation) {
         self.nanny = nanny
         self.user = user
         
@@ -83,7 +83,7 @@ class NannyDetailVC: UIViewController {
         self.nannyImage = image
     }
     
-    func checkMutualFriends(nanny: Nanny, user: User) {
+    private func checkMutualFriends(nanny: Nanny, user: User) {
         // FIXME: - This need to be fixed to REF_USERS_PUBLIC
         DataService.instance.REF_USERS_PUBLIC.child(nanny.userUID).child("friends").observeSingleEvent(of: .value, with: { (snapshot) in
             if !snapshot.exists() { return }
@@ -120,7 +120,7 @@ class NannyDetailVC: UIViewController {
         })
     }
 
-    func getReviewsAndRatings(nanny: Nanny) {
+    private func getReviewsAndRatings(nanny: Nanny) {
         DataService.instance.REF_USERS_PUBLIC.child(nanny.userUID).child("reviews").observeSingleEvent(of: .value, with: { (snapshot) in
             if !snapshot.exists() { return }
             if let snap = snapshot.value as? [String:Any] {
@@ -135,7 +135,7 @@ class NannyDetailVC: UIViewController {
         })
     }
     
-    func setReviewsAndRatings(key: String, value: Any) {
+    private func setReviewsAndRatings(key: String, value: Any) {
         let userUID = key
         if let value = value as? [String:Any] {
             print(value)

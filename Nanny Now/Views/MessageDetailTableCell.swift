@@ -15,7 +15,7 @@ class MessageDetailTableCell: UITableViewCell {
     @IBOutlet weak var messageTextContraint: NSLayoutConstraint!
     @IBOutlet weak var dateLabel: UILabel!
     
-    var dateTime: Date? {
+    private var dateTime: Date? {
         didSet {
             if self.hasDateTime {
                 if let date = self.dateTime {
@@ -25,18 +25,18 @@ class MessageDetailTableCell: UITableViewCell {
         }
     }
     
-    var hasDateTime: Bool = false
+    private var hasDateTime: Bool = false
     
     override func layoutSubviews() {
         super.layoutSubviews()
     }
     
-    public enum Direction {
+    private enum Direction {
         case enter
         case exit
     }
     
-    func animateView( direction: Direction) {
+    private func animateView( direction: Direction) {
         if direction == .enter {
             self.contentView.alpha = 0.0
             self.setNeedsDisplay(profileImage.frame)

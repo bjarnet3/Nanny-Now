@@ -12,13 +12,13 @@ class ReviewTableViewCell: UITableViewCell  {
     
     @IBOutlet weak var reviewCollectionView: UICollectionView!
     
-    var reviews = [Review]() {
+    private var reviews = [Review]() {
         didSet {
             self.reviewCollectionView.reloadData()
         }
     }
     
-    func updateData(reviews: [Review]) {
+    public func updateData(reviews: [Review]) {
         self.reviews = reviews
     }
     

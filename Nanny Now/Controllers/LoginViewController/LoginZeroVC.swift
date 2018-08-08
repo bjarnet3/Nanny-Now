@@ -37,8 +37,8 @@ class LoginZeroVC: UIViewController {
     
     // MARK: - Properties & Variables
     // -------------------------------
-    var imagePicker: UIImagePickerController!
-    var viewHasDisappeard: Bool = false
+    private var imagePicker: UIImagePickerController!
+    private var viewHasDisappeard: Bool = false
 
     // MARK: - Facebook Authentication
     // -------------------------------
@@ -62,7 +62,7 @@ class LoginZeroVC: UIViewController {
         }
     }
     
-    func facebookAuth() {
+    private func facebookAuth() {
         hapticButton(.light)
         // self.activityIndicator.startAnimating()
         self.animateLabel(delay: 0, enter: false)
@@ -167,7 +167,7 @@ class LoginZeroVC: UIViewController {
     
     // MARK: Facebook Logout
     // ---------------------
-    func facebookLogout() {
+    private func facebookLogout() {
         let loginView : FBSDKLoginManager = FBSDKLoginManager()
         loginView.loginBehavior = FBSDKLoginBehavior.web
         
@@ -180,7 +180,7 @@ class LoginZeroVC: UIViewController {
     
     // MARK: - Firebase Authentication
     // -------------------------------
-    func firebaseAuth(_ credential: AuthCredential) {
+    private func firebaseAuth(_ credential: AuthCredential) {
         // This line is Auth for Firebase,, the rest is just Error handling :-)
         Auth.auth().signInAndRetrieveData(with: credential, completion: { (data, error) in
             if error != nil {
@@ -217,14 +217,14 @@ class LoginZeroVC: UIViewController {
         })
     }
     
-    func completeSignIn(id: String, userData: [String : String]) {
+    private func completeSignIn(id: String, userData: [String : String]) {
         DataService.instance.createFirbaseDBUser(uid: id, userData: userData)
         _ = KeychainWrapper.standard.set(id, forKey: KEY_UID)
         animateButton(isSignedIn: true)
     }
     
     // Post Image To Firebase (and update DB)
-    func postImageToFirebase(image: UIImage?) {
+    private func postImageToFirebase(image: UIImage?) {
         if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             if let img = image {
                 // Generic Function
@@ -262,7 +262,7 @@ class LoginZeroVC: UIViewController {
     }
     
     // Post userInfo to Firebase
-    func postUserInfoToFirebase(imgUrl: String, userFirebaseInfo: [String:Any]) {
+    private func postUserInfoToFirebase(imgUrl: String, userFirebaseInfo: [String:Any]) {
         if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             // Database - REF_POSTS = .child("posts") - .childByAutoId()
             userInfo.updateValue(userID, forKey: "userID")
@@ -327,7 +327,7 @@ class LoginZeroVC: UIViewController {
     
     // MARK: - GET from Firebase
     // -------------------------
-    func getInfoFromFirebase() {
+    private func getInfoFromFirebase() {
         // activityIndicator.startAnimating()
         if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             signedIn = true
@@ -392,7 +392,7 @@ class LoginZeroVC: UIViewController {
     
     // MARK: - Logout, Sign Out and Exit (functions)
     // ---------------------------------------------
-    func logout(service: Service = .All) {
+    private func logout(service: Service = .All) {
         switch service {
         case .Facebook:
             self.facebookLogout()
@@ -410,7 +410,7 @@ class LoginZeroVC: UIViewController {
     }
     
     // This is just a test "different message labels"
-    func messageLabel() {
+    private func messageLabel() {
         /*
          let name = self.userInfo["first_name"] as? String ?? "Unknown Name"
          let mainSmallArray = ["Hei \(name)", "Hallo \(name)", "\(name) . . ."]
@@ -423,7 +423,7 @@ class LoginZeroVC: UIViewController {
          */
     }
     
-    func getInfoFromUserInfo() {
+    private func getInfoFromUserInfo() {
         if !userInfo.isEmpty || signedIn {
             // MARK: - This is working pretty good
             for (key, value) in userInfo {
@@ -559,7 +559,7 @@ extension LoginZeroVC {
 // ---------------------------------------------
 extension LoginZeroVC {
     
-    func animateView(delay: Double, enter: Bool) {
+    private func animateView(delay: Double, enter: Bool) {
         if enter {
             UIView.animate(withDuration: 0.45, delay: delay, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.85, options: .curveEaseIn, animations: {
                 self.imageView.alpha = 0.25
@@ -581,7 +581,7 @@ extension LoginZeroVC {
         }
     }
     
-    func animateProfileInfo(duration: TimeInterval = 0.45, delay: Double, enter: Bool) {
+    private func animateProfileInfo(duration: TimeInterval = 0.45, delay: Double, enter: Bool) {
         if enter {
             UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.85, options: .curveEaseIn, animations: {
                 self.nameLbl.alpha = 1.0
@@ -605,7 +605,7 @@ extension LoginZeroVC {
         }
     }
     
-    func animateLabel(duration: TimeInterval = 0.45, delay: Double, enter: Bool, mainLabel: String = "Velkommen", middleLabel: String = " til Nanny Now . . .") {
+    private func animateLabel(duration: TimeInterval = 0.45, delay: Double, enter: Bool, mainLabel: String = "Velkommen", middleLabel: String = " til Nanny Now . . .") {
         if enter {
             UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.85, options: .curveEaseIn, animations: {
                 self.mainLbl.alpha = 1
@@ -629,7 +629,7 @@ extension LoginZeroVC {
         }
     }
     
-    func animateButton(isSignedIn: Bool) {
+    private func animateButton(isSignedIn: Bool) {
         if isSignedIn {
             if let name = userInfo["first_name"] as? String {
                 UIView.animate(withDuration: 0.45, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.85, options: .curveEaseIn, animations: {

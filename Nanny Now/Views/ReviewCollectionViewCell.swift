@@ -15,9 +15,9 @@ class ReviewCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var userReview: UILabel!
     @IBOutlet weak var userRating: UILabel!
     
-    var cellImageLoaded = false
+    private var cellImageLoaded = false
     
-    public enum Direction {
+    private enum Direction {
         case enter
         case exit
     }
@@ -26,7 +26,7 @@ class ReviewCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    func animateView( direction: Direction) {
+    private func animateView( direction: Direction) {
         if direction == .enter {
             self.contentView.alpha = 0
             self.setNeedsDisplay(profileImage.frame)

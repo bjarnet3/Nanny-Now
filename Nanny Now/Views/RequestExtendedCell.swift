@@ -15,9 +15,9 @@ class RequestExtendedCell: UITableViewCell {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var timeDurationLabel: UILabel!
     
-    var cellImageLoaded = false
-    var hasSelected = false
-    var hasOpened = false
+    private var cellImageLoaded = false
+    private var hasSelected = false
+    private var hasOpened = false
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -63,12 +63,12 @@ class RequestExtendedCell: UITableViewCell {
         }
     }
     
-    public enum Direction {
+    private enum Direction {
         case enter
         case exit
     }
     
-    func animateView( direction: Direction) {
+    private func animateView( direction: Direction) {
         if direction == .enter {
             self.contentView.alpha = 0
             self.setNeedsDisplay(cellImageView.frame)
