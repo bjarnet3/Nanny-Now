@@ -63,19 +63,6 @@ class MessageViewController: UIViewController {
         }
     }
     
-    // Animating Blur Radius
-    private var blurAnimator: UIViewPropertyAnimator? {
-        didSet {
-            print("blurAnimator didSet")
-        }
-    }
-    
-    private var scrollAnimator: UIViewPropertyAnimator? {
-        didSet {
-            print("scrollAnimator didSet")
-        }
-    }
-    
     private func mainAction() {
         hapticButton(.selection)
     }
@@ -93,46 +80,6 @@ class MessageViewController: UIViewController {
     
     // MARK: - Functions, Database & Animation
     // ----------------------------------------
-    private func maxiMizeTableView() {
-        self.blurAnimator?.stopAnimation(true)
-        self.scrollAnimator?.stopAnimation(true)
-
-        self.blurAnimator?.startAnimation()
-        
-        UIView.animate(withDuration: 0.45, delay: 0.045, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
-            self.enterRequestTable()
-        }, completion: { (true) in
-            self.animatorIsBusy = false
-            
-            self.messageTable.reloadData()
-            self.messageTable.setNeedsDisplay()
-            
-        })
-    }
-    
-    private func miniMizeTableView() {
-        self.animatorIsBusy = true
-        
-        self.blurAnimator?.stopAnimation(true)
-        // self.scrollAnimator?.stopAnimation(true)
-        self.scrollAnimator?.stopAnimation(true)
-        // self.scrollAnimator?.pauseAnimation()
-        
-        // setBlurEffectWithAnimator(on: self.mainTable, duration: 0.45, startBlur: false, curve: .easeIn)
-        // self.blurAnimator?.startAnimation()
-        
-        UIView.animate(withDuration: 0.45, delay: 0.010, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
-            self.enterMessageTable()
-            
-        }, completion: { (true) in
-            self.animatorIsBusy = false
-            
-            // self.setScrollEffectWithAnimator(on: self.backTable, reversed: true)
-            self.setScrollEffectWithAnimator(on: self.messageTable, reversed: true, curve: .easeOut)
-            // self.scrollAnimator?.fractionComplete = 0.0
-        })
-    }
-    
     private func setMessageTable() {
         // self.backView.frame = CGRect(x: self.backTableOffset, y: self.backTableMaxY, width: self.mainScreenWidth - (self.backTableOffset * 2), height: self.mainScreenHeight - self.backTableMaxY)
         self.messageView.frame = CGRect(x: 0, y: self.messageTableMaxY, width: self.mainScreenWidth, height: self.mainScreenHeight - self.messageTableMaxY)
@@ -143,43 +90,6 @@ class MessageViewController: UIViewController {
         self.messageTable.contentInset.top = 20
         self.messageTable.contentInset.bottom = 110
         // self.backTable.contentOffset.y = 35
-    }
-    
-    private func showMessageTable() {
-        self.messageView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-        self.messageView.layer.cornerRadius = self.cornerRadius
-        self.messageView.alpha = 1.0
-        
-        self.messageTable.isScrollEnabled = true
-        self.messageTable.layoutIfNeeded()
-        
-        self.messageLabel.text = "• • •"
-    }
-    
-    private func midMessageTable() {
-        
-        self.messageView.transform = CGAffineTransform(scaleX: 0.97, y: 0.940)
-        self.messageView.layer.cornerRadius = self.cornerRadius
-        self.messageView.alpha = 0.65
-        
-        self.messageTable.layoutIfNeeded()
-    }
-    
-    private func hideMessageTable() {
-        self.messageView.transform = CGAffineTransform(scaleX: 0.94, y: 0.90)
-        self.messageView.layer.cornerRadius = self.cornerRadius
-        self.messageView.alpha = 0.45
-        
-        self.messageTable.isScrollEnabled = false
-        self.messageTable.layoutIfNeeded()
-    }
-    
-    private func enterRequestTable() {
-        self.hideMessageTable()
-    }
-    
-    private func enterMessageTable() {
-        self.showMessageTable()
     }
     // THIS NEEDS TO BE FIXED
     // ----------------------
@@ -200,59 +110,6 @@ class MessageViewController: UIViewController {
                         self.messageTable.reloadData()
                     }
                 }
-            }
-        }
-    }
-    
-    private func setScrollEffectWithAnimator(on view: UIView, reversed: Bool = false, curve: UIViewAnimationCurve = .easeOut) {
-        scrollAnimator = UIViewPropertyAnimator(duration: 0.6, curve: curve) {
-            if reversed {
-                self.showMessageTable()
-            } else {
-                self.midMessageTable()
-            }
-        }
-    }
-    
-    private func setBlurEffectWithAnimator(on view: UIView, duration: TimeInterval = 0.45, startBlur: Bool = false, curve: UIViewAnimationCurve = .easeOut) {
-        removeBlurEffect(on: view)
-        
-        let blurEffect = startBlur ? UIBlurEffect(style: .light) : nil
-        let effectView = UIVisualEffectView(effect: blurEffect)
-        effectView.frame = view.bounds
-        effectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        effectView.isUserInteractionEnabled = false
-        
-        view.addSubview(effectView)
-        
-        blurAnimator = UIViewPropertyAnimator(duration: duration, curve: curve) {
-            // this is the main trick, animating between a blur effect and nil is how you can manipulate blur radius
-            effectView.effect = startBlur ? nil : UIBlurEffect(style: .light)
-        }
-    }
-    
-    private func setBlurEffect(on view: UIView) {
-        var effectView: UIVisualEffectView?
-        for subview in view.subviews {
-            if subview is UIVisualEffectView {
-                if let visualView = subview as? UIVisualEffectView {
-                    effectView = visualView
-                    effectView?.isUserInteractionEnabled = false
-                }
-            }
-        }
-        if effectView == nil {
-            effectView = UIVisualEffectView(frame: view.bounds)
-            effectView?.isUserInteractionEnabled = false
-        }
-        effectView?.effect = UIBlurEffect(style: .light)
-        view.addSubview(effectView!)
-    }
-    
-    private func removeBlurEffect(on view: UIView) {
-        for subview in view.subviews {
-            if subview is UIVisualEffectView {
-                subview.removeFromSuperview()
             }
         }
     }
@@ -326,7 +183,6 @@ class MessageViewController: UIViewController {
                     
                     let remote = User(userUID: message._toUID, imageName: imageName, firstName: firstName)
                     message.setTo(user: remote)
-                    
                     message.userStatus = userStatus!
                     
                     self.messages.sort(by: { $0._messageTime > $1._messageTime })
@@ -397,14 +253,13 @@ class MessageViewController: UIViewController {
         }
     }
     
-    
 }
 
 // MARK: - ViewDidLoad, ViewWillLoad etc...
 // ----------------------------------------
 extension MessageViewController {
+    
     override func viewDidLoad() {
-        print("-- viewDidLoad")
         super.viewDidLoad()
         
         setMessageTable()
@@ -414,72 +269,24 @@ extension MessageViewController {
         
         getUserSettings()
         observeMessages()
-        
-        revealingSplashAnimation(self.view, type: SplashAnimationType.swingAndZoomOut, completion: {
-            
-            self.midMessageTable()
-            
-            UIView.animate(withDuration: 0.51, delay: 0.151, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: {
-                print("- revealingSplashAnimation (completion:)")
-                self.blurAnimator?.startAnimation()
-                
-                // backTableView
-                self.hideMessageTable()
-                
-                
-            }, completion: { (true) in
-                self.introAnimationLoaded = true
-                self.animatorIsBusy = false
-                
-                self.messageTable.reloadData()
-                self.messageTable.setNeedsDisplay()
-            })
-        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("- viewWillAppear")
         if !self.returnWithDismiss {
             hapticButton(.heavy, lowPowerModeDisabled)
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("- viewDidAppear")
-        
-        self.animatorIsBusy = false
-        self.updatePublicRequestValue()
-        
-        /*
-
-        if !self.returnWithDismiss {
-            if self.introAnimationLoaded {
-            } else {
-                let tab = self.tabBarController?.tabBar as! FrostyTabBar
-                tab.setEffect(blurEffect: .extraLight)
-            }
-            // hapticButton(.heavy, lowPowerModeDisabled)
-        } else {
-            self.returnWithDismiss = false
-        }
- 
-        */
     }
     
     override func viewDidLayoutSubviews() {
-        print("- viewDidLayoutSubviews")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        print("- viewWillDisappear")
-        
-        self.animatorIsBusy = true
-        self.scrollAnimator?.stopAnimation(true)
-        self.blurAnimator?.stopAnimation(true)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        print("- viewDidDisappear")
         self.messageBadge = 0
     }
     
@@ -506,19 +313,8 @@ extension MessageViewController: UIScrollViewDelegate {
     
     // Search for: scrollViewDidScroll UIVisualEffect
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        if messageTable == scrollView {
-            if blurAnimator != nil && scrollAnimator != nil {
-                if !animatorIsBusy {
-                    if scrollView.contentOffset.y < -30 {
-                        if scrollAnimator?.state != .stopped {
-                            // print("scrollAnimator.state is not stopped")
-                            let scrollResult = returnScrollValue(with: scrollView.contentOffset.y, valueOffset: 0.30)
-                            scrollAnimator?.fractionComplete = scrollResult
-                        }
-                    }
-                }
-            }
+        if scrollView.contentOffset.y < -30 {
+            
         }
     }
     
@@ -526,10 +322,6 @@ extension MessageViewController: UIScrollViewDelegate {
         print("scrollViewWillEndDragging: \(velocity)")
         
         if scrollView.contentOffset.y <= -80 {
-            if scrollAnimator?.state != .stopped {
-                    // self.mainAction()
-                    self.maxiMizeTableView()
-            }
         }
     }
     
@@ -546,9 +338,6 @@ extension MessageViewController: UIScrollViewDelegate {
         print("scrollViewDidEndDecelerating")
         // Drag down
         if scrollView.contentOffset.y <= -80 {
-            if scrollAnimator?.state != .stopped {
-
-            }
         }
     }
     
