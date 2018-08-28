@@ -165,11 +165,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.applicationIconBadgeNumber = 0
     }
     
+    func didBecomeActive() {
+        
+    }
+    
     /// Tells the delegate that the app has become active.
     /// -------------------------------------------------
     func applicationDidBecomeActive(_ application: UIApplication) {
         // User Status
         DataService.instance.updateUserStatus(with: .active)
+        
+        
         
         // Clear badge when app is or resumed
         application.applicationIconBadgeNumber = 0
@@ -299,10 +305,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         switch shortcutItem.type {
             case "no.digital.mood.developer.Nanny-Now.loggInn" :
+
                 succeeded = shortCutCase(0)
             case "no.digital.mood.developer.Nanny-Now.nanny" :
+
                 succeeded = shortCutCase(1)
             case "no.digital.mood.developer.Nanny-Now.family" :
+
                 succeeded = shortCutCase(2)
             // case "no.digital.mood.developer.Nanny-Now.info" :
             default :

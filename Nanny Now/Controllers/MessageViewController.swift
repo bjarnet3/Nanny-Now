@@ -267,8 +267,6 @@ class MessageViewController: UIViewController {
         
         self.messageTable.isScrollEnabled = false
         self.messageTable.layoutIfNeeded()
-        
-        
     }
     
     func enterRequestTable() {
@@ -584,6 +582,13 @@ class MessageViewController: UIViewController {
         }
     }
     
+    func removeAllDatabaseObservers() {
+        if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            DataService.instance.REF_REQUESTS.child("private").child(UID).child("requests").removeAllObservers()
+            DataService.instance.REF_MESSAGES.child("private").child(UID).child("last").queryOrdered(byChild: "messageTime").removeAllObservers()
+        }
+    }
+    
     // MARK: - Go to : LoginPageVC, InfoVC
     // ----------------------------------------
     func goToRegister(pageToLoadFirst: Int = 0) {
@@ -600,7 +605,6 @@ class MessageViewController: UIViewController {
         }
         present(infoVC, animated: true)
     }
-    
     
     func updatePublicRequestValue() {
         if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
@@ -638,7 +642,47 @@ class MessageViewController: UIViewController {
         }
     }
     
+    func setupApplicationActiveObserver() {
+        print(" setupApplicationActiveObserver")
+        _ = NotificationCenter.default.addObserver(forName: .UIApplicationDidBecomeActive,
+                                                   object: nil,
+                                                   queue:.main,
+                                                   using: didBecomeActive)
+    }
     
+    func setupApplicationInactiveObserver() {
+        print(" setupApplicationInactiveObserver")
+        _ = NotificationCenter.default.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: .main, using: didBecomeInactive)
+    }
+    
+    func removeApplicationActiveObserver() {
+        print(" removeApplicationActiveObserver")
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationDidBecomeActive, object: nil)
+    }
+    
+    func removeApplicationInactiveObserver() {
+        print(" removeApplicationInactiveObserver")
+        NotificationCenter.default.removeObserver(self, name: .UIApplicationWillResignActive, object: nil)
+    }
+    
+    lazy var didBecomeActive: (Notification) -> Void = { [weak self] _ in
+        print(" didBecomeActive")
+        self?.removeApplicationActiveObserver()
+        self?.setupApplicationInactiveObserver()
+        
+        // self?.observeRequests()
+        self?.observeMessages()
+    }
+    
+    lazy var didBecomeInactive: (Notification) -> Void = { [weak self] _ in
+        print(" didBecomeInactive")
+        self?.removeAllDatabaseObservers()
+        
+        self?.removeApplicationInactiveObserver()
+        self?.setupApplicationActiveObserver()
+        
+        
+    }
 }
 
 // MARK: - ViewDidLoad, ViewWillLoad etc...
@@ -663,6 +707,8 @@ extension MessageViewController {
         
         observeRequests()
         observeMessages()
+        
+        setupApplicationInactiveObserver()
         
         revealingSplashAnimation(self.view, type: SplashAnimationType.swingAndZoomOut, completion: {
             
@@ -693,6 +739,8 @@ extension MessageViewController {
             })
         })
     }
+    
+
     
     override func viewWillAppear(_ animated: Bool) {
         print("- viewWillAppear")
@@ -745,6 +793,8 @@ extension MessageViewController {
             self.returnWithDismiss = false
             self.requestTable.reloadData()
         }
+
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -758,6 +808,8 @@ extension MessageViewController {
         self.requestTable.isUserInteractionEnabled = false
         self.scrollAnimator?.stopAnimation(true)
         self.blurAnimator?.stopAnimation(true)
+        
+        self.removeAllDatabaseObservers()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
