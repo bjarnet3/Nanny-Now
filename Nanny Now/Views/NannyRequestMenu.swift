@@ -11,7 +11,6 @@ import UIKit
 class NannyRequestMenu: UIView {
     
     @IBOutlet var requestView: FrostyCornerView!
-    
     @IBOutlet weak var requestImage: CustomImageView!
     @IBOutlet weak var requestTitle: UILabel!
     @IBOutlet weak var requestName: UILabel!

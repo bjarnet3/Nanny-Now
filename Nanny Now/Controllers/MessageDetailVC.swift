@@ -91,7 +91,7 @@ class MessageDetailVC: UIViewController {
     
     // MARK: - Functions, Database & Animation
     // ----------------------------------------
-    func setupView(user: User, remoteUser: User) {
+    public func setupView(user: User, remoteUser: User) {
         self.user = user
         self.remoteUser = remoteUser
     }

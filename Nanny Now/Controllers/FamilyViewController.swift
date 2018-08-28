@@ -22,6 +22,7 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var familyTabBar: UITabBarItem!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var notifyTitle: CustomButton!
+    @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Array, Constants & Varables
     // -------------------------------------
@@ -268,6 +269,9 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
         self.mapView.alpha = 1
         self.mapView.delegate = self
         
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
         self.setupDummyUsers()
         self.setMapBackgroundOverlay(mapName: .whiteAndBlackMap)
         
@@ -315,6 +319,22 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
         super.didReceiveMemoryWarning()
     }
 
+}
+
+extension FamilyViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.families.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
 }
 
 extension FamilyViewController: MKMapViewDelegate {
