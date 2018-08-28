@@ -26,9 +26,6 @@ class MessageViewController: UIViewController {
     @IBOutlet weak var requestLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     
-    @IBOutlet weak var requestTable: CustomTable!
-    @IBOutlet weak var requestLabel: UILabel!
-    
     // MARK: - Properties: Array & Varables
     // -------------------------------------
     var user: User?

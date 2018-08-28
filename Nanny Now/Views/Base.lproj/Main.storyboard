@@ -1778,6 +1778,9 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <color key="textColor" red="1" green="0.19215686269999999" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="sbn-uy-9fa" appends="YES" id="Nnf-ki-gMQ"/>
+                                        </connections>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2141,6 +2144,9 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <color key="textColor" red="1" green="0.050217002980000001" blue="0.13672771310000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="7EA-ip-s7A" appends="YES" id="Nwb-lM-KOw"/>
+                                        </connections>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2183,10 +2189,11 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                     </tabBarItem>
                     <connections>
                         <outlet property="messageLabel" destination="CU5-fv-cWh" id="GDR-sw-GUh"/>
-                        <outlet property="messageTable" destination="1S9-DO-AYS" id="Hmn-Co-29Q"/>
-                        <outlet property="messageView" destination="XVF-ye-IV8" id="YCS-RL-roI"/>
+                        <outlet property="messageTable" destination="1S9-DO-AYS" id="SHX-Qt-cq0"/>
+                        <outlet property="messageView" destination="XVF-ye-IV8" id="AdD-Lc-Hz0"/>
                         <outlet property="requestLabel" destination="n5a-jz-SNb" id="AS7-Ei-5ee"/>
-                        <outlet property="requestTable" destination="Tg9-OF-pSS" id="pI1-kw-YZi"/>
+                        <outlet property="requestTable" destination="6BB-7Z-reE" id="9Kb-aO-Pv4"/>
+                        <outlet property="requestView" destination="Tg9-OF-pSS" id="yRu-qc-Zdk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PMc-Yb-Aqh" userLabel="First Responder" sceneMemberID="firstResponder"/>
