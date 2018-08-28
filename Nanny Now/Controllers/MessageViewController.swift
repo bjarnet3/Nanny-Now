@@ -21,6 +21,8 @@ class MessageViewController: UIViewController {
     @IBOutlet weak var messageTable: CustomTableView!
     @IBOutlet weak var messageLabel: UILabel!
     
+    @IBOutlet weak var requestTable: CustomTable!
+    
     // MARK: - Properties: Array & Varables
     // -------------------------------------
     private var user: User?

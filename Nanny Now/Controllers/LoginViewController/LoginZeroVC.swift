@@ -249,9 +249,7 @@ class LoginZeroVC: UIViewController {
                                         userInfo.updateValue(downloadString, forKey: "imageUrl")
                                     }
                                 } else {
-                                    // error handling
-                                    // error handling
-                                    // error handling
+                                    print("Unable to extract downloadString from metadata")
                                 }
                             })
                         }

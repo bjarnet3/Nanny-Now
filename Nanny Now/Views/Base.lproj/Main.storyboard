@@ -2191,9 +2191,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                         <outlet property="messageLabel" destination="CU5-fv-cWh" id="GDR-sw-GUh"/>
                         <outlet property="messageTable" destination="1S9-DO-AYS" id="Hmn-Co-29Q"/>
                         <outlet property="messageView" destination="XVF-ye-IV8" id="YCS-RL-roI"/>
-                        <outlet property="requestLabel" destination="n5a-jz-SNb" id="ufn-hd-jc1"/>
-                        <outlet property="requestTable" destination="6BB-7Z-reE" id="oji-7L-bGF"/>
-                        <outlet property="requestView" destination="Tg9-OF-pSS" id="VsX-Nh-GpB"/>
+                        <outlet property="requestTable" destination="Tg9-OF-pSS" id="pI1-kw-YZi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PMc-Yb-Aqh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2207,16 +2205,8 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </customObject>
-                <tapGestureRecognizer id="sbn-uy-9fa">
-                    <connections>
-                        <action selector="messageAction:" destination="fy0-hk-GP9" id="tRL-dR-ec6"/>
-                    </connections>
-                </tapGestureRecognizer>
-                <tapGestureRecognizer id="7EA-ip-s7A">
-                    <connections>
-                        <action selector="requestAction:" destination="fy0-hk-GP9" id="J4E-ac-imU"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer id="sbn-uy-9fa"/>
+                <tapGestureRecognizer id="7EA-ip-s7A"/>
             </objects>
             <point key="canvasLocation" x="983.20000000000005" y="831.63418290854577"/>
         </scene>
