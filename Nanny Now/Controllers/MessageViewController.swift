@@ -27,7 +27,6 @@ class MessageViewController: UIViewController {
     // -------------------------------------
     private var user: User?
     private var messages = [Message]()
-    
     private var totalMessages: Int = 0
     
     private var lastRowSelected: IndexPath?
@@ -42,13 +41,13 @@ class MessageViewController: UIViewController {
     
     private let messageTableOffset: CGFloat = 0
     private let messageTableMaxY: CGFloat = 22
-    
     private let messageTableMaximizedHeight: CGFloat = UIScreen.main.bounds.height - 22
     private let messageTableMinimizedWidth: CGFloat = UIScreen.main.bounds.width - 22
     
     private var mainScreenHeight: CGFloat {
         return UIScreen.main.bounds.height
     }
+    
     private var mainScreenWidth: CGFloat {
         return UIScreen.main.bounds.width
     }
@@ -56,6 +55,7 @@ class MessageViewController: UIViewController {
     // Property Observer
     private var runningCount: Int = 0 {
         didSet {
+            print("running")
         }
     }
     
@@ -69,21 +69,50 @@ class MessageViewController: UIViewController {
         hapticButton(.selection)
     }
     
+    // MARK: - IBAction: Methods connected to UI
+    // ----------------------------------------
+    
+    @IBAction func messageAction(_ sender: Any) {
+        mainAction()
+    }
+    
+    @IBAction func requestAction(_ sender: Any) {
+        mainAction()
+    }
+    
     // MARK: - Functions, Database & Animation
     // ----------------------------------------
     private func setMessageTable() {
+        // self.backView.frame = CGRect(x: self.backTableOffset, y: self.backTableMaxY, width: self.mainScreenWidth - (self.backTableOffset * 2), height: self.mainScreenHeight - self.backTableMaxY)
         self.messageView.frame = CGRect(x: 0, y: self.messageTableMaxY, width: self.mainScreenWidth, height: self.mainScreenHeight - self.messageTableMaxY)
-        self.messageView.alpha = 1.0
+        self.messageView.alpha = 0.75
         self.messageView.layer.cornerRadius = self.cornerRadius
+        // Specify which corners to round = [ upper left , upper right ]
         self.messageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         self.messageTable.contentInset.top = 20
         self.messageTable.contentInset.bottom = 110
+        // self.backTable.contentOffset.y = 35
     }
+    // THIS NEEDS TO BE FIXED
+    // ----------------------
     
     // Set User Object
     private func getUserSettings() {
         if let user = LocalService.instance.getUser() {
             self.user = user
+        }
+    }
+    
+    // Check if image is loaded for MessageTableViewCell
+    private func lastBackCellLayout() {
+        for cell in messageTable.visibleCells {
+            if cell is MessageTableViewCell {
+                if let backCells = cell as? MessageTableViewCell {
+                    if backCells.cellImageLoaded != true {
+                        self.messageTable.reloadData()
+                    }
+                }
+            }
         }
     }
     
@@ -191,6 +220,41 @@ class MessageViewController: UIViewController {
         */
     }
     
+    
+    public func updatePublicRequestValue() {
+        if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(UID).child("requests")
+            let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(UID)
+            publicRequest.observeSingleEvent(of: .value, with: { snapshot in
+                if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                    
+                    for snap in snapshot {
+                        if let snapValue = snap.value as? [String: AnyObject] {
+                            for (key,val) in snapValue {
+                                if key == "familyID" || key == "nannyID" {
+                                    if let remoteUID = val as? String, remoteUID != UID {
+                                        publicRequest.child(snap.key).child("userID").setValue(remoteUID)
+                                    }
+                                }
+                                if key == "requestStatus", val as? String != "pending" {
+                                    if let requestValue = val as? String {
+                                        privateRequest.child(snap.key).child(key).setValue(requestValue)
+                                        publicRequest.child(snap.key).removeValue()
+                                    }
+                                } else {
+                                    DataService.instance.copyValuesFromRefToRef(fromReference: publicRequest, toReference: privateRequest)
+                                }
+                                // self.requests.removeAll()
+                            }
+                            
+                        }
+                    }
+                }
+                
+            })
+        }
+    }
+    
 }
 
 // MARK: - ViewDidLoad, ViewWillLoad etc...
@@ -200,10 +264,11 @@ extension MessageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setMessageTable()
+        
         self.messageTable.delegate = self
         self.messageTable.dataSource = self
         
-        setMessageTable()
         getUserSettings()
         observeMessages()
     }
@@ -227,6 +292,10 @@ extension MessageViewController {
         self.messageBadge = 0
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
 }
 
 // MARK: - ScrollView, Delegate & Datasource
@@ -286,16 +355,14 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let returnCell = UITableViewCell()
+        
         if tableView == messageTable {
-            
             if let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell", for: indexPath) as? MessageTableViewCell {
                 cell.setupView(with: messages[indexPath.row])
                 return cell
             }
-            
         }
         return returnCell
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -314,8 +381,6 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.messageTable {
             tableView.deselectRow(at: indexPath, animated: true)
-            
-            
             guard let messageDetailVC = storyboard?.instantiateViewController(withIdentifier: "MessageDetail") as? MessageDetailVC else {
                 return
             }
@@ -331,8 +396,6 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
                     }
                 }
             }
-            
-            
             
         }
     }
