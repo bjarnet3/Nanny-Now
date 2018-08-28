@@ -22,6 +22,7 @@ class MessageViewController: UIViewController {
     @IBOutlet weak var messageLabel: UILabel!
     
     @IBOutlet weak var requestTable: CustomTable!
+    @IBOutlet weak var requestLabel: UILabel!
     
     // MARK: - Properties: Array & Varables
     // -------------------------------------
@@ -174,6 +175,8 @@ class MessageViewController: UIViewController {
         
         self.messageTable.isScrollEnabled = false
         self.messageTable.layoutIfNeeded()
+        
+        
     }
     
     private func enterRequestTable() {
