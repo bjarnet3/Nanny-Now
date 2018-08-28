@@ -25,7 +25,7 @@ class LoginTwoVC: UIViewController {
         // goToLogin()
     }
     
-    private func goToLogin() {
+    func goToLogin() {
         
         guard let startVC = storyboard?.instantiateViewController(withIdentifier: "StartVC") as? StartViewController else {
             return

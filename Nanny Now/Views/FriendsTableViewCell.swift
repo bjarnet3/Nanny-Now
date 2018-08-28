@@ -17,7 +17,7 @@ class FriendsTableViewCell: UITableViewCell  {
         }
     }
     
-    private var friends = [Friends]()
+    var friends = [Friends]()
 
     /*
     var mutualFriends = [String:String]() {

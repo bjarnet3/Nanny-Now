@@ -320,6 +320,56 @@ class DataService {
         requestREF.updateChildValues(requestValues)
     }
     
+    // MARK: - Post to Request
+    func postToTheRequest(recieveUserID: String, requestID: String, message: String, status: String, reference: DatabaseReference) {
+        if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            
+            let timeStamp = returnTimeStamp()
+            let request = reference
+            
+            let requestValues : [String : Any] = [
+                "highlighted" : true,
+                "familyID": userID,
+                "nannyID" : recieveUserID,
+                "requestAmount" : "250",
+                "requestDate" : timeStamp,
+                "requestID": requestID,
+                "requestMessage" : message,
+                "requestStatus" : status,
+                "requestType" : "Nanny",
+                "timeFrom" : "fromTime",
+                "timeTo": "toTime"
+            ]
+            request.updateChildValues(requestValues)
+        }
+    }
+    
+    func postToTheRequest(recieveUserID: String, requestID: String, timeFrom: Date, timeTo: Date, message: String, status: String, reference: DatabaseReference) {
+        if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            
+            let timeFrom = returnDayTimeString(from: timeFrom)
+            let timeTo = returnDayTimeString(from: timeTo, day: true)
+            
+            let timeStamp = returnTimeStamp()
+            let request = reference
+            
+            let requestValues : [String : Any] = [
+                "highlighted" : true,
+                "familyID": userID,
+                "nannyID" : recieveUserID,
+                "requestAmount" : "250",
+                "requestDate" : timeStamp,
+                "requestID": requestID,
+                "requestMessage" : message,
+                "requestStatus" : status,
+                "requestType" : "Nanny",
+                "timeFrom" : timeFrom,
+                "timeTo": timeTo
+            ]
+            request.updateChildValues(requestValues)
+        }
+    }
+    
     func block(userID blockedUserID: String, blockedName: String) {
         if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             
@@ -401,6 +451,58 @@ class DataService {
             fidFirebase.updateChildValues(friends)
         }
     }
+    
+    /*
+    func addOldTokenToDatabase(for userID: String) {
+        if let refreshedToken = InstanceID.instanceID().token() {
+            
+            let deviceName = UIDevice.current.name
+            // You will get multiple UUID if you have different versions of the application, even with the same phone
+            // Unique ID generated from App1 + Device1 = Unique
+            let deviceUUID = UIDevice.current.identifierForVendor!.uuidString
+            // let deviceNSUUID = NSUUID().description
+            // let deviceVendorID = UIDevice.current.identifierForVendor?.description
+            
+            let tokenUUID = [
+                "name"      :   deviceName,
+                "token"     :   refreshedToken,
+                "date"      :   returnDateStamp()
+                // "NSUUID"    :   deviceNSUUID,
+                // "VendorID"  :   deviceVendorID
+            ]
+            
+            let tokenREF = DataService.instance.REF_USERS_PRIVATE.child(userID).child("tokens")
+            tokenREF.observeSingleEvent(of: .value, with: { (snapshot) in
+                if !snapshot.exists() { tokenREF.child(deviceUUID).updateChildValues(tokenUUID) }
+                if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                    for snap in snapshot {
+                        if let userBase = snap.value as? [String: AnyObject] {
+                            if let token = userBase["token"] as? String {
+                                if token != refreshedToken {
+                                    print("token is not equal")
+                                    if let device = userBase["name"] as? String, device == deviceName {
+                                        print("device name is equal")
+                                        tokenREF.child(snap.key).removeValue()
+                                        print("removed equel token")
+                                    }
+                                    print("update Token")
+                                    tokenREF.child(deviceUUID).updateChildValues(tokenUUID)
+                                }
+                            } else {
+                                tokenREF.child(snap.key).removeValue()
+                                print("no token for \(snap.key)")
+                                print(snap.key)
+                                tokenREF.child(deviceUUID).updateChildValues(tokenUUID)
+                            }
+                            
+                        }
+                    }
+                }
+                
+            })
+        }
+    }
+    */
     
     // Add Token To OldNannies - REMOVE
     func addTokenToDatabase(for userID: String) {
@@ -498,5 +600,5 @@ class DataService {
             from.removeValue()
         })
     }
-
+    // ------------------------------------
 }

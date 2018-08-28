@@ -11,8 +11,10 @@ import Foundation
 struct Review {
     var requestID: String
     var requestDate: String
+    
     var reviewRating: String
     var reviewMessage: String
+    
     var userUID: String
     var userName: String
     var userImage: String

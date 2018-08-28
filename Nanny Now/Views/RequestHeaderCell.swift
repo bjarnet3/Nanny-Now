@@ -22,6 +22,7 @@ class RequestHeaderCell: UITableViewCell {
         self.brandingLabel.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         self.brandingLabel.layer.cornerRadius = self.brandingLabel.frame.height / 2
         self.brandingLabel.clipsToBounds = true
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

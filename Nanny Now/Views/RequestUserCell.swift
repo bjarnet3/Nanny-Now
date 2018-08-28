@@ -28,7 +28,7 @@ class RequestUserCell: UITableViewCell {
     var hasSelected = false
     var hasOpened = false
     
-    private func returnRequestIndicator(status: RequestStatus = .pending) {
+    func returnRequestIndicator(status: RequestStatus = .pending) {
         switch status {
         case .accepted:
             self.requestIndicatorLbl.textColor = UIColor.green
@@ -48,7 +48,7 @@ class RequestUserCell: UITableViewCell {
         }
     }
     
-    private func returnUserIndicator(from date: Date) {
+    func returnUserIndicator(from date: Date) {
         let now = Date()
         let timeSince = now.timeIntervalSince(date)
         
@@ -79,7 +79,7 @@ class RequestUserCell: UITableViewCell {
         print(minutes)
     }
     
-    private var requestStatus: RequestStatus? {
+    var requestStatus: RequestStatus? {
         didSet {
             if let requestStatus = self.requestStatus {
                 self.requestStatusLbl.text = requestStatus.rawValue
@@ -88,7 +88,7 @@ class RequestUserCell: UITableViewCell {
         }
     }
     
-    private var userStatus: Date? {
+    var userStatus: Date? {
         didSet {
             if let userStatus = self.userStatus {
                 self.userStatusLbl.text = userStatus.description
@@ -97,7 +97,7 @@ class RequestUserCell: UITableViewCell {
         }
     }
     
-    private var timeFrom: Date? {
+    var timeFrom: Date? {
         didSet {
             if let timeFrom = self.timeFrom {
                 self.timeFromLabel.text = returnDayTimeString(from: timeFrom)
@@ -105,7 +105,7 @@ class RequestUserCell: UITableViewCell {
         }
     }
     
-    private var timeTo: Date? {
+    var timeTo: Date? {
         didSet {
             if let timeTo = self.timeTo {
                 self.timeToLabel.text = returnDayTimeString(from: timeTo)
@@ -179,12 +179,12 @@ class RequestUserCell: UITableViewCell {
         }
     }
     
-    private enum Direction {
+    public enum Direction {
         case enter
         case exit
     }
     
-    private func animateView( direction: Direction) {
+    func animateView( direction: Direction) {
         if direction == .enter {
             self.contentView.alpha = 0
             self.setNeedsDisplay(cellImageView.frame)

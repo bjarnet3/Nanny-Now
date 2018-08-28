@@ -12,8 +12,8 @@ class SubSettingsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    private var settings = [Settings]()
-    private var user: User?
+    var settings = [Settings]()
+    var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()

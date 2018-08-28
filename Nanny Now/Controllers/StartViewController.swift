@@ -29,16 +29,16 @@ class StartViewController: UIViewController, CLLocationManagerDelegate {
     
     // MARK: - Properties: Array and Varables
     // ----------------------------------------
-    private var profileImage: UIImage?
-    private var settings = [Settings]()
+    var profileImage: UIImage?
+    var settings = [Settings]()
     
-    private var user: User?
-    private var viewAnimationLoaded = false
-    private var locationManager = CLLocationManager()
+    var user: User?
+    var viewAnimationLoaded = false
+    var locationManager = CLLocationManager()
     
     // MARK: Facebook Logout
     // ----------------------------------------
-    private func facebookLogout() {
+    func facebookLogout() {
         let loginView : FBSDKLoginManager = FBSDKLoginManager()
         loginView.loginBehavior = FBSDKLoginBehavior.web
         
@@ -51,7 +51,7 @@ class StartViewController: UIViewController, CLLocationManagerDelegate {
     
     // MARK: - GET from Firebase
     // ----------------------------------------
-    private func getInfoFromFirebase() {
+    func getInfoFromFirebase() {
         print("-- getInfoFromFirebase")
         var user: User?
         if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
@@ -130,7 +130,7 @@ class StartViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     // Location Services (Enable)
-    public func enableLocationServices() {
+    func enableLocationServices() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
@@ -139,7 +139,7 @@ class StartViewController: UIViewController, CLLocationManagerDelegate {
     
     // MARK: - Register, Logout (function, action)
     // ----------------------------------------
-    public func goToRegister(pageToLoadFirst: Int = 0) {
+    func goToRegister(pageToLoadFirst: Int = 0) {
         guard let loginPageVC = storyboard?.instantiateViewController(withIdentifier: "LoginPageVC") as? LoginPageVC else {
             return
         }
@@ -147,21 +147,21 @@ class StartViewController: UIViewController, CLLocationManagerDelegate {
         present(loginPageVC, animated: false)
     }
     
-    public func goToInfoVC(pageToLoadFirst: Int = 0) {
+    func goToInfoVC(pageToLoadFirst: Int = 0) {
         guard let infoVC = storyboard?.instantiateViewController(withIdentifier: "InfoVC") as? InfoViewController else {
             return
         }
         present(infoVC, animated: true)
     }
     
-    public func goToSubSettings() {
+    func goToSubSettings() {
         guard let subSettings = storyboard?.instantiateViewController(withIdentifier: "SubSettingsViewController") as? SubSettingsViewController else {
             return
         }
         present(subSettings, animated: true)
     }
     
-    private func logout(service: Service = .All) {
+    func logout(service: Service = .All) {
         switch service {
         case .Facebook:
             self.facebookLogout()
@@ -306,7 +306,7 @@ extension StartViewController: UITableViewDelegate, UITableViewDataSource {
 // ----------------------------------------
 extension StartViewController {
     
-    private func standardAlert() {
+    func standardAlert() {
         self.view.blur(blurRadius: 10.0)
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -339,7 +339,7 @@ extension StartViewController {
         }
     }
     
-    private func logoutAlertActionSheet() {
+    func logoutAlertActionSheet() {
         self.view.blur(blurRadius: 10.0)
         
         let user = self.user
@@ -362,7 +362,7 @@ extension StartViewController {
         self.present(alertController, animated: true) { }
     }
     
-    private func sendRequestAlert() {
+    func sendRequestAlert() {
         self.view.blur(blurRadius: 10.0)
         
         let controller = UIAlertController(title: "Title ", message: "Message", preferredStyle: .alert)

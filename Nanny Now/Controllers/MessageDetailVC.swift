@@ -13,7 +13,7 @@ import SwiftKeychainWrapper
 // For the Sounds and Audio
 import AVFoundation
 
-private var player: AVAudioPlayer?
+var player: AVAudioPlayer?
 
 private extension Selector {
     static let keyboardWillShow = #selector(MessageDetailVC.keyboardWillShow(notification:))
@@ -46,7 +46,7 @@ class MessageDetailVC: UIViewController {
     private var messages = [Message]()
     private var totalMessages: Int = 0
     
-    private var reversedMessages: [Message] {
+    var reversedMessages: [Message] {
         return self.messages.reversed()
     }
     
@@ -91,7 +91,7 @@ class MessageDetailVC: UIViewController {
     
     // MARK: - Functions, Database & Animation
     // ----------------------------------------
-    public func setupView(user: User, remoteUser: User) {
+    func setupView(user: User, remoteUser: User) {
         self.user = user
         self.remoteUser = remoteUser
     }
@@ -131,7 +131,7 @@ class MessageDetailVC: UIViewController {
         }
     }
     
-    private func sendRequestAlert(message: String, completion: Completion? = nil) {
+    func sendRequestAlert(message: String, completion: Completion? = nil) {
         playSound(soundLibrary: .falure_notification)
         
         let controller = UIAlertController(title: " Sikker på at du vil sende denne meldingen? ", message: message, preferredStyle: .alert)

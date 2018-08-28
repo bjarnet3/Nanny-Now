@@ -35,8 +35,8 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     // https://medium.com/@brianclouser/swift-3-creating-a-custom-view-from-a-xib-ecdfe5b3a960
     // MARK: - Properties: Array & Varables
     // -------------------------------------
-    public var nannies = [Nanny]()
     private var user: User?
+    private var nannies = [Nanny]()
     private var request: Request?
     
     private var animator: UIViewPropertyAnimator?
@@ -177,7 +177,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     
     // MARK: - Functions, Database & Animation
     // ---------------------------------------
-    private func setMapView(for mapStyleForView: MapStyleForView) {
+    func setMapView(for mapStyleForView: MapStyleForView) {
         self.backgroundMapViewIsRendered = false
         self.mapView.removeOverlays(mapView.overlays)
         
@@ -768,12 +768,12 @@ extension NannyViewController {
         
     }
     
-    private func setupParallex() {
+    func setupParallex() {
         addParallaxEffectOnView(self.mapView, -6)
         addParallaxEffectOnView(self.tableView, 14)
     }
     
-    private func remoteParallex() {
+    func remoteParallex() {
         removeParallaxEffectOnView(self.mapView)
         removeParallaxEffectOnView(self.tableView)
     }
@@ -914,7 +914,7 @@ extension NannyViewController : UITableViewDelegate, UITableViewDataSource {
         return [delete, request, more]
     }
     
-    private func goToDetail(row: Int) {
+    func goToDetail(row: Int) {
         if let nannyDetail = self.storyboard?.instantiateViewController(withIdentifier: "NannyDetailVC") as? NannyDetailVC {
             if let cell = tableView.cellForRow(at: lastRowSelected!) as? NannyTableViewCell {
                 if let image = cell.profilImage.image {
@@ -925,7 +925,7 @@ extension NannyViewController : UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    private func singelTapToEnterOrderMenu(_ tableView: UITableView, indexPath: IndexPath)  {
+    func singelTapToEnterOrderMenu(_ tableView: UITableView, indexPath: IndexPath)  {
         self.exitOrderMenu()
         self.exitLocationMenu()
         hapticButton(.selection, lowPowerModeDisabled)
@@ -949,7 +949,7 @@ extension NannyViewController : UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    private func doubleTapToEnterOrderMenu(_ tableView: UITableView, indexPath: IndexPath) {
+    func doubleTapToEnterOrderMenu(_ tableView: UITableView, indexPath: IndexPath) {
         exitAllMenu()
         if let last = lastRowSelected, last == indexPath {
             // Get image from selected cell

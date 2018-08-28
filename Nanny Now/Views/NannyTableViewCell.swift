@@ -40,7 +40,7 @@ class NannyTableViewCell: UITableViewCell {
         }
     }
     
-    private func ratingsChecker(_ rating: Double) {
+    func ratingsChecker(_ rating: Double) {
         switch rating
         {
         case 0.5..<1.5:
@@ -59,7 +59,7 @@ class NannyTableViewCell: UITableViewCell {
         }
     }
 
-    private func distanceChecker(_ distance: Int) {
+    func distanceChecker(_ distance: Int) {
         let dist = Double(Double(distance) / 1000.0)
         let formatedDistance = String(format: "%.1f", dist)
         
@@ -82,7 +82,7 @@ class NannyTableViewCell: UITableViewCell {
         }
     }
     
-    private func hasPoliceAttest(checked: Bool) {
+    func hasPoliceAttest(checked: Bool) {
         if checked {
             self.vandelLabel.text = "Godkjent Vandel"
             self.vandelLabel.textColor = UIColor.gray

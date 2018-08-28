@@ -51,7 +51,7 @@ class RequestDetailVC: UIViewController {
         
     }
     
-    private func exitDetailView() {
+    func exitDetailView() {
         UIView.animate(withDuration: 0.45, delay: 0.010, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
             self.backgroundView.frame = self.viewRect
             self.backgroundView.layer.cornerRadius = 22.0
@@ -60,7 +60,7 @@ class RequestDetailVC: UIViewController {
         })
     }
     
-    public func initWith(adminUser: User, guestUser: User, viewRect: CGRect) {
+    func initWith(adminUser: User, guestUser: User, viewRect: CGRect) {
         self.adminUser = adminUser
         self.guestUser = guestUser
         
