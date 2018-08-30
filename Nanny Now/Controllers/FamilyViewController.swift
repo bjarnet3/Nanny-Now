@@ -277,7 +277,6 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
         
         self.setUserSettings()
         self.enableLocationServices()
-        
         self.viewDidLoadAnimation()
         
         revealingSplashAnimation(self.view, type: SplashAnimationType.woobleAndZoomOut, duration: 1.90, delay: 0)
@@ -318,11 +317,9 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
 }
 
 extension FamilyViewController: UITableViewDelegate, UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.families.count
     }
@@ -334,7 +331,6 @@ extension FamilyViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
     }
-    
 }
 
 extension FamilyViewController: MKMapViewDelegate {

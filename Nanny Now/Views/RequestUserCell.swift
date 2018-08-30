@@ -200,7 +200,9 @@ class RequestUserCell: UITableViewCell {
     func setupView(request: Request, animated: Bool = true) {
         if animated {
             animateView(direction: .enter)
+            
             self.cellImageView.loadImageUsingCacheWith(urlString: request.imageName, completion: {
+                
                 let random = Double(arc4random_uniform(UInt32(1000))) / 3000
                 UIView.animate(withDuration: 0.6, delay: random, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
                     self.animateView(direction: .exit)
@@ -217,9 +219,12 @@ class RequestUserCell: UITableViewCell {
                     self.timeTo = stringToDateTime(request.timeTo)
                     self.amount.text = " \(request.amount) kr   "
                 })
+                
                 self.cellImageLoaded = true
             })
+            
         } else {
+            
             self.nameLabel.text = request.firstName
             self.messageLabel.text = request.message
             
@@ -229,6 +234,7 @@ class RequestUserCell: UITableViewCell {
             self.timeFrom = stringToDateTime(request.timeFrom)
             self.timeTo = stringToDateTime(request.timeTo)
             self.amount.text = " \(request.amount) kr   "
+            
         }
     }
 }
