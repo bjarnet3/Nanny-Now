@@ -70,18 +70,22 @@ class MessageTableViewCell: UITableViewCell {
             }
         }
     }
+    
+    func setProfileImage() {
+        self.profileImage.clipsToBounds = true
+        self.profileImage.layer.cornerRadius = self.profileImage.layer.bounds.height / 2
+        self.profileImage.layer.borderColor = UIColor.white.cgColor
+        self.profileImage.layer.borderWidth = 0.85
+        
+        // self.profileImage.layer.masksToBounds = true
+        self.profileImage.layer.addShadow()
+    }
 
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.profileImage.layer.borderColor = UIColor.white.cgColor
-        self.profileImage.layer.cornerRadius = self.profileImage.layer.bounds.height / 2
-        self.profileImage.layer.borderWidth = 0.85
-        self.profileImage.layer.masksToBounds = true
-        self.profileImage.layer.addShadow()
-        
+        setProfileImage()
         self.userStatusLbl.layer.cornerRadius = self.userStatusLbl.frame.height / 2
-        
         self.brandingLabel.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         self.brandingLabel.layer.cornerRadius = self.brandingLabel.frame.height / 2
         self.brandingLabel.clipsToBounds = true
@@ -112,6 +116,7 @@ class MessageTableViewCell: UITableViewCell {
             // self.setNeedsDisplay(profileImage.frame)
             self.contentView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
         } else {
+            setProfileImage()
             self.contentView.alpha = 1
             self.contentView.transform = CGAffineTransform(scaleX: 1.00, y: 1.00)
         }

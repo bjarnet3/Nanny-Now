@@ -643,7 +643,6 @@ class MessageViewController: UIViewController {
     }
     
     func setupApplicationActiveObserver() {
-        print(" setupApplicationActiveObserver")
         _ = NotificationCenter.default.addObserver(forName: .UIApplicationDidBecomeActive,
                                                    object: nil,
                                                    queue:.main,
@@ -651,37 +650,24 @@ class MessageViewController: UIViewController {
     }
     
     func setupApplicationInactiveObserver() {
-        print(" setupApplicationInactiveObserver")
         _ = NotificationCenter.default.addObserver(forName: .UIApplicationWillResignActive, object: nil, queue: .main, using: didBecomeInactive)
     }
     
     func removeApplicationActiveObserver() {
-        print(" removeApplicationActiveObserver")
         NotificationCenter.default.removeObserver(self, name: .UIApplicationDidBecomeActive, object: nil)
     }
     
     func removeApplicationInactiveObserver() {
-        print(" removeApplicationInactiveObserver")
         NotificationCenter.default.removeObserver(self, name: .UIApplicationWillResignActive, object: nil)
     }
     
     lazy var didBecomeActive: (Notification) -> Void = { [weak self] _ in
-        print(" didBecomeActive")
-        self?.removeApplicationActiveObserver()
-        self?.setupApplicationInactiveObserver()
-        
-        // self?.observeRequests()
+        self?.observeRequests()
         self?.observeMessages()
     }
     
     lazy var didBecomeInactive: (Notification) -> Void = { [weak self] _ in
-        print(" didBecomeInactive")
         self?.removeAllDatabaseObservers()
-        
-        self?.removeApplicationInactiveObserver()
-        self?.setupApplicationActiveObserver()
-        
-        
     }
 }
 
@@ -689,7 +675,6 @@ class MessageViewController: UIViewController {
 // ----------------------------------------
 extension MessageViewController {
     override func viewDidLoad() {
-        print("-- viewDidLoad")
         super.viewDidLoad()
         
         setRequestTable()
@@ -709,7 +694,6 @@ extension MessageViewController {
         observeMessages()
         
         setupApplicationInactiveObserver()
-        
         revealingSplashAnimation(self.view, type: SplashAnimationType.swingAndZoomOut, completion: {
             
             self.midMessageTable()
@@ -743,14 +727,15 @@ extension MessageViewController {
 
     
     override func viewWillAppear(_ animated: Bool) {
-        print("- viewWillAppear")
+        super.viewWillAppear(animated)
+        
         if !self.returnWithDismiss {
             hapticButton(.heavy, lowPowerModeDisabled)
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("- viewDidAppear")
+        super.viewDidAppear(animated)
         
         self.animatorIsBusy = false
         self.requestTable.isUserInteractionEnabled = true
@@ -798,22 +783,22 @@ extension MessageViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        print("- viewDidLayoutSubviews")
+        super.viewDidLayoutSubviews()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        print("- viewWillDisappear")
+        super.viewWillDisappear(animated)
         
         self.animatorIsBusy = true
         self.requestTable.isUserInteractionEnabled = false
         self.scrollAnimator?.stopAnimation(true)
         self.blurAnimator?.stopAnimation(true)
-        
-        self.removeAllDatabaseObservers()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        print("- viewDidDisappear")
+        super.viewDidDisappear(animated)
+        
+        self.removeAllDatabaseObservers()
         self.messageBadge = 0
     }
     
