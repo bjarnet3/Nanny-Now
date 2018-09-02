@@ -314,7 +314,10 @@ class MessageDetailVC: UIViewController {
     
     private func observeMessages() {
         if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
-            DataService.instance.REF_MESSAGES.child("private").child(UID).child("all").queryOrdered(byChild: "messageTime").observe(.value, with: { (snapshot) in
+            
+            guard let remoteID = self.remoteUser?.userUID else { return }
+            
+            DataService.instance.REF_MESSAGES.child("private").child(UID).child("all").child(remoteID).queryOrdered(byChild: "messageTime").observe(.value, with: { (snapshot) in
                 
                 self.messages.removeAll()
                 

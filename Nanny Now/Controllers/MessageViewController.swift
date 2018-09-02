@@ -775,8 +775,6 @@ extension MessageViewController {
             self.returnWithDismiss = false
             self.requestTable.reloadData()
         }
-
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -808,7 +806,6 @@ extension MessageViewController {
 // MARK: - ScrollView, Delegate & Datasource
 // ----------------------------------------
 extension MessageViewController: UIScrollViewDelegate {
-    
     func returnScrollValue(with scrollOffset: CGFloat, valueOffset: CGFloat) -> CGFloat {
         let value = (((scrollOffset / 100)) / -1) - valueOffset
         
@@ -816,7 +813,6 @@ extension MessageViewController: UIScrollViewDelegate {
         let valueMax = value > 1.0 ? 1.0 : value
         
         let result = value < valueMin ? valueMin : valueMax
-        
         return result
     }
     

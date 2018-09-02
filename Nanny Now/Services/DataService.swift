@@ -290,13 +290,13 @@ class DataService {
             
             if userID == recieveUserID {
                 baseFirebase.child("last").child(recieveUserID).updateChildValues(myBase)
-                baseFirebase.child("all").updateChildValues(all)
+                baseFirebase.child("all").child(userID).updateChildValues(all)
             } else {
                 baseFirebase.child("last").child(recieveUserID).updateChildValues(myBase)
                 reciFirebase.child("last").child(userID).updateChildValues(base)
                 
-                baseFirebase.child("all").updateChildValues(all)
-                reciFirebase.child("all").updateChildValues(all)
+                baseFirebase.child("all").child(recieveUserID).updateChildValues(all)
+                reciFirebase.child("all").child(userID).updateChildValues(all)
             }
         }
     }
