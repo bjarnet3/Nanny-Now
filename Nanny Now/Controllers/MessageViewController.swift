@@ -62,34 +62,19 @@ class MessageViewController: UIViewController {
         }
     }
     
-    
-    // Check if image is loaded for MessageTableViewCell
-    func lastBackCellLayout() {
-        for cell in tableView.visibleCells {
-            if cell is MessageTableViewCell {
-                if let backCells = cell as? MessageTableViewCell {
-                    if backCells.cellImageLoaded != true {
-                        self.tableView.reloadData()
-                    }
-                }
-            }
-        }
-    }
-    
     // MARK: - Observer, Firebase Database Functions
     // ----------------------------------------
     func observeMessages(_ exemptIDs: [String] = []) {
         if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             DataService.instance.REF_MESSAGES.child("private").child(UID).child("last").queryOrdered(byChild: "messageTime").observe(.value, with: { (snapshot) in
-                let remoteID = snapshot.key
                 
+                let remoteID = snapshot.key
                 self.messages.removeAll()
                 
                 if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
                     self.totalMessages = snapValue.keys.count
-                    
                     if !exemptIDs.contains(remoteID) {
-                        
+                
                         for (key,value) in snapValue {
                             if let snapMessage = value as? [String:AnyObject] {
                                 self.fetchMessageObserver(snapMessage, remoteUID: key, userUID: UID)
@@ -111,6 +96,7 @@ class MessageViewController: UIViewController {
             message:  messageSnap["message"] as! String,
             messageTime:  messageSnap["messageTime"] as! String,
             highlighted:  (messageSnap["highlighted"] as? Bool)!)
+        
         self.observeUser(with: message, userRef: userREF)
     }
     
@@ -124,7 +110,6 @@ class MessageViewController: UIViewController {
                     var userStatus: Date?
                     
                     for (key, val) in snapValue {
-                        
                         if key == "imageUrl" {
                             imageName = val as? String
                         }
@@ -150,15 +135,14 @@ class MessageViewController: UIViewController {
                     
                     let remote = User(userUID: message._toUID, imageName: imageName, firstName: firstName)
                     message.setTo(user: remote)
-                    
                     message.userStatus = userStatus!
                     
-                    self.messages.sort(by: { $0._messageTime > $1._messageTime })
                     self.messages.append(message)
                     self.messages.sort(by: { $0._messageTime > $1._messageTime })
                     
                     self.tableView.reloadData()
                 }
+                
             })
         } else {
             self.tableView.reloadData()
@@ -224,12 +208,12 @@ extension MessageViewController {
             hapticButton(.heavy, lowPowerModeDisabled)
         }
         
-        self.removeAllDatabaseObservers()
+        // self.removeAllDatabaseObservers()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        observeMessages()
+        // observeMessages()
     }
     
     override func viewDidLayoutSubviews() {
@@ -243,7 +227,7 @@ extension MessageViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        self.removeAllDatabaseObservers()
+        // self.removeAllDatabaseObservers()
         self.messageBadge = 0
     }
     
@@ -344,12 +328,10 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         let request = UITableViewRowAction(style: .destructive, title: " ☑︎ ") { (action , indexPath) -> Void in
-            // self.enterRequestMenu()
             // self.sendRequestAlert(row: indexPath.row)
         }
         
         let more = UITableViewRowAction(style: .default, title: " ⋮ ") { (action, indexPath) -> Void in
-            // Show on map
             // self.standardAlert(row: indexPath.row)
         }
         

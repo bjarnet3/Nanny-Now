@@ -161,14 +161,12 @@ extension NotificationViewController : UITableViewDelegate, UITableViewDataSourc
             // guard let user = self.user else { return NotificationTableCell(style: .default, reuseIdentifier: leftIdentifier) }
             if let leftCell = tableView.dequeueReusableCell(withIdentifier: leftIdentifier, for: indexPath) as? NotificationTableCell {
                 leftCell.setupView(with: self.messages[indexPath.row], to: self.remoteUser!)
-                leftCell.transform = CGAffineTransform(scaleX: 1, y: 1)
                 return leftCell
             }
         } else {
             // guard let remoteUser = self.remoteUser else { return NotificationTableCell(style: .default, reuseIdentifier: rightIdentifier) }
             if let rightCell = tableView.dequeueReusableCell(withIdentifier: rightIdentifier, for: indexPath) as? NotificationTableCell {
                 rightCell.setupView(with: self.messages[indexPath.row], to: self.user!)
-                rightCell.transform = CGAffineTransform(scaleX: 1, y: 1)
                 return rightCell
             }
         }

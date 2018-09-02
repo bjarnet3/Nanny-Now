@@ -485,7 +485,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dyk-Uy-luO" customClass="UserImageView" customModule="Nanny_Now" customModuleProvider="target">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nanny-profil" translatesAutoresizingMaskIntoConstraints="NO" id="Dyk-Uy-luO" customClass="UserImageView" customModule="Nanny_Now" customModuleProvider="target">
                                                     <rect key="frame" x="10" y="14.5" width="35" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="35" id="Q04-FD-7Db"/>
@@ -1032,7 +1032,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D5V-z6-4ti" customClass="NannyImageView" customModule="Nanny_Now" customModuleProvider="target">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="nanny-profil" translatesAutoresizingMaskIntoConstraints="NO" id="D5V-z6-4ti" customClass="NannyImageView" customModule="Nanny_Now" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     </imageView>
@@ -1096,7 +1096,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                                 <rect key="frame" x="0.0" y="0.0" width="178" height="25"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dPS-if-KGB" customClass="NannyImageView" customModule="Nanny_Now" customModuleProvider="target">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="nanny-profil" translatesAutoresizingMaskIntoConstraints="NO" id="dPS-if-KGB" customClass="NannyImageView" customModule="Nanny_Now" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     </imageView>
@@ -2239,7 +2239,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z4L-wg-aqo" customClass="UserImageView" customModule="Nanny_Now" customModuleProvider="target">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="nanny-profil" translatesAutoresizingMaskIntoConstraints="NO" id="z4L-wg-aqo" customClass="UserImageView" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="56" y="23" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -2251,7 +2251,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                             <action selector="backAction:" destination="t8V-4x-faD" eventType="touchUpInside" id="pC8-Rv-sZo"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uvs-vz-nq6" customClass="UserImageView" customModule="Nanny_Now" customModuleProvider="target">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="nanny-profil" translatesAutoresizingMaskIntoConstraints="NO" id="Uvs-vz-nq6" customClass="UserImageView" customModule="Nanny_Now" customModuleProvider="target">
                                         <rect key="frame" x="270" y="23" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
