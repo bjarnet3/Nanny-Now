@@ -206,7 +206,9 @@ class DataService {
     func getFacebookProfilePicture(_ fid: String, _ size: PictureSize) -> UIImage {
         var facebookImage = UIImage(named: "40B52118-FA0A-4978-8A6F-47A5E2137F95")
         if (fid != "") {
+            // let imgURLString = "https://graph.facebook.com/10157516443970641/picture?type=large"
             let imgURLString = "https://graph.facebook.com/" + fid + "/picture?type=\(size)"
+            
             let imgURL = NSURL(string: imgURLString)
             let imageData = NSData(contentsOf: imgURL! as URL)
             if let image = UIImage(data: imageData! as Data) {

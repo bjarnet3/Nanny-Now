@@ -76,6 +76,7 @@ class StartViewController: UIViewController, CLLocationManagerDelegate {
                                     if let birthday = snap.value as? String, snap.key == "birthday" { user?.birthday = birthday }
                                     if let imageName = snap.value as? String, snap.key == "imageUrl" {
                                         user?.imageName = imageName
+                                        userInfo.updateValue(imageName, forKey: snap.key)
                                     }
                                     
                                     if let ratings = snap.value as? [String:Int], snap.key == "ratings" {

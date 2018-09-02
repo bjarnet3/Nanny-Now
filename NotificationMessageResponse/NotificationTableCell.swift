@@ -24,12 +24,7 @@ class NotificationTableCell: UITableViewCell {
             }
         }
     }
-    
     var hasDateTime: Bool = false
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
     
     public enum Direction {
         case enter
@@ -40,16 +35,21 @@ class NotificationTableCell: UITableViewCell {
         if direction == .enter {
             self.contentView.alpha = 0.0
             self.setNeedsDisplay(profileImage.frame)
-            self.contentView.transform = CGAffineTransform(scaleX: 0.85, y: -0.85)
+            self.contentView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
+            
+            // Reverse "mirror" Cell
+            // self.contentView.transform = CGAffineTransform(scaleX: 0.85, y: -0.85)
         } else {
             self.contentView.alpha = 1.0
-            self.contentView.transform = CGAffineTransform(scaleX: 1.00, y: -1.00)
+            self.contentView.transform = CGAffineTransform(scaleX: 1.00, y: 1.00)
+            
+            // Reverse "mirror" Cell
+            // self.contentView.transform = CGAffineTransform(scaleX: 1.00, y: -1.00)
         }
     }
     
     func setupView(with message: MessageLite, to user: UserLite, animated: Bool = true, hasDateTime: Bool = false) {
         self.animateView(direction: .enter)
-        
         self.hasDateTime = hasDateTime
         
         if let font = messageTextView.font {

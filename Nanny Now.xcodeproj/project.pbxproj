@@ -100,6 +100,7 @@
 		5CC0C6972095DFD1005317FA /* RequestDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC0C6962095DFD1005317FA /* RequestDetailVC.swift */; };
 		5CC849331FCA1198003AE163 /* StartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC849321FCA1198003AE163 /* StartTableViewCell.swift */; };
 		5CC849351FCA11BE003AE163 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC849341FCA11BE003AE163 /* SettingsTableViewCell.swift */; };
+		5CCE6642213B57C000FF5B43 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE6641213B57C000FF5B43 /* AuthService.swift */; };
 		5CCF0C751D898BFB0089F39D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C741D898BFB0089F39D /* AppDelegate.swift */; };
 		5CCF0C771D898BFB0089F39D /* NannyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C761D898BFB0089F39D /* NannyViewController.swift */; };
 		5CCF0C791D898BFB0089F39D /* FamilyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CCF0C781D898BFB0089F39D /* FamilyViewController.swift */; };
@@ -247,6 +248,7 @@
 		5CC849321FCA1198003AE163 /* StartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTableViewCell.swift; sourceTree = "<group>"; };
 		5CC849341FCA11BE003AE163 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		5CC8493A1FCA34C3003AE163 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		5CCE6641213B57C000FF5B43 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		5CCF0C711D898BFB0089F39D /* Nanny Now.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nanny Now.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CCF0C741D898BFB0089F39D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5CCF0C761D898BFB0089F39D /* NannyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NannyViewController.swift; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 		5CB03AD2209B6DF600C29FDE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				5CCE6641213B57C000FF5B43 /* AuthService.swift */,
 				5C85A7ED1DB84D83008C5FBB /* DataService.swift */,
 				5CDE08041FB27A5000E97D97 /* LocalService.swift */,
 				5C6D422A1EDE0DFA001037CE /* Notifications.swift */,
@@ -927,6 +930,7 @@
 				5CCF0C791D898BFB0089F39D /* FamilyViewController.swift in Sources */,
 				5CC849351FCA11BE003AE163 /* SettingsTableViewCell.swift in Sources */,
 				5C9FC62C1FF6E95000906B05 /* FriendsCollectionViewCell.swift in Sources */,
+				5CCE6642213B57C000FF5B43 /* AuthService.swift in Sources */,
 				5CB7FE561FE435B600D41E6F /* FrostyView.swift in Sources */,
 				5C558A0C1FA772FD0076A17D /* LoginTwoVC.swift in Sources */,
 				5CCF0C8D1D898D090089F39D /* Groups.swift in Sources */,

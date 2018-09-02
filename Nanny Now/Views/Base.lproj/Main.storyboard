@@ -66,7 +66,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="female" translatesAutoresizingMaskIntoConstraints="NO" id="RLQ-ff-g3X" customClass="CustomImageView" customModule="Nanny_Now" customModuleProvider="target">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="nanny-profil" translatesAutoresizingMaskIntoConstraints="NO" id="RLQ-ff-g3X" customClass="CustomImageView" customModule="Nanny_Now" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -175,9 +175,6 @@
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
                                 <color key="value" red="1" green="0.52156862745098043" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="number" keyPath="yOffSet">
-                                <real key="value" value="0.0"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
@@ -1844,7 +1841,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6MP-gp-Jjf" customClass="StatusView" customModule="Nanny_Now" customModuleProvider="target">
                                                             <rect key="frame" x="12" y="20" width="100" height="100"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="female" translatesAutoresizingMaskIntoConstraints="NO" id="5Ho-hP-UZo" customClass="CustomImageView" customModule="Nanny_Now" customModuleProvider="target">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nanny-profil" translatesAutoresizingMaskIntoConstraints="NO" id="5Ho-hP-UZo" customClass="CustomImageView" customModule="Nanny_Now" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="5Ho-hP-UZo" secondAttribute="height" multiplier="1:1" id="zme-6n-Uwy"/>
@@ -1969,7 +1966,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="female" translatesAutoresizingMaskIntoConstraints="NO" id="tJ0-v9-xoF">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nanny-profil" translatesAutoresizingMaskIntoConstraints="NO" id="tJ0-v9-xoF">
                                                             <rect key="frame" x="10" y="15" width="50" height="50"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
@@ -2275,12 +2272,12 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                         <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Halloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!!" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ECd-Mn-1ug">
                                                             <rect key="frame" x="8" y="0.0" width="269" height="35"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <color key="textColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textView>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="1" green="0.19215686274509805" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="ECd-Mn-1ug" firstAttribute="top" secondItem="6Zy-4E-ort" secondAttribute="top" id="18D-ht-3WG"/>
                                                         <constraint firstAttribute="trailing" secondItem="ECd-Mn-1ug" secondAttribute="trailing" constant="8" id="A4b-BZ-Sr9"/>
@@ -2322,12 +2319,12 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                             <rect key="frame" x="8" y="0.0" width="269" height="153"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <string key="text">Halloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibility</string>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textView>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" red="1" green="0.19215686269999999" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="9zg-dQ-8no" firstAttribute="top" secondItem="Kzd-vP-aVG" secondAttribute="top" id="D3A-Iv-QFy"/>
                                                         <constraint firstItem="9zg-dQ-8no" firstAttribute="leading" secondItem="Kzd-vP-aVG" secondAttribute="leading" constant="8" id="dj6-CB-h6Q"/>
@@ -2384,12 +2381,12 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                         <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Halloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!!" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WjL-Sm-5Ye">
                                                             <rect key="frame" x="8" y="0.0" width="269" height="35"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <color key="textColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textView>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="1" green="0.19215686269999999" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="WjL-Sm-5Ye" firstAttribute="leading" secondItem="RLD-6t-fHB" secondAttribute="leading" constant="8" id="6cD-bi-I2J"/>
                                                         <constraint firstItem="WjL-Sm-5Ye" firstAttribute="top" secondItem="RLD-6t-fHB" secondAttribute="top" id="6ep-Kb-bMl"/>
@@ -2440,12 +2437,12 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                             <rect key="frame" x="8" y="0.0" width="269" height="133"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <string key="text">Halloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibility</string>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textView>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" red="1" green="0.19215686269999999" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="Wk3-Bs-Lpd" firstAttribute="top" secondItem="LhT-OF-15D" secondAttribute="top" id="6ve-pV-Yke"/>
                                                         <constraint firstAttribute="bottom" secondItem="Wk3-Bs-Lpd" secondAttribute="bottom" id="KXR-zd-GWf"/>

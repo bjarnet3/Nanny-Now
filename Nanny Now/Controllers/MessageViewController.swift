@@ -36,7 +36,6 @@ class MessageViewController: UIViewController {
     var totalRequests: Int = 0
     var totalMessages: Int = 0
     
-    var lastRowSelected: IndexPath?
     var heightForRow:[CGFloat] = [5,170,80]
     
     var animatorIsBusy = false
@@ -394,31 +393,6 @@ class MessageViewController: UIViewController {
         }
     }
     
-    func resetRequestStatusCount() {
-        self.acceptedCount = 0
-        self.pendingCount = 0
-        self.completeCount = 0
-        self.acceptedCount = 0
-        self.runningCount = 0
-    }
-    
-    func setRequestStatusCountFrom(request: Request) {
-        if let requestStatus = requestStatusString(request: request.requestStatus) {
-            switch requestStatus {
-            case .accepted:
-                self.acceptedCount += 1
-            case .complete:
-                self.completeCount += 1
-            case .pending:
-                self.pendingCount += 1
-            case .rejected:
-                self.rejectedCount += 1
-            case .running:
-                self.runningCount += 1
-            }
-        }
-    }
-    
     // MARK: - Observer, Firebase Database Functions
     // ----------------------------------------
     func observeRequests(_ exemptIDs: [String] = []) {
@@ -468,6 +442,31 @@ class MessageViewController: UIViewController {
                 }
                 
             })
+        }
+    }
+    
+    func resetRequestStatusCount() {
+        self.acceptedCount = 0
+        self.pendingCount = 0
+        self.completeCount = 0
+        self.acceptedCount = 0
+        self.runningCount = 0
+    }
+    
+    func setRequestStatusCountFrom(request: Request) {
+        if let requestStatus = requestStatusString(request: request.requestStatus) {
+            switch requestStatus {
+            case .accepted:
+                self.acceptedCount += 1
+            case .complete:
+                self.completeCount += 1
+            case .pending:
+                self.pendingCount += 1
+            case .rejected:
+                self.rejectedCount += 1
+            case .running:
+                self.runningCount += 1
+            }
         }
     }
     
@@ -723,8 +722,6 @@ extension MessageViewController {
             })
         })
     }
-    
-
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

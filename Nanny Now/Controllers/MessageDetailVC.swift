@@ -480,16 +480,20 @@ extension MessageDetailVC: UITableViewDelegate, UITableViewDataSource {
         let rightIdentifier = hasLabel ? "MessageDetailRightLabelCell" : "MessageDetailRightCell"
         
         if let user = self.user, messages[indexPath.row]._fromUID == user.userUID {
-            if let leftCell = tableView.dequeueReusableCell(withIdentifier: leftIdentifier, for: indexPath) as? MessageDetailTableCell {
-                leftCell.setupView(with: self.messages[indexPath.row], to: user, hasDateTime: hasLabel)
-                return leftCell
-                
-            }
-        } else if let remoteUser = self.remoteUser {
+
             if let rightCell = tableView.dequeueReusableCell(withIdentifier: rightIdentifier, for: indexPath) as? MessageDetailTableCell {
-                rightCell.setupView(with: self.messages[indexPath.row], to: remoteUser, hasDateTime: hasLabel)
+                rightCell.setupView(with: self.messages[indexPath.row], to: user, hasDateTime: hasLabel)
                 return rightCell
             }
+            
+        } else if let remoteUser = self.remoteUser {
+            
+            if let leftCell = tableView.dequeueReusableCell(withIdentifier: leftIdentifier, for: indexPath) as? MessageDetailTableCell {
+                leftCell.setupView(with: self.messages[indexPath.row], to: remoteUser, hasDateTime: hasLabel)
+                return leftCell
+            }
+            
+            
         }
         return MessageDetailTableCell()
     }

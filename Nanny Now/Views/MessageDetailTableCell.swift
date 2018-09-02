@@ -37,6 +37,7 @@ class MessageDetailTableCell: UITableViewCell {
     }
     
     func animateView( direction: Direction) {
+        // self.transform = CGAffineTransform(scaleX: 1, y: -1)
         if direction == .enter {
             self.contentView.alpha = 0.0
             self.setNeedsDisplay(profileImage.frame)
@@ -49,7 +50,6 @@ class MessageDetailTableCell: UITableViewCell {
     
     func setupView(with message: Message, to user: User, animated: Bool = false, hasDateTime: Bool = false) {
         self.animateView(direction: .enter)
-        
         self.hasDateTime = hasDateTime
         
         if let font = messageTextView.font {
@@ -66,7 +66,6 @@ class MessageDetailTableCell: UITableViewCell {
             
             // print("widthForText \(widthForText), linesForText \(linesForText)")
             self.messageTextContraint.constant = linesForText == 1 ? constraintMax - widthForText : constraintMin
-            
             self.profileImage.loadImageUsingCacheWith(urlString: user.imageName, completion: {
                 if animated {
                     let random = Double(arc4random_uniform((UInt32(1000))) / 3000) + 250

@@ -743,8 +743,6 @@ extension NannyViewController {
         self.tableView.dataSource = self
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.tabBarController!.tabBar.frame.height, 0)
         
-        
-        
         // PickerView Delegate and Datasource
         self.locationPicker.delegate = self
         self.locationPicker.dataSource = self

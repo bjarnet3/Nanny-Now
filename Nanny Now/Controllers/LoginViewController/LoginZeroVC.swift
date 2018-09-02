@@ -110,14 +110,14 @@ class LoginZeroVC: UIViewController {
                                     if key == "gender" {
                                         publicInfo.updateValue(val, forKey: key)
                                         userInfo.updateValue(val, forKey: key)
+                                    } else {
+                                        publicInfo.updateValue("other", forKey: key)
+                                        userInfo.updateValue("other", forKey: key)
                                     }
                                     userInfo.updateValue(val, forKey: key)
                                 }
                                 userInfo.updateValue(val, forKey: key)
                             }
-                            // ---
-                            print(userInfo)
-                            print(publicInfo)
                             let name = userInfo["first_name"] as? String ?? "Unknown Name"
                             self.descriptionLbl.text = userInfo["email"] as? String ?? "Unknown Email"
                             if let ageString = userInfo["birthday"] as? String {
@@ -158,8 +158,8 @@ class LoginZeroVC: UIViewController {
                                 }
                             }
                         }
+                        self.firebaseAuth(credential)
                     })
-                    self.firebaseAuth(credential)
                 }
             }
         }
@@ -190,7 +190,9 @@ class LoginZeroVC: UIViewController {
                 // print("PRINT: Firebase Authentication Successfull")
                 if let user = data?.user {
                     // SET: userData to DB
-                    if let gender = userInfo["gender"] as? String {
+                    if let publicFID = publicInfo["fid"] as? String {
+                        printFunc(publicFID)
+                        let gender = userInfo["gender"] as? String ?? "other"
                         let userData = [
                             "provider": credential.provider,
                             "name": self.nameLbl.text!,
@@ -199,6 +201,7 @@ class LoginZeroVC: UIViewController {
                         ]
                         KeychainWrapper.standard.set(user.uid, forKey: KEY_UID)
                         if let fid = userInfo["id"] as? String {
+                            printFunc(fid)
                             userInfo.removeValue(forKey: "id")
                             userInfo["fid"] = fid
                             KeychainWrapper.standard.set(fid, forKey: KEY_FID)
@@ -209,6 +212,8 @@ class LoginZeroVC: UIViewController {
                                     self.profileImageView.alpha = 1.0
                                 })
                             self.postImageToFirebase(image: image)
+                        } else {
+                            print("unable to download image")
                         }
                         self.completeSignIn(id: user.uid, userData: userData)
                     }
@@ -225,6 +230,41 @@ class LoginZeroVC: UIViewController {
     
     // Post Image To Firebase (and update DB)
     func postImageToFirebase(image: UIImage?) {
+        if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            if let img = image {
+                // Generic Function
+                if let imgData = UIImageJPEGRepresentation(img, 0.4) {
+                    // Unique image identifier
+                    let imageUID = NSUUID().uuidString
+                    // Set metaData for the image
+                    let metadata = StorageMetadata()
+                    metadata.contentType = "image/jpeg"
+                    // Upload image - STORAGE_BASE.child("post-pics").child(uniqueID).put(image, meta)
+                    let storageREF = DataService.instance.REF_PROFILE_IMAGES.child(userID).child("\(imageUID).jpg")
+                    storageREF.putData(imgData, metadata: metadata) { (metadata, error) in
+                        if error != nil {
+                            print("postImageToFirebase: Unable to upload image to Firebase storage")
+                            print(error!)
+                        } else {
+                            print("postImageToFirebase: Successfully uploaded image to Firebase storage")
+                            storageREF.downloadURL { (url, err) in
+                                if let absoluteUrlString = url?.absoluteString {
+                                    userInfo.updateValue(absoluteUrlString, forKey: "imageUrl")
+                                    self.postUserInfoToFirebase(imgUrl: absoluteUrlString, userFirebaseInfo: userInfo)
+                                } else {
+                                    print("unable to get imageLocation")
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    // Post Image To Firebase (and update DB)
+    func oldPostImageToFirebase(image: UIImage?) {
         if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             if let img = image {
                 // Generic Function
@@ -497,7 +537,6 @@ extension LoginZeroVC {
         print("viewWillAppear")
         
         animateButton(isSignedIn: signedIn)
-        
         getInfoFromUserInfo()
         
         // If view have Disappeard before (comming back)
@@ -506,8 +545,7 @@ extension LoginZeroVC {
             if signedIn {
                 let firstName = userInfo["first_name"] as? String ?? "Unknown Name"
                 self.animateLabel(delay: 0.3, enter: true, mainLabel: "Velkommen", middleLabel: "  tilbake \(firstName)")
-                
-                animateProfileInfo(delay: 0.4, enter: true)
+                self.animateProfileInfo(delay: 0.4, enter: true)
             } else {
                 animateLabel(delay: 0.3, enter: true)
             }
@@ -518,6 +556,12 @@ extension LoginZeroVC {
         print("viewDidAppear")
         // animateLabel(delay: 2.0, enter: true)
         
+        if let imageURL = userInfo["imageUrl"] as? String {
+            printFunc(imageURL)
+            self.profileImageView.loadImageUsingCacheWith(urlString: imageURL, completion: {
+                self.profileImageView.alpha = 1.0
+            })
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

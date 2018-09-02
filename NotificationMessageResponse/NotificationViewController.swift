@@ -116,7 +116,6 @@ extension NotificationViewController {
         super.viewDidLoad()
         
         tableView.alpha = 0
-        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -125,7 +124,8 @@ extension NotificationViewController {
         tableView.contentInset.top = 65
         tableView.contentInset.bottom = 45
         
-        tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
+        // Reverse "mirror" TableView
+        // tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -161,13 +161,14 @@ extension NotificationViewController : UITableViewDelegate, UITableViewDataSourc
             // guard let user = self.user else { return NotificationTableCell(style: .default, reuseIdentifier: leftIdentifier) }
             if let leftCell = tableView.dequeueReusableCell(withIdentifier: leftIdentifier, for: indexPath) as? NotificationTableCell {
                 leftCell.setupView(with: self.messages[indexPath.row], to: self.remoteUser!)
+                leftCell.transform = CGAffineTransform(scaleX: 1, y: 1)
                 return leftCell
-                
             }
         } else {
             // guard let remoteUser = self.remoteUser else { return NotificationTableCell(style: .default, reuseIdentifier: rightIdentifier) }
             if let rightCell = tableView.dequeueReusableCell(withIdentifier: rightIdentifier, for: indexPath) as? NotificationTableCell {
                 rightCell.setupView(with: self.messages[indexPath.row], to: self.user!)
+                rightCell.transform = CGAffineTransform(scaleX: 1, y: 1)
                 return rightCell
             }
         }

@@ -175,8 +175,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // User Status
         DataService.instance.updateUserStatus(with: .active)
         
-        
-        
         // Clear badge when app is or resumed
         application.applicationIconBadgeNumber = 0
         
@@ -263,7 +261,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         
         // With swizzling disabled you must set the APNs token here.
-        // Messaging.messaging().apnsToken = deviceToken
+        Messaging.messaging().apnsToken = deviceToken
         // InstanceID.instanceID().setAPNSToken(deviceToken, type: InstanceIDAPNSTokenType.sandbox)
     }
     
