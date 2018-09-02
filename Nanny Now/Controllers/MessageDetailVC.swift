@@ -45,6 +45,7 @@ class MessageDetailVC: UIViewController {
     
     private var messages = [Message]()
     private var totalMessages: Int = 0
+    let messageTableMaxY: CGFloat = 22
     
     var reversedMessages: [Message] {
         return self.messages.reversed()
@@ -56,12 +57,14 @@ class MessageDetailVC: UIViewController {
         self.view.endEditing(true)
         self.progressView.setProgress(0.0, animated: false)
         self.progressView.alpha = 1.0
+        self.removeMessagesObserver()
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func sendButton(_ sender: UIButton) {
         if sender.titleLabel?.text == "SEND ▶︎" {
             self.sendMessage()  // self.checkAndSendMessage()
+            DataService.instance.updateUserStatus(with: .active)
         } else if sender.titleLabel?.text == "AVBRYT ▼" {
             self.view.endEditing(true)
         } else if sender.titleLabel?.text == " START ▲" {
@@ -400,6 +403,10 @@ extension MessageDetailVC {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        self.view.layer.cornerRadius = 22
+        self.view.layer.masksToBounds = true
         
         tableView.delegate = self
         tableView.dataSource = self

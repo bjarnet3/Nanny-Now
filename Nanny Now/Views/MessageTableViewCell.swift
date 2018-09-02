@@ -11,13 +11,11 @@ import UIKit
 class MessageTableViewCell: UITableViewCell {
     
     @IBOutlet weak var profileImage: UIImageView!
-    
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
     @IBOutlet weak var brandingLabel: UILabel!
-    
     @IBOutlet weak var userStatusLbl: UILabel!
     @IBOutlet weak var userIndicatorLbl: UILabel!
 
@@ -86,7 +84,8 @@ class MessageTableViewCell: UITableViewCell {
         
         setProfileImage()
         self.userStatusLbl.layer.cornerRadius = self.userStatusLbl.frame.height / 2
-        self.brandingLabel.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        
+        self.brandingLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         self.brandingLabel.layer.cornerRadius = self.brandingLabel.frame.height / 2
         self.brandingLabel.clipsToBounds = true
     }

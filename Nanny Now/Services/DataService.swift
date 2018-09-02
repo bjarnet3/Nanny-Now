@@ -143,13 +143,13 @@ class DataService {
             let time = returnTimeStamp()
             let state: [String: String] = [
                 "state": state.rawValue,
-                "status" : time
+                "time" : time
             ]
             let publicREF = REF_USERS_PUBLIC
             publicREF.child(userID).child("status").updateChildValues(state)
             
             let privateREF = REF_USERS_PRIVATE
-            privateREF.child(userID).updateChildValues(state)
+            privateREF.child(userID).child("status").updateChildValues(state)
         }
     }
     
