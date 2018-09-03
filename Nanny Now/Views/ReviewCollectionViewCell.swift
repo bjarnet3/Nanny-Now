@@ -41,20 +41,16 @@ class ReviewCollectionViewCell: UICollectionViewCell {
     
     func setupView(review: Review, animated: Bool = true) {
         animateView(direction: .enter)
-        
         let reviews = review
-        
         self.profileImage.loadImageUsingCacheWith(urlString: reviews.userImage, completion: {
             if animated {
                 let random = Double(arc4random_uniform((UInt32(1000))) / 3000) + 250
                 UIView.animate(withDuration: 0.6, delay: random, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
-                    
                     self.animateView(direction: .exit)
                     
                     self.profileName.text = review.userName
                     self.userReview.text = review.reviewMessage
                     self.userRating.text = review.reviewRating
-                    
                 })
             } else {
                 self.animateView(direction: .exit)

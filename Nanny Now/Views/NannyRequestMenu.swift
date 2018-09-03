@@ -23,13 +23,14 @@ class NannyRequestMenu: UIView {
     @IBOutlet weak var requestCheck: UILabel!
     @IBOutlet weak var requestType: UISegmentedControl!
     
-    @IBOutlet weak var fromSwitch: UISwitch!
     @IBOutlet weak var fromDateTime: UIDatePicker!
     @IBOutlet weak var fromCheck: UILabel!
     
-    @IBOutlet weak var toSwitch: UISwitch!
     @IBOutlet weak var toDateTime: UIDatePicker!
     @IBOutlet weak var toCheck: UILabel!
+    
+    @IBOutlet weak var mapSwitch: UISwitch!
+    @IBOutlet weak var mapBackView: UIView!
     
     // MARK: - Properties: Array & Varables
     // -------------------------------------
@@ -48,9 +49,10 @@ class NannyRequestMenu: UIView {
         let requestType = sender.selectedSegmentIndex == 0 ? RequestType.request : RequestType.message
         func switchSegment(segmentType: RequestType) {
             let segment: Bool = segmentType == .request ? true : false
-            fromSwitch.setOn(segment, animated: true)
-            fromSwitch.isUserInteractionEnabled = segment
-            fromSwitch.transform = segment ? CGAffineTransform(scaleX: 1.0, y: 1.0) : CGAffineTransform(scaleX: 0.9, y: 0.9)
+            
+            mapBackView.alpha = segmentType == .request ? 1.0 : 0.0
+            mapBackView.isUserInteractionEnabled = segmentType == .request ? true : false
+            
             fromDateTime.alpha = segment ? 1.0 : 0.2
             fromDateTime.isUserInteractionEnabled = segment
             fromDateTime.transform = segment ? CGAffineTransform(scaleX: 1.0, y: 1.0) : CGAffineTransform(scaleX: 0.9, y: 0.9)
@@ -58,9 +60,6 @@ class NannyRequestMenu: UIView {
             fromCheck.textColor = UIColor.darkGray
             
             // To Switch, DatePicker & CheckLabel
-            toSwitch.setOn(segment, animated: true)
-            toSwitch.isUserInteractionEnabled = segment
-            toSwitch.transform = segment ? CGAffineTransform(scaleX: 1.0, y: 1.0) : CGAffineTransform(scaleX: 0.9, y: 0.9)
             toDateTime.alpha = segment ? 1.0 : 0.2
             toDateTime.isUserInteractionEnabled = segment
             toDateTime.transform = segment ? CGAffineTransform(scaleX: 1.0, y: 1.0) : CGAffineTransform(scaleX: 0.9, y: 0.9)
@@ -68,7 +67,7 @@ class NannyRequestMenu: UIView {
             toCheck.textColor = segment ? UIColor.darkGray : UIColor.lightGray
             
             // TextField & CheckLabel
-            requestTextField.alpha = segment ? 0.2 : 1.0
+            requestTextField.alpha = segment ? 0.0 : 1.0
             requestTextField.isUserInteractionEnabled = !segment
             
             // Just enjoy it
@@ -108,11 +107,19 @@ class NannyRequestMenu: UIView {
                 var requestMessage = "Melding til: \(nanny.firstName)"
                 if let text = self.requestTextField.text, text != "" { requestMessage = text }
                 if self.requestType.selectedSegmentIndex == 0 {
-                    // Send Request
+                    // Request
                     requestMessage = "Forespørsel til: \(nanny.firstName)"
                     var request = Request(nanny: nanny, user: user, timeFrom: self.fromDateTime.date, timeTo: self.toDateTime.date, message: requestMessage)
-                    request.requestCategory = NotificationCategory.nannyRequest.rawValue
-                    Notifications.instance.sendNotification(with: request)
+                    if !mapSwitch.isOn {
+                        // Send Nanny Request
+                        request.requestCategory = NotificationCategory.nannyRequest.rawValue
+                            Notifications.instance.sendNotification(with: request)
+                    } else {
+                        // Send Map Request
+                        request.requestCategory = NotificationCategory.nannyMapRequest.rawValue
+                        Notifications.instance.sendNotification(with: request)
+                    }
+                    
                 } else {
                     // Send Message
                     let message = Message(from: user, to: nanny, message: requestMessage)

@@ -1787,6 +1787,12 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dhN-On-y2P">
+                                        <rect key="frame" x="0.0" y="616" width="375" height="2"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="progressTintColor" red="1" green="0.19215686269999999" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="trackTintColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </progressView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -1824,6 +1830,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                     </tabBarItem>
                     <connections>
                         <outlet property="messageView" destination="XVF-ye-IV8" id="AdD-Lc-Hz0"/>
+                        <outlet property="progressView" destination="dhN-On-y2P" id="yVd-Ne-uE6"/>
                         <outlet property="tableView" destination="1S9-DO-AYS" id="4O2-ay-HOh"/>
                     </connections>
                 </viewController>
@@ -1921,7 +1928,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kzd-vP-aVG" customClass="CustomView" customModule="Nanny_Now" customModuleProvider="target">
                                                     <rect key="frame" x="48" y="10" width="285" height="153"/>
                                                     <subviews>
-                                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="right" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9zg-dQ-8no">
+                                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9zg-dQ-8no">
                                                             <rect key="frame" x="8" y="0.0" width="269" height="153"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <string key="text">Halloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibility</string>
@@ -2039,7 +2046,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LhT-OF-15D" customClass="CustomView" customModule="Nanny_Now" customModuleProvider="target">
                                                     <rect key="frame" x="48" y="30" width="285" height="133"/>
                                                     <subviews>
-                                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="right" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wk3-Bs-Lpd">
+                                                        <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wk3-Bs-Lpd">
                                                             <rect key="frame" x="8" y="0.0" width="269" height="133"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <string key="text">Halloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibilityHalloen folken, her er meldingen : !!!! Si noe annet da, sånne at vi forsvinner...!! . No care for life,,, didn matter if you live or die... I tought it was a big possibility</string>
@@ -2104,28 +2111,26 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         <color key="progressTintColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="trackTintColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </progressView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PyN-V2-g5P">
-                                        <rect key="frame" x="333" y="20" width="42" height="45"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="24"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PyN-V2-g5P" customClass="CustomButton" customModule="Nanny_Now" customModuleProvider="target">
+                                        <rect key="frame" x="317" y="28" width="50" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="0.19215686269999999" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22"/>
                                         <state key="normal" title="✕">
-                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="backButton:" destination="WpP-rT-5Nh" eventType="touchUpInside" id="hqV-We-RFo"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="nZS-BU-aG9" secondAttribute="trailing" id="0Ke-xr-xlU"/>
                                     <constraint firstItem="nZS-BU-aG9" firstAttribute="leading" secondItem="0Ep-jY-Yre" secondAttribute="leading" id="2Zd-EV-xCb"/>
                                     <constraint firstItem="nZS-BU-aG9" firstAttribute="top" secondItem="0Ep-jY-Yre" secondAttribute="top" constant="58" id="52S-qP-KhJ"/>
                                     <constraint firstAttribute="height" constant="60" id="Bu6-w4-DrI"/>
-                                    <constraint firstAttribute="trailing" secondItem="PyN-V2-g5P" secondAttribute="trailing" id="Smw-tX-GlG"/>
-                                    <constraint firstItem="PyN-V2-g5P" firstAttribute="leading" relation="lessThanOrEqual" secondItem="0Ep-jY-Yre" secondAttribute="leading" constant="333" id="Ss1-qJ-foY"/>
-                                    <constraint firstItem="PyN-V2-g5P" firstAttribute="top" secondItem="0Ep-jY-Yre" secondAttribute="top" constant="20" id="VYa-wm-OrN"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i9K-I6-gHO" customClass="FrostyView" customModule="Nanny_Now" customModuleProvider="target">
@@ -2195,7 +2200,6 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                             <constraint firstAttribute="trailing" secondItem="bCr-ei-flI" secondAttribute="trailing" id="bFT-wA-WcV"/>
                             <constraint firstAttribute="trailing" secondItem="0Ep-jY-Yre" secondAttribute="trailing" id="dgc-FU-sBs"/>
                             <constraint firstItem="bCr-ei-flI" firstAttribute="top" secondItem="xrv-PD-bic" secondAttribute="bottom" id="f9Q-nd-0Qy"/>
-                            <constraint firstAttribute="trailing" secondItem="PyN-V2-g5P" secondAttribute="trailing" id="fEb-Hk-wht"/>
                             <constraint firstItem="0Ep-jY-Yre" firstAttribute="leading" secondItem="aty-UC-zmS" secondAttribute="leading" id="hrm-e0-fBo"/>
                             <constraint firstItem="NnS-Ij-5k3" firstAttribute="top" secondItem="bCr-ei-flI" secondAttribute="bottom" id="nUV-v3-aA9"/>
                             <constraint firstItem="0Ep-jY-Yre" firstAttribute="top" secondItem="xrv-PD-bic" secondAttribute="bottom" constant="-20" id="wfC-NG-hQG"/>
@@ -2205,6 +2209,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="PyN-V2-g5P" id="4af-HS-g4O"/>
                         <outlet property="progressView" destination="nZS-BU-aG9" id="eoC-8J-sWA"/>
                         <outlet property="sendButton" destination="nEX-VP-fz7" id="g7o-eO-tIt"/>
                         <outlet property="tableView" destination="bCr-ei-flI" id="jPZ-N4-tcL"/>
@@ -2221,7 +2226,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2305" y="1521"/>
+            <point key="canvasLocation" x="2304.8000000000002" y="1520.6896551724139"/>
         </scene>
         <!--Request DetailVC-->
         <scene sceneID="LtI-5c-p6a">
@@ -2255,8 +2260,8 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         <rect key="frame" x="270" y="23" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XTl-Lp-Nw2">
-                                        <rect key="frame" x="0.0" y="159" width="375" height="508"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XTl-Lp-Nw2">
+                                        <rect key="frame" x="0.0" y="159" width="375" height="488"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RequestDetailCell" rowHeight="80" id="hFT-5b-bLx">
@@ -2282,7 +2287,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                         <constraints>
                             <constraint firstItem="ywO-tF-qyo" firstAttribute="top" secondItem="XTl-Lp-Nw2" secondAttribute="bottom" id="5Vw-Hc-VYL"/>
                             <constraint firstItem="XTl-Lp-Nw2" firstAttribute="leading" secondItem="hol-2I-Bz9" secondAttribute="leading" id="DKj-NV-Wwz"/>
-                            <constraint firstItem="XTl-Lp-Nw2" firstAttribute="top" secondItem="kxF-rz-H9F" secondAttribute="bottom" constant="139" id="RRD-Gp-a52"/>
+                            <constraint firstItem="XTl-Lp-Nw2" firstAttribute="top" secondItem="kxF-rz-H9F" secondAttribute="bottom" constant="159" id="RRD-Gp-a52"/>
                             <constraint firstAttribute="trailing" secondItem="XTl-Lp-Nw2" secondAttribute="trailing" id="tcn-Ag-elw"/>
                         </constraints>
                     </view>
@@ -2295,7 +2300,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XnZ-cb-od5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1665" y="1521"/>
+            <point key="canvasLocation" x="1664.8" y="1520.6896551724139"/>
         </scene>
         <!--Request-->
         <scene sceneID="hp6-Ma-xbL">
@@ -2471,28 +2476,28 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nanny-profil" translatesAutoresizingMaskIntoConstraints="NO" id="5gH-aH-0CN">
-                                                    <rect key="frame" x="10" y="15" width="50" height="50"/>
+                                                    <rect key="frame" x="10" y="15" width="45" height="45"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="5gH-aH-0CN" secondAttribute="height" multiplier="1:1" id="YZD-Wj-QTz"/>
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="oD1-oS-XEA">
-                                                    <rect key="frame" x="70" y="10" width="180" height="60"/>
+                                                    <rect key="frame" x="65" y="12" width="185" height="56"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="BBS-vn-yYW">
-                                                            <rect key="frame" x="0.0" y="0.0" width="180" height="23"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="185" height="23"/>
                                                             <subviews>
-                                                                <stackView opaque="NO" contentMode="left" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="QTE-tm-rWb">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="81.5" height="23"/>
+                                                                <stackView opaque="NO" contentMode="left" distribution="equalSpacing" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="QTE-tm-rWb">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="83.5" height="23"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7j9-b6-S9C">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="38.5" height="23"/>
+                                                                            <rect key="frame" x="0.0" y="2" width="38.5" height="19.5"/>
                                                                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                                                             <color key="highlightedColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baK-Nj-tTC">
-                                                                            <rect key="frame" x="42.5" y="0.0" width="7.5" height="23"/>
+                                                                            <rect key="frame" x="43.5" y="0.0" width="7.5" height="23"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="23" id="7UR-Fb-bul"/>
                                                                                 <constraint firstAttribute="width" constant="7.5" id="Z6Z-Ns-PF7"/>
@@ -2502,15 +2507,15 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                                             <color key="highlightedColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 min" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ic4-pN-ARa">
-                                                                            <rect key="frame" x="54" y="0.0" width="27.5" height="23"/>
+                                                                            <rect key="frame" x="56" y="5.5" width="27.5" height="12.5"/>
                                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="9"/>
                                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <color key="highlightedColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </label>
                                                                     </subviews>
                                                                 </stackView>
-                                                                <stackView opaque="NO" contentMode="right" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="zmb-5a-alw">
-                                                                    <rect key="frame" x="135" y="0.0" width="45" height="23"/>
+                                                                <stackView opaque="NO" contentMode="right" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zmb-5a-alw">
+                                                                    <rect key="frame" x="139" y="0.0" width="46" height="23"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pending" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LS8-e2-0Rm">
                                                                             <rect key="frame" x="0.0" y="0.0" width="34" height="23"/>
@@ -2519,7 +2524,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                                             <color key="highlightedColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="al3-mR-XOL">
-                                                                            <rect key="frame" x="38" y="0.0" width="7" height="23"/>
+                                                                            <rect key="frame" x="39" y="0.0" width="7" height="23"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="23" id="Uhc-Ez-sCs"/>
                                                                                 <constraint firstAttribute="width" constant="7" id="not-VP-gqZ"/>
@@ -2533,10 +2538,10 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="center" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="W4j-Rx-DPZ">
-                                                            <rect key="frame" x="0.0" y="23" width="180" height="37"/>
+                                                            <rect key="frame" x="0.0" y="23" width="185" height="33"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Du: Har du mulighet til sfsdfsf sdfsfsdf sdfsf" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPd-vT-98C">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="180" height="30.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="185" height="30.5"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="11"/>
                                                                     <color key="textColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2548,54 +2553,54 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="ppZ-Dn-1V4">
-                                                    <rect key="frame" x="260" y="12" width="105" height="56"/>
+                                                    <rect key="frame" x="260" y="15" width="105" height="50"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FaC-o9-zsH">
-                                                            <rect key="frame" x="11" y="0.0" width="94" height="18.5"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FaC-o9-zsH">
+                                                            <rect key="frame" x="4" y="0.0" width="101" height="16"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fra" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="urX-Ks-iAR">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="13" height="18.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.5" width="13" height="15.5"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
                                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="highlightedColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="i morgen  15:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGu-t9-G7G">
-                                                                    <rect key="frame" x="23" y="0.0" width="71" height="18.5"/>
-                                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
+                                                                    <rect key="frame" x="23" y="0.5" width="78" height="15.5"/>
+                                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
                                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="highlightedColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mAE-Pv-dOu">
-                                                            <rect key="frame" x="60.5" y="18.5" width="44.5" height="18"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mAE-Pv-dOu">
+                                                            <rect key="frame" x="58" y="16" width="47" height="16.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="til" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IcL-wh-7BW">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="9" height="18"/>
+                                                                    <rect key="frame" x="0.0" y="0.5" width="9" height="15.5"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
                                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="highlightedColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCK-kE-s6g">
-                                                                    <rect key="frame" x="19" y="0.0" width="25.5" height="18"/>
-                                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
+                                                                    <rect key="frame" x="19" y="0.5" width="28" height="15.5"/>
+                                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
                                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <color key="highlightedColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zq4-tB-Mvl">
-                                                            <rect key="frame" x="8.5" y="36.5" width="96.5" height="19.5"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zq4-tB-Mvl">
+                                                            <rect key="frame" x="8.5" y="32.5" width="96.5" height="17.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="per time   " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHl-Li-cQ6">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="46" height="19.5"/>
+                                                                    <rect key="frame" x="0.0" y="1.5" width="46" height="14"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
                                                                     <color key="textColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 250 kr " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qw3-6f-0mi">
-                                                                    <rect key="frame" x="56" y="0.0" width="40.5" height="19.5"/>
+                                                                    <rect key="frame" x="56" y="0.5" width="40.5" height="16.5"/>
                                                                     <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                                                     <color key="textColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2618,15 +2623,15 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="ppZ-Dn-1V4" secondAttribute="trailing" constant="10" id="6dB-gy-EV2"/>
-                                                <constraint firstItem="ppZ-Dn-1V4" firstAttribute="top" secondItem="oy6-7k-N7u" secondAttribute="top" constant="12" id="8En-m0-809"/>
+                                                <constraint firstItem="ppZ-Dn-1V4" firstAttribute="top" secondItem="oy6-7k-N7u" secondAttribute="top" constant="15" id="8En-m0-809"/>
                                                 <constraint firstItem="5gH-aH-0CN" firstAttribute="top" secondItem="oy6-7k-N7u" secondAttribute="top" constant="15" id="9Mu-VA-auP"/>
                                                 <constraint firstItem="ppZ-Dn-1V4" firstAttribute="leading" secondItem="oD1-oS-XEA" secondAttribute="trailing" constant="10" id="B4P-ta-6EV"/>
-                                                <constraint firstAttribute="bottom" secondItem="oD1-oS-XEA" secondAttribute="bottom" constant="10" id="KRm-10-uLd"/>
-                                                <constraint firstAttribute="bottom" secondItem="ppZ-Dn-1V4" secondAttribute="bottom" constant="12" id="WBE-30-E9l"/>
-                                                <constraint firstAttribute="bottom" secondItem="5gH-aH-0CN" secondAttribute="bottom" constant="15" id="WBR-FC-k7u"/>
+                                                <constraint firstAttribute="bottom" secondItem="oD1-oS-XEA" secondAttribute="bottom" constant="12" id="KRm-10-uLd"/>
+                                                <constraint firstAttribute="bottom" secondItem="ppZ-Dn-1V4" secondAttribute="bottom" constant="15" id="WBE-30-E9l"/>
+                                                <constraint firstAttribute="bottom" secondItem="5gH-aH-0CN" secondAttribute="bottom" constant="20" id="WBR-FC-k7u"/>
                                                 <constraint firstItem="oD1-oS-XEA" firstAttribute="leading" secondItem="5gH-aH-0CN" secondAttribute="trailing" constant="10" id="mPh-1G-zso"/>
                                                 <constraint firstItem="5gH-aH-0CN" firstAttribute="leading" secondItem="oy6-7k-N7u" secondAttribute="leading" constant="10" id="xFc-eC-aSe"/>
-                                                <constraint firstItem="oD1-oS-XEA" firstAttribute="top" secondItem="oy6-7k-N7u" secondAttribute="top" constant="10" id="zKh-Iw-xiy"/>
+                                                <constraint firstItem="oD1-oS-XEA" firstAttribute="top" secondItem="oy6-7k-N7u" secondAttribute="top" constant="12" id="zKh-Iw-xiy"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="tintColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

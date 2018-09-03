@@ -19,6 +19,7 @@ class MessageViewController: UIViewController {
     // ----------------------------------------
     @IBOutlet weak var messageView: UIView!
     @IBOutlet weak var tableView: CustomTableView!
+    @IBOutlet weak var progressView: UIProgressView!
     
     // MARK: - Properties: Array & Varables
     // -------------------------------------
@@ -68,6 +69,8 @@ class MessageViewController: UIViewController {
         if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             DataService.instance.REF_MESSAGES.child("private").child(UID).child("last").queryOrdered(byChild: "messageTime").observe(.value, with: { (snapshot) in
                 
+                self.setProgress(progress: 0.7, animated: true, alpha: 1.0)
+                
                 let remoteID = snapshot.key
                 self.messages.removeAll()
                 
@@ -82,8 +85,9 @@ class MessageViewController: UIViewController {
                         }
                     }
                 }
-                
+                self.setProgress(progress: 1.0, animated: true, alpha: 0.0)
             })
+            
         }
     }
     
@@ -98,10 +102,14 @@ class MessageViewController: UIViewController {
             highlighted:  (messageSnap["highlighted"] as? Bool)!)
         
         self.observeUser(with: message, userRef: userREF)
+        // self.setProgress(progress: 1.0, animated: true, alpha: 0.0)
     }
     
     func observeUser(with message: Message, userRef: DatabaseReference) {
         if self.messages.count < self.totalMessages {
+            if self.messages.count == 1 {
+                setProgress(progress: 0.7, animated: true, alpha: 1.0)
+            }
             userRef.observeSingleEvent(of: .value, with: { snapshot in
                 if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
                     
@@ -142,10 +150,10 @@ class MessageViewController: UIViewController {
                     
                     self.tableView.reloadData()
                 }
-                
             })
         } else {
             self.tableView.reloadData()
+            setProgress(progress: 1.0, animated: true, alpha: 0.0)
         }
     }
     
@@ -170,6 +178,20 @@ class MessageViewController: UIViewController {
             return
         }
         present(infoVC, animated: true)
+    }
+    
+    private func setProgress(progress: Float = 1.0, animated: Bool = true, alpha: CGFloat = 1.0) {
+        if let progressView = self.progressView {
+            if animated {
+                progressView.setProgress(progress, animated: animated)
+                UIView.animate(withDuration: 0.60, delay: 0.75, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
+                    progressView.alpha = alpha
+                })
+            } else {
+                progressView.setProgress(progress, animated: animated)
+                progressView.alpha = alpha
+            }
+        }
     }
 }
 
@@ -203,30 +225,36 @@ extension MessageViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        printFunc()
         
         if !self.returnWithDismiss {
             hapticButton(.heavy, lowPowerModeDisabled)
         }
-        
+        setProgress(progress: 0.7, animated: true, alpha: 1.0)
         // self.removeAllDatabaseObservers()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // observeMessages()
+        setProgress(progress: 1.0, animated: true, alpha: 0.0)
+        printFunc()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        printFunc()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        printFunc()
+        setProgress(progress: 0.0, animated: false, alpha: 0.0)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
+        printFunc()
         // self.removeAllDatabaseObservers()
         self.messageBadge = 0
     }

@@ -31,6 +31,8 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
 
     @IBOutlet weak var locationMenu: FrostyCornerView!
     @IBOutlet weak var locationPicker: UIPickerView!
+    
+    
 
     // https://medium.com/@brianclouser/swift-3-creating-a-custom-view-from-a-xib-ecdfe5b3a960
     // MARK: - Properties: Array & Varables
@@ -631,14 +633,11 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     private func enterRequestMenu() {
         // Instantiate Visual Blur View
         let visualView = UIVisualEffectView(frame: UIScreen.main.bounds)
-        // self.visualView = visualView
         self.view.addSubview(visualView)
         
         // Instantiate RequestMenu View
         let requestFrame = CGRect(x: 15, y: 30, width: UIScreen.main.bounds.width - 30, height: 520)
         let requestMenu = NannyRequestMenu(frame: requestFrame)
-        // self.view.addSubview(requestMenu)
-        // self.requestMenu = requestMenu
         
         // Set properties
         visualView.effect = nil
@@ -649,7 +648,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         // Instantiate UIPropertyAnimator
         animator = UIViewPropertyAnimator(duration: 0.38, curve: .easeOut) {
             visualView.effect = UIBlurEffect(style: .light)
-            // self.effectView.effect = UIBlurEffect(style: .light)
         }
         
         // Add Visual and RequestView to subview
@@ -666,6 +664,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
             requestMenu.isUserInteractionEnabled = true
             requestMenu.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         })
+        
         // Init Data to requestMenu
         requestMenu.initData(user: self.user, nanny: self.nannies[(lastRowSelected?.row)!], completion: {
             // Run exit process when done...
@@ -893,9 +892,7 @@ extension NannyViewController : UITableViewDelegate, UITableViewDataSource {
         }
         
         let request = UITableViewRowAction(style: .destructive, title: " ☑︎ ") { (action , indexPath) -> Void in
-
             self.enterRequestMenu()
-            
             // self.enterRequestMenu()
             // self.sendRequestAlert(row: indexPath.row)
         }

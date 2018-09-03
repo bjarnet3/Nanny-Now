@@ -31,6 +31,7 @@ class MessageDetailVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var textFieldBackView: FrostyView!
@@ -385,14 +386,6 @@ class MessageDetailVC: UIViewController {
         self.messages.sort(by: { $0._messageTime > $1._messageTime })
         
         self.tableView.reloadData()
-        
-        /* Display the messages
-        for message in messages {
-            let dateString = dateTimeToTimeStampString(message.messageTime) //  dateTimeToString(from: message.messageTime)
-            print("\(dateString) \(message._message)")
-        }
-        */
-        
         self.setProgress(progress: 1.0, animated: true, alpha: 0.0)
     }
 }
@@ -418,6 +411,10 @@ extension MessageDetailVC {
         
         tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
         // tableView.transform = CGAffineTransform(rotationAngle: -CGFloat.pi)
+        
+        // self.backButton.layer.cornerRadius = backButton.frame.height / 2
+        // self.backButton.layer.borderWidth = 0.8
+        // self.backButton.layer.borderColor = #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1)
         
         performAction(for: .setup)
     }
