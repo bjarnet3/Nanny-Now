@@ -281,7 +281,7 @@ class DataService {
                 "messageTime": timeStamp,
                 "toUID"     : recieveUserID,
                 "fromUID"   : userID,
-                "highlighted" : true
+                "highlighted" : false
             ]
             
             let all : [String : Any] = [

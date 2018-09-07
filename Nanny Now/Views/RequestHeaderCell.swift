@@ -19,7 +19,7 @@ class RequestHeaderCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.brandingLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        self.brandingLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         self.brandingLabel.layer.cornerRadius = self.brandingLabel.frame.height / 2
         self.brandingLabel.clipsToBounds = true
         

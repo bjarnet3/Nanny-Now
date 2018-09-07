@@ -78,6 +78,10 @@ struct Message {
         self._requestCategory = category
     }
     
+    mutating func setHighlighted(highlighted: Bool) {
+        self._highlighted = highlighted
+    }
+    
     init(from fromUser: User, to toUser: User, message: String, messageID: String? = nil) {
         self._toUser = toUser
         self._fromUser = fromUser

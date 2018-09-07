@@ -31,8 +31,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
 
     @IBOutlet weak var locationMenu: FrostyCornerView!
     @IBOutlet weak var locationPicker: UIPickerView!
-    
-    
 
     // https://medium.com/@brianclouser/swift-3-creating-a-custom-view-from-a-xib-ecdfe5b3a960
     // MARK: - Properties: Array & Varables
@@ -95,7 +93,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         maskView.layer.addSublayer(boarderLayer)
         // add mask to mapView
         addParallaxEffectOnView(maskView, 12)
-        
         subView.addSubview(maskView)
     }
     
@@ -118,11 +115,11 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     private var locationMenuShowing = true
     private var orderMenuShowing = true
     
-    private var currentMapStyle:MapStyleForView = .blueAndGrayMap
+    private var currentMapStyle:MapStyleForView = .veryLightMap
     private var backgroundMapViewIsRendered = false
     private var index = 0
     
-    private var mapStyle: [MapStyleForView] = [.blueAndGrayMap, .blackAndRegularMap, .dayMap, .pinkBlackMap, .pinkStinkMap, .pinkWhiteMap, .veryLightMap, .whiteAndBlackMap, .blackAndBlueGrayMap, .lightBlueGrayMap]
+
     
     // MARK: - IBAction: Methods connected to UI
     // ----------------------------------------
@@ -175,37 +172,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                 self.nannyAd.setTitleColor(UIColor.black, for: .normal)
             })
         })
-    }
-    
-    // MARK: - Functions, Database & Animation
-    // ---------------------------------------
-    func setMapView(for mapStyleForView: MapStyleForView) {
-        self.backgroundMapViewIsRendered = false
-        self.mapView.removeOverlays(mapView.overlays)
-        
-        switch mapStyleForView {
-        case .blueAndGrayMap:
-            self.setMapBackgroundOverlay(mapName: .blueAndGrayMap)
-        case .blackAndRegularMap:
-            self.setMapBackgroundOverlay(mapName: .blackAndRegularMap)
-        case .dayMap:
-            self.setMapBackgroundOverlay(mapName: .dayMap)
-        case .pinkBlackMap:
-            self.setMapBackgroundOverlay(mapName: .pinkBlackMap)
-        case .pinkStinkMap:
-            self.setMapBackgroundOverlay(mapName: .pinkStinkMap)
-        case .pinkWhiteMap:
-            self.setMapBackgroundOverlay(mapName: .pinkWhiteMap)
-        case .veryLightMap:
-            self.setMapBackgroundOverlay(mapName: .veryLightMap)
-        case .whiteAndBlackMap:
-            self.setMapBackgroundOverlay(mapName: .whiteAndBlackMap)
-        case .blackAndBlueGrayMap:
-            self.setMapBackgroundOverlay(mapName: .blackAndBlueGrayMap)
-        case .lightBlueGrayMap:
-            self.setMapBackgroundOverlay(mapName: .lightBlueGrayMap)
-        }
-        displayOnTitle(displayMessage: "Map Title  \(mapStyleForView.rawValue)")
     }
     
     private func getUserSettings() {
@@ -289,7 +255,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                             DataService.instance.copyLocationToREF(for: userID, fromLocation: self.activeLocationName, reference: nanniesActive)
                             
                             self.nannyAdOn.updateValue(true, forKey: userID)
-                            self.changeMap()
                         }
                     }
                 }
@@ -305,7 +270,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                 let nannyActive = DataService.instance.REF_NANNIES_ACTIVE
                 DataService.instance.removeReferenceChildValues(uid: userID, reference: nannyActive)
                 self.nannyAdOn.updateValue(false, forKey: userID)
-                self.changeMap()
             }
         }
     }
@@ -374,23 +338,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                 }
             }
         }
-    }
-    
-    private func setMapBackgroundOverlay(mapName: MapStyleForView) {
-        // We first need to have the path of the overlay configuration JSON
-        guard let overlayFileURLString = Bundle.main.path(forResource: mapName.rawValue, ofType: "json") else {
-            return
-        }
-        let overlayFileURL = URL(fileURLWithPath: overlayFileURLString)
-        
-        // After that, you can create the tile overlay using MapKitGoogleStyler
-        guard let tileOverlay = try? MapKitGoogleStyler.buildOverlay(with: overlayFileURL) else {
-            return
-        }
-        
-        // And finally add it to your MKMapView
-        mapView.add(tileOverlay)
-        self.backgroundMapViewIsRendered = true
     }
     
     private func resetMapView() {
@@ -578,15 +525,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         }
     }
     
-    private func changeMap() {
-        if index < mapStyle.count {
-            setMapView(for: mapStyle[index])
-            index += 1
-        } else {
-            index = 0
-        }
-    }
-    
     // Request Menu
     private func enterOrderMenu(_ animated: Bool = true, delay: TimeInterval = 0.03) {
         
@@ -617,7 +555,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                     self.orderMenu.transform = CGAffineTransform(translationX: 0, y: 20)
                     self.orderMenuShowing = false
                 }, completion: { (_) in
-                    // self.changeMap()
+                    printFunc("completion:")
                 })
             } else {
                 self.orderMenu.alpha = 0.0
@@ -666,7 +604,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         })
         
         // Init Data to requestMenu
-        requestMenu.initData(user: self.user, nanny: self.nannies[(lastRowSelected?.row)!], completion: {
+        requestMenu.initData(user: self.user, remote: self.nannies[(lastRowSelected?.row)!], completion: {
             // Run exit process when done...
             self.exitAllMenu()
         })
@@ -735,7 +673,7 @@ extension NannyViewController {
         self.mapView.alpha = 0
         self.mapView.delegate = self
         
-        self.setMapBackgroundOverlay(mapName: .whiteAndBlackMap)
+        setMapBackgroundOverlay(mapName: .veryLightMap, mapView: self.mapView)
         
         self.tableView.alpha = 0
         self.tableView.delegate = self
@@ -1069,7 +1007,7 @@ extension NannyViewController {
             for view in self.view.subviews {
                 if view is NannyRequestMenu {
                     if let requestMenu = view as? NannyRequestMenu {
-                        requestMenu.initData(user: user, nanny: remoteUser)
+                        requestMenu.initData(user: user, remote: remoteUser)
                         requestMenu.sendRequest()
                     }
                 }

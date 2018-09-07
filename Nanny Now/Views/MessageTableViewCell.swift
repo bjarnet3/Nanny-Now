@@ -18,10 +18,9 @@ class MessageTableViewCell: UITableViewCell {
     @IBOutlet weak var brandingLabel: UILabel!
     @IBOutlet weak var userStatusLbl: UILabel!
     @IBOutlet weak var userIndicatorLbl: UILabel!
-
+    @IBOutlet weak var hightlightedLbl: UILabel!
+    
     var cellImageLoaded = false
-    var hasSelected = false
-    var hasOpened = false
     
     func returnUserIndicator(from date: Date) {
         let now = Date()
@@ -85,7 +84,7 @@ class MessageTableViewCell: UITableViewCell {
         setProfileImage()
         self.userStatusLbl.layer.cornerRadius = self.userStatusLbl.frame.height / 2
         
-        self.brandingLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        self.brandingLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         self.brandingLabel.layer.cornerRadius = self.brandingLabel.frame.height / 2
         self.brandingLabel.clipsToBounds = true
     }
@@ -96,17 +95,20 @@ class MessageTableViewCell: UITableViewCell {
     }
     
     func setHighlightedOnTextAnd(highlighted: Bool = false) {
-        self.nameLabel.textColor = BLACK_SOLID
-        self.nameLabel.highlightedTextColor = UIColor.darkGray
+        self.nameLabel.textColor = UIColor.darkGray
+        self.nameLabel.highlightedTextColor = BLACK_SOLID
         self.nameLabel.isHighlighted = highlighted
         
-        self.messageLabel.textColor = PINK_DARK_SHARP
-        self.messageLabel.highlightedTextColor = PINK_TABBAR_UNSELECTED
+        self.messageLabel.textColor = PINK_TABBAR_UNSELECTED
+        self.messageLabel.highlightedTextColor = PINK_DARK_SHARP
         self.messageLabel.isHighlighted = highlighted
         
-        self.timeLabel.textColor = UIColor.darkGray
-        self.timeLabel.highlightedTextColor = UIColor.lightGray
+        self.timeLabel.textColor = UIColor.lightGray
+        self.timeLabel.highlightedTextColor = UIColor.black
         self.timeLabel.isHighlighted = highlighted
+        
+        self.hightlightedLbl.text = highlighted ? "•" : " "
+        // self.profileImage.alpha = highlighted ? 1.0 : 0.85
     }
     
     func animateView( direction: Direction) {
@@ -137,8 +139,7 @@ class MessageTableViewCell: UITableViewCell {
                         self.userStatus = message.userStatus
                     })
                 } else {
-                    self.hasOpened = message._highlighted
-                    
+                    // self.hasOpened = message._highlighted
                     self.nameLabel.text = user.firstName
                     self.messageLabel.text = message._message
                     self.time = stringToDateTime(message._messageTime)

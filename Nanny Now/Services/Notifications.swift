@@ -294,10 +294,15 @@ class Notifications {
                                     guard let remoteLat = remote.location?.coordinate.latitude else { return } // ?? 60.1890322
                                     guard let remoteLong = remote.location?.coordinate.longitude else { return } // ?? 5.9254423
                                     
+                                    let timeFrom = request.timeFrom
+                                    let timeTo = request.timeTo
+                                    
                                     // Get tokens from Database
                                     let registration_ids = tokens
                                     let message = message
-                                    var title = "\(firstName)"
+                                    
+                                    let remoteName = firstName
+                                    var title = remoteName
                                     // let contentAvailable = false
                                     
                                     // For Advanced Rich Notificaiton Setup
@@ -331,7 +336,10 @@ class Notifications {
                                         ["data":
                                             [ "category": category,
                                               "requestID": requestID,
+                                              "timeFrom": timeFrom,
+                                              "timeTo": timeTo,
                                               
+                                              "remoteName": remoteName,
                                               "remoteID": remoteID,
                                               "remoteURL": remoteURL,
                                               "remoteLat": String(remoteLat),
@@ -341,6 +349,7 @@ class Notifications {
                                               "userURL": userURL,
                                               "userLat": String(userLat),
                                               "userLong": String(userLong)
+                                              
                                             ],
                                          "registration_ids" : registration_ids,
                                          "notification":

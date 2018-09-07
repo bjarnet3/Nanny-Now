@@ -13,6 +13,42 @@ import Contacts
 import UserNotifications
 import UserNotificationsUI
 
+/**
+ - DateFormat = "yyyy-MM-dd-HH:mm:ss"
+ - TimeZone = TimeZone(secondsFromGMT: 86400)
+ - Locale = Locale(identifier: "en_US_POSIX")
+ 
+ - Returns: **Date**
+ */
+public func stringToDateTime(_ dateTimeString: String) -> Date {
+    let dateFormater = DateFormatter()
+    dateFormater.dateFormat = "yyyy-MM-dd-HH:mm:ss"
+    
+    let stringToDateTimeFormat = dateFormater.date(from: dateTimeString)
+    return stringToDateTimeFormat!
+}
+
+/**
+ - http://nsdateformatter.com/
+ 
+ - DateFormat = "E d MMMM h:mm"
+ - TimeZone = TimeZone(secondsFromGMT: 86400)
+ - Locale = Locale(identifier: "nb_NO")
+ 
+ - Returns: **E d MMMM h:mm** ex: (**tir. 5 juni 9:04**)
+ */
+public func dateTimeToString(from date: Date, with locale:String = "nb_NO", dateFormat:String = "E d MMMM H:mm") -> String {
+    let dateFormater = DateFormatter()
+    
+    dateFormater.dateFormat = dateFormat
+    dateFormater.timeZone = TimeZone(secondsFromGMT: 86400)
+    dateFormater.locale = Locale(identifier: locale)
+    
+    let dateTimeToString = dateFormater.string(from: date)
+    return dateTimeToString
+}
+
+
 class FrostyView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -49,9 +85,13 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     @IBOutlet weak var remoteImageView: UIImageView!
     @IBOutlet weak var yourImageView: UIImageView!
     
-    @IBOutlet weak var messageLabel: UILabel!
+    
     @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var distanceTimeLabel: UILabel!
+    
+    @IBOutlet weak var requestName: UILabel!
+    @IBOutlet weak var requestTime: UILabel!
+    @IBOutlet weak var requestTimeTo: UILabel!
     
     let regionRadius: CLLocationDistance = 20000
     // var locationManager: CLLocationManager!
@@ -62,12 +102,10 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         // The solution to not drawing polyline
         mapView.delegate = self
         self.setMapBackgroundOverlay(mapName: .veryLightMap)
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         self.addCirleMaskWithFrostOn(self.maskingView)
     }
     
@@ -77,9 +115,8 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         let remoteURL = AnyHashable("userURL")
         let userURL = AnyHashable("remoteURL")
         
-        let title = notification.request.content.title
+        // let title = notification.request.content.title
         let subtitle = notification.request.content.body
-        
         let userInfo = notification.request.content.userInfo
         
         guard let yourImageUrl = userInfo[userURL] as? String else { return }
@@ -88,6 +125,13 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         self.yourImageView.loadImageUsingCacheWith(urlString:yourImageUrl)
         self.remoteImageView.loadImageUsingCacheWith(urlString: remoteImageUrl)
         
+        // Message Text
+        // -----------
+        let remoteName = userInfo["remoteName"] as? String ?? ""
+        self.requestName?.text = "Forespørsel ( \(remoteName) )"
+        
+        // Location
+        // --------
         let remoteLatitude = userInfo["userLat"] as? String ?? "60.0001"  // Åsane Senter
         let remoteLongitude = userInfo["userLong"] as? String ?? "5.0001"
         
@@ -97,11 +141,22 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         let yourLocation = CLLocationCoordinate2D(latitude: Double(userLatitude)!, longitude: Double(userLongitude)!)
         let remoteLocation = CLLocationCoordinate2D(latitude: Double(remoteLatitude)!, longitude: Double(remoteLongitude)!)
         
-        self.renderedMap(title, subtitle: subtitle, remoteLocation: remoteLocation, yourLocation: yourLocation)
+        self.renderedMap(remoteName, subtitle: subtitle, remoteLocation: remoteLocation, yourLocation: yourLocation)
         
-        let message = "\(notification.request.content.title): \(notification.request.content.body) "
-        // let message = "\(remoteLatitude): \(remoteLongitude)  -  \(userLatitude):\(userLongitude)"
-        self.messageLabel?.text = message
+        // Data Time Format
+        // ----------------
+
+        let timeStringFrom = userInfo["timeFrom"] as? String
+        let timeStringTo = userInfo["timeTo"] as? String
+        
+        let timeFrom = stringToDateTime(timeStringFrom!)
+        let timeTo = stringToDateTime(timeStringTo!)
+        
+        let timeStringFormatFrom = dateTimeToString(from: timeFrom, dateFormat: "E d MMM H:mm")
+        let timeStringFormatTo = dateTimeToString(from: timeTo, dateFormat: "d MMM H:mm")
+        
+        self.requestTime?.text = "\(timeStringFormatFrom) "
+        self.requestTimeTo.text = "\(timeStringFormatTo) "
     }
     
     private func addCirleMaskWithFrostOn(_ subView: UIView) {
@@ -137,17 +192,8 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         maskView.clipsToBounds = true
         maskView.layer.borderColor = UIColor.gray.cgColor
         maskView.backgroundColor = nil
-        // maskView.layer.masksToBounds = true
         maskView.layer.addSublayer(boarderLayer)
-        // add mask to mapView
-        
-        // maskView.contentMode = .scaleAspectFill
-        // maskView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        // subView.insertSubview(maskView, at: 0)
         self.maskingView.addSubview(maskView)
-        
-        // subView.insertSubview(maskView, aboveSubview: self.mapView)
-        // subView.addSubview(maskView) // addSubview(maskView)
     }
     
     /**
@@ -354,12 +400,12 @@ extension NotificationViewController : MKMapViewDelegate {
                     let routeTimeMessage = "Det tar ca \(routeMinutes) minutter \(transportTypeString)"
                     let routeDistanceMessage = "Avstanden er \(routeDistance) km"
                     
-                    self.timeLabel.text = routeTimeMessage
+                    self.distanceTimeLabel.text = routeTimeMessage
                     self.distanceLabel.text = routeDistanceMessage
                     
                     // https://stackoverflow.com/questions/23127795/how-to-offset-properly-an-mkmaprect
                     let mapRect = route.polyline.boundingMapRect
-                    self.mapView.setVisibleMapRect(mapRect, edgePadding: UIEdgeInsetsMake(65, 60, 85, 60), animated: true)
+                    self.mapView.setVisibleMapRect(mapRect, edgePadding: UIEdgeInsetsMake(100, 60, 85, 60), animated: true)
                     
                     // let mapCamera = MKMapCamera(lookingAtCenter: (self.userLocation), fromEyeCoordinate: (self.yourLocation), eyeAltitude: 400.0)
                     // mapCamera.heading = 80 // rotation

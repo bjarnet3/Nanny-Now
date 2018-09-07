@@ -35,9 +35,13 @@ class NannyRequestMenu: UIView {
     // MARK: - Properties: Array & Varables
     // -------------------------------------
     private var user: User?
-    private var nanny: Nanny?
+    private var remote: User?
     private var message: String = ""
     private var completion: Completion?
+    
+    private func switchUser() {
+        (self.user, self.remote) = (self.remote, self.user)
+    }
     
     // MARK: - IBAction: Methods connected to UI
     // ----------------------------------------
@@ -72,10 +76,6 @@ class NannyRequestMenu: UIView {
             
             // Just enjoy it
             (requestTextField.text, self.message) = (self.message, requestTextField.text ?? "")
-            
-            requestCheck.text = segment ? "x" : "✓"
-            requestCheck.textColor = segment ? UIColor.lightGray : UIColor.darkGray
-            
             if segment { dismissKeyboard() } else { requestTextField.becomeFirstResponder() }
         }
         switchSegment(segmentType: requestType)
@@ -97,19 +97,24 @@ class NannyRequestMenu: UIView {
     @IBAction private func resignKeyboard(_ sender: Any) {
         self.dismissKeyboard()
     }
-
+    
+    @IBAction func mapSwitchAction(_ sender: UISwitch) {
+        requestCheck.text = sender.isOn ? "✓" : "x"
+    }
+    
     // MARK: - Functions, Database & Animation
     // ---------------------------------------
     public func sendRequest() {
         print("sendRequest")
-        if let nanny = self.nanny {
+        
+        if let remoteUser = self.remote {
             if let user = self.user {
-                var requestMessage = "Melding til: \(nanny.firstName)"
+                var requestMessage = "Melding til: \(remoteUser.firstName)"
                 if let text = self.requestTextField.text, text != "" { requestMessage = text }
                 if self.requestType.selectedSegmentIndex == 0 {
                     // Request
-                    requestMessage = "Forespørsel til: \(nanny.firstName)"
-                    var request = Request(nanny: nanny, user: user, timeFrom: self.fromDateTime.date, timeTo: self.toDateTime.date, message: requestMessage)
+                    requestMessage = "Forespørsel til: \(remoteUser.firstName)"
+                    var request = Request(nanny: remoteUser as! Nanny, user: user, timeFrom: self.fromDateTime.date, timeTo: self.toDateTime.date, message: requestMessage)
                     if !mapSwitch.isOn {
                         // Send Nanny Request
                         request.requestCategory = NotificationCategory.nannyRequest.rawValue
@@ -122,7 +127,7 @@ class NannyRequestMenu: UIView {
                     
                 } else {
                     // Send Message
-                    let message = Message(from: user, to: nanny, message: requestMessage)
+                    let message = Message(from: user, to: remoteUser, message: requestMessage)
                     Notifications.instance.sendNotification(with: message)
                 }
             }
@@ -161,20 +166,20 @@ class NannyRequestMenu: UIView {
         requestView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
     
-    public func initData(user: User?, nanny: Nanny?, completion: Completion? = nil) {
-        if let nanny = nanny {
-            self.requestImage.loadImageUsingCacheWith(urlString: nanny.imageName)
-            self.requestName.text = nanny.firstName
-            self.requestAge.text = "\(nanny.age) år"
-            self.requestTitle.text = nanny.jobTitle
-            self.requestGender.text = nanny.gender
-            self.requestRating.text = nanny.ratingStar
-            self.requestDistance.text = nanny.returnDistance
+    public func initData(user: User?, remote: User?, completion: Completion? = nil) {
+        if let remoteUser = remote {
+            self.requestImage.loadImageUsingCacheWith(urlString: remoteUser.imageName)
+            self.requestName.text = remoteUser.firstName
+            self.requestAge.text = "\(remoteUser.age) år"
+            self.requestTitle.text = remoteUser.jobTitle
+            self.requestGender.text = remoteUser.gender
+            self.requestRating.text = remoteUser.ratingStar
+            self.requestDistance.text = remoteUser.returnDistance
             
             self.fromDateTime.minimumDate = Date(timeIntervalSinceNow: 900.0)
             self.toDateTime.minimumDate = Date(timeIntervalSinceNow: 4800.0)
             
-            self.nanny = nanny
+            self.remote = remoteUser
         }
         if let user = user {
             self.user = user

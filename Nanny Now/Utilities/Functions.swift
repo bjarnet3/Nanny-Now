@@ -11,7 +11,6 @@ import MapKit
 // import Firebase
 // import RevealingSplashView
 // import RAMAnimatedTabBarController
-
 public func returnGender(_ gender:String?) -> String {
     switch gender! {
     case "female":
@@ -213,7 +212,7 @@ public func timeToString(from date: Date) -> String {
  
  - Returns: **E d MMMM h:mm** ex: (**tir. 5 juni 9:04**)
  */
-public func dateTimeToString(from date: Date, with locale:String = "nb_NO") -> String {
+public func dateTimeToString(from date: Date, with locale:String = "nb_NO", dateFormat:String = "E d MMMM H:mm") -> String {
     let dateFormater = DateFormatter()
 
     dateFormater.dateFormat = "E d MMMM H:mm"
@@ -311,7 +310,6 @@ public func returnDayTimeString(from date: Date) -> String {
     let today = formatter.string(from: todayDate)
     let tomorrow = formatter.string(from: tomorrowDate)
     let yesterday = formatter.string(from: yesterdayDate)
-    
     
     /*
     var tidsPeriode = ""

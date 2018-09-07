@@ -44,11 +44,13 @@ class MessageDetailVC: UIViewController {
     private var user: User?
     private var remoteUser: User?
     
+    private var animator: UIViewPropertyAnimator?
+    
     private var messages = [Message]()
     private var totalMessages: Int = 0
-    let messageTableMaxY: CGFloat = 22
+    private let messageTableMaxY: CGFloat = 22
     
-    var reversedMessages: [Message] {
+    private var reversedMessages: [Message] {
         return self.messages.reversed()
     }
     
@@ -93,6 +95,10 @@ class MessageDetailVC: UIViewController {
         }
     }
     
+    @IBAction func requestMenu(_ sender: UIButton) {
+        enterRequestMenu()
+    }
+    
     // MARK: - Functions, Database & Animation
     // ----------------------------------------
     public func setupView(user: User, remoteUser: User) {
@@ -108,6 +114,85 @@ class MessageDetailVC: UIViewController {
     private func removeKeyboard() {
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow , object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide , object: nil)
+    }
+    
+    // Display Request Menu "View"
+    private func enterRequestMenu() {
+        // Instantiate Visual Blur View
+        let visualView = UIVisualEffectView(frame: UIScreen.main.bounds)
+        self.view.addSubview(visualView)
+        
+        // Instantiate RequestMenu View
+        let requestFrame = CGRect(x: 15, y: 30, width: UIScreen.main.bounds.width - 30, height: 520)
+        let requestMenu = NannyRequestMenu(frame: requestFrame)
+        
+        // Set properties
+        visualView.effect = nil
+        requestMenu.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
+        requestMenu.alpha = 0.0
+        requestMenu.backgroundColor = UIColor.clear
+        
+        // Instantiate UIPropertyAnimator
+        animator = UIViewPropertyAnimator(duration: 0.38, curve: .easeOut) {
+            visualView.effect = UIBlurEffect(style: .light)
+        }
+        
+        // Add Visual and RequestView to subview
+        self.view.addSubview(visualView)
+        self.view.addSubview(requestMenu)
+        
+        // Start Animator Animation (visualView)
+        animator?.startAnimation()
+        visualView.isUserInteractionEnabled = true
+        
+        // Start Request Animation
+        UIView.animate(withDuration: 0.42, delay: 0.05, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
+            requestMenu.alpha = 1.0
+            requestMenu.isUserInteractionEnabled = true
+            requestMenu.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        })
+        
+        // Init Data to requestMenu
+        requestMenu.initData(user: self.user, remote: self.remoteUser as? Nanny, completion: {
+            // Run exit process when done...
+            print("requestMenu completion")
+            self.exitRequestMenu()
+        })
+    }
+    
+    private func exitRequestMenu() {
+        var visualView: UIVisualEffectView?
+        var requestMenu: NannyRequestMenu?
+        
+        for view in self.view.subviews {
+            if view is UIVisualEffectView {
+                print("VisualEffectView is found")
+                visualView = (view as? UIVisualEffectView)!
+            }
+            if view is NannyRequestMenu {
+                if let requestMenuView = view as? NannyRequestMenu {
+                    requestMenu = requestMenuView
+                    print("requestMenu found")
+                    
+                    if let visualView = visualView {
+                        self.animator = UIViewPropertyAnimator(duration: 0.38, curve: .easeOut) {
+                            visualView.effect = nil
+                        }
+                        self.animator?.startAnimation()
+                        visualView.isUserInteractionEnabled = false
+                        
+                        UIView.animate(withDuration: 0.35, delay: 0.00, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
+                            
+                            requestMenu?.alpha = 0.0
+                            requestMenu?.isUserInteractionEnabled = false
+                            requestMenu?.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
+                        })
+                        requestMenu = nil
+                    }
+                    
+                }
+            }
+        }
     }
     
     private func checkAndSendMessage() {
@@ -437,6 +522,15 @@ extension MessageDetailVC {
     override func viewWillDisappear(_ animated: Bool) {
         removeKeyboard()
         removeMessagesObserver()
+        if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            if let remoteUID = self.remoteUser?.userUID {
+                let setHighlighted = ["highlighted": false]
+                DataService.instance.REF_MESSAGES.child("private").child(UID).child("last").child(remoteUID).updateChildValues(setHighlighted)
+            }
+           
+            
+            
+        }
     }
     
 }

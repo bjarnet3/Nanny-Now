@@ -253,10 +253,8 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource {
             
             if let cell = tableView.cellForRow(at: indexPath) {
                 if cell is RequestUserCell {
-                    if let requestCell = cell as? RequestUserCell {
-                        
-                        let request = requests[indexPath.row - 2]
-                        let adminUser = self.user!
+                    let request = requests[indexPath.row - 2]
+                    if let adminUser = self.user {
                         let guestUser = User(userUID: request.userID, imageName: request.imageName, firstName: request.firstName)
                         
                         
@@ -264,6 +262,8 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource {
                         requestDetail.initWith(adminUser: adminUser, guestUser: guestUser, viewRect: tableView.bounds)
                         self.returnWithDismiss = true
                         present(requestDetail, animated: false)
+                    } else {
+                        printFunc("adminUser / user not initialized")
                     }
                 }
             }

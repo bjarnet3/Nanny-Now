@@ -12,6 +12,7 @@ import Firebase
 import SwiftKeychainWrapper
 import UserNotifications
 import RevealingSplashView
+import RAMAnimatedTabBarController
 
 class MessageViewController: UIViewController {
     
@@ -20,22 +21,27 @@ class MessageViewController: UIViewController {
     @IBOutlet weak var messageView: UIView!
     @IBOutlet weak var tableView: CustomTableView!
     @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var animatedTabBarItem: RAMAnimatedTabBarItem!
     
     // MARK: - Properties: Array & Varables
     // -------------------------------------
     var user: User?
-    var messages = [Message]()
+    var messages = [Message]() {
+        didSet {
+            if let highlightedMessage = hightlightedMessages, highlightedMessage != 0 {
+                self.animatedTabBarItem.badgeValue = String(highlightedMessage)
+            } else {
+                self.animatedTabBarItem.badgeValue = nil
+            }
+        }
+    }
+    
+    var hightlightedMessages: Int? {
+        return messages.filter({ $0._highlighted == true }).count
+    }
+    
     var totalMessages: Int = 0
-    
-    var heightForRow:[CGFloat] = [5,170,80]
-    
-    var introAnimationLoaded = false
     var returnWithDismiss = false
-    
-    let messageTableOffset: CGFloat = 0
-    let messageTableMaxY: CGFloat = 22
-    let messageTableMaximizedHeight: CGFloat = UIScreen.main.bounds.height - 22
-    let messageTableMinimizedWidth: CGFloat = UIScreen.main.bounds.width - 22
     
     var mainScreenHeight: CGFloat {
         return UIScreen.main.bounds.height
@@ -43,12 +49,6 @@ class MessageViewController: UIViewController {
     
     var mainScreenWidth: CGFloat {
         return UIScreen.main.bounds.width
-    }
-    
-    var messageBadge: Int = 0 {
-        didSet {
-            self.tabBarItem.badgeValue = messageBadge != 0 ? "\(messageBadge)" : nil
-        }
     }
     
     func setMessageTable() {
@@ -87,7 +87,6 @@ class MessageViewController: UIViewController {
                 }
                 self.setProgress(progress: 1.0, animated: true, alpha: 0.0)
             })
-            
         }
     }
     
@@ -102,7 +101,6 @@ class MessageViewController: UIViewController {
             highlighted:  (messageSnap["highlighted"] as? Bool)!)
         
         self.observeUser(with: message, userRef: userREF)
-        // self.setProgress(progress: 1.0, animated: true, alpha: 0.0)
     }
     
     func observeUser(with message: Message, userRef: DatabaseReference) {
@@ -147,8 +145,13 @@ class MessageViewController: UIViewController {
                     
                     self.messages.append(message)
                     self.messages.sort(by: { $0._messageTime > $1._messageTime })
+                    // self.tableView.reloadData()
                     
-                    self.tableView.reloadData()
+                    if self.messages.count == self.totalMessages {
+                        printCount()
+                        self.tableView.reloadData()
+                        self.animatedTabBarItem.playAnimation()
+                    }
                 }
             })
         } else {
@@ -201,7 +204,6 @@ extension MessageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
@@ -212,9 +214,8 @@ extension MessageViewController {
         revealingSplashAnimation(self.view, type: SplashAnimationType.swingAndZoomOut, completion: {
             
             self.tableView.reloadData()
-            
             UIView.animate(withDuration: 0.51, delay: 0.151, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: {
-                print("- revealingSplashAnimation (completion:)")
+                
 
             }, completion: { (true) in
                 
@@ -236,32 +237,24 @@ extension MessageViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // observeMessages()
         setProgress(progress: 1.0, animated: true, alpha: 0.0)
-        printFunc()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        printFunc()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        printFunc()
         setProgress(progress: 0.0, animated: false, alpha: 0.0)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        printFunc()
-        // self.removeAllDatabaseObservers()
-        self.messageBadge = 0
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
 
@@ -326,6 +319,12 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        self.messages[indexPath.row].setHighlighted(highlighted: false)
+        
+        if let cell = tableView.cellForRow(at: indexPath) as? MessageTableViewCell {
+            cell.setHighlightedOnTextAnd()
+        }
+        
         guard let messageDetailVC = storyboard?.instantiateViewController(withIdentifier: "MessageDetail") as? MessageDetailVC else {
             return
         }
@@ -333,7 +332,6 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
         if let remoteFrom = messages[indexPath.row]._fromUser {
             if let user = self.user {
                 if let remoteUser = remoteFrom.userUID != user.userUID ? remoteFrom : messages[indexPath.row]._toUser {
-                    
                     messageDetailVC.setupView(user: user, remoteUser: remoteUser)
                     
                     self.returnWithDismiss = true
