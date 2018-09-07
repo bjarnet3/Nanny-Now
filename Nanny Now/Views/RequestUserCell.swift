@@ -112,18 +112,6 @@ class RequestUserCell: UITableViewCell {
             }
         }
     }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        self.cellImageView.layer.borderColor = UIColor.white.cgColor
-        self.cellImageView.layer.cornerRadius = self.cellImageView.layer.bounds.height / 2
-        self.cellImageView.layer.borderWidth = 0.85
-        self.cellImageView.layer.masksToBounds = true
-        self.cellImageView.layer.addShadow()
-        
-        self.amount.layer.cornerRadius = self.amount.frame.height / 2
-    }
     
     // MARK: - CATransform3DRotate
     // Thanx to - http://www.programering.com/a/MDN3YzMwATE.html
@@ -179,6 +167,22 @@ class RequestUserCell: UITableViewCell {
         }
     }
     
+    func setProfileImage() {
+        self.cellImageView.clipsToBounds = true
+        self.cellImageView.layer.cornerRadius = self.cellImageView.layer.bounds.height / 2
+        self.cellImageView.layer.borderColor = UIColor.white.cgColor
+        self.cellImageView.layer.borderWidth = 0.85
+        
+        self.cellImageView.layer.addShadow()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        setProfileImage()
+        self.amount.layer.cornerRadius = self.amount.frame.height / 2
+    }
+    
     public enum Direction {
         case enter
         case exit
@@ -187,22 +191,19 @@ class RequestUserCell: UITableViewCell {
     func animateView( direction: Direction) {
         if direction == .enter {
             self.contentView.alpha = 0
-            self.setNeedsDisplay(cellImageView.frame)
             self.contentView.transform = CGAffineTransform(scaleX: 0.85, y: 0.85)
-            // self.layer.transform = CATransform3DMakeRotation(CGFloat.pi / 16, 0, 1, 0)
         } else {
+            setProfileImage()
             self.contentView.alpha = 1
             self.contentView.transform = CGAffineTransform(scaleX: 1.00, y: 1.00)
-            // self.layer.transform = CATransform3DMakeRotation(0, 0, 1, 0)
         }
     }
     
     func setupView(request: Request, animated: Bool = true) {
-        if animated {
-            animateView(direction: .enter)
-            
-            self.cellImageView.loadImageUsingCacheWith(urlString: request.imageName, completion: {
-                
+        self.cellImageLoaded = false
+        self.cellImageView.loadImageUsingCacheWith(urlString: request.imageName, completion: {
+            if animated {
+                self.animateView(direction: .enter)
                 let random = Double(arc4random_uniform(UInt32(1000))) / 3000
                 UIView.animate(withDuration: 0.6, delay: random, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
                     self.animateView(direction: .exit)
@@ -213,28 +214,23 @@ class RequestUserCell: UITableViewCell {
                     self.requestStatus = requestStatusString(request: request.requestStatus)
                     self.userStatus = request.userStatus
                     
-                    print(request.userStatus.description)
-                    
                     self.timeFrom = stringToDateTime(request.timeFrom)
                     self.timeTo = stringToDateTime(request.timeTo)
                     self.amount.text = " \(request.amount) kr   "
                 })
+            } else {
+                self.animateView(direction: .exit)
+                self.nameLabel.text = request.firstName
+                self.messageLabel.text = request.message
                 
-                self.cellImageLoaded = true
-            })
-            
-        } else {
-            
-            self.nameLabel.text = request.firstName
-            self.messageLabel.text = request.message
-            
-            self.requestStatus = requestStatusString(request: request.requestStatus)
-            self.userStatus = request.userStatus
-            
-            self.timeFrom = stringToDateTime(request.timeFrom)
-            self.timeTo = stringToDateTime(request.timeTo)
-            self.amount.text = " \(request.amount) kr   "
-            
-        }
+                self.requestStatus = requestStatusString(request: request.requestStatus)
+                self.userStatus = request.userStatus
+                
+                self.timeFrom = stringToDateTime(request.timeFrom)
+                self.timeTo = stringToDateTime(request.timeTo)
+                self.amount.text = " \(request.amount) kr   "
+            }
+            self.cellImageLoaded = true
+        })
     }
 }

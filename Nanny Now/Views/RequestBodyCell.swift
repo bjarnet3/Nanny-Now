@@ -14,8 +14,6 @@ class RequestBodyCell: UITableViewCell {
     @IBOutlet weak var cellImageView: CustomImageView!
     
     @IBOutlet weak var welcomeTitleLabel: UILabel!
-    @IBOutlet weak var welcomeMsgLabel: UILabel!
-    
     @IBOutlet weak var pendingLabel: UILabel!
     @IBOutlet weak var acceptedLabel: UILabel!
     @IBOutlet weak var completeLabel: UILabel!
@@ -90,7 +88,6 @@ class RequestBodyCell: UITableViewCell {
                 self.animateView(direction: .exit)
             }
             self.welcomeTitleLabel.text = "Halloen, \(user.firstName)..."
-            self.welcomeMsgLabel.text = "Forbered deg selv til ditt neste oppdrag . . . "
             self.user = user
         })
         

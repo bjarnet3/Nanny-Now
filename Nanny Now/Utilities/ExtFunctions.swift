@@ -93,3 +93,52 @@ public func setMapBackgroundOverlay(mapName: MapStyleForView, mapView: MKMapView
     // And finally add it to your MKMapView
     mapView.add(tileOverlay)
 }
+
+// Overlay / MapOverlay
+// -------------------
+public func setupOverLay(mapView: MKMapView) {
+    addCirleMaskWithFrostOn(mapView)
+}
+
+public func addCirleMaskWithFrostOn(_ subView: UIView) {
+    // Create the view
+    let blurEffect = UIBlurEffect(style: .regular)
+    let maskView = UIVisualEffectView(effect: blurEffect)
+    
+    maskView.frame = subView.bounds
+    // maskView.frame.insetBy(dx: 1.10, dy: 1.10)
+    
+    // Set the radius to 1/3 of the screen width
+    let radius : CGFloat = subView.bounds.width / 2.6 //  subView.bounds.width/2.6
+    // Create a path with the rectangle in it.
+    let path = UIBezierPath(rect: subView.bounds)
+    // Put a circle path in the middle
+    path.addArc(withCenter: subView.center, radius: radius, startAngle: 0.0, endAngle: CGFloat(2*CGFloat.pi), clockwise: true)
+    
+    // Create the shapeLayer
+    let shapeLayer = CAShapeLayer()
+    // set arc to shapeLayer
+    shapeLayer.path = path.cgPath
+    shapeLayer.fillRule = kCAFillRuleEvenOdd
+    
+    // Create the boarderLayer
+    let boarderLayer = CAShapeLayer()
+    boarderLayer.path = UIBezierPath(arcCenter: subView.center, radius: radius, startAngle: 0.0, endAngle: CGFloat(2*CGFloat.pi), clockwise: true).cgPath
+    boarderLayer.lineWidth = 3.0
+    boarderLayer.strokeColor = UIColor.white.cgColor
+    boarderLayer.fillColor = nil
+    
+    // add shapeLayer to maskView
+    maskView.layer.mask = shapeLayer
+    
+    // set properties
+    maskView.clipsToBounds = false
+    maskView.layer.borderColor = UIColor.gray.cgColor
+    maskView.backgroundColor = nil
+    // maskView.layer.masksToBounds = true
+    maskView.layer.addSublayer(boarderLayer)
+    // add mask to mapView
+    addParallaxEffectOnView(maskView, 12)
+    subView.addSubview(maskView)
+}
+

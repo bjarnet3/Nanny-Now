@@ -213,15 +213,15 @@ extension MessageViewController {
         
         revealingSplashAnimation(self.view, type: SplashAnimationType.swingAndZoomOut, completion: {
             
-            self.tableView.reloadData()
+            // self.tableView.reloadData()
             UIView.animate(withDuration: 0.51, delay: 0.151, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: {
-                
-
+                printFunc("revelingSplashAnimation Animation Complete")
             }, completion: { (true) in
-                
-                
+                printFunc("revelingSplashAnimation Completion:")
             })
         })
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -296,7 +296,6 @@ extension MessageViewController: UIScrollViewDelegate {
 extension MessageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let returnCell = UITableViewCell()
             if let cell = tableView.dequeueReusableCell(withIdentifier: "MessageTableViewCell", for: indexPath) as? MessageTableViewCell {
                 cell.setupView(with: messages[indexPath.row])

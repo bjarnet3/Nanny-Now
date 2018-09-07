@@ -22,9 +22,7 @@ class RequestViewController: UIViewController {
     var user: User?
     var requests = [Request]()
     var totalRequests: Int = 0
-    var heightForRow:[CGFloat] = [5,170,80]
-    
-    var introAnimationLoaded = false
+    var heightForRow:[CGFloat] = [5,40,80]
     var returnWithDismiss = false
     
     // Set User Object
@@ -126,7 +124,6 @@ class RequestViewController: UIViewController {
     
     func observeUser(request: Request, userRef: DatabaseReference) {
         setRequestStatusCountFrom(request: request)
-        
         if self.requests.count < self.totalRequests {
             var requestVal = request
             let reference = userRef
@@ -190,8 +187,6 @@ class RequestViewController: UIViewController {
         }
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -200,6 +195,19 @@ class RequestViewController: UIViewController {
         
         getUserSettings()
         observeRequests()
+        
+        // Splash Animation
+        // ----------------
+        revealingSplashAnimation(self.view, type: SplashAnimationType.woobleAndZoomOut, completion: {
+            // self.tableView.reloadData()
+            UIView.animate(withDuration: 0.51, delay: 0.151, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: {
+                printFunc("revelingSplashAnimation Animation Complete")
+            }, completion: { (true) in
+                printFunc("revelingSplashAnimation Completion:")
+            })
+        })
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -221,13 +229,11 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource {
             } else if indexPath.row == 1 {
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestBodyCell", for: indexPath) as? RequestBodyCell {
                     cell.setupView(user: self.user!)
-                    cell.layoutIfNeeded()
                     return cell
                 }
             } else {
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestUserCell", for: indexPath) as? RequestUserCell {
                     cell.setupView(request: requests[indexPath.row - 2], animated: true)
-                    // https://stackoverflow.com/questions/30066625/uiimageview-in-table-view-not-showing-until-clicked-on-or-device-is-roatated
                     return cell
                 }
             }
@@ -248,26 +254,22 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            guard let requestDetail = storyboard?.instantiateViewController(withIdentifier: "RequestDetail") as? RequestDetailVC else { return
-            }
-            
-            if let cell = tableView.cellForRow(at: indexPath) {
-                if cell is RequestUserCell {
-                    let request = requests[indexPath.row - 2]
-                    if let adminUser = self.user {
-                        let guestUser = User(userUID: request.userID, imageName: request.imageName, firstName: request.firstName)
-                        
-                        
-                        
-                        requestDetail.initWith(adminUser: adminUser, guestUser: guestUser, viewRect: tableView.bounds)
-                        self.returnWithDismiss = true
-                        present(requestDetail, animated: false)
-                    } else {
-                        printFunc("adminUser / user not initialized")
-                    }
+        guard let requestDetail = storyboard?.instantiateViewController(withIdentifier: "RequestDetail") as? RequestDetailVC else { return
+        }
+        if let cell = tableView.cellForRow(at: indexPath) {
+            if cell is RequestUserCell {
+                let request = requests[indexPath.row - 2]
+                if let adminUser = self.user {
+                    let guestUser = User(userUID: request.userID, imageName: request.imageName, firstName: request.firstName)
+                    requestDetail.initWith(adminUser: adminUser, guestUser: guestUser, viewRect: tableView.bounds)
+                    self.returnWithDismiss = true
+                    present(requestDetail, animated: false)
+                } else {
+                    printFunc("adminUser / user not initialized")
                 }
             }
-            tableView.deselectRow(at: indexPath, animated: true)
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // Swipe to delete implemented :-P,, other tableView cell button implemented :-D howdy!
