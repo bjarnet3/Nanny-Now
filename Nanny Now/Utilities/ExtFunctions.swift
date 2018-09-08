@@ -11,7 +11,6 @@ import MapKit
 import MapKitGoogleStyler
 import RevealingSplashView
 
-
 /// Splash Animations of type SplashAnimationType with default value of nil
 public func revealingSplashAnimation(_ view: UIView, type: SplashAnimationType? = nil, completion: SplashAnimatableCompletion? = nil) {
     let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "logo_1024_cornered")!,iconInitialSize: CGSize(width: 120, height: 120), backgroundColor: UIColor(red:255, green:255, blue:255, alpha:1.0))
@@ -50,9 +49,10 @@ public func revealingSplashAnimation(_ view: UIView, type: SplashAnimationType? 
     revealingSplashView.startAnimation(completion)
 }
 
+public var mapStyle: [MapStyleForView] = [.blueAndGrayMap, .blackAndRegularMap, .dayMap, .pinkBlackMap, .pinkStinkMap, .pinkWhiteMap, .veryLightMap, .whiteAndBlackMap, .blackAndBlueGrayMap, .lightBlueGrayMap, .whiteBlackMap]
+
 public func setMapView(for mapStyleForView: MapStyleForView, mapView: MKMapView) {
     mapView.removeOverlays(mapView.overlays)
-    
     switch mapStyleForView {
     case .blueAndGrayMap:
         setMapBackgroundOverlay(mapName: .blueAndGrayMap, mapView: mapView)
@@ -74,6 +74,8 @@ public func setMapView(for mapStyleForView: MapStyleForView, mapView: MKMapView)
         setMapBackgroundOverlay(mapName: .blackAndBlueGrayMap, mapView: mapView)
     case .lightBlueGrayMap:
         setMapBackgroundOverlay(mapName: .lightBlueGrayMap, mapView: mapView)
+    case .whiteBlackMap:
+        setMapBackgroundOverlay(mapName: .whiteBlackMap, mapView: mapView)
     }
     print("Map Title  \(mapStyleForView.rawValue)")
 }
@@ -84,29 +86,22 @@ public func setMapBackgroundOverlay(mapName: MapStyleForView, mapView: MKMapView
         return
     }
     let overlayFileURL = URL(fileURLWithPath: overlayFileURLString)
-    
     // After that, you can create the tile overlay using MapKitGoogleStyler
     guard let tileOverlay = try? MapKitGoogleStyler.buildOverlay(with: overlayFileURL) else {
         return
     }
-    
     // And finally add it to your MKMapView
     mapView.add(tileOverlay)
 }
 
 // Overlay / MapOverlay
 // -------------------
-public func setupOverLay(mapView: MKMapView) {
-    addCirleMaskWithFrostOn(mapView)
-}
-
 public func addCirleMaskWithFrostOn(_ subView: UIView) {
     // Create the view
     let blurEffect = UIBlurEffect(style: .regular)
-    let maskView = UIVisualEffectView(effect: blurEffect)
-    
-    maskView.frame = subView.bounds
     // maskView.frame.insetBy(dx: 1.10, dy: 1.10)
+    let maskView = UIVisualEffectView(effect: blurEffect)
+    maskView.frame = subView.bounds
     
     // Set the radius to 1/3 of the screen width
     let radius : CGFloat = subView.bounds.width / 2.6 //  subView.bounds.width/2.6
@@ -130,7 +125,6 @@ public func addCirleMaskWithFrostOn(_ subView: UIView) {
     
     // add shapeLayer to maskView
     maskView.layer.mask = shapeLayer
-    
     // set properties
     maskView.clipsToBounds = false
     maskView.layer.borderColor = UIColor.gray.cgColor

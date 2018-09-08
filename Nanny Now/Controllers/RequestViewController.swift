@@ -13,17 +13,26 @@ import SwiftKeychainWrapper
 import UserNotifications
 import RevealingSplashView
 
-class RequestViewController: UIViewController {
-
+class RequestViewController: UIViewController, CLLocationManagerDelegate {
+    
+    @IBOutlet weak var backView: UIView!
     @IBOutlet weak var tableView: CustomTableView!
+    @IBOutlet weak var brandingLabel: UILabel!
     
     // MARK: - Properties: Array & Varables
     // -------------------------------------
     var user: User?
     var requests = [Request]()
+    
     var totalRequests: Int = 0
-    var heightForRow:[CGFloat] = [5,40,80]
+    // var heightForRow:[CGFloat] = [5,40,80]
     var returnWithDismiss = false
+    
+    var cellHeights: [CGFloat] = []
+    struct CellHeight {
+        static let close: CGFloat = 125 // equal or greater foregroundView height
+        static let open: CGFloat = 300 // equal or greater containerView height
+    }
     
     // Set User Object
     func getUserSettings() {
@@ -31,34 +40,71 @@ class RequestViewController: UIViewController {
             self.user = user
         }
     }
+
+    // Location Manager & Current Location
+    var locationManager = CLLocationManager()
+    var currentLocation: CLLocation? {
+        var location: CLLocation?
+        if let currentLocation = locationManager.location {
+            location = currentLocation
+        } else if let userLocation = user?.location {
+            location = userLocation
+        } else {
+            location = nil
+        }
+        return location
+    }
+    
+    func setBrandingLabel() {
+        self.brandingLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        self.brandingLabel.layer.cornerRadius = self.brandingLabel.frame.height / 2
+        self.brandingLabel.clipsToBounds = true
+    }
+    
+    // LocationManager
+    func enableLocationServices() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        // locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
+    }
     
     // Property Observer
     // ----------------
     var pendingCount: Int = 0 {
         didSet {
+            /*
             let secondCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? RequestBodyCell
             secondCell?.pendingCount = pendingCount
+            */
         }
     }
     
     var acceptedCount: Int = 0 {
         didSet {
+            /*
             let secondCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? RequestBodyCell
             secondCell?.acceptedCount = acceptedCount
+            */
         }
     }
     
     var completeCount: Int = 0 {
         didSet {
+            /*
             let secondCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? RequestBodyCell
             secondCell?.completeCount = completeCount
+            */
         }
     }
     
     var rejectedCount: Int = 0 {
         didSet {
+            /*
             let secondCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? RequestBodyCell
             secondCell?.rejectedCount = rejectedCount
+            */
         }
     }
     
@@ -119,11 +165,24 @@ class RequestViewController: UIViewController {
             requestStatus: requestSnap["requestStatus"] as! String,
             requestCategory: requestSnap["requestCategory"] as! String,
             requestREF: userRef)
+        
+        /*
+        guard let user = self.user else { return }
+        request.user = user
+        
+        let family = Family()
+        family.location = CLLocation(latitude: 60.3752306, longitude: 5.2654997)
+        family.distance = (family.location?.distance(from: (self.user?.location)!))!
+        request.family = family
+        */
+        
         self.observeUser(request: request, userRef: userRef)
     }
     
     func observeUser(request: Request, userRef: DatabaseReference) {
+        self.cellHeights.append(CellHeight.close)
         setRequestStatusCountFrom(request: request)
+        
         if self.requests.count < self.totalRequests {
             var requestVal = request
             let reference = userRef
@@ -194,8 +253,12 @@ class RequestViewController: UIViewController {
         tableView.dataSource = self
         
         getUserSettings()
-        observeRequests()
+        setBrandingLabel()
         
+        self.enableLocationServices()
+        self.user?.location = locationManager.location!
+
+        observeRequests()
         // Splash Animation
         // ----------------
         revealingSplashAnimation(self.view, type: SplashAnimationType.woobleAndZoomOut, completion: {
@@ -206,7 +269,6 @@ class RequestViewController: UIViewController {
                 printFunc("revelingSplashAnimation Completion:")
             })
         })
-        
         
     }
 
@@ -221,36 +283,54 @@ class RequestViewController: UIViewController {
 extension RequestViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let returnCell = UITableViewCell()
-            if indexPath.row == 0 {
-                if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestHeaderCell", for: indexPath) as? RequestHeaderCell {
-                    return cell
-                }
-            } else if indexPath.row == 1 {
-                if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestBodyCell", for: indexPath) as? RequestBodyCell {
-                    cell.setupView(user: self.user!)
-                    return cell
-                }
-            } else {
-                if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestUserCell", for: indexPath) as? RequestUserCell {
-                    cell.setupView(request: requests[indexPath.row - 2], animated: true)
-                    return cell
-                }
-            }
-        return returnCell
+        let defaultCell = UITableViewCell()
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestUserCell", for: indexPath) as? RequestUserCell {
+            cell.setupView(request: requests[indexPath.row], animated: true)
+            return cell
+        }
+        /*
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestFoldingCell", for: indexPath) as? RequestFoldingCell {
+            cell.setupView(request: requests[indexPath.row], animated: true)
+            return cell
+        }
+        */
+        return defaultCell
     }
     
+    /*
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if cell is RequestFoldingCell {
+            print("cell is FoldingCell")
+        } else {
+            print("cell is not of type: FoldingCell")
+        }
+        // allows you to check if cell "as FoldingCell" does match the pattern cell
+        // "case alone" is used to match against one case.. "if case let" Explaination :
+        // http://alisoftware.github.io/swift/pattern-matching/2016/05/16/pattern-matching-4/
+        // Can we use "is" here ??
+        if case let cell as RequestFoldingCell = cell {
+            if cellHeights[indexPath.row] == CellHeight.close {
+                cell.unfold(false, animated: false, completion: nil)
+                
+            } else {
+                cell.unfold(true, animated: false, completion: nil)
+            }
+        }
+    }
+    */
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let mainHeight = (indexPath.row < self.heightForRow.count) ? self.heightForRow[indexPath.row] : 80
-        return mainHeight
+        // let mainHeight = (indexPath.row < self.heightForRow.count) ? self.heightForRow[indexPath.row] : 80
+        // let cellHeight = self.requests[indexPath.row + 2].requestStatus != "rejected" ? cellHeights[indexPath.row - 2] : mainHeight
+        return 80.0 // cellHeights[indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return indexPath.row >= 2
+        return true
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return requests.count + 2
+        return requests.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -270,6 +350,26 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
         tableView.deselectRow(at: indexPath, animated: true)
+        /*
+        guard case let cell as RequestFoldingCell = tableView.cellForRow(at: indexPath) else {
+            return
+        }
+        var duration = 0.0
+        if cellHeights[indexPath.row] == CellHeight.close || !cell.isUnfolded { // open cell
+            cellHeights[indexPath.row] = CellHeight.open
+            cell.unfold(true, animated: true, completion: nil) // selectedAnimation(true, animated: true, completion: nil)
+            duration = 0.5
+        } else {// close cell
+            cellHeights[indexPath.row] = CellHeight.close
+            cell.unfold(false, animated: true, completion: nil) // selectedAnimation(false, animated: true, completion: nil)
+            duration = 1.1
+        }
+        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: {
+            tableView.beginUpdates()
+            tableView.endUpdates()
+        }, completion: nil)
+        tableView.deselectRow(at: indexPath, animated: true)
+        */
     }
     
     // Swipe to delete implemented :-P,, other tableView cell button implemented :-D howdy!

@@ -27,10 +27,10 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
     // MARK: - Array, Constants & Varables
     // -------------------------------------
     private var families = [Family]()
+    private var users = [User]()
+    
     private var user: User?
     private var remoteUser: User?
-    
-    private var users = [User]()
     
     private var lastRowSelected: IndexPath?
     private var exemptIDs = [String]()
@@ -38,8 +38,6 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
     private var currentMapStyle:MapStyleForView = .blueAndGrayMap
     private var backgroundMapViewIsRendered = false
     private var index = 0
-    
-    private var mapStyle: [MapStyleForView] = [.blueAndGrayMap, .blackAndRegularMap, .dayMap, .pinkBlackMap, .pinkStinkMap, .pinkWhiteMap, .veryLightMap, .whiteAndBlackMap, .blackAndBlueGrayMap, .lightBlueGrayMap]
     
     // Property Observer
     // -----------------
@@ -61,7 +59,7 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
     // ------------------------------------
     private func changeMapStyle() {
         if index < mapStyle.count {
-            setMapView(for: mapStyle[index])
+            setMapView(for: mapStyle[index], mapView: self.mapView)
             index += 1
         } else {
             index = 0
@@ -179,7 +177,6 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
     
     // ------------------------------------
     // ------------------------------------
-
     private func checkForBlocked(_ userID: String) {
         DataService.instance.REF_USERS_PUBLIC.child(userID).child("blocked").observeSingleEvent(of: .value, with: { snapshot in
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
@@ -233,13 +230,11 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
         updateUserArrayAndAnnotation(user1)
         self.users.append(user1)
         
-        
         let user2 = User(userUID: "vYQknBpgaGcEZiEpj2KG4VBR1pQ2", imageName: "https://firebasestorage.googleapis.com/v0/b/nanny-now-d2596.appspot.com/o/profile-images%2FvYQknBpgaGcEZiEpj2KG4VBR1pQ2%2F906D633F-FAE9-4D55-AFE8-A28839F603CC?alt=media&token=18df0ffe-aea4-4635-af9d-a8e2d93d41d1", firstName: "Glenn")
         user2.location = CLLocation(latitude: 60.3890508, longitude: 5.2652124)
         user2.jobTitle = "SpikerMann"
         updateUserArrayAndAnnotation(user2)
         self.users.append(user2)
-        
         
         // TO NEXT TIME
         let family0 = Family()
@@ -250,10 +245,8 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
     // MARK: - Actions  /  Functions
     // -----------------------------
     @IBAction func addPlussButton(_ sender: UIButton) {
-        
         changeMapStyle()
     }
-    
     
     // MARK: - viewDidLoad  /   viewDidAppear
     // --------------------------------------
@@ -273,7 +266,7 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
         self.tableView.dataSource = self
         
         self.setupDummyUsers()
-        self.setMapBackgroundOverlay(mapName: .whiteAndBlackMap)
+        setMapBackgroundOverlay(mapName: .whiteAndBlackMap, mapView: self.mapView)
         
         self.setUserSettings()
         self.enableLocationServices()
@@ -337,50 +330,6 @@ extension FamilyViewController: MKMapViewDelegate {
     
     // MARK: - Functions, Database & Animation
     // ---------------------------------------
-    func setMapView(for mapStyleForView: MapStyleForView) {
-        self.backgroundMapViewIsRendered = false
-        self.mapView.removeOverlays(mapView.overlays)
-        
-        switch mapStyleForView {
-        case .blueAndGrayMap:
-            self.setMapBackgroundOverlay(mapName: .blueAndGrayMap)
-        case .blackAndRegularMap:
-            self.setMapBackgroundOverlay(mapName: .blackAndRegularMap)
-        case .dayMap:
-            self.setMapBackgroundOverlay(mapName: .dayMap)
-        case .pinkBlackMap:
-            self.setMapBackgroundOverlay(mapName: .pinkBlackMap)
-        case .pinkStinkMap:
-            self.setMapBackgroundOverlay(mapName: .pinkStinkMap)
-        case .pinkWhiteMap:
-            self.setMapBackgroundOverlay(mapName: .pinkWhiteMap)
-        case .veryLightMap:
-            self.setMapBackgroundOverlay(mapName: .veryLightMap)
-        case .whiteAndBlackMap:
-            self.setMapBackgroundOverlay(mapName: .whiteAndBlackMap)
-        case .blackAndBlueGrayMap:
-            self.setMapBackgroundOverlay(mapName: .blackAndBlueGrayMap)
-        case .lightBlueGrayMap:
-            self.setMapBackgroundOverlay(mapName: .lightBlueGrayMap)
-        }
-        displayOnTitle(displayMessage: "Map Title  \(mapStyleForView.rawValue)")
-    }
-    
-    private func setMapBackgroundOverlay(mapName: MapStyleForView) {
-        // We first need to have the path of the overlay configuration JSON
-        guard let overlayFileURLString = Bundle.main.path(forResource: mapName.rawValue, ofType: "json") else {
-            return
-        }
-        let overlayFileURL = URL(fileURLWithPath: overlayFileURLString)
-        
-        // After that, you can create the tile overlay using MapKitGoogleStyler
-        guard let tileOverlay = try? MapKitGoogleStyler.buildOverlay(with: overlayFileURL) else {
-            return
-        }
-        // And finally add it to your MKMapView
-        mapView.add(tileOverlay)
-        self.backgroundMapViewIsRendered = true
-    }
     
     // https://github.com/fmo91/MapKitGoogleStyler
     func mkOverlayRender(_ overlay: MKOverlay) -> MKOverlayRenderer {

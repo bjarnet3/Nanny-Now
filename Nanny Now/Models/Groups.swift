@@ -45,6 +45,7 @@ class Family: MKPointAnnotation {
     var returnIntDistance: Int { return Int(_distance ?? 8888.0) }
     
     var location: CLLocation? { get { return _location! } set { _location = newValue } }
+    var distance: Double { get { return _distance! } set { _distance = newValue } }
     
     // Options Configurations
     // ----------------------

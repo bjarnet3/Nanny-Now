@@ -1,31 +1,45 @@
 //
-//  RequestTableViewCell.swift
+//  RequestFoldingCell.swift
 //  Nanny Now
 //
-//  Created by Bjarne Tvedten on 13.12.2017.
-//  Copyright © 2017 Digital Mood. All rights reserved.
+//  Created by Bjarne Tvedten on 07.09.2018.
+//  Copyright © 2018 Digital Mood. All rights reserved.
 //
 
 import UIKit
+import MapKit
 
-class RequestUserCell: UITableViewCell {
-    
+class RequestFoldingCell: UXFoldingCell {
+    // MARK: - IBOutlet: Connection to View "storyboard"
+    // -------------------------------------------------
+    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var cellImageView: UIImageView!
     
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var requestStatusLbl: UILabel!
-    @IBOutlet weak var requestIndicatorLbl: UILabel!
-    
     @IBOutlet weak var userStatusLbl: UILabel!
     @IBOutlet weak var userIndicatorLbl: UILabel!
     
-    @IBOutlet weak var messageLabel: UILabel!
-    @IBOutlet weak var timeFromLabel: UILabel!
-    @IBOutlet weak var timeToLabel: UILabel!
-    @IBOutlet weak var amount: UILabel!
+    @IBOutlet weak var requestStatusLbl: UILabel!
+    @IBOutlet weak var requestIndicatorLbl: UILabel!
+    
+    @IBOutlet weak var messageLbl: UILabel!
+    @IBOutlet weak var timeFromLbl: UILabel!
+    @IBOutlet weak var timeToLbl: UILabel!
+    @IBOutlet weak var amountLbl: UILabel!
+    
+    // MARK: - Properties: Array, Constants and Varables
+    // -------------------------------------------------
+    private var _distance: String?
+    private var _familyLocation: CLLocation?
+    private var _nannyLocation: CLLocation?
+    private var _image: UIImage?
+    
+    var twoLocations = [AnyObject]()
+    let regionRadius: CLLocationDistance = 4000
     
     var cellImageLoaded = false
     var hasSelected = false
+    // var hasOpened = false
     
     func returnRequestIndicator(status: RequestStatus = .pending) {
         switch status {
@@ -99,7 +113,7 @@ class RequestUserCell: UITableViewCell {
     var timeFrom: Date? {
         didSet {
             if let timeFrom = self.timeFrom {
-                self.timeFromLabel.text = returnDayTimeString(from: timeFrom)
+                self.timeFromLbl.text = returnDayTimeString(from: timeFrom)
             }
         }
     }
@@ -107,66 +121,10 @@ class RequestUserCell: UITableViewCell {
     var timeTo: Date? {
         didSet {
             if let timeTo = self.timeTo {
-                self.timeToLabel.text = returnDayTimeString(from: timeTo)
+                self.timeToLbl.text = returnDayTimeString(from: timeTo)
             }
         }
     }
-    
-    // MARK: - CATransform3DRotate
-    // Thanx to - http://www.programering.com/a/MDN3YzMwATE.html
-    // Recommend isHighlithed() insted of touchesBegan()
-    /*
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        if selected {
-            UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in
-                self.hasSelected = true
-                
-                self.messageLabel.isHighlighted = true
-                self.nameLabel.isHighlighted = true
-                self.timeFromLabel.isHighlighted = true
-                self.amount.isHighlighted = true
-                self.timeToLabel.isHighlighted = true
-                self.cellImageView.isHighlighted = true
-                self.cellImageView.alpha = 1.0
-            })
-        }
-        else {
-            UIView.animate(withDuration: 0.20, delay: 0.05, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in
-                
-                self.messageLabel.isHighlighted = false
-                self.nameLabel.isHighlighted = false
-                self.timeFromLabel.isHighlighted = false
-                self.amount.isHighlighted = false
-                self.timeToLabel.isHighlighted = false
-                self.cellImageView.isHighlighted = false
-                self.cellImageView.alpha = 1.0
-            })
-        }
-    }
-    
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        if highlighted {
-            UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in
-                
-                self.messageLabel.isHighlighted = false
-                self.nameLabel.isHighlighted = false
-                self.timeFromLabel.isHighlighted = false
-                self.amount.isHighlighted = false
-                self.timeToLabel.isHighlighted = false
-                self.cellImageView.isHighlighted = false
-                self.cellImageView.alpha = 0.9
-                
-                self.transform = CGAffineTransform(scaleX: 1.08, y: 1.08)
-                hapticButton(.selection)
-            })
-        }
-        else {
-            UIView.animate(withDuration: 0.20, delay: 0.05, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in
-                self.transform = CGAffineTransform(scaleX: 1.00, y: 1.00)
-            })
-        }
-    }
-    */
     
     func setProfileImage() {
         self.cellImageView.clipsToBounds = true
@@ -181,7 +139,7 @@ class RequestUserCell: UITableViewCell {
         super.layoutSubviews()
         
         setProfileImage()
-        self.amount.layer.cornerRadius = self.amount.frame.height / 2
+        self.amountLbl.layer.cornerRadius = self.amountLbl.frame.height / 2
     }
     
     public enum Direction {
@@ -209,29 +167,113 @@ class RequestUserCell: UITableViewCell {
                 UIView.animate(withDuration: 0.6, delay: random, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
                     self.animateView(direction: .exit)
                     
+                    self._distance = request.family.returnDistance
+                    self._familyLocation = request.family.location
+                    self._nannyLocation = request.user.location
+                    
                     self.nameLabel.text = request.firstName
-                    self.messageLabel.text = request.message
+                    self.messageLbl.text = request.message
                     
                     self.requestStatus = requestStatusString(request: request.requestStatus)
                     self.userStatus = request.userStatus
                     
                     self.timeFrom = stringToDateTime(request.timeFrom)
                     self.timeTo = stringToDateTime(request.timeTo)
-                    self.amount.text = " \(request.amount) kr   "
+                    self.amountLbl.text = " \(request.amount) kr   "
                 })
             } else {
                 self.animateView(direction: .exit)
                 self.nameLabel.text = request.firstName
-                self.messageLabel.text = request.message
+                self.messageLbl.text = request.message
                 
                 self.requestStatus = requestStatusString(request: request.requestStatus)
                 self.userStatus = request.userStatus
                 
                 self.timeFrom = stringToDateTime(request.timeFrom)
                 self.timeTo = stringToDateTime(request.timeTo)
-                self.amount.text = " \(request.amount) kr   "
+                self.amountLbl.text = " \(request.amount) kr   "
             }
             self.cellImageLoaded = true
         })
     }
+    
+    // MARK: - awakeFromNib, setSelected and animationDuration
+    // -------------------------------------------------------
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.contentView.layer.shadowColor = UIColor(red: SHADOW_GRAY, green: SHADOW_GRAY, blue: SHADOW_GRAY, alpha: 0.8).cgColor
+        self.contentView.layer.shadowOpacity = 0.5
+        self.contentView.layer.shadowRadius = 10.0
+        self.contentView.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+        
+        self.foregroundView.layer.cornerRadius = 10
+        self.foregroundView.layer.masksToBounds = true
+        self.containerView.layer.cornerRadius = 10
+        self.containerView.layer.masksToBounds = true
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        if selected {
+            self.mapView.delegate = self
+            twoLocations.append(_familyLocation!)
+            twoLocations.append(_nannyLocation!)
+            centerMapOnLocation(location: calculateCenterPositionFromArrayOfLocations(twoLocations))
+            setRoute(from: nil)
+        }
+    }
+    
+    override func animationDuration(_ itemIndex: NSInteger, type: RequestFoldingCell.AnimationType) -> TimeInterval {
+        let durations = [0.26, 0.2, 0.2]
+        return durations[itemIndex]
+    }
+    
 }
+
+// MARK: - MKMapView, centerMapOnLocation & setRoute
+// -------------------------------------------------
+extension RequestFoldingCell: MKMapViewDelegate {
+    
+    func centerMapOnLocation(location: CLLocation) {
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
+                                                                  regionRadius, regionRadius)
+        mapView.setRegion(coordinateRegion, animated: false)
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(polyline: overlay as! MKPolyline)
+        renderer.strokeColor = UIColor.purple
+        renderer.lineWidth = 5
+        return renderer
+    }
+    
+    func setRoute(from annotations: [MKPointAnnotation]?) {
+        let request = MKDirectionsRequest()
+        request.source = MKMapItem(placemark: MKPlacemark(coordinate: (_nannyLocation?.coordinate)!, addressDictionary: nil))
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: (_familyLocation?.coordinate)!, addressDictionary: nil))
+        request.requestsAlternateRoutes = false
+        request.transportType = .automobile
+        
+        // let annotation = annotations.last as! Family
+        // let arrivaleDate = annotation.requestStart  // 3600 One Hour from Date()
+        // request.arrivalDate = arrivaleDate
+        
+        let directions = MKDirections(request: request)
+        
+        directions.calculate { [unowned self] response, error in
+            guard let unwrappedResponse = response else { return }
+            
+            for route in unwrappedResponse.routes {
+                self.mapView.add(route.polyline)
+                if route == unwrappedResponse.routes.last {
+                    // https://stackoverflow.com/questions/23127795/how-to-offset-properly-an-mkmaprect
+                    let mapRect = route.polyline.boundingMapRect
+                    self.mapView.setVisibleMapRect(mapRect, edgePadding: UIEdgeInsets(top: 15,left: 10,bottom: 15,right: 10), animated: true)
+                }
+            }
+        }
+    }
+    
+}
+

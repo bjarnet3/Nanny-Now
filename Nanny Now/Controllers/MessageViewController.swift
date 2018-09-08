@@ -219,6 +219,7 @@ extension MessageViewController {
             }, completion: { (true) in
                 printFunc("revelingSplashAnimation Completion:")
             })
+            
         })
         
         
@@ -237,6 +238,10 @@ extension MessageViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        // animateCells(in: self.tableView, true, completion: nil)
+        // animateTable(self.tableView, delay: 0.2)
+        // animateCells3d(in: self.tableView, true, delay: 0.05)
+        // fadeView(self.tableView, direction: .Right, distance: 25.0, duration: 0.51, delay: 0.151)
         setProgress(progress: 1.0, animated: true, alpha: 0.0)
     }
     

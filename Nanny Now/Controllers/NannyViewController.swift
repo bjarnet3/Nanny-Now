@@ -649,7 +649,7 @@ extension NannyViewController {
             registerForPreviewing(with: self, sourceView: tableView)
         }
         
-        setupOverLay(mapView: self.mapView)
+        addCirleMaskWithFrostOn(self.mapView)
         setupParallex()
     }
     

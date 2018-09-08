@@ -490,6 +490,13 @@ public func fadeView(_ view: UIView, direction: Fade.Direction = .Left, distance
     })
 }
 
+public enum TableViewCellAnimation {
+    case fade(() -> Void)
+    case scale(() -> Void)
+    case tilt3D(() -> Void)
+    case blur(() -> Void)
+}
+
 /// animate tableView Cells (Very generic) #Swift_3.0 - Animation Base
 public func animateTable(_ tableView: UITableView,_ animated: Bool = true,_ mapView: MKMapView? = nil) {
     tableView.reloadData()
@@ -541,14 +548,7 @@ public func animateTable(_ tableView: UITableView, delay: Double, animated: Bool
     }
 }
 
-public enum TableViewCellAnimation {
-    case fade(() -> Void)
-    case scale(() -> Void)
-    case tilt3D(() -> Void)
-    case blur(() -> Void)
-}
-
-/// Animate only chosen sequence of cells
+/// Animate only chosen sequence of cells with delay
 /// -------------------------------------
 public func animate(cells: [UITableViewCell], in tableView: UITableView,_ animated: Bool = true, completion: Completion? = nil) {
     if animated /* && lowPowerModeDisabled */ {
@@ -576,19 +576,24 @@ public func animate(cells: [UITableViewCell], in tableView: UITableView,_ animat
     }
 }
 
+public func animate(cells: [UITableViewCell], in tableView: UITableView,_ animated: Bool = true, delay: Double, completion: Completion? = nil) {
+    let delayInSeconds = delay
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+        animate(cells: cells, in: tableView, animated, completion: completion)
+    }
+}
+
+/// Animate only chosen sequence of cells
+/// -------------------------------------
 public func animateCells(in tableView: UITableView,_ animated: Bool = true, completion: Completion? = nil) {
     if animated /* && lowPowerModeDisabled */ {
         let cells = tableView.visibleCells
-        
         for cell in cells { cell.alpha = 0 }
-        
         tableView.alpha = 1
         
         var index = 0
         for cell in cells {
-            
             cell.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
-            
             UIView.animate(withDuration: 0.905, delay: 0.050 * Double(index), usingSpringWithDamping: 1.3, initialSpringVelocity: 0.5, options: .allowAnimatedContent, animations: {
                 cell.alpha = 1
                 // sett "end" transition point
@@ -601,6 +606,15 @@ public func animateCells(in tableView: UITableView,_ animated: Bool = true, comp
         completion?()
     } else {
         tableView.alpha = 1
+    }
+}
+
+/// Animate cells with delay
+/// -------------------------------------
+public func animateCells(in tableView: UITableView,_ animated: Bool = true, delay: Double, completion: Completion? = nil) {
+    let delayInSeconds = delay
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+        animateCells(in: tableView)
     }
 }
 
@@ -638,24 +652,6 @@ public func animateCellsWithProgress(in tableView: UITableView,_ animated: Bool 
     }
 }
 
-/// Animate only chosen sequence of cells with delay
-/// -------------------------------------
-public func animate(cells: [UITableViewCell], in tableView: UITableView,_ animated: Bool = true, delay: Double, completion: Completion? = nil) {
-    let delayInSeconds = delay
-    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-        animate(cells: cells, in: tableView, animated, completion: completion)
-    }
-}
-
-/// Animate cells with delay
-/// -------------------------------------
-public func animateCells(in tableView: UITableView,_ animated: Bool = true, delay: Double, completion: Completion? = nil) {
-    let delayInSeconds = delay
-    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
-        animateCells(in: tableView)
-    }
-}
-
 /// @available(iOS, deprecated, message: "Use animateCells3d() method instead.")
 public func animateCells3d(in tableView: UITableView,_ animated: Bool = true) {
     if animated /* && lowPowerModeDisabled */ {
@@ -668,7 +664,7 @@ public func animateCells3d(in tableView: UITableView,_ animated: Bool = true) {
         for cell in cells {
             cell.layer.transform = CATransform3DMakeRotation(CGFloat.pi / 4, 0, 1, 0)
             
-            UIView.animate(withDuration: 0.805, delay: 0.048 * Double(index), usingSpringWithDamping: 1.3, initialSpringVelocity: 0.4, options: .allowAnimatedContent, animations: {
+            UIView.animate(withDuration: 1.405, delay: 0.048 * Double(index), usingSpringWithDamping: 1.3, initialSpringVelocity: 0.4, options: .allowAnimatedContent, animations: {
                 cell.alpha = 1
                 // sett "end" transition point
                 cell.layer.transform = CATransform3DMakeRotation(0, 0, 1, 0)
