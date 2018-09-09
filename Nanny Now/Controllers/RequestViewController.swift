@@ -284,7 +284,7 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let defaultCell = UITableViewCell()
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestUserCell", for: indexPath) as? RequestUserCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestCell", for: indexPath) as? RequestCell {
             cell.setupView(request: requests[indexPath.row], animated: true)
             return cell
         }
@@ -322,7 +322,7 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // let mainHeight = (indexPath.row < self.heightForRow.count) ? self.heightForRow[indexPath.row] : 80
         // let cellHeight = self.requests[indexPath.row + 2].requestStatus != "rejected" ? cellHeights[indexPath.row - 2] : mainHeight
-        return 80.0 // cellHeights[indexPath.row]
+        return 80.0 // 140.0 cellHeights[indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

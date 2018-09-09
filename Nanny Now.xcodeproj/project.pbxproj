@@ -17,6 +17,7 @@
 		5C0F40F220DA045900BB3585 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CAD363120A8EFBC00C56FCE /* MainInterface.storyboard */; };
 		5C1104151DF56A4200C7FB46 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1104141DF56A4200C7FB46 /* Extensions.swift */; };
 		5C17A1DE20817D87004CCBC6 /* SubSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17A1DD20817D87004CCBC6 /* SubSettingsViewController.swift */; };
+		5C2286852144AE3D008388A6 /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2286842144AE3D008388A6 /* RequestCell.swift */; };
 		5C2895551FDB52A50009F6D5 /* FamilyDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2895541FDB52A50009F6D5 /* FamilyDetailVC.swift */; };
 		5C2E696920BCDA93000F7AFC /* NannyRequestMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2E696820BCDA93000F7AFC /* NannyRequestMenu.swift */; };
 		5C2E696B20BCFA81000F7AFC /* NannyRequestMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C2E696A20BCFA81000F7AFC /* NannyRequestMenu.xib */; };
@@ -179,6 +180,7 @@
 		5C093A4A1FE099E700144A32 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		5C1104141DF56A4200C7FB46 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		5C17A1DD20817D87004CCBC6 /* SubSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSettingsViewController.swift; sourceTree = "<group>"; };
+		5C2286842144AE3D008388A6 /* RequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
 		5C2895541FDB52A50009F6D5 /* FamilyDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyDetailVC.swift; sourceTree = "<group>"; };
 		5C2E696820BCDA93000F7AFC /* NannyRequestMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NannyRequestMenu.swift; sourceTree = "<group>"; };
 		5C2E696A20BCFA81000F7AFC /* NannyRequestMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NannyRequestMenu.xib; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 				5C9FC62B1FF6E95000906B05 /* FriendsCollectionViewCell.swift */,
 				5C8925A120810A060032CEAA /* ReviewTableViewCell.swift */,
 				5C8925A320810C1F0032CEAA /* ReviewCollectionViewCell.swift */,
+				5C2286842144AE3D008388A6 /* RequestCell.swift */,
 				5C093A481FE0985100144A32 /* RequestUserCell.swift */,
 				5CD0182D2142CF57003C6889 /* RequestFoldingCell.swift */,
 				5CD0182B2142CDEC003C6889 /* UXFoldingCell.swift */,
@@ -954,6 +957,7 @@
 				5C558A081FA772BE0076A17D /* LoginZeroVC.swift in Sources */,
 				5C093A4B1FE099E700144A32 /* Request.swift in Sources */,
 				5CF50D83209C49D300136167 /* MessageTableViewCell.swift in Sources */,
+				5C2286852144AE3D008388A6 /* RequestCell.swift in Sources */,
 				5C093A491FE0985100144A32 /* RequestUserCell.swift in Sources */,
 				5CBC8B9920DA250E00A225A8 /* ExtFunctions.swift in Sources */,
 				5C76202F20891DC0005D7647 /* HeaderTableViewCell.swift in Sources */,
