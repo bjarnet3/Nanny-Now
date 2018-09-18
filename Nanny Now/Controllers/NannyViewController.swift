@@ -649,8 +649,8 @@ extension NannyViewController {
             registerForPreviewing(with: self, sourceView: tableView)
         }
         
-        addCirleMaskWithFrostOn(self.mapView)
-        setupParallex()
+        // addCirleMaskWithFrostOn(self.mapView)
+        // setupParallex()
     }
     
     func setupParallex() {
@@ -666,6 +666,10 @@ extension NannyViewController {
     func viewDidLoadAnimation() {
         self.centerMapOnLocation(calculateCenterPositionFromArrayOfLocations(self.nannies), regionRadius: AltitudeDistance.large, animated: false)
         self.mapView.showAnnotations(self.nannies, animated: lowPowerModeDisabled)
+        
+        addCirleMaskWithFrostOn(self.mapView)
+        setupParallex()
+        
         animateTable(self.tableView, delay: 0.21, animated: lowPowerModeDisabled, mapView: self.mapView)
         hapticButton(.light, lowPowerModeDisabled)
     }

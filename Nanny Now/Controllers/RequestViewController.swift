@@ -200,9 +200,11 @@ class RequestViewController: UIViewController, CLLocationManagerDelegate {
                         }
                     }
                 }
+                
                 if let index = self.requests.index(where: { $0.timeRequested <= requestVal.timeRequested }) {
                     self.requests.insert(requestVal, at: index)
-                    let indexPath = IndexPath(row: index.advanced(by: 2), section: 0)
+                    // let indexPath = IndexPath(row: index.advanced(by: 2), section: 0)
+                    let indexPath = IndexPath(row: index, section: 0)
                     self.tableView.insertRows(at: [indexPath], with: .automatic)
                 } else {
                     self.requests.append(requestVal)
