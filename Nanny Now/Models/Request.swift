@@ -13,9 +13,9 @@ import SwiftKeychainWrapper
 // This should be used in Notifications.swift
 public enum RequestStatus : String {
     case pending = "pending"
+    case running = "running"
     case accepted = "accepted"
     case rejected = "rejected"
-    case running = "running"
     case complete = "complete"
 }
 
@@ -24,7 +24,6 @@ public func requestStatusString(request: String) -> RequestStatus? {
 }
 
 struct Request {
-    
     // Personal information (Private)
     // ------------------------------
     private(set) public var _nannyID: String
