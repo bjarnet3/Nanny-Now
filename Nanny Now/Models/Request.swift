@@ -76,7 +76,7 @@ struct Request {
     
     var highlighted: Bool {
         get { return _highlighted }
-            set { self.highlighted = newValue } }
+            set { self._highlighted = newValue } }
     
     // Personal Information
     // --------------------
@@ -134,7 +134,7 @@ struct Request {
     
     var nanny: Nanny {
         get { return _nanny! }
-        set { self.nanny = newValue }
+        set { self._nanny = newValue }
     }
     
     var family: Family {

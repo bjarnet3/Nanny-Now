@@ -19,20 +19,19 @@ class RequestViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var tableView: CustomTableView!
     @IBOutlet weak var brandingLabel: UILabel!
     
+    @IBOutlet weak var pendingLabel: UILabel!
+    @IBOutlet weak var acceptLabel: UILabel!
+    @IBOutlet weak var rejectLabel: UILabel!
+    @IBOutlet weak var completeLabel: UILabel!
+    
     // MARK: - Properties: Array & Varables
     // -------------------------------------
     var user: User?
     var requests = [Request]()
+    var requestSections = [RequestStatus:[Request]]()
     
     var totalRequests: Int = 0
-    // var heightForRow:[CGFloat] = [5,40,80]
     var returnWithDismiss = false
-    
-    var cellHeights: [CGFloat] = []
-    struct CellHeight {
-        static let close: CGFloat = 125 // equal or greater foregroundView height
-        static let open: CGFloat = 300 // equal or greater containerView height
-    }
     
     // Set User Object
     func getUserSettings() {
@@ -74,6 +73,14 @@ class RequestViewController: UIViewController, CLLocationManagerDelegate {
     // ----------------
     var pendingCount: Int = 0 {
         didSet {
+            self.pendingLabel.text = "\(pendingCount) pending"
+            if pendingCount == 0 {
+                self.requestSections.removeValue(forKey: .pending)
+            } else {
+                var requestArray = requests.filter{ $0.requestStatus == RequestStatus.pending.rawValue }
+                // requestArray.sort(by: { $0.timeRequested <= $1.timeRequested })
+                requestSections.updateValue(requestArray, forKey: .pending)
+            }
             /*
             let secondCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? RequestBodyCell
             secondCell?.pendingCount = pendingCount
@@ -83,6 +90,14 @@ class RequestViewController: UIViewController, CLLocationManagerDelegate {
     
     var acceptedCount: Int = 0 {
         didSet {
+            self.acceptLabel.text = "\(acceptedCount) accepted"
+            if acceptedCount == 0 {
+                self.requestSections.removeValue(forKey: .accepted)
+            } else {
+                var requestArray = requests.filter{ $0.requestStatus == RequestStatus.pending.rawValue }
+                // requestArray.sort(by: { $0.timeRequested <= $1.timeRequested })
+                requestSections.updateValue(requestArray, forKey: .accepted)
+            }
             /*
             let secondCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? RequestBodyCell
             secondCell?.acceptedCount = acceptedCount
@@ -90,17 +105,16 @@ class RequestViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    var completeCount: Int = 0 {
-        didSet {
-            /*
-            let secondCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? RequestBodyCell
-            secondCell?.completeCount = completeCount
-            */
-        }
-    }
-    
     var rejectedCount: Int = 0 {
         didSet {
+            self.rejectLabel.text = "\(rejectedCount) rejected"
+            if rejectedCount == 0 {
+                self.requestSections.removeValue(forKey: .rejected)
+            } else {
+                var requestArray = requests.filter{ $0.requestStatus == RequestStatus.pending.rawValue }
+                // requestArray.sort(by: { $0.timeRequested <= $1.timeRequested })
+                requestSections.updateValue(requestArray, forKey: .rejected)
+            }
             /*
             let secondCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? RequestBodyCell
             secondCell?.rejectedCount = rejectedCount
@@ -108,9 +122,32 @@ class RequestViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    var completeCount: Int = 0 {
+        didSet {
+            self.completeLabel.text = "\(completeCount) complete"
+            if completeCount == 0 {
+                self.requestSections.removeValue(forKey: .complete)
+            } else {
+                var requestArray = requests.filter{ $0.requestStatus == RequestStatus.complete.rawValue }
+                // requestArray.sort(by: { $0.timeRequested <= $1.timeRequested })
+                requestSections.updateValue(requestArray, forKey: .complete)
+            }
+            /*
+             let secondCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? RequestBodyCell
+             secondCell?.completeCount = completeCount
+             */
+        }
+    }
+    
     var runningCount: Int = 0 {
         didSet {
-            print("running")
+            if runningCount == 0 {
+                self.requestSections.removeValue(forKey: .running)
+            } else {
+                var requestArray = requests.filter{ $0.requestStatus == RequestStatus.complete.rawValue }
+                // requestArray.sort(by: { $0.timeRequested <= $1.timeRequested })
+                requestSections.updateValue(requestArray, forKey: .running)
+            }
         }
     }
     
@@ -132,6 +169,8 @@ class RequestViewController: UIViewController, CLLocationManagerDelegate {
                     self.totalRequests = snapValue.keys.count
                     
                     self.requests.removeAll()
+                    self.requestSections.removeAll()
+                    
                     self.resetRequestStatusCount()
                     
                     for (_,value) in snapValue {
@@ -165,22 +204,54 @@ class RequestViewController: UIViewController, CLLocationManagerDelegate {
             requestStatus: requestSnap["requestStatus"] as! String,
             requestCategory: requestSnap["requestCategory"] as! String,
             requestREF: userRef)
-        
-        /*
-        guard let user = self.user else { return }
-        request.user = user
-        
-        let family = Family()
-        family.location = CLLocation(latitude: 60.3752306, longitude: 5.2654997)
-        family.distance = (family.location?.distance(from: (self.user?.location)!))!
-        request.family = family
-        */
-        
         self.observeUser(request: request, userRef: userRef)
     }
     
     func observeUser(request: Request, userRef: DatabaseReference) {
-        self.cellHeights.append(CellHeight.close)
+        if self.requests.count < self.totalRequests {
+            var requestVal = request
+            let reference = userRef
+            reference.observeSingleEvent(of: .value, with: { snapshot in
+                if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
+                    for (key, val) in snapValue {
+                        if let userValue = val as? String {
+                            if key == "first_name" {
+                                requestVal.firstName = userValue
+                            } else if key == "imageUrl" {
+                                requestVal.imageName = userValue
+                            } else if key == "status" {
+                                requestVal.userStatus = stringToDateTime(userValue)
+                            }
+                        }
+                    }
+                }
+                
+                /*
+                
+                if let index = self.requests.index(where: { $0.timeRequested <= requestVal.timeRequested }) {
+                    self.requests.insert(requestVal, at: index)
+                    // let indexPath = IndexPath(row: index.advanced(by: 2), section: 0)
+                    let indexPath = IndexPath(row: index, section: 0)
+                    self.tableView.insertRows(at: [indexPath], with: .automatic)
+                } else {
+                    self.requests.append(requestVal)
+                }
+ 
+                */
+                
+                self.requests.append(requestVal)
+                self.setRequestStatusCountFrom(request: request)
+                
+                self.tableView.reloadData()
+                self.requestBadge += 1
+            })
+        } else {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func oldObserveUser(request: Request, userRef: DatabaseReference) {
+        // self.cellHeights.append(CellHeight.close)
         setRequestStatusCountFrom(request: request)
         
         if self.requests.count < self.totalRequests {
@@ -200,7 +271,6 @@ class RequestViewController: UIViewController, CLLocationManagerDelegate {
                         }
                     }
                 }
-                
                 if let index = self.requests.index(where: { $0.timeRequested <= requestVal.timeRequested }) {
                     self.requests.insert(requestVal, at: index)
                     // let indexPath = IndexPath(row: index.advanced(by: 2), section: 0)
@@ -228,10 +298,15 @@ class RequestViewController: UIViewController, CLLocationManagerDelegate {
     func setRequestStatusCountFrom(request: Request) {
         if let requestStatus = requestStatusString(request: request.requestStatus) {
             switch requestStatus {
+                
             case .accepted:
                 self.acceptedCount += 1
             case .complete:
                 self.completeCount += 1
+                /*
+                let requestArray = requestSections[requestStatus] ?? [request]
+                requestSections.updateValue(requestArray, forKey: requestStatus)
+                */
             case .pending:
                 self.pendingCount += 1
             case .rejected:
@@ -239,6 +314,7 @@ class RequestViewController: UIViewController, CLLocationManagerDelegate {
             case .running:
                 self.runningCount += 1
             }
+            
         }
     }
     
@@ -283,43 +359,43 @@ class RequestViewController: UIViewController, CLLocationManagerDelegate {
 // MARK: - TableView, Delegate & Datasource
 // ----------------------------------------
 extension RequestViewController: UITableViewDelegate, UITableViewDataSource {
+
+    // TableView Sections
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return requestSections.count
+    }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        for (reqIndex, reqSection) in self.requestSections.keys.enumerated() {
+            if reqIndex == section {
+                return reqSection.rawValue
+            }
+        }
+        return nil
+    }
+    
+    // TableView Rows
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let defaultCell = UITableViewCell()
         if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestCell", for: indexPath) as? RequestCell {
+            
+            for (index, sectRequests) in self.requestSections.values.enumerated() {
+                if index == indexPath.section {
+                    for val in sectRequests {
+                        cell.setupView(request: val, animated: true)
+                        return cell
+                    }
+                
+                }
+                
+            }
+            /*
             cell.setupView(request: requests[indexPath.row], animated: true)
             return cell
+            */
         }
-        /*
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "RequestFoldingCell", for: indexPath) as? RequestFoldingCell {
-            cell.setupView(request: requests[indexPath.row], animated: true)
-            return cell
-        }
-        */
         return defaultCell
     }
-    
-    /*
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if cell is RequestFoldingCell {
-            print("cell is FoldingCell")
-        } else {
-            print("cell is not of type: FoldingCell")
-        }
-        // allows you to check if cell "as FoldingCell" does match the pattern cell
-        // "case alone" is used to match against one case.. "if case let" Explaination :
-        // http://alisoftware.github.io/swift/pattern-matching/2016/05/16/pattern-matching-4/
-        // Can we use "is" here ??
-        if case let cell as RequestFoldingCell = cell {
-            if cellHeights[indexPath.row] == CellHeight.close {
-                cell.unfold(false, animated: false, completion: nil)
-                
-            } else {
-                cell.unfold(true, animated: false, completion: nil)
-            }
-        }
-    }
-    */
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // let mainHeight = (indexPath.row < self.heightForRow.count) ? self.heightForRow[indexPath.row] : 80
@@ -332,7 +408,13 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return requests.count
+        for (idx, val) in requestSections.values.enumerated() {
+            if idx == section {
+                printFunc(val.count)
+                return val.count
+            }
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -352,26 +434,6 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
         tableView.deselectRow(at: indexPath, animated: true)
-        /*
-        guard case let cell as RequestFoldingCell = tableView.cellForRow(at: indexPath) else {
-            return
-        }
-        var duration = 0.0
-        if cellHeights[indexPath.row] == CellHeight.close || !cell.isUnfolded { // open cell
-            cellHeights[indexPath.row] = CellHeight.open
-            cell.unfold(true, animated: true, completion: nil) // selectedAnimation(true, animated: true, completion: nil)
-            duration = 0.5
-        } else {// close cell
-            cellHeights[indexPath.row] = CellHeight.close
-            cell.unfold(false, animated: true, completion: nil) // selectedAnimation(false, animated: true, completion: nil)
-            duration = 1.1
-        }
-        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: {
-            tableView.beginUpdates()
-            tableView.endUpdates()
-        }, completion: nil)
-        tableView.deselectRow(at: indexPath, animated: true)
-        */
     }
     
     // Swipe to delete implemented :-P,, other tableView cell button implemented :-D howdy!
