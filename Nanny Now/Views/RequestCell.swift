@@ -111,62 +111,6 @@ class RequestCell: UITableViewCell {
         }
     }
     
-    // MARK: - CATransform3DRotate
-    // Thanx to - http://www.programering.com/a/MDN3YzMwATE.html
-    // Recommend isHighlithed() insted of touchesBegan()
-    /*
-     override func setSelected(_ selected: Bool, animated: Bool) {
-     if selected {
-     UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in
-     self.hasSelected = true
-     
-     self.messageLabel.isHighlighted = true
-     self.nameLabel.isHighlighted = true
-     self.timeFromLabel.isHighlighted = true
-     self.amount.isHighlighted = true
-     self.timeToLabel.isHighlighted = true
-     self.cellImageView.isHighlighted = true
-     self.cellImageView.alpha = 1.0
-     })
-     }
-     else {
-     UIView.animate(withDuration: 0.20, delay: 0.05, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in
-     
-     self.messageLabel.isHighlighted = false
-     self.nameLabel.isHighlighted = false
-     self.timeFromLabel.isHighlighted = false
-     self.amount.isHighlighted = false
-     self.timeToLabel.isHighlighted = false
-     self.cellImageView.isHighlighted = false
-     self.cellImageView.alpha = 1.0
-     })
-     }
-     }
-     
-     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-     if highlighted {
-     UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in
-     
-     self.messageLabel.isHighlighted = false
-     self.nameLabel.isHighlighted = false
-     self.timeFromLabel.isHighlighted = false
-     self.amount.isHighlighted = false
-     self.timeToLabel.isHighlighted = false
-     self.cellImageView.isHighlighted = false
-     self.cellImageView.alpha = 0.9
-     
-     self.transform = CGAffineTransform(scaleX: 1.08, y: 1.08)
-     hapticButton(.selection)
-     })
-     }
-     else {
-     UIView.animate(withDuration: 0.20, delay: 0.05, usingSpringWithDamping: 0.9, initialSpringVelocity: 0.95, options: .curveEaseIn, animations: { () in
-     self.transform = CGAffineTransform(scaleX: 1.00, y: 1.00)
-     })
-     }
-     }
-     */
-    
     func setProfileImage() {
         self.cellImageView.clipsToBounds = true
         self.cellImageView.layer.cornerRadius = self.cellImageView.layer.bounds.height / 2
@@ -206,29 +150,30 @@ class RequestCell: UITableViewCell {
                 self.animateView(direction: .enter)
                 let random = Double(arc4random_uniform(UInt32(1000))) / 3000
                 UIView.animate(withDuration: 0.6, delay: random, usingSpringWithDamping: 0.70, initialSpringVelocity: 0.3, options: .curveEaseOut, animations: {
-                    self.animateView(direction: .exit)
-                    
                     self.nameLabel.text = request.firstName
                     self.messageLabel.text = request.message
                     
-                    self.requestStatus = requestStatusString(request: request.requestStatus)
+                    self.requestStatus = request._requestStatus
                     self.userStatus = request.userStatus
                     
                     self.timeFrom = stringToDateTime(request.timeFrom)
                     self.timeTo = stringToDateTime(request.timeTo)
                     self.amount.text = " \(request.amount) kr   "
+                    
+                    self.animateView(direction: .exit)
                 })
             } else {
-                self.animateView(direction: .exit)
                 self.nameLabel.text = request.firstName
                 self.messageLabel.text = request.message
                 
-                self.requestStatus = requestStatusString(request: request.requestStatus)
+                // self.requestStatus = requestStatusString(request: request.requestStatus)
+                self.requestStatus = request._requestStatus
                 self.userStatus = request.userStatus
                 
                 self.timeFrom = stringToDateTime(request.timeFrom)
                 self.timeTo = stringToDateTime(request.timeTo)
                 self.amount.text = " \(request.amount) kr   "
+                self.animateView(direction: .exit)
             }
             self.cellImageLoaded = true
         })

@@ -22,7 +22,6 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var familyTabBar: UITabBarItem!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var notifyTitle: CustomButton!
-    @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Array, Constants & Varables
     // -------------------------------------
@@ -35,7 +34,7 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
     private var lastRowSelected: IndexPath?
     private var exemptIDs = [String]()
     
-    private var currentMapStyle:MapStyleForView = .blueAndGrayMap
+    private var currentMapStyle: MapStyleForView = .pinkBlackMap
     private var backgroundMapViewIsRendered = false
     private var index = 0
     
@@ -262,11 +261,8 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
         self.mapView.alpha = 1
         self.mapView.delegate = self
         
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        
         self.setupDummyUsers()
-        setMapBackgroundOverlay(mapName: .whiteAndBlackMap, mapView: self.mapView)
+        setMapBackgroundOverlay(mapName: .pinkWhiteMap, mapView: self.mapView)
         
         self.setUserSettings()
         self.enableLocationServices()

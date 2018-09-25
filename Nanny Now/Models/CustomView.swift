@@ -17,3 +17,12 @@ class CustomView: UIView {
         self.layer.addShadow()
     }
 }
+
+class CustomViewShaddow: UIView {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.layer.roundCorners(radius: 22.5)
+        self.layer.addShadow()
+    }
+}

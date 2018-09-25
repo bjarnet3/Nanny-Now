@@ -108,9 +108,12 @@ class MessageViewController: UIViewController {
             if self.messages.count == 1 {
                 setProgress(progress: 0.7, animated: true, alpha: 1.0)
             }
+            
             userRef.observeSingleEvent(of: .value, with: { snapshot in
                 if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
                     
+                    // Get User Status
+                    // ---------------
                     var imageName: String?
                     var firstName: String?
                     var userStatus: Date?
@@ -122,6 +125,7 @@ class MessageViewController: UIViewController {
                         if key == "first_name" {
                             firstName = val as? String
                         }
+                        
                         if key == "status" {
                             if let status = val as? [String: AnyObject] {
                                 for (k, v) in status {
@@ -154,6 +158,7 @@ class MessageViewController: UIViewController {
                     }
                 }
             })
+            
         } else {
             self.tableView.reloadData()
             setProgress(progress: 1.0, animated: true, alpha: 0.0)

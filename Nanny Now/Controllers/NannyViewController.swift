@@ -47,8 +47,6 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
             self.nannyTabBar.badgeValue = nannyBadge != 0 ? "\(nannyBadge)" : nil
         }
     }
-    
-    
 
     private var nannyAdOn = [String:Bool]()
     private var nanniesUID = [String]()

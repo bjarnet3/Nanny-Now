@@ -62,6 +62,10 @@
 		5C78D10620E1DF070064FAC0 /* whiteBlackMap.json in Resources */ = {isa = PBXBuildFile; fileRef = 5C78D0F920E1D82E0064FAC0 /* whiteBlackMap.json */; };
 		5C85A7EE1DB84D83008C5FBB /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C85A7ED1DB84D83008C5FBB /* DataService.swift */; };
 		5C860FC41FCF36870063B0BB /* PrintDebug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C860FC31FCF36870063B0BB /* PrintDebug.swift */; };
+		5C86B6B921598EC7001AC367 /* FamilyPageOne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C86B6B821598EC7001AC367 /* FamilyPageOne.swift */; };
+		5C86B6BB21598F66001AC367 /* FamilyPageZero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C86B6BA21598F66001AC367 /* FamilyPageZero.swift */; };
+		5C86B6BD21598F7C001AC367 /* FamilyPageTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C86B6BC21598F7C001AC367 /* FamilyPageTwo.swift */; };
+		5C86B6BF21598F9F001AC367 /* FamilyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C86B6BE21598F9F001AC367 /* FamilyPageVC.swift */; };
 		5C8925A220810A060032CEAA /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8925A120810A060032CEAA /* ReviewTableViewCell.swift */; };
 		5C8925A420810C1F0032CEAA /* ReviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8925A320810C1F0032CEAA /* ReviewCollectionViewCell.swift */; };
 		5C89EE9E1FA48072005341ED /* DTTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C89EE9D1FA48072005341ED /* DTTextField.swift */; };
@@ -213,6 +217,10 @@
 		5C78D10020E1DC4E0064FAC0 /* blueAndGrayMap.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = blueAndGrayMap.json; sourceTree = "<group>"; };
 		5C85A7ED1DB84D83008C5FBB /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		5C860FC31FCF36870063B0BB /* PrintDebug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintDebug.swift; sourceTree = "<group>"; };
+		5C86B6B821598EC7001AC367 /* FamilyPageOne.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FamilyPageOne.swift; path = "Nanny Now/Controllers/FamilyPageViewController/FamilyPageOne.swift"; sourceTree = SOURCE_ROOT; };
+		5C86B6BA21598F66001AC367 /* FamilyPageZero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyPageZero.swift; sourceTree = "<group>"; };
+		5C86B6BC21598F7C001AC367 /* FamilyPageTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyPageTwo.swift; sourceTree = "<group>"; };
+		5C86B6BE21598F9F001AC367 /* FamilyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyPageVC.swift; sourceTree = "<group>"; };
 		5C8925A120810A060032CEAA /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		5C8925A320810C1F0032CEAA /* ReviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCollectionViewCell.swift; sourceTree = "<group>"; };
 		5C89EE9D1FA48072005341ED /* DTTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTTextField.swift; sourceTree = "<group>"; };
@@ -381,7 +389,8 @@
 		5C6C4E3C209B70F10000D8ED /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5C6C4E3D209B71420000D8ED /* LoginViewController */,
+				5C6C4E3D209B71420000D8ED /* LoginPageViewController */,
+				5C86B6B521598CD1001AC367 /* FamilyPageViewController */,
 				5CCF0C9C1D898F110089F39D /* StartViewController.swift */,
 				5CCF0C761D898BFB0089F39D /* NannyViewController.swift */,
 				5C4C9A8C1F71BBDF00D431F3 /* NannyDetailVC.swift */,
@@ -397,7 +406,7 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		5C6C4E3D209B71420000D8ED /* LoginViewController */ = {
+		5C6C4E3D209B71420000D8ED /* LoginPageViewController */ = {
 			isa = PBXGroup;
 			children = (
 				5C558A051FA7711C0076A17D /* LoginPageVC.swift */,
@@ -405,7 +414,18 @@
 				5C558A091FA772E80076A17D /* LoginOneVC.swift */,
 				5C558A0B1FA772FD0076A17D /* LoginTwoVC.swift */,
 			);
-			path = LoginViewController;
+			path = LoginPageViewController;
+			sourceTree = "<group>";
+		};
+		5C86B6B521598CD1001AC367 /* FamilyPageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5C86B6BE21598F9F001AC367 /* FamilyPageVC.swift */,
+				5C86B6BA21598F66001AC367 /* FamilyPageZero.swift */,
+				5C86B6B821598EC7001AC367 /* FamilyPageOne.swift */,
+				5C86B6BC21598F7C001AC367 /* FamilyPageTwo.swift */,
+			);
+			path = FamilyPageViewController;
 			sourceTree = "<group>";
 		};
 		5CAD362E20A8EFBC00C56FCE /* NotificationMessageResponse */ = {
@@ -928,6 +948,7 @@
 				5C9BAB7520C5DFE20063BD20 /* CustomView.swift in Sources */,
 				5C860FC41FCF36870063B0BB /* PrintDebug.swift in Sources */,
 				5C6D422B1EDE0DFA001037CE /* Notifications.swift in Sources */,
+				5C86B6B921598EC7001AC367 /* FamilyPageOne.swift in Sources */,
 				5CA49F5B1FD78DA100B0A993 /* MessageViewController.swift in Sources */,
 				5C9FD3CC20A52B6400B1D5A1 /* UIImageView+ShadowImageView.swift in Sources */,
 				5C592B741DAE9DF300238E7E /* CustomImageView.swift in Sources */,
@@ -940,6 +961,7 @@
 				5CCE6642213B57C000FF5B43 /* AuthService.swift in Sources */,
 				5CB7FE561FE435B600D41E6F /* FrostyView.swift in Sources */,
 				5C558A0C1FA772FD0076A17D /* LoginTwoVC.swift in Sources */,
+				5C86B6BB21598F66001AC367 /* FamilyPageZero.swift in Sources */,
 				5CCF0C8D1D898D090089F39D /* Groups.swift in Sources */,
 				5CE55E191FF7446F00E89D86 /* CustomTableView.swift in Sources */,
 				5CCF0C991D898EC40089F39D /* CustomButton.swift in Sources */,
@@ -960,6 +982,7 @@
 				5C558A081FA772BE0076A17D /* LoginZeroVC.swift in Sources */,
 				5C093A4B1FE099E700144A32 /* Request.swift in Sources */,
 				5CF50D83209C49D300136167 /* MessageTableViewCell.swift in Sources */,
+				5C86B6BF21598F9F001AC367 /* FamilyPageVC.swift in Sources */,
 				5C2286852144AE3D008388A6 /* RequestCell.swift in Sources */,
 				5C093A491FE0985100144A32 /* RequestUserCell.swift in Sources */,
 				5C1B81EE2158468E00026FD1 /* RequestCategory.swift in Sources */,
@@ -973,6 +996,7 @@
 				5C8925A420810C1F0032CEAA /* ReviewCollectionViewCell.swift in Sources */,
 				5CC0C6972095DFD1005317FA /* RequestDetailVC.swift in Sources */,
 				5CCF0C771D898BFB0089F39D /* NannyViewController.swift in Sources */,
+				5C86B6BD21598F7C001AC367 /* FamilyPageTwo.swift in Sources */,
 				5C558A061FA7711C0076A17D /* LoginPageVC.swift in Sources */,
 				5C17A1DE20817D87004CCBC6 /* SubSettingsViewController.swift in Sources */,
 				5C89EE9E1FA48072005341ED /* DTTextField.swift in Sources */,

@@ -17,6 +17,9 @@ class RequestViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var tableView: CustomTableView!
+    @IBOutlet weak var profileImage: CustomImageView!
+
+    @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var brandingLabel: UILabel!
     
     @IBOutlet weak var pendingLabel: UILabel!
@@ -37,6 +40,9 @@ class RequestViewController: UIViewController, CLLocationManagerDelegate {
     func getUserSettings() {
         if let user = LocalService.instance.getUser() {
             self.user = user
+            
+            self.welcomeLabel.text = "Hello, \(user.firstName)"
+            self.profileImage.loadImageUsingCacheWith(urlString: user.imageName)
         }
     }
     
@@ -154,7 +160,6 @@ class RequestViewController: UIViewController, CLLocationManagerDelegate {
                     
                     self.requests.removeAll()
                     self.requestSections.removeAll()
-                    
                     self.resetRequestStatusCount()
                     
                     for (_,value) in snapValue {
@@ -188,32 +193,53 @@ class RequestViewController: UIViewController, CLLocationManagerDelegate {
             requestStatus: requestSnap["requestStatus"] as! String,
             requestCategory: requestSnap["requestCategory"] as! String,
             requestREF: userRef)
-        self.observeUser(request: request, userRef: userRef)
+        self.oldObserveUser(request: request, userRef: userRef)
     }
     
-    func observeUser(request: Request, userRef: DatabaseReference) {
+    func oldObserveUser(request: Request, userRef: DatabaseReference) {
         if self.requests.count < self.totalRequests {
+            
             var requestVal = request
             let reference = userRef
+            
             reference.observeSingleEvent(of: .value, with: { snapshot in
                 if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
+                    
+                    var imageName: String?
+                    var firstName: String?
+                    var userStatus: Date?
+                    
                     for (key, val) in snapValue {
-                        if let userValue = val as? String {
-                            if key == "first_name" {
-                                requestVal.firstName = userValue
-                            } else if key == "imageUrl" {
-                                requestVal.imageName = userValue
-                            } else if key == "status" {
-                                requestVal.userStatus = stringToDateTime(userValue)
+                        if key == "imageUrl" {
+                            imageName = val as? String
+                        }
+                        if key == "first_name" {
+                            firstName = val as? String
+                        }
+                        
+                        if key == "status" {
+                            if let status = val as? [String: AnyObject] {
+                                for (k, v) in status {
+                                    if k == "time" {
+                                        if let timeValue = v as? String {
+                                            userStatus = stringToDateTime(timeValue)
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
+                    
+                    requestVal.imageName = imageName != nil ? imageName! : ""
+                    requestVal.firstName = firstName != nil ? firstName! : ""
+                    requestVal.userStatus = userStatus!
+                    
+                    self.requests.append(requestVal)
+                    self.setRequestStatusCountFrom(request: requestVal)
+                    
+                    self.requestBadge = self.requests.count
+                    self.tableView.reloadData()
                 }
-                self.requests.append(requestVal)
-                self.setRequestStatusCountFrom(request: request)
-                
-                self.requestBadge += 1
-                self.tableView.reloadData()
             })
         } else {
             self.tableView.reloadData()

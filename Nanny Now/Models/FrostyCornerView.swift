@@ -9,11 +9,15 @@
 import UIKit
 
 class FrostyCornerView: FrostyView {
+    
+    @IBInspectable var customCornerRadius: CGFloat = 19.5
+    @IBInspectable var customBlurEffect: UIBlurEffectStyle = .regular
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.layer.cornerRadius = 19.5
+        self.layer.cornerRadius = customCornerRadius
         self.layer.borderWidth = 0.2
         self.layer.borderColor = WHITE_ALPHA.cgColor
-        setEffect(blurEffect: .light)
+        setEffect(blurEffect: customBlurEffect)
     }
 }

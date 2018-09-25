@@ -7,8 +7,8 @@
 //
 
 import Foundation
-public var disablePrint = false
 
+fileprivate var disablePrint = false
 fileprivate var printCount = [String:Int]()
 fileprivate var printCountTotal = 0
 

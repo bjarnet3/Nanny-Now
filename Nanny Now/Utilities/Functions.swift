@@ -11,6 +11,7 @@ import MapKit
 // import Firebase
 // import RevealingSplashView
 // import RAMAnimatedTabBarController
+
 public func returnGender(_ gender:String?) -> String {
     switch gender! {
     case "female":
