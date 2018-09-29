@@ -123,7 +123,10 @@ class MessageDetailVC: UIViewController {
         self.view.addSubview(visualView)
         
         // Instantiate RequestMenu View
-        let requestFrame = CGRect(x: 15, y: 30, width: UIScreen.main.bounds.width - 30, height: 520)
+        let tabBarHeight = self.tabBarController?.tabBar.frame.height ?? 49.0
+        let minRequestFrame = CGRect(x: 15, y: 20, width: UIScreen.main.bounds.width - 30, height: UIScreen.main.bounds.height - ((tabBarHeight) + 40))
+        let maxRequestFrame = CGRect(x: 20, y: ((UIScreen.main.bounds.height - 550) - tabBarHeight) / 2, width: UIScreen.main.bounds.width - 40, height: 550)
+        let requestFrame = UIScreen.main.bounds.height > 568 ? maxRequestFrame : minRequestFrame
         let requestMenu = NannyRequestMenu(frame: requestFrame)
         
         // Set properties
@@ -152,8 +155,11 @@ class MessageDetailVC: UIViewController {
             requestMenu.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         })
         
+        
+        
         // Init Data to requestMenu
-        requestMenu.initData(user: self.user, remote: self.remoteUser as? Nanny, completion: {
+        requestMenu.initData(user: self.user, remote: self.remoteUser, completion: {
+            
             // Run exit process when done...
             print("requestMenu completion")
             self.exitRequestMenu()

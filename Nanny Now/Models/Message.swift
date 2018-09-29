@@ -9,7 +9,110 @@
 import UIKit
 import Firebase
 
-struct Message {
+class Message {
+    // Personal information (Private)
+    // ------------------------------
+    private(set) public var _toUser: User?
+    private(set) public var _fromUser: User?
+    
+    private(set) public var _toUID: String
+    private(set) public var _fromUID: String
+    
+    private(set) public var _imageURL: String?
+    private(set) public var _userStatus: Date?
+    
+    // Service information (Request)
+    // -----------------------------
+    private(set) public var _messageID: String
+    private(set) public var _messageTime: String
+    private(set) public var _message: String
+    
+    private(set) public var _timeBreak: Bool = false
+    
+    private(set) public var _requestCategory: NotificationCategory = .messageRequest
+    private(set) public var _highlighted: Bool = false
+    
+    var userStatus: Date {
+        get {
+            guard let userDate = _userStatus else { return stringToDateTime(_messageTime) }
+            return userDate
+        }
+        set {
+            self._userStatus = newValue
+        }
+    }
+    
+    var messageTime: Date {
+        get {
+            return stringToDateTime(_messageTime)
+        } set {
+            self._messageTime = dateTimeToTimeStampString(newValue)
+        }
+    }
+    
+    func setMessageID() {
+        self._messageID = DataService.instance.REF_MESSAGES.childByAutoId().key
+    }
+    
+    func setMessage(message: String) {
+        self._message = message
+    }
+    
+    func setTo(user: User) {
+        self._toUser = user
+    }
+    
+    func setFrom(user: User) {
+        self._fromUser = user
+    }
+    
+    func setImageUrl(imageURL: String) {
+        self._imageURL = imageURL
+    }
+    
+    func setTimeBreak(timeBreak: Bool) {
+        self._timeBreak = timeBreak
+    }
+    
+    func setCategory(category: NotificationCategory) {
+        self._requestCategory = category
+    }
+    
+    func setHighlighted(highlighted: Bool) {
+        self._highlighted = highlighted
+    }
+    
+    init(from fromUser: User, to toUser: User, message: String, messageID: String? = nil) {
+        self._toUser = toUser
+        self._fromUser = fromUser
+        
+        self._toUID = toUser.userUID
+        self._fromUID = fromUser.userUID
+        
+        self._imageURL = fromUser.imageName
+        
+        self._message = message
+        self._messageID = messageID ?? DataService.instance.REF_MESSAGES.childByAutoId().key
+        self._messageTime = returnTimeStamp()
+        self._highlighted = false
+    }
+    
+    init(from fromUID: String, to toUID: String, messageID: String? = nil, message: String, messageTime: String, highlighted: Bool = true, requestCategory: NotificationCategory? = nil) {
+        
+        self._toUID = toUID
+        self._fromUID = fromUID
+        
+        self._message = message
+        self._messageID = messageID ?? DataService.instance.REF_MESSAGES.childByAutoId().key
+        self._messageTime = messageTime
+        
+        self._highlighted = highlighted
+        self._requestCategory = requestCategory ?? .messageRequest
+    }
+}
+
+/*
+struct MessageStruct {
     // Personal information (Private)
     // ------------------------------
     private(set) public var _toUser: User?
@@ -111,3 +214,5 @@ struct Message {
     }
     
 }
+*/
+

@@ -346,6 +346,7 @@ class DataService {
         }
     }
     
+    /*
     func postToTheRequest(recieveUserID: String, requestID: String, timeFrom: Date, timeTo: Date, message: String, status: String, reference: DatabaseReference) {
         if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             
@@ -371,6 +372,7 @@ class DataService {
             request.updateChildValues(requestValues)
         }
     }
+    */
     
     func block(userID blockedUserID: String, blockedName: String) {
         if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {

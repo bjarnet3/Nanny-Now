@@ -36,6 +36,7 @@ class NannyRequestMenu: UIView {
     // -------------------------------------
     private var user: User?
     private var remote: User?
+    
     private var message: String = ""
     private var completion: Completion?
     
@@ -154,11 +155,13 @@ class NannyRequestMenu: UIView {
         initNib()
     }
     
+    // Initialize frame
     override init(frame: CGRect) {
         super.init(frame: frame)
         initNib()
     }
 
+    // Initialize Xib File
     private func initNib() {
         Bundle.main.loadNibNamed("NannyRequestMenu", owner: self, options: nil)
         addSubview(requestView)
@@ -166,6 +169,7 @@ class NannyRequestMenu: UIView {
         requestView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
     
+    // Initialize Data
     public func initData(user: User?, remote: User?, completion: Completion? = nil) {
         if let remoteUser = remote {
             self.requestImage.loadImageUsingCacheWith(urlString: remoteUser.imageName)

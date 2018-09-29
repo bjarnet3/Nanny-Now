@@ -523,7 +523,10 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
         self.view.addSubview(visualView)
         
         // Instantiate RequestMenu View
-        let requestFrame = CGRect(x: 15, y: 30, width: UIScreen.main.bounds.width - 30, height: 520)
+        let tabBarHeight = self.tabBarController?.tabBar.frame.height ?? 49.0
+        let minRequestFrame = CGRect(x: 15, y: 20, width: UIScreen.main.bounds.width - 30, height: UIScreen.main.bounds.height - ((tabBarHeight) + 40))
+        let maxRequestFrame = CGRect(x: 20, y: ((UIScreen.main.bounds.height - 550) - tabBarHeight) / 2, width: UIScreen.main.bounds.width - 40, height: 550)
+        let requestFrame = UIScreen.main.bounds.height > 568 ? maxRequestFrame : minRequestFrame
         let requestMenu = NannyRequestMenu(frame: requestFrame)
         
         // Set properties
@@ -1021,7 +1024,7 @@ extension NannyViewController {
         
         var request = Request(nanny: remoteUser, user: user, timeFrom: Date(timeIntervalSinceNow: 3600.0), timeTo: Date(timeIntervalSinceNow: 7200.0), message: "Nanny Request")
         
-        let controller = UIAlertController(title: "Forespørsel til \(self.nannies[row].firstName)", message: "Skriv bare tidspunktet, og hvilken dag (Kl. 'fra - til' og 'i dag' / 'dato)", preferredStyle: .alert)
+        let controller = UIAlertController(title: "Forespørsel fra \(self.nannies[row].firstName)", message: "Skriv bare tidspunktet, og hvilken dag (Kl. 'fra - til' og 'i dag' / 'dato)", preferredStyle: .alert)
         
         let cancelButton = UIAlertAction(title: "Avbryt", style: .destructive) { (action) in
             self.exitOrderMenu()

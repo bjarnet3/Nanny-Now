@@ -128,7 +128,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         // Message Text
         // -----------
         let remoteName = userInfo["remoteName"] as? String ?? ""
-        self.requestName?.text = "Forespørsel ( \(remoteName) )"
+        self.requestName?.text = "\(remoteName)"
         
         // Location
         // --------
@@ -145,7 +145,6 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         
         // Data Time Format
         // ----------------
-
         let timeStringFrom = userInfo["timeFrom"] as? String
         let timeStringTo = userInfo["timeTo"] as? String
         
@@ -165,8 +164,10 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         let maskView = UIVisualEffectView(effect: blurEffect)
         maskView.frame = subView.bounds
         
+        // Choose the smales distance - width / height
+        let subViewBounds: CGFloat = subView.bounds.width < subView.bounds.height ? subView.bounds.width : subView.bounds.height
         // Set the radius to 1/3 of the screen width
-        let radius : CGFloat = subView.bounds.width/2.25
+        let radius : CGFloat = subViewBounds/2.40
         // Create a path with the rectangle in it.
         let path = UIBezierPath(rect: subView.bounds)
         // Put a circle path in the middle
@@ -266,7 +267,7 @@ extension NotificationViewController : MKMapViewDelegate {
         
         mapView.addAnnotation(remoteArt)
         
-        let yourArt = Artwork(title: "Dette er deg",
+        let yourArt = Artwork(title: "YOU",
                               locationName: "",
                               discipline: "",
                               coordinate: yourLocation)

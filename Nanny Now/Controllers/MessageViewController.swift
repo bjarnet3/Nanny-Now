@@ -104,6 +104,103 @@ class MessageViewController: UIViewController {
     }
     
     func observeUser(with message: Message, userRef: DatabaseReference) {
+        
+        
+        
+        
+        
+        if self.messages.count < self.totalMessages {
+            
+            if self.messages.count == 1 {
+                
+                setProgress(progress: 0.7, animated: true, alpha: 1.0)
+                
+            }
+            
+            userRef.observeSingleEvent(of: .value, with: { snapshot in
+                if let snapValue = snapshot.value as? Dictionary<String, AnyObject> {
+                    
+                    // Get User Status
+                    // ---------------
+                    var imageName: String?
+                    var firstName: String?
+                    var userBirthDay: String?
+                    var userJobTitle: String?
+                    var userGender: String?
+                    var userRatings: [String: Int]?
+                    
+                    var userStatus: Date?
+                    
+                    for (key, val) in snapValue {
+                        if key == "imageUrl" {
+                            imageName = val as? String
+                        }
+                        if key == "first_name" {
+                            firstName = val as? String
+                        }
+                        
+                        if key == "birthday" {
+                            userBirthDay = val as? String
+                        }
+                        
+                        if key == "yrke" {
+                            userJobTitle = val as? String
+                        }
+                        
+                        if key == "gender" {
+                            userGender = val as? String
+                        }
+                        
+                        if key == "ratings" {
+                            userRatings = val as? [String:Int]
+                        }
+                        
+                        if key == "status" {
+                            if let status = val as? [String: AnyObject] {
+                                for (k, v) in status {
+                                    if k == "time" {
+                                        if let timeValue = v as? String {
+                                            userStatus = stringToDateTime(timeValue)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    let message = message
+                    let user = User(userUID: message._fromUID, imageName: imageName, firstName: firstName)
+                    message.setFrom(user: user)
+                    
+                    let remoteUser = User(userUID: message._toUID, imageName: imageName, firstName: firstName, lastName: nil, birthDay: userBirthDay, gender: userGender, jobTitle: userJobTitle, location: CLLocation(latitude: 60.003890322, longitude: 5.003254423))
+                    
+                    remoteUser.ratings = userRatings
+                    message.setTo(user: remoteUser)
+                    message.userStatus = userStatus!
+                    
+                    
+                    self.messages.append(message)
+                    self.messages.sort(by: { $0._messageTime > $1._messageTime })
+                    
+                    if self.messages.count == self.totalMessages {
+                        
+                        self.tableView.reloadData()
+                        self.animatedTabBarItem.playAnimation()
+                    }
+                    
+                }
+            })
+        } else {
+            self.tableView.reloadData()
+            setProgress(progress: 1.0, animated: true, alpha: 0.0)
+        }
+        
+        
+        
+    }
+    
+    /*
+    func observeUser(with message: MessageStruct, userRef: DatabaseReference) {
         if self.messages.count < self.totalMessages {
             if self.messages.count == 1 {
                 setProgress(progress: 0.7, animated: true, alpha: 1.0)
@@ -149,21 +246,21 @@ class MessageViewController: UIViewController {
                     
                     self.messages.append(message)
                     self.messages.sort(by: { $0._messageTime > $1._messageTime })
-                    // self.tableView.reloadData()
                     
                     if self.messages.count == self.totalMessages {
-                        printCount()
+                        
                         self.tableView.reloadData()
                         self.animatedTabBarItem.playAnimation()
                     }
+                    
                 }
             })
-            
         } else {
             self.tableView.reloadData()
             setProgress(progress: 1.0, animated: true, alpha: 0.0)
         }
     }
+    */
     
     func removeAllDatabaseObservers() {
         if let UID = KeychainWrapper.standard.string(forKey: KEY_UID) {

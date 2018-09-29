@@ -224,6 +224,7 @@ public func dateTimeToString(from date: Date, with locale:String = "nb_NO", date
     return dateTimeToString
 }
 
+/*
 /// This will be used when Nanny and Family Request are ready
 public func returnDayTimeString(from date: Date, day: Bool = true) -> String {
     let todayDate = Date()
@@ -278,8 +279,10 @@ public func returnDayTimeString(from date: Date, day: Bool = true) -> String {
     }
     return returnString
 }
+*/
 
-/// This will be used when Nanny and Family Request are ready
+// This will be used when Nanny and Family Request are ready
+/// @available(iOS, deprecated, message: "Use dateTimeToString() method instead or create an original nb_NO-local")
 public func returnDayTimeString(from date: Date) -> String {
     let todayDate = Date()
     let tomorrowDate = Date(timeInterval: 86400, since: todayDate)
