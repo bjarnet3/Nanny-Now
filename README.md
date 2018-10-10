@@ -692,14 +692,57 @@ Summary:
 - [ ] Nanny Now - Fix Notificaiton Send Request (Infinite Loop 50+ Requests)
 - [ ] Nanny Now - FamilyTableViewController (Part 1) - IMPORTANT - Remake / Redesign
 - [x] TV-Remote - Playground with View (Part 1)
+
+#### Week 32: (Protocol Composition)
+- [ ] Nanny Now - Different Colors in MapKit using CocoaPods «MapKitGoogleStyler» Part 2
+- [ ] Nanny Now - Update Cocoa Pods and remove Errors (20 errors)
+- [ ] Nanny Now - Fix Notificaiton Send Request (Infinite Loop 50+ Requests)
+- [ ] Nanny Now - FamilyTableViewController (Part 1) - IMPORTANT - Remake / Redesign
+- [x] TV-Remote - Playground with View (Part 1)
 Summary:
-- Codable (protocol composition type)
+- Codable (protocol composition type) (Encodable + Decodable)
 - https://benscheirman.com/2017/06/swift-json/
 
-#### Week 32: (Intermediate Design Patterns in Swift)
+#### Week 33: (Intermediate Design Patterns in Swift)
+- [x] TV-Remote - Location and NSUserDefaults
+- [x] MusicVOID - player update !!
+- [x] MusicVOID - circle text around player
+- [x] MusicVOID - Add Tabbar Icons
 - https://www.raywenderlich.com/86053/intermediate-design-patterns-in-swift
 
-#### Week 33: (Functional Refactoring)
+#### Week 35 - 37: (Functional Refactoring)
+- [ ] Nanny Now - Observe [.added, .removed, .modified] - «This will solve the double posts in TableView» !!! Important
+- [ ] Nanny Now - Fix Request System
+- [ ] Nanny Now - Fix MessageViewController
+- [x] Nanny Now - Revert back to older version on Github «Because of merge error»
+- [ ] Nanny Now - Different Colors in MapKit using CocoaPods «MapKitGoogleStyler» Part 2
+- [ ] Nanny Now - Update Cocoa Pods and remove Errors (20 errors)
+- [ ] Nanny Now - Fix Notificaiton Send Request (Infinite Loop 50+ Requests)
+- [ ] Nanny Now - FamilyTableViewController (Part 1) - IMPORTANT - Remake / Redesign
+- [x] Nanny Now - User Request object in Notifications.swift
+- [x] Nanny Now - NannyDetail «Map Request» in RequestCurrentVC
+
+#### Week 38: (Functional Refactoring)
+- [ ] Nanny Now - Observe [.added, .removed, .modified] - «This will solve the double posts in TableView» !!! Important
+- [x] Nanny Now - Fix Request System - Part 1
+- [x] Nanny Now - Fix MessageViewController - Part 1
+- [ ] Nanny Now - Fix LoginViewController - Create LoginManager
+- [ ] Nanny Now - Different Colors in MapKit using CocoaPods «MapKitGoogleStyler» Part 2
+- [ ] Nanny Now - App Delegate Cleanup - Part 2
+- [x] Nanny Now - Update Cocoa Pods and remove Errors (20 errors)
+- [ ] Nanny Now - Fix Notificaiton Send Request (Infinite Loop 50+ Requests)
+- [x] Nanny Now - FamilyTableViewController (Part 1) - IMPORTANT - Remake / Redesign
+- [x] RaspberryPI - Give it too my Cusin
+
+#### Week 39: (Protocol-oriented Data Structures)
+- https://www.appcoda.com/pop-generic-doubly-linked-list/
+- [x] Nanny Now - Fix Request Size Guide (iPhone 5 - iPhone X)
+- [ ] Nanny Now - Observe [.added, .removed, .modified] - «This will solve the double posts in TableView» !!! Important
+- [ ] Nanny Now - Fix LoginViewController - Create LoginManager
+- [ ] Nanny Now - Different Colors in MapKit using CocoaPods «MapKitGoogleStyler» Part 2
+- [ ] Nanny Now - App Delegate Cleanup - Part 2
+- [ ] Nanny Now - Fix Notificaiton Send Request (Infinite Loop 50+ Requests)
+- collectionView.layoutAttributesForItem(at: <IndexPath>)
 
 
 # Contributors:
