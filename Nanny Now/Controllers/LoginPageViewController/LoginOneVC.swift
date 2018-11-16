@@ -26,7 +26,6 @@ class LoginOneVC: UIViewController {
     @IBOutlet weak var overlayView: UIImageView!
     
     // @IBOutlet weak var scrollView: UIScrollView!
-    
     @IBOutlet weak var txtFirstName: DTTextField!
     @IBOutlet weak var txtLastName: DTTextField!
     @IBOutlet weak var txtEmail: DTTextField!

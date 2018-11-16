@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -174,6 +174,9 @@
                             <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
                                 <color key="value" red="1" green="0.52156862745098043" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="textFontSize">
+                                <real key="value" value="9"/>
+                            </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
                             <outlet property="animation" destination="Dqp-aQ-tOW" id="cra-pD-dAH"/>
@@ -264,6 +267,9 @@
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="yOffSet">
                                 <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="textFontSize">
+                                <real key="value" value="9"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
@@ -677,6 +683,9 @@
                                 <color key="value" red="1" green="0.52120530610000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="textFontSize">
+                                <real key="value" value="9"/>
+                            </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
                             <outlet property="animation" destination="zRa-80-e0D" id="aap-LZ-AFU"/>
@@ -1273,13 +1282,13 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
         <!--Login ZeroVC-->
         <scene sceneID="0Ab-kD-Frg">
             <objects>
-                <viewController storyboardIdentifier="LoginZero" automaticallyAdjustsScrollViewInsets="NO" id="hTu-1c-awd" customClass="LoginZeroVC" customModule="Nanny_Now" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginZero" id="hTu-1c-awd" customClass="LoginZeroVC" customModule="Nanny_Now" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6mP-x2-Wxq"/>
                         <viewControllerLayoutGuide type="bottom" id="m1z-0O-haq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="amY-35-0Ac">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="header" translatesAutoresizingMaskIntoConstraints="NO" id="nYV-Zw-i4F">
@@ -1291,14 +1300,14 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Vent litt" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SbZ-Es-geI">
-                                <rect key="frame" x="16" y="293" width="288" height="87.5"/>
+                                <rect key="frame" x="16" y="293" width="343" height="87.5"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="64"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="20"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L7l-g8-ctM" customClass="CustomButton" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="16" y="480" width="288" height="48"/>
+                                <rect key="frame" x="16" y="579" width="343" height="48"/>
                                 <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="Vnr-rD-ohl"/>
@@ -1323,7 +1332,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mOF-fa-Xnp" customClass="CustomImageView" customModule="Nanny_Now" customModuleProvider="target">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nanny-profil" translatesAutoresizingMaskIntoConstraints="NO" id="mOF-fa-Xnp" customClass="CustomImageView" customModule="Nanny_Now" customModuleProvider="target">
                                 <rect key="frame" x="16" y="70" width="123" height="123"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -1332,22 +1341,22 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6c2-pL-Myf">
-                                <rect key="frame" x="162" y="90" width="148" height="81"/>
+                                <rect key="frame" x="162" y="90" width="203" height="81"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="first_name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RMl-yl-qJ5">
-                                        <rect key="frame" x="0.0" y="0.0" width="148" height="23.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="203" height="23.5"/>
                                         <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
                                         <color key="textColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Job Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9i-ET-NQ1">
-                                        <rect key="frame" x="0.0" y="33.5" width="148" height="18"/>
+                                        <rect key="frame" x="0.0" y="33.5" width="203" height="18"/>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="13"/>
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4kh-F3-cDm">
-                                        <rect key="frame" x="0.0" y="61.5" width="148" height="19.5"/>
+                                        <rect key="frame" x="0.0" y="61.5" width="203" height="19.5"/>
                                         <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1355,7 +1364,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="     henter facebook data . . ." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rD2-3R-NS9">
-                                <rect key="frame" x="16" y="405.5" width="288" height="26"/>
+                                <rect key="frame" x="16" y="405.5" width="343" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="26" id="74W-Df-eoR"/>
                                 </constraints>
@@ -1364,7 +1373,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Facebook_Home_logo_old.svg" highlightedImage="Facebook_Home_logo_old.svg" translatesAutoresizingMaskIntoConstraints="NO" id="hHb-XE-q02" customClass="CustomImageView" customModule="Nanny_Now" customModuleProvider="target">
-                                <rect key="frame" x="26" y="485" width="32" height="32"/>
+                                <rect key="frame" x="26" y="584" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="32" id="VyY-r2-2qr"/>
                                     <constraint firstAttribute="height" constant="32" id="XmG-CF-9ZU"/>
@@ -1392,7 +1401,6 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                             <constraint firstItem="mOF-fa-Xnp" firstAttribute="leading" secondItem="amY-35-0Ac" secondAttribute="leadingMargin" id="roI-Hh-WNw"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="320" height="568"/>
                     <connections>
                         <outlet property="descriptionLbl" destination="4kh-F3-cDm" id="gLq-gX-LnW"/>
                         <outlet property="imageView" destination="nYV-Zw-i4F" id="2Kq-lC-Lus"/>
@@ -1408,7 +1416,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jzH-Qo-xam" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1023" y="-19"/>
+            <point key="canvasLocation" x="-1023" y="-18"/>
         </scene>
         <!--Login OneVC-->
         <scene sceneID="asi-hR-wxt">
@@ -1628,7 +1636,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iab-Bj-A1U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="326" y="-19"/>
+            <point key="canvasLocation" x="326" y="-18"/>
         </scene>
         <!--Animated Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -1824,6 +1832,9 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
                                 <color key="value" red="1" green="0.52156862745098043" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="textFontSize">
+                                <real key="value" value="9"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
@@ -3528,6 +3539,9 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="iconColor">
                                 <color key="value" red="1" green="0.52156862749999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="textFontSize">
+                                <real key="value" value="9"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
