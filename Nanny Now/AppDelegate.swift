@@ -11,8 +11,6 @@ import UserNotifications
 import Firebase
 import FBSDKLoginKit
 import RAMAnimatedTabBarController
-import FirebaseMessaging
-import FirebaseInstanceID
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -124,6 +122,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let messageAccept = UNNotificationAction(identifier: NotificationAction.messageAccept.rawValue, title: "Meldinger", options: [.authenticationRequired, .foreground])
         let messageResponse = UNTextInputNotificationAction(identifier: NotificationAction.messageResponse.rawValue, title: "Svar", options: [.authenticationRequired], textInputButtonTitle: "Send", textInputPlaceholder: "Svar")
+        // let messageResponse = UNTextInputNotificationAction(identifier: NotificationAction.messageResponse.rawValue, title: "Svar", options: [.authenticationRequired, .foreground], textInputButtonTitle: "Send", textInputPlaceholder: "Svar")
         let messageReject = UNNotificationAction(identifier: NotificationAction.messageReject.rawValue, title: "Mottatt", options: [.destructive])
         
         // Notification Categories
@@ -163,10 +162,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Clear badge when app is or resumed
         application.applicationIconBadgeNumber = 0
-    }
-    
-    func didBecomeActive() {
-        
     }
     
     /// Tells the delegate that the app has become active.
@@ -279,6 +274,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         decreaseBadge(application)
     }
     
+    // ---------------------------------------------
+    // UIBackgroundFetchResult      /   fetchCompletionHandler    /   backGroundFetchResult
+    // ---------------------------------------------
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        let state : UIApplicationState = application.applicationState
+        switch state {
+        case UIApplicationState.active:
+            print("If needed notify user about the message")
+        default:
+            print("Run code to download content")
+        }
+        completionHandler(UIBackgroundFetchResult.newData)
+    }
     
     // Closure @escaping ...
     // ---------------------
@@ -358,6 +367,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                        didReceive response: UNNotificationResponse,
                                        withCompletionHandler completionHandler: @escaping () -> Void) {
         notificationResponse(response: response, completionHandler: completionHandler)
+        completionHandler()
     }
     
     // ---------------------------------------------
@@ -386,7 +396,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             print("default")
             completionHandler?()
         }
-        completionHandler?()
     }
     
     // ---------------------------------------------
@@ -465,14 +474,17 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             tabBarController.tabBarItem.badgeValue = nil
         case .messageResponse:
             if let textResponse = response as? UNTextInputNotificationResponse {
+                
                 let messageResponse = textResponse.userText
                 
                 let userInfo = response.notification.request.content.userInfo
                 let remoteID = AnyHashable("userID")
                 guard let remoteUID = userInfo[remoteID] as? String else { return }
-                
+
                 DataService.instance.postToMessage(recieveUserID: remoteUID, message: messageResponse)
                 decreaseBadge(.shared)
+            } else {
+                printDebug(object: "UNTextInputNotificationResponse.userText empty")
             }
         default:
             print("messageReject")

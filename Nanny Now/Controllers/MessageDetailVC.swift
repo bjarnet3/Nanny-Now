@@ -344,7 +344,7 @@ class MessageDetailVC: UIViewController {
             if let user = self.user {
                 setProgress(progress: 0.5, animated: true, alpha: 1.0)
                 
-                var message = Message(from: user, to: remote, message: messageText)
+                let message = Message(from: user, to: remote, message: messageText)
                 message.setCategory(category: .messageConfirm)
                 sendNotification(message: message)
                 

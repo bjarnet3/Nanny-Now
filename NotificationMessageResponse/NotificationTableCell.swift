@@ -48,7 +48,7 @@ class NotificationTableCell: UITableViewCell {
         }
     }
     
-    func setupView(with message: MessageLite, to user: UserLite, animated: Bool = true, hasDateTime: Bool = false) {
+    func setupView(with message: Message, to user: User, animated: Bool = true, hasDateTime: Bool = false) {
         self.animateView(direction: .enter)
         self.hasDateTime = hasDateTime
         

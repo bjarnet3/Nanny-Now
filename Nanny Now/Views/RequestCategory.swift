@@ -10,6 +10,7 @@ import UIKit
 class RequestCategory: UITableViewCell {
     
     @IBOutlet weak var categoryTitle: UILabel!
+    @IBOutlet weak var categoryImage: UIImageView!
     @IBOutlet weak var categoryProgress: UIProgressView!
     
     override func layoutSubviews() {

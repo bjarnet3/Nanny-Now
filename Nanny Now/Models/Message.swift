@@ -7,7 +7,53 @@
 //
 
 import UIKit
-import Firebase
+// import Firebase
+
+/// Defination of category types will come here !!
+public enum NotificationCategory : String {
+    case nannyRequest = "nannyRequest"
+    case nannyMapRequest = "nannyMapRequest"
+    case nannyConfirm = "nannyConfirm"
+    
+    case familyRequest = "familyRequest"
+    case familyMapRequest = "familyMapRequest"
+    case familyConfirm = "familyConfirm"
+    
+    case messageRequest = "messageRequest"
+    case messageConfirm = "messageConfirm"
+    
+    case defaultCategory = "defaultCategory"
+}
+
+public enum NotificationAction: String {
+    case nannyAccept = "nannyAccept"
+    case nannyReject = "nannyReject"
+    case nannyResponse = "nannyResponse"
+    
+    case familyAccept = "familyAccept"
+    case familyReject = "familyReject"
+    case familyResponse = "familyResponse"
+    
+    case messageAccept = "messageAccept"
+    case messageReject = "messageReject"
+    case messageResponse = "messageResponse"
+    
+    case defaultAccept = "defaultAccept"
+    case defaultReject = "defaultReject"
+    case defaultRemind = "defaultRemind"
+    
+    case defaultAction = "defaultAction"
+}
+
+public func notificationRequest(category: String) -> NotificationCategory {
+    guard let notificaitonCategory = NotificationCategory(rawValue: category) else { return NotificationCategory.defaultCategory }
+    return notificaitonCategory
+}
+
+public func notificationRequest(action: String) -> NotificationAction {
+    guard let notificaitonAction = NotificationAction(rawValue: action) else { return NotificationAction.defaultAction }
+    return notificaitonAction
+}
 
 class Message {
     // Personal information (Private)
@@ -50,8 +96,8 @@ class Message {
         }
     }
     
-    func setMessageID() {
-        self._messageID = DataService.instance.REF_MESSAGES.childByAutoId().key
+    func setMessageID(messageID: String) {
+        self._messageID = messageID // DataService.instance.REF_MESSAGES.childByAutoId().key
     }
     
     func setMessage(message: String) {
@@ -92,7 +138,7 @@ class Message {
         self._imageURL = fromUser.imageName
         
         self._message = message
-        self._messageID = messageID ?? DataService.instance.REF_MESSAGES.childByAutoId().key
+        self._messageID = messageID ?? "" // ?? DataService.instance.REF_MESSAGES.childByAutoId().key
         self._messageTime = returnTimeStamp()
         self._highlighted = false
     }
@@ -103,7 +149,7 @@ class Message {
         self._fromUID = fromUID
         
         self._message = message
-        self._messageID = messageID ?? DataService.instance.REF_MESSAGES.childByAutoId().key
+        self._messageID = messageID ?? "" //  ?? DataService.instance.REF_MESSAGES.childByAutoId().key
         self._messageTime = messageTime
         
         self._highlighted = highlighted

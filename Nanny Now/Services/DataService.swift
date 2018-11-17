@@ -10,6 +10,8 @@ import UIKit
 import MapKit
 // Firebase Part 3
 import Firebase
+import FirebaseMessaging
+import FirebaseInstanceID
 // Facebook Part 4
 import FBSDKCoreKit
 import FBSDKLoginKit

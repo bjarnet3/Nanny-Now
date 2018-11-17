@@ -18,10 +18,10 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
     
     // MARK: - Properties: Array & Varables
     // -------------------------------------
-    var user: UserLite?
-    var remoteUser: UserLite?
+    var user: User?
+    var remoteUser: User?
     
-    var messages = [MessageLite]()
+    var messages = [Message]()
     
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?
@@ -47,10 +47,10 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
             let userInfo = bestAttemptContent.userInfo
             
             guard let userUID = userInfo[userID] as? String else { return }
-            let user = UserLite(userUID: userUID)
+            let user = User(userUID: userUID) // UserLite(userUID: userUID)
             
             guard let remoteUID = userInfo[remoteID] as? String else { return }
-            let remoteUser = UserLite(userUID: remoteUID)
+            let remoteUser = User(userUID: remoteUID)
             
             guard let userImage = userInfo[userURL] as? String else { return }
             user.imageName = userImage
@@ -61,7 +61,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
             remoteUser.imageName = remoteImage
             
             self.remoteUser = remoteUser
-            let message = MessageLite(from: remoteUser, to: user, message: remoteMessage)
+            let message = Message(from: remoteUser, to: user, message: remoteMessage) // MessageLite(from: remoteUser, to: user, message: remoteMessage)
             
             self.messages.append(message)
             self.tableView.reloadData()
@@ -76,7 +76,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         if response.actionIdentifier == "messageResponse" {
             if let textResponse = response as? UNTextInputNotificationResponse {
                 
-                let toMessage = MessageLite(from: user, to: remoteUser, message: textResponse.userText)
+                let toMessage = Message(from: user, to: remoteUser, message: textResponse.userText) // MessageLite(from: user, to: remoteUser, message: textResponse.userText)
                 
                 self.messages.append(toMessage)
                 self.tableView.reloadData()
@@ -129,7 +129,7 @@ extension NotificationViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
+        super.viewDidAppear(animated)
         animateCells(in: self.tableView, delay: 0.15)
     }
 }

@@ -18,23 +18,12 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.35</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb1415370085429142</string>
-			</array>
-		</dict>
-	</array>
 	<key>CFBundleVersion</key>
 	<string>2</string>
 	<key>FacebookAppID</key>
 	<string>1415370085429142</string>
 	<key>FacebookDisplayName</key>
 	<string>Nanny Now</string>
-	<key>FirebaseAppDelegateProxyEnabled</key>
-	<true/>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
@@ -112,6 +101,7 @@
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

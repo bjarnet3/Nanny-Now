@@ -3019,8 +3019,12 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                                     <color key="tintColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="progressTintColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </progressView>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="complete1" translatesAutoresizingMaskIntoConstraints="NO" id="Fa7-hX-Vib">
+                                                                    <rect key="frame" x="0.0" y="5" width="22" height="22"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Active" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iP6-cP-PaX">
-                                                                    <rect key="frame" x="10" y="8" width="47" height="22"/>
+                                                                    <rect key="frame" x="30" y="5" width="75" height="22"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
                                                                     <color key="textColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3039,6 +3043,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
+                                                    <outlet property="categoryImage" destination="Fa7-hX-Vib" id="NkN-ml-MSu"/>
                                                     <outlet property="categoryProgress" destination="VkC-Qt-aoG" id="9oO-mI-Qmh"/>
                                                     <outlet property="categoryTitle" destination="iP6-cP-PaX" id="VZw-z9-Hxu"/>
                                                 </connections>

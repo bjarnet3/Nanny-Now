@@ -16,6 +16,8 @@
 		5C0F40F120DA041700BB3585 /* NotificationTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2F4BBA20A7FB1100BFB313 /* NotificationTableCell.swift */; };
 		5C0F40F220DA045900BB3585 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CAD363120A8EFBC00C56FCE /* MainInterface.storyboard */; };
 		5C1104151DF56A4200C7FB46 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1104141DF56A4200C7FB46 /* Extensions.swift */; };
+		5C16D582219F874200E49395 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC8493A1FCA34C3003AE163 /* Users.swift */; };
+		5C16D583219F881700E49395 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C042AE3209248B10022C5DD /* Message.swift */; };
 		5C17A1DE20817D87004CCBC6 /* SubSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C17A1DD20817D87004CCBC6 /* SubSettingsViewController.swift */; };
 		5C1B81EE2158468E00026FD1 /* RequestCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1B81ED2158468E00026FD1 /* RequestCategory.swift */; };
 		5C2286852144AE3D008388A6 /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2286842144AE3D008388A6 /* RequestCell.swift */; };
@@ -88,8 +90,6 @@
 		5CB41F1820C7EF85003A86C0 /* csd_notification_01.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CB41F1420C7EF84003A86C0 /* csd_notification_01.mp3 */; };
 		5CB41F1920C7EF85003A86C0 /* short_notification.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CB41F1520C7EF84003A86C0 /* short_notification.mp3 */; };
 		5CB41F1A20C7EF85003A86C0 /* simple_notification.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CB41F1620C7EF85003A86C0 /* simple_notification.mp3 */; };
-		5CB7575320DB0ED8003B0F09 /* MessageLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7575220DB0ED8003B0F09 /* MessageLite.swift */; };
-		5CB7575820DB12B0003B0F09 /* UserLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7575720DB12B0003B0F09 /* UserLite.swift */; };
 		5CB7575920DB1485003B0F09 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC8493A1FCA34C3003AE163 /* Users.swift */; };
 		5CB7FE561FE435B600D41E6F /* FrostyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7FE551FE435B600D41E6F /* FrostyView.swift */; };
 		5CB7FE581FE4362900D41E6F /* FrostyTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7FE571FE4362900D41E6F /* FrostyTabBar.swift */; };
@@ -243,8 +243,6 @@
 		5CB41F1420C7EF84003A86C0 /* csd_notification_01.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = csd_notification_01.mp3; sourceTree = "<group>"; };
 		5CB41F1520C7EF84003A86C0 /* short_notification.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = short_notification.mp3; sourceTree = "<group>"; };
 		5CB41F1620C7EF85003A86C0 /* simple_notification.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = simple_notification.mp3; sourceTree = "<group>"; };
-		5CB7575220DB0ED8003B0F09 /* MessageLite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageLite.swift; sourceTree = "<group>"; };
-		5CB7575720DB12B0003B0F09 /* UserLite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLite.swift; sourceTree = "<group>"; };
 		5CB7575A20DB4715003B0F09 /* NotificationMessageResponse.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationMessageResponse.entitlements; sourceTree = "<group>"; };
 		5CB7575B20DB47EC003B0F09 /* NotificationContentExtensions.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationContentExtensions.entitlements; sourceTree = "<group>"; };
 		5CB7FE551FE435B600D41E6F /* FrostyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyView.swift; sourceTree = "<group>"; };
@@ -434,8 +432,6 @@
 				5CB7575A20DB4715003B0F09 /* NotificationMessageResponse.entitlements */,
 				5CAD362F20A8EFBC00C56FCE /* NotificationViewController.swift */,
 				5C2F4BBA20A7FB1100BFB313 /* NotificationTableCell.swift */,
-				5CB7575220DB0ED8003B0F09 /* MessageLite.swift */,
-				5CB7575720DB12B0003B0F09 /* UserLite.swift */,
 				5CAD363120A8EFBC00C56FCE /* MainInterface.storyboard */,
 				5CAD363420A8EFBC00C56FCE /* Info.plist */,
 			);
@@ -931,13 +927,13 @@
 				5C65485A20DB0DCC00C66673 /* Extensions.swift in Sources */,
 				5CAD363020A8EFBC00C56FCE /* NotificationViewController.swift in Sources */,
 				5C0F40F120DA041700BB3585 /* NotificationTableCell.swift in Sources */,
-				5CB7575320DB0ED8003B0F09 /* MessageLite.swift in Sources */,
 				5C65485920DB0DAF00C66673 /* Functions.swift in Sources */,
 				5CBC8B9D20DA29B700A225A8 /* CustomView.swift in Sources */,
 				5C65485820DB0DA600C66673 /* Constants.swift in Sources */,
 				5CBC8B9E20DA29F700A225A8 /* UserImageView.swift in Sources */,
-				5CB7575820DB12B0003B0F09 /* UserLite.swift in Sources */,
+				5C16D583219F881700E49395 /* Message.swift in Sources */,
 				5CBC8B9F20DA2A7200A225A8 /* CALayer+addShadow.swift in Sources */,
+				5C16D582219F874200E49395 /* Users.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -47,51 +47,7 @@ public func returnFilenameAndExtensionFromSound(soundName: SoundLibrary) -> (Str
     return (soundfileName, String(audioExtension))
 }
 
-/// Defination of category types will come here !!
-public enum NotificationCategory : String {
-    case nannyRequest = "nannyRequest"
-    case nannyMapRequest = "nannyMapRequest"
-    case nannyConfirm = "nannyConfirm"
-    
-    case familyRequest = "familyRequest"
-    case familyMapRequest = "familyMapRequest"
-    case familyConfirm = "familyConfirm"
-    
-    case messageRequest = "messageRequest"
-    case messageConfirm = "messageConfirm"
-    
-    case defaultCategory = "defaultCategory"
-}
 
-public enum NotificationAction: String {
-    case nannyAccept = "nannyAccept"
-    case nannyReject = "nannyReject"
-    case nannyResponse = "nannyResponse"
-    
-    case familyAccept = "familyAccept"
-    case familyReject = "familyReject"
-    case familyResponse = "familyResponse"
-    
-    case messageAccept = "messageAccept"
-    case messageReject = "messageReject"
-    case messageResponse = "messageResponse"
-    
-    case defaultAccept = "defaultAccept"
-    case defaultReject = "defaultReject"
-    case defaultRemind = "defaultRemind"
-    
-    case defaultAction = "defaultAction"
-}
-
-public func notificationRequest(category: String) -> NotificationCategory {
-    guard let notificaitonCategory = NotificationCategory(rawValue: category) else { return NotificationCategory.defaultCategory }
-    return notificaitonCategory
-}
-
-public func notificationRequest(action: String) -> NotificationAction {
-    guard let notificaitonAction = NotificationAction(rawValue: action) else { return NotificationAction.defaultAction }
-    return notificaitonAction
-}
 
 /// Notification Singleton / with sendNotification() and sendNotificationResponse() function
 class Notifications {
