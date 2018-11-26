@@ -947,7 +947,7 @@ extension NannyViewController {
         let user = self.user ?? LocalService.instance.user!
         let remoteUser = self.nannies[row]
         
-        var message = Message(from: user, to: remoteUser, message: "Standard Message", messageID: nil)
+        let message = Message(from: user, to: remoteUser, message: "Standard Message", messageID: nil)
         var request = Request(nanny: remoteUser, user: user, timeFrom: Date(timeIntervalSinceNow: 3600.0), timeTo: Date(timeIntervalSinceNow: 7200.0), message: "Nanny Map Request")
         
         let alertController = UIAlertController(title: "\(remoteUser.firstName) ( \(remoteUser.gender) \(remoteUser.age) år )", message: "\(remoteUser.jobTitle) - \(remoteUser.policeAttest ? "Godkjent Vandel" : "Ikke levert Vandel")", preferredStyle: .actionSheet)
