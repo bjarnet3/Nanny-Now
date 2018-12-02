@@ -1,5 +1,5 @@
 //
-//  ExtendFunctionality.swift
+//  ExtendedFunc.swift
 //  Nanny Now
 //
 //  Created by Bjarne Tvedten on 20.06.2018.

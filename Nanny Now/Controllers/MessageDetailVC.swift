@@ -309,7 +309,7 @@ class MessageDetailVC: UIViewController {
     
     private func sendNotification(message: Message) {
         // Send Notification Message
-        var mutableMessage = message
+        let mutableMessage = message
         mutableMessage.setCategory(category: .messageRequest)
         
         Notifications.instance.sendNotification(with: mutableMessage)

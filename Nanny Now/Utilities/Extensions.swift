@@ -138,6 +138,7 @@ protocol Blurable
 
 extension Blurable
 {
+    @available(iOS, deprecated, message: "blur is old")
     func blur(blurRadius: CGFloat)
     {
         if self.superview == nil
@@ -199,6 +200,7 @@ extension Blurable
                                  objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
     }
     
+    @available(iOS, deprecated, message: "unBlur is old")
     func unBlur()
     {
         guard let this = self as? UIView,
@@ -238,12 +240,14 @@ extension Blurable
 
 extension UIView: Blurable
 {
+    @available(iOS, deprecated, message: "fadeOut is old")
     func fadeOut(duration: TimeInterval = 0.2, delay: TimeInterval = 0.0, completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
         UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.alpha = 0.2
         }, completion: completion)
     }
     
+    @available(iOS, deprecated, message: "fadeOut is old")
     func fadeIn(duration: TimeInterval = 0.2, delay: TimeInterval = 0.0, completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
         UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.curveEaseIn, animations: {
             self.alpha = 1.0

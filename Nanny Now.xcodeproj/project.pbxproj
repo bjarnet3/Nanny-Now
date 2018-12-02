@@ -96,7 +96,7 @@
 		5CB7FE5A1FE4368900D41E6F /* FrostyCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB7FE591FE4368900D41E6F /* FrostyCornerView.swift */; };
 		5CB7FE601FE4CC8900D41E6F /* notification11.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CB7FE5F1FE4CC8900D41E6F /* notification11.wav */; };
 		5CBC8B9520DA19C000A225A8 /* MessageDetailTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBC8B9420DA19C000A225A8 /* MessageDetailTableCell.swift */; };
-		5CBC8B9920DA250E00A225A8 /* ExtFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBC8B9820DA250D00A225A8 /* ExtFunctions.swift */; };
+		5CBC8B9920DA250E00A225A8 /* ExtendedFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBC8B9820DA250D00A225A8 /* ExtendedFunc.swift */; };
 		5CBC8B9D20DA29B700A225A8 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAB7420C5DFE20063BD20 /* CustomView.swift */; };
 		5CBC8B9E20DA29F700A225A8 /* UserImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9D522620B6CE180083CE13 /* UserImageView.swift */; };
 		5CBC8B9F20DA2A7200A225A8 /* CALayer+addShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9BAB7620C5FE2E0063BD20 /* CALayer+addShadow.swift */; };
@@ -250,7 +250,7 @@
 		5CB7FE591FE4368900D41E6F /* FrostyCornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostyCornerView.swift; sourceTree = "<group>"; };
 		5CB7FE5F1FE4CC8900D41E6F /* notification11.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = notification11.wav; sourceTree = "<group>"; };
 		5CBC8B9420DA19C000A225A8 /* MessageDetailTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailTableCell.swift; sourceTree = "<group>"; };
-		5CBC8B9820DA250D00A225A8 /* ExtFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtFunctions.swift; sourceTree = "<group>"; };
+		5CBC8B9820DA250D00A225A8 /* ExtendedFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedFunc.swift; sourceTree = "<group>"; };
 		5CBD1C2D1DA81E7900CAC8CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5CC0C6962095DFD1005317FA /* RequestDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailVC.swift; sourceTree = "<group>"; };
 		5CC849321FCA1198003AE163 /* StartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTableViewCell.swift; sourceTree = "<group>"; };
@@ -479,7 +479,7 @@
 			isa = PBXGroup;
 			children = (
 				5C33CFC61DB422830075675E /* Functions.swift */,
-				5CBC8B9820DA250D00A225A8 /* ExtFunctions.swift */,
+				5CBC8B9820DA250D00A225A8 /* ExtendedFunc.swift */,
 				5C55C1001DAAFC5600581EF3 /* Constants.swift */,
 				5C1104141DF56A4200C7FB46 /* Extensions.swift */,
 				5C860FC31FCF36870063B0BB /* PrintDebug.swift */,
@@ -982,7 +982,7 @@
 				5C2286852144AE3D008388A6 /* RequestCell.swift in Sources */,
 				5C093A491FE0985100144A32 /* RequestUserCell.swift in Sources */,
 				5C1B81EE2158468E00026FD1 /* RequestCategory.swift in Sources */,
-				5CBC8B9920DA250E00A225A8 /* ExtFunctions.swift in Sources */,
+				5CBC8B9920DA250E00A225A8 /* ExtendedFunc.swift in Sources */,
 				5C76202F20891DC0005D7647 /* HeaderTableViewCell.swift in Sources */,
 				5CB7FE581FE4362900D41E6F /* FrostyTabBar.swift in Sources */,
 				5CCC34A9213BA7A200A7E804 /* RequestViewController.swift in Sources */,
