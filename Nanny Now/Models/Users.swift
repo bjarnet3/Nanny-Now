@@ -64,6 +64,7 @@ class User : MKPointAnnotation {
     var returnDistance: String { return returnStringDistance(from: returnIntDistance) }
     var returnIntDistance: Int { return Int(_distance ?? 8888.0) }
     
+    // FIXME: - Need to go trough StartViewController before location is available
     var location: CLLocation? { get { return _location! } set { _location = newValue } }
     var activeLocation: CLLocation? { get { return _activeLocation } set { _activeLocation = newValue } }
     

@@ -276,6 +276,7 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
     
     private func getLocationsFromUserInfo() {
         if let locations = userInfo["location"] as? [String: Any] {
+            printDebug(object: "Got location from userInfo")
             for (key, value) in locations {
                 if key != "active" {
                     let locationkey = key
@@ -287,6 +288,8 @@ class NannyViewController: UIViewController, UIImagePickerControllerDelegate, CL
                     }
                 }
             }
+        } else {
+            printDebug(object: "Didn't get location from userInfo")
         }
     }
     

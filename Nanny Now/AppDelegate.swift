@@ -9,8 +9,6 @@
 import UIKit
 import UserNotifications
 import Firebase
-import FirebaseMessaging
-import FirebaseInstanceID
 import FBSDKLoginKit
 import RAMAnimatedTabBarController
 
@@ -49,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setNotificationAuth()
         
         // set user notifications.
-        setNotifications()
+        setNotificationCat()
         
         // Add observer for InstanceID token refresh callback.
         NotificationCenter.default.addObserver(forName: Notification.Name.MessagingRegistrationTokenRefreshed, object: nil, queue: nil, using: tokenRefreshNotification(_:))
@@ -110,7 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // Set Notificaiton Categories with Actions
     // ----------------------------------------
-    func setNotifications() {
+    func setNotificationCat() {
         
         // Notification Actions
         // --------------------
