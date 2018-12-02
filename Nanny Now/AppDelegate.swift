@@ -9,6 +9,8 @@
 import UIKit
 import UserNotifications
 import Firebase
+import FirebaseMessaging
+import FirebaseInstanceID
 import FBSDKLoginKit
 import RAMAnimatedTabBarController
 
@@ -396,6 +398,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             print("default")
             completionHandler?()
         }
+        completionHandler?()
     }
     
     // ---------------------------------------------
