@@ -15,10 +15,11 @@ class Family: MKPointAnnotation {
     // Identification
     // --------------
     private(set) public var _familyID: String?
+    private(set) public var _familyName: String?
     
     // Family information (Private)
     // ----------------------------
-    private(set) public var _familyName: String?
+    private(set) public var _imageName: String?
     private(set) public var _members: [User]?
     private(set) public var _unregistered: [Unregistered]?
     private(set) public var _kids: [String:Int]?
@@ -37,6 +38,8 @@ class Family: MKPointAnnotation {
     // -------------------
     var familyID: String { return _familyID! }
     var familyName: String { get { return _familyName! } set { _familyName = newValue } }
+
+    var imageName: String { get { return _imageName! } set { _imageName = newValue } }
     
     var ratings: [String:Int]? { get { return _ratings } set { _ratings = newValue } }
     var ratingStar: String { return returnStarsStringFrom(returnAvrageRatings(ratings)) }

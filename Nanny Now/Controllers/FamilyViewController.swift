@@ -21,6 +21,7 @@ class FamilyViewController: UIViewController, CLLocationManagerDelegate {
     // ----------------------------------------
     @IBOutlet weak var familyTabBar: UITabBarItem!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var collectionView: CustomCollectionView!
     @IBOutlet weak var notifyTitle: CustomButton!
     
     // MARK: - Array, Constants & Varables
