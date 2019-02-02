@@ -534,7 +534,7 @@
                                     <constraint firstItem="AG7-jh-DnT" firstAttribute="leading" secondItem="XUZ-0u-kIB" secondAttribute="leading" constant="15" id="weP-et-zBX"/>
                                 </constraints>
                             </view>
-                            <view clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1t-h7-Cay" customClass="FrostyCornerView" customModule="Nanny_Now" customModuleProvider="target">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1t-h7-Cay" customClass="FrostyCornerView" customModule="Nanny_Now" customModuleProvider="target">
                                 <rect key="frame" x="5" y="358" width="365" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bE1-2J-cPW">
@@ -1504,7 +1504,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="erI-XR-vnt">
-                                <rect key="frame" x="10" y="20" width="355" height="146"/>
+                                <rect key="frame" x="10" y="20" width="355" height="137"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Registrering" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZZ9-E7-d8h">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="80"/>
@@ -1517,7 +1517,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         <size key="shadowOffset" width="0.0" height="20"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Personlig Info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nlo-6e-mQw">
-                                        <rect key="frame" x="0.0" y="80" width="355" height="66"/>
+                                        <rect key="frame" x="0.0" y="80" width="355" height="57"/>
                                         <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
                                         <color key="textColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1530,8 +1530,8 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                     <constraint firstItem="ZZ9-E7-d8h" firstAttribute="leading" secondItem="erI-XR-vnt" secondAttribute="leading" id="Ppp-gc-1yo"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="76d-db-aa1">
-                                <rect key="frame" x="10" y="186" width="355" height="213"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="76d-db-aa1">
+                                <rect key="frame" x="10" y="177" width="355" height="222"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="wlW-KE-Mbg">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="42"/>
@@ -1560,7 +1560,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         </constraints>
                                     </stackView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Epost" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="TUo-Mj-afA" customClass="DTTextField" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="57" width="355" height="42"/>
+                                        <rect key="frame" x="0.0" y="60" width="355" height="42"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="done" textContentType="email"/>
@@ -1569,7 +1569,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Yrke / Stilling" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="u1z-Mr-tu4" customClass="DTTextField" customModule="Nanny_Now" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="114" width="355" height="42"/>
+                                        <rect key="frame" x="0.0" y="120" width="355" height="42"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes" keyboardAppearance="alert" returnKeyType="done" textContentType="organization-title"/>
@@ -1578,7 +1578,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                                         </connections>
                                     </textField>
                                     <segmentedControl opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" segmentControlStyle="bordered" translatesAutoresizingMaskIntoConstraints="NO" id="y9U-RR-xFB">
-                                        <rect key="frame" x="0.0" y="171" width="355" height="43"/>
+                                        <rect key="frame" x="0.0" y="180" width="355" height="43"/>
                                         <color key="backgroundColor" red="0.98656708002090454" green="0.18414348363876343" blue="0.57283514738082886" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <segments>
                                             <segment title="Kvinne  ♀"/>
@@ -1651,7 +1651,7 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-343" y="-19"/>
+            <point key="canvasLocation" x="-343.19999999999999" y="-19.340329835082461"/>
         </scene>
         <!--Login TwoVC-->
         <scene sceneID="ju1-hb-cMq">
