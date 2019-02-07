@@ -1,6 +1,0 @@
-framework module Pods_Nanny_Now {
-  umbrella header "Pods-Nanny Now-umbrella.h"
-
-  export *
-  module * { export * }
-}
