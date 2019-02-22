@@ -49,7 +49,7 @@ public func revealingSplashAnimation(_ view: UIView, type: SplashAnimationType? 
     revealingSplashView.startAnimation(completion)
 }
 
-public var mapStyle: [MapStyleForView] = [.blueAndGrayMap, .blackAndRegularMap, .dayMap, .pinkBlackMap, .pinkStinkMap, .pinkWhiteMap, .veryLightMap, .whiteAndBlackMap, .blackAndBlueGrayMap, .lightBlueGrayMap, .whiteBlackMap]
+public var mapStyle: [MapStyleForView] = [.blueAndGrayMap, .blackAndRegularMap, .dayMap, .pinkBlackMap, .pinkStinkMap, .pinkWhiteMap, .veryLightMap, .whiteAndBlackMap, .blackAndBlueGrayMap, .lightBlueGrayMap, .whiteBlackMap, .testMap]
 
 public func setMapView(for mapStyleForView: MapStyleForView, mapView: MKMapView) {
     mapView.removeOverlays(mapView.overlays)
@@ -76,6 +76,8 @@ public func setMapView(for mapStyleForView: MapStyleForView, mapView: MKMapView)
         setMapBackgroundOverlay(mapName: .lightBlueGrayMap, mapView: mapView)
     case .whiteBlackMap:
         setMapBackgroundOverlay(mapName: .whiteBlackMap, mapView: mapView)
+    case .testMap:
+        setMapBackgroundOverlay(mapName: .testMap, mapView: mapView)
     }
     print("Map Title  \(mapStyleForView.rawValue)")
 }

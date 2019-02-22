@@ -39,7 +39,7 @@ public extension String {
 }
 
 public enum MapStyleForView: String {
-    case dayMap = "dayMap", blueAndGrayMap = "blueAndGrayMap", veryLightMap = "veryLightMap", pinkStinkMap = "pinkStinkMap", pinkBlackMap = "pinkBlackMap", blackAndRegularMap = "blackAndRegularMap", pinkWhiteMap = "pinkWhiteMap", whiteAndBlackMap = "whiteAndBlackMap", whiteBlackMap = "whiteBlackMap", blackAndBlueGrayMap = "blackAndBlueGrayMap", lightBlueGrayMap = "lightBlueGrayMap"
+    case dayMap = "dayMap", blueAndGrayMap = "blueAndGrayMap", veryLightMap = "veryLightMap", pinkStinkMap = "pinkStinkMap", pinkBlackMap = "pinkBlackMap", blackAndRegularMap = "blackAndRegularMap", pinkWhiteMap = "pinkWhiteMap", whiteAndBlackMap = "whiteAndBlackMap", whiteBlackMap = "whiteBlackMap", blackAndBlueGrayMap = "blackAndBlueGrayMap", lightBlueGrayMap = "lightBlueGrayMap", testMap = "testMap"
 }
 
 /// The size of this picture. It can be one of the following values: small, normal, large, album, square.
