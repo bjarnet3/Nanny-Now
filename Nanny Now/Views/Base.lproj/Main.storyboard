@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -3651,8 +3651,8 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
         <image name="Nanny-Now-Background-color" width="200" height="800"/>
         <image name="Photosynthesize" width="1024" height="640"/>
         <image name="Text" width="287" height="70"/>
-        <image name="background_image" width="265.20001220703125" height="341.27999877929688"/>
-        <image name="clear" width="0.58064514398574829" height="0.58064514398574829"/>
+        <image name="background_image" width="1105" height="1422"/>
+        <image name="clear" width="1" height="1"/>
         <image name="close_user_settings" width="481" height="481"/>
         <image name="complete1" width="429" height="401"/>
         <image name="female" width="33" height="33"/>
@@ -3668,14 +3668,14 @@ Dette prinsippet er blant annet forankret i Den europeiske menneskerettighetskon
         <image name="noun_182952_cc" width="500" height="497"/>
         <image name="noun_304276_cc" width="500" height="497"/>
         <image name="noun_590438_cc_Modified2" width="500" height="497"/>
-        <image name="reject-ignore" width="429" height="401"/>
+        <image name="reject-ignore" width="143" height="133.66667175292969"/>
         <image name="requestAccept" width="429" height="401"/>
-        <image name="tabbar@2x_customer" width="64" height="96"/>
-        <image name="tabbar_account-22" width="64" height="96"/>
-        <image name="tabbar_clock_test" width="64" height="96"/>
-        <image name="tabbar_dotts-left" width="64" height="96"/>
-        <image name="tabbar_nanny_selected_2" width="64" height="96"/>
-        <image name="tabbar_request" width="64" height="96"/>
-        <image name="waiting-timeglass2" width="429" height="401"/>
+        <image name="tabbar@2x_customer" width="21.333333969116211" height="32"/>
+        <image name="tabbar_account-22" width="21.333333969116211" height="32"/>
+        <image name="tabbar_clock_test" width="21.333333969116211" height="32"/>
+        <image name="tabbar_dotts-left" width="32" height="48"/>
+        <image name="tabbar_nanny_selected_2" width="21.333333969116211" height="32"/>
+        <image name="tabbar_request" width="21.333333969116211" height="32"/>
+        <image name="waiting-timeglass2" width="143" height="133.66667175292969"/>
     </resources>
 </document>
