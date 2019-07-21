@@ -158,10 +158,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// ----------------------------------------------------------------
     func applicationWillEnterForeground(_ application: UIApplication) {
         // User Status
-        DataService.instance.updateUserStatus(with: .active)
+        DataService.instance.updateUserStatus(with: .foreground)
         
         // Clear badge when app is or resumed
-        application.applicationIconBadgeNumber = 0
+        DataService.instance.clearBadge()
     }
     
     /// Tells the delegate that the app has become active.
@@ -169,9 +169,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // User Status
         DataService.instance.updateUserStatus(with: .active)
-        
-        // Clear badge when app is or resumed
-        application.applicationIconBadgeNumber = 0
         
         connectToFcm()
         guard let shortcut = shortcutItem else { return }
@@ -186,7 +183,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// --------------------------------------------------------
     func applicationDidEnterBackground(_ application: UIApplication) {
         // User Status
-        DataService.instance.updateUserStatus(with: .inactive)
+        DataService.instance.updateUserStatus(with: .background)
         
         // Messaging.messaging().disconnect()
         Messaging.messaging().shouldEstablishDirectChannel = false
