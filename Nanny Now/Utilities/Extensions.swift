@@ -24,7 +24,7 @@ public extension String {
     func linesFor(font : UIFont, width : CGFloat) -> Int {
         let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
         // let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
-        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [kCTFontAttributeName as NSAttributedStringKey: font], context: nil)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [kCTFontAttributeName as NSAttributedString.Key: font], context: nil)
         return Int(boundingBox.height/font.lineHeight)
     }
     
@@ -175,7 +175,7 @@ extension Blurable
         blurOverlay.frame = boundingRect
         
         blurOverlay.image = filteredImage
-        blurOverlay.contentMode = UIViewContentMode.left
+        blurOverlay.contentMode = UIView.ContentMode.left
         
         if let superview = superview as? UIStackView,
             let index = (superview as UIStackView).arrangedSubviews.index(of: this)
@@ -190,7 +190,7 @@ extension Blurable
             UIView.transition(from: this,
                               to: blurOverlay,
                               duration: 0.3,
-                              options: UIViewAnimationOptions.curveEaseIn,
+                              options: .curveEaseIn,
                               completion: nil)
         }
         
@@ -222,7 +222,7 @@ extension Blurable
             UIView.transition(from: blurOverlay,
                               to: this,
                               duration: 0.2,
-                              options: UIViewAnimationOptions.curveEaseIn,
+                              options: .curveEaseIn,
                               completion: nil)
         }
         
@@ -242,14 +242,14 @@ extension UIView: Blurable
 {
     @available(iOS, deprecated, message: "fadeOut is old")
     func fadeOut(duration: TimeInterval = 0.2, delay: TimeInterval = 0.0, completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
-        UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.curveEaseIn, animations: {
+        UIView.animate(withDuration: duration, delay: delay, options: .curveEaseIn, animations: {
             self.alpha = 0.2
         }, completion: completion)
     }
     
     @available(iOS, deprecated, message: "fadeOut is old")
     func fadeIn(duration: TimeInterval = 0.2, delay: TimeInterval = 0.0, completion: @escaping ((Bool) -> Void) = {(finished: Bool) -> Void in}) {
-        UIView.animate(withDuration: duration, delay: delay, options: UIViewAnimationOptions.curveEaseIn, animations: {
+        UIView.animate(withDuration: duration, delay: delay, options: .curveEaseIn, animations: {
             self.alpha = 1.0
         }, completion: completion)
     }

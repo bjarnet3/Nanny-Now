@@ -178,7 +178,7 @@ class NannyDetailVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         // Set the estimatedRowHeight to a non-0 value to enable auto layout.
         tableView.estimatedRowHeight = 160
         
@@ -222,7 +222,7 @@ extension NannyDetailVC: MKMapViewDelegate {
             return
         }
         // And finally add it to your MKMapView
-        mapView.add(tileOverlay)
+        mapView.addOverlay(tileOverlay)
         self.backgroundMapViewIsRendered = true
     }
     
@@ -290,7 +290,7 @@ extension NannyDetailVC: MKMapViewDelegate {
             transportTypeString = "komme"
         }
 
-        let request = MKDirectionsRequest()
+        let request = MKDirections.Request()
         request.source = MKMapItem(placemark: MKPlacemark(coordinate: annotation1.coordinate, addressDictionary: nil))
         request.destination = MKMapItem(placemark: MKPlacemark(coordinate: annotation2.coordinate, addressDictionary: nil))
         request.requestsAlternateRoutes = false
@@ -306,7 +306,7 @@ extension NannyDetailVC: MKMapViewDelegate {
             guard let unwrappedResponse = response else { return }
             
             for route in unwrappedResponse.routes {
-                self.mapView.add(route.polyline)
+                self.mapView.addOverlay(route.polyline)
                 if route == unwrappedResponse.routes.last {
                     let routeSeconds = route.expectedTravelTime
                     let routeMinutes = Int(routeSeconds) % 60
@@ -324,7 +324,7 @@ extension NannyDetailVC: MKMapViewDelegate {
                     
                     // https://stackoverflow.com/questions/23127795/how-to-offset-properly-an-mkmaprect
                     let mapRect = route.polyline.boundingMapRect
-                    self.mapView.setVisibleMapRect(mapRect, edgePadding: UIEdgeInsetsMake(35, 10, 20, 10), animated: true)
+                    self.mapView.setVisibleMapRect(mapRect, edgePadding: UIEdgeInsets(top: 35, left: 10, bottom: 20, right: 10), animated: true)
                     
                     // let mapCamera = MKMapCamera(lookingAtCenter: (self.nanny?.location.coordinate)!, fromEyeCoordinate: (self.user?.location.coordinate)!, eyeAltitude: 400.0)
                     // mapCamera.heading = 80 // rotation
@@ -334,8 +334,8 @@ extension NannyDetailVC: MKMapViewDelegate {
         }
     }
     func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-                                                                  regionRadius, regionRadius)
+        let coordinateRegion = MKCoordinateRegion(center: location.coordinate,
+                                                  latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         mapView.setRegion(coordinateRegion, animated: true)
     }
 }

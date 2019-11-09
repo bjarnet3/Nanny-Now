@@ -236,8 +236,8 @@ class RequestFoldingCell: UXFoldingCell {
 extension RequestFoldingCell: MKMapViewDelegate {
     
     func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-                                                                  regionRadius, regionRadius)
+        let coordinateRegion = MKCoordinateRegion(center: location.coordinate,
+                                                  latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         mapView.setRegion(coordinateRegion, animated: false)
     }
     
@@ -249,7 +249,7 @@ extension RequestFoldingCell: MKMapViewDelegate {
     }
     
     func setRoute(from annotations: [MKPointAnnotation]?) {
-        let request = MKDirectionsRequest()
+        let request = MKDirections.Request()
         request.source = MKMapItem(placemark: MKPlacemark(coordinate: (_nannyLocation?.coordinate)!, addressDictionary: nil))
         request.destination = MKMapItem(placemark: MKPlacemark(coordinate: (_familyLocation?.coordinate)!, addressDictionary: nil))
         request.requestsAlternateRoutes = false
@@ -265,7 +265,7 @@ extension RequestFoldingCell: MKMapViewDelegate {
             guard let unwrappedResponse = response else { return }
             
             for route in unwrappedResponse.routes {
-                self.mapView.add(route.polyline)
+                self.mapView.addOverlay(route.polyline)
                 if route == unwrappedResponse.routes.last {
                     // https://stackoverflow.com/questions/23127795/how-to-offset-properly-an-mkmaprect
                     let mapRect = route.polyline.boundingMapRect

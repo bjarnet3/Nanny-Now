@@ -109,16 +109,19 @@ class LoginOneVC: UIViewController {
         
         addTextToRegistration()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil, using: keyboardWillShow(notification:))
+        
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil, using: keyboardWillHide(notification:))
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         print("viewDidAppear")
         print(LocalService.instance.userInfo)
         // animateLabel(delay: 2.0, enter: true)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil, using: keyboardWillShow(notification:))
+        
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil, using: keyboardWillHide(notification:))
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -240,7 +243,7 @@ class LoginOneVC: UIViewController {
 extension LoginOneVC {
     
     @objc func keyboardWillShow(notification:Notification) {
-        guard let keyboardHeight = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        guard let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue else { return }
         // scrollView.contentInset = UIEdgeInsetsMake(0, 0, keyboardHeight.height, 0)
         print(keyboardHeight)
     }

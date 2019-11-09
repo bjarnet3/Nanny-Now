@@ -25,17 +25,17 @@ class CustomTextField: UITextField {
 
     // Paddging for place holder
     override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, placePadding)
+        return bounds.inset(by: placePadding)
     }
     
     // Padding for text
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, textPadding)
+        return bounds.inset(by: textPadding)
     }
     
     // Padding for text in editting mode
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, editPadding)
+        return bounds.inset(by: editPadding)
     }
     
     override func clearButtonRect(forBounds bounds: CGRect) -> CGRect {

@@ -107,13 +107,15 @@ class MessageDetailVC: UIViewController {
     }
 
     private func setUpKeyboard() {
-        NotificationCenter.default.addObserver(self, selector: .keyboardWillShow, name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: .keyboardWillDisappear, name: .UIKeyboardWillHide, object: nil)
+        
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil, using: keyboardWillShow(notification:))
+        
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil, using: keyboardWillDisappear(notification:))
     }
     
     private func removeKeyboard() {
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow , object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide , object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     // Display Request Menu "View"
@@ -322,7 +324,7 @@ class MessageDetailVC: UIViewController {
         let (fileName, fileType) = returnFilenameAndExtensionFromSound(soundName: soundLibrary)
         guard let url = Bundle.main.url(forResource: fileName, withExtension: fileType) else { return }
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
             
             /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
             try AVAudioSession.sharedInstance().setActive(true)
@@ -357,8 +359,8 @@ class MessageDetailVC: UIViewController {
         }
     }
     
-    @objc fileprivate func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+    @objc func keyboardWillShow(notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.45, delay: 0.045, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseIn, animations: {
                 
                 self.tableViewBottom.constant = keyboardSize.height
@@ -372,7 +374,7 @@ class MessageDetailVC: UIViewController {
         }
     }
     
-    @objc fileprivate func keyboardWillDisappear(notification: NSNotification) {
+    @objc func keyboardWillDisappear(notification: Notification) {
         UIView.animate(withDuration: 0.45, delay: 0.045, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.4, options: .curveEaseOut, animations: {
             
             self.tableViewBottom.constant = 0.0

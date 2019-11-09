@@ -393,7 +393,7 @@ extension FamilyViewController: MKMapViewDelegate {
             transportTypeString = "komme"
         }
         
-        let request = MKDirectionsRequest()
+        let request = MKDirections.Request()
         request.source = MKMapItem(placemark: MKPlacemark(coordinate: annotation1.coordinate, addressDictionary: nil))
         request.destination = MKMapItem(placemark: MKPlacemark(coordinate: annotation2.coordinate, addressDictionary: nil))
         request.requestsAlternateRoutes = false
@@ -409,7 +409,7 @@ extension FamilyViewController: MKMapViewDelegate {
             guard let unwrappedResponse = response else { return }
             
             for route in unwrappedResponse.routes {
-                self.mapView.add(route.polyline)
+                self.mapView.addOverlay(route.polyline)
                 if route == unwrappedResponse.routes.last {
                     let routeSeconds = route.expectedTravelTime
                     let routeMinutes = Int(routeSeconds) % 60
@@ -427,7 +427,7 @@ extension FamilyViewController: MKMapViewDelegate {
                     
                     // https://stackoverflow.com/questions/23127795/how-to-offset-properly-an-mkmaprect
                     let mapRect = route.polyline.boundingMapRect
-                    self.mapView.setVisibleMapRect(mapRect, edgePadding: UIEdgeInsetsMake(35, 10, 20, 10), animated: true)
+                    self.mapView.setVisibleMapRect(mapRect, edgePadding: UIEdgeInsets(top: 35, left: 10, bottom: 20, right: 10), animated: true)
                     
                     // let mapCamera = MKMapCamera(lookingAtCenter: (self.nanny?.location.coordinate)!, fromEyeCoordinate: (self.user?.location.coordinate)!, eyeAltitude: 400.0)
                     // mapCamera.heading = 80 // rotation
@@ -439,7 +439,7 @@ extension FamilyViewController: MKMapViewDelegate {
     
     // Center Map On Location Function : mapView.setRegion()
     func centerMapOnLocation(_ location: CLLocation, regionRadius: CLLocationDistance, animated: Bool) {
-        let coordinateRadius = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2.2, regionRadius * 2.2)
+        let coordinateRadius = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius * 2.2, longitudinalMeters: regionRadius * 2.2)
         mapView.setRegion(coordinateRadius, animated: animated)
     }
     

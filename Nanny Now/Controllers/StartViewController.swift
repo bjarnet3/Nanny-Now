@@ -39,14 +39,11 @@ class StartViewController: UIViewController, CLLocationManagerDelegate {
     // MARK: Facebook Logout
     // ----------------------------------------
     func facebookLogout() {
-        let loginView : FBSDKLoginManager = FBSDKLoginManager()
-        loginView.loginBehavior = FBSDKLoginBehavior.web
+        let loginView : LoginManager = LoginManager()
+        loginView.loginBehavior = .browser
         
-        let manager = FBSDKLoginManager()
+        let manager = LoginManager()
         manager.logOut()
-        
-        FBSDKAccessToken.setCurrent(nil)
-        FBSDKProfile.setCurrent(nil)
     }
     
     // MARK: - GET from Firebase

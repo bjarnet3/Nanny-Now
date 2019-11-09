@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // ********************************
     
     /// Tells the delegate that the launch process is almost done and the app is almost ready to run.
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Clear badge when app did finish launching
         application.applicationIconBadgeNumber = 0
         
@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var performShortcutDelegate = true
         if let launchOptions = launchOptions {
         
-            if let shortcutItem = launchOptions[UIApplicationLaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
+            if let shortcutItem = launchOptions[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
             
                 print("Application launched via shortcut")
                 self.shortcutItem = shortcutItem
@@ -143,8 +143,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // Facebook     /      FBSDKApplicationDelegate      /
     // ---------------
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        return ApplicationDelegate.shared.application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        return ApplicationDelegate.shared.application(app, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplication.OpenURLOptionsKey.annotation])
     }
     
     /// Tells the delegate that the app is about to become inactive.
@@ -276,7 +276,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // ---------------------------------------------
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
-        let state : UIApplicationState = application.applicationState
+        let state : UIApplication.State = application.applicationState
         switch state {
         case UIApplicationState.active:
             print("If needed notify user about the message")

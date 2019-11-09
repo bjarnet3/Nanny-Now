@@ -287,7 +287,7 @@ class DataService {
             ]
             
             let all : [String : Any] = [
-                messageID : base
+                messageID! : base
             ]
             
             if userID == recieveUserID {

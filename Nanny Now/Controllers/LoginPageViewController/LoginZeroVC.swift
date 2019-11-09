@@ -67,10 +67,10 @@ class LoginZeroVC: UIViewController {
         // self.activityIndicator.startAnimating()
         self.animateLabel(delay: 0, enter: false)
         self.animateProfileInfo(delay: 0, enter: false)
-        let facebookLogin = FBSDKLoginManager()
+        let facebookLogin = LoginManager()
         facebookLogin.logOut()
         // Facebook Part 6
-        facebookLogin.logIn(withReadPermissions: ["public_profile", "user_birthday", "email", "user_friends"], from: self) { (result, error) in
+        facebookLogin.logIn(permissions: ["public_profile", "user_birthday", "email", "user_friends"], from: self) { (result, error) in
             self.animateLabel(delay: 0.1, enter: true, mainLabel:" Vent litt", middleLabel: "     henter facebook data . . .")
             if error != nil {
                 self.animateLabel(delay: 0, enter: false)
@@ -85,11 +85,11 @@ class LoginZeroVC: UIViewController {
             } else {
                 self.animateLabel(delay: 0, enter: false)
                 hapticButton(.success)
-                let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
                 // print("PRINT: Facebook Authentication Successfull")
                 // Facebook Login Info
-                if((FBSDKAccessToken.current()) != nil){
-                    FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "gender, id, last_name, birthday, email, first_name"]).start(completionHandler: { (connection, result, error) -> Void in
+                if((AccessToken.current) != nil){
+                    GraphRequest(graphPath: "me", parameters: ["fields": "gender, id, last_name, birthday, email, first_name"]).start(completionHandler: { (connection, result, error) -> Void in
                         if (error == nil) {
                             userInfo.removeAll()
                             publicInfo.removeAll()
@@ -138,7 +138,7 @@ class LoginZeroVC: UIViewController {
                         }
                     })
                     // MARK: This is much better :-D -- Getting User Facebook friends
-                    FBSDKGraphRequest(graphPath: "/me/friends/", parameters: ["fields": "id, first_name"]).start(completionHandler: { (connection, result, error) -> Void in
+                    GraphRequest(graphPath: "/me/friends/", parameters: ["fields": "id, first_name"]).start(completionHandler: { (connection, result, error) -> Void in
                         if (error == nil) {
                             for (key, val) in result as! Dictionary<String,Any> {
                                 if key == "data" {
@@ -168,14 +168,11 @@ class LoginZeroVC: UIViewController {
     // MARK: Facebook Logout
     // ---------------------
     func facebookLogout() {
-        let loginView : FBSDKLoginManager = FBSDKLoginManager()
-        loginView.loginBehavior = FBSDKLoginBehavior.web
+        let loginView : LoginManager = LoginManager()
+        loginView.loginBehavior = .browser
         
-        let manager = FBSDKLoginManager()
+        let manager = LoginManager()
         manager.logOut()
-        
-        FBSDKAccessToken.setCurrent(nil)
-        FBSDKProfile.setCurrent(nil)
     }
     
     // MARK: - Firebase Authentication
@@ -233,7 +230,7 @@ class LoginZeroVC: UIViewController {
         if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             if let img = image {
                 // Generic Function
-                if let imgData = UIImageJPEGRepresentation(img, 0.4) {
+                if let imgData = img.jpegData(compressionQuality: 0.4) {
                     // Unique image identifier
                     let imageUID = NSUUID().uuidString
                     // Set metaData for the image
@@ -268,7 +265,7 @@ class LoginZeroVC: UIViewController {
         if let userID = KeychainWrapper.standard.string(forKey: KEY_UID) {
             if let img = image {
                 // Generic Function
-                if let imgData = UIImageJPEGRepresentation(img, 0.4) {
+                if let imgData = img.jpegData(compressionQuality: 0.4) {
                     // Unique image identifier
                     let imageUid = NSUUID().uuidString
                     // Set metaData for the image

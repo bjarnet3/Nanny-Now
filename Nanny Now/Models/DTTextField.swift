@@ -64,7 +64,7 @@ public class DTTextField: UITextField {
         didSet{
             guard let color = placeholderColor else { return }
             attributedPlaceholder = NSAttributedString(string: placeholderFinal,
-                                                       attributes: [NSAttributedStringKey.foregroundColor:color])
+                                                       attributes: [NSAttributedString.Key.foregroundColor:color])
         }
     }
     
@@ -122,13 +122,6 @@ public class DTTextField: UITextField {
         }
     }
     
-    override public var borderStyle: UITextBorderStyle{
-        didSet{
-            guard borderStyle != oldValue else { return }
-            borderStyle = .none
-        }
-    }
-    
     public override var text: String?{
         didSet{ self.textFieldTextChanged() }
     }
@@ -141,7 +134,7 @@ public class DTTextField: UITextField {
                 return
             }
             attributedPlaceholder = NSAttributedString(string: placeholderFinal,
-                                                       attributes: [NSAttributedStringKey.foregroundColor:color])
+                                                       attributes: [NSAttributedString.Key.foregroundColor:color])
         }
     }
     

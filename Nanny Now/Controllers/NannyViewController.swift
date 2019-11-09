@@ -633,7 +633,7 @@ extension NannyViewController {
         self.tableView.alpha = 0
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.tabBarController!.tabBar.frame.height, 0)
+        self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: self.tabBarController!.tabBar.frame.height, right: 0)
         
         // PickerView Delegate and Datasource
         self.locationPicker.delegate = self
@@ -901,7 +901,7 @@ extension NannyViewController : MKMapViewDelegate {
     
     // Center Map On Location Function : mapView.setRegion()
     func centerMapOnLocation(_ location: CLLocation, regionRadius: CLLocationDistance, animated: Bool) {
-        let coordinateRadius = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2.2, regionRadius * 2.2)
+        let coordinateRadius = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius * 2.2, longitudinalMeters: regionRadius * 2.2)
         mapView.setRegion(coordinateRadius, animated: animated)
     }
     

@@ -17,7 +17,7 @@ class FrostyTabBar: UITabBar {
 }
 
 extension FrostyTabBar {
-    func setEffect(blurEffect: UIBlurEffectStyle = .light) {
+    func setEffect(blurEffect: UIBlurEffect.Style = .light) {
         for view in subviews {
             if view is UIVisualEffectView {
                 print(view.description)
@@ -34,8 +34,8 @@ extension FrostyTabBar {
     // https://stackoverflow.com/questions/26069334/changing-tab-bar-font-in-swift
     func setTitleTextAttributes() {
         for item in items! {
-            item.setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 15.0)!], for: .normal)
-            item.setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 16.0)!], for: .selected)
+            item.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Avenir-Book", size: 15.0)!], for: .normal)
+            item.setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Avenir-Book", size: 16.0)!], for: .selected)
         }
         /*
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 15.0)!], for: .normal)

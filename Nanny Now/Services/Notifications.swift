@@ -274,7 +274,7 @@ class Notifications {
                                     case .nannyConfirm:
                                         title = "Barnevakten \(firstName):"
                                         
-                                        let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(requestID)
+                                        let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(requestID!)
                                         publicRequest.child("nannyID").removeValue()
                                     case .familyRequest:
                                         print("familyRequest")
@@ -348,7 +348,7 @@ class Notifications {
         let requestID = request.requestID ?? requestREFID.key // maybe add requestID argument
         
         // let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(remoteUID).child(requestID)
-        let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(remoteUID).child(requestID)
+        let publicRequest = DataService.instance.REF_REQUESTS.child("public").child(remoteUID).child(requestID!)
         let setUserID = ["userID" : userUID,
                          "requestID": requestID ]
         
@@ -358,7 +358,7 @@ class Notifications {
         let setRemoteID = ["userID" : remoteUID,
                            "requestID": requestID
         ]
-        let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(userUID).child("requests").child(requestID)
+        let privateRequest = DataService.instance.REF_REQUESTS.child("private").child(userUID).child("requests").child(requestID!)
         DataService.instance.postToRequest(with: request, reference: privateRequest)
         privateRequest.updateChildValues(setRemoteID)
     }

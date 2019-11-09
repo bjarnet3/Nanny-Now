@@ -59,7 +59,7 @@ class FrostyView: UIView {
 }
 
 extension FrostyView {
-    func setEffect(blurEffect: UIBlurEffectStyle = .extraLight) {
+    func setEffect(blurEffect: UIBlurEffect.Style = .extraLight) {
         for view in subviews {
             if view is UIVisualEffectView {
                 print(view.description)
@@ -177,7 +177,7 @@ class NotificationViewController: UIViewController, UNNotificationContentExtensi
         let shapeLayer = CAShapeLayer()
         // set arc to shapeLayer
         shapeLayer.path = path.cgPath
-        shapeLayer.fillRule = kCAFillRuleEvenOdd
+        shapeLayer.fillRule = CAShapeLayerFillRule.evenOdd
         
         // Create the boarderLayer
         let boarderLayer = CAShapeLayer()
@@ -319,7 +319,7 @@ extension NotificationViewController : MKMapViewDelegate {
             return
         }
         // And finally add it to your MKMapView
-        mapView.add(tileOverlay)
+        mapView.addOverlay(tileOverlay)
         self.backgroundMapViewIsRendered = true
     }
     
@@ -367,7 +367,7 @@ extension NotificationViewController : MKMapViewDelegate {
             transportTypeString = "komme"
         }
         
-        let request = MKDirectionsRequest()
+        let request = MKDirections.Request()
         request.source = MKMapItem(placemark: MKPlacemark(coordinate: annotation1.coordinate, addressDictionary: nil))
         request.destination = MKMapItem(placemark: MKPlacemark(coordinate: annotation2.coordinate, addressDictionary: nil))
         request.requestsAlternateRoutes = false
@@ -383,7 +383,7 @@ extension NotificationViewController : MKMapViewDelegate {
             guard let unwrappedResponse = response else { return }
             
             for route in unwrappedResponse.routes {
-                self.mapView.add(route.polyline)
+                self.mapView.addOverlay(route.polyline)
                 if route == unwrappedResponse.routes.last {
                     let routeSeconds = route.expectedTravelTime
                     let routeMinutes = Int(routeSeconds) % 60
@@ -406,7 +406,7 @@ extension NotificationViewController : MKMapViewDelegate {
                     
                     // https://stackoverflow.com/questions/23127795/how-to-offset-properly-an-mkmaprect
                     let mapRect = route.polyline.boundingMapRect
-                    self.mapView.setVisibleMapRect(mapRect, edgePadding: UIEdgeInsetsMake(100, 60, 85, 60), animated: true)
+                    self.mapView.setVisibleMapRect(mapRect, edgePadding: UIEdgeInsets(top: 100, left: 60, bottom: 85, right: 60), animated: true)
                     
                     // let mapCamera = MKMapCamera(lookingAtCenter: (self.userLocation), fromEyeCoordinate: (self.yourLocation), eyeAltitude: 400.0)
                     // mapCamera.heading = 80 // rotation
@@ -416,8 +416,8 @@ extension NotificationViewController : MKMapViewDelegate {
         }
     }
     func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-                                                                  regionRadius, regionRadius)
+        let coordinateRegion = MKCoordinateRegion(center: location.coordinate,
+                                                  latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         mapView.setRegion(coordinateRegion, animated: false)
     }
 }

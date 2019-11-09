@@ -30,7 +30,7 @@ class LoginPageVC: UIPageViewController {
         let bottom = NSLayoutConstraint(item: pageControl, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
         
         view.insertSubview(pageControl, at: 0)
-        view.bringSubview(toFront: pageControl)
+        view.bringSubviewToFront(pageControl)
         view.addConstraints([leading, trailing, bottom])
     }
     

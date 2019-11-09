@@ -11,7 +11,7 @@ import UIKit
 class FrostyCornerView: FrostyView {
     
     @IBInspectable var customCornerRadius: CGFloat = 19.5
-    @IBInspectable var customBlurEffect: UIBlurEffectStyle = .regular
+    @IBInspectable var customBlurEffect: UIBlurEffect.Style = .regular
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

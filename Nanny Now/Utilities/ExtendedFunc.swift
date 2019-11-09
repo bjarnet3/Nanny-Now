@@ -93,7 +93,7 @@ public func setMapBackgroundOverlay(mapName: MapStyleForView, mapView: MKMapView
         return
     }
     // And finally add it to your MKMapView
-    mapView.add(tileOverlay)
+    mapView.addOverlay(tileOverlay)
 }
 
 // Overlay / MapOverlay
@@ -116,7 +116,7 @@ public func addCirleMaskWithFrostOn(_ subView: UIView) {
     let shapeLayer = CAShapeLayer()
     // set arc to shapeLayer
     shapeLayer.path = path.cgPath
-    shapeLayer.fillRule = kCAFillRuleEvenOdd
+    shapeLayer.fillRule = CAShapeLayerFillRule.evenOdd
     
     // Create the boarderLayer
     let boarderLayer = CAShapeLayer()

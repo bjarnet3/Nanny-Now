@@ -41,7 +41,7 @@ open class UXFoldingCell: UITableViewCell {
     
     // MARK:  life cicle
     
-    override public init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
@@ -85,7 +85,7 @@ open class UXFoldingCell: UITableViewCell {
         foregroundView.layer.transform = foregroundView.transform3d()
         
         createAnimationView()
-        self.contentView.bringSubview(toFront: foregroundView)
+        self.contentView.bringSubviewToFront(foregroundView)
     }
     
     func createAnimationItemView()->[RotatedView] {
@@ -316,7 +316,7 @@ open class UXFoldingCell: UITableViewCell {
         let durations = durationSequence(.open)
         
         var delay: TimeInterval   = 0
-        var timing                = kCAMediaTimingFunctionEaseIn
+        var timing                = CAMediaTimingFunctionName.easeIn
         var from: CGFloat         = 0.0;
         var to: CGFloat           = -CGFloat.pi / 2
         var hidden                = true
@@ -329,11 +329,11 @@ open class UXFoldingCell: UITableViewCell {
         for index in 0..<animationItemViews.count {
             let animatedView = animationItemViews[index]
             
-            animatedView.foldingAnimation(timing, from: from, to: to, duration: durations[index], delay: delay, hidden: hidden)
+            animatedView.foldingAnimation(timing.rawValue, from: from, to: to, duration: durations[index], delay: delay, hidden: hidden)
             
             from   = from == 0.0 ? CGFloat.pi / 2 : 0.0
             to     = to == 0.0 ? -CGFloat.pi / 2 : 0.0
-            timing = timing == kCAMediaTimingFunctionEaseIn ? kCAMediaTimingFunctionEaseOut : kCAMediaTimingFunctionEaseIn
+            timing = timing == CAMediaTimingFunctionName.easeIn ? CAMediaTimingFunctionName.easeOut : CAMediaTimingFunctionName.easeIn
             hidden = !hidden
             delay += durations[index]
         }
@@ -367,7 +367,7 @@ open class UXFoldingCell: UITableViewCell {
         var durations: [TimeInterval] = durationSequence(.close).reversed()
         
         var delay: TimeInterval   = 0
-        var timing                = kCAMediaTimingFunctionEaseIn
+        var timing                = CAMediaTimingFunctionName.easeIn
         var from: CGFloat         = 0.0
         var to: CGFloat           = CGFloat.pi / 2
         var hidden                = true
@@ -379,11 +379,11 @@ open class UXFoldingCell: UITableViewCell {
         for index in 0..<animationItemViews.count {
             let animatedView = animationItemViews.reversed()[index]
             
-            animatedView.foldingAnimation(timing, from: from, to: to, duration: durations[index], delay: delay, hidden: hidden)
+            animatedView.foldingAnimation(timing.rawValue, from: from, to: to, duration: durations[index], delay: delay, hidden: hidden)
             
             to     = to == 0.0 ? CGFloat.pi / 2 : 0.0
             from   = from == 0.0 ? -CGFloat.pi / 2 : 0.0
-            timing = timing == kCAMediaTimingFunctionEaseIn ? kCAMediaTimingFunctionEaseOut : kCAMediaTimingFunctionEaseIn
+            timing = timing == CAMediaTimingFunctionName.easeIn ? CAMediaTimingFunctionName.easeOut : CAMediaTimingFunctionName.easeIn
             hidden = !hidden
             delay += durations[index]
         }
@@ -454,12 +454,12 @@ extension RotatedView: CAAnimationDelegate {
     func foldingAnimation(_ timing: String, from: CGFloat, to: CGFloat, duration: TimeInterval, delay:TimeInterval, hidden:Bool) {
         
         let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation.x")
-        rotateAnimation.timingFunction      = CAMediaTimingFunction(name: timing)
+        rotateAnimation.timingFunction      = CAMediaTimingFunction(name: CAMediaTimingFunctionName(rawValue: timing))
         rotateAnimation.fromValue           = (from)
         rotateAnimation.toValue             = (to)
         rotateAnimation.duration            = duration
         rotateAnimation.delegate            = self;
-        rotateAnimation.fillMode            = kCAFillModeForwards
+        rotateAnimation.fillMode            = .forwards
         rotateAnimation.isRemovedOnCompletion = false;
         rotateAnimation.beginTime           = CACurrentMediaTime() + delay
         
