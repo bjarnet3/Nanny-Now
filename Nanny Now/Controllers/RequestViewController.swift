@@ -288,7 +288,7 @@ class RequestViewController: UIViewController, CLLocationManagerDelegate {
         setBrandingLabel()
         
         self.enableLocationServices()
-        self.user?.location = locationManager.location!
+        self.user?.location = locationManager.location
         
         observeRequests()
         

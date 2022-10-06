@@ -39,9 +39,6 @@ class StartViewController: UIViewController, CLLocationManagerDelegate {
     // MARK: Facebook Logout
     // ----------------------------------------
     func facebookLogout() {
-        let loginView : LoginManager = LoginManager()
-        loginView.loginBehavior = .browser
-        
         let manager = LoginManager()
         manager.logOut()
     }

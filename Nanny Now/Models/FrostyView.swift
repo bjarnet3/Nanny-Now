@@ -35,7 +35,11 @@ extension FrostyView {
         frost.autoresizingMask = .flexibleWidth
         
         self.layer.borderWidth = 0.4
-        self.layer.borderColor = UIColor.lightGray.cgColor
+        if #available(iOS 13.0, *) {
+            self.layer.borderColor = UIColor.systemBackground.cgColor
+        } else {
+            self.layer.borderColor = UIColor.gray.cgColor
+        }
         
         insertSubview(frost, at: 0)
     }

@@ -11,6 +11,7 @@ import UserNotifications
 import Firebase
 import FBSDKLoginKit
 import RAMAnimatedTabBarController
+import SwiftKeychainWrapper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -34,6 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// Tells the delegate that the launch process is almost done and the app is almost ready to run.
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        isFirstLogin()
+        
         // Clear badge when app did finish launching
         application.applicationIconBadgeNumber = 0
         
@@ -71,6 +74,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         return performShortcutDelegate
+    }
+    
+    func isFirstLogin() {
+        let isNotFirstLoginKey = "isNotFirstLogin"
+        if let _ = KeychainWrapper.standard.bool(forKey: isNotFirstLoginKey) {
+            print("Is Not First Login - Resume")
+        } else {
+            print("Is First Login")
+            // Is First Login
+            print("- Remove All Keys")
+            KeychainWrapper.standard.removeAllKeys()
+            print("+ Add isNotFirstLogin to Keychain")
+            KeychainWrapper.standard.set(true, forKey: isNotFirstLoginKey)
+        }
     }
     
     // Set Notificaiton Authentication
@@ -294,7 +311,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // Shortcut identifiers
     // --------------------
-    func handleShortcut(shortcutItem: UIApplicationShortcutItem ) -> Bool {
+    func handleShortcut(shortcutItem: UIApplicationShortcutItem) -> Bool {
         var succeeded = false
         
         func shortCutCase(_ to: Int) -> Bool {

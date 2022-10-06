@@ -50,7 +50,7 @@ public func returnStarsStringFrom(_ ratings: Double) -> String {
     switch ratings
     {
     case 0.5..<1.5:
-        return "★☆☆☆☆"
+        return "★✬☆☆☆"
     case 1.5..<2.5:
         return "★★✬☆☆"
     case 2.5..<3.5:
